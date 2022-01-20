@@ -1,3 +1,7 @@
+:root {
+    --primary: #0188bf;
+}
+
 a:hover {
     text-decoration: none !important;
 }
