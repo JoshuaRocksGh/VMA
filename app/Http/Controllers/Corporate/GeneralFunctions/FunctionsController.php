@@ -15,6 +15,7 @@ class FunctionsController extends Controller
 
     public function get_pending_requests(Request $request)
     {
+        // return $request;
         $customerNumber = $request->query('customerNumber');
         $requestStatus = $request->query('requestStatus');
 

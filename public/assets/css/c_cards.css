@@ -16,7 +16,7 @@ body {
     min-height: 100vh;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    font-family: 'Raleway';
+    font-family: "Roboto";
 }
 
 .payment-title {
@@ -54,7 +54,7 @@ body {
     grid-column-gap: 10px;
     grid-template-columns: auto auto;
     grid-template-rows: 90px 90px 90px;
-    grid-template-areas: "name name""number number""expiration security";
+    grid-template-areas: "name name" "number number" "expiration security";
     max-width: 400px;
     padding: 20px;
     color: #707070;
@@ -82,7 +82,6 @@ input {
     width: 60px;
 }
 
-
 /* CREDIT CARD IMAGE STYLING */
 
 .preload * {
@@ -91,7 +90,6 @@ input {
     -ms-transition: none !important;
     -o-transition: none !important;
 }
-
 
 /* .container {
     width: 100%;
@@ -132,21 +130,20 @@ input {
     float: right;
 }
 
-
 /* CHANGEABLE CARD ELEMENTS */
 
 .creditcard .lightcolor,
 .creditcard .darkcolor {
-    -webkit-transition: fill .5s;
-    transition: fill .5s;
+    -webkit-transition: fill 0.5s;
+    transition: fill 0.5s;
 }
 
 .creditcard .lightblue {
-    fill: #03A9F4;
+    fill: #03a9f4;
 }
 
 .creditcard .lightbluedark {
-    fill: #0288D1;
+    fill: #0288d1;
 }
 
 .creditcard .red {
@@ -213,7 +210,6 @@ input {
     fill: #616161;
 }
 
-
 /* FRONT OF CARD */
 
 #svgname {
@@ -221,11 +217,11 @@ input {
 }
 
 #cardfront .st2 {
-    fill: #FFFFFF;
+    fill: #ffffff;
 }
 
 #cardfront .st3 {
-    font-family: 'Source Code Pro', monospace;
+    font-family: "Source Code Pro", monospace;
     font-weight: 600;
 }
 
@@ -234,7 +230,7 @@ input {
 }
 
 #cardfront .st5 {
-    font-family: 'Source Code Pro', monospace;
+    font-family: "Source Code Pro", monospace;
     font-weight: 400;
 }
 
@@ -244,7 +240,7 @@ input {
 
 #cardfront .st7 {
     opacity: 0.6;
-    fill: #FFFFFF;
+    fill: #ffffff;
 }
 
 #cardfront .st8 {
@@ -256,7 +252,7 @@ input {
 }
 
 #cardfront .st10 {
-    font-family: 'Source Code Pro', monospace;
+    font-family: "Source Code Pro", monospace;
     font-weight: 300;
 }
 
@@ -265,15 +261,14 @@ input {
 }
 
 #cardfront .st12 {
-    fill: #4C4C4C;
+    fill: #4c4c4c;
 }
-
 
 /* BACK OF CARD */
 
 #cardback .st0 {
     fill: none;
-    stroke: #0F0F0F;
+    stroke: #0f0f0f;
     stroke-miterlimit: 10;
 }
 
@@ -282,19 +277,19 @@ input {
 }
 
 #cardback .st3 {
-    fill: #F2F2F2;
+    fill: #f2f2f2;
 }
 
 #cardback .st4 {
-    fill: #D8D2DB;
+    fill: #d8d2db;
 }
 
 #cardback .st5 {
-    fill: #C4C4C4;
+    fill: #c4c4c4;
 }
 
 #cardback .st6 {
-    font-family: 'Source Code Pro', monospace;
+    font-family: "Source Code Pro", monospace;
     font-weight: 400;
 }
 
@@ -307,7 +302,7 @@ input {
 }
 
 #cardback .st9 {
-    fill: #FFFFFF;
+    fill: #ffffff;
 }
 
 #cardback .st10 {
@@ -315,17 +310,16 @@ input {
 }
 
 #cardback .st11 {
-    fill: #EAEAEA;
+    fill: #eaeaea;
 }
 
 #cardback .st12 {
-    font-family: 'Rock Salt', cursive;
+    font-family: "Rock Salt", cursive;
 }
 
 #cardback .st13 {
     font-size: 37.769px;
 }
-
 
 /* FLIP ANIMATION */
 

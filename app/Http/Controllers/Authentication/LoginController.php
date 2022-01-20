@@ -72,7 +72,7 @@ class LoginController extends Controller
 
         try {
             $response = Http::post(env('API_BASE_URL') . "/user/login", $data);
-
+            // return $response;
             if (!$response->ok()) { // API response status code is 200
                 return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
             }
@@ -106,13 +106,13 @@ class LoginController extends Controller
                 "userMandate" => 'A',
                 "deviceInfo" => [
                     "appVersion" => "web",
-                    "deviceBrand" => Browser::deviceFamily(),
+                    // "deviceBrand" => Browser::deviceFamily(),
                     // "deviceCountry" => Location::get()->countryName,
-                    "deviceId" => Browser::browserName(),
+                    // "deviceId" => Browser::browserName(),
                     "deviceIp" => request()->ip(),
-                    "deviceManufacturer" => Browser::deviceFamily(),
-                    "deviceModel" => Browser::deviceModel(),
-                    "deviceOs" =>  Browser::platformName(),
+                    // "deviceManufacturer" => Browser::deviceFamily(),
+                    // "deviceModel" => Browser::deviceModel(),
+                    // "deviceOs" =>  Browser::platformName(),
                 ],
                 "headers" => [
                     "x-api-key" => "123",

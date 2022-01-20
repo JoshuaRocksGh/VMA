@@ -1,7 +1,7 @@
 @charset "UTF-8";
-/* @import url(https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600&amp;display=swap); */
+/* @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&amp;display=swap); */
 
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
 
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
@@ -39,7 +39,7 @@
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1367px;
-    --font-family-sans-serif: "Lato", sans-serif;
+    --font-family-sans-serif: "Roboto", sans-serif;
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
         "Liberation Mono", "Courier New", monospace;
 }
@@ -51,7 +51,7 @@
 }
 
 html {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
@@ -72,7 +72,7 @@ section {
 
 body {
     margin: 0;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     /* font-size: 0.8125rem; */
     font-size: 0.9rem;
     font-weight: 400;
@@ -6421,7 +6421,7 @@ a.close.disabled {
     z-index: 1070;
     display: block;
     margin: 0;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -6547,7 +6547,7 @@ a.close.disabled {
     z-index: 1060;
     display: block;
     max-width: 276px;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -11913,7 +11913,7 @@ h4,
 h5,
 h6 {
     margin: 10px 0;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     color: #343a40;
 }
 

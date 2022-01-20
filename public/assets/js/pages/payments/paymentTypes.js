@@ -6,8 +6,6 @@ function getPaymentBeneficiaries() {
         datatype: "application/json",
         success: function (response) {
             let data = response.data;
-            console.log(data);
-            // return false;
             if (data.length > 0) {
                 $.each(pageData.payTypes, (i) => {
                     const type = pageData.payTypes[i];
@@ -17,7 +15,6 @@ function getPaymentBeneficiaries() {
                 });
                 initPaymentsCarousel();
             } else {
-                console.log(response);
                 return false;
             }
         },
@@ -38,11 +35,7 @@ function paymentType() {
         datatype: "application/json",
         success: function (response) {
             $("#loader").hide();
-            console.log("response:", response);
             let data = response.data;
-            console.log(data.length);
-            // return false;
-
             if (response.responseCode == "000") {
                 pageData.payTypes = [];
 
@@ -100,7 +93,6 @@ function makePayment() {
         },
         success: function (response) {
             siteLoading("hide");
-            console.log(response);
             if (response.responseCode == "000") {
                 getAccounts();
                 Swal.fire({
@@ -141,7 +133,6 @@ function getRecipientName() {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            console.log(response);
             if (response.responseCode == "000") {
                 siteLoading("hide");
                 pageData.paymentInfo.recipientName = response.data;
@@ -325,7 +316,6 @@ $(() => {
         let beneficiaryAccount, payeeName;
 
         if (!isOnetimePayment) {
-            console.log(isOnetimePayment);
             beneficiaryAccount = $("#to_account").val();
             payeeName = $("#to_account option:selected").attr("data-type");
         } else {
@@ -359,7 +349,6 @@ $(() => {
             return false;
         }
         pageData.paymentInfo.pinCode = pin;
-        console.table(pageData.paymentInfo);
         makePayment();
         $("#user_pin").val("").text("");
     });

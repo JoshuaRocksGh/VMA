@@ -85,7 +85,8 @@ Route::get('/change-password', [ResetPasswordController::class, 'change_password
 
 
 Route::get('/multiple-transfers', [MultipleTransfersController::class, 'index'])->name('multiple-transfers');
-Route::post('/upload_', [BulkUploadBulkUploadsController::class, 'upload_'])->name('upload_');
+Route::post('upload_', [BulkUploadBulkUploadsController::class, 'upload_'])->name('upload_');
+// Route::post('/bulk-file-upload', [BulkUploadBulkUploadsController::class, 'bulk_file_upload']);
 Route::post('/submit-kyc', [KycController::class, 'submit_kyc'])->name('submit-kyc');
 
 // Route::get('/approved-transaction', [PendingController::class, 'approved_transaction'])->name('approved-transaction');
@@ -144,8 +145,8 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/same-bank', [SameBankController::class, 'same_bank']);
     Route::get('/local-bank', [LocalBankController::class, 'local_bank']);
     Route::get('/own-account', [OwnAccountController::class, 'own_account']);
-    Route::get('standing-order', [StandingOrderController::class, 'display_standing_order']);
-    Route::get('standing-order-status', [StandingOrderController::class, 'display_standing_order_status']);
+    Route::get('/standing-order', [StandingOrderController::class, 'display_standing_order']);
+    Route::get('/standing-order-status', [StandingOrderController::class, 'display_standing_order_status']);
     Route::get('/bulk-transfer', [BulkUploadBulkUploadsController::class, 'index']);
     Route::post('/initiate-cardless', [CardlessController::class, 'initiate_cardless'])->name('initiate-cardless');
     Route::post('/cardless-otp', [CardlessController::class, 'cardless_otp'])->name('cardless-otp');
@@ -181,6 +182,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     // Route::get('/download_other_bank_file', [BulkUploadBulkUploadsController::class, 'download_other_bank'])->name('download-other-bank-file');
     Route::get('/view-bulk-korpor-transfer', [BulkUploadBulkUploadsController::class, 'view_bulk_korpor_transfer'])->name('view-bulk-korpor-transfer');
     Route::get('/view-bulk-transfer', [BulkUploadBulkUploadsController::class, 'view_bulk_transfer'])->name('view-bulk-transfer');
+    Route::get('/delete-bulk-transfer', [BulkUploadBulkUploadsController::class, 'delete_bulk_transfer'])->name('delete-bulk-transfer');
     Route::get('/view-bulk-transfer-korpor', [BulkUploadBulkUploadsController::class, 'view_bulk_transfer_korpor'])->name('view-bulk-transfer-korpor');
     Route::get('/view-error-bulk-transfer', [BulkUploadBulkUploadsController::class, 'view_error_bulk_transfer'])->name('view-error-bulk-transfer');
     Route::get('/bulk-korpor-error-transfer', [BulkUploadBulkUploadsController::class, 'bulk_korpor_error_transfer'])->name('bulk-korpor-error-transfer');

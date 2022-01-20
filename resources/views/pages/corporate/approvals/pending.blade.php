@@ -334,9 +334,10 @@
         };
 
         function get_corporate_requests(customerNumber, requestStatus) {
-            var table = $('.pending_transaction_request').DataTable({
+            {{-- var table = $('.pending_transaction_request').DataTable({
                 destroy: true
-            });
+            }); --}}
+            var table = $('.pending_transaction_request').DataTable();
             var nodes = table.rows().nodes();
 
             table
@@ -359,11 +360,11 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    console.log(response);
+                    //console.log(response);
                     if (response.responseCode == '000') {
 
                         let data = response.data;
-                        console.log(data);
+                        //console.log(data);
 
                         table.clear().draw()
 
@@ -397,7 +398,7 @@
                             } else if (data[index].request_type == 'BULK') {
                                 amount = (data[index].currency) + ' ' + formatToCurrency(parseFloat(
                                     data[index].total_amount))
-                                console.log(data[index].total_amount)
+                                //console.log(data[index].total_amount)
                                 request_type = 'Bulk Transfer'
                             } else if (data[index].request_type == 'INTB') {
                                 request_type = 'International Bank Transfer'
@@ -409,6 +410,13 @@
                                 amount = (data[index].currency) + ' ' + formatToCurrency(parseFloat(
                                     data[index].total_amount))
                                 request_type = 'Bulk E-Korpor'
+                            } else if (data[index].request_type == "UTL") {
+                                request_type = 'Utility'
+                            } else if (data[index].request_type == "AIR") {
+                                request_type = 'Airtime'
+                            } else if (data[index].request_type == "MOM") {
+                                request_type = 'Mobile Money'
+
                             } else {
                                 request_type = 'Others'
                                 if (request_type = 'Others') {
@@ -478,7 +486,7 @@
             }) --}}
             var customer_no = @json(session()->get('customerNumber'));
             var request_status = 'P'
-            console.log(customer_no);
+            //console.log(customer_no);
             $('.transfer_tab_btn').click(function() {
                 let customer_no = @json(session()->get('customerNumber'));
                 get_corporate_requests(customer_no, 'P')

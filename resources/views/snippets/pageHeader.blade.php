@@ -13,9 +13,9 @@
         </div>
 
         <div class="col-md-3 align-items-center d-none d-md-block text-right">
-            <span class="align-items-center d-none d-lg-block">
-                <span class="text-primary "> {{ $basePath }} </span> &nbsp; > &nbsp; <span
-                    class="text-danger">{{ $currentPath }}</span>
+            <span class="align-items-center font-12 font-weight-bold d-none d-lg-block">
+                <span class="text-primary "> {{ $basePath }} </span> &nbsp; > &nbsp; <span class="text-danger">{{
+                    $currentPath }}</span>
             </span>
         </div>
 

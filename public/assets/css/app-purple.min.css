@@ -1,5 +1,5 @@
-/* @import url(https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600&amp;display=swap); */
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+/* @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&amp;display=swap); */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
 
 html {
     position: relative;
@@ -47,7 +47,7 @@ body {
     padding: 12px 20px;
     position: relative;
     transition: all 0.4s;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 15px;
 }
 
@@ -1753,7 +1753,7 @@ body[data-layout-mode="horizontal"] .content-page {
     line-height: 22px;
     padding: calc(33px / 2) 1.1rem;
     color: #6e7488;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .topnav .navbar-nav .nav-link i {
@@ -2024,7 +2024,7 @@ body[data-layout-mode="two-column"]
     > .nav-link {
     color: #6e768e;
     font-size: 13.4px;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 body[data-layout-mode="two-column"]
@@ -2302,11 +2302,11 @@ body[data-layout-mode="two-column"][data-layout-width="boxed"]:not([data-sidebar
 }
 
 .font-family-primary {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .font-family-secondary {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .sp-line-1,
@@ -3536,12 +3536,12 @@ body.authentication-bg-pattern {
         rgba(126, 87, 194, 0.2) 10px 3px;
     font-size: 84px;
     line-height: 90px;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .error-text-box {
     font-size: 10rem;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     min-height: 200px;
 }
 
@@ -4246,7 +4246,7 @@ body.authentication-bg-pattern {
     display: inline-block;
     margin-bottom: 5px;
     font-weight: 500;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .filter-menu a:hover {
@@ -4643,7 +4643,7 @@ body.authentication-bg-pattern {
 }
 
 .apex-charts text {
-    font-family: Lato, sans-serif !important;
+    font-family: Roboto, sans-serif !important;
     fill: #98a6ad;
     font-weight: 500;
 }
@@ -4655,7 +4655,7 @@ body.authentication-bg-pattern {
 .apexcharts-legend-text,
 .apexcharts-tooltip-text,
 .apexcharts-tooltip-title {
-    font-family: Lato, sans-serif !important;
+    font-family: Roboto, sans-serif !important;
 }
 
 .apexcharts-legend-series {
@@ -4673,7 +4673,7 @@ body.authentication-bg-pattern {
 
 .apexcharts-xaxis text,
 .apexcharts-yaxis text {
-    font-family: Lato, sans-serif !important;
+    font-family: Roboto, sans-serif !important;
     fill: #98a6ad;
     font-weight: 500;
 }
@@ -4706,7 +4706,7 @@ body.authentication-bg-pattern {
 
 .apexcharts-datalabels-group text {
     fill: #98a6ad !important;
-    font-family: Lato, sans-serif !important;
+    font-family: Roboto, sans-serif !important;
 }
 
 .scatter-images-chart .apexcharts-legend {
@@ -5294,7 +5294,7 @@ th.fc-day-header {
     color: #000 !important;
     font-size: 12px !important;
     line-height: 18px !important;
-    font-family: Lato, sans-serif !important;
+    font-family: Roboto, sans-serif !important;
     font-weight: 500 !important;
 }
 
@@ -5400,7 +5400,7 @@ div.dt-button-info h2 {
 }
 
 .daterangepicker {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .daterangepicker .ranges li.active,
@@ -5760,7 +5760,7 @@ div.dt-button-info h2 {
 
 .jq-toast-single {
     padding: 15px;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     background-color: #0561ad;
     /* font-size: 13px; */
     font-size: 0.9rem;
@@ -5768,7 +5768,7 @@ div.dt-button-info h2 {
 }
 
 .jq-toast-single h2 {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .jq-toast-single a {
@@ -5871,7 +5871,7 @@ div.dt-button-info h2 {
 }
 
 .swal2-modal {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     box-shadow: 0 10px 33px rgba(0, 0, 0, 0.1);
 }
 
@@ -6235,7 +6235,7 @@ div.hopscotch-bubble .hopscotch-prev {
     border-color: #0561ad !important;
     text-shadow: none !important;
     margin: 0 0 0 5px !important;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     color: #fff !important;
 }
 
@@ -6297,12 +6297,12 @@ div.hopscotch-bubble
 }
 
 div.hopscotch-bubble h3 {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     margin-bottom: 10px;
 }
 
 div.hopscotch-bubble .hopscotch-content {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .flotTip {
@@ -6320,7 +6320,7 @@ div.hopscotch-bubble .hopscotch-content {
 
 .legend tr {
     height: 30px;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .legend > div {
@@ -6362,7 +6362,7 @@ div.hopscotch-bubble .hopscotch-content {
 }
 
 .morris-chart text {
-    font-family: Lato, sans-serif !important;
+    font-family: Roboto, sans-serif !important;
     fill: #6c757d;
 }
 
@@ -6378,13 +6378,13 @@ div.hopscotch-bubble .hopscotch-content {
     padding: 10px 12px;
     background: #323a46;
     color: #fff;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .morris-hover.morris-default-style .morris-hover-row-label {
     font-weight: 700;
     margin: 0.25em 0;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .morris-hover.morris-default-style .morris-hover-point {
@@ -6524,7 +6524,7 @@ div.hopscotch-bubble .hopscotch-content {
 
 .c3-tooltip td {
     border-left: none;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .c3-tooltip td > span {
@@ -6546,12 +6546,12 @@ div.hopscotch-bubble .hopscotch-content {
 }
 
 .c3 text {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     fill: #6c757d;
 }
 
 .c3-legend-item {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 14px;
 }
 
@@ -6588,11 +6588,11 @@ div.hopscotch-bubble .hopscotch-content {
 .rickshaw_graph .detail .item,
 .rickshaw_graph .detail .x_label,
 .rickshaw_graph .x_tick .title {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .gauge-chart text {
-    font-family: Lato, sans-serif !important;
+    font-family: Roboto, sans-serif !important;
 }
 
 .responsive-table-plugin .dropdown-menu li.checkbox-row {
@@ -7173,7 +7173,7 @@ table[data-toggle="table"] {
 .tablesaw thead tr:first-child th {
     border: none;
     font-weight: 500;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .tablesaw td {
@@ -7409,7 +7409,7 @@ table[data-toggle="table"] {
 
 .ms-optgroup-label {
     font-weight: 500;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     color: #323a46 !important;
     /* font-size: 13px; */
     font-size: 0.9rem;
@@ -7453,7 +7453,7 @@ table[data-toggle="table"] {
 .autocomplete-group {
     padding: 5px;
     font-weight: 500;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .autocomplete-group strong {
@@ -7804,7 +7804,7 @@ span.flatpickr-weekday {
 }
 
 .ql-container {
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .ql-container.ql-snow {
@@ -7817,7 +7817,7 @@ span.flatpickr-weekday {
 }
 
 .ql-toolbar {
-    font-family: Lato, sans-serif !important;
+    font-family: Roboto, sans-serif !important;
 }
 
 .ql-toolbar span {
@@ -8013,7 +8013,7 @@ span.flatpickr-weekday {
     border: none;
     background: #323a46;
     color: #fff;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
     font-size: 0.8125rem;
     padding: 5px 8px;
 }
@@ -8040,7 +8040,7 @@ span.flatpickr-weekday {
     max-width: 200px;
     display: none;
     color: #fff;
-    font-family: Lato, sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 .mapael .zoomIn,
@@ -8065,7 +8065,7 @@ span.flatpickr-weekday {
 }
 
 .mapael .plotLegend text {
-    font-family: Lato, sans-serif !important;
+    font-family: Roboto, sans-serif !important;
     fill: #98a6ad;
 }
 

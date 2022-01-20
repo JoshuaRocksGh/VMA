@@ -18,54 +18,31 @@
 
     @include('snippets.style')
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js">
-        $.ajaxSetup({
-        timeout: 3000,
-        retryAfter: 5000
-    });
-    </script>
 
     @yield('styles')
-
-
+    <script src="assets\plugins\jquery\jquery-3.6.0.min.js"></script>
 </head>
 
-<body style="zoom: 0.9; background-color: white;">
+<body style="background-color: white;">
 
-    <!-- Pre-loader -->
-    <div id="preloader">
-        <div id="status">
-            <div class="spinner">Loading...</div>
+    <div id="preloader" class="preloader">
+        <div id="status" class="preloader">
+            <img class="pulse" style="width: 100px; top: -50px;" src="assets/images/logoRKB.png" />
         </div>
-    </div>
-    <!-- End Preloader-->
+    </div> <!-- End Preloader-->
 
-    <!-- Begin page -->
 
     <div class="container-fluid">
         <div class="row">
-
-
-
             <div class="col-md-12">
-                <div class="content" style="zoom: 0.9 ;">
+                <div class="content">
                     @yield('content')
                 </div>
-
             </div>
-
-
-
         </div>
     </div>
-
     @include('snippets.script')
-
-
     @yield('scripts')
-
-
 </body>
-
 
 </html>

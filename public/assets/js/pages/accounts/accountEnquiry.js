@@ -1,313 +1,217 @@
 $(function () {
-    // console.log("a")
     let today = new Date();
     let day = today.getDate().toString().padStart(2, "0");
     let month = (today.getMonth() + 1).toString().padStart(2, "0");
-    let start_date = today.getFullYear() + "-" + month + "-01";
-    let end_date = today.getFullYear() + "-" + month + "-" + day;
-    let this_day = end_date;
+    let startDate = today.getFullYear() + "-" + month + "-01";
+    let endDate = today.getFullYear() + "-" + month + "-" + day;
+    let this_day = endDate;
 
-    $("#startDate").val(start_date);
-    $("#endDate").val(end_date);
+    $("#startDate").val(startDate);
+    $("#endDate").val(endDate);
 
-    // get_accounts();
-
-    $("#from_account").change(function () {
-        let from_account = $(this).val();
-        from_account_info = from_account.split("~");
-        // set summary values for display
-        $(".account_product").text(from_account_info[0]);
-        $(".account_description").text(from_account_info[1]);
-        $(".account_number").text(from_account_info[2]);
-        $(".display_from_account_currency").text(from_account_info[3]);
-        $(".account_currency").text(from_account_info[3]);
+    $("#from_account").on("change", function (e) {
+        let option = $("#from_account option:selected");
+        const accountNumber = option.attr("data-account-number");
+        if (!accountNumber) {
+            $(this).val("");
+            return;
+        }
+        const accountProduct = option.attr("data-account-type");
+        const accountCurrency = option.attr("data-account-currency");
+        const accountDescription = option.attr("data-account-description");
+        $(".account_product").text(accountProduct);
+        $(".account_number").text(accountNumber);
+        $(".display_from_account_currency").text(accountCurrency);
+        $(".account_description").text(accountDescription);
+        $(".account_currency").text(accountCurrency);
     });
+    if (PageData.reqAccount) {
+        PageData.reqAccount = decodeString(PageData.reqAccount);
+        $(`#from_account option[data-account-number=${PageData.reqAccount}]`)
+            .prop("selected", true)
+            .trigger("change");
+        $("#search_transaction").trigger("click");
+    }
 
-    $("#search_transaction").click(function () {
-        start_date = $("#startDate").val();
-        end_date = $("#endDate").val();
-        if (start_date > this_day) {
+    $("#search_transaction").on("click", function () {
+        startDate = $("#startDate").val();
+        endDate = $("#endDate").val();
+        if (startDate > this_day) {
             toaster("Start Date can't be greater than today", "warning");
             return false;
-        } else if (end_date > this_day) {
+        } else if (endDate > this_day) {
             toaster("End Date can't be greater than today", "warning");
             return false;
-        } else if (start_date > end_date) {
-            toaster(
-                "Start Date can't be greater than End Date",
-                "warning",
-                3000
-            );
+        } else if (startDate > endDate) {
+            toaster("Start Date can't be greater than End Date", "warning");
             return false;
         } else {
             var from_account = $("#from_account").val();
-            console.log(start_date);
+            console.log(startDate);
             if (!from_account) {
                 toaster("please select an account", "warning");
                 $("#search_transaction").text("Search");
                 return false;
             } else {
-                $("#search_transaction").text("Loading ...");
                 from_account_info = from_account.split("~");
                 account_number = from_account_info[2].trim();
-                getAccountTransactions(account_number, start_date, end_date);
+                blockUi(
+                    "body",
+                    "Getting Transactions...Please Wait",
+                    "75px",
+                    "#4fc6e1"
+                );
+                getAccountTransactions(
+                    account_number,
+                    startDate,
+                    endDate
+                ).always(() => unblockUi("body"));
+                const pdfPath = `print-account-statement\?ac=${encodeString(
+                    account_number
+                )}&sd=${encodeString(startDate)}&ed=${encodeString(endDate)}`;
+                $("#pdf_print").attr("href", pdfPath);
+
+                $("#excel_print").html(`
+                                <a href="{{ url('print-account-statement') }}">
+                                    <img src="assets/images/excel.png" alt="" style="width: 22px; height: 25px;">
+                                </a>
+                            `);
             }
         }
     });
 
-    $("#date_search").click(function () {
-        $(".account_transaction_display").hide();
-        $(".account_transaction_display_table").hide();
-        $("#account_transaction_retry_btn").hide();
-        $("#account_transaction_loader").show();
-        getAccountTransactions(account_number, start_date, end_date);
-    });
-
-    $("#credit_transaction").click(function () {
-        $("#table-body-display").empty();
-        let data = transactions;
-        var load_data = [];
-        $.each(data, function (index) {
-            if (parseFloat(data[index].amount) > 0) {
-                load_data.push(data[index]);
-            } else {
-            }
-        });
-
-        load_data_into_table(load_data, account_number, start_date, end_date);
-    });
-
-    $("#filter").change(function () {
-        let filter = $(this).val();
-
-        let account = $("#from_account").val();
-
-        if (account == "" || account == undefined) {
-            return false;
+    $("#filter").on("change", (e) => {
+        e.preventDefault();
+        let workingTransactions;
+        switch (e.currentTarget.value) {
+            case "credit":
+                workingTransactions = PageData.transaction.filter(
+                    (e) => e.amount > 0
+                );
+                break;
+            case "debit":
+                workingTransactions = PageData.transaction.filter(
+                    (e) => e.amount < 0
+                );
+                break;
+            default:
+                workingTransactions = PageData.transaction;
+                break;
         }
+        drawTransactionsTable(workingTransactions);
+    });
 
-        if (filter == "debit") {
-            $("#table-body-display").empty();
-            let data = transactions;
-            var load_data = [];
-            $.each(data, function (index) {
-                if (parseFloat(data[index].amount) < 0) {
-                    load_data.push(data[index]);
-                } else {
-                }
-            });
-            load_data_into_table(
-                load_data,
-                account_number,
-                start_date,
-                end_date
+    function drawTransactionsTable(workingTransactions) {
+        $("#account_transaction_display_table tbody").empty();
+        if (!workingTransactions || workingTransactions.length === 0) {
+            let noTrans = noDataAvailable.replace("Data", "Transactions");
+            $("#account_transaction_display_table tbody").append(
+                `<td colspan="100%" class="text-center">
+                ${noTrans} </td>`
             );
-        } else if (filter == "credit") {
-            $("#table-body-display").empty();
-            let data = transactions;
-            var load_data = [];
-            $.each(data, function (index) {
-                if (parseFloat(data[index].amount) > 0) {
-                    load_data.push(data[index]);
-                } else {
-                }
-            });
-
-            load_data_into_table(
-                load_data,
-                account_number,
-                start_date,
-                end_date
-            );
-        } else {
-            let load_data = transactions;
-            load_data_into_table(
-                load_data,
-                account_number,
-                start_date,
-                end_date
-            );
+            return;
         }
-    });
-
-    $("#all_transaction").click(function () {
-        $("#table-body-display").empty();
-
-        let data = transactions;
-
-        load_data_into_table(transactions);
-    });
-
-    $("#debit_transaction").click(function () {
-        $("#table-body-display").empty();
-        // {{-- return false --}}
-
-        let data = transactions;
-        var load_data = [];
-        $.each(data, function (index) {
-            if (parseFloat(data[index].amount) < 0) {
-                // {{-- alert(data[index].amount) --}}
-                load_data.push(data[index]);
-            } else {
-            }
-        });
-        load_data_into_table(load_data, account_number, start_date, end_date);
-    });
-
-    function load_data_into_table(data, account_number, start_date, end_date) {
-        $("#table-body-display tr").remove();
-        $(".account_transaction_display").hide();
-        $(".account_transaction_display_table").hide();
-        $("#account_transaction_retry_btn").hide();
-        $("#account_transaction_loader").show();
-
-        $(".display_account_number").text(account_number);
-        $(".display_search_date_range").text(start_date + " to " + end_date);
-
-        $("#table-body-display").html("");
-
-        var table = $(".account_transaction_display_table").DataTable({
+        let transactionTableOptions = {
             destroy: true,
-            // dom: "Bfrtip",
-            // buttons: ["copy", "excel", "pdf"],
+            columnDefs: [
+                {
+                    targets: 0,
+                    // "data": "description",
+                    render: function (data, type) {
+                        if (type === "display" || type === "filter") {
+                            const d = new Date(data);
+                            return (
+                                String(d.getDate()).padStart(2, "0") +
+                                "-" +
+                                String(d.getMonth() + 1).padStart(2, "0") +
+                                "-" +
+                                d.getFullYear()
+                            );
+                        }
+                        return data;
+                    },
+                },
+                {
+                    targets: [1, 4],
+                    render: function (data, type) {
+                        if (type === "display" || type === "filter") {
+                            const color =
+                                data < 0 ? "text-danger" : "text-success";
+                            // <i class="fe-arrow-up text-${color} mr-1"></i>
+                            return `<b class='${color}'>
+                                ${formatToCurrency(parseFloat(data))}
+                            </b>
+                            `;
+                        }
+                        return data;
+                    },
+                },
+                {
+                    targets: 6,
+                    render: (data) =>
+                        data.split("~")[0] === 0
+                            ? (attachment = `<a href="#" data-value='${
+                                  data.split("~")[1]
+                              }' class="attachment-icon" >
+                    <i class="fe-file-text d-block text-center text-success"></a>`)
+                            : "N/A",
+                },
+            ],
+        };
+        let table = $("#account_transaction_display_table")
+            .DataTable(transactionTableOptions)
+            .clear();
+        workingTransactions.forEach((trans) => {
+            table.row
+                .add([
+                    trans.postingSysDate,
+                    trans.amount,
+                    trans.contraAccount,
+                    trans.narration,
+                    trans.runningBalance,
+                    // data[index].batchNumber,
+                    trans.documentReference,
+                    `${trans.imageCheck}~${trans.batchNumber}`,
+                ])
+                .order([0, "desc"])
+                .draw(false);
         });
-
-        table.clear().draw();
-
-        if (data.length > 0) {
-            $("#pdf_print").html(`
-                        <a href="print-account-statement?account_number=${account_number}&start_date=${start_date}&end_date=${end_date}" target="_blank">
-                            <img src="{{ asset('assets/images/pdf.png') }}" alt="" style="width: 22px; height: 25px;">
-                        </a>
-                    `);
-
-            $("#excel_print").html(`
-                        <a href="{{ url('print-account-statement') }}">
-                            <img src="{{ asset('assets/images/excel.png') }}" alt="" style="width: 22px; height: 25px;">
-                        </a>
-                    `);
-            $.each(data, function (index) {
-                let amount = ``;
-                if (parseFloat(data[index].amount) > 0) {
-                    amount = `<b class='text-success'>
-                                        <i class="fe-arrow-up text-success mr-1"></i>
-                                        ${formatToCurrency(
-                                            parseFloat(data[index].amount)
-                                        )}
-                                    </b>
-                                    `;
-                } else {
-                    amount = `<b class='text-danger'>
-                                        <i class="fe-arrow-down text-danger mr-1"></i>
-                                        ${formatToCurrency(
-                                            parseFloat(data[index].amount)
-                                        )}
-                                    </b>
-                                    `;
-                }
-
-                let attachment = ``;
-
-                if (data[index].imageCheck == "1") {
-                    attachment = `<a href="#" data-value='${data[index].batchNumber}' class="attachment-icon" >
-                     <i class="fe-file-text d-block text-center text-success"></a>`;
-                } else {
-                    attachment = `<i class="fe-file-text d-block text-center text-danger">`;
-                }
-
-                let sysDate = new Date(data[index].postingSysDate);
-                let dd = String(sysDate.getDate()).padStart(2, "0");
-                let mm = String(sysDate.getMonth() + 1).padStart(2, "0"); //January is 0!
-                let yyyy = sysDate.getFullYear();
-
-                table.row
-                    .add([
-                        data[index].documentReference,
-                        dd + "/" + mm + "/" + yyyy,
-                        amount,
-                        `${formatToCurrency(
-                            parseFloat(data[index].runningBalance)
-                        )}`,
-                        data[index].narration,
-                        data[index].contraAccount,
-                        data[index].batchNumber,
-                        attachment,
-                    ])
-                    .order([0, "desc"])
-                    .column(0)
-                    .visible(false, false)
-                    .draw(false);
-            });
-            $(".attachment-icon").on("click", function (e) {
-                e.preventDefault();
-                const docId = $(this).attr("data-value");
-                getTransDocument(docId);
-            });
-        } else {
-        }
-
-        $("#account_transaction_loader").hide();
-        $("#account_transaction_retry_btn").hide();
-        $(".account_transaction_display_table").show();
-        $(".account_transaction_display").show();
+        $(".attachment-icon").on("click", function (e) {
+            e.preventDefault();
+            const docId = $(this).attr("data-value");
+            getTransDocument(docId);
+        });
     }
-    function getAccountTransactions(account_number, start_date, end_date) {
-        $("#search_transaction").text("Loading ...");
-        $.ajax({
+    function getAccountTransactions(accountNumber, startDate, endDate) {
+        return $.ajax({
             type: "POST",
             url: "account-transaction-history",
             datatype: "application/json",
             data: {
-                accountNumber: account_number,
-                endDate: end_date,
+                accountNumber: accountNumber,
+                endDate: endDate,
                 entrySource: "A",
-                startDate: start_date,
+                startDate: startDate,
                 transLimit: "20",
             },
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                console.log(response);
-                if (response.responseCode == "000") {
-                    transactions = response.data;
-                    if (response.data.length === 0) {
-                        toaster(response.message, "warning", 3000);
-                    }
-                    $("#search_transaction").text("Search");
-                    load_data_into_table(
-                        transactions,
-                        account_number,
-                        start_date,
-                        end_date
-                    );
-
-                    $("#account_transaction_loader").hide();
-                    $("#account_transaction_retry_btn").hide();
-                    $(".account_transaction_display_table").show();
-                    $(".account_transaction_display").show();
-                } else {
-                    $("#search_transaction").text("Search");
-                    $("#account_transaction_loader").hide();
-                    $(".account_transaction_display").hide();
-                    $(".account_transaction_display_table").hide();
-                    $("#account_transaction_retry_btn").show();
+                if (
+                    response.responseCode !== "000" ||
+                    response.data.length === 0
+                ) {
                     toaster(response.message, "warning");
+                    PageData.transaction = [];
+                } else {
+                    PageData.transaction = response.data;
                 }
+                $("#filter").trigger("change");
+                return;
             },
             error: function (xhr, status, error) {
-                $("#search_transaction").text("Search");
-                $("#account_transaction_loader").hide();
-                $(".account_transaction_display").hide();
-                $(".account_transaction_display_table").hide();
-                $("#account_transaction_retry_btn").show();
-                setTimeout(function () {
-                    getAccountTransactions(
-                        account_number,
-                        start_date,
-                        end_date
-                    );
-                }, $.ajaxSetup().retryAfter);
+                toaster(error, "error");
             },
         });
     }
@@ -321,11 +225,9 @@ $(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                console.log(response);
                 if (response.responseCode == "000") {
                     const data = response.data;
                     $.each(data, (i) => {
-                        console.log(i);
                         Object.entries(data[i]).forEach(([key, value], j) => {
                             if (key.includes("image")) {
                                 let active = j === 0 ? "active" : "";

@@ -25,6 +25,6 @@
     var  {transferType, userAccounts } = pageData
 </script>
 <script src="{{ asset('assets/js/pages/transfer/transfersMaster.js') }}" defer></script>
-<script src="{{ asset('assets/js/functions/validateEmail.js') }}" defer></script>
-<script src="{{ asset('assets/js/functions/currencyConverter.js') }}" defer></script>
+{{-- <script src="{{ asset('assets/js/functions/validateEmail.js') }}" defer></script> --}}
+{{-- <script src="{{ asset('assets/js/functions/currencyConverter.js') }}" defer></script> --}}
 <script src="assets/js/pages/transfer/beneficiary/beneficiaryForm.js"></script>

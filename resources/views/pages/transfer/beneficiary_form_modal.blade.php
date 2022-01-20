@@ -172,4 +172,4 @@
 @include("snippets.blockui")
 <script src="assets/js/pages/transfer/beneficiary/beneficiaryForm.js"></script>
 <script src="assets/js/pages/transfer/beneficiary/saveBeneficiary.js"></script>
-<script src="assets/js/functions/validateEmail.js"></script>
+{{-- <script src="assets/js/functions/validateEmail.js"></script> --}}

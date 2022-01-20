@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Validator;
 class CorporateKorporController extends Controller
 {
     //
-    public function corporate_initiate_korpor(Request $request) {
+    public function corporate_initiate_korpor(Request $request)
+    {
+        // return $request;
 
         $validator = Validator::make($request->all(), [
             'amount' => 'required',
@@ -22,13 +24,12 @@ class CorporateKorporController extends Controller
             'receiver_address' => 'required',
             'receiver_name' => 'required',
             'receiver_phone' => 'required',
-            'sender_name' => 'required' ,
+            'sender_name' => 'required',
             'account_currency' => 'required',
             'account_mandate' => 'required',
-            'currCode' => 'required'
+            // 'currCode' => 'required'
         ]);
 
-        // return $request;
 
 
         $base_response = new BaseResponse();
@@ -51,10 +52,10 @@ class CorporateKorporController extends Controller
         $receiverAddress = $request->receiver_address;
         $receiverName = $request->receiver_name;
         $receiverPhone = $request->receiver_phone;
-        $user_ip_address =$request->ip();
+        $user_ip_address = $request->ip();
         $account_currency = $request->account_currency;
         $currCode = $request->currCode;
-        $narration = $request->narration ;
+        $narration = $request->narration;
 
 
 
@@ -72,7 +73,7 @@ class CorporateKorporController extends Controller
             'receiver_address' => $receiverAddress,
             'receiver_name' => $receiverName,
             'currCode' => $currCode,
-            'narration' => $narration ,
+            'narration' => $narration,
             'userID' => $userID
         ];
 
@@ -83,22 +84,19 @@ class CorporateKorporController extends Controller
 
             // dd(env('CIB_API_BASE_URL') . "send-korpor-gone-for-pending");
 
-            $response = Http::post(env('CIB_API_BASE_URL') ."send-korpor-gone-for-pending", $data);
+            $response = Http::post(env('CIB_API_BASE_URL') . "send-korpor-gone-for-pending", $data);
 
 
             // return $response;
 
             $result = new ApiBaseResponse();
             return $result->api_response($response);
-
         } catch (\Exception $e) {
 
 
-            return response()->json([
-
-            ]);
-            return $response ;
-            return false ;
+            return response()->json([]);
+            return $response;
+            return false;
             // DB::table('tb_error_logs')->insert([
             //     'platform' => 'ONLINE_INTERNET_BANKING',
             //     'user_id' => 'AUTH',
@@ -109,8 +107,6 @@ class CorporateKorporController extends Controller
 
 
         }
-
-
     }
 
     public function corporate_reverse_korpor(Request $request)
@@ -118,9 +114,9 @@ class CorporateKorporController extends Controller
         $validator = Validator::make($request->all(), [
             'reference_no' => 'required',
             'receiver_phoneNo' => 'required',
-            'accountNumber' => 'required' ,
-            'accountCurrency' => 'required' ,
-            'accountMandate' => 'required' ,
+            'accountNumber' => 'required',
+            'accountCurrency' => 'required',
+            'accountMandate' => 'required',
             'accountCurrCode' => 'required'
         ]);
 
@@ -167,7 +163,7 @@ class CorporateKorporController extends Controller
 
             if ($reference_no == $response['REMITTANCE_REF']) {
                 dd("Equal");
-            }else {
+            } else {
                 dd("Not Equal");
             };
 
@@ -191,5 +187,4 @@ class CorporateKorporController extends Controller
 
 
     }
-
 }

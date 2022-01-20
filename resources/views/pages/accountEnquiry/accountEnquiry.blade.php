@@ -63,7 +63,7 @@
                             <div class="row site-card justify-content-md-around" id="transaction_form">
                                 <div class="col-md-6 align-self-center">
                                     <div class="form-group row ">
-                                        <b class="col-md-3 text-primary align-self-center">Select Account :</b>
+                                        <b class="col-md-3 text-primary align-self-center"> Account :</b>
                                         <select class="form-control col-md-9" id="from_account" required>
                                             <option value="" disabled selected> -- Select Your Account -- </option>
                                             @include("snippets.accounts")
@@ -141,7 +141,7 @@
                                         </h5>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-9 col-md-4">
                                         <select class="form-control col-md-8" id="filter" required>
 
                                             <option value="all" selected> ALL</option>
@@ -150,25 +150,25 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-2">
+                                    <div class="col-3 col-md-2">
                                         <span style="float: right">
                                             &nbsp;&nbsp;
-                                            <span id="pdf_print">
-                                                <a href="{{ url('print-account-statement') }}">
-                                                    <img src="{{ asset('assets/images/pdf.png') }}" alt=""
-                                                        style="width: 22px; height: 25px;">
-                                                </a>
-                                            </span>
+                                            {{-- <span> --}}
+                                            <a id="pdf_print" href="{{ url('print-account-statement') }}">
+                                                <img src="{{ asset('assets/images/pdf.png') }}" alt=""
+                                                    style="width: 22px; height: 25px;">
+                                            </a>
+                                            {{-- </span> --}}
 
                                             &nbsp;&nbsp;&nbsp;
                                         </span>
                                         <span style="float: right">
-                                            <span id="excel_print">
-                                                <a href="{{ url('print-account-statement') }}">
-                                                    <img src="{{ asset('assets/images/excel.png') }}" alt=""
-                                                        style="width: 22px; height: 25px;">
-                                                </a>
-                                            </span>
+                                            {{-- <span> --}}
+                                            <a id="excel_print" href="{{ url('print-account-statement') }}">
+                                                <img src="{{ asset('assets/images/excel.png') }}" alt=""
+                                                    style="width: 22px; height: 25px;">
+                                            </a>
+                                            {{-- </span> --}}
 
                                         </span>
                                     </div>
@@ -176,22 +176,22 @@
                             </div>
                             <div class="table-responsive  ">
 
-                                <table role="table" id="table-view"
-                                    class="table p-3 table-bordered table-striped table-centered account_transaction_display_table">
+                                <table role="table" class="table p-3 table-bordered table-striped table-centered"
+                                    id="account_transaction_display_table" style="zoom:0.9">
                                     <thead>
 
                                         <tr class="bg-info text-white ">
-                                            <th scope="col">Document Ref</th>
                                             <th scope="col">Date</th>
-                                            <th scope="col">Amount <span class="account_number_display_"></span>
-                                            </th>
-                                            <th scope="col">Balance<span class="account_description_display_"></span>
-                                            </th>
+                                            <th scope="col">Amount <span class="account_number_display_"></span></th>
+                                            <th scope="col">Credit Account</th>
                                             <th scope="col">Purpose of Transfer <span
                                                     class="account_currency_display_"></span>
                                             </th>
-                                            <th scope="col">Credit Account</th>
-                                            <th scope="col">Batch No</th>
+                                            <th scope="col">Balance<span class="account_description_display_"></span>
+                                            </th>
+                                            <th scope="col">Document Ref</th>
+
+                                            {{-- <th scope="col">Batch No</th> --}}
                                             <th scope="col">Attachment</th>
                                         </tr>
                                     </thead>
@@ -248,5 +248,9 @@
 @section('scripts')
     @include("extras.datatables")
     <script src="{{ asset('assets/js/pages/accounts/accountEnquiry.js') }}"></script>
-
+    <script defer>
+        const PageData = new Object();
+        PageData.reqAccount = @json($accountNumber);
+        let noDataAvailable = {!! json_encode($noDataAvailable) !!}
+    </script>
 @endsection

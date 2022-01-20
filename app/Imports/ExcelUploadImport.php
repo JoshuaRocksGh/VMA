@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithMappedCells;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ExcelUploadImport implements WithHeadingRow, ToCollection
 {
@@ -95,25 +96,43 @@ class ExcelUploadImport implements WithHeadingRow, ToCollection
         $value_date = strtotime($value_date);
         $value_date = date('d-M-Y', $value_date);
 
-        $t_amt = 0;
+        // $t_amt = 0;
+
 
         $check_ref = false;
 
         $batch_no = $documentRef;
 
-        /*
-        foreach ($rows as $row) {
+        // foreach ($rows as $row) {
 
 
-            if ($row['account_number'] == null) {
-            } else {
-                // echo json_encode($row);
-                // die();
-                $t_amt = $t_amt + floatval($row['amount']);
-            }
-        }
+        //     if ($row['account_number'] == null) {
+        //     } else {
+        //         // echo json_encode($row);
+        //         // die();
+        //         $excel_t_amt = $excel_t_amt + floatval($row['amount']);
+        //     }
+        // }
 
-        */
+
+        // Create an empty array
+        // $excel_ref = array();
+
+        // $excel_ref = [];
+
+
+
+
+
+        // echo json_encode($error_insert);
+
+
+        // echo json_encode($error_insert);
+        // echo json_encode($row);
+
+
+
+
 
         // echo json_encode($t_amt);
         // die();
@@ -174,18 +193,97 @@ class ExcelUploadImport implements WithHeadingRow, ToCollection
         }
         */
 
+        // $query_result_delete = DB::table('tb_corp_bank_import_excel')
+        //     ->where('customer_no', $customer_no)
+        //     ->delete();
+
+        // $error_insert_delete = DB::table('tb_bulk_error_logs')
+        //     ->where('customer_no', $customer_no)
+        //     ->delete();
+
+        // $query_result_delete = DB::table('TB_CORP_BANK_BULK_REF')
+        //     ->where('customer_no', $customer_no)
+        //     ->delete();
+
         $t_amt = 0;
+        $excel_t_amt = 0;
+
+
+
 
         foreach ($rows as $row) {
 
-            // echo json_encode($rows);
+
+            // echo json_encode($row);
+
+            // echo json_encode(floatval($row['amount']));
             // die();
 
+            // $oracle = DB::connection('oracle');
+            // Select name_of_column from g_ledger where acct_link = account number ;
+            // if ($oracle) {
+            //     echo (json_encode($oracle));
+            // } else {
+            //     echo ('failed');
+            // };
 
-            if (null == ($row['account_number'] || $row['name'] ||  $row['amount'] || $row['ref_number'])) {
-                // return null;
+
+
+            $error_message = '';
+            // Validate reference number
+
+            // if (null == ($row['name'])) {
+            //     $error_message = $error_message . '- Name can not be empty.';
+            //     $row['name'] = "";
+            // }
+
+            // if (null == ($row['amount'])) {
+            //     $error_message = $error_message . '- Amount can not be empty.';
+            //     $row['amount'] = "";
+            // } else if (($row['amount']) <= 0) {
+            //     $error_message = $error_message . '- Amount can not be 0.';
+            //     $row['amount'] = "";
+            // }
+
+            // if (null == ($row['transaction_description'])) {
+            //     $error_message = $error_message . '- Transaction description can not be empty.';
+            //     $row['transaction_description'] = "";
+            // }
+
+            // if (null == ($row['bank'])) {
+            //     $error_message = $error_message . '- Bank can not be empty.';
+            //     $row['bank'] = "";
+            // }
+
+            if (null == ($row['ref_number'])) {
+                $error_message = $error_message . '- Ref Number can not be empty.';
+                $row['ref_number'] = "";
+            } else if (($row['ref_number']) != $ref_no) {
+                $error_message = $error_message . '- Ref Number do not match';
+                $row['ref_number'] = "";
+            }
+
+
+            if (null == ($row['account_number'] || $row['name'] ||  $row['amount'] || $row['transaction_description'] || $row['bank'] || $row['ref_number'])) {
+                // return null; here if on colum is empty.. that row will net insert at all. are you okay with that?
+                // yeah... but u i go work with am' okay
             } else {
 
+                if ($row['ref_number'] == null) {
+                    $excel = "";
+                } else {
+                    $excel = $row['ref_number'];
+                }
+
+                // echo json_encode(floatval($row['amount']));
+                // die();
+
+
+
+                // if ($row['amount'] != "" || $row['amount'] != null) {
+                //     // $excel_t_amt = $t_amt + floatval($row['amount']);
+                //     $excel_t_amt = $t_amt + (float) $row['amount'];
+                // }
 
                 $beneficiaryname = $row['name'];
                 $creditaccountnumber =  $row['account_number'];
@@ -196,7 +294,41 @@ class ExcelUploadImport implements WithHeadingRow, ToCollection
                 //     "data"  => $creditaccountnumber
                 // ]);
 
-                $t_amt = $t_amt + (float) $row['amount'];
+                // if ($row['amount'] != "" || $row['amount'] != null) {
+
+                //     $t_amt = $t_amt + floatval($row['amount']);
+                //     $t_amt = $t_amt + (float) $row['amount'];
+                // }
+
+
+                // $data = [
+                //     'ref_no' => $row['ref_number'],
+                //     'bban' => $row['account_number'],
+                //     'name' => $row['name'],
+                //     'amount' => $row['amount'],
+                //     'trans_desc' => $row['transaction_description'],
+                //     'value_date' => $value_date,
+                //     'bank_code' => $bank_code,
+                //     'user_id' => session()->get('userId'),
+                //     'customer_no' => $customer_no,
+                //     'account_no' => $account_no,
+                //     'account_mandate' => $account_mandate,
+                //     'total_amount' => $total_amount,
+                //     'currency' => $currency,
+                //     'message' => $error_message,
+                //     'batch_no' => $batch_no,
+                //     'status' => "P",
+                //     'bank_name' => '$bank_name',
+                //     'created_at' => NOW(),
+                //     'updated_at' => NOW(),
+                // ];
+                $t_amt = $t_amt + floatval($row['amount']);
+
+                // $t_amt = $t_amt + (float) $row['amount'];
+                // echo json_encode($t_amt);
+                // die();
+
+
 
 
 
@@ -215,14 +347,17 @@ class ExcelUploadImport implements WithHeadingRow, ToCollection
                     'account_mandate' => $account_mandate,
                     'total_amount' => $total_amount,
                     'currency' => $currency,
-                    'message' => 'message',
+                    'message' => $error_message,
                     'batch_no' => $batch_no,
-                    'status' => 'P',
+                    'status' => "P",
                     'bank_name' => '$bank_name',
                     'created_at' => NOW(),
                     'updated_at' => NOW(),
-                    
+
                 ]);
+
+                // echo json_encode($query_result);
+                // die();
 
                 /*
                 $query_result = DB::table('tb_corp_bank_req')->insert(
@@ -242,7 +377,7 @@ class ExcelUploadImport implements WithHeadingRow, ToCollection
                         // 'narration' => $narration,
                         'post_date' => $post_date,
                         'is_accept_excel' => 'NY',
-                        'ref_no' => $ref_no,
+                        // 'ref_no' => $ref_no,
                         'total_amount' => $total_amount,
                         'value_date' => $value_date,
                     ]
@@ -250,6 +385,24 @@ class ExcelUploadImport implements WithHeadingRow, ToCollection
                 */
             }
         }
+
+
+
+        // echo json_encode($t_amt);
+        // echo json_encode("===");
+        // echo json_encode($excel_t_amt);
+
+
+        $error_insert = DB::table('tb_bulk_error_logs')->insert([
+            "batch_no" => $batch_no,
+            "customer_no" => $customer_no,
+            "account_balance" => "",
+            "total_amount" => $total_amount,
+            "ref_number" => $ref_no,
+            "excel_total_amount" => $t_amt,
+            "excel_ref_number" => $excel
+        ]);
+
 
         $query_result_ = DB::table('TB_CORP_BANK_BULK_REF')->insert(
             [
@@ -259,6 +412,7 @@ class ExcelUploadImport implements WithHeadingRow, ToCollection
                 'TOTAL_AMOUNT' => $t_amt,
                 'DESCRIPTION' => $ref_no,
                 'USER_ID' => $user_id,
+                'CUSTOMER_NO' => $customer_no,
                 'ACCOUNT_NO' => $account_no,
                 'ACCOUNT_MANDATE' => $account_mandate,
                 'BATCH_NO' => $batch_no
@@ -270,7 +424,7 @@ class ExcelUploadImport implements WithHeadingRow, ToCollection
 
         // echo $query_result;die;
 
-        DB::commit();
+        // DB::commit();
 
         // if($query_result_){
 

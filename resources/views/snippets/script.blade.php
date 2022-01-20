@@ -1,7 +1,4 @@
-<!-- Third Party js-->
-{{-- <script src="{{ asset('land_asset/js/jquery.min.js') }}"></script> --}}
-
-@if (config("app.corporate"))
+@if (config('app.corporate'))
 <script>
     const ISCORPORATE = true;
 </script>
@@ -10,29 +7,19 @@
     const ISCORPORATE = false;
 </script>
 @endif
-<script type="text/javascript">
-    if (typeof jQuery === 'undefined') {
-        var oScriptElem = document.createElement("script");
-        oScriptElem.type = "text/javascript";
-        oScriptElem.src = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js";
-        document.head.insertBefore(oScriptElem, document.head.getElementsByTagName("script")[0])
-    }
-</script>
+
+<!-- Third Party js-->
 <script src="{{ asset('assets/js/vendor.min.js') }}" defer></script>
-{{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script> --}}
-<script src="assets\plugins\sweet-alert\sweetalert2@11.js"></script>
+<script src="{{ asset('assets\plugins\sweet-alert\sweetalert2@11.js') }}" defer></script>
 <script src="{{ asset('assets/js/app.min.js') }}" defer></script>
-<script src="{{ asset('assets/js/functions/getAccounts.js') }}" defer></script>
+{{-- <script src="{{ asset('assets/js/functions/getAccounts.js') }}" defer></script> --}}
+<script src="{{  asset('assets/plugins/blockui/jquery.blockUI.min.js') }}" defer></script>
 {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js" defer></script>
 --}}
-{{-- <script src="assets\plugins\bootstrap-select\bootstrap-select.min.js" defer> </script> --}}
-<script defer>
-    function formatToCurrency(amount) {
-        return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-    };
-</script>
+<script src="assets\plugins\bootstrap-select\bootstrap-select.min.js" defer> </script>
+<script defer src="{{ asset('assets/js/functions/genericFunctions.js') }}">
 
-{{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@10" defer></script> --}}
+</script>
 
 <script defer>
     const ACCOUNT_NUMBER_LENGTH = 13
@@ -118,7 +105,7 @@ $(window).on("load", ()=>{
         }, 1000);
       })  
 </script>
-
+{{-- <script src="{{ asset('assets/js/functions/blockUi.js') }}"></script> --}}
 {{-- <script type='text/javascript'>
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
@@ -130,10 +117,3 @@ $(window).on("load", ()=>{
 
 <script type='text/javascript' src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'>
 </script> --}}
-
-<script defer>
-    $.ajaxSetup({
-        timeout: 3000,
-        retryAfter: 5000
-    });
-</script>

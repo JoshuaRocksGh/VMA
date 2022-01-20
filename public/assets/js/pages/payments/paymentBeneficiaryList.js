@@ -5,11 +5,9 @@ function getBeneficiaryList() {
         url: "payment-beneficiary-list-api",
         datatype: "application/json",
         success: function (response) {
-            console.log(response);
-
             if (response.responseCode == "000") {
                 const data = response.data;
-                console.log(data);
+
                 if (data && data.length > 0) {
                     $.each(pageData.payTypes, (i) => {
                         const type = pageData.payTypes[i];
@@ -20,7 +18,6 @@ function getBeneficiaryList() {
                     drawBeneficiaryTable();
                 }
             } else {
-                console.log(response);
             }
         },
         error: function (xhr, status, error) {
@@ -37,14 +34,10 @@ function getPaymentTypes() {
         url: "get-payment-types-api",
         datatype: "application/json",
         success: function (response) {
-            console.log(response);
             if (response.responseCode == "000") {
                 const data = response.data;
                 pageData.payTypes = [];
                 $.each(data, function (i) {
-                    console.log(data[i]);
-                    console.log("a");
-
                     const type = data[i].paymentType;
                     pageData.payTypes.push(type);
                     pageData["pay_" + type] = data[i];
@@ -109,7 +102,7 @@ function drawBeneficiaryTable() {
         const beneData = JSON.stringify(data[index]);
         const editIcon = `<a class='edit-beneficiary' style="display:flex; place-content:center;" href="#" data-value='${beneData}'> <span class="fe-edit noti-icon text-info"></span></a>`;
         const { NICKNAME, ACCOUNT, PAYEE_NAME } = data[index];
-        console.log(data[index]);
+
         const logo = pageData["pay_" + currentType].paySubTypes.find(
             (e) => e.paymentCode === PAYEE_NAME
         ).paymentLogo;

@@ -12,7 +12,7 @@
 {{--
 <link rel="stylesheet" href="{{ asset('assets\fonts\fontawesome-free-5.15.4-web\css\all.min.css')}}" type="text/css" />
 --}}
-<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.css')}}" type="text/css" />
+<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.css') }}" type="text/css" />
 <link href="{{ asset('assets/css/bootstrap-purple.min.css') }}" rel="stylesheet" type="text/css"
     id="bs-default-stylesheet" />
 <link href="{{ asset('assets/css/app-purple.min.css') }}" rel="stylesheet" type="text/css"

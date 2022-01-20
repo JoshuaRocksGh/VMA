@@ -52,6 +52,8 @@ function reverseKorpor(url, data) {
 }
 
 function initiateKorpor(url, data) {
+    // console.log(data);
+    // return false;
     siteLoading("show");
     $.ajax({
         type: "POST",
@@ -67,7 +69,8 @@ function initiateKorpor(url, data) {
             sender_name: data.accountName,
             account_mandate: data.accountMandate,
             account_currency: data.accountCurrency,
-            currCode: data.accountCurrencyCode,
+            currCode: data.currCode,
+            narration: data.narration,
         },
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -312,12 +315,14 @@ $(document).ready(function () {
     let transferInfo = new Object();
     $("#account_of_transfer").change(function () {
         const e = $("#account_of_transfer option:selected");
+        // console.log(e.attr("data-account-currency-code"));
         const accountNumber = e.attr("data-account-number");
         const accountCurrency = e.attr("data-account-currency");
         const accountMandate = e.attr("data-account-mandate");
         const accountName = e.attr("data-account-description");
         const accountType = e.attr("data-account-type");
         const accountBalance = e.attr("data-account-balance");
+        const currCode = e.attr("data-account-currency-code");
         transferInfo = {
             accountCurrency,
             accountMandate,
@@ -325,6 +330,7 @@ $(document).ready(function () {
             accountNumber,
             accountType,
             accountBalance,
+            currCode,
         };
         $(".display_from_account_type").text(accountType);
         $(".display_from_account_name").text(accountName);
@@ -383,7 +389,7 @@ $(document).ready(function () {
 
     $("#confirm_next_button").on("click", (e) => {
         e.preventDefault();
-        console.log("here");
+        // console.log("here");
         let amount = $("#amount").val();
         let recipientAddress = $("#receiver_address").val();
         let recipientName = $("#receiver_name").val();
@@ -584,7 +590,7 @@ $(document).ready(function () {
             // }
 
             if (!reference_no || !receiver_phoneNo || !pin) {
-                toaster("Fields must not be empty", "error", 10000);
+                toaster("Fields must not be empty", "error");
                 return false;
             } else {
                 $("#reverse-text").hide();
