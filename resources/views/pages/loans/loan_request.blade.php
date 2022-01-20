@@ -9,7 +9,9 @@ $pageTitle = "Loan Request"; @endphp
 @include("snippets.pageHeader")
 
 @include("snippets.pinCodeModal")
-<div class="card-body py-3 px-md-3">
+
+
+{{-- <div class="card-body py-3 px-md-3">
     <div class="row">
         <div class="col-md-7 px-3">
             <div class="site-card h-100" id="request_form_div">
@@ -204,7 +206,6 @@ $pageTitle = "Loan Request"; @endphp
         <div class="col-md-5 z-1 px-3">
             <div class="site-card h-100" id="atm_request_summary">
                 <br>
-                {{-- <br><br> --}}
                 <span class="text-primary transfer-detail-header "> Loan Detail </span>
                 <hr class="mt-0">
                 <div class="row">
@@ -259,18 +260,10 @@ $pageTitle = "Loan Request"; @endphp
             </div>
         </div>
 
-        {{-- <div class="col-md-5 text-center card-body success-message "
-            style="background-image: linear-gradient(to bottom right, white, rgb(223, 225, 226)); display:none">
-
-            <p class="display-4 text-center text-success">
-                <img width="305px" height="505px" src="{{ asset(" land_asset/images/rcb_cashless.jpeg") }}" />
-            </p>
-        </div> --}}
-
     </div>
-</div>
+</div> --}}
 
-<div class="card" id="payment_schedule" style="display: none">
+{{-- <div class="card" id="payment_schedule" style="display: none">
     <div class="show col-md-12" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body ">
             <div class="row">
@@ -309,7 +302,7 @@ $pageTitle = "Loan Request"; @endphp
 
         </div>
     </div>
-</div>
+</div> --}}
 
 @endsection
 
