@@ -201,7 +201,7 @@ Route::group(['middleware' => ['userAuth']], function () {
 
     // --- LOANS
     Route::get('/loan-request', [LoansController::class, 'loan_request'])->name('loan-request');
-    Route::get('/loan-quotation', [LoansController::class, 'loan_request'])->name('loan-quotation');
+    // Route::get('/loan-quotation', [LoansController::class, 'loan_request'])->name('loan-quotation');
 
 
     Route::get('request-statement', [AccountServicesController::class, 'request_statement'])->name('request-statement');
