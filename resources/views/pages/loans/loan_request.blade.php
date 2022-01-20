@@ -10,6 +10,30 @@ $pageTitle = "Loan Request"; @endphp
 
 @include("snippets.pinCodeModal")
 
+<div class="card-body mt-md-4 py-3 site-card container">
+    <nav>
+        <div class="nav nav-pills flex-column flex-sm-row" id="pills-tab" role="tablist">
+            <a id="Balance_Tab" class="flex-sm-fill text-sm-center nav-link active" data-toggle="pill" role="tab"
+                href="#Balances_Pill">Balances</a>
+            <a id="Request_Tab" class="flex-sm-fill text-sm-center nav-link" data-toggle="pill" role="tab"
+                href="#Requests_Pill">Requests</a>
+            <a id="Tracking_Tab" class="flex-sm-fill text-sm-center nav-link" data-toggle="pill" role="tab"
+                href="#Tracking_Pill">Tracking</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="pills-tabContent">
+
+        <div class="tab-pane fade show active" id="Balances_Pill" role="tab-panel">
+            {!! $noDataAvailable !!}
+        </div>
+        <div class="tab-pane fade" id="Requests_Pill" role="tab-panel">
+            <p>Requests</p>
+        </div>
+        <div class="tab-pane fade" id="Tracking_Pill" role="tab-panel">
+            <p>Tracking</p>
+        </div>
+    </div>
+</div>
 
 {{-- <div class="card-body py-3 px-md-3">
     <div class="row">
@@ -307,6 +331,11 @@ $pageTitle = "Loan Request"; @endphp
 @endsection
 
 @section('scripts')
+
 @include("extras.datatables")
 <script src="{{ asset('assets/js/pages/loans/loan-request.js') }}"> </script>
+<script>
+    let noDataAvailable = {!! json_encode($noDataAvailable) !!}
+
+</script>
 @endsection
