@@ -10,8 +10,8 @@ $pageTitle = "Loan Request"; @endphp
 
 @include("snippets.pinCodeModal")
 
-<div class="card-body mt-md-4 py-3 site-card container">
-    <nav>
+<div class="card-body mt-md-4 py-3 site-card container" style="min-height: 50vh">
+    <nav class="my-3 ">
         <div class="nav nav-pills flex-column flex-sm-row" id="pills-tab" role="tablist">
             <a id="Balance_Tab" class="flex-sm-fill text-sm-center nav-link active" data-toggle="pill" role="tab"
                 href="#Balances_Pill">Balances</a>
@@ -23,11 +23,61 @@ $pageTitle = "Loan Request"; @endphp
     </nav>
     <div class="tab-content" id="pills-tabContent">
 
-        <div class="tab-pane fade show active" id="Balances_Pill" role="tab-panel">
-            {!! $noDataAvailable !!}
+        <div class="tab-pane fade show active " id="Balances_Pill" role="tab-panel" style="height: 100%">
+            <div class="d-flex justify-content-center align-items-center">
+                {!! $noDataAvailable !!}
+            </div>
         </div>
-        <div class="tab-pane fade" id="Requests_Pill" role="tab-panel">
-            <p>Requests</p>
+        <div class="tab-pane  fade" id="Requests_Pill" role="tab-panel">
+
+            <form action="#" id="payment_details_form" autocomplete="off" class="container" style="max-width: 650px">
+                @csrf
+                <div class="mb-3 form-group ">
+                    <label class="text-primary mb-1 font-weight-bold font-12" for="loan_product">Select Loan
+                        Product</label>
+                    <select class="form-control" id="loan_product" required>
+                        <option value="" disabled selected>Select Loan Product
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-3 form-group ">
+
+                    <label class="text-primary mb-1 font-weight-bold font-12" for="loan_amount">Enter Amount</label>
+                    <div class="input-group">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">SSL</span>
+                        </div>
+                        <input type="text" placeholder="0.00" id="loan_amount" class="form-control">
+                    </div>
+                </div>
+                <div class="mb-3 form-group ">
+                    <label class="text-primary mb-1 font-weight-bold font-12" for="principal_repay_frequency">Select
+                        Principal Frequency Type</label>
+                    <select class="form-control" id="principal_repay_frequency" required>
+                        <option value="" disabled selected>Select Principal Frequency Type
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-3 form-group ">
+                    <label class="text-primary mb-1 font-weight-bold font-12" for="interest_repay_frequency">Select
+                        Interest
+                        Frequency Type</label>
+                    <select class="form-control" id="interest_repay_frequency" required>
+                        <option value="" disabled selected>Select Interest Frequency Type
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-3 form-group  form-check">
+                    <input type="checkbox" class="form-check-input" id="terms_checkbox">
+                    <label class="text-primary mb-1 font-weight-bold font-12" class="form-check-label"
+                        for="terms_checkbox">I
+                        agree to the Terms and Conditions</label>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
         <div class="tab-pane fade" id="Tracking_Pill" role="tab-panel">
             <p>Tracking</p>
