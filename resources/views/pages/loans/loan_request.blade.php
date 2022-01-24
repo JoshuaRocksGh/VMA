@@ -14,18 +14,36 @@ $pageTitle = "Loan Request"; @endphp
     <nav class="my-3 ">
         <div class="nav nav-pills flex-column flex-sm-row" id="pills-tab" role="tablist">
             <a id="Balance_Tab" class="flex-sm-fill text-sm-center nav-link active" data-toggle="pill" role="tab"
-                href="#Balances_Pill">Balances</a>
+                href="#Balances_Pill">BALANCES</a>
             <a id="Request_Tab" class="flex-sm-fill text-sm-center nav-link" data-toggle="pill" role="tab"
-                href="#Requests_Pill">Requests</a>
+                href="#Requests_Pill">REQUEST</a>
             <a id="Tracking_Tab" class="flex-sm-fill text-sm-center nav-link" data-toggle="pill" role="tab"
-                href="#Tracking_Pill">Tracking</a>
+                href="#Tracking_Pill">TRACKING</a>
         </div>
     </nav>
-    <div class="tab-content" id="pills-tabContent">
+    <div class="tab-content my-3" id="pills-tabContent">
 
         <div class="tab-pane fade show active " id="Balances_Pill" role="tab-panel" style="height: 100%">
             <div class="d-flex justify-content-center align-items-center">
-                {!! $noDataAvailable !!}
+                {{-- {!! $noDataAvailable !!} --}}
+                <table id="example" class="display table table-bordered " style="width:100%">
+                    <thead class="bg-primary text-white font-weight-bold">
+                        <tr>
+                            <th>Loan Description</th>
+                            <th>Amount Granted</th>
+                            <th>Loan Balance</th>
+                            <th> View Details </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{-- <tr>
+                            <td>Tiger Nixon</td>
+                            <td>2011/04/25</td>
+                            <td>$320,800</td>
+                            <td>Button</td>
+                        </tr> --}}
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="tab-pane  fade" id="Requests_Pill" role="tab-panel">
@@ -77,6 +95,7 @@ $pageTitle = "Loan Request"; @endphp
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
+
             </form>
         </div>
         <div class="tab-pane fade" id="Tracking_Pill" role="tab-panel">

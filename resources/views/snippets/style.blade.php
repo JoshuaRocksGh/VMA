@@ -197,49 +197,6 @@
         color: #1E1F23
     }
 
-    /* .btn-primary {
-        background-color: #00bdf3 !important;
-        border-color: #00bdf3 !important;
-        /* height: 3rem; */
-    }
-
-    */
-    /* .btn-primary:hover {
-        background-color: #0388cb !important;
-        border-color: #0388cb !important;
-        box-shadow: 0 0 0 0.15rem #0388cb80 !important;
-    }
-
-    .btn-primary:focus {
-        background-color: #0388cb !important;
-        border-color: #0388cb !important;
-        box-shadow: 0 0 0 0.15rem #0388cb80 !important;
-    } */
-
-
-    /* .btn-primary:active {
-        background-color: #0388cb !important;
-        border-color: #0388cb !important;
-        box-shadow: 0 0 0 0.15rem #0388cb80 !important;
-
-    }
-
-    .btn-primary:active {
-        background-color: #00bdf3 !important;
-        border-color: #00bdf3 !important;
-        box-shadow: 0 0 0 0.15rem #0388cb80 !important;
-    } */
-
-    /* a.text-primary {
-        color: #00bdf3 !important;
-    } */
-
-    /* a.text-primary:focus,
-    a.text-primary:hover {
-        color: #0388cb !important;
-    } */
-
-
     .div-card {
         background-image: linear-gradient(to bottom right, white, rgb(223, 225, 226));
         box-shadow: 4px 4px 15px rgb(26 35 126 / 20%);
