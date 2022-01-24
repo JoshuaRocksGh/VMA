@@ -103,19 +103,6 @@ select:hover {
     }
 }
 
-label {
-    align-self: center;
-    margin-bottom: 0;
-}
-
-input {
-    align-self: center !important;
-}
-
-form-control {
-    align-self: center !important;
-}
-
 .switch-text {
     position: absolute;
     left: 70%;
@@ -147,10 +134,10 @@ form-control {
     background-color: #00bdf3 !important;
     color: white;
 }
-.page-item.active .page-link {
+/* .page-item.active .page-link {
     background-color: var(--info);
     border-color: var(--info);
-}
+} */
 
 .next-button {
     height: 2rem !important;
