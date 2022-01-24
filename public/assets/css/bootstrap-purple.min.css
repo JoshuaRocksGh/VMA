@@ -2567,7 +2567,7 @@ textarea.form-control.is-invalid {
 .btn.focus,
 .btn:focus {
     outline: 0;
-    box-shadow: 0 0 0 0.15rem rgba(126, 87, 194, 0.25);
+    /* box-shadow: 0 0 0 0.15rem rgba(126, 87, 194, 0.25); */
 }
 
 .btn.disabled,
@@ -2599,9 +2599,9 @@ fieldset:disabled a.btn {
 .btn-primary.focus,
 .btn-primary:focus {
     color: var(--white);
-    background-color: #00bdf3;
+    /* background-color: #00bdf3; */
     border-color: var(--primary-alt);
-    box-shadow: 0 0 0 0.15rem rgba(145, 112, 203, 0.5);
+    /* box-shadow: 0 0 0 0.15rem rgba(74, 129, 212, 0.5); */
 }
 
 .btn-primary.disabled,
@@ -2615,14 +2615,14 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active,
 .show > .btn-primary.dropdown-toggle {
     color: var(--white);
-    background-color: #00bdf3;
-    border-color: var(--primary-alt);
+    /* background-color: #00bdf3; */
+    /* border-color: var(--primary-alt); */
 }
 
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show > .btn-primary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.15rem rgba(145, 112, 203, 0.5);
+    box-shadow: 0 0 0 0.15rem rgba(74, 129, 212, 0.5);
 }
 
 .btn-secondary {
@@ -10769,7 +10769,7 @@ a.text-blue:hover {
 }
 
 .btn-primary {
-    box-shadow: 0 0 0 0 rgba(126, 87, 194, 0.5);
+    box-shadow: 0 0 0 0 rgba(74, 129, 212, 0.5);
 }
 
 .btn-secondary {
@@ -10879,7 +10879,7 @@ a.text-blue:hover {
 
 .btn-outline-primary.focus,
 .btn-outline-primary:focus {
-    box-shadow: 0 0 0 0.15rem rgba(126, 87, 194, 0.5);
+    box-shadow: 0 0 0 0.15rem rgba(74, 129, 212, 0.5);
 }
 
 .btn-outline-primary.disabled,
@@ -10899,7 +10899,7 @@ a.text-blue:hover {
 .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus,
 .show > .btn-outline-primary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.15rem rgba(126, 87, 194, 0.5);
+    box-shadow: 0 0 0 0.15rem rgba(74, 129, 212, 0.5);
 }
 
 .btn-outline-secondary {
@@ -11247,8 +11247,8 @@ a.text-blue:hover {
 
 .btn-soft-primary {
     color: var(--primary);
-    background-color: rgba(126, 87, 194, 0.18);
-    border-color: rgba(126, 87, 194, 0.12);
+    background-color: rgba(74, 129, 212, 0.5);
+    border-color: rgba(74, 129, 212, 0.5);
 }
 
 .btn-soft-primary:hover {
@@ -11258,7 +11258,7 @@ a.text-blue:hover {
 
 .btn-soft-primary.focus,
 .btn-soft-primary:focus {
-    box-shadow: 0 0 0 0.15rem rgba(126, 87, 194, 0.3);
+    box-shadow: 0 0 0 0.15rem rrgba(74, 129, 212, 0.5);
 }
 
 .btn-soft-secondary {
