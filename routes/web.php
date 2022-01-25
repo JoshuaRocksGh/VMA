@@ -382,22 +382,21 @@ Route::post('reverse-korpor', [KorporController::class, 'reverse_korpor'])->name
 
 
 //route to return interest rate types
-Route::get('get-interest-types-api', [FunctionsController::class, 'get_Interest_Types'])->name('get-interest-types-api');
 
-//route to return loan frequencies
 
 //route to return loan purposes
-Route::get('get-loan-frequencies-api', [FunctionsController::class, 'get_loan_frequencies']);
-Route::get('get-loan-purpose-api', [FunctionsController::class, 'getLoanPurpose']);
-Route::get('get-loan-intro-source-api', [FunctionsController::class, 'getLoanIntroSource']);
-Route::get('get-loan-sectors-api', [FunctionsController::class, 'getLoanSectors']);
-Route::get('get-loan-sub-sectors-api', [FunctionsController::class, 'getLoanSubSectors']);
-Route::get('get-loan-products-api', [FunctionsController::class, 'get_Loan_products']);
-Route::post('loan-request-details', [LoanRequestController::class, 'send_loan_request']);
+Route::get('get-interest-types-api', [FunctionsController::class, 'get_Interest_Types'])->name('get-interest-types-api');
+Route::get('get-loan-frequencies-api', [LoansController::class, 'get_loan_frequencies']);
+Route::get('get-loan-purpose-api', [LoansController::class, 'getLoanPurpose']);
+Route::get('get-loan-intro-source-api', [LoansController::class, 'getLoanIntroSource']);
+Route::get('get-loan-sectors-api', [LoansController::class, 'getLoanSectors']);
+Route::get('get-loan-sub-sectors-api', [LoansController::class, 'getLoanSubSectors']);
+Route::get('get-loan-products-api', [LoansController::class, 'get_Loan_products']);
+Route::post('loan-request-details', [LoansController::class, 'send_loan_request']);
 Route::post('loan-quotation-details', [LoansController::class, 'sendLoanRequestQuote']);
 Route::post('loan-origination-api', [LoansController::class, 'postLoanOrigination']);
-Route::get('get-loan-accounts-api', [FunctionsController::class, 'get_my_loans_accounts']);
-
+Route::get('get-loan-accounts-api', [LoansController::class, 'get_my_loans_accounts']);
+Route::get("get-loan-details", [LoansController::class, 'getLoanDetails']);
 
 //route to return standing order frequencies
 Route::get('get-standing-order-frequencies-api', [FunctionsController::class, 'get_standing_order_frequencies'])->name('get-standing-order-frequencies-api');
