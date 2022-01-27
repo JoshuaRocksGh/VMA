@@ -19,8 +19,8 @@
 //             // $(optionId).selectpicker("refresh");
 //         },
 //         error: (xhr, status, error) => {
-//             console.log(optionUrl);
-//             console.log(error);
+//
+//
 //             setTimeout(() => {
 //                 getOptions(optionUrl, optionId);
 //             }, $.ajaxSetup().retryAfter);
@@ -59,7 +59,7 @@
 //         },
 //         success: function (response) {
 //             if (response.responseCode === "000") {
-//                 console.log(response);
+//
 //                 let table = $(".loan_payment_schedule").DataTable();
 //                 // var nodes = table.rows().nodes();
 //                 let data = response.data.loanSchedule;
@@ -114,7 +114,7 @@
 //         data: data,
 //         success: function (response) {
 //             if (response.responseCode === "000") {
-//                 console.log(response);
+//
 //                 swal.fire({
 //                     title: "Successful!",
 //                     html: response.message,
@@ -297,7 +297,7 @@
 //             return false;
 //         }
 //         if (loanFormStage === "final") {
-//             console.log(loanData);
+//
 //             if (
 //                 !loanData.loanIntroSourceCode ||
 //                 !loanData.loanSectorCode ||
@@ -347,19 +347,98 @@ function getLoans() {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-    });
+    })
+        .done((res) => {
+            if (res.responseCode !== "000") {
+                $("#loan_balances").hide();
+                $("#loan_balances_no_data").show();
+                toaster(res.message, "warning");
+                return;
+            }
+
+            let table = $("#loan_balances_table").DataTable({
+                destroy: true,
+                pageLength: 8,
+                autoWidth: false,
+                lengthChange: false,
+                responsive: true,
+                columnDefs: [
+                    {
+                        targets: [1, 2],
+                        render: (data) => {
+                            const d = data.split("~");
+                            return `<div class="float-right"><span>${
+                                d[0]
+                            }&nbsp${formatToCurrency(d[1])} </span></div>`;
+                        },
+                    },
+                ],
+            });
+
+            res.data.forEach((e) => {
+                table.row
+                    .add([
+                        e.description,
+                        `${e.isoCode}~${e.amountGranted}`,
+                        `${e.isoCode}~${e.loanBalance}`,
+                        `<div class="text-center"><button class="loan_detail_button btn btn-primary" data-value='${e.facilityNo}'>View</button></div>`,
+                    ])
+                    .draw(false);
+            });
+            $("#loan_balances_no_data").hide();
+            $("#loan_balances").show();
+            $(".loan_detail_button").on("click", function (e) {
+                const facilityNo = e.currentTarget.getAttribute("data-value");
+                getLoanDetails(facilityNo);
+            });
+        })
+        .fail((err) => {
+            toaster("failed to get loans", "error");
+        });
+}
+
+function getLoanDetails(facilityNo) {
+    return $.ajax({
+        type: "GET",
+        url: "get-loan-details",
+        data: { facilityNo },
+        datatype: "application/json",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    })
+        .done((res) => {
+            if (res.responseCode !== "000") {
+                $("#loan_balances").hide();
+                $("#loan_balances_no_data").show();
+                toaster(res.message, "warning");
+                return;
+            }
+            console.log(res.data);
+            const loan = res.data[0];
+
+            $("#principal_account").text(loan.PRINCIPAL_ACCOUNT);
+            $("#accrued_interest").text(loan.ACCRUED_INTEREST);
+            $("#penal_accrued").text(loan.ACCRUED_PENALTY);
+            $("#loan_detail_modal").modal("show");
+        })
+        .fail((res) => {
+            console.log(res);
+        });
 }
 
 $(function () {
-    getLoans()
-        .done((res) => {
-            res.responseCode !== "000" &&
-                toaster("failed to get loans", "warning");
+    getLoans();
+    $("#view_loan_schedule").on("click", () => {
+        $("#loan_details_content").hide(500);
+        $("#loan_schedule_content").show(500);
+    });
+    $("#loan_schedule_back_button").on("click", () => {
+        $("#loan_schedule_content").hide(500);
+        $("#loan_details_content").show(500);
+    });
 
-            console.log(res);
-        })
-        .fail((err) => {
-            console.log(err);
-            toaster("failed to get loans", "error");
-        });
+    $("#advanced_payment").on("click", () => {
+        toaster("Feature in the works", "warning");
+    });
 });
