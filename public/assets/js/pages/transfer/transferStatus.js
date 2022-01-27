@@ -96,8 +96,8 @@ function getTransferStatus(customerNumber) {
     });
 }
 
-$(document).ready(function () {
-    $(".transfer_tab_btn").click(function () {
+$(function () {
+    $(".transfer_tab_btn").on("click", function () {
         getTransferStatus(customerNumber);
     });
 
