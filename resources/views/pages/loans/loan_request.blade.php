@@ -1,6 +1,18 @@
 @extends('layouts.master')
 
 
+@section('styles')
+<style>
+    .repayment .menu-arrow {
+        transform: rotate(90deg);
+        transition: transform 0.5s
+    }
+
+    .repayment[aria-expanded="true"] .menu-arrow {
+        transform: rotate(270deg);
+    }
+</style>
+@endsection
 @section('content')
 @php
 $currentPath = "Loan Request" ;
@@ -23,12 +35,14 @@ $pageTitle = "Loan Request"; @endphp
     </nav>
     <div class="tab-content my-3" id="pills-tabContent">
 
-        <div class="tab-pane fade show active " id="Balances_Pill" role="tab-panel" style="height: 100%">
-            <div class="d-flex justify-content-center align-items-center">
-                {{-- {!! $noDataAvailable !!} --}}
-                <table id="example" class="display table table-bordered " style="width:100%">
+        <div class="tab-pane show active " id="Balances_Pill" role="tab-panel" style="height: 100%">
+            <div id="loan_balances_no_data" class=" justify-content-center align-items-center" style="display: flex;">
+                {!! $noDataAvailable !!}
+            </div>
+            <div id="loan_balances" class="table-responsive" style="display: none">
+                <table id="loan_balances_table" class="table table-striped table-hover table-centered table-bordered">
                     <thead class="bg-primary text-white font-weight-bold">
-                        <tr>
+                        <tr class="text-center">
                             <th>Loan Description</th>
                             <th>Amount Granted</th>
                             <th>Loan Balance</th>
@@ -36,17 +50,11 @@ $pageTitle = "Loan Request"; @endphp
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- <tr>
-                            <td>Tiger Nixon</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                            <td>Button</td>
-                        </tr> --}}
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="tab-pane  fade" id="Requests_Pill" role="tab-panel">
+        <div class="tab-pane  " id="Requests_Pill" role="tab-panel">
 
             <form action="#" id="payment_details_form" autocomplete="off" class="container" style="max-width: 650px">
                 @csrf
@@ -98,11 +106,196 @@ $pageTitle = "Loan Request"; @endphp
 
             </form>
         </div>
-        <div class="tab-pane fade" id="Tracking_Pill" role="tab-panel">
+        <div class="tab-pane " id="Tracking_Pill" role="tab-panel">
             <p>Tracking</p>
         </div>
     </div>
 </div>
+
+
+<!-- Standard modal content -->
+<div id="loan_detail_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="transfer_status"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="loan_details_content">
+                <div class="modal-header bg-primary">
+                    <h3 class="modal-title modal-title font-18 font-weight-bold text-white" id="transfer_status_title">
+                        LOAN DETAILS</h3>
+                </div>
+
+
+                <div class="modal-body">
+                    <div class="rounded-circle d-flex justify-content-center align-items-center mx-auto text-center bg-secondary"
+                        style="height: 200px; width: 200px">
+                        <div class="text-white ">
+                            <span class="d-block font-14">Amount Outstanding</span>
+                            <span class="d-block font-16">0.00</span>
+                            <span class="d-block font-16">SSL</span>
+                        </div>
+                    </div>
+                    <div class="d-flex px-2 my-4 justify-content-between">
+                        <button type="button" class="btn btn-outline-primary rounded shadow-lg"
+                            id="advanced_payment">Advance Payment</button>
+                        <button type="button" class="btn btn-outline-primary rounded shadow-lg" id="view_loan_schedule">
+                            View Schedule</button>
+                    </div>
+
+                    <h2 class="text-primary  font-16 font-weight-bold mb-2 text-center">LOAN </h2>
+
+                    <table class="table table-borderless table-striped table-sm">
+                        <tbody>
+                            <tr>
+                                <th class="col-5 font-14 font-weight-normal">Principal Account</th>
+                                <td class="text-primary text-right" id="principal_account"></td>
+                            </tr>
+
+                            <tr>
+                                <th class="col-5 font-14 font-weight-normal">Principal in Areas</th>
+                                <td class="text-primary text-right" id="principal_in_areas"></td>
+                            </tr>
+                            <tr>
+                                <th class="col-5 font-14 font-weight-normal">Interest in Amount</th>
+                                <td class="text-primary text-right" id="interest_in_amount"></td>
+                            </tr>
+                            <tr>
+                                <th class="col-5 font-14 font-weight-normal">Accrued interest</th>
+                                <td class="text-primary text-right" id="accrued_interest"></td>
+                            </tr>
+                            <tr>
+                                <th class="col-5 font-14 font-weight-normal">Interest in Areas</th>
+                                <td class="text-primary text-right" id="interest_in_areas"></td>
+                            </tr>
+                            <tr>
+                                <th class="col-5 font-14 font-weight-normal">Pinal Accrued</th>
+                                <td class="text-primary text-right" id="pinal_accrued"></td>
+                            </tr>
+                            <tr>
+                                <th class="col-5 font-14 font-weight-normal">Last Repay Date</th>
+                                <td class="text-primary text-right" id="last_repay_date"></td>
+                            </tr>
+                            <tr>
+                                <th class="col-5 font-14 font-weight-normal">Next Review Date</th>
+                                <td class="text-primary text-right" id="next_review_date"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="loan_schedule_content" class="" style="display: none">
+                <div class="p-3 bg-primary">
+                    <a id="loan_schedule_back_button" class="fas text-black fa-arrow-left inline-block"></a>
+                    <h3 class="pb-2 text-center modal-title modal-title font-16 font-weight-bold text-white"
+                        id="transfer_status_title"> LOAN SCHEDULE</h3>
+                    <div class="px-2">
+                        <div class="d-flex justify-content-between " style="color: #b2b9bd">
+                            <span class="font-12">Facility No.</span>
+                            <span class="font-weight-bold  text-white">998832</span>
+                        </div>
+                        <hr class="my-1">
+                        <div class="d-flex justify-content-between text-white">
+                            <div>
+                                <span class="d-block font-12 " style="color: #b2b9bd">Current Balance</span>
+                                <span class="d-block font-weight-bold">998832</span>
+
+                            </div>
+                            <div>
+                                <span class="d-block font-12 text-right" style="color:#b2b9bd">Areas</span>
+                                <span class="d-block font-weight-bold text-right">LL 14,998,832.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="min-height: 50vh">
+                    <div class="card m-2 shadow" style="border-radius: 2px">
+                        <div>
+                            <a href="#s" class="repayment" data-toggle="collapse">
+                                <div class="d-flex justify-content-between pl-3 py-2">
+                                    <span> Repayment #1</span>
+                                    <span class="menu-arrow"></span>
+                                </div>
+                            </a>
+                            <div class="collapse " id="s">
+                                <div class="d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+                                <div class="d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+                                <div class="d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+                                <div class="d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+                                <div class="d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+
+                            </div>
+                            <div class="bg-info">
+                                <div class="d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card m-2 shadow" style="border-radius: 2px">
+                        <div>
+                            <a href="#a" class="repayment" data-toggle="collapse">
+                                <div class=" d-flex justify-content-between pl-3 py-2">
+                                    <span> Repayment #1</span>
+                                    <span class="menu-arrow"></span>
+                                </div>
+                            </a>
+                            <div class="collapse " id="a">
+                                <div class=" d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+                                <div class="d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+                                <div class="d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+                                <div class="d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+                                <div class="d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+
+                            </div>
+                            <div class="bg-info">
+                                <div class="d-flex border-top justify-content-between px-3 py-2">
+                                    <span class="text-dark"> Interest Amount</span>
+                                    <span class="text-info">SLL 09347538</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+
+
+{{-- ================================================================ --}}
 
 {{-- <div class="card-body py-3 px-md-3">
     <div class="row">
@@ -320,13 +513,15 @@ $pageTitle = "Loan Request"; @endphp
 
                     <p class="col-md-6 transfer-detail-text my-1">Interest Repay Frequency:</p>
                     <p class="text-primary display_interest_repay_freq col-md-6"></p>
-                    <p class="col-md-6 transfer-detail-text my-1 loan-detail" style="display: none">Intro Source:</p>
+                    <p class="col-md-6 transfer-detail-text my-1 loan-detail" style="display: none">Intro Source:
+                    </p>
                     <p class="text-primary loan-detail display_loan_intro_source col-md-6" style="display: none">
                     </p>
                     <p class="col-md-6 transfer-detail-text my-1 loan-detail" style="display: none">Sector:</p>
                     <p class="text-primary loan-detail display_loan_sectors col-md-6" style="display: none">
                     </p>
-                    <p class="col-md-6 transfer-detail-text my-1 loan-sub-sectors-div" style="display: none">Sub Sector:
+                    <p class="col-md-6 transfer-detail-text my-1 loan-sub-sectors-div" style="display: none">Sub
+                        Sector:
                     </p>
                     <p class="text-primary loan-sub-sectors-div display_loan_sub_sectors col-md-6"
                         style="display: none">
@@ -334,7 +529,8 @@ $pageTitle = "Loan Request"; @endphp
                     <p class="col-md-6 transfer-detail-text my-1 loan-detail" style="display: none">Purpose:</p>
                     <p class="text-primary loan-detail display_loan_purpose col-md-6" style="display: none">
                     </p>
-                    <p class="col-md-6 transfer-detail-text my-1 loan-detail" style="display: none">Product Branch:</p>
+                    <p class="col-md-6 transfer-detail-text my-1 loan-detail" style="display: none">Product Branch:
+                    </p>
                     <p class="text-primary loan-detail product-branch display_product_branch col-md-6"
                         style="display: none"></p>
 
