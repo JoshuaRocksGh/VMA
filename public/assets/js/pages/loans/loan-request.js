@@ -422,14 +422,45 @@ function getLoanDetails(facilityNo) {
 
 $(function () {
     getLoans();
-    getOptions("get-loan-types-api", "#loan_product");
-    getOptions("get-loan-frequencies-api", "#principal_repay_freq");
-    getOptions("get-loan-frequencies-api", "#interest_repay_freq");
-    getOptions("get-interest-types-api", "#interest_rate_type");
-    getOptions("get-loan-intro-source-api", "#loan_intro_source");
-    getOptions("get-loan-sectors-api", "#loan_sectors");
-    getOptions("get-loan-purpose-api", "#loan_purpose");
+    getOptions("get-loan-types-api", "#loan_product").then((res) => {
+        const data = res.data;
+        data.forEach((e) => {
+            $("#loan_product").append(
+                $("<option>", {
+                    value: e.PROD_CODE,
+                }).text(e.PRODUCT)
+            );
+        });
+    });
+    getOptions("get-loan-frequencies-api", "#principal_repay_frequency");
+    getOptions("get-loan-frequencies-api", "#interest_repay_frequency");
+    // getOptions("get-interest-types-api", "#interest_rate_type");
+    // getOptions("get-loan-intro-source-api", "#loan_intro_source");
+    // getOptions("get-loan-sectors-api", "#loan_sectors");
+    // getOptions("get-loan-purpose-api", "#loan_purpose");
     // getBranches();
+
+    $("#loan_product").on("change", (e) => {
+        console.log(e.currentTarget);
+        const {
+            MIN_LOAN_AMT,
+            MAX_LOAN_AMT,
+            MATURITY_PERIOD,
+            INTEREST_TYPE,
+            CHARGES_RATE,
+        } = pageData["loan_product"].find(
+            (f) => f.PROD_CODE === e.currentTarget.value
+        );
+        $("#lpi_amount_range").text(
+            `${formatToCurrency(MIN_LOAN_AMT)} - ${formatToCurrency(
+                MAX_LOAN_AMT
+            )}`
+        );
+        $("#lpi_tenure").text(`${MATURITY_PERIOD} Months`);
+        $("#lpi_interest_type").text(INTEREST_TYPE);
+        $("#lpi_rate").text(`${CHARGES_RATE}%`);
+        $("#product_info_toggle").addClass("show");
+    });
 
     $("#view_loan_schedule").on("click", () => {
         $("#loan_details_content").hide(500);
