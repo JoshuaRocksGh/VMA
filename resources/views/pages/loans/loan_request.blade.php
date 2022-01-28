@@ -40,7 +40,8 @@ $pageTitle = "Loan Request"; @endphp
                 {!! $noDataAvailable !!}
             </div>
             <div id="loan_balances" class="table-responsive" style="display: none">
-                <table id="loan_balances_table" class="table table-striped table-hover table-centered table-bordered">
+                <table id="loan_balances_table"
+                    class="table table-sm table-striped table-hover table-centered table-bordered">
                     <thead class="bg-primary text-white font-weight-bold">
                         <tr class="text-center">
                             <th>Loan Description</th>
