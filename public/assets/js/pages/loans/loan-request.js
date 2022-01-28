@@ -1,32 +1,29 @@
-// function getOptions(optionUrl, optionId, data) {
-//     $.ajax({
-//         type: "GET",
-//         data: data,
-//         url: optionUrl,
-//         datatype: "application/json",
-//         success: (response) => {
-//             let data = response.data;
-//             $.each(data, (index) => {
-//                 $(optionId).append(
-//                     $("<option>", {
-//                         value: data[index].code,
-//                     }).text(data[index].name)
-//                 );
-//             });
-//             if (optionId === "#loan_sub_sectors") {
-//                 $("#side-loadingId").hide();
-//             }
-//             // $(optionId).selectpicker("refresh");
-//         },
-//         error: (xhr, status, error) => {
-//
-//
-//             setTimeout(() => {
-//                 getOptions(optionUrl, optionId);
-//             }, $.ajaxSetup().retryAfter);
-//         },
-//     });
-// }
+function getOptions(optionUrl, optionId, incomingData) {
+    return $.ajax({
+        type: "GET",
+        data: incomingData,
+        url: optionUrl,
+        datatype: "application/json",
+        success: (response) => {
+            let data = response.data;
+            pageData[`${optionId.slice(1)}`] = data;
+            data.forEach((e) => {
+                if (!e.code || !e.name) return;
+                $(optionId).append(
+                    $("<option>", {
+                        value: e.code,
+                    }).text(e.name)
+                );
+            });
+            // $(optionId).selectpicker("refresh");
+        },
+        error: (xhr, status, error) => {
+            setTimeout(() => {
+                getOptions(optionUrl, optionId);
+            }, $.ajaxSetup().retryAfter);
+        },
+    });
+}
 
 // function getBranches() {
 //     $.ajax({
@@ -133,14 +130,7 @@
 // }
 
 // $(() => {
-//     getOptions("get-loan-products-api", "#loan_product");
-//     getOptions("get-loan-frequencies-api", "#principal_repay_freq");
-//     getOptions("get-loan-frequencies-api", "#interest_repay_freq");
-//     getOptions("get-interest-types-api", "#interest_rate_type");
-//     getOptions("get-loan-intro-source-api", "#loan_intro_source");
-//     getOptions("get-loan-sectors-api", "#loan_sectors");
-//     getOptions("get-loan-purpose-api", "#loan_purpose");
-//     getBranches();
+
 //     let loanData = new Object();
 //     let loanFormStage = "initial";
 //     let confirmationCompleted = false;
@@ -403,7 +393,7 @@ function getLoans() {
 function getLoanDetails(facilityNo) {
     return $.ajax({
         type: "GET",
-        url: "get-loan-details",
+        url: "get-loan-details-api",
         data: { facilityNo },
         datatype: "application/json",
         headers: {
@@ -432,6 +422,15 @@ function getLoanDetails(facilityNo) {
 
 $(function () {
     getLoans();
+    getOptions("get-loan-types-api", "#loan_product");
+    getOptions("get-loan-frequencies-api", "#principal_repay_freq");
+    getOptions("get-loan-frequencies-api", "#interest_repay_freq");
+    getOptions("get-interest-types-api", "#interest_rate_type");
+    getOptions("get-loan-intro-source-api", "#loan_intro_source");
+    getOptions("get-loan-sectors-api", "#loan_sectors");
+    getOptions("get-loan-purpose-api", "#loan_purpose");
+    // getBranches();
+
     $("#view_loan_schedule").on("click", () => {
         $("#loan_details_content").hide(500);
         $("#loan_schedule_content").show(500);
