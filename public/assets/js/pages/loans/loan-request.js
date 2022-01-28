@@ -381,15 +381,18 @@ function getLoans() {
                         e.description,
                         `${e.isoCode}~${e.amountGranted}`,
                         `${e.isoCode}~${e.loanBalance}`,
-                        `<div class="text-center"><button class="loan_detail_button btn btn-primary" data-value='${e.facilityNo}'>View</button></div>`,
+                        `<div class="text-center"><button class="loan_detail_button btn btn-outline-primary btn-sm" data-value='${e.facilityNo}'>View</button></div>`,
                     ])
                     .draw(false);
             });
             $("#loan_balances_no_data").hide();
             $("#loan_balances").show();
             $(".loan_detail_button").on("click", function (e) {
+                siteLoading("show");
                 const facilityNo = e.currentTarget.getAttribute("data-value");
-                getLoanDetails(facilityNo);
+                getLoanDetails(facilityNo).always(() => {
+                    siteLoading("hide");
+                });
             });
         })
         .fail((err) => {
