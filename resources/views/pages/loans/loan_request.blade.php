@@ -66,6 +66,36 @@ $pageTitle = "Loan Request"; @endphp
                         <option value="" disabled selected>Select Loan Product
                         </option>
                     </select>
+                    <div class="card mt-1" style="border-radius: 2px">
+                        <span href="#a" class="text-primary repayment" data-toggle="collapse">
+                            <div class=" d-flex justify-content-between pl-3 py-1 font-12 font-weight-bold">
+                                <span> Product Detail</span>
+                                <span class="menu-arrow"></span>
+                            </div>
+                        </span>
+                        <div class="collapse " id="a">
+                            <table id="loan_product_info" class="mb-0 table table-borderless table-striped table-sm">
+                                <tbody>
+                                    <tr>
+                                        <th class="col-5 font-12 pl-3  font-weight-normal">Amount Range</th>
+                                        <td class="text-primary text-right" id="lpi_amount_range"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-5 font-12 pl-3  font-weight-normal">Tenure</th>
+                                        <td class="text-primary text-right" id="lpi_tenure"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-5 font-12 pl-3  font-weight-normal">Interest Type</th>
+                                        <td class="text-primary text-right" id="lpi_interest_type"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-5 font-12 pl-3  font-weight-normal">Rate</th>
+                                        <td class="text-primary text-right" id="lpi_rate"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <div class="mb-3 form-group ">
 
@@ -602,6 +632,7 @@ $pageTitle = "Loan Request"; @endphp
 <script src="{{ asset('assets/js/pages/loans/loan-request.js') }}"> </script>
 <script>
     let noDataAvailable = {!! json_encode($noDataAvailable) !!}
+    const pageData = new Object()
 
 </script>
 @endsection
