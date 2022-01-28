@@ -105,7 +105,6 @@ $(window).on("load", ()=>{
         }, 1000);
       })  
 </script>
-{{-- <script src="{{ asset('assets/js/functions/blockUi.js') }}"></script> --}}
 {{-- <script type='text/javascript'>
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
