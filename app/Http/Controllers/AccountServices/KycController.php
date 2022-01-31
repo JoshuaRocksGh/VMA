@@ -16,7 +16,7 @@ class KycController extends Controller
     public function validateKyc()
     {
         $customerNumber = session()->get('customerNumber');
-        $response = Http::get(env('API_BASE_URL') . "user/kycInfo/" . $customerNumber);
+        $response = Http::get(env('API_BASE_URL') . "user/validateKyc/" . $customerNumber);
         $result = new ApiBaseResponse();
         return $result->api_response($response);
     }
