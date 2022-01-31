@@ -25,6 +25,7 @@
     --gray-dark: #343a40;
     --primary: #0089c1;
     --primary-alt: #0388cb;
+    --black: #000000;
     /* --primary: #0561ad */
     --secondary: #6c757d;
     --success: #1abc9c;
@@ -10320,6 +10321,9 @@ a.text-blue:hover {
 .text-black-50 {
     color: rgba(0, 0, 0, 0.5) !important;
 }
+/* .text-black {
+    color: var(--black) !important;
+} */
 
 .text-white-50 {
     color: rgba(255, 255, 255, 0.5) !important;
