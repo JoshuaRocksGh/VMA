@@ -332,7 +332,8 @@ Route::post('corporate-chequebook-request', [AccountServicesChequeBookRequestCon
 
 
 // KYC EDIT
-Route::get('get-kyc-details', [KycController::class, 'kyc_update'])->name('get-kyc-details');
+Route::get('get-kyc-details', [KycController::class, 'kyc_update']);
+Route::get('validate-kyc-api', [KycController::class, 'validateKyc']);
 
 //route for atm card
 Route::post('atm-card-request-api', [AtmCardRequestController::class, 'atm_card_request'])->name('atm-card-request-api');
