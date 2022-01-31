@@ -8,6 +8,14 @@
         transition: transform 0.5s
     }
 
+    .dataTables_info {
+        font-size: 12px;
+    }
+
+    a.page-link {
+        font-size: 12px;
+    }
+
     .repayment[aria-expanded="true"] .menu-arrow {
         transform: rotate(270deg);
     }
@@ -107,7 +115,7 @@ $pageTitle = "Loan Request"; @endphp
                     <div class="input-group">
 
                         <div class="input-group-prepend">
-                            <span class="input-group-text">SSL</span>
+                            <span class="input-group-text" id="loan_currency">SLL</span>
                         </div>
                         <input type="number" placeholder="0.00" id="loan_amount" class="form-control">
                     </div>
@@ -166,7 +174,7 @@ $pageTitle = "Loan Request"; @endphp
                         <div class="text-white ">
                             <span class="d-block font-14">Amount Outstanding</span>
                             <span class="d-block font-16">0.00</span>
-                            <span class="d-block font-16">SSL</span>
+                            <span class="d-block font-16">SLL</span>
                         </div>
                     </div>
                     <div class="d-flex px-2 my-4 justify-content-between">
@@ -302,41 +310,45 @@ $pageTitle = "Loan Request"; @endphp
                     </div>
                     <div class="mt-4">
                         <h3 class="text-white mb-2 text-center font-weight-bold font-16  py-1"
-                            style="border-bottom: 1px solid  #e5e9ec">LOAN PRODUCT
+                            style="border-bottom: 1px solid  #e5e9ec" id="ls_loan_product">LOAN PRODUCT
                         </h3>
 
                         <div class=" text-white">
                             <div class="d-flex justify-content-between">
                                 <span class="d-block font-13  " style="color: #e5e9ec">Amount</span>
-                                <span class="d-block font-weight-bold">998832</span>
+                                <span class="d-block font-weight-bold" id="ls_amount"></span>
 
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span class="d-block font-13 " style="color:#e5e9ec">Tenure</span>
-                                <span class="d-block font-weight-bold text-right" id="ls_">LL 14,998,832.00</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_tenure"></span>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span class="d-block font-13 " style="color:#e5e9ec">Interest Type</span>
-                                <span class="d-block font-weight-bold text-right" id="ls_">LL 14,998,832.00</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_interest_type"></span>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span class="d-block font-13 " style="color:#e5e9ec">Principal Repay
                                     Frequency</span>
-                                <span class="d-block font-weight-bold text-right" id="ls_">LL 14,998,832.00</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_principal_repay_freq"></span>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span class="d-block font-13" style="color:#e5e9ec">Interest Repay
                                     Frequency</span>
-                                <span class="d-block font-weight-bold text-right" id="ls_">LL 14,998,832.00</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_interest_repay_freq"></span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
                     <div>
-                        <h4> Repayment Schedule</h4>
-                        <table id="loan_quotation_table" class="table table-borderless table-striped table-sm">
-                            <thead class="bg-primary text-white font-weight-bold">
+                        <div class="d-flex justify-content-between px-1">
+                            <h4 class="font-13"> Repayment Schedule</h4>
+                            <h4 class="text-primary font-12 font-weight-bold" id="loan_rate">Rate: </h4>
+                        </div>
+                        <table id="loan_quotation_table"
+                            class="font-12 table text-center table-borderless table-striped table-sm">
+                            <thead class="bg-primary  text-white font-weight-bold">
                                 <tr class="text-center">
                                     <th>Principal</th>
                                     <th>Interest</th>

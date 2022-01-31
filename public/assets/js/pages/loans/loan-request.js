@@ -55,54 +55,50 @@ function getLoanQuotationDetails(loanData) {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (res) {
-            if (res.resCode === "000") {
-                console.log(res.data?.data);
-                return;
-                let table = $("#loan_balances_table").DataTable({
+            if (res.responseCode === "000") {
+                console.log(res.data);
+                const { loanSchedule, rate } = res.data;
+                let table = $("#loan_quotation_table").DataTable({
                     destroy: true,
-                    pageLength: 8,
+                    pageLength: 10,
                     autoWidth: false,
                     lengthChange: false,
                     responsive: true,
-                    columnDefs: [
-                        {
-                            targets: [1, 2],
-                            render: (data) => {
-                                const d = data.split("~");
-                                return `<div class="float-right"><span>${
-                                    d[0]
-                                }&nbsp${formatToCurrency(d[1])} </span></div>`;
-                            },
-                        },
-                    ],
+                    searching: false,
                 });
 
-                res.data.forEach((e) => {
+                loanSchedule.forEach((e) => {
                     table.row
                         .add([
-                            e.description,
-                            `${e.isoCode}~${e.amountGranted}`,
-                            `${e.isoCode}~${e.loanBalance}`,
+                            e.principalRepayment,
+                            e.interestRepayment,
+                            e.totalRepayment,
+                            e.repaymentDate,
                         ])
                         .draw(false);
                 });
-                $("#loan_quotation_modal").modal("show");
-                // let table = $(".loan_payment_schedule").DataTable();
-                // let data = res.data.loanSchedule;
-                // $("#btn_loan_request").prop("disabled", false);
 
-                // $.each(data, function (index) {
-                //     model_data = data[index];
-                //     table.row
-                //         .add([
-                //             index + 1,
-                //             data[index].repaymentDate,
-                //             data[index].principalRepayment,
-                //             data[index].interestRepayment,
-                //             data[index].totalRepayment,
-                //         ])
-                //         .draw(false);
-                // });
+                $("#loan_rate").text(`Rate: ${rate}%`);
+                console.table(loanData);
+                const {
+                    loanProduct,
+                    loanCurrency,
+                    tenureInMonths,
+                    loanAmount,
+                    principalRepayFreq,
+                    interestRepayFreq,
+                } = loanData;
+                const { INTEREST_TYPE } = pageData.currentLoanProduct;
+                $("#ls_loan_product").text(loanProduct);
+                $("#ls_amount").text(
+                    `${loanCurrency} ${formatToCurrency(loanAmount)}`
+                );
+                $("#ls_tenure").text(`${tenureInMonths} months`);
+                $("#ls_interest_type").text(INTEREST_TYPE);
+                $("#ls_principal_repay_freq").text(principalRepayFreq);
+                $("#ls_interest_repay_freq").text(interestRepayFreq);
+
+                $("#loan_quotation_modal").modal("show");
             } else {
                 toaster(res.message, "error");
             }
@@ -420,7 +416,7 @@ function getLoanDetails(facilityNo) {
                 toaster(res.message, "warning");
                 return;
             }
-            console.log(res.data);
+
             const loan = res.data[0];
 
             $("#principal_account").text(loan.PRINCIPAL_ACCOUNT);
@@ -428,9 +424,7 @@ function getLoanDetails(facilityNo) {
             $("#penal_accrued").text(loan.ACCRUED_PENALTY);
             $("#loan_detail_modal").modal("show");
         })
-        .fail((res) => {
-            console.log(res);
-        });
+        .fail((res) => {});
 }
 
 $(function () {
@@ -456,7 +450,6 @@ $(function () {
     // getBranches();
 
     $("#loan_product").on("change", (e) => {
-        console.log(e.currentTarget);
         pageData.currentLoanProduct = pageData["loan_product"].find(
             (f) => f.PROD_CODE === e.currentTarget.value
         );
@@ -493,16 +486,17 @@ $(function () {
     $("#loan_request_btn").on("click", (e) => {
         e.preventDefault();
         const loanProductCode = $("#loan_product").val();
+        const loanProduct = $("#loan_product option:selected").text();
         const loanAmount = $("#loan_amount").val();
         const principalRepayFreqCode = $("#principal_repay_frequency").val();
+        const principalRepayFreq = $(
+            "#principal_repay_frequency option:selected"
+        ).text();
         const interestRepayFreqCode = $("#interest_repay_frequency").val();
-
-        console.table({
-            loanProductCode,
-            loanAmount,
-            principalRepayFreqCode,
-            interestRepayFreqCode,
-        });
+        const interestRepayFreq = $(
+            "#interest_repay_frequency option:selected"
+        ).text();
+        const loanCurrency = $("#loan_currency").text();
         if (
             !loanAmount ||
             !loanProductCode ||
@@ -520,6 +514,10 @@ $(function () {
         const interestRateTypeCode = pageData.currentLoanProduct.INT_TYPE_CODE;
         siteLoading("show");
         getLoanQuotationDetails({
+            loanCurrency,
+            loanProduct,
+            principalRepayFreq,
+            interestRepayFreq,
             loanProductCode,
             loanAmount,
             principalRepayFreqCode,
@@ -527,7 +525,6 @@ $(function () {
             tenureInMonths,
             interestRateTypeCode,
         }).then((e) => {
-            console.log(e);
             siteLoading("hide");
         });
     });
