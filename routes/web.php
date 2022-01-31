@@ -10,11 +10,10 @@ use App\Http\Controllers\AccountServices\AccountServicesController;
 use App\Http\Controllers\AccountServices\AtmCardRequestController;
 use App\Http\Controllers\AccountServices\ChequeBookRequestController as AccountServicesChequeBookRequestController;
 use App\Http\Controllers\AccountServices\ComplaintController;
-use App\Http\Controllers\AccountServices\KYC\KycController as KYCKycController;
 use App\Http\Controllers\AccountServices\StatementRequestController;
 use App\Http\Controllers\AccountServices\StopChequeController;
 use App\Http\Controllers\Authentication\ForgotPasswordController;
-use App\Http\Controllers\Authentication\KycController;
+use App\Http\Controllers\AccountServices\KycController;
 use App\Http\Controllers\Authentication\LoginController as AuthenticationLoginController;
 use App\Http\Controllers\Authentication\ResetPasswordController;
 use App\Http\Controllers\Payments\Beneficiary\PaymentBeneficiaryController;
@@ -333,7 +332,7 @@ Route::post('corporate-chequebook-request', [AccountServicesChequeBookRequestCon
 
 
 // KYC EDIT
-Route::get('get-kyc-details', [KYCKycController::class, 'kyc_update'])->name('get-kyc-details');
+Route::get('get-kyc-details', [KycController::class, 'kyc_update'])->name('get-kyc-details');
 
 //route for atm card
 Route::post('atm-card-request-api', [AtmCardRequestController::class, 'atm_card_request'])->name('atm-card-request-api');

@@ -12,6 +12,30 @@ use Illuminate\Support\Facades\Validator;
 
 class KycController extends Controller
 {
+    public function kyc_update()
+    {
+
+
+        $authToken = session()->get('userToken');
+        $userID = session()->get('userId');
+        $customerNumber = session()->get('customerNumber');
+
+        // return $customerNumber ;
+
+
+        $data = [
+            "authToken" => $authToken,
+            "userId"    => $userID,
+            "customerNumber"    => $customerNumber,
+        ];
+
+        $response = Http::get(env('API_BASE_URL') . "user/kycInfo/056173");
+
+        //return $response->body();
+
+        $result = new ApiBaseResponse();
+        return $result->api_response($response);
+    }
     public function submit_kyc(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -134,59 +158,58 @@ class KycController extends Controller
 
         return $this->generate_doc_id($request->prove_of_address);
 
-        if($this->generate_doc_id($request->prove_of_address) == null ){
+        if ($this->generate_doc_id($request->prove_of_address) == null) {
             return ('jhgfghjkl');
-
-        }else{
+        } else {
 
 
             $data['proofAddressDocId'] = $this->generate_doc_id($request->prove_of_address);
 
-           return $this->generate_doc_id($request->prove_of_address);
+            return $this->generate_doc_id($request->prove_of_address);
 
 
-        try {
-            $response = Http::post(env('API_BASE_URL') . "user/kycInfo", $data);
+            try {
+                $response = Http::post(env('API_BASE_URL') . "user/kycInfo", $data);
 
-            // return json_decode($response->body());
-            $result = new ApiBaseResponse();
-            return $result->api_response($response);
-        } catch (\Exception $e) {
+                // return json_decode($response->body());
+                $result = new ApiBaseResponse();
+                return $result->api_response($response);
+            } catch (\Exception $e) {
 
-            DB::table('tb_error_logs')->insert([
-                'platform' => 'ONLINE_INTERNET_BANKING',
-                'user_id' => 'AUTH',
-                'message' => (string) $e->getMessage()
-            ]);
+                DB::table('tb_error_logs')->insert([
+                    'platform' => 'ONLINE_INTERNET_BANKING',
+                    'user_id' => 'AUTH',
+                    'message' => (string) $e->getMessage()
+                ]);
 
-            return $result->api_response('500', $e->getMessage(),  NULL); // return API BASERESPONSE
+                return $result->api_response('500', $e->getMessage(),  NULL); // return API BASERESPONSE
 
 
+            }
         }
     }
-    }
 
-    public function generate_doc_id ($image_Base64)
+    public function generate_doc_id($image_Base64)
     {
 
         $data = [
 
-            "image" => $image_Base64 ,
+            "image" => $image_Base64,
             "id" => "1506362378",
-            "file" => "dfdfd" ,
-            "customerno" => "amama" ,
-            "dept" => "9000010" ,
-            "filename" => "Channels" ,
-            "cat" => "4444" ,
-            "description" => "For ELijah" ,
-            "category" => "asas" ,
-            "expiryDate" => "asas" ,
-            "docType" => "asas" ,
-            "comment" => "asas" ,
-            "enteredBy" => "111" ,
-            "approve" => "0" ,
-            "department" => "asasa" ,
-            "contentType" => "asas" ,
+            "file" => "dfdfd",
+            "customerno" => "amama",
+            "dept" => "9000010",
+            "filename" => "Channels",
+            "cat" => "4444",
+            "description" => "For ELijah",
+            "category" => "asas",
+            "expiryDate" => "asas",
+            "docType" => "asas",
+            "comment" => "asas",
+            "enteredBy" => "111",
+            "approve" => "0",
+            "department" => "asasa",
+            "contentType" => "asas",
         ];
 
         try {
@@ -198,8 +221,6 @@ class KycController extends Controller
             $image_id = $result->data;
 
             return $result;
-
-
         } catch (\Exception $e) {
 
             DB::table('tb_error_logs')->insert([
@@ -209,9 +230,6 @@ class KycController extends Controller
             ]);
 
             return null;
-
-
-
         }
     }
 }
