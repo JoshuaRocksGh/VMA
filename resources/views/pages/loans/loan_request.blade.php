@@ -64,8 +64,16 @@ $pageTitle = "Loan Request"; @endphp
             </div>
         </div>
         <div class="tab-pane  " id="Requests_Pill" role="tab-panel">
-
-            <form action="#" id="payment_details_form" autocomplete="off" class="container" style="max-width: 650px">
+            <div id="kyc_incomplete" class="mx-auto" style="max-width: 350px;  display:none">
+                <img class=" img-fluid" src="{{ asset('assets/images/placeholders/kyc.svg') }}" />
+                <span class="my-3 d-block text-white font-13 font-weight-bold p-2 rounded-lg"
+                    style="background-color: rgb(255, 0, 0)"><i class="fas fa-exclamation-circle pr-2"></i>Your KYC
+                    (Know Your Customer) is not Complete </span>
+                <a href="{{ url('kyc-update') }}"
+                    class="text-primary font-14 float-right text-right font-weight-bold"><i class="far fa-edit"></i>
+                    Update KYC</a>
+            </div>
+            <form action="#" id="payment_details_form" autocomplete="off" class="container" style="max-width: 650px;">
                 @csrf
                 <div class="mb-3 form-group ">
                     <label class="text-primary mb-1 font-weight-bold font-12" for="loan_product">Select Loan

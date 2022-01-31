@@ -25,6 +25,23 @@ function getOptions(optionUrl, optionId, incomingData) {
     });
 }
 
+function validateKyc() {
+    return $.ajax({
+        type: "GET",
+        url: "validate-kyc-api",
+        datatype: "application/json",
+    })
+        .done((res) => {
+            if (res.responseCode !== "000") {
+                $("#payment_details_form").hide();
+                $("#kyc_incomplete").show();
+            }
+        })
+        .fail((xhr, status, error) => {
+            console.log(error);
+        });
+}
+
 // function getBranches() {
 //     $.ajax({
 //         type: "GET",
@@ -428,8 +445,7 @@ function getLoanDetails(facilityNo) {
 }
 
 $(function () {
-    $("#loan_quotation_modal").modal("show");
-
+    validateKyc();
     getLoans();
     getOptions("get-loan-types-api", "#loan_product").then((res) => {
         const data = res.data;
