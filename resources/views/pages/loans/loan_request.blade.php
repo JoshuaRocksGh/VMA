@@ -78,19 +78,23 @@ $pageTitle = "Loan Request"; @endphp
                                 <tbody>
                                     <tr>
                                         <th class="col-5 font-12 pl-3  font-weight-normal">Amount Range</th>
-                                        <td class="text-primary pr-3 text-right" id="lpi_amount_range"></td>
+                                        <td class="text-primary  font-13 font-weight-bold pr-3 text-right"
+                                            id="lpi_amount_range"></td>
                                     </tr>
                                     <tr>
                                         <th class="col-5 font-12 pl-3  font-weight-normal">Tenure</th>
-                                        <td class="text-primary pr-3 text-right" id="lpi_tenure"></td>
+                                        <td class="text-primary  font-13 font-weight-bold pr-3 text-right"
+                                            id="lpi_tenure"></td>
                                     </tr>
                                     <tr>
                                         <th class="col-5 font-12 pl-3  font-weight-normal">Interest Type</th>
-                                        <td class="text-primary pr-3 text-right" id="lpi_interest_type"></td>
+                                        <td class="text-primary  font-13 font-weight-bold pr-3 text-right"
+                                            id="lpi_interest_type"></td>
                                     </tr>
                                     <tr>
                                         <th class="col-5 font-12 pl-3  font-weight-normal">Rate</th>
-                                        <td class="text-primary pr-3 text-right" id="lpi_rate"></td>
+                                        <td class="text-primary  font-13 font-weight-bold pr-3 text-right"
+                                            id="lpi_rate"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -105,7 +109,7 @@ $pageTitle = "Loan Request"; @endphp
                         <div class="input-group-prepend">
                             <span class="input-group-text">SSL</span>
                         </div>
-                        <input type="text" placeholder="0.00" id="loan_amount" class="form-control">
+                        <input type="number" placeholder="0.00" id="loan_amount" class="form-control">
                     </div>
                 </div>
                 <div class="mb-3 form-group ">
@@ -132,7 +136,7 @@ $pageTitle = "Loan Request"; @endphp
                         agree to the Terms and Conditions</label>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button type="submit" id="loan_request" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="loan_request_btn" class="btn btn-primary">Submit</button>
                 </div>
 
             </form>
@@ -289,13 +293,61 @@ $pageTitle = "Loan Request"; @endphp
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div id="loan_details_content">
-                <div class="modal-header bg-primary">
-                    <a id="loan_schedule_back_button" class="fas text-black fa-arrow-left inline-block"></a>
-                    <h3 class="modal-title modal-title font-18 font-weight-bold text-white" id="transfer_status_title">
-                        LOAN SCHEDULE</h3>
+            <div id="loan_quotation_content">
+                <div class="px-3 py-2 bg-primary">
+                    <div class="d-flex align-items-center ">
+                        <a id="loan_schedule_back_button" class="fas mr-4 fa-arrow-left " style=" color: #343a40;"></a>
+                        <h2 class="d-block modal-title modal-title font-16" id="transfer_status_title">
+                            LOAN SCHEDULE</h2>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-white mb-2 text-center font-weight-bold font-16  py-1"
+                            style="border-bottom: 1px solid  #e5e9ec">LOAN PRODUCT
+                        </h3>
+
+                        <div class=" text-white">
+                            <div class="d-flex justify-content-between">
+                                <span class="d-block font-13  " style="color: #e5e9ec">Amount</span>
+                                <span class="d-block font-weight-bold">998832</span>
+
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="d-block font-13 " style="color:#e5e9ec">Tenure</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_">LL 14,998,832.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="d-block font-13 " style="color:#e5e9ec">Interest Type</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_">LL 14,998,832.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="d-block font-13 " style="color:#e5e9ec">Principal Repay
+                                    Frequency</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_">LL 14,998,832.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="d-block font-13" style="color:#e5e9ec">Interest Repay
+                                    Frequency</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_">LL 14,998,832.00</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-body">
+                    <div>
+                        <h4> Repayment Schedule</h4>
+                        <table id="loan_quotation_table" class="table table-borderless table-striped table-sm">
+                            <thead class="bg-primary text-white font-weight-bold">
+                                <tr class="text-center">
+                                    <th>Principal</th>
+                                    <th>Interest</th>
+                                    <th>Total</th>
+                                    <th>Due Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

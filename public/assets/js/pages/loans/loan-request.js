@@ -45,60 +45,73 @@ function getOptions(optionUrl, optionId, incomingData) {
 //     });
 // }
 
-// function getLoanQuotationDetails(loanData) {
-//     $.ajax({
-//         type: "POST",
-//         url: "loan-quotation-details",
-//         datatype: "application/json",
-//         data: loanData,
-//         headers: {
-//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-//         },
-//         success: function (response) {
-//             if (response.responseCode === "000") {
-//
-//                 let table = $(".loan_payment_schedule").DataTable();
-//                 // var nodes = table.rows().nodes();
-//                 let data = response.data.loanSchedule;
-//                 $("#request_form_div").hide();
-//                 $(".disappear-after-success").hide();
-//                 $("#loan_request_detail_div").show();
-//                 $("#loan_request_detail_div").hide();
-//                 $(".appear-button").show();
-//                 $("#atm_request_summary").hide();
-//                 $("#payment_schedule").show();
-//                 $(".spinner-load").hide();
-//                 $(".submit-text").show();
-//                 $("#btn_loan_request").prop("disabled", false);
+function getLoanQuotationDetails(loanData) {
+    return $.ajax({
+        type: "POST",
+        url: "loan-quotation-details",
+        datatype: "application/json",
+        data: loanData,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (res) {
+            if (res.resCode === "000") {
+                console.log(res.data?.data);
+                return;
+                let table = $("#loan_balances_table").DataTable({
+                    destroy: true,
+                    pageLength: 8,
+                    autoWidth: false,
+                    lengthChange: false,
+                    responsive: true,
+                    columnDefs: [
+                        {
+                            targets: [1, 2],
+                            render: (data) => {
+                                const d = data.split("~");
+                                return `<div class="float-right"><span>${
+                                    d[0]
+                                }&nbsp${formatToCurrency(d[1])} </span></div>`;
+                            },
+                        },
+                    ],
+                });
 
-//                 $.each(data, function (index) {
-//                     model_data = data[index];
-//                     table.row
-//                         .add([
-//                             index + 1,
-//                             data[index].repaymentDate,
-//                             data[index].principalRepayment,
-//                             data[index].interestRepayment,
-//                             data[index].totalRepayment,
-//                         ])
-//                         .draw(false);
-//                 });
-//             } else {
-//                 toaster(response.message, "error", 2000);
-//                 $(".spinner-load").hide();
-//                 $(".submit-text").show();
-//                 $("#btn_loan_request").prop("disabled", false);
-//             }
-//         },
-//         error: function (xhr, status, error) {
-//             $("#submit").attr("disabled", false);
-//             $(".spinner-load").hide();
-//             $("#log_in").show();
-//             $("#error_message").text("Connection Error");
-//             $("#failed_login").show();
-//         },
-//     });
-// }
+                res.data.forEach((e) => {
+                    table.row
+                        .add([
+                            e.description,
+                            `${e.isoCode}~${e.amountGranted}`,
+                            `${e.isoCode}~${e.loanBalance}`,
+                        ])
+                        .draw(false);
+                });
+                $("#loan_quotation_modal").modal("show");
+                // let table = $(".loan_payment_schedule").DataTable();
+                // let data = res.data.loanSchedule;
+                // $("#btn_loan_request").prop("disabled", false);
+
+                // $.each(data, function (index) {
+                //     model_data = data[index];
+                //     table.row
+                //         .add([
+                //             index + 1,
+                //             data[index].repaymentDate,
+                //             data[index].principalRepayment,
+                //             data[index].interestRepayment,
+                //             data[index].totalRepayment,
+                //         ])
+                //         .draw(false);
+                // });
+            } else {
+                toaster(res.message, "error");
+            }
+        },
+        error: function (xhr, status, error) {
+            $("#error_message").text("Connection Error");
+        },
+    });
+}
 
 // function postLoanOrigination(data) {
 //     $.ajax({
@@ -371,7 +384,7 @@ function getLoans() {
                         e.description,
                         `${e.isoCode}~${e.amountGranted}`,
                         `${e.isoCode}~${e.loanBalance}`,
-                        `<div class="text-center"><button class="loan_detail_button btn btn-outline-primary btn-sm" data-value='${e.facilityNo}'>View</button></div>`,
+                        `<div class="text-center"><button class="loan_detail_button btn btn-outline-primary btn-xs" data-value='${e.facilityNo}'>View</button></div>`,
                     ])
                     .draw(false);
             });
@@ -421,6 +434,8 @@ function getLoanDetails(facilityNo) {
 }
 
 $(function () {
+    $("#loan_quotation_modal").modal("show");
+
     getLoans();
     getOptions("get-loan-types-api", "#loan_product").then((res) => {
         const data = res.data;
@@ -442,15 +457,16 @@ $(function () {
 
     $("#loan_product").on("change", (e) => {
         console.log(e.currentTarget);
+        pageData.currentLoanProduct = pageData["loan_product"].find(
+            (f) => f.PROD_CODE === e.currentTarget.value
+        );
         const {
             MIN_LOAN_AMT,
             MAX_LOAN_AMT,
             MATURITY_PERIOD,
             INTEREST_TYPE,
             CHARGES_RATE,
-        } = pageData["loan_product"].find(
-            (f) => f.PROD_CODE === e.currentTarget.value
-        );
+        } = pageData.currentLoanProduct;
         $("#lpi_amount_range").text(
             `${formatToCurrency(MIN_LOAN_AMT)} - ${formatToCurrency(
                 MAX_LOAN_AMT
@@ -473,5 +489,46 @@ $(function () {
 
     $("#advanced_payment").on("click", () => {
         toaster("Feature in the works", "warning");
+    });
+    $("#loan_request_btn").on("click", (e) => {
+        e.preventDefault();
+        const loanProductCode = $("#loan_product").val();
+        const loanAmount = $("#loan_amount").val();
+        const principalRepayFreqCode = $("#principal_repay_frequency").val();
+        const interestRepayFreqCode = $("#interest_repay_frequency").val();
+
+        console.table({
+            loanProductCode,
+            loanAmount,
+            principalRepayFreqCode,
+            interestRepayFreqCode,
+        });
+        if (
+            !loanAmount ||
+            !loanProductCode ||
+            !principalRepayFreqCode ||
+            !interestRepayFreqCode
+        ) {
+            toaster("All Fields Are Required", "warning");
+            return;
+        }
+        if (!parseFloat(loanAmount)) {
+            toaster("Invalid Amount", "warning");
+            return;
+        }
+        const tenureInMonths = pageData.currentLoanProduct.MATURITY_PERIOD;
+        const interestRateTypeCode = pageData.currentLoanProduct.INT_TYPE_CODE;
+        siteLoading("show");
+        getLoanQuotationDetails({
+            loanProductCode,
+            loanAmount,
+            principalRepayFreqCode,
+            interestRepayFreqCode,
+            tenureInMonths,
+            interestRateTypeCode,
+        }).then((e) => {
+            console.log(e);
+            siteLoading("hide");
+        });
     });
 });
