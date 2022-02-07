@@ -15,7 +15,7 @@ function getOptions(optionUrl, optionId, incomingData) {
                     }).text(e.name)
                 );
             });
-            // $(optionId).selectpicker("refresh");
+            $(optionId).select2().trigger("change");
         },
         error: (xhr, status, error) => {
             setTimeout(() => {
@@ -445,6 +445,8 @@ function getLoanDetails(facilityNo) {
 }
 
 $(function () {
+    // $("#loan_quotation_modal").modal("show");
+
     validateKyc();
     getLoans();
     getOptions("get-loan-types-api", "#loan_product").then((res) => {
@@ -469,6 +471,7 @@ $(function () {
         pageData.currentLoanProduct = pageData["loan_product"].find(
             (f) => f.PROD_CODE === e.currentTarget.value
         );
+        if (!pageData.currentLoanProduct) return;
         const {
             MIN_LOAN_AMT,
             MAX_LOAN_AMT,
