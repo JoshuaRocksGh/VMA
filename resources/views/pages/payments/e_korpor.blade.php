@@ -672,32 +672,31 @@
                                     </select>
 
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
+                                <div class="">
+                                    <nav class="nav nav-pills flex-column flex-sm-row">
+                                        <a class="flex-sm-fill text-sm-center nav-link active" href="#">Redeemed</a>
+                                        <a class="flex-sm-fill text-sm-center nav-link" href="#">Pending</a>
+                                        <a class="flex-sm-fill text-sm-center nav-link" href="#">Cancelled</a>
+                                    </nav>
+                                    <div class="table-responsive table-sm table-bordered accounts_display_area">
+                                        <table id="" class="table mb-0 ">
+                                            <thead>
+                                                <tr class="bg-primary text-white ">
+                                                    <td> <b> Reference Number </b> </td>
+                                                    <td> <b> Receiver Name </b> </td>
+                                                    <td> <b> Receiver Telephone </b> </td>
+                                                    <td> <b> Receiver Address </b> </td>
+                                                    <td> <b> Amount </b> </td>
+                                                    <td> <b>Status</b></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="background-color:white;" class="redeemed_korpor_list_display">
 
-                                        {{-- <div
-                                            class="table-responsive table-sm table-bordered accounts_display_area">
-                                            <table id="" class="table mb-0 ">
-                                                <thead>
-                                                    <tr class="bg-primary text-white ">
-                                                        <td> <b> Reference Number </b> </td>
-                                                        <td> <b> Receiver Name </b> </td>
-                                                        <td> <b> Receiver Telephone </b> </td>
-                                                        <td> <b> Receiver Address </b> </td>
-                                                        <td> <b> Amount </b> </td>
-                                                        <td> <b>Status</b></td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody style="background-color:white;"
-                                                    class="redeemed_korpor_list_display">
 
-
-                                                </tbody>
-                                            </table>
-                                        </div> --}}
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <div class="col-sm-4"></div>
-                                    <div class="col-sm-4"></div>
+
 
                                 </div>
                                 {{-- <div class="card-box">
