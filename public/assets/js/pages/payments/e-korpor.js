@@ -257,13 +257,13 @@ function getKorporHistory(url, fromAccountNo, target) {
     });
 }
 
-$(document).ready(function () {
+$(function () {
     // ==============================================================
     // ------------------- Redeem Korpor ---------------------------
     // ==============================================================
     const redeemInfo = new Object();
     $("#redeem_account option[data-account-currency!='SLL']").remove();
-    $("#proceed_to_redeem_button").click(function () {
+    $("#proceed_to_redeem_button").on("click", function () {
         let mobileNumber = $("#mobile_no").val();
         let remittanceNumber = $("#remittance_no").val();
         if (!mobileNumber || !remittanceNumber) {
@@ -313,7 +313,7 @@ $(document).ready(function () {
     //  ------------- Korpor Transfer ------------------
     // ===================================================
     let transferInfo = new Object();
-    $("#account_of_transfer").change(function () {
+    $("#account_of_transfer").on("change", function () {
         const e = $("#account_of_transfer option:selected");
         // console.log(e.attr("data-account-currency-code"));
         const accountNumber = e.attr("data-account-number");
@@ -321,7 +321,7 @@ $(document).ready(function () {
         const accountMandate = e.attr("data-account-mandate");
         const accountName = e.attr("data-account-description");
         const accountType = e.attr("data-account-type");
-        const accountBalance = e.attr("data-account-balance");
+        const accountBalance = e.attr("data-account-balance") || "0.00";
         const currCode = e.attr("data-account-currency-code");
         transferInfo = {
             accountCurrency,
@@ -382,7 +382,7 @@ $(document).ready(function () {
         $(".display_receiver_address").text(address);
     });
 
-    $("#amount").change(function () {
+    $("#amount").on("change", function () {
         let amount = $("#amount").val();
         $(".display_amount").text(formatToCurrency(amount));
     });
@@ -417,6 +417,14 @@ $(document).ready(function () {
             toaster("Amount should be a number", "warning");
             return;
         }
+        if (!validatePhone(recipientPhone)) {
+            toaster("Invalid phone number", "warning");
+            return;
+        }
+        if (amount > transferInfo.accountBalance) {
+            toaster("Insufficient Account Balance", "warning");
+            return;
+        }
         if (ISCORPORATE) {
             corporateInitiateKorpor(transferInfo);
             return;
@@ -435,6 +443,8 @@ $(document).ready(function () {
             }
             transferInfo.pinCode = pinCode;
             initiateKorpor("initiate-korpor", transferInfo);
+            transferInfo.pinCode = "";
+            $("#user_pin").val("");
             transferInfo.type = "";
         });
     });
