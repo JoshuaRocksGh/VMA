@@ -16,8 +16,6 @@
 <link href="{{ asset('assets/css/bootstrap-purple.min.css') }}" rel="stylesheet" type="text/css"
     id="bs-default-stylesheet" />
 <link href="assets\plugins\select2\select2.min.css" rel="stylesheet" />
-{{--
-<link href="assets\plugins\select2\select2-bootstrap4.min.css" rel="stylesheet" /> --}}
 <link href="{{ asset('assets/css/app-purple.min.css') }}" rel="stylesheet" type="text/css"
     id="app-default-stylesheet" />
 <link href="{{ asset('assets/css/rokel.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
