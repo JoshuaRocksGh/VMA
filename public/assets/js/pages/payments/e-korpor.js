@@ -208,7 +208,12 @@ function getKorporHistory(type, accountNumber) {
                 dataSource: data,
                 pageSize: 5,
                 callback: function (data, pagination) {
-                    const items = data.map((e) => renderKorporHistoryItem(e));
+                    let items = [];
+                    items = data.map((e) => renderKorporHistoryItem(e));
+
+                    if (items.length < 1) {
+                        items = noDataAvailable;
+                    }
                     $("#korpor_history_container").html(items);
                 },
             });
@@ -461,10 +466,25 @@ $(function () {
     //                    Korpor History
     //     ####################################################
 
-    $("#korpor_history_tab").on("click", () => {});
+    $("#korpor_history_tab").on("click", () => {
+        if (!$("#korpor_history_accounts").val()) {
+            $("#korpor_history_accounts option:last").prop("selected", true);
+        }
+        console.log("ll");
+        $("#korpor_history_accounts").trigger("change");
+    });
 
+    function accountTemplate(state) {
+        console.log(state);
+        const data = $(state.element).attr("data-content");
+        console.log(data);
+        return $(data);
+    }
     //initialize select2 on accounts select
-    $("#korpor_history_accounts").select2();
+    $("#korpor_history_accounts").select2({
+        templateResult: accountTemplate,
+        templateSelection: accountTemplate,
+    });
 
     //trigger knav click on accounts change.
     $("#korpor_history_accounts").on("change", (e) => {

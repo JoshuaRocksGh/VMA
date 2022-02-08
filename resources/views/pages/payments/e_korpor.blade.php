@@ -4,9 +4,15 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/pagination/pagination.css') }}" />
 <style>
     .history-card {
-
         box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
 
+    .nodata {
+        text-align: center !important
+    }
+
+    #no_data_available_img {
+        max-width: 150px !important;
     }
 
     .knav.active {
@@ -63,10 +69,12 @@
                 </a>
             </li> --}}
             <li class="nav-item mb-1 col-sm-4">
-                <a href="#korpor_history_tab" data-toggle="tab" aria-expanded="false" class="nav-link korpor_trans_tab">
+                <a href="#korpor_history_page" id="korpor_history_tab" data-toggle="tab" aria-expanded="false"
+                    class="nav-link korpor_trans_tab">
                     E-Korpor History
                 </a>
             </li>
+
             <li class="nav-item mb-1 col-sm-4">
                 <a href="#redeem_korpor_page" data-toggle="tab" aria-expanded="false"
                     class="nav-link redeem_korpor_tab">
@@ -656,7 +664,7 @@
                 </div>
             </div>
 
-            <div class="tab-pane mt-4 bg-page site-card" id="korpor_history_tab">
+            <div class="tab-pane mt-4 bg-page site-card" id="korpor_history_page">
 
                 <div class="px-md-3 mt-lg-0 rounded">
                     <br>
@@ -689,72 +697,31 @@
                                 href="#">Cancelled</button>
                         </nav>
                         <div class="col-md-8" id="korpor_history_display">
-                            <div id="korpor_history_container" style="min-height: 400px" class="mb-3">
+                            <div id="korpor_history_container" style="min-height: 350px" class="mb-3">
+                                <div class="text-center" {!! $noDataAvailable !!} </div>
+                                </div>
                             </div>
                         </div>
-                        {{-- <div class="table-responsive table-sm table-bordered accounts_display_area">
-                            <table id="" class="table mb-0 ">
-                                <thead>
-                                    <tr class="bg-primary text-white ">
-                                        <td> <b> Reference Number </b> </td>
-                                        <td> <b> Receiver Name </b> </td>
-                                        <td> <b> Receiver Telephone </b> </td>
-                                        <td> <b> Receiver Address </b> </td>
-                                        <td> <b> Amount </b> </td>
-                                        <td> <b>Status</b></td>
-                                    </tr>
-                                </thead>
-                                <tbody class="redeemed_korpor_list_display">
-
-                                    <td colspan="100%" class="text-center" id="loan_balances_no_data" {!!
-                                        $noDataAvailable !!} </td>
-                                </tbody>
-                            </table>
-                        </div> --}}
-
-
                     </div>
-                    {{-- <div class="card-box">
-                        <ul class="nav nav-tabs">
-                            <li class="nav-item">
-                                <a href="#home" data-toggle="tab" aria-expanded="false" class="nav-link  text-primary">
-                                    <b>Unredeemed/Pending</b>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#profile" data-toggle="tab" aria-expanded="true"
-                                    class="nav-link active text-primary">
-                                    <b>Completed</b>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#messages" data-toggle="tab" aria-expanded="false"
-                                    class="nav-link text-primary">
-                                    <b>Reversed</b>
-                                </a>
-                            </li>
-                        </ul>
-                    </div> --}}
+
+
                 </div>
-
-
+                @include("snippets.pinCodeModal")
             </div>
-            @include("snippets.pinCodeModal")
         </div>
     </div>
-</div>
-<script>
-    const customerInfo = new Object();
+    <script>
+        const customerInfo = new Object();
         customerInfo.customerType = @json(session()->get('customerType'));
         customerInfo.userAlias = @json(session()->get('userAlias'));
         customerInfo.userPhone = @json(session()->get('customerPhone'));
         customerInfo.userEmail = @json(session()->get('email'));
-</script>
-<script>
-    let noDataAvailable = {!! json_encode($noDataAvailable) !!}
-</script>
-<script src="{{ asset('assets/js/pages/payments/e-korpor.js') }}">
-</script>
-<script src="{{ asset('assets/plugins/pagination/pagination-2.1.5.min.js') }}" defer>
-</script>
-@endsection
+    </script>
+    <script>
+        let noDataAvailable = {!! json_encode($noDataAvailable) !!}
+    </script>
+    <script src="{{ asset('assets/js/pages/payments/e-korpor.js') }}">
+    </script>
+    <script src="{{ asset('assets/plugins/pagination/pagination-2.1.5.min.js') }}" defer>
+    </script>
+    @endsection
