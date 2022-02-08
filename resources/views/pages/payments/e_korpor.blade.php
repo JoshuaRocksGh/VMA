@@ -1,7 +1,42 @@
 @extends('layouts.master')
 
+@section("styles")
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/pagination/pagination.css') }}" />
+<style>
+    .history-card {
 
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
+    }
+
+    .knav.active {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+
+    #redeemed_history.active {
+        background-color: var(--success) !important;
+        color: white !important;
+        border-color: var(--success) !important;
+
+    }
+
+    #pending_history.active {
+        background-color: var(--primary-alt) !important;
+        color: white !important;
+        border-color: var(--primary-alt) !important;
+
+    }
+
+    #cancelled_history.active {
+        background-color: var(--red) !important;
+        color: white !important;
+        border-color: var(--red) !important;
+
+    }
+</style>
+@endsection
 @section('content')
 
 <div class="">
@@ -14,8 +49,8 @@
     <br>
     <div class="mx-lg-3 mx-md-2">
 
-        <ul class="nav nav-pills navtab-bg nav-justified">
-            <li class="nav-item">
+        <ul class="nav nav-pills mx-1 navtab-bg row text-center">
+            <li class="nav-item mb-1 col-sm-4">
                 <a href="#send_korpor_page" data-toggle="tab" aria-expanded="true"
                     class="nav-link active send_korpor_tab">
                     Send E-Korpor
@@ -27,12 +62,12 @@
                     Reverse E-Korpor
                 </a>
             </li> --}}
-            <li class="nav-item">
-                <a href="#korpor_trans_page" data-toggle="tab" aria-expanded="false" class="nav-link korpor_trans_tab">
+            <li class="nav-item mb-1 col-sm-4">
+                <a href="#korpor_history_tab" data-toggle="tab" aria-expanded="false" class="nav-link korpor_trans_tab">
                     E-Korpor History
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item mb-1 col-sm-4">
                 <a href="#redeem_korpor_page" data-toggle="tab" aria-expanded="false"
                     class="nav-link redeem_korpor_tab">
                     Redeem E-Korpor
@@ -279,16 +314,8 @@
                                                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                                                     required>
                                                             </div>
-
-
-
                                                         </div>
-
-
-
-
                                                     </div> --}}
-
                                                     <div class="form-group text-right mt-2">
                                                         <button type="button"
                                                             class="btn btn-primary btn-rounded waves-effect waves-light disappear-after-success "
@@ -298,37 +325,12 @@
 
                                                         </button>
                                                     </div>
-
                                                 </div>
-
                                                 {{-- <div class="col-md-1"></div> --}}
                                             </div>
-
-
-
-
-
-
-
-
-
                                         </div>
-
-
                                         <div class="col-md-1"></div>
-
                                     </div>
-
-
-
-
-
-
-
-
-
-
-
                                 </form>
 
 
@@ -654,77 +656,88 @@
                 </div>
             </div>
 
-            <div class="tab-pane" id="korpor_trans_page">
+            <div class="tab-pane mt-4 bg-page site-card" id="korpor_history_tab">
 
-                <div class="col-md-12">
-                    <div class="cards_table row">
-                        <div class="col-md-12 col-sm-12 col-xs-12 m-2 customize_card" id=""
-                            style="background-image: linear-gradient(to bottom right, white, rgb(223, 225, 226));">
-                            <div class="p-3 mt-4 mt-lg-0 rounded">
-                                <br>
-                                <div class="form-group mx-auto" style="max-width: 750px">
-                                    <label class="d-block ml-2 f-18 font-weight-bold mb-1 text-primary"> Select
-                                        Account</label>
-                                    <select class="form-control unredeemed" id="unredeemed_history_account" required>
-                                        <option disabled selected value="">Select
-                                            Account Number</option>
-                                        @include('snippets.accounts')
-                                    </select>
+                <div class="px-md-3 mt-lg-0 rounded">
+                    <br>
+                    <div class="form-group mb-3 justify-content-center d-md-flex mx-md-auto" style="max-width: 750px">
 
-                                </div>
-                                <div class="">
-                                    <nav class="nav nav-pills flex-column flex-sm-row">
-                                        <a class="flex-sm-fill text-sm-center nav-link active" href="#">Redeemed</a>
-                                        <a class="flex-sm-fill text-sm-center nav-link" href="#">Pending</a>
-                                        <a class="flex-sm-fill text-sm-center nav-link" href="#">Cancelled</a>
-                                    </nav>
-                                    <div class="table-responsive table-sm table-bordered accounts_display_area">
-                                        <table id="" class="table mb-0 ">
-                                            <thead>
-                                                <tr class="bg-primary text-white ">
-                                                    <td> <b> Reference Number </b> </td>
-                                                    <td> <b> Receiver Name </b> </td>
-                                                    <td> <b> Receiver Telephone </b> </td>
-                                                    <td> <b> Receiver Address </b> </td>
-                                                    <td> <b> Amount </b> </td>
-                                                    <td> <b>Status</b></td>
-                                                </tr>
-                                            </thead>
-                                            <tbody style="background-color:white;" class="redeemed_korpor_list_display">
+                        <div class=" align-self-center" style="min-width: 100px"> <label
+                                class="d-block f-18 font-weight-bold mb-1 text-primary">
+                                Select
+                                Account</label></div>
+                        <div class="pl-md-3 w-100">
+                            <select class="form-control unredeemed" id="korpor_history_accounts" required>
+                                <option disabled selected value="">Select
+                                    Account Number</option>
+                                @include('snippets.accounts')
+                            </select>
+                        </div>
 
+                    </div>
+                    <div class="row pt-md-4">
+                        <nav class="col-md-4  nav nav-pills flex-column mx-auto mb-3 flex-row" style="max-width: 350px">
+                            <button id="pending_history" data-value="unredeemed"
+                                class=" transition-all py-md-2 active  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                                href="#">Pending</button>
+                            <button data-value="redeemed"
+                                class=" transition-all py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link "
+                                id="redeemed_history" href="#">Redeemed</button>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-
-                                </div>
-                                {{-- <div class="card-box">
-                                    <ul class="nav nav-tabs">
-                                        <li class="nav-item">
-                                            <a href="#home" data-toggle="tab" aria-expanded="false"
-                                                class="nav-link  text-primary">
-                                                <b>Unredeemed/Pending</b>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#profile" data-toggle="tab" aria-expanded="true"
-                                                class="nav-link active text-primary">
-                                                <b>Completed</b>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#messages" data-toggle="tab" aria-expanded="false"
-                                                class="nav-link text-primary">
-                                                <b>Reversed</b>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div> --}}
+                            <button id="cancelled_history" data-value="reversed"
+                                class="  transition-all py-md-2 text-sm-center mtb1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                                href="#">Cancelled</button>
+                        </nav>
+                        <div class="col-md-8" id="korpor_history_display">
+                            <div id="korpor_history_container" style="min-height: 400px" class="mb-3">
                             </div>
                         </div>
+                        {{-- <div class="table-responsive table-sm table-bordered accounts_display_area">
+                            <table id="" class="table mb-0 ">
+                                <thead>
+                                    <tr class="bg-primary text-white ">
+                                        <td> <b> Reference Number </b> </td>
+                                        <td> <b> Receiver Name </b> </td>
+                                        <td> <b> Receiver Telephone </b> </td>
+                                        <td> <b> Receiver Address </b> </td>
+                                        <td> <b> Amount </b> </td>
+                                        <td> <b>Status</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody class="redeemed_korpor_list_display">
+
+                                    <td colspan="100%" class="text-center" id="loan_balances_no_data" {!!
+                                        $noDataAvailable !!} </td>
+                                </tbody>
+                            </table>
+                        </div> --}}
+
+
                     </div>
+                    {{-- <div class="card-box">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a href="#home" data-toggle="tab" aria-expanded="false" class="nav-link  text-primary">
+                                    <b>Unredeemed/Pending</b>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#profile" data-toggle="tab" aria-expanded="true"
+                                    class="nav-link active text-primary">
+                                    <b>Completed</b>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#messages" data-toggle="tab" aria-expanded="false"
+                                    class="nav-link text-primary">
+                                    <b>Reversed</b>
+                                </a>
+                            </li>
+                        </ul>
+                    </div> --}}
                 </div>
+
+
             </div>
             @include("snippets.pinCodeModal")
         </div>
@@ -741,6 +754,7 @@
     let noDataAvailable = {!! json_encode($noDataAvailable) !!}
 </script>
 <script src="{{ asset('assets/js/pages/payments/e-korpor.js') }}">
-
+</script>
+<script src="{{ asset('assets/plugins/pagination/pagination-2.1.5.min.js') }}" defer>
 </script>
 @endsection
