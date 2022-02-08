@@ -6,6 +6,9 @@ a:hover {
     text-decoration: none !important;
 }
 
+.transition-all {
+    transition: all 400ms;
+}
 /* .bootstrap-select, .btn:focus { */
 .z-1 {
     z-index: -1;
