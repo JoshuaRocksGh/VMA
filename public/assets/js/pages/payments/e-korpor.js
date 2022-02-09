@@ -474,14 +474,13 @@ $(function () {
         $("#korpor_history_accounts").trigger("change");
     });
 
-    function accountTemplate(state) {
-        console.log(state);
-        const data = $(state.element).attr("data-content");
-        console.log(data);
+    function accountTemplate(account) {
+        const data = $(account.element).attr("data-content");
+        if (!data) return $(account.element).text();
         return $(data);
     }
     //initialize select2 on accounts select
-    $("#korpor_history_accounts").select2({
+    $(".my-accounts-select").select2({
         templateResult: accountTemplate,
         templateSelection: accountTemplate,
     });
