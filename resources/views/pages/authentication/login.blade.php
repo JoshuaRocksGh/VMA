@@ -254,13 +254,13 @@
                         <div class="form-group" id="security_question_form" style="display: none">
                             <input type="email" id="security_question_answer" name="security_question_answer"
                                 class="form-control" autocomplete="off" aria-autocomplete="off">
-                            <input type="text" id="security_question_code" hidden>
+                            <input type="text" id="security_question_code" autocomplete="new-password" hidden>
                             <br>
                             <input type="password" placeholder="Enter New Password" id="reset_password"
                                 name="reset_password" class="form-control" autocomplete="off" aria-autocomplete="off">
                             <br>
                             <input type="password" placeholder="Confirm Password" id="reset_confirm_password"
-                                name="reset_confirm_password" class="form-control">
+                                name="reset_confirm_password" autocomplete="new-password" class="form-control" />
                         </div>
 
                         <div class="form-group mb-0 text-center">

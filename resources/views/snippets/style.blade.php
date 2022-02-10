@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.css') }}" type="text/css" />
 <link href="{{ asset('assets/css/bootstrap-purple.min.css') }}" rel="stylesheet" type="text/css"
     id="bs-default-stylesheet" />
+<link href="assets\plugins\select2\select2.min.css" rel="stylesheet" />
 <link href="{{ asset('assets/css/app-purple.min.css') }}" rel="stylesheet" type="text/css"
     id="app-default-stylesheet" />
 <link href="{{ asset('assets/css/rokel.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
@@ -22,9 +23,9 @@
 <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
 <style>
-    .form-group {
+    /* .form-group {
         margin-bottom: 0.4rem !Important;
-    }
+    } */
 
     .readOnly {
         background-color: #eceff1 !Important;
@@ -196,48 +197,6 @@
         background-color: #fffbfb79;
         color: #1E1F23
     }
-
-    .btn-primary {
-        background-color: #00bdf3 !important;
-        border-color: #00bdf3 !important;
-        /* height: 3rem; */
-    }
-
-    .btn-primary:hover {
-        background-color: #0388cb !important;
-        border-color: #0388cb !important;
-        box-shadow: 0 0 0 0.15rem #0388cb80 !important;
-    }
-
-    .btn-primary:focus {
-        background-color: #0388cb !important;
-        border-color: #0388cb !important;
-        box-shadow: 0 0 0 0.15rem #0388cb80 !important;
-    }
-
-
-    .btn-primary:active {
-        background-color: #0388cb !important;
-        border-color: #0388cb !important;
-        box-shadow: 0 0 0 0.15rem #0388cb80 !important;
-
-    }
-
-    .btn-primary:active {
-        background-color: #00bdf3 !important;
-        border-color: #00bdf3 !important;
-        box-shadow: 0 0 0 0.15rem #0388cb80 !important;
-    }
-
-    /* a.text-primary {
-        color: #00bdf3 !important;
-    } */
-
-    a.text-primary:focus,
-    a.text-primary:hover {
-        color: #0388cb !important;
-    }
-
 
     .div-card {
         background-image: linear-gradient(to bottom right, white, rgb(223, 225, 226));

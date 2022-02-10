@@ -123,37 +123,13 @@ class KorporController extends Controller
         }
     }
 
-    public function send_unredeemed_request(Request $request)
+    public function getKorporHistoryByType(Request $request)
     {
 
-        // return $request;
-        $authToken = session()->get('userToken');
-        $userID = session()->get('userId');
         $api_headers = session()->get("headers");
-        // return $authToken;
-
-        // $base_response = new BaseResponse();
-
-
-
-        $accountNumber = $request->accountNo;
-        // $accountNumber = "004001100241700194";
-        // $accountNumber = "004001160169700292";
-        // $data = [
-
-        //     "accountNumber" => $accountNumber
-
-        // ];
-        // return $accountNumber;
-
-
-        $response = Http::withHeaders($api_headers)->get(env('API_BASE_URL') . "payment/unredeemedKorpor/$accountNumber");
-        // return $response;
-
-        //for debugging purposes
-        // return $data;
-        // $response = Http::get(env('API_BASE_URL') . "payment/unredeemedkorpor/$accountNumber");
-        // return $response;die();
+        $url = "payment/" . $request->type . "Korpor" . "/" . $request->accountNumber;
+        // return $url;
+        $response = Http::withHeaders($api_headers)->get(env('API_BASE_URL') . $url);
         $result = new ApiBaseResponse();
 
         return $result->api_response($response);

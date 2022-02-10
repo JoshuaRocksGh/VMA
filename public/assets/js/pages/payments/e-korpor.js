@@ -189,81 +189,88 @@ function redeemKorpor(data) {
         },
     });
 }
-function getKorporHistory(url, fromAccountNo, target) {
-    siteLoading("show");
-    $.ajax({
+function getKorporHistory(type, accountNumber) {
+    return $.ajax({
         type: "GET",
-        url: url,
+        url: "korpor-history-api",
         datatype: "application/json",
         data: {
-            accountNo: fromAccountNo,
+            accountNumber,
+            type,
         },
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            let data = response.data;
-            $(`${target}`).empty();
-            if (data.length > 0) {
-                let extracolumn;
-                if (!target.includes("reversal")) {
-                    let badgeColor;
-                    let badgeText;
-                    if (target.includes("reversed")) {
-                        badgeColor = "danger";
-                        badgeText = "Cancelled";
-                    } else if (target.includes("completed")) {
-                        badgeColor = "success";
-                        badgeText = "Completed";
-                    } else {
-                        badgeColor = "warning";
-                        badgeText = "Pending";
+            const data = response.data;
+            // console.log(renderedHistoryItems);
+            $("#korpor_history_display").pagination({
+                dataSource: data,
+                pageSize: 5,
+                callback: function (data, pagination) {
+                    let items = [];
+                    items = data.map((e) => renderKorporHistoryItem(e));
+
+                    if (items.length < 1) {
+                        items = noDataAvailable;
                     }
-                    extracolumn = `<td> <strong><span class="badge badge-${badgeColor}">&nbsp;${badgeText}&nbsp;</span></strong> </td>`;
-                }
-                $.each(data, function (index) {
-                    if (target.includes("reversal")) {
-                        extracolumn = `<td> <button class="btn btn-danger badge reversal-button badge-danger" id="${data[index].REMITTANCE_REF}" korporData="${data[index].BENEF_TEL}~${data[index].REMITTANCE_REF}"> &nbsp;Reverse&nbsp;</button> </td>`;
-                    }
-                    $(`${target}`).append(
-                        `<tr><td> <b> ${data[index].REMITTANCE_REF} </b>  </td>
-                        <td> <b> ${data[index].BENEF_NAME}  </b>  </td>
-                        <td> <b> ${data[index].BENEF_TEL}  </b>  </td>
-                        <td> <b> ${data[index].BENEF_ADDRESS1}  </b>  </td>
-                        <td> <b> ${formatToCurrency(
-                            parseFloat(data[index].REMITTANCE_AMOUNT)
-                        )}</b></td>${extracolumn}</tr>`
-                    );
-                    if (target.includes("reversal")) {
-                        $(`#${data[index].REMITTANCE_REF}`).on("click", () => {
-                            korporReversal(data[index]);
-                        });
-                    }
-                });
-            } else {
-                let noData = noDataAvailable.replace(
-                    "No Data Available",
-                    response.message
-                );
-                $(target).append(
-                    `<td colspan="100%" class="text-center">
-                    ${noData} </td>`
-                );
-                $("#no_data_available_img").css("max-width", "250px");
-                // toaster(response.message, "warning");
-            }
-            siteLoading("hide");
+                    $("#korpor_history_container").html(items);
+                },
+            });
         },
     });
 }
 
-$(document).ready(function () {
+function renderKorporHistoryItem(data) {
+    console.log(data);
+    const {
+        BENEF_NAME: name,
+        BENEF_TEL: tel,
+        REG_POSTING_SYS_DATE: date,
+        REMITTANCE_AMOUNT: amount,
+    } = data;
+    const dateOptions = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    };
+    const color = $(".knav.active").css("background-color");
+    const type = $(".knav.active").text();
+    const dateFormatted = new Date(date).toDateString("en-US", dateOptions);
+    return `  <div class="history-card d-flex justify-content-between font-12 mb-1 py-1 px-3 bg-white" style="border-left: 4px solid ${color}">
+    <div>
+        <div><i class=" fas fa-user" style="color: ${color} !important"></i> <span
+                class="account-name font-weight-bold px-1">${name}</span></div>
+        <div>
+            <span><i class=" fas fa-phone-alt" style="color: ${color} !important"></i> <span
+                    class="phone-number px-1">${tel}</span></span>
+        </div>
+        <div>
+            <span> <i class=" fas fa-clock" style="color: ${color} !important"></i><span class="date px-1">${dateFormatted}</span></span>
+        </div>
+    </div>
+    <div class="text-right align-self-center">
+        <div>
+            <span class="font-14 font-weight-bold text-success">SLL ${formatToCurrency(
+                amount
+            )}</span>
+        </div>
+        <div>
+            <span style="background-color: ${color} !important;" class=" text-white font-11 font-weight-bold px-1 rounded-pill">
+                ${type}</span>
+        </div>
+    </div>
+</div> `;
+}
+
+$(function () {
     // ==============================================================
     // ------------------- Redeem Korpor ---------------------------
     // ==============================================================
     const redeemInfo = new Object();
     $("#redeem_account option[data-account-currency!='SLL']").remove();
-    $("#proceed_to_redeem_button").click(function () {
+    $("#proceed_to_redeem_button").on("click", function () {
         let mobileNumber = $("#mobile_no").val();
         let remittanceNumber = $("#remittance_no").val();
         if (!mobileNumber || !remittanceNumber) {
@@ -313,7 +320,7 @@ $(document).ready(function () {
     //  ------------- Korpor Transfer ------------------
     // ===================================================
     let transferInfo = new Object();
-    $("#account_of_transfer").change(function () {
+    $("#account_of_transfer").on("change", function () {
         const e = $("#account_of_transfer option:selected");
         // console.log(e.attr("data-account-currency-code"));
         const accountNumber = e.attr("data-account-number");
@@ -321,7 +328,7 @@ $(document).ready(function () {
         const accountMandate = e.attr("data-account-mandate");
         const accountName = e.attr("data-account-description");
         const accountType = e.attr("data-account-type");
-        const accountBalance = e.attr("data-account-balance");
+        const accountBalance = e.attr("data-account-balance") || "0.00";
         const currCode = e.attr("data-account-currency-code");
         transferInfo = {
             accountCurrency,
@@ -382,7 +389,7 @@ $(document).ready(function () {
         $(".display_receiver_address").text(address);
     });
 
-    $("#amount").change(function () {
+    $("#amount").on("change", function () {
         let amount = $("#amount").val();
         $(".display_amount").text(formatToCurrency(amount));
     });
@@ -417,6 +424,14 @@ $(document).ready(function () {
             toaster("Amount should be a number", "warning");
             return;
         }
+        if (!validatePhone(recipientPhone)) {
+            toaster("Invalid phone number", "warning");
+            return;
+        }
+        if (amount > transferInfo.accountBalance) {
+            toaster("Insufficient Account Balance", "warning");
+            return;
+        }
         if (ISCORPORATE) {
             corporateInitiateKorpor(transferInfo);
             return;
@@ -435,6 +450,8 @@ $(document).ready(function () {
             }
             transferInfo.pinCode = pinCode;
             initiateKorpor("initiate-korpor", transferInfo);
+            transferInfo.pinCode = "";
+            $("#user_pin").val("");
             transferInfo.type = "";
         });
     });
@@ -445,202 +462,51 @@ $(document).ready(function () {
 
     // ----------- korpor transfer end -----------
 
-    // $(".unredeemed").change(function () {
-    //     var account = $(".unredeemed").val();
-    //     console.log(account);
-    // });
+    //     ####################################################
+    //                    Korpor History
+    //     ####################################################
 
-    //button to submit for list of redeemed/completed transactions
-    $("#submit_account_no_redeemed").on("click", function () {
-        let fromAccount = $(".redeemed").val();
-        handleKorporHistory(
-            "redeemed-korpor",
-            fromAccount,
-            ".redeemed_korpor_list_display"
-        );
-    });
-
-    //button to submit account unredeemed request
-    $("#submit_account_no_unredeemed").on("click", function () {
-        let fromAccount = $("#unredeemed_history_account").val();
-        handleKorporHistory(
-            "unredeem-korpor-request",
-            fromAccount,
-            "#unredeemed_korpor_history_display"
-        );
-    });
-
-    // $("#submit_unredeemed_account").on("click", () => {
-    $("#unredeemed_account").on("change", () => {
-        let fromAccount = $("#unredeemed_account").val();
-        handleKorporHistory(
-            "unredeem-korpor-request",
-            fromAccount,
-            "#korpor_reversal_list_display"
-        );
-    });
-    $("#submit_account_no_reversed").on("click", function () {
-        let fromAccount = $(".reversed").val();
-        handleKorporHistory(
-            "reversed-korpor-request",
-            fromAccount,
-            ".reversed_korpor_list_display"
-        );
-    });
-    function handleKorporHistory(url, fromAccount, target) {
-        if (!fromAccount) {
-            toaster(
-                "Select an account to show list of unredeemed transactions",
-                "warning"
-            );
-            return false;
+    $("#korpor_history_tab").on("click", () => {
+        if (!$("#korpor_history_accounts").val()) {
+            $("#korpor_history_accounts option:last").prop("selected", true);
         }
-        let fromAccountNo = fromAccount.split("~")[2];
-        getKorporHistory(url, fromAccountNo, target);
+        console.log("ll");
+        $("#korpor_history_accounts").trigger("change");
+    });
+
+    function accountTemplate(account) {
+        const data = $(account.element).attr("data-content");
+        if (!data) return $(account.element).text();
+        return $(data);
     }
-
-    //button to submit for korpor payment for reversal
-    $("#reverse_button").click(function () {
-        console.log(customerType);
-
-        if (customerType == "C") {
-            // alert("Corporate Reversal");
-
-            var account_num = $("#account_of_transfer_reverse")
-                .val()
-                .split("~");
-            console.log(account_num);
-            var acc_num = account_num[2];
-            var acc_currency = account_num[3];
-            var acc_mandate = account_num[5];
-            var acc_currCode = account_num[6];
-            // return false ;
-            var reference_no = $("#reference_no").val();
-            var receiver_phoneNo = $("#receiver_phoneNo_reverse").val();
-            // var pin = $("#reference_pin").val();
-
-            if (
-                reference_no == "" ||
-                receiver_phoneNo == "" ||
-                account_num == ""
-            ) {
-                toaster("Fields must not be empty", "error", 10000);
-                return false;
-            } else {
-                $("#reverse-text").hide();
-                $("#spinner-reverse").show();
-                $("#spinner-text-reverse").show();
-
-                $.ajax({
-                    type: "POST",
-                    url: "corporate-reverse-korpor",
-                    datatype: "application/json",
-                    data: {
-                        reference_no: reference_no,
-                        receiver_phoneNo: receiver_phoneNo,
-                        accountNumber: acc_num,
-                        accountCurrency: acc_currency,
-                        accountMandate: acc_mandate,
-                        accountCurrCode: acc_currCode,
-                    },
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
-                        ),
-                    },
-                    success: function (response) {
-                        if (response.responseCode == "000") {
-                            Swal.fire("", response.message, "success");
-                            // toaster(response.message, 'success', 2000)
-                            // var data = response.data.loanSchedule
-                            // console.log(response)
-                            $("#spinner-text-reverse").hide();
-                            $("#spinner-reverse").hide();
-                            $("#reverse-text").show();
-                            setTimeout(function () {
-                                window.location.reload();
-                            }, 2000);
-                        } else {
-                            toaster(response.message, "error", 9000);
-                            $("#spinner-text-reverse").hide();
-                            $("#spinner-reverse").hide();
-                            $("#reverse-text").show();
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        $("#submit").attr("disabled", false);
-                        $("#spinner").hide();
-                        $("#spinner-text").hide();
-
-                        $("#log_in").show();
-                        $("#error_message").text("Connection Error");
-                        $("#failed_login").show();
-                    },
-                });
-            }
-        } else {
-            var reference_no = $("#reference_no").val();
-            var receiver_phoneNo = $("#receiver_phoneNo_reverse").val();
-            var pin = $("#reference_pin").val();
-
-            // if (from_account == '' || amount == '' || receiver_name == '' || receiver_phoneNum ==
-            //     '' || receiver_address == '') {
-            //     toaster('Field must not be empty', 'error', 10000)
-            //     return false
-            // }
-
-            if (!reference_no || !receiver_phoneNo || !pin) {
-                toaster("Fields must not be empty", "error");
-                return false;
-            } else {
-                $("#reverse-text").hide();
-                $("#spinner-reverse").show();
-                $("#spinner-text-reverse").show();
-
-                $.ajax({
-                    type: "POST",
-                    url: "reverse-korpor",
-                    datatype: "application/json",
-                    data: {
-                        reference_no: reference_no,
-                        receiver_phoneNo: receiver_phoneNo,
-                        pin: pin,
-                    },
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
-                        ),
-                    },
-                    success: function (response) {
-                        if (response.responseCode == "000") {
-                            Swal.fire("", response.message, "success");
-                            // toaster(response.message, 'success', 2000)
-                            // var data = response.data.loanSchedule
-                            // console.log(response)
-                            $("#spinner-text-reverse").hide();
-                            $("#spinner-reverse").hide();
-                            $("#reverse-text").show();
-                            setTimeout(function () {
-                                window.location.reload();
-                            }, 2000);
-                        } else {
-                            toaster(response.message, "error", 9000);
-                            $("#spinner-text-reverse").hide();
-                            $("#spinner-reverse").hide();
-                            $("#reverse-text").show();
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        $("#submit").attr("disabled", false);
-                        $("#spinner").hide();
-                        $("#spinner-text").hide();
-
-                        $("#log_in").show();
-                        $("#error_message").text("Connection Error");
-                        $("#failed_login").show();
-                    },
-                });
-            }
-        }
+    //initialize select2 on accounts select
+    $(".my-accounts-select").select2({
+        minimumResultsForSearch: Infinity,
+        templateResult: accountTemplate,
+        templateSelection: accountTemplate,
     });
+
+    //trigger knav click on accounts change.
+    $("#korpor_history_accounts").on("change", (e) => {
+        $(".knav.active").trigger("click");
+    });
+
+    $(".knav").on("click", (e) => {
+        const accountNumber = $(
+            "#korpor_history_accounts option:selected"
+        ).attr("data-account-number");
+        if (!accountNumber) {
+            toaster("Please select a valid account", "warning");
+            return;
+        }
+
+        const navId = e.currentTarget.id;
+        const type = e.currentTarget.getAttribute("data-value");
+        $(".knav").removeClass("active");
+        $(`#${navId}`).addClass("active");
+        siteLoading("show");
+        getKorporHistory(type, accountNumber).always(siteLoading("hide"));
+    });
+
+    // ================= End of Korpor history =======================
 });
