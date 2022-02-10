@@ -8,6 +8,14 @@
         transition: transform 0.5s
     }
 
+    .dataTables_info {
+        font-size: 12px;
+    }
+
+    a.page-link {
+        font-size: 12px;
+    }
+
     .repayment[aria-expanded="true"] .menu-arrow {
         transform: rotate(270deg);
     }
@@ -40,7 +48,8 @@ $pageTitle = "Loan Request"; @endphp
                 {!! $noDataAvailable !!}
             </div>
             <div id="loan_balances" class="table-responsive" style="display: none">
-                <table id="loan_balances_table" class="table table-striped table-hover table-centered table-bordered">
+                <table id="loan_balances_table"
+                    class="table table-sm table-striped table-hover table-centered table-bordered">
                     <thead class="bg-primary text-white font-weight-bold">
                         <tr class="text-center">
                             <th>Loan Description</th>
@@ -55,8 +64,16 @@ $pageTitle = "Loan Request"; @endphp
             </div>
         </div>
         <div class="tab-pane  " id="Requests_Pill" role="tab-panel">
-
-            <form action="#" id="payment_details_form" autocomplete="off" class="container" style="max-width: 650px">
+            <div id="kyc_incomplete" class="mx-auto" style="max-width: 350px;  display:none">
+                <img class=" img-fluid" src="{{ asset('assets/images/placeholders/kyc.svg') }}" />
+                <span class="my-3 d-block text-white font-13 font-weight-bold p-2 rounded-lg"
+                    style="background-color: rgb(255, 0, 0)"><i class="fas fa-exclamation-circle pr-2"></i>Your KYC
+                    (Know Your Customer) is not Complete </span>
+                <a href="{{ url('kyc-update') }}"
+                    class="text-primary font-14 float-right text-right font-weight-bold"><i class="far fa-edit"></i>
+                    Update KYC</a>
+            </div>
+            <form action="#" id="payment_details_form" autocomplete="off" class="container" style="max-width: 650px;">
                 @csrf
                 <div class="mb-3 form-group ">
                     <label class="text-primary mb-1 font-weight-bold font-12" for="loan_product">Select Loan
@@ -65,6 +82,40 @@ $pageTitle = "Loan Request"; @endphp
                         <option value="" disabled selected>Select Loan Product
                         </option>
                     </select>
+                    <div class="card mt-1" style="border-radius: 2px">
+                        <span href="#product_info_toggle" class="text-primary repayment" data-toggle="collapse">
+                            <div class=" d-flex justify-content-between pl-3 py-1 font-12 font-weight-bold">
+                                <span> Product Detail</span>
+                                <span class="menu-arrow"></span>
+                            </div>
+                        </span>
+                        <div class="collapse " id="product_info_toggle">
+                            <table id="loan_product_info" class="mb-0 table table-borderless table-striped table-sm">
+                                <tbody>
+                                    <tr>
+                                        <th class="col-5 font-12 pl-3  font-weight-normal">Amount Range</th>
+                                        <td class="text-primary  font-13 font-weight-bold pr-3 text-right"
+                                            id="lpi_amount_range"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-5 font-12 pl-3  font-weight-normal">Tenure</th>
+                                        <td class="text-primary  font-13 font-weight-bold pr-3 text-right"
+                                            id="lpi_tenure"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-5 font-12 pl-3  font-weight-normal">Interest Type</th>
+                                        <td class="text-primary  font-13 font-weight-bold pr-3 text-right"
+                                            id="lpi_interest_type"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-5 font-12 pl-3  font-weight-normal">Rate</th>
+                                        <td class="text-primary  font-13 font-weight-bold pr-3 text-right"
+                                            id="lpi_rate"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <div class="mb-3 form-group ">
 
@@ -72,17 +123,17 @@ $pageTitle = "Loan Request"; @endphp
                     <div class="input-group">
 
                         <div class="input-group-prepend">
-                            <span class="input-group-text">SSL</span>
+                            <span class="input-group-text" id="loan_currency">SLL</span>
                         </div>
-                        <input type="text" placeholder="0.00" id="loan_amount" class="form-control">
+                        <input type="number" placeholder="0.00" id="loan_amount" class="form-control">
                     </div>
                 </div>
                 <div class="mb-3 form-group ">
                     <label class="text-primary mb-1 font-weight-bold font-12" for="principal_repay_frequency">Select
                         Principal Frequency Type</label>
                     <select class="form-control" id="principal_repay_frequency" required>
-                        <option value="" disabled selected>Select Principal Frequency Type
-                        </option>
+                        {{-- <option value="" disabled selected>Select Principal Frequency Type
+                        </option> --}}
                     </select>
                 </div>
                 <div class="mb-3 form-group ">
@@ -90,8 +141,8 @@ $pageTitle = "Loan Request"; @endphp
                         Interest
                         Frequency Type</label>
                     <select class="form-control" id="interest_repay_frequency" required>
-                        <option value="" disabled selected>Select Interest Frequency Type
-                        </option>
+                        {{-- <option value="" disabled selected>Select Interest Frequency Type
+                        </option> --}}
                     </select>
                 </div>
                 <div class="mb-3 form-group  form-check">
@@ -101,7 +152,7 @@ $pageTitle = "Loan Request"; @endphp
                         agree to the Terms and Conditions</label>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="loan_request_btn" class="btn btn-primary">Submit</button>
                 </div>
 
             </form>
@@ -113,7 +164,7 @@ $pageTitle = "Loan Request"; @endphp
 </div>
 
 
-<!-- Standard modal content -->
+<!-- LOAN DETAIL MODAL -->
 <div id="loan_detail_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="transfer_status"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -131,7 +182,7 @@ $pageTitle = "Loan Request"; @endphp
                         <div class="text-white ">
                             <span class="d-block font-14">Amount Outstanding</span>
                             <span class="d-block font-16">0.00</span>
-                            <span class="d-block font-16">SSL</span>
+                            <span class="d-block font-16">SLL</span>
                         </div>
                     </div>
                     <div class="d-flex px-2 my-4 justify-content-between">
@@ -247,42 +298,130 @@ $pageTitle = "Loan Request"; @endphp
                         </div>
 
                     </div>
-                    <div class="card m-2 shadow" style="border-radius: 2px">
-                        <div>
-                            <a href="#a" class="repayment" data-toggle="collapse">
-                                <div class=" d-flex justify-content-between pl-3 py-2">
-                                    <span> Repayment #1</span>
-                                    <span class="menu-arrow"></span>
-                                </div>
-                            </a>
-                            <div class="collapse " id="a">
-                                <div class=" d-flex border-top justify-content-between px-3 py-2">
-                                    <span class="text-dark"> Interest Amount</span>
-                                    <span class="text-info">SLL 09347538</span>
-                                </div>
-                                <div class="d-flex border-top justify-content-between px-3 py-2">
-                                    <span class="text-dark"> Interest Amount</span>
-                                    <span class="text-info">SLL 09347538</span>
-                                </div>
-                                <div class="d-flex border-top justify-content-between px-3 py-2">
-                                    <span class="text-dark"> Interest Amount</span>
-                                    <span class="text-info">SLL 09347538</span>
-                                </div>
-                                <div class="d-flex border-top justify-content-between px-3 py-2">
-                                    <span class="text-dark"> Interest Amount</span>
-                                    <span class="text-info">SLL 09347538</span>
-                                </div>
-                                <div class="d-flex border-top justify-content-between px-3 py-2">
-                                    <span class="text-dark"> Interest Amount</span>
-                                    <span class="text-info">SLL 09347538</span>
-                                </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
 
-                            </div>
-                            <div class="bg-info">
-                                <div class="d-flex border-top justify-content-between px-3 py-2">
-                                    <span class="text-dark"> Interest Amount</span>
-                                    <span class="text-info">SLL 09347538</span>
+<!-- LOAN DETAIL MODAL -->
+<div id="loan_quotation_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="transfer_status"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="" class="">
+                <div class="bg-primary mb-3 p-2 d-flex align-items-center ">
+                    <a id="loan_schedule_back_button" class="fas mr-4 fa-arrow-left " style=" color: #343a40;"></a>
+                    <h2 class="d-block modal-title modal-title font-16" id="transfer_status_title">
+                        LOAN SCHEDULE</h2>
+                </div>
+                <div class="px-4">
+                    <label class=" mb-0 font-weight-bold font-12 text-primary"> Intro Source
+                    </label>
+
+
+                    <select class="form-control mb-2" id="loan_intro_source"
+                        placeholder="Select Where You Heard About The Loan" required>
+                        {{-- <option value="" disabled selected>Select Where You
+                            Heard About The Loan</option> --}}
+                    </select>
+
+                    <label class="mb-0 font-weight-bold font-12 text-primary">Loan Sector
+                    </label>
+
+
+                    <select class="form-control mb-2 " id="loan_sectors" placeholder="Select The Sector" required>
+                        {{-- <option value="" disabled selected>Select the sector
+                        </option> --}}
+                    </select>
+
+                    <label class="mb-0 font-weight-bold font-12 text-primary">Sub Sector
+                    </label>
+
+
+                    <select class="form-control mb-2 " id="loan_sub_sectors" placeholder="Select The Sub Sector"
+                        required>
+                        {{-- <option value="" disabled selected>Select the sub
+                            sector</option> --}}
+                    </select>
+
+                    <label class="mb-0 font-weight-bold font-12 text-primary">
+                        Purpose
+                    </label>
+
+
+                    <select class="form-control mb-2" id="loan_purpose" placeholder="Purpose of the loan" required>
+                        {{-- <option value="" disabled selected>Purpose
+                            of the loan
+                        </option> --}}
+                    </select>
+
+
+                </div>
+                <div id="loan_quotation_content" style="display: none">
+                    <div class="px-3 py-2 bg-primary">
+                        <div class="d-flex align-items-center ">
+                            <a id="loan_schedule_back_button" class="fas mr-4 fa-arrow-left "
+                                style=" color: #343a40;"></a>
+                            <h2 class="d-block modal-title modal-title font-16" id="transfer_status_title">
+                                LOAN SCHEDULE</h2>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-white mb-2 text-center font-weight-bold font-16  py-1"
+                                style="border-bottom: 1px solid  #e5e9ec" id="ls_loan_product">LOAN PRODUCT
+                            </h3>
+
+                            <div class=" text-white">
+                                <div class="d-flex justify-content-between">
+                                    <span class="d-block font-13  " style="color: #e5e9ec">Amount</span>
+                                    <span class="d-block font-weight-bold" id="ls_amount"></span>
+
                                 </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="d-block font-13 " style="color:#e5e9ec">Tenure</span>
+                                    <span class="d-block font-weight-bold text-right" id="ls_tenure"></span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="d-block font-13 " style="color:#e5e9ec">Interest Type</span>
+                                    <span class="d-block font-weight-bold text-right" id="ls_interest_type"></span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="d-block font-13 " style="color:#e5e9ec">Principal Repay
+                                        Frequency</span>
+                                    <span class="d-block font-weight-bold text-right"
+                                        id="ls_principal_repay_freq"></span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="d-block font-13" style="color:#e5e9ec">Interest Repay
+                                        Frequency</span>
+                                    <span class="d-block font-weight-bold text-right"
+                                        id="ls_interest_repay_freq"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div id="repayment_schedule">
+                            <div class="d-flex justify-content-between px-1">
+                                <h4 class="font-13"> Repayment Schedule</h4>
+                                <h4 class="text-primary font-12 font-weight-bold" id="loan_rate">Rate: </h4>
+                            </div>
+                            <table id="loan_quotation_table"
+                                class="font-12 table text-center table-borderless table-striped table-sm">
+                                <thead class="bg-primary  text-white font-weight-bold">
+                                    <tr class="text-center">
+                                        <th>Principal</th>
+                                        <th>Interest</th>
+                                        <th>Total</th>
+                                        <th>Due Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                            <div class=" w-100 d-flex justify-content-end mt-2">
+                                <button class="btn btn-primary font-12 font-weight-bold rounded">Request
+                                    Loan</button>
                             </div>
                         </div>
 
@@ -292,7 +431,6 @@ $pageTitle = "Loan Request"; @endphp
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
-
 
 
 {{-- ================================================================ --}}
@@ -601,6 +739,7 @@ $pageTitle = "Loan Request"; @endphp
 <script src="{{ asset('assets/js/pages/loans/loan-request.js') }}"> </script>
 <script>
     let noDataAvailable = {!! json_encode($noDataAvailable) !!}
+    const pageData = new Object()
 
 </script>
 @endsection

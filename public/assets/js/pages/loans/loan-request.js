@@ -1,32 +1,46 @@
-// function getOptions(optionUrl, optionId, data) {
-//     $.ajax({
-//         type: "GET",
-//         data: data,
-//         url: optionUrl,
-//         datatype: "application/json",
-//         success: (response) => {
-//             let data = response.data;
-//             $.each(data, (index) => {
-//                 $(optionId).append(
-//                     $("<option>", {
-//                         value: data[index].code,
-//                     }).text(data[index].name)
-//                 );
-//             });
-//             if (optionId === "#loan_sub_sectors") {
-//                 $("#side-loadingId").hide();
-//             }
-//             // $(optionId).selectpicker("refresh");
-//         },
-//         error: (xhr, status, error) => {
-//
-//
-//             setTimeout(() => {
-//                 getOptions(optionUrl, optionId);
-//             }, $.ajaxSetup().retryAfter);
-//         },
-//     });
-// }
+function getOptions(optionUrl, optionId, incomingData) {
+    return $.ajax({
+        type: "GET",
+        data: incomingData,
+        url: optionUrl,
+        datatype: "application/json",
+        success: (response) => {
+            let data = response.data;
+            pageData[`${optionId.slice(1)}`] = data;
+            data.forEach((e) => {
+                if (!e.code || !e.name) return;
+                $(optionId).append(
+                    $("<option>", {
+                        value: e.code,
+                    }).text(e.name)
+                );
+            });
+            $(optionId).select2().trigger("change");
+        },
+        error: (xhr, status, error) => {
+            setTimeout(() => {
+                getOptions(optionUrl, optionId);
+            }, $.ajaxSetup().retryAfter);
+        },
+    });
+}
+
+function validateKyc() {
+    return $.ajax({
+        type: "GET",
+        url: "validate-kyc-api",
+        datatype: "application/json",
+    })
+        .done((res) => {
+            if (res.responseCode !== "000") {
+                $("#payment_details_form").hide();
+                $("#kyc_incomplete").show();
+            }
+        })
+        .fail((xhr, status, error) => {
+            console.log(error);
+        });
+}
 
 // function getBranches() {
 //     $.ajax({
@@ -48,60 +62,69 @@
 //     });
 // }
 
-// function getLoanQuotationDetails(loanData) {
-//     $.ajax({
-//         type: "POST",
-//         url: "loan-quotation-details",
-//         datatype: "application/json",
-//         data: loanData,
-//         headers: {
-//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-//         },
-//         success: function (response) {
-//             if (response.responseCode === "000") {
-//
-//                 let table = $(".loan_payment_schedule").DataTable();
-//                 // var nodes = table.rows().nodes();
-//                 let data = response.data.loanSchedule;
-//                 $("#request_form_div").hide();
-//                 $(".disappear-after-success").hide();
-//                 $("#loan_request_detail_div").show();
-//                 $("#loan_request_detail_div").hide();
-//                 $(".appear-button").show();
-//                 $("#atm_request_summary").hide();
-//                 $("#payment_schedule").show();
-//                 $(".spinner-load").hide();
-//                 $(".submit-text").show();
-//                 $("#btn_loan_request").prop("disabled", false);
+function getLoanQuotationDetails(loanData) {
+    return $.ajax({
+        type: "POST",
+        url: "loan-quotation-details",
+        datatype: "application/json",
+        data: loanData,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (res) {
+            if (res.responseCode === "000") {
+                console.log(res.data);
+                const { loanSchedule, rate } = res.data;
+                let table = $("#loan_quotation_table").DataTable({
+                    destroy: true,
+                    pageLength: 10,
+                    autoWidth: false,
+                    lengthChange: false,
+                    responsive: true,
+                    searching: false,
+                });
 
-//                 $.each(data, function (index) {
-//                     model_data = data[index];
-//                     table.row
-//                         .add([
-//                             index + 1,
-//                             data[index].repaymentDate,
-//                             data[index].principalRepayment,
-//                             data[index].interestRepayment,
-//                             data[index].totalRepayment,
-//                         ])
-//                         .draw(false);
-//                 });
-//             } else {
-//                 toaster(response.message, "error", 2000);
-//                 $(".spinner-load").hide();
-//                 $(".submit-text").show();
-//                 $("#btn_loan_request").prop("disabled", false);
-//             }
-//         },
-//         error: function (xhr, status, error) {
-//             $("#submit").attr("disabled", false);
-//             $(".spinner-load").hide();
-//             $("#log_in").show();
-//             $("#error_message").text("Connection Error");
-//             $("#failed_login").show();
-//         },
-//     });
-// }
+                loanSchedule.forEach((e) => {
+                    table.row
+                        .add([
+                            e.principalRepayment,
+                            e.interestRepayment,
+                            e.totalRepayment,
+                            e.repaymentDate,
+                        ])
+                        .draw(false);
+                });
+
+                $("#loan_rate").text(`Rate: ${rate}%`);
+                console.table(loanData);
+                const {
+                    loanProduct,
+                    loanCurrency,
+                    tenureInMonths,
+                    loanAmount,
+                    principalRepayFreq,
+                    interestRepayFreq,
+                } = loanData;
+                const { INTEREST_TYPE } = pageData.currentLoanProduct;
+                $("#ls_loan_product").text(loanProduct);
+                $("#ls_amount").text(
+                    `${loanCurrency} ${formatToCurrency(loanAmount)}`
+                );
+                $("#ls_tenure").text(`${tenureInMonths} months`);
+                $("#ls_interest_type").text(INTEREST_TYPE);
+                $("#ls_principal_repay_freq").text(principalRepayFreq);
+                $("#ls_interest_repay_freq").text(interestRepayFreq);
+
+                $("#loan_quotation_modal").modal("show");
+            } else {
+                toaster(res.message, "error");
+            }
+        },
+        error: function (xhr, status, error) {
+            $("#error_message").text("Connection Error");
+        },
+    });
+}
 
 // function postLoanOrigination(data) {
 //     $.ajax({
@@ -133,14 +156,7 @@
 // }
 
 // $(() => {
-//     getOptions("get-loan-products-api", "#loan_product");
-//     getOptions("get-loan-frequencies-api", "#principal_repay_freq");
-//     getOptions("get-loan-frequencies-api", "#interest_repay_freq");
-//     getOptions("get-interest-types-api", "#interest_rate_type");
-//     getOptions("get-loan-intro-source-api", "#loan_intro_source");
-//     getOptions("get-loan-sectors-api", "#loan_sectors");
-//     getOptions("get-loan-purpose-api", "#loan_purpose");
-//     getBranches();
+
 //     let loanData = new Object();
 //     let loanFormStage = "initial";
 //     let confirmationCompleted = false;
@@ -381,15 +397,18 @@ function getLoans() {
                         e.description,
                         `${e.isoCode}~${e.amountGranted}`,
                         `${e.isoCode}~${e.loanBalance}`,
-                        `<div class="text-center"><button class="loan_detail_button btn btn-primary" data-value='${e.facilityNo}'>View</button></div>`,
+                        `<div class="text-center"><button class="loan_detail_button btn btn-outline-primary btn-xs" data-value='${e.facilityNo}'>View</button></div>`,
                     ])
                     .draw(false);
             });
             $("#loan_balances_no_data").hide();
             $("#loan_balances").show();
             $(".loan_detail_button").on("click", function (e) {
+                siteLoading("show");
                 const facilityNo = e.currentTarget.getAttribute("data-value");
-                getLoanDetails(facilityNo);
+                getLoanDetails(facilityNo).always(() => {
+                    siteLoading("hide");
+                });
             });
         })
         .fail((err) => {
@@ -400,7 +419,7 @@ function getLoans() {
 function getLoanDetails(facilityNo) {
     return $.ajax({
         type: "GET",
-        url: "get-loan-details",
+        url: "get-loan-details-api",
         data: { facilityNo },
         datatype: "application/json",
         headers: {
@@ -414,7 +433,7 @@ function getLoanDetails(facilityNo) {
                 toaster(res.message, "warning");
                 return;
             }
-            console.log(res.data);
+
             const loan = res.data[0];
 
             $("#principal_account").text(loan.PRINCIPAL_ACCOUNT);
@@ -422,13 +441,55 @@ function getLoanDetails(facilityNo) {
             $("#penal_accrued").text(loan.ACCRUED_PENALTY);
             $("#loan_detail_modal").modal("show");
         })
-        .fail((res) => {
-            console.log(res);
-        });
+        .fail((res) => {});
 }
 
 $(function () {
+    // $("#loan_quotation_modal").modal("show");
+
+    validateKyc();
     getLoans();
+    getOptions("get-loan-types-api", "#loan_product").then((res) => {
+        const data = res.data;
+        data.forEach((e) => {
+            $("#loan_product").append(
+                $("<option>", {
+                    value: e.PROD_CODE,
+                }).text(e.PRODUCT)
+            );
+        });
+    });
+    getOptions("get-loan-frequencies-api", "#principal_repay_frequency");
+    getOptions("get-loan-frequencies-api", "#interest_repay_frequency");
+    // getOptions("get-interest-types-api", "#interest_rate_type");
+    // getOptions("get-loan-intro-source-api", "#loan_intro_source");
+    // getOptions("get-loan-sectors-api", "#loan_sectors");
+    // getOptions("get-loan-purpose-api", "#loan_purpose");
+    // getBranches();
+
+    $("#loan_product").on("change", (e) => {
+        pageData.currentLoanProduct = pageData["loan_product"].find(
+            (f) => f.PROD_CODE === e.currentTarget.value
+        );
+        if (!pageData.currentLoanProduct) return;
+        const {
+            MIN_LOAN_AMT,
+            MAX_LOAN_AMT,
+            MATURITY_PERIOD,
+            INTEREST_TYPE,
+            CHARGES_RATE,
+        } = pageData.currentLoanProduct;
+        $("#lpi_amount_range").text(
+            `${formatToCurrency(MIN_LOAN_AMT)} - ${formatToCurrency(
+                MAX_LOAN_AMT
+            )}`
+        );
+        $("#lpi_tenure").text(`${MATURITY_PERIOD} Months`);
+        $("#lpi_interest_type").text(INTEREST_TYPE);
+        $("#lpi_rate").text(`${CHARGES_RATE}%`);
+        $("#product_info_toggle").addClass("show");
+    });
+
     $("#view_loan_schedule").on("click", () => {
         $("#loan_details_content").hide(500);
         $("#loan_schedule_content").show(500);
@@ -440,5 +501,50 @@ $(function () {
 
     $("#advanced_payment").on("click", () => {
         toaster("Feature in the works", "warning");
+    });
+    $("#loan_request_btn").on("click", (e) => {
+        e.preventDefault();
+        const loanProductCode = $("#loan_product").val();
+        const loanProduct = $("#loan_product option:selected").text();
+        const loanAmount = $("#loan_amount").val();
+        const principalRepayFreqCode = $("#principal_repay_frequency").val();
+        const principalRepayFreq = $(
+            "#principal_repay_frequency option:selected"
+        ).text();
+        const interestRepayFreqCode = $("#interest_repay_frequency").val();
+        const interestRepayFreq = $(
+            "#interest_repay_frequency option:selected"
+        ).text();
+        const loanCurrency = $("#loan_currency").text();
+        if (
+            !loanAmount ||
+            !loanProductCode ||
+            !principalRepayFreqCode ||
+            !interestRepayFreqCode
+        ) {
+            toaster("All Fields Are Required", "warning");
+            return;
+        }
+        if (!parseFloat(loanAmount)) {
+            toaster("Invalid Amount", "warning");
+            return;
+        }
+        const tenureInMonths = pageData.currentLoanProduct.MATURITY_PERIOD;
+        const interestRateTypeCode = pageData.currentLoanProduct.INT_TYPE_CODE;
+        siteLoading("show");
+        getLoanQuotationDetails({
+            loanCurrency,
+            loanProduct,
+            principalRepayFreq,
+            interestRepayFreq,
+            loanProductCode,
+            loanAmount,
+            principalRepayFreqCode,
+            interestRepayFreqCode,
+            tenureInMonths,
+            interestRateTypeCode,
+        }).then((e) => {
+            siteLoading("hide");
+        });
     });
 });

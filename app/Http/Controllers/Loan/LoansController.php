@@ -108,6 +108,23 @@ class LoansController extends Controller
         $result = new ApiBaseResponse();
         return $result->api_response($response);
     }
+    //method to return the interest types
+    public function get_Interest_Types()
+    {
+
+        $authToken = session()->get('userToken');
+        $userID = session()->get('userId');
+
+        $data = [
+            "authToken" => $authToken,
+            "userId"    => $userID
+        ];
+
+        $response = Http::get(env('API_BASE_URL') . "/loans/interestTypes", $data);
+
+        $result = new ApiBaseResponse();
+        return $result->api_response($response);
+    }
 
     //method to return the interest types
     public function get_loan_frequencies()
@@ -118,7 +135,13 @@ class LoansController extends Controller
         return $result->api_response($response);
     }
 
+    public function getLoanTypes()
+    {
+        $response = Http::get(env('API_BASE_URL') . "/loans/loanTypes");
 
+        $result = new ApiBaseResponse();
+        return $result->api_response($response);
+    }
     public function get_my_loans_accounts()
     {
 
