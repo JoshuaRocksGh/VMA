@@ -481,6 +481,7 @@ $(function () {
     }
     //initialize select2 on accounts select
     $(".my-accounts-select").select2({
+        minimumResultsForSearch: Infinity,
         templateResult: accountTemplate,
         templateSelection: accountTemplate,
     });
