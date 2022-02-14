@@ -61,7 +61,7 @@
 
             </div>
             {{-- <label for="" class="text-center">1463</label>
-                <div id="demo" data-value="1463"></div> --}}
+            <div id="demo" data-value="1463"></div> --}}
         </div>
         <div class="col-md-1">
 
@@ -80,13 +80,7 @@
 
     @section('scripts')
 
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <script type="text/javascript" src="{{ asset('assets/libs/jquery-barcode/jquery-barcode.js') }}"></script>
 
     <script>
         $(".prod_list").hide();

@@ -112,7 +112,7 @@ function getAccounts(account_data) {
         },
         success: function (response) {
             if (response.responseCode !== "000") {
-                toater(response.message, "error");
+                toaster(response.message, "error");
                 setTimeout(() => {
                     if (response.data == null) {
                         window.location = "logout";

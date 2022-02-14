@@ -32,4 +32,12 @@
     {{ $account->accountDesc . ' || ' . $account->accountNumber . ' || ' . $account->currency . ' ' .
     number_format($account->availableBalance, 2) }}
 </option>
+
+
 @endforeach
+
+<script>
+    $(function () {
+getAccounts()
+})
+</script>
