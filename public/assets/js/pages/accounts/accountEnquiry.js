@@ -72,11 +72,10 @@ $(function () {
                 )}&sd=${encodeString(startDate)}&ed=${encodeString(endDate)}`;
                 $("#pdf_print").attr("href", pdfPath);
 
-                $("#excel_print").html(`
-                                <a href="{{url('print-account-statement') }}">
-                                    <img src="assets/images/excel.png" alt="" style="width: 22px; height: 25px;">
-                                </a>
-                            `);
+                $("#excel_print").on("click", (e) => {
+                    e.preventDefault();
+                    $(".buttons-excel").trigger("click");
+                });
             }
         }
     });

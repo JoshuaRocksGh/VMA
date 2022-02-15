@@ -13,6 +13,10 @@
         }
     }
 
+    .buttons-excel {
+        display: none !important;
+    }
+
     @font-face {
         font-family: 'password';
         font-style: normal;
