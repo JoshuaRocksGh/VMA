@@ -51,7 +51,6 @@
         #datatable-buttons_filter {
             float: right;
         }
-
     </style>
 
 
@@ -81,7 +80,6 @@
         /* .table_over_flow {
             overflow-y: hidden;
         } */
-
     </style>
     @yield('styles')
     <script src="assets\plugins\jquery\jquery-3.6.0.min.js"></script>
@@ -95,10 +93,14 @@
     <!-- Pre-loader -->
     <div id="preloader" class="preloader">
         <div id="status" class="preloader">
-            <img class="pulse" style="width: 100px; top: -50px;" src="assets/images/logoRKB.png" />
-        </div>
-    </div> <!-- End Preloader-->
-
+            {{-- <img class="pulse" style="width: 100px; top: -50px;" src="assets/images/logoRKB.png" /> --}}
+            <div><img class="pulse " style="width: 100px;" src="assets/images/logoRKB.png" />
+                <div class="mt-2  text-primary d-flex tw-relative"><span class="lds-hourglass tw-absolute"></span> <span
+                        class="text-semibold align-self-center mx-2 font-weight-bold">
+                        Loading</span></div>
+            </div>
+        </div> <!-- End Preloader-->
+    </div>
     <!-- Begin page -->
     <div id="wrapper">
         @include('snippets.nav')

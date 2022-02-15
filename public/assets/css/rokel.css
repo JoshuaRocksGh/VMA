@@ -214,8 +214,8 @@ select:hover {
     height: 0;
     margin: 8px;
     box-sizing: border-box;
-    border: 10px solid #fff;
-    border-color: #fff transparent #fff transparent;
+    border: 10px solid var(--primary);
+    border-color: var(--primary) transparent var(--primary) transparent;
     animation: lds-hourglass 1.5s infinite;
 }
 
