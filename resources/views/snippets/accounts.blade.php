@@ -35,9 +35,3 @@
 
 
 @endforeach
-
-<script>
-    $(function () {
-getAccounts()
-})
-</script>

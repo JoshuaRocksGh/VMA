@@ -24,7 +24,7 @@
 <script src="{{ asset('assets/plugins/datatables/jszip.min.js') }}" defer></script>
 {{-- <script src="{{ asset('assets/plugins/datatables/pdfmake.min.js') }}" defer></script> --}}
 {{-- <script src="{{ asset('assets/plugins/datatables/vfs_fonts.js') }}" defer></script> --}}
-{{-- <script src="{{ asset('assets/plugins/datatables/buttons.html5.min.js') }}" defer></script> --}}
+<script src="{{ asset('assets/plugins/datatables/buttons.html5.min.js') }}" defer></script>
 {{-- <script src="{{ asset('assets/plugins/datatables/buttons.colVis.min.js') }}" defer></script> --}}
 {{-- <script src="{{ asset('assets/plugins/datatables/buttons.print.min.js') }}" defer></script> --}}
 <script src="{{ asset('assets/plugins/datatables/dataTables.responsive.min.js') }}" defer></script>
