@@ -21,13 +21,13 @@ function toaster(message, icon, timer = 3000) {
         } else if (icon.toLowerCase() === "error") {
             color = "#dc3545";
         }
-        Swal.fire({
-            html: `<span class="font-16 ">${message}</span>`,
-            icon: icon,
-            confirmButtonColor: color,
-            width: 400,
-        });
     }
+    return Swal.fire({
+        html: `<span class="font-16 ">${message}</span>`,
+        icon: icon,
+        confirmButtonColor: color,
+        width: 400,
+    });
 }
 
 function formatToCurrency(amount) {
@@ -112,12 +112,16 @@ function getAccounts(account_data) {
         },
         success: function (response) {
             if (response.responseCode !== "000") {
-                toaster(response.message, "error");
-                setTimeout(() => {
-                    if (response.data == null) {
+                Swal.fire({
+                    html: `<span class="font-16 ">${response.message}</span>`,
+                    icon: icon,
+                    confirmButtonColor: color,
+                    width: 400,
+                    didDestroy: () => {
                         window.location = "logout";
-                    }
-                }, 1500);
+                    },
+                });
+                // toaster(response.message, "error").then(() => console.log("okay"));
             }
         },
         error: function (xhr, status, error) {
