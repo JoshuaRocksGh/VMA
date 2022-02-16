@@ -167,9 +167,10 @@ $pageTitle = "Loan Request"; @endphp
 <!-- LOAN DETAIL MODAL -->
 <div id="loan_detail_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="transfer_status"
     aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered
+    ">
         <div class="modal-content">
-            <div id="loan_details_content">
+            <div id="loan_details_content" class="loan-details-content">
                 <div class="modal-header bg-primary">
                     <h3 class="modal-title modal-title font-18 font-weight-bold text-white" id="transfer_status_title">
                         LOAN DETAILS</h3>
@@ -233,7 +234,7 @@ $pageTitle = "Loan Request"; @endphp
                     </table>
                 </div>
             </div>
-            <div id="loan_schedule_content" class="" style="display: none">
+            <div id="loan_schedule_content" class="loan-details-content" style="display: none">
                 <div class="p-3 bg-primary">
                     <a id="loan_schedule_back_button" class="fas text-black fa-arrow-left inline-block"></a>
                     <h3 class="pb-2 text-center modal-title modal-title font-16 font-weight-bold text-white"
@@ -307,16 +308,17 @@ $pageTitle = "Loan Request"; @endphp
 <!-- LOAN DETAIL MODAL -->
 <div id="loan_quotation_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="transfer_status"
     aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div id="" class="">
+            <div id="loan_detail_info" class="pb-4" style="display:none;">
                 <div class="bg-primary mb-3 p-2 d-flex align-items-center ">
-                    <a id="loan_schedule_back_button" class="fas mr-4 fa-arrow-left " style=" color: #343a40;"></a>
+                    <a id="back_to_loan_quotation" href="#" class="fas mr-4 fa-arrow-left "
+                        style=" color: #343a40;"></a>
                     <h2 class="d-block modal-title modal-title font-16" id="transfer_status_title">
                         LOAN SCHEDULE</h2>
                 </div>
                 <div class="px-4">
-                    <label class=" mb-0 font-weight-bold font-12 text-primary"> Intro Source
+                    <label class="mt-2  mb-0 font-weight-bold font-12 text-primary"> Intro Source
                     </label>
 
 
@@ -326,7 +328,7 @@ $pageTitle = "Loan Request"; @endphp
                             Heard About The Loan</option> --}}
                     </select>
 
-                    <label class="mb-0 font-weight-bold font-12 text-primary">Loan Sector
+                    <label class="mt-2 mb-0 font-weight-bold font-12 text-primary">Loan Sector
                     </label>
 
 
@@ -335,17 +337,17 @@ $pageTitle = "Loan Request"; @endphp
                         </option> --}}
                     </select>
 
-                    <label class="mb-0 font-weight-bold font-12 text-primary">Sub Sector
+                    <label class="mt-2 mb-0 font-weight-bold font-12 text-primary">Sub Sector
                     </label>
 
 
                     <select class="form-control mb-2 " id="loan_sub_sectors" placeholder="Select The Sub Sector"
-                        required>
-                        {{-- <option value="" disabled selected>Select the sub
-                            sector</option> --}}
+                        required disabled>
+                        <option value="" disabled selected>Select the sub
+                            sector</option>
                     </select>
 
-                    <label class="mb-0 font-weight-bold font-12 text-primary">
+                    <label class="mt-2 mb-0 font-weight-bold font-12 text-primary">
                         Purpose
                     </label>
 
@@ -355,82 +357,83 @@ $pageTitle = "Loan Request"; @endphp
                             of the loan
                         </option> --}}
                     </select>
-
+                    <div class=" w-100 d-flex justify-content-end mt-3">
+                        <button id="finalize_loan_button"
+                            class="btn btn-primary btn-lg font-12 font-weight-bold rounded">Finalize Request</button>
+                    </div>
 
                 </div>
-                <div id="loan_quotation_content" style="display: none">
-                    <div class="px-3 py-2 bg-primary">
-                        <div class="d-flex align-items-center ">
-                            <a id="loan_schedule_back_button" class="fas mr-4 fa-arrow-left "
-                                style=" color: #343a40;"></a>
-                            <h2 class="d-block modal-title modal-title font-16" id="transfer_status_title">
-                                LOAN SCHEDULE</h2>
-                        </div>
-                        <div class="mt-4">
-                            <h3 class="text-white mb-2 text-center font-weight-bold font-16  py-1"
-                                style="border-bottom: 1px solid  #e5e9ec" id="ls_loan_product">LOAN PRODUCT
-                            </h3>
+            </div>
+            <div id="loan_quotation_content" style="">
+                <div class="px-3 py-2 bg-primary">
+                    <div class="d-flex align-items-center ">
+                        {{-- <a class="fas mr-4 fa-arrow-left " style=" color: #343a40;"></a> --}}
+                        <h2 class="d-block modal-title modal-title font-16" id="transfer_status_title">
+                            LOAN SCHEDULE</h2>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-white mb-2 text-center font-weight-bold font-16  py-1"
+                            style="border-bottom: 1px solid  #e5e9ec" id="ls_loan_product">LOAN PRODUCT
+                        </h3>
 
-                            <div class=" text-white">
-                                <div class="d-flex justify-content-between">
-                                    <span class="d-block font-13  " style="color: #e5e9ec">Amount</span>
-                                    <span class="d-block font-weight-bold" id="ls_amount"></span>
+                        <div class=" text-white">
+                            <div class="d-flex justify-content-between">
+                                <span class="d-block font-13  " style="color: #e5e9ec">Amount</span>
+                                <span class="d-block font-weight-bold" id="ls_amount"></span>
 
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="d-block font-13 " style="color:#e5e9ec">Tenure</span>
-                                    <span class="d-block font-weight-bold text-right" id="ls_tenure"></span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="d-block font-13 " style="color:#e5e9ec">Interest Type</span>
-                                    <span class="d-block font-weight-bold text-right" id="ls_interest_type"></span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="d-block font-13 " style="color:#e5e9ec">Principal Repay
-                                        Frequency</span>
-                                    <span class="d-block font-weight-bold text-right"
-                                        id="ls_principal_repay_freq"></span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <span class="d-block font-13" style="color:#e5e9ec">Interest Repay
-                                        Frequency</span>
-                                    <span class="d-block font-weight-bold text-right"
-                                        id="ls_interest_repay_freq"></span>
-                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="d-block font-13 " style="color:#e5e9ec">Tenure</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_tenure"></span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="d-block font-13 " style="color:#e5e9ec">Interest Type</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_interest_type"></span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="d-block font-13 " style="color:#e5e9ec">Principal Repay
+                                    Frequency</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_principal_repay_freq"></span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="d-block font-13" style="color:#e5e9ec">Interest Repay
+                                    Frequency</span>
+                                <span class="d-block font-weight-bold text-right" id="ls_interest_repay_freq"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-body">
-                        <div id="repayment_schedule">
-                            <div class="d-flex justify-content-between px-1">
-                                <h4 class="font-13"> Repayment Schedule</h4>
-                                <h4 class="text-primary font-12 font-weight-bold" id="loan_rate">Rate: </h4>
-                            </div>
-                            <table id="loan_quotation_table"
-                                class="font-12 table text-center table-borderless table-striped table-sm">
-                                <thead class="bg-primary  text-white font-weight-bold">
-                                    <tr class="text-center">
-                                        <th>Principal</th>
-                                        <th>Interest</th>
-                                        <th>Total</th>
-                                        <th>Due Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            <div class=" w-100 d-flex justify-content-end mt-2">
-                                <button class="btn btn-primary font-12 font-weight-bold rounded">Request
-                                    Loan</button>
-                            </div>
+                </div>
+                <div class="modal-body">
+                    <div id="repayment_schedule">
+                        <div class="d-flex justify-content-between px-1">
+                            <h4 class="font-13"> Repayment Schedule</h4>
+                            <h4 class="text-primary font-12 font-weight-bold" id="loan_rate">Rate: </h4>
                         </div>
-
+                        <table id="loan_quotation_table"
+                            class="font-12 table text-center table-borderless table-striped table-sm">
+                            <thead class="bg-primary  text-white font-weight-bold">
+                                <tr class="text-center">
+                                    <th>Principal</th>
+                                    <th>Interest</th>
+                                    <th>Total</th>
+                                    <th>Due Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div class=" w-100 d-flex justify-content-end mt-2">
+                            <button id="request_loan_button"
+                                class="btn btn-primary font-12 font-weight-bold rounded">Request
+                                Loan</button>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+    </div>
+</div><!-- /.modal-content -->
 
 
 {{-- ================================================================ --}}
