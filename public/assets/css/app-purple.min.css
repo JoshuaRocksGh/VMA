@@ -5447,7 +5447,8 @@ div.dt-button-info h2 {
 }
 .select2-container--default
     .select2-results__option--highlighted.select2-results__option--selectable {
-    background-color: #0188bf29 !important;
+    /* background-color: #0188bf29 !important; */
+    background-color: var(--primary) !important;
     color: white;
 }
 
