@@ -35,7 +35,8 @@
 
 </head>
 
-<body class="auth-fluid-pages pb-0">
+<body class="auth-fluid-pages pb-0"
+    style="background-image: url('assets/images/background.png'); background-repeat: no-repeat; background-size: cover;">
 
     <!-- Pre-loader -->
     <div id="preloader" class="preloader">
