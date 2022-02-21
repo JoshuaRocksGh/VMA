@@ -1,18 +1,12 @@
 <!-- App favicon -->
-{{--
-<link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}"> --}}
-{{--
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap"
+{{-- <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}"> --}}
+{{-- <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap"
     rel="stylesheet"> --}}
-{{--
-<link href="assets/fonts/Roboto.css2.css" rel="stylesheet"> --}}
-{{--
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
---}}
-{{--
-<link rel="stylesheet" href="{{ asset('assets\fonts\fontawesome-free-5.15.4-web\css\all.min.css')}}" type="text/css" />
---}}
-<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.css') }}" type="text/css" />
+{{-- <link href="assets/fonts/Roboto.css2.css" rel="stylesheet"> --}}
+{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"> --}}
+{{-- <link rel="stylesheet" href="{{ asset('assets\fonts\fontawesome-free-5.15.4-web\css\all.min.css')}}" type="text/css" /> --}}
+<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.css') }}"
+    type="text/css" />
 <link href="{{ asset('assets/css/bootstrap-purple.min.css') }}" rel="stylesheet" type="text/css"
     id="bs-default-stylesheet" />
 <link href="assets\plugins\select2\select2.min.css" rel="stylesheet" />
@@ -207,4 +201,5 @@
     #wrapper {
         height: auto;
     }
+
 </style>
