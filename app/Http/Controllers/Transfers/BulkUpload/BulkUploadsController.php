@@ -24,7 +24,8 @@ class BulkUploadsController extends Controller
 {
     public function index()
     {
-        return view('pages.transfer.bulkTransfers.bulk_trasnfer');
+        // return view('pages.transfer.bulkTransfers.bulk_trasnfer');
+        return view('pages.transfer.bulkTransfers.new_bulk_transfer');
     }
 
     public function download_same_bank()
@@ -358,7 +359,7 @@ class BulkUploadsController extends Controller
     public function get_bulk_upload_list(Request $request)
     {
 
-        // return $request;
+        // dd($request);
 
         $fileBatch = $request->query("fileBatch");
         $customerNumber = session()->get('customerNumber');
@@ -366,12 +367,12 @@ class BulkUploadsController extends Controller
         $base_response = new BaseResponse();
 
 
-        // return $fileBatch;
+        // $fileBatch;
         // dd('http://192.168.1.225:9096/corporate/getBulkUploadFilesDetails?' . "customerNumber=$customerNumber&batchNumber=$fileBatch");
 
 
         try {
-            $response = Http::post(env('API_BASE_URL') . "/corporate/getBulkUploadFilesDetails?customerNumber=$customerNumber&batchNumber=$fileBatch");
+            $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadData/$fileBatch");
             $result = new ApiBaseResponse();
 
             return $result->api_response($response);

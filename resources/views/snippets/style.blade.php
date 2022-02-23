@@ -202,4 +202,11 @@
         height: auto;
     }
 
+    /* Slide In, Slide Off */
+    .sliding-u-l-r-l {
+        display: inline-block;
+        position: relative;
+        padding-bottom: 5px;
+    }
+
 </style>

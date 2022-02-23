@@ -23,7 +23,7 @@
         <!-- end page title -->
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-3 ">
                     <a href="{{ url('payments') }}">
                         <div class="widget-rounded-circle card-box home-card "
                             style="background-color: rgba(191, 236, 227, 1);">
@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="col-8">
                                     <div class="text-right">
-                                        <h3 class="mt-1 text-black "><span><b>Payments</b></span></h3>
+                                        <h3 class="mt-1 text-black sliding-u-l-r-l"><span><b>Payments</b></span></h3>
                                     </div>
                                 </div>
                             </div> <!-- end row-->
@@ -619,11 +619,11 @@
                         </form>
                     </div>
 
-                    <div class="card site-card">
+                    {{-- <div class="card mt-0">
                         <div class="card-body">
-                            <br><br><br><br>
+                            <br>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="modal fade" id="bs-example-modal-lg" role="dialog"

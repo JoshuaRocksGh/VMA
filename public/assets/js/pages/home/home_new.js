@@ -875,9 +875,8 @@
                             url: "get-correct-fx-rate-api",
                             datatype: "application/json",
                             success: (response) => {
-                        //         {{-- console.log("======")
-                        // console.log(response.data)
-                        // console.log("======") --}}
+                                // console.log("getCorrectFxRates =>" , response)
+                                // return false;
                                 if (response.responseCode === "000") {
                                     forex_rate = response.data
                                     $(".currency_fx_rate tr").remove();
@@ -918,12 +917,12 @@
                                         currency1 = currency1.trim();
                                         if (currency1 !== currency2) {
                                             $("#fx_rate_marquee").append(`
-                            <span>
-                                <img src="${baseFlagsPath}${currency1}.png" ${imageProps}>
-                                /
-                                <img src="${baseFlagsPath}${currency2}.png" ${imageProps}> &nbsp;=&nbsp;
-                                <span> <strong>  ${MIDRATE} </strong> </span>
-                                </span>  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; `);
+                                                <span>
+                                                    <img src="${baseFlagsPath}${currency1}.png" ${imageProps}>
+                                                    /
+                                                    <img src="${baseFlagsPath}${currency2}.png" ${imageProps}> &nbsp;=&nbsp;
+                                                    <span> <strong>  ${MIDRATE} </strong> </span>
+                                                    </span>  &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; `);
 
                                             $(".currency_fx_rate").append(
                                                 `
@@ -939,6 +938,11 @@
                                     });
                                 }
                             },
+                            error: function(xhr, status, error){
+                                setTimeout(function() {
+                                    getCorrectFxRates()
+                                }, $.ajaxSetup().retryAfter)
+                            }
                         });
                     }
 
@@ -1282,9 +1286,9 @@
                                 getAccountTransactions(acc_num, acc_cur, start_date, end_date, transLimit)
                                 //line_graph()
                                 //account_line_chart(cus_accounts, acc_line_details)
-                            }, 2000)
+                            }, 500)
 
-                        }, 2000);
+                        }, 500);
 
                     })
 
