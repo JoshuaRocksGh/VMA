@@ -1,61 +1,3 @@
-// {{--  function get_lovs() {
-
-//     $(".accounts_display_area").hide()
-//     $(".accounts_error_area").hide()
-//     $(".accounts_loading_area").show()
-
-//     $.ajax({
-//         "type": "GET",
-//         "url": "get-accounts-api",
-//         datatype: "application/json",
-
-//         headers: {
-//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//         },
-//         success: function(response) {
-//             console.log(response);
-//             if (response.responseCode == '000') {
-
-//                 let data = response.data.;
-
-//                 let custerlist =
-
-//                 $.each(data, function(index) {
-//                     $('.casa_list_display').append(`<tr>
-//                         <td>  <a href="{{ url('account-enquiry?accountNumber=${data[index].accountNumber}') }}"> <b class="text-primary">${data[index].accountNumber} </b> </a></td>
-//                         <td> <b> ${data[index].accountDesc} </b>  </td>
-//                         <td> <b> ${data[index].accountType}  </b>  </td>
-//                         <td> <b> ${data[index].currency}  </b>  </td>
-//                         <td> <b> ${data[index].availableBalance}   </b> </b></td>
-//                         <td> <b> ${data[index].ledgerBalance}   </b>  </td>
-//                         <td>  <b> 0.00  </b> </td>
-//                     </tr>`)
-
-//                 })
-
-//                 $(".accounts_error_area").hide()
-//                 $(".accounts_loading_area").hide()
-//                 $(".accounts_display_area").show()
-
-//             } else {
-
-//                 $(".accounts_error_area").hide()
-//                 $(".accounts_loading_area").hide()
-//                 $(".accounts_display_area").show()
-
-//             }
-
-//         },
-//         error: function(xhr, status, error) {
-
-//             $(".accounts_loading_area").hide()
-//             $(".accounts_display_area").hide()
-//             $(".accounts_error_area").show()
-
-//         }
-//     })
-// }  --}}
-
 function lovs_list() {
     $.ajax({
         type: "GET",
@@ -65,7 +7,6 @@ function lovs_list() {
             console.log(response);
             let title_list = response.data.titleList;
             let country_list = response.data.nationalityList;
-            // let country_list = country_list_.sort();
             console.log(country_list);
             let id_list = response.data.documentTypeList;
             let residence_list = response.data.residentStatusList;
@@ -130,19 +71,17 @@ $(() => {
     console.log("here");
     $("#spinner").hide(), $("#spinner-text").hide(), $("#print_receipt").hide();
 
-    setTimeout(function () {
-        lovs_list();
-        $(".mod-open").trigger("click");
-    }, 1000);
+    $(".mod-open").trigger("click");
+    lovs_list();
 
     //    $('#previewImg').hide();
     $(".display_selected_id_image").hide();
     $(".display_passport_picture").hide();
     $(".display_selfie").hide();
 
-    $("#v-pills-tab").click(function (e) {
-        return false;
-    });
+    // $("#v-pills-tab").click(function (e) {
+    //     return false;
+    // });
 
     $("#personal_details").submit(function (e) {
         e.preventDefault();

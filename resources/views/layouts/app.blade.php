@@ -28,20 +28,20 @@
         }
     </style>
 
-    <script src="assets\plugins\jquery\jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
     @include('snippets.style')
     @include('snippets.script')
 
 
 </head>
 
-<body class="auth-fluid-pages pb-0"
-    style="background-image: url('assets/images/background.png'); background-repeat: no-repeat; background-size: cover;">
-
-    <!-- Pre-loader -->
+<body class=" auth-fluid-pages pb-0" style="background-image: url('../../assets/images/background.png');
+    background-repeat: no-repeat; background-size: cover;">
+    <!-- Pre-loader 
+        -->
     <div id="preloader" class="preloader">
         <div id="status" class="preloader">
-            <img class="pulse" style="width: 100px; top: -50px;" src="assets/images/logoRKB.png" />
+            <img class="pulse" style="width: 100px; top: -50px;" src="{{ asset('assets/images/logoRKB.png') }}" />
         </div>
     </div> <!-- End Preloader-->
 
