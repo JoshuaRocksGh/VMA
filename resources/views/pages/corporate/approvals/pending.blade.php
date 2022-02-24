@@ -1,21 +1,6 @@
 @extends('layouts.master')
 
-@section('styles')
-    <!-- third party css -->
-    <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
-        rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <!-- third party css end -->
 
-    <style>
-
-    </style>
-@endsection
 
 @section('content')
     <div class="container-fluid hide_on_print">
@@ -72,8 +57,8 @@
 
                                 <div class="card card-body table-responsive">
 
-                                    <table id="datatable-buttons"
-                                        class="table dt-responsive  table-bordered table-striped nowrap w-100 pending_transaction_request "
+                                    <table id=""
+                                        class="table   table-bordered table-striped nowrap w-100 pending_transaction_request "
                                         style="zoom: 0.8;">
                                         <thead>
                                             <tr class="bg-info text-white">
@@ -87,7 +72,9 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
+                                        <tbody>
 
+                                        </tbody>
 
 
                                     </table>

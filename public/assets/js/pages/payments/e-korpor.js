@@ -328,7 +328,8 @@ $(function () {
         const accountMandate = e.attr("data-account-mandate");
         const accountName = e.attr("data-account-description");
         const accountType = e.attr("data-account-type");
-        const accountBalance = e.attr("data-account-balance") || "0.00";
+        const accountBalance = e.attr("data-account-balance") ?? "00.0";
+        // console.log(accountBalance);
         const currCode = e.attr("data-account-currency-code");
         transferInfo = {
             accountCurrency,
@@ -428,7 +429,7 @@ $(function () {
             toaster("Invalid phone number", "warning");
             return;
         }
-        if (amount > transferInfo.accountBalance) {
+        if (parseFloat(amount) > parseFloat(transferInfo.accountBalance)) {
             toaster("Insufficient Account Balance", "warning");
             return;
         }

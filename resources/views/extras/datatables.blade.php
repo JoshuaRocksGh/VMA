@@ -1,5 +1,4 @@
-{{--
-<link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+{{-- <link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
 <link href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js" defer></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js" defer></script>
@@ -15,7 +14,8 @@
 <script src="https://cdn.datatables.net/plug-ins/1.11.3/dataRender/ellipsis.js" defer></script> --}}
 <link href="{{ asset('assets/plugins/datatables/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
     type="text/css" />
-<link href="{{ asset('assets/plugins/datatables/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/plugins/datatables/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"
+    type="text/css" />
 
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}" defer></script>

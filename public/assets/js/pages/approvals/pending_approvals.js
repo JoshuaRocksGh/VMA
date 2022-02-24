@@ -1,15 +1,8 @@
-// alert("approvals");
-
 function formatToCurrency(amount) {
     return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
 }
 
 function get_corporate_requests(customerNumber, requestStatus) {
-    var table = $(".pending_transaction_request").DataTable();
-    var nodes = table.rows().nodes();
-
-    table.order([0, "desc"]).column(0).visible(false, false).draw();
-
     $(".loans_display_area").hide();
     $(".loans_error_area").hide();
     $(".loans_loading_area").show();
@@ -27,12 +20,16 @@ function get_corporate_requests(customerNumber, requestStatus) {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            //console.log(response);
+            console.log(response);
             if (response.responseCode == "000") {
                 let data = response.data;
                 //console.log(data);
+                // $(".pending_transaction_request tbody").empty();
+                var table = $(".pending_transaction_request").DataTable();
+                // .clear();
+                // var nodes = table.rows().nodes();
 
-                table.clear().draw();
+                // table.order([0, "desc"]).column(0).visible(false, false).draw();
 
                 $.each(data, function (index) {
                     let request_id = data[index].request_id;
@@ -105,13 +102,16 @@ function get_corporate_requests(customerNumber, requestStatus) {
                             data[index].narration,
                             dd + "/" + mm + "/" + yyyy,
                             data[index].postedby,
-
-                            `<a onclick="window.open('{{ url('approvals-pending-transfer-details/${request_id}/${customer_no}') }}', '_blank', 'location=yes,height=670,width=1200,scrollbars=yes,status=yes')">
+                            `<a onclick="window.open('approvals-pending-transfer-details/${request_id}/${customer_no}'), '_blank', 'location=yes,height=670,width=1200,scrollbars=yes,status=yes'">
                                         <button type="button" class=" btn btn-info btn-xs waves-effect waves-light"> View Details</button>
                                     </a>
                                     `,
                         ])
-                        .draw(false);
+                        .order([0, "desc"])
+                        .draw();
+                    table.column(0).visible(false);
+
+                    // table.columns.adjust().draw();
                 });
 
                 $(".loans_error_area").hide();

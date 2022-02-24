@@ -219,7 +219,8 @@
                                 </div>
                             @endif
                             <table id=""
-                                class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list">
+                                class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list"
+                                style="zoom: 0.9;">
 
                                 <thead>
                                     <tr class="bg-info text-white">
@@ -294,11 +295,12 @@
                                             <th><b>Account No.</b></th>
                                             <th><b>Amount</b></th>
                                             <th><b>Ref No.</b></th>
+                                            <th><b>&emsp;&emsp;Description&emsp;&emsp;</b></th>
                                         </tr>
                                     </thead>
                                     <tbody class="successful_uploads">
                                         <tr>
-                                            <td colspan="5">
+                                            <td colspan="6">
                                                 <div class="d-flex justify-content-center">
                                                     <br>
                                                     {!! $noDataAvailable !!}

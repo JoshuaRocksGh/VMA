@@ -168,12 +168,15 @@
                     <div class="collapse" id="sidebarAccountServices">
                         <ul class="nav-second-level">
                             <li>
+                                <a href="#">ATM Card Request </a>
+                            </li>
+                            <li>
                                 <a href="{{ url('cheque-book-request') }}">Cheque Book Request </a>
                             </li>
                             <li>
                                 <a href="{{ url('confirm-cheque') }}">Cheque Status</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="#sidebarChequeApprovals" data-toggle="collapse">
                                     <span>Cheque Approvals</span>
                                     <span class="menu-arrow"></span>
@@ -191,7 +194,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="#sidebarRequests" data-toggle="collapse">
@@ -207,7 +210,7 @@
                                             <a href="{{ url('request-statement') }}">Statement Request</a>
                                         </li>
                                         <li>
-                                            <a href="{{ url('request-draft') }}">Request bank draft</a>
+                                            <a href="{{ url('request-draft') }}">Request Bank Draft</a>
                                         </li>
                                     </ul>
                                 </div>

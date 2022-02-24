@@ -46,12 +46,15 @@ function my_account() {
 var bulk_upload_array_list = [];
 var bulk_detail_list = [];
 
-function bulk_upload_list(fileBatch) {
-    console.log(fileBatch);
-    // console.log(allErrors);
-    var table = $(".bulk_upload_list").DataTable();
+let valid_uploads = 0;
+let valid_uploads_count = 1;
+let invalid_uploads = 0;
+let invalid_uploads_count = 0;
 
-    var nodes = table.rows().nodes();
+function bulk_upload_list(fileBatch) {
+    // console.log(fileBatch);
+    // console.log(allErrors);
+
     //var error_table = $('.failed_bulk_upload_table').DataTable();
     //var _error_nodes = error_table.rows().nodes();
     $.ajax({
@@ -70,12 +73,54 @@ function bulk_upload_list(fileBatch) {
             let value_date = uploadDetails_date_split[0];
             let total_upload = uploadData.length;
 
+            // console.log("uploadData => ", uploadData);
+            // return false;
+
             let all_failed_uploads = 0;
             // let upload_with_errors = uploadData.;
 
             if (response.responseCode == "000") {
                 // NO ERRORS IN FILE UPLOAD
-                $.each;
+
+                // var nodes = all_valid_uplaods.rows().nodes();
+
+                var all_valid_uplaods = $(
+                    ".all_successful_uploads_table"
+                ).DataTable();
+                $(".successful_uploads tr").remove();
+                // var nodes = all_valid_uplaods.rows().nodes();
+
+                $.each(uploadData, function (index) {
+                    // console.log(uploadData[index]);
+                    console.log(uploadData[index].valid);
+
+                    // return false;
+                    if (uploadData[index].valid == "Y") {
+                        valid_uploads++; //increment
+
+                        // all_valid_uplaods.row
+                        //     .add([
+                        //         `<b>${valid_uploads_count}</b>`,
+                        //         `<b>${uploadData[index].name}</b>`,
+                        //         `<b>${uploadData[index].accountNumber}</b>`,
+                        //         `<b>${uploadData[index].amount}</b>`,
+                        //         `<b>${uploadData[index].refNumber}</b>`,
+                        //         `<b class="text-success">${uploadData[index].acctValid}</b>`,
+                        //     ])
+                        //     .draw(false);
+
+                        valid_uploads_count++;
+                    } else if (uploadData[index].valid == "Y") {
+                        invalid_uploads++;
+                        invalid_uploads_count++;
+                    }
+                });
+
+                console.log("valid_uploads_count=>", valid_uploads_count);
+                console.log("invalid_uploads_count=>", invalid_uploads_count);
+                var table = $(".bulk_upload_list").DataTable();
+
+                var nodes = table.rows().nodes();
                 table.row
                     .add([
                         `<b>${uploadDetails.referenceNumber}</b>`,
@@ -85,7 +130,7 @@ function bulk_upload_list(fileBatch) {
                         )}</b>`,
                         `<b>${value_date}</b>`,
                         `<b><button type="button" class="btn btn-sm btn-soft-success waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;${total_upload}&emsp;</button></b>`,
-                        `<b>0</b>`,
+                        `<b><button type="button" class="btn btn-sm btn-soft-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;${invalid_uploads}&emsp;</button></b>`,
                         `<b>Upload</b>`,
 
                         //action
