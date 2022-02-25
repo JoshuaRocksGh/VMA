@@ -46,17 +46,18 @@ function my_account() {
 var bulk_upload_array_list = [];
 var bulk_detail_list = [];
 
-let valid_uploads = 0;
-let valid_uploads_count = 1;
-let invalid_uploads = 0;
-let invalid_uploads_count = 0;
-
 function bulk_upload_list(fileBatch) {
     // console.log(fileBatch);
     // console.log(allErrors);
 
     //var error_table = $('.failed_bulk_upload_table').DataTable();
     //var _error_nodes = error_table.rows().nodes();
+
+    // var all_invalid_uplaods = $(".all_failed_uploads_table").DataTable({
+    //     paging: true,
+    // });
+    // var nodes = all_valid_uplaods.rows().nodes();
+
     $.ajax({
         tpye: "GET",
         url: "get-bulk-upload-list-api?fileBatch=" + fileBatch,
@@ -66,13 +67,6 @@ function bulk_upload_list(fileBatch) {
             // return false;
             //console.log("bulk upload list:", response.data);
 
-            let uploadData = response.data.uploadData;
-            let uploadDetails = response.data.uploadDetails;
-            let uploadDetails_date = uploadDetails.valueDate;
-            var uploadDetails_date_split = uploadDetails_date.split("T");
-            let value_date = uploadDetails_date_split[0];
-            let total_upload = uploadData.length;
-
             // console.log("uploadData => ", uploadData);
             // return false;
 
@@ -81,14 +75,27 @@ function bulk_upload_list(fileBatch) {
 
             if (response.responseCode == "000") {
                 // NO ERRORS IN FILE UPLOAD
+                let uploadData = response.data.uploadData;
+                let uploadDetails = response.data.uploadDetails;
+                let uploadDetails_date = uploadDetails.valueDate;
+                var uploadDetails_date_split = uploadDetails_date.split("T");
+                let value_date = uploadDetails_date_split[0];
+                let total_upload = uploadData.length;
 
-                // var nodes = all_valid_uplaods.rows().nodes();
+                let valid_uploads = 0;
+                let valid_uploads_count = 1;
+                let invalid_uploads = 0;
+                let invalid_uploads_count = 1;
 
-                var all_valid_uplaods = $(
+                var all_valid_uploads = $(
                     ".all_successful_uploads_table"
                 ).DataTable();
+                var nodes = all_valid_uploads.rows().nodes();
+
+                // all_valid_uploads.destroy();
+
                 $(".successful_uploads tr").remove();
-                // var nodes = all_valid_uplaods.rows().nodes();
+                $(".failed_uploads tr").remove();
 
                 $.each(uploadData, function (index) {
                     // console.log(uploadData[index]);
@@ -98,313 +105,154 @@ function bulk_upload_list(fileBatch) {
                     if (uploadData[index].valid == "Y") {
                         valid_uploads++; //increment
 
-                        // all_valid_uplaods.row
-                        //     .add([
-                        //         `<b>${valid_uploads_count}</b>`,
-                        //         `<b>${uploadData[index].name}</b>`,
-                        //         `<b>${uploadData[index].accountNumber}</b>`,
-                        //         `<b>${uploadData[index].amount}</b>`,
-                        //         `<b>${uploadData[index].refNumber}</b>`,
-                        //         `<b class="text-success">${uploadData[index].acctValid}</b>`,
-                        //     ])
-                        //     .draw(false);
-
-                        valid_uploads_count++;
-                    } else if (uploadData[index].valid == "Y") {
-                        invalid_uploads++;
-                        invalid_uploads_count++;
-                    }
-                });
-
-                console.log("valid_uploads_count=>", valid_uploads_count);
-                console.log("invalid_uploads_count=>", invalid_uploads_count);
-                var table = $(".bulk_upload_list").DataTable();
-
-                var nodes = table.rows().nodes();
-                table.row
-                    .add([
-                        `<b>${uploadDetails.referenceNumber}</b>`,
-                        `<b>${uploadDetails.debitAccount}</b>`,
-                        `<b>${formatToCurrency(
-                            parseFloat(uploadDetails.totalAmount)
-                        )}</b>`,
-                        `<b>${value_date}</b>`,
-                        `<b><button type="button" class="btn btn-sm btn-soft-success waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;${total_upload}&emsp;</button></b>`,
-                        `<b><button type="button" class="btn btn-sm btn-soft-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;${invalid_uploads}&emsp;</button></b>`,
-                        `<b>Upload</b>`,
-
-                        //action
-                    ])
-                    .draw(false);
-
-                return false;
-
-                console.log(file_total_amount);
-                let modal_target = table.row
-                    .add([
-                        `<b>${response.data[0].ref_number}</b>`,
-                        `<b></b>`,
-                        `<b>${formatToCurrency(
-                            parseFloat(file_total_amount)
-                        )}</b>`,
-                        `<b>${today}</b>`,
-                        `<b>${new_file_upload.length}</b>`,
-                        `<b><button type="button" class="btn btn-sm btn-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="${failed_acc_link}">&emsp;${failed_acc_link.length}&emsp;</button></b>`,
-                        `<b></b>`,
-
-                        //action
-                    ])
-                    .draw(false);
-
-                var new_table = $(".failed_bulk_upload_table").DataTable();
-                var nodes = new_table.rows().nodes();
-                let error_table_modal = failed_acc_link;
-                let upload_summary_count = 1;
-
-                $.each(failed_acc_link, function (index) {
-                    console.log("failed_acc_link=>", failed_acc_link[index]);
-
-                    new_table.row
-                        .add([
-                            `<b class="h5">${upload_summary_count++}</b>`,
-                            `<b class="h5">${failed_acc_link[index].name}</b>`,
-                            `<b class="h5">${failed_acc_link[index].acct_link}</b>`,
-                            `<b class="h5">${formatToCurrency(
-                                parseFloat(failed_acc_link[index].amount)
-                            )}</b>`,
-                            `<b class="h5">${failed_acc_link[index].ref_number}</b>`,
-                            `<b class="h5 text-danger">${failed_acc_link[index].acct_valid}</b>`,
-                        ])
-                        .draw(false);
-                });
-
-                //  $(".error_modal_data").click(() => {
-                //     $(".failed_bulk_upload_table tbody").empty();
-                //     $(".successful_bulk_upload tr").remove();
-
-                // })
-
-                return false;
-
-                $(".successful_bulk_upload tr").remove();
-                $(".failed_bulk_upload tr").remove();
-                //$("#show_error_upload").show()
-                //$("#show_successful_upload").show()
-
-                bulk_upload_array_list = response.data.bulk_ref;
-                bulk_detail_list = response.data.bulk_details;
-                excel_error_list = response.data.excel_errors;
-
-                data = bulk_upload_array_list;
-                detail = bulk_detail_list;
-                excel = excel_error_list;
-
-                //show alert on upload...
-
-                $.each(excel, function (index) {
-                    total_amount = excel[index].TOTAL_AMOUNT;
-                    bulk_total_amount = excel[index].EXCEL_TOTAL_AMOUNT;
-                    if (
-                        excel[index].TOTAL_AMOUNT !=
-                        excel[index].EXCEL_TOTAL_AMOUNT
-                    ) {
-                        $("#display_bulk_amount_error").show();
-                    } else {
-                        var matched_amounts = true;
-                        $("#display_bulk_amount_error").hide();
-                    }
-
-                    if (
-                        excel[index].REF_NUMBER != excel[index].EXCEL_REF_NUMBER
-                    ) {
-                        $("#excel_ref_number_upload").append(
-                            `<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        Ref Number and Excel Ref Number do not Match
-                                    </div> `
-                        );
-
-                        // $(".successful_bulk_upload").append(
+                        // $(".successful_uploads").append(
+                        //     `<tr>
+                        //         <td><b>${valid_uploads_count}</b></td>
+                        //         <td><b>${uploadData[index].name}</b></td>
+                        //         <td><b>${uploadData[index].accountNumber}</b></td>
+                        //         <td><b>${uploadData[index].amount}</b></td>
+                        //         <td><b>${uploadData[index].refNumber}</b></td>
+                        //         <td><b class="text-success">${uploadData[index].acctValid}</b></td>
+                        //     </tr>
                         //     `
-                        //         <tr>
-                        //             <td colspan="100%"  class="text-center">${noData} </td>
-                        //         </tr>
-                        //     `
-                        // )
-                    } else {
-                        var matched_ref_number = true;
-                        $("#excel_ref_number_upload").append(
-                            `
-                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        Ref Number and Excel Ref Number Match
-                                    </div`
-                        );
+                        // );
 
-                        //  $(".failed_bulk_upload").append(
-                        //     `
-                        //         <tr>
-                        //             <td colspan="100%"  class="text-center">${noData} </td>
-                        //         </tr>
-                        //     `
-                        // )
-                    }
+                        // uploadData[index].name == null ||
+                        // uploadData[index].name == undefined
+                        //     ? uploadData[index].name
+                        //     : "N/A";
 
-                    if (matched_amounts != true || matched_ref_number != true) {
-                        $("#upload_success_button").append(
-                            `
-                                    <p class="text-center"> &nbsp; - &nbsp;</p>
-                                    `
-                        );
-                    } else {
-                        $("#upload_success_button").append(
-                            `<a type="button" class="btn btn-primary waves-effect waves-light float-right" href="{{ url('view-bulk-transfer?batch_no=${data[index].BATCH_NO}&bulk_amount=${data[index].TOTAL_AMOUNT}&account_no=${data[index].ACCOUNT_NO}&bank_type=${data[index].bank_code}') }}"><b>Upload</b></a>`
-                        );
-                    }
-                });
+                        // console.log(uploadData[index].name);
 
-                var new_table = $(".failed_bulk_upload_table").DataTable();
+                        // uploadData[index].accountNumber == null ||
+                        // uploadData[index].accountNumber == undefined
+                        //     ? uploadData[index].accountNumber
+                        //     : "N/A";
+                        // console.log(uploadData[index].accountNumber);
 
-                var nodes = new_table.rows().nodes();
+                        // uploadData[index].amount == null ||
+                        // uploadData[index].amount == undefined
+                        //     ? uploadData[index].amount
+                        //     : "N/A";
+                        // console.log(uploadData[index].amount);
 
-                $.each(detail, function (index) {
-                    //console.log("bulk_detail_list:", detail[index])
-                    var error_message = detail[index].MESSAGE.split("-");
-                    //console.log('error_message:', error_message)
-                    var display_error_message = "<ul>";
-                    $.each(error_message, function (index) {
-                        //console.log(error_message[index])
-                        if (error_message[index]) {
-                            display_error_message += `<li class="text-danger">${error_message[index]}</li>`;
+                        // uploadData[index].refNumber == null ||
+                        // uploadData[index].refNumber == undefined
+                        //     ? uploadData[index].refNumber
+                        //     : "N/A";
+                        // console.log(uploadData[index].refNumber);
+
+                        // uploadData[index].acctValid == null ||
+                        // uploadData[index].acctValid == undefined
+                        //     ? uploadData[index].acctValid
+                        //     : "N/A";
+                        // console.log(uploadData[index].acctValid);
+
+                        if (
+                            uploadData[index].name == null ||
+                            uploadData[index].name == undefined
+                        ) {
+                            var uploadName = "N/A";
+                        } else {
+                            var uploadName = uploadData[index].name;
                         }
-                    });
-                    display_error_message += "</ul>";
-                    total_upload++;
 
-                    if (detail[index].MESSAGE != "") {
-                        pending++;
+                        if (
+                            uploadData[index].accountNumber == null ||
+                            uploadData[index].accountNumber == undefined
+                        ) {
+                            var uploadAccountNumber = "N/A";
+                        } else {
+                            var uploadAccountNumber =
+                                uploadData[index].accountNumber;
+                        }
 
-                        new_table.row
+                        if (
+                            uploadData[index].amount == null ||
+                            uploadData[index].amount == undefined
+                        ) {
+                            var uploadAmount = "N/A";
+                        } else {
+                            var uploadAmount = uploadData[index].amount;
+                        }
+
+                        if (
+                            uploadData[index].refNumber == null ||
+                            uploadData[index].refNumber == undefined
+                        ) {
+                            var uploadRefNumber = "N/A";
+                        } else {
+                            var uploadRefNumber = uploadData[index].refNumber;
+                        }
+
+                        if (
+                            uploadData[index].acctValid == null ||
+                            uploadData[index].acctValid == undefined
+                        ) {
+                            var uploadAcctValid = "N/A";
+                        } else {
+                            var uploadAcctValid = uploadData[index].acctValid;
+                        }
+                        all_valid_uploads.row
                             .add([
-                                `<b class="h5">${upload_summary_count++}</b>`,
-                                `<b class="h5">${detail[index].NAME}</b>`,
-                                `<b class="h5">${detail[index].BBAN}</b>`,
-                                `<b class="h5">${formatToCurrency(
-                                    parseFloat(detail[index].AMOUNT)
-                                )}</b>`,
-                                `<b class="h5">${detail[index].REF_NO}</b>`,
-                                `<b class="h5">${display_error_message}</b>`,
+                                `<b>${valid_uploads_count}</b>`,
+                                `<b>${uploadName}</b>`,
+                                `<b>${uploadAccountNumber}</b>`,
+                                `<b>${uploadAmount}</b>`,
+                                `<b>${uploadRefNumber}</b>`,
+                                `<b class="text-success">${uploadAcctValid}</b>`,
                             ])
                             .draw(false);
 
-                        //  $(".failed_bulk_upload").append(
-                        //     `
-                        //         <tr>
-                        //             <td class="h5"><b>${upload_summary_count++}</b></td>
-                        //             <td class="h5"><b>${detail[index].NAME}</b></td>
-                        //             <td class="h5"><b>${detail[index].BBAN}</b></td>
-                        //             <td class="h5"><b>${detail[index].AMOUNT}</b></td>
-                        //             <td class="h5"><b>${detail[index].REF_NO}</b></td>
-                        //             <td class="h5"><b>${display_error_message}</b></td>
-                        //         </tr>
-                        //     `
-                        // )
+                        valid_uploads_count++;
+                    } else if (uploadData[index].valid != "Y") {
+                        invalid_uploads++;
 
-                        //console.log("pending:", pending)
-                    } else if (detail[index].MESSAGE == "") {
-                        successful++;
-
-                        //  new_table.row.add([
-                        //     `<b class="h5">${upload_summary_count++}</b>`,
-                        //     `<b class="h5">${detail[index].NAME}</b>`,
-                        //     `<b class="h5">${detail[index].BBAN}</b>`,
-                        //     `<b class="h5">${formatToCurrency(parseFloat(detail[index].AMOUNT))}</b>`,
-                        //     `<b class="h5">${detail[index].REF_NO}</b>`,
-                        //     `<b class="h5 text-success">Validation Successful</b>`
-
-                        // ]).draw(false)
-                        //  $(".failed_bulk_upload").append(
-                        //     `
-                        //         <tr>
-                        //             <td class="h5"><b>${upload_summary_count++}</b></td>
-                        //             <td class="h5"><b>${detail[index].NAME}</b></td>
-                        //             <td class="h5"><b>${detail[index].BBAN}</b></td>
-                        //             <td class="h5"><b>${detail[index].AMOUNT}</b></td>
-                        //             <td class="h5"><b>${detail[index].REF_NO}</b></td>
-                        //             <td class="h5 text-success"><b>Validation Successful</b></td>
-                        //         </tr>
-                        //     `
-                        // )
-
-                        //console.log("successful:", successful)
+                        $(".failed_uploads").append(
+                            `<tr>
+                                <td><b>${invalid_uploads_count}</b></td>
+                                <td><b>${uploadData[index].name}</b></td>
+                                <td><b>${uploadData[index].accountNumber}</b></td>
+                                <td><b>${uploadData[index].amount}</b></td>
+                                <td><b>${uploadData[index].refNumber}</b></td>
+                                <td><b class="text-danger">${uploadData[index].acctValid}</b></td>
+                            </tr>
+                            `
+                        );
+                        invalid_uploads_count++;
                     } else {
                         return false;
                     }
                 });
 
-                //return false;
+                console.log("valid_uploads_count=>", valid_uploads_count);
+                console.log("invalid_uploads_count=>", invalid_uploads_count);
+                // var table = $(".bulk_upload_list").DataTable();
 
-                $.each(data, function (index) {
-                    console.log("bulk_upload_array_list:", data[index]);
+                // var nodes = table.rows().nodes();
+                // table.row
+                //     .add([
 
-                    let status = "";
-                    let bank_type = "";
+                //     ])
+                //     .draw(false);
 
-                    if (data[index].status == "A") {
-                        status = `<span class="badge badge-success"> &nbsp; Approved &nbsp; </span> `;
-                    } else if (data[index].status == "R") {
-                        status = `<span class="badge badge-danger"> &nbsp; Rejected &nbsp; </span> `;
-                    } else {
-                        status = `<span class="badge badge-warning"> &nbsp; Pending &nbsp; </span> `;
-                    }
+                $(".all_bulk_upload_summary").append(
+                    `
+                            <tr>
+                                <td><b>${uploadDetails.referenceNumber}</b></td>
+                                <td><b>${uploadDetails.debitAccount}</b></td>
+                                <td><b>${formatToCurrency(
+                                    parseFloat(uploadDetails.totalAmount)
+                                )}</b></td>
+                                <td><b>${value_date}</b></td>
+                                <td><button type="button" class="btn btn-sm btn-soft-success waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;<b>${total_upload}</b>&emsp;</button></td>
+                                <td><button type="button" class="btn btn-sm btn-soft-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;<b>${invalid_uploads}</b>&emsp;</button></td>
+                                <td><b>Upload</b></td>
+                            </tr>
+                        `
+                );
 
-                    if (data[index].bank_code == "SAB") {
-                        bank_type = `<span class=""> &nbsp; Same Bank &nbsp; </span> `;
-                    } else {
-                        bank_type = `<span class=""> &nbsp; Other Bank &nbsp; </span> `;
-                    }
-
-                    if (
-                        total_upload == successful &&
-                        total_amount == bulk_total_amount
-                    ) {
-                        $(".successful_upload_header").show();
-                        $(".failed_upload_header").hide();
-                        action_button = `<div class="row">
-                                        <div class="col-md-6">
-                                            <a href="#" type="button" class="btn btn-primary btn-sm waves-effect waves-light m-1 float-right" data-toggle="modal" data-target="#full-width-modal"><b>View </b></a>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <a href="{{ url('view-bulk-transfer?batch_no=${data[index].BATCH_NO}&bulk_amount=${data[index].TOTAL_AMOUNT}&account_no=${data[index].ACCOUNT_NO}&bank_type=${data[index].bank_code}') }}" type="button" class="btn btn-success btn-sm waves-effect waves-light m-1 float-right"><b>Upload</b></a>
-                                        </div>
-                                    </div>
-                                `;
-                    } else {
-                        $(".successful_upload_header").hide();
-                        $(".failed_upload_header").show();
-                        action_button = `<div class="row">
-                                        <div class="col-md-6">
-                                            <a href="#" type="button" class="btn btn-primary btn-sm waves-effect waves-light m-1 float-right" data-toggle="modal" data-target="#full-width-modal"><b>View </b></a>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <a href="{{ url('delete-bulk-transfer?batch_no=${data[index].BATCH_NO}&bulk_amount=${data[index].CUSTOMER_NO}') }}" type="button" class="btn btn-danger btn-sm waves-effect waves-light m-1 float-right"><b>Delete</b></a>
-                                        </div>
-                                    </div>
-                                `;
-                    }
-
-                    let batch = `<b>${data[index].BATCH_NO}</b>`;
-
-                    let action = `<span class="btn-group mb-2">
-                                                                                                                                                                                        <button class="btn btn-sm btn-success" style="zoom:0.8;"> Approved</button>
-                                                                                                                                                                                         &nbsp;
-                                                                                                                                                                                         <button class="btn btn-sm btn-danger" style="zoom:0.8;"> Reject</button>
-                                                                                                                                                                                         </span>  `;
-                });
+                return false;
             } else {
                 $("#beneficiary_table").hide();
                 $("#beneficiary_list_loader").hide();

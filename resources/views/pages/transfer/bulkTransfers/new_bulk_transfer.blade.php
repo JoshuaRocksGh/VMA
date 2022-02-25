@@ -86,7 +86,7 @@
 
                 <div class="col-md-10">
 
-                    <form id="bulk_upload_form" action="#" method="POST" enctype="multipart/form-data">
+                    <form id="bulk_upload_form" action="#" enctype="multipart/form-data">
                         @csrf
 
 
@@ -122,7 +122,7 @@
                                         <select class="custom-select " name="bank_type" id="bank_type" required>
                                             {{-- <option value=""> ---Select Type --</option> --}}
                                             <option value="SAB" selected> Same Bank </option>
-                                            {{-- <option value="OTB"> Other Bank </option> --}}
+                                            <option value="OTB"> Other Bank </option>
                                         </select>
                                     </div>
 
@@ -238,7 +238,7 @@
                                     </tr>
                                 </thead>
 
-                                <tbody class="___class_+?66___">
+                                <tbody class="all_bulk_upload_summary">
 
                                 </tbody>
 
