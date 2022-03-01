@@ -204,7 +204,7 @@ function expenseTypes() {
                     );
                 }
             });
-            // $("#category").selectpicker("refresh");
+            $("#category").trigger("change");
         },
         error: function (xhr, status, error) {
             setTimeout(function () {
@@ -287,6 +287,15 @@ $(() => {
     let confirmationCompleted = false;
     let validationsCompleted = false;
     let isOnetimeTransfer = false;
+    $(".accounts-select").select2({
+        minimumResultsForSearch: Infinity,
+        templateResult: accountTemplate,
+        templateSelection: accountTemplate,
+    });
+    $("#to_account").select2({
+        minimumResultsForSearch: Infinity,
+    });
+    $("#category").select2();
 
     function renderOwnAccounts() {
         $("#to_account").empty()
@@ -307,6 +316,7 @@ $(() => {
                 //      ${account.accountDesc}  ||  ${account.accountNumber} || ${account.currency} || ${account.availableBalance}
                 // </option>`)
             );
+        $("#to_account").trigger("change");
     }
 
     function updateTransactionType(type) {
