@@ -1,29 +1,7 @@
 @extends('layouts.master')
 
 
-@section('styles')
-
-    <!-- third party css -->
-    <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
-        rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <!-- third party css end -->
-
-    <style>
-
-    </style>
-
-@endsection
-
-
-
 @section('content')
-
     <div class="container-fluid">
         <br>
         <div class="row">
@@ -74,7 +52,7 @@
                         </p> --}}
 
 
-                    <form role="form" class="parsley-examples" id="bulk_upload_form">
+                    <form class="parsley-examples" id="bulk_upload_form">
                         <div class="card-box col-md-12">
 
 
@@ -83,12 +61,12 @@
 
 
                                 <div class="col-md-6">
-                                    <h4 class="mb-2">Batch Number : <span class="text-muted mr-2"></span> <b
-                                            class="text-primary display_batch_no"></b>
+                                    <h4 class="mb-2 text-primary">Batch Number : <b
+                                            class="text-danger display_batch_no font-12">{{ $uploadData[0]['uploadBatch'] }}</b>
                                     </h4>
 
-                                    <h4 class="mb-2">Narration : <span class="text-muted mr-2"></span> <b
-                                            class="text-primary display_narrations"></b>
+                                    <h4 class="mb-2 text-primary">Narration : <b
+                                            class="text-danger display_narrations font-12">{{ $uploadData[0]['transDescription'] }}</b>
                                     </h4>
 
                                 </div>
@@ -96,12 +74,12 @@
 
 
                                 <div class="col-md-6">
-                                    <h4 class="mb-2">Account Number : <span class="text-muted mr-2"></span> <b
-                                            class="text-primary display_debit_account_no"></b>
+                                    <h4 class="mb-2 text-primary">Debit Account Number : <b
+                                            class="text-danger display_debit_account_no font-12">{{ $uploadDetails['debitAccount'] }}</b>
                                     </h4>
 
-                                    <h4 class="mb-2">Bulk Amount : <span class="text-muted mr-2"></span> <b
-                                            class="text-primary display_total_amount"></b>
+                                    <h4 class="mb-2 text-primary">Bulk Amount : <b
+                                            class="text-danger display_total_amount font-12">{{ $uploadDetails['totalAmount'] }}</b>
                                     </h4>
 
                                 </div>
@@ -137,6 +115,7 @@
                             </div>
 
                         </div>
+                        <button type="button" class="btn btn-primary hello_clicked">Hello</button>
 
 
                     </form>
@@ -153,7 +132,7 @@
                                 class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list">
 
                                 <thead>
-                                    <tr class="bg-secondary text-white">
+                                    <tr class="bg-info text-white">
                                         <th>No</th>
                                         <th>Credit Acc</th>
                                         <th>Name</th>
@@ -163,7 +142,23 @@
                                 </thead>
 
                                 <tbody class="">
-
+                                    @if (isset($uploadData))
+                                        @php
+                                            $count = 1;
+                                        @endphp
+                                        @foreach ($uploadData as $data)
+                                            <tr>
+                                                <td>{{ $count }}</td>
+                                                <td>{{ $data['accountNumber'] }}</td>
+                                                <td>{{ $data['name'] }}</td>
+                                                <td>{{ $data['amount'] }}</td>
+                                                <td>{{ $data['refNumber'] }}</td>
+                                            </tr>
+                                            @php
+                                                $count = $count + 1;
+                                            @endphp
+                                        @endforeach
+                                    @endif
                                 </tbody>
 
 
@@ -182,229 +177,16 @@
 
         </div>
     </div>
-
-
-
 @endsection
 
-
 @section('scripts')
-
-    {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script> --}}
-
     @include('extras.datatables')
 
-    <!-- Datatables init -->
-    {{-- <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script> --}}
-    <script>
-        siteLoading('show')
+    <script type="text/javascript">
+        //var table = $(".bulk_upload_list").DataTable()
+        //var nodes = table.rows().nodes();
 
-        function my_account() {
-            $.ajax({
-                type: 'GET',
-                url: 'get-my-account',
-                datatype: "application/json",
-                success: function(response) {
-                    console.log(response.data);
-                    let data = response.data
-                    $.each(data, function(index) {
-
-                        $('#my_account').append($('<option>', {
-                            value: data[index].accountType + '~' + data[index].accountDesc +
-                                '~' + data[index].accountNumber + '~' + data[index]
-                                .currency + '~' + data[index].availableBalance
-                        }).text(data[index].accountType + '~' + data[index].accountNumber +
-                            '~' + data[index].currency + '~' + data[index].availableBalance));
-
-                    });
-                },
-
-            })
-        }
-
-        var bulk_upload_array_list = []
-
-        function formatToCurrency(amount) {
-            return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-        };
-
-
-
-
-        function bulk_upload_detail_list(customer_no, batch_no) {
-
-            var table = $('.bulk_upload_list').DataTable({
-                destroy: true
-            });
-            var nodes = table.rows().nodes();
-            $.ajax({
-                tpye: 'GET',
-                url: 'get-bulk-upload-detail-list-api?customer_no=' + customer_no + '&batch_no=' + batch_no,
-                datatype: "application/json",
-                success: function(response) {
-
-                    let ID = 1;
-
-                    //console.log("upload bulk details:", response);
-
-                    if (response.responseCode == '000') {
-                        siteLoading('hide')
-
-                        bulk_upload_array_list = response.data;
-                        {{-- $('#beneficiary_table').show();
-                        $('#beneficiary_list_loader').hide();
-                        $('#beneficiary_list_retry_btn').hide(); --}}
-
-                        let bulk_info = bulk_upload_array_list.bulk_info
-                        let bulk_details = bulk_upload_array_list.bulk_details
-                        let data = bulk_upload_array_list.bulk_details
-
-                        //console.log("bulk_info:", bulk_info);
-
-
-                        //return false;
-
-
-                        $('.display_batch_no').text(bulk_info.BATCH_NO)
-                        $('.display_narrations').text(bulk_info.DESCRIPTION)
-                        $('.display_debit_account_no').text(bulk_info.ACCOUNT_NO)
-                        $('.display_total_amount').text(formatToCurrency(parseFloat(bulk_info.TOTAL_AMOUNT)))
-
-                        $.each(data, function(index) {
-                            //console.log(data[index])
-
-                            let status = ''
-                            let bank_type = ''
-
-                            if (data[index].STATUS == 'A') {
-                                status =
-                                    `<span class="badge badge-success"> &nbsp; Approved &nbsp; </span> `
-                            } else if (data[index].STATUS == 'R') {
-                                status =
-                                    `<span class="badge badge-danger"> &nbsp; Rejected &nbsp; </span> `
-                            } else {
-                                status =
-                                    `<span class="badge badge-warning"> &nbsp; Pending &nbsp; </span> `
-                            }
-
-                            if (data[index].BANK_CODE == 'SAB') {
-                                bank_type = `<span class=""> &nbsp; Same Bank &nbsp; </span> `
-                            } else {
-                                bank_type = `<span class=""> &nbsp; Other Bank &nbsp; </span> `
-                            }
-
-                            let batch =
-                                `<a href="{{ url('bulkFile/${data[index].BATCH_NO}') }}">${data[index].BATCH_NO}</a>`
-
-                            let action =
-                                `<span class="btn-group mb-2">
-                                                                                                                                                                                                                                                                                                                                                                <button class="btn btn-sm btn-success" style="zoom:0.8;"> Approved</button>
-                                                                                                                                                                                                                                                                                                                                                                 &nbsp;
-                                                                                                                                                                                                                                                                                                                                                                 <button class="btn btn-sm btn-danger" style="zoom:0.8;"> Reject</button>
-                                                                                                                                                                                                                                                                                                                                                                 </span>  `
-
-                            table.row.add([
-                                ID++,
-                                data[index].BBAN,
-                                data[index].NAME,
-                                formatToCurrency(parseFloat(data[index].AMOUNT)),
-                                data[index].REF_NO
-
-
-
-                            ]).draw(false)
-
-                        })
-
-                    } else {
-
-                        $('#beneficiary_table').hide();
-                        $('#beneficiary_list_loader').hide();
-                        $('#beneficiary_list_retry_btn').show();
-
-
-                    }
-
-                },
-                error: function(xhr, status, error) {
-                    setTimeout(function() {
-                        bulk_upload_detail_list()
-                    }, $.ajaxSetup().retryAfter)
-                }
-
-
-            })
-        }
-
-
-
-
-        function formatToCurrency(amount) {
-            return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-        };
-
-
-        function toaster(message, icon, timer) {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: timer,
-                timerProgressBar: false,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
-
-            Toast.fire({
-                icon: icon,
-                title: message
-            })
-        }
-
-        {{-- function post_bulk_transaction(batch_no) {
-
-            Swal.showLoading()
-
-            $.ajax({
-
-                type: 'POST',
-                url: 'post-bulk-transaction-api',
-                datatype: "application/json",
-                'data': {
-                    'batch_no': batch_no.trim()
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-
-                    console.log(response)
-
-                    if (response.responseCode == '000') {
-                        toaster(response.message, 'success', 20000)
-                        Swal.fire(
-                            response.message,
-
-                            'success'
-                        )
-                    } else {
-                        toaster(response.message, 'error', 9000);
-                        Swal.fire(
-                            response.message,
-
-                            'error'
-                        )
-
-                    }
-                }
-            });
-        } --}}
-
-
-
-        function submit_upload(batch_no, customer_no) {
+        function submit_upload(batch_no) {
 
             siteLoading("show")
 
@@ -412,12 +194,14 @@
 
             $.ajax({
                 type: "GET",
-                url: 'post-bulk-transaction-api?batch_no=' + batch_no + "~" + customer_no,
-                datatype: 'json',
+                url: 'post-bulk-transaction-api?batch_no=' + batch_no,
+                datatype: "application/json",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function(response) {
+                    console.log(response)
+                    return false
                     siteLoading("hide")
 
                     if (response.responseCode == '000') {
@@ -443,149 +227,21 @@
 
             })
 
-            {{-- Swal.fire([{
-                title: 'Are you sure',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Submit!',
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return fetch(ipAPI)
-                        .then(response => response.json())
-                        .then((data) => {
-                            if (data.responseCode == '000') {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: data.message
-                                })
-
-                                setTimeout(function() {
-                                    window.location = "{{ url('bulk-transfer') }}"
-                                }, 3000)
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: data.message
-                                })
-                            }
-
-                        })
-                        .catch(() => {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'API SERVER ERROR'
-                            })
-                        })
-                }
-            }]) --}}
-
-
         }
-
-
-        function reject_upload(customer_no) {
-
-            const ipAPI = 'reject-bulk-transaction-api?customer_no=' + customer_no
-
-            Swal.fire([{
-                title: 'Are you sure you want to reject',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, Reject!',
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return fetch(ipAPI)
-                        .then(response => response.json())
-                        .then((data) => {
-                            if (data.responseCode == '000') {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: data.message
-                                })
-
-                                setTimeout(function() {
-                                    window.location = "{{ url('bulk-transfer') }}"
-                                }, 2000)
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: data.message
-                                })
-                            }
-                            {{-- Swal.fire(data.ip) --}}
-                        })
-                        .catch(() => {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'API SERVER ERROR'
-                            })
-                        })
-                }
-            }])
-
-
-        }
-
-
 
         $(document).ready(function() {
-
-            {{-- var customer_no = "057725" --}}
-            var customer_no = @json(session('customerNumber'))
-            {{-- var customer_no = @json($customer_no) --}}
             var batch_no = @json($batch_no)
 
-
-            let today = new Date();
-            let dd = today.getDate();
-
-            let mm = today.getMonth() + 1;
-            const yyyy = today.getFullYear()
-            console.log(mm)
-            console.log(String(mm).length)
-            if (String(mm).length == 1) {
-                mm = '0' + mm
-            }
-
-            defaultDate = dd + mm + '-' + today.getFullYear()
-            console.log(defaultDate)
-
-
             $('#approve_upload_btn').click(function() {
-                //$(this).text('Processing...')
-                submit_upload(batch_no, customer_no)
+                //console.log(batch_no)
+                submit_upload(batch_no)
             })
 
             $('#reject_upload_btn').click(function() {
-
-                reject_upload(customer_no)
+                console.log(batch_no)
             })
 
 
-
-            {{-- $(".date-picker-valueDate").flatpickr({
-                altInput: true,
-                altFormat: "j F, Y",
-                dateFormat: "d-m-Y",
-                defaultDate: [defaultDate],
-                position: "below"
-            }) --}}
-
-            setTimeout(function() {
-
-
-                bulk_upload_detail_list(customer_no, batch_no)
-                {{-- my_account() --}}
-            }, 1000)
-
-
-
-
-        });
+        })
     </script>
-
 @endsection

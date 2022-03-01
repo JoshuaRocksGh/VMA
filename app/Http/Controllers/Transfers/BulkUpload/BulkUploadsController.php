@@ -24,7 +24,8 @@ class BulkUploadsController extends Controller
 {
     public function index()
     {
-        return view('pages.transfer.bulkTransfers.bulk_trasnfer');
+        // return view('pages.transfer.bulkTransfers.bulk_trasnfer');
+        return view('pages.transfer.bulkTransfers.new_bulk_transfer');
     }
 
     public function download_same_bank()
@@ -358,7 +359,7 @@ class BulkUploadsController extends Controller
     public function get_bulk_upload_list(Request $request)
     {
 
-        // return $request;
+        // dd($request);
 
         $fileBatch = $request->query("fileBatch");
         $customerNumber = session()->get('customerNumber');
@@ -366,12 +367,12 @@ class BulkUploadsController extends Controller
         $base_response = new BaseResponse();
 
 
-        // return $fileBatch;
+        // $fileBatch;
         // dd('http://192.168.1.225:9096/corporate/getBulkUploadFilesDetails?' . "customerNumber=$customerNumber&batchNumber=$fileBatch");
 
 
         try {
-            $response = Http::post(env('API_BASE_URL') . "/corporate/getBulkUploadFilesDetails?customerNumber=$customerNumber&batchNumber=$fileBatch");
+            $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadData/$fileBatch");
             $result = new ApiBaseResponse();
 
             return $result->api_response($response);
@@ -386,46 +387,9 @@ class BulkUploadsController extends Controller
 
         }
         die();
-        $query = DB::connection('oracle')->table('bulk_temp_excel')->get();
-        return response()->json([
-            'responseCode' => '000',
-            'message' => "Successful",
-            'data' => $query
-        ]);
 
 
-        $excel_errors = DB::table('tb_bulk_error_logs')
-            // ->where('batch_no', $batch_no)
-            ->where('customer_no', $customerNumber)
-            ->get();
-
-        $bulk_ref = DB::table('tb_corp_bank_bulk_ref')
-            ->where('customer_no', $customerNumber)
-            ->orderBy('batch_no', 'desc')
-            ->get();
-
-        // $bulk_details = DB::table('tb_corp_bank_import_excel')
-        foreach ($bulk_ref as $key => $value) {
-            $batch_no = $value->BATCH_NO;
-        }
-
-        $bulk_details = DB::table('tb_corp_bank_import_excel')
-            ->distinct()
-            ->where('customer_no', $customerNumber)
-            ->where('batch_no', $batch_no)
-            ->orderBy('batch_no', 'desc')
-            ->get();
-
-
-        return [
-            'responseCode' => '000',
-            'message' => "Available Uploads",
-            'data' => [
-                'bulk_ref' => $bulk_ref,
-                'bulk_details' => $bulk_details,
-                'excel_errors' => $excel_errors
-            ]
-        ];
+        // $query = DB::connection('oracle')->table('bulk_temp_excel')->get();
     }
 
     public function get_bulk_korpor_upload_list(Request $request)
@@ -472,9 +436,9 @@ class BulkUploadsController extends Controller
     {
         // return $request;
 
-        $batch_no = $request->query('batch_no');
-        $account_no = $request->query('account_no');
-        $bank_type = $request->query('bank_type');
+        $fileBatch = $request->query('batch_no');
+        // $account_no = $request->query('account_no');
+        // $bank_type = $request->query('bank_type');
 
         $customer_no = session()->get('customerNumber');
 
@@ -483,19 +447,39 @@ class BulkUploadsController extends Controller
         //     return back();
         // }
 
-        $bulk_details = DB::table('tb_corp_bank_import_excel')->where('batch_no', $batch_no)->get();
-        $bulk_info = DB::table('TB_CORP_BANK_BULK_REF')->where('batch_no', $batch_no)->first();
+        // $bulk_details = DB::table('tb_corp_bank_import_excel')->where('batch_no', $batch_no)->get();
+        // $bulk_info = DB::table('TB_CORP_BANK_BULK_REF')->where('batch_no', $batch_no)->first();
 
-        if ($bulk_info == null || $bulk_info == "") {
-            Alert::error("Bulk Transfer Detail Not Found");
-            return view('pages.transfer.bulkTransfers.bulk_trasnfer');
-        } else {
+        // if ($bulk_info == null || $bulk_info == "") {
+        //     Alert::error("Bulk Transfer Detail Not Found");
+        //     return view('pages.transfer.bulkTransfers.bulk_trasnfer');
+        // } else {
+        //     return view('pages.transfer.bulkTransfers.view_bulk_trasnfer', [
+        //         'customer_no' => $customer_no,
+        //         'batch_no' => $batch_no,
+        //         'account_no' => $account_no,
+        //         'bank_type' => $bank_type,
+        //     ]);
+        // }
+
+        try {
+            $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadData/$fileBatch");
+            // $result = new ApiBaseResponse();
+
+            // dd($response['data']);
+            $uploadData = $response['data']['uploadData'];
+            $uploadDetails = $response['data']['uploadDetails'];
             return view('pages.transfer.bulkTransfers.view_bulk_trasnfer', [
-                'customer_no' => $customer_no,
-                'batch_no' => $batch_no,
-                'account_no' => $account_no,
-                'bank_type' => $bank_type,
+                'uploadData' => $uploadData,
+                'uploadDetails' => $uploadDetails,
+                'batch_no' => $fileBatch
+
+
             ]);
+        } catch (\Exception $e) {
+            Alert::error("Bulk Transfer Detail Not Found");
+            // return view('pages.transfer.bulkTransfers.bulk_trasnfer');
+            return view('pages.transfer.bulkTransfers.new_bulk_transfer');
         }
     }
 
