@@ -246,11 +246,11 @@
                     </div>
                 </li>
                 @endif
-                <li>
+                {{-- <li>
                     <a href="{{ url('home') }}">
                         <i class="fas fa-file-invoice-dollar"></i> <span> Budgetting</span>
                     </a>
-                </li>
+                </li> --}}
                 @if (config('app.corporate'))
                 <li>
                     <a href="#approvals" data-toggle="collapse">
