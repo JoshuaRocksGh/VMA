@@ -5419,15 +5419,15 @@ div.dt-button-info h2 {
 }
 
 .select2-container .select2-selection--single {
-    /* border: 1px solid #ced4da; */
-    border:none;
+    border: 1px solid #ced4da;
+    /* border:none; */
     height: auto;
     padding: 0.5rem 0.2rem;
     /* height: calc(1.5em + 0.9rem + 2px); */
     background-color: #fff;
     box-shadow: none;
     outline: 0;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; */
     /* 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); */ */
 
 }
