@@ -4,9 +4,17 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/pagination/pagination.css') }}" />
 <style>
     .history-card {
+        cursor: pointer;
+
         box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
         /* box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px; */
         /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
+    }
+
+    .history-card:hover {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
     }
 
     .nodata {
@@ -30,6 +38,7 @@
         border-color: var(--success) !important;
 
     }
+
 
     #pending_history.active {
         background-color: var(--primary-alt) !important;
@@ -65,12 +74,6 @@
                     Send E-Korpor
                 </a>
             </li>
-            {{-- <li class="nav-item">
-                <a href="#reverse_korpor_page" data-toggle="tab" aria-expanded="false"
-                    class="nav-link reverse_korpor_tab">
-                    Reverse E-Korpor
-                </a>
-            </li> --}}
             <li class="nav-item mb-1 col-sm-4">
                 <a href="#korpor_history_page" id="korpor_history_tab" data-toggle="tab" aria-expanded="false"
                     class="nav-link korpor_trans_tab">
@@ -113,7 +116,7 @@
                                                         <span class="text-danger">*</span> </b>
 
 
-                                                    <select class="form-control col-md-12 my-accounts-select"
+                                                    <select class="form-control col-md-12 accounts-select"
                                                         id="account_of_transfer" required>
                                                         <option disabled selected value=""> ---
                                                             Select Source Account ---
@@ -305,22 +308,15 @@
 
                                 </div>
                             </div>
-                            {{-- <div class="form-group text-center display_button_print">
 
-                                <span>&nbsp;
-                                    <span>&nbsp; <button class="btn btn-light btn-rounded" type="button"
-                                            id="print_receipt" onclick="window.print()">Print
-                                            Receipt
-                                        </button></span>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="tab-pane" id="redeem_korpor_page">
 
-                <div class="row">
-                    <div class=" col-lg-6  pt-5 px-4 site-card " id="request_form_div" style="max-height: 75%">
+                <div class="row px-2">
+                    <div class="col-lg-6  pt-5 px-4 site-card " id="request_form_div" style="max-height: 75%">
 
                         <form action="#" class="select_beneficiary" id="redeem_korpor_payment_details_form"
                             autocomplete="off" aria-autocomplete="none">
@@ -374,7 +370,7 @@
                                         <b class="col-md-12 text-primary">Select Account To Redeem Into
                                             &nbsp;
                                             <span class="text-danger"></span> </b>
-                                        <select class="form-control col-md-12 my-accounts-select" id="redeem_account"
+                                        <select class="form-control col-md-12 accounts-select" id="redeem_account"
                                             required>
                                             <option disabled selected value=""> ---
                                                 Select
@@ -496,7 +492,7 @@
                                 Select
                                 Account</label></div>
                         <div class="pl-md-3 w-100">
-                            <select class="form-control unredeemed my-accounts-select" id="korpor_history_accounts"
+                            <select class="form-control unredeemed accounts-select" id="korpor_history_accounts"
                                 required>
                                 <option disabled selected value="">Select
                                     Account Number</option>
