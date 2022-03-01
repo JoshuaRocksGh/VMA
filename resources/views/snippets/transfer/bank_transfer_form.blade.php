@@ -20,11 +20,10 @@
                     {{-- ======================================================= --}}
                     {{-- Own account Area --}}
                     {{-- ======================================================= --}}
-                    <div class=" mb-1 px-3 row ">
-                        <label class="col-md-12 text-primary">Account to transfer from</label>
+                    <div class=" mb-1 ">
+                        <label class="text-primary">Account to transfer from</label>
 
-                        <select class="form-control col-md-12" data-title=" --- Select Source Account ---"
-                            data-none-selected-text="--- Select Source Account ---" id="from_account" required>
+                        <select class="form-control accounts-select" id="from_account" required>
                             <option disabled selected value=""> --- Select Source Account --- </option>
                             @include("snippets.accounts")
                         </select>
@@ -77,10 +76,8 @@
                             <div class="col-12">
                                 @if ($currentPath === 'Standing Order')
                                 <div class="form-group row">
-                                    <label class="col-md-4 text-primary"> Standing Other Type </label>
-                                    <select data-title=" --- Select Standing Other Type ---"
-                                        data-none-selected-text="--- Select Standing Other Type ---"
-                                        class="form-control col-md-8 " id="standing_other_type" required>
+                                    <label class="text-primary"> Standing Other Type </label>
+                                    <select class="form-control  " id="standing_other_type" required>
                                         <option disabled value=""> -- Select
                                             Type --</option>
                                         <option selected value="own account"> Own Account</option>
@@ -90,10 +87,10 @@
                                 </div>
                                 @endif
                                 <div class="form-group row">
-                                    <label class="col-md-4 text-primary"> {{ $destination }} </label>
+                                    <label class=" text-primary"> {{ $destination }} </label>
                                     <select data-title=" --- Select {{ $destination}} ---"
                                         data-none-selected-text="--- Select {{ $destination}} ---"
-                                        class="form-control col-md-8 select_beneficiary" id="to_account" required>
+                                        class="form-control select_beneficiary" id="to_account" required>
                                         <option disabled selected value=""> -- Select
                                             {{ $destination }} --</option>
                                         @if ($currentPath === 'Own Account' || $currentPath === "Standing Order")
@@ -151,8 +148,8 @@
                             <div class="col-12">
                                 @if ($currentPath === 'International Bank')
                                 <div class="row mb-1">
-                                    <label class="text-primary col-md-4">Bank Country</label>
-                                    <select class="form-control col-md-8" id="onetime_select_country" required>
+                                    <label class="text-primary ">Bank Country</label>
+                                    <select class="form-control " id="onetime_select_country" required>
                                         <option disabled selected>--- Not Selected ---</option>
 
                                     </select>
@@ -160,8 +157,8 @@
                                 @endif
                                 @if ($currentPath === 'Local Bank' || $currentPath === 'International Bank')
                                 <div class="row mb-1">
-                                    <label class="text-primary col-md-4">Transfer Bank</label>
-                                    <select class="form-control col-md-8" id="onetime_select_bank" required>
+                                    <label class="text-primary ">Transfer Bank</label>
+                                    <select class="form-control " id="onetime_select_bank" required>
                                         <option disabled selected>--- Not Selected ---</option>
 
                                     </select>
@@ -240,9 +237,9 @@
 
                         @if ($currentPath === 'Local Bank')
                         <div class="form-group row">
-                            <label class="text-primary col-md-4"> Transfer Mode</label>
+                            <label class="text-primary "> Transfer Mode</label>
 
-                            <select class="form-control col-md-8 " id="transfer_mode" required>
+                            <select class="form-control  " id="transfer_mode" required>
                                 <option disabled selected> -- Select Transfer Mode --
                                 </option>
                                 <option value="ACH">ACH</option>
@@ -262,8 +259,8 @@
                             <input type="date" class="form-control col-md-8" id="so_end_date" required>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-4 text-primary">Frequency</label>
-                            <select class="form-control col-md-8 so_frequency" id="beneficiary_frequency"
+                            <label class=" text-primary">Frequency</label>
+                            <select class="form-control  so_frequency" id="beneficiary_frequency"
                                 placeholder="Select Pick Up Branch" required>
                                 <option disabled selected value="">--Select Frequency--
                                 </option>
@@ -279,12 +276,12 @@
                         </div>
                         @endif
                         <div class="form-group row">
-                            <label class="col-md-4 text-primary">Expense Category &nbsp;
+                            <label class="text-primary">Expense Category &nbsp;
                             </label>
                             <input type="hidden" value="Others" id="category_">
 
 
-                            <select class="form-control col-md-8" id="category" required>
+                            <select class="form-control " id="category" required>
                                 <option disabled selected value="">-- Select expense
                                     category --
                                 </option>
