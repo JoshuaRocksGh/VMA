@@ -659,77 +659,28 @@ class BulkUploadsController extends Controller
     {
         // return $request;
 
-        $batch = $request->query('batch_no');
-        $batch_ = explode('~', $batch);
-        // return $batch_;
+        $fileBatch = $request->query('batch_no');
+
+        $base_response = new BaseResponse();
+        // return $fileBatch;
 
 
-        $batch_no = $batch_[0];
-        $customer_no = $batch_[1];
-        // $batch_no = $request->batch_no;
-        $authToken = session()->get('userToken');
-        $userID = session()->get('userId');
-
-
-
-        $data = DB::table('tb_corp_bank_import_excel')->where('batch_no', $batch_no)->get()->toArray();
-
-
-
-        // return $data;
-
-        // return response()->json([
-        //     'responseCode' => '422',
-        //     'message' => 'View Error From Api',
-        //     'data' => $data
-        // ], 200);
-
-        // die();
-
-        /*
-        $credit_data = [];
-        $debit_data = [];
-
-        foreach ($files as $data) {
-
-            $credit['creditAccount'] = $data->BBAN;
-            $credit['creditAmount'] = (float) $data->AMOUNT;
-            $credit['creditBranch'] = '001';
-            $credit['debitCurrency'] = 'SLL';
-            $credit['creditNarration'] =  $data->TRANS_DESC;
-            $credit['creditProdRef'] = $data->REF_NO;
-
-            array_push($credit_data, $credit);
+        try {
+            $batch = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadData/$fileBatch");
+            // $result = new ApiBaseResponse();
+            $bulk_details = $batch['data'];
+            $response = Http::post(env('CIB_API_BASE_URL') . "post-bulk-upload-list", $bulk_details);
+            return $response;
+        } catch (\Exception $e) {
+            DB::table('tb_error_logs')->insert([
+                'platform' => 'ONLINE_INTERNET_BANKING',
+                'user_id' => 'AUTH',
+                'message' => (string) $e->getMessage()
+            ]);
+            return $base_response->api_response('500', "Internal Server Error",  NULL); // return API BASERESPONSE
         }
 
-        $debit_data['debitAccount'] = $files[0]->ACCOUNT_NO;
-        $debit_data['debitAmount'] = (float) $files[0]->TOTAL_AMOUNT;
-        $debit_data['debitCurrency'] = 'SLL';
-        $debit_data['debitNarration'] = $files[0]->TRANS_DESC;
-        $debit_data['debitProdRef'] = $files[0]->REF_NO;
-
-        $data = [
-            "approvedBy" => "string",
-            "branch" => "string",
-            "channelCode" => "string",
-            "department" => "rr",
-            "postedBy" => "KOBBY",
-            "referenceNo" => "string",
-            "transType" => "string",
-            "unit" => "yyy",
-            "debitAccounts" => [$debit_data],
-            "creditAccounts" => $credit_data,
-        ];
-
-        // return  $data;
-
-        */
-        // dd(env('CIB_API_BASE_URL') . "post-bulk-upload-list");
-        $response = Http::post(env('CIB_API_BASE_URL') . "post-bulk-upload-list", $data);
-        // dd($response);
-        // return (array) $response;
-        // $result = new ApiBaseResponse();
-        $base_response = new BaseResponse();
+        die();
 
         if ($response->ok()) {    // API response status code is 200
 
