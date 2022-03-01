@@ -105,48 +105,77 @@ function bulk_upload_list(fileBatch) {
                     if (uploadData[index].valid == "Y") {
                         valid_uploads++; //increment
 
-                        // $(".successful_uploads").append(
-                        //     `<tr>
-                        //         <td><b>${valid_uploads_count}</b></td>
-                        //         <td><b>${uploadData[index].name}</b></td>
-                        //         <td><b>${uploadData[index].accountNumber}</b></td>
-                        //         <td><b>${uploadData[index].amount}</b></td>
-                        //         <td><b>${uploadData[index].refNumber}</b></td>
-                        //         <td><b class="text-success">${uploadData[index].acctValid}</b></td>
-                        //     </tr>
-                        //     `
-                        // );
+                        if (
+                            uploadData[index].name == null ||
+                            uploadData[index].name == undefined
+                        ) {
+                            var uploadName = "N/A";
+                        } else {
+                            var uploadName = uploadData[index].name;
+                        }
 
-                        // uploadData[index].name == null ||
-                        // uploadData[index].name == undefined
-                        //     ? uploadData[index].name
-                        //     : "N/A";
+                        if (
+                            uploadData[index].accountNumber == null ||
+                            uploadData[index].accountNumber == undefined
+                        ) {
+                            var uploadAccountNumber = "N/A";
+                        } else {
+                            var uploadAccountNumber =
+                                uploadData[index].accountNumber;
+                        }
 
-                        // console.log(uploadData[index].name);
+                        if (
+                            uploadData[index].amount == null ||
+                            uploadData[index].amount == undefined
+                        ) {
+                            var uploadAmount = "N/A";
+                        } else {
+                            var uploadAmount = uploadData[index].amount;
+                        }
 
-                        // uploadData[index].accountNumber == null ||
-                        // uploadData[index].accountNumber == undefined
-                        //     ? uploadData[index].accountNumber
-                        //     : "N/A";
-                        // console.log(uploadData[index].accountNumber);
+                        if (
+                            uploadData[index].refNumber == null ||
+                            uploadData[index].refNumber == undefined
+                        ) {
+                            var uploadRefNumber = "N/A";
+                        } else {
+                            var uploadRefNumber = uploadData[index].refNumber;
+                        }
 
-                        // uploadData[index].amount == null ||
-                        // uploadData[index].amount == undefined
-                        //     ? uploadData[index].amount
-                        //     : "N/A";
-                        // console.log(uploadData[index].amount);
+                        if (
+                            uploadData[index].acctValid == null ||
+                            uploadData[index].acctValid == undefined
+                        ) {
+                            var uploadAcctValid = "N/A";
+                        } else {
+                            var uploadAcctValid = uploadData[index].acctValid;
+                        }
+                        // all_valid_uploads.row
+                        //     .add([
+                        //         `<b>${valid_uploads_count}</b>`,
+                        //         `<b>${uploadName}</b>`,
+                        //         `<b>${uploadAccountNumber}</b>`,
+                        //         `<b>${uploadAmount}</b>`,
+                        //         `<b>${uploadRefNumber}</b>`,
+                        //         `<b class="text-success">${uploadAcctValid}</b>`,
+                        //     ])
+                        //     .draw(false);
 
-                        // uploadData[index].refNumber == null ||
-                        // uploadData[index].refNumber == undefined
-                        //     ? uploadData[index].refNumber
-                        //     : "N/A";
-                        // console.log(uploadData[index].refNumber);
+                        $(".successful_uploads").append(
+                            `<tr>
+                                <td><b>${valid_uploads_count}</b></td>
+                                <td><b>${uploadName}</b></td>
+                                <td><b>${uploadAccountNumber}</b></td>
+                                <td><b>${uploadAmount}</b></td>
+                                <td><b>${uploadRefNumber}</b></td>
+                                <td><b class="text-success">${uploadAcctValid}</b></td>
+                            </tr>
+                            `
+                        );
 
-                        // uploadData[index].acctValid == null ||
-                        // uploadData[index].acctValid == undefined
-                        //     ? uploadData[index].acctValid
-                        //     : "N/A";
-                        // console.log(uploadData[index].acctValid);
+                        valid_uploads_count++;
+                    } else if (uploadData[index].valid != "Y") {
+                        invalid_uploads++;
 
                         if (
                             uploadData[index].name == null ||
@@ -193,29 +222,15 @@ function bulk_upload_list(fileBatch) {
                         } else {
                             var uploadAcctValid = uploadData[index].acctValid;
                         }
-                        all_valid_uploads.row
-                            .add([
-                                `<b>${valid_uploads_count}</b>`,
-                                `<b>${uploadName}</b>`,
-                                `<b>${uploadAccountNumber}</b>`,
-                                `<b>${uploadAmount}</b>`,
-                                `<b>${uploadRefNumber}</b>`,
-                                `<b class="text-success">${uploadAcctValid}</b>`,
-                            ])
-                            .draw(false);
-
-                        valid_uploads_count++;
-                    } else if (uploadData[index].valid != "Y") {
-                        invalid_uploads++;
 
                         $(".failed_uploads").append(
                             `<tr>
                                 <td><b>${invalid_uploads_count}</b></td>
-                                <td><b>${uploadData[index].name}</b></td>
-                                <td><b>${uploadData[index].accountNumber}</b></td>
-                                <td><b>${uploadData[index].amount}</b></td>
-                                <td><b>${uploadData[index].refNumber}</b></td>
-                                <td><b class="text-danger">${uploadData[index].acctValid}</b></td>
+                                <td><b>${uploadName}</b></td>
+                                <td><b>${uploadAccountNumber}</b></td>
+                                <td><b>${uploadAmount}</b></td>
+                                <td><b>${uploadRefNumber}</b></td>
+                                <td><b class="text-danger">${uploadAcctValid}</b></td>
                             </tr>
                             `
                         );
@@ -247,7 +262,16 @@ function bulk_upload_list(fileBatch) {
                                 <td><b>${value_date}</b></td>
                                 <td><button type="button" class="btn btn-sm btn-soft-success waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;<b>${total_upload}</b>&emsp;</button></td>
                                 <td><button type="button" class="btn btn-sm btn-soft-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;<b>${invalid_uploads}</b>&emsp;</button></td>
-                                <td><b>Upload</b></td>
+                                <td>
+                                <a href="#" type="button" class="btn btn-danger  btn-sm waves-effect waves-light p-1">
+                                                    <i class="mdi mdi-close-circle-outline"></i>&nbsp;<b>Delete</b>
+                                                </a>
+                                                <a href="view-bulk-transfer?batch_no=${fileBatch}" type="button" class="btn btn-success btn-sm waves-effect waves-light">
+                                                    <i class="mdi mdi-check-all"></i>&nbsp;<b>Upload</b>
+                                                </a>
+
+
+                                </td>
                             </tr>
                         `
                 );
@@ -396,18 +420,17 @@ $(document).ready(function () {
                         }, 500);
                     } else {
                         siteLoading("hide");
-                        let allErrors = new Array();
-                        //console.log(fileBatch)
+                        $("#submit_cheque_request").text("Submit File");
+                        let errorMessage = response.message;
 
                         let validationErrors = data.validationErrors;
-                        $.each(validationErrors, function (index) {
-                            //console.log(validationErrors[index])
-                            allErrors.push(validationErrors[index]);
-                        });
+
+                        let all_errors =
+                            errorMessage + `<br>` + validationErrors;
 
                         //bulk_upload_list(fileBatch, allErrors)
 
-                        toaster(response.message, "error", 3000);
+                        toaster(all_errors, "error", 3000);
                         //location.reload();
                         /* setTimeout(function() {
                                      location.reload();

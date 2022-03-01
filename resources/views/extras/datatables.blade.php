@@ -9,13 +9,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" defer></script>
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js" defer></script>
 <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.colVis.min.js" defer></script>
-<script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js" defer></script>
+
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js" defer></script>
 <script src="https://cdn.datatables.net/plug-ins/1.11.3/dataRender/ellipsis.js" defer></script> --}}
 <link href="{{ asset('assets/plugins/datatables/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
     type="text/css" />
 <link href="{{ asset('assets/plugins/datatables/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"
     type="text/css" />
+
+{{-- <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js" defer></script> --}}
 
 <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}" defer></script>

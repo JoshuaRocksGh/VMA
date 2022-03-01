@@ -387,46 +387,9 @@ class BulkUploadsController extends Controller
 
         }
         die();
+
+
         $query = DB::connection('oracle')->table('bulk_temp_excel')->get();
-        return response()->json([
-            'responseCode' => '000',
-            'message' => "Successful",
-            'data' => $query
-        ]);
-
-
-        $excel_errors = DB::table('tb_bulk_error_logs')
-            // ->where('batch_no', $batch_no)
-            ->where('customer_no', $customerNumber)
-            ->get();
-
-        $bulk_ref = DB::table('tb_corp_bank_bulk_ref')
-            ->where('customer_no', $customerNumber)
-            ->orderBy('batch_no', 'desc')
-            ->get();
-
-        // $bulk_details = DB::table('tb_corp_bank_import_excel')
-        foreach ($bulk_ref as $key => $value) {
-            $batch_no = $value->BATCH_NO;
-        }
-
-        $bulk_details = DB::table('tb_corp_bank_import_excel')
-            ->distinct()
-            ->where('customer_no', $customerNumber)
-            ->where('batch_no', $batch_no)
-            ->orderBy('batch_no', 'desc')
-            ->get();
-
-
-        return [
-            'responseCode' => '000',
-            'message' => "Available Uploads",
-            'data' => [
-                'bulk_ref' => $bulk_ref,
-                'bulk_details' => $bulk_details,
-                'excel_errors' => $excel_errors
-            ]
-        ];
     }
 
     public function get_bulk_korpor_upload_list(Request $request)
@@ -473,9 +436,9 @@ class BulkUploadsController extends Controller
     {
         // return $request;
 
-        $batch_no = $request->query('batch_no');
-        $account_no = $request->query('account_no');
-        $bank_type = $request->query('bank_type');
+        $fileBatch = $request->query('batch_no');
+        // $account_no = $request->query('account_no');
+        // $bank_type = $request->query('bank_type');
 
         $customer_no = session()->get('customerNumber');
 
@@ -484,19 +447,39 @@ class BulkUploadsController extends Controller
         //     return back();
         // }
 
-        $bulk_details = DB::table('tb_corp_bank_import_excel')->where('batch_no', $batch_no)->get();
-        $bulk_info = DB::table('TB_CORP_BANK_BULK_REF')->where('batch_no', $batch_no)->first();
+        // $bulk_details = DB::table('tb_corp_bank_import_excel')->where('batch_no', $batch_no)->get();
+        // $bulk_info = DB::table('TB_CORP_BANK_BULK_REF')->where('batch_no', $batch_no)->first();
 
-        if ($bulk_info == null || $bulk_info == "") {
-            Alert::error("Bulk Transfer Detail Not Found");
-            return view('pages.transfer.bulkTransfers.bulk_trasnfer');
-        } else {
+        // if ($bulk_info == null || $bulk_info == "") {
+        //     Alert::error("Bulk Transfer Detail Not Found");
+        //     return view('pages.transfer.bulkTransfers.bulk_trasnfer');
+        // } else {
+        //     return view('pages.transfer.bulkTransfers.view_bulk_trasnfer', [
+        //         'customer_no' => $customer_no,
+        //         'batch_no' => $batch_no,
+        //         'account_no' => $account_no,
+        //         'bank_type' => $bank_type,
+        //     ]);
+        // }
+
+        try {
+            $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadData/$fileBatch");
+            // $result = new ApiBaseResponse();
+
+            // dd($response['data']);
+            $uploadData = $response['data']['uploadData'];
+            $uploadDetails = $response['data']['uploadDetails'];
             return view('pages.transfer.bulkTransfers.view_bulk_trasnfer', [
-                'customer_no' => $customer_no,
-                'batch_no' => $batch_no,
-                'account_no' => $account_no,
-                'bank_type' => $bank_type,
+                'uploadData' => $uploadData,
+                'uploadDetails' => $uploadDetails,
+                'batch_no' => $fileBatch
+
+
             ]);
+        } catch (\Exception $e) {
+            Alert::error("Bulk Transfer Detail Not Found");
+            // return view('pages.transfer.bulkTransfers.bulk_trasnfer');
+            return view('pages.transfer.bulkTransfers.new_bulk_transfer');
         }
     }
 
@@ -658,73 +641,11 @@ class BulkUploadsController extends Controller
 
     public function post_bulk_transaction(Request $request)
     {
-        // return $request;
+        return $request;
 
         $batch = $request->query('batch_no');
-        $batch_ = explode('~', $batch);
-        // return $batch_;
 
 
-        $batch_no = $batch_[0];
-        $customer_no = $batch_[1];
-        // $batch_no = $request->batch_no;
-        $authToken = session()->get('userToken');
-        $userID = session()->get('userId');
-
-
-
-        $data = DB::table('tb_corp_bank_import_excel')->where('batch_no', $batch_no)->get()->toArray();
-
-
-
-        // return $data;
-
-        // return response()->json([
-        //     'responseCode' => '422',
-        //     'message' => 'View Error From Api',
-        //     'data' => $data
-        // ], 200);
-
-        // die();
-
-        /*
-        $credit_data = [];
-        $debit_data = [];
-
-        foreach ($files as $data) {
-
-            $credit['creditAccount'] = $data->BBAN;
-            $credit['creditAmount'] = (float) $data->AMOUNT;
-            $credit['creditBranch'] = '001';
-            $credit['debitCurrency'] = 'SLL';
-            $credit['creditNarration'] =  $data->TRANS_DESC;
-            $credit['creditProdRef'] = $data->REF_NO;
-
-            array_push($credit_data, $credit);
-        }
-
-        $debit_data['debitAccount'] = $files[0]->ACCOUNT_NO;
-        $debit_data['debitAmount'] = (float) $files[0]->TOTAL_AMOUNT;
-        $debit_data['debitCurrency'] = 'SLL';
-        $debit_data['debitNarration'] = $files[0]->TRANS_DESC;
-        $debit_data['debitProdRef'] = $files[0]->REF_NO;
-
-        $data = [
-            "approvedBy" => "string",
-            "branch" => "string",
-            "channelCode" => "string",
-            "department" => "rr",
-            "postedBy" => "KOBBY",
-            "referenceNo" => "string",
-            "transType" => "string",
-            "unit" => "yyy",
-            "debitAccounts" => [$debit_data],
-            "creditAccounts" => $credit_data,
-        ];
-
-        // return  $data;
-
-        */
         // dd(env('CIB_API_BASE_URL') . "post-bulk-upload-list");
         $response = Http::post(env('CIB_API_BASE_URL') . "post-bulk-upload-list", $data);
         // dd($response);
