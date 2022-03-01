@@ -644,16 +644,34 @@ class BulkUploadsController extends Controller
         // return $request;
 
         $fileBatch = $request->query('batch_no');
+        $customerAccounts = session()->get('customerAccounts');
 
         $base_response = new BaseResponse();
-        // return $fileBatch;
+        // return $customerAccounts;
 
 
         try {
             $batch = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadData/$fileBatch");
             // $result = new ApiBaseResponse();
             $bulk_details = $batch['data'];
-            $response = Http::post(env('CIB_API_BASE_URL') . "post-bulk-upload-list", $bulk_details);
+            $uploadDetails = $bulk_details['uploadDetails'];
+            $debit_account = $uploadDetails['debitAccount'];
+            // return $debit_account;
+            foreach (session()->get('customerAccounts') as $i => $account) {
+                if ($account->accountNumber ==  $debit_account) {
+                    $accountDetails = $account;
+                };
+            }
+
+            // return $accountDetails;
+
+            $data = [
+                'bulk_details' => $bulk_details,
+                'accountDetails' => $accountDetails
+            ];
+
+            // return $data;
+            $response = Http::post(env('CIB_API_BASE_URL') . "post-bulk-upload-list", $data);
             return $response;
         } catch (\Exception $e) {
             DB::table('tb_error_logs')->insert([
