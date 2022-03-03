@@ -201,7 +201,7 @@
                 },
                 success: function(response) {
                     console.log(response)
-                    return false
+                    //return false
                     siteLoading("hide")
 
                     if (response.responseCode == '000') {
@@ -229,6 +229,52 @@
 
         }
 
+
+        function reject_upload(customer_no) {
+
+            const ipAPI = 'reject-bulk-transaction-api?customer_no=' + customer_no
+
+            Swal.fire([{
+                title: 'Are you sure you want to reject',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, Reject!',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return fetch(ipAPI)
+                        .then(response => response.json())
+                        .then((data) => {
+                            if (data.responseCode == '000') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message
+                                })
+
+                                setTimeout(function() {
+                                    window.location = "{{ url('bulk-transfer') }}"
+                                }, 2000)
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: data.message
+                                })
+                            }
+                            {{-- Swal.fire(data.ip) --}}
+                        })
+                        .catch(() => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'API SERVER ERROR'
+                            })
+                        })
+                }
+            }])
+
+
+        }
+
         $(document).ready(function() {
             var batch_no = @json($batch_no)
 
@@ -238,7 +284,7 @@
             })
 
             $('#reject_upload_btn').click(function() {
-                console.log(batch_no)
+                reject_upload(batch_no)
             })
 
 
