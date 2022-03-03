@@ -441,6 +441,7 @@ class BulkUploadsController extends Controller
         // $bank_type = $request->query('bank_type');
 
         $customer_no = session()->get('customerNumber');
+        $userID = session()->get('userId');
 
         // if (null !== ($request->query('batch_no') || $request->query('account_no') || $request->query('bank_type'))) {
 
@@ -472,7 +473,8 @@ class BulkUploadsController extends Controller
             return view('pages.transfer.bulkTransfers.view_bulk_trasnfer', [
                 'uploadData' => $uploadData,
                 'uploadDetails' => $uploadDetails,
-                'batch_no' => $fileBatch
+                'batch_no' => $fileBatch,
+                'userID' => $userID
 
 
             ]);

@@ -5,9 +5,9 @@
 
                     let pie_chart_details = []
 
-                    let int_days = 700;
+                    let int_days = 300;
                     let int_interest = 0.01;
-                    let int_amount = 500;
+                    let int_amount = 1000;
                     let int_count_days = 1;
                     let int_daily_profit = 0;
                     let int_total_amount_and_profit = 0;
