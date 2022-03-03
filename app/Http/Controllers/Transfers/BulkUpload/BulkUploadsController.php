@@ -441,7 +441,7 @@ class BulkUploadsController extends Controller
         // $bank_type = $request->query('bank_type');
 
         $customer_no = session()->get('customerNumber');
-        $userID = session()->get('userId');
+        // $userID = session()->get('userId');
 
         // if (null !== ($request->query('batch_no') || $request->query('account_no') || $request->query('bank_type'))) {
 
@@ -474,7 +474,7 @@ class BulkUploadsController extends Controller
                 'uploadData' => $uploadData,
                 'uploadDetails' => $uploadDetails,
                 'batch_no' => $fileBatch,
-                'userID' => $userID
+                // 'userID' => $userID
 
 
             ]);
@@ -647,6 +647,7 @@ class BulkUploadsController extends Controller
 
         $fileBatch = $request->query('batch_no');
         $customerAccounts = session()->get('customerAccounts');
+        $userID = session()->get('userId');
 
         $base_response = new BaseResponse();
         // return $customerAccounts;
@@ -669,7 +670,8 @@ class BulkUploadsController extends Controller
 
             $data = [
                 'bulk_details' => $bulk_details,
-                'accountDetails' => $accountDetails
+                'accountDetails' => $accountDetails,
+                'userID' => $userID
             ];
 
             // return $data;
