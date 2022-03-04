@@ -5,28 +5,7 @@
 
                     let pie_chart_details = []
 
-                    let int_days = 300;
-                    let int_interest = 0.01;
-                    let int_amount = 1000;
-                    let int_count_days = 1;
-                    let int_daily_profit = 0;
-                    let int_total_amount_and_profit = 0;
 
-
-                    function calculate_interest(){
-                        if(int_count_days <= int_days){
-                           let int_daily_interest_compounding = int_amount *  int_interest
-                           int_amount +=int_daily_interest_compounding
-                           int_count_days++
-                            console.log(int_amount)
-                            calculate_interest()
-
-                        }
-
-                        // calculate_interest()
-                    }
-
-                    calculate_interest()
 
 
 
