@@ -1,77 +1,83 @@
 @extends('layouts.app')
 
+
+@section('styles')
+<style>
+    .bg-muted {
+        background-color: #f5f5f5;
+    }
+</style>
+@endsection
+
 @section('content')
 
-    @include('snippets.top_navbar', ['page_title' => 'BRANCHES'])
+@include('snippets.top_navbar', ['page_title' => 'LOCATOR'])
 
 
 
 
-    <div class="container">
+<div class="container-xl pt-5">
 
-        <br><br><br><br>
-
-        <div class="card">
-            <div class="card-body">
-
-
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="col-12 ">
-                            <form class="search-bar form-inline" autocomplete="off" aria-autocomplete="off">
-                                <div class="position-relative">
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                    <span class="mdi mdi-magnify"></span>
-                                </div>
-                            </form>
-                        </div>
-                        <br>
-
-                        <div class="col-12 ">
-
-                            <div class="table-responsive" style="height: 420px;">
-
-                                <div class="text-center" id="branches_info_loader">
-                                    <div class="spinner-border avatar-lg" role="status"></div>
-                                </div>
-
-                                <div class="text-center" id="branches_info_retry_btn">
-                                    <button class="btn btn-sm btn-secondary">retry</button>
-                                </div>
-
-
-                                <table class="table table-centered table-nowrap mb-0">
-                                    <tbody id="branches_display">
-
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- end table-responsive -->
-                        </div>
-
-
-
-                    </div> <!-- end col -->
-
-                    <div class="col-md-7">
-                        <img src="{{ asset('assets/images/map.jpg') }}" class="img-fluid" alt="">
-                    </div> <!-- end col -->
+    <div class="site-card mt-3"
+        style="background-image: url('assets/images/background.png'); background-repeat: no-repeat; background-size: cover;">
+        <div class="row">
+            <div class="col-md-3 pt-md-5">
+                <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link my-md-2 rounded-pill active" id="pills-branch-tab" data-toggle="pill"
+                        href="#pills-branch" role="tab" aria-controls="pills-branch" aria-selected="true">Branch</a>
+                    <a class="nav-link my-md-2 rounded-pill" id="pills-atm-tab" data-toggle="pill" href="#pills-atm"
+                        role="tab" aria-controls="pills-atm" aria-selected="false">Atm</a>
+                    <a class="nav-link my-md-2 rounded-pill" id="pills-agents-tab" data-toggle="pill"
+                        href="#pills-agents" role="tab" aria-controls="pills-agents" aria-selected="false">Agents</a>
                 </div>
-                <!-- end row -->
-
-
+            </div>
+            <div class="col-md-9">
+                <div class="input-group flex-nowrap w-100 rounded-pill my-3 mx-auto " style="max-width: 400px">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text bg-white text-muted"
+                            style="border-right: none; border-top-left-radius:33px;border-bottom-left-radius:33px; padding-right: 0"
+                            id="addon-wrapping"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" class="form-control   "
+                        style="border-left: none; border-top-right-radius:33px;border-bottom-right-radius:33px;"
+                        id="search-box" placeholder="Search ..." />
+                </div>
+                <div class="tab-content " id="pills-tabContent" style="height:700px">
+                    <div class="tab-pane fade show active" id="pills-branch" role="tabpanel"
+                        aria-labelledby="pills-branch-tab">
+                        <div class="bg-white p-2">
+                            <div class="d-flex">
+                                <div class="px-2 align-self-center"><i class="fas fa-building font-28"></i></i></div>
+                                <div class="pl-2 ">
+                                    <div class="pl-2">
+                                        <div class="flex justify-content-between"><span
+                                                class="d-block  font-weight-bold" style="color:#222222">ADABRAKA
+                                                BRANCH</span><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                                        <span class="d-block   font-11">08:00 - 16:00<span class="pl-2">Mon - Fri
+                                            </span></span>
+                                        <span class="d-block  font-11">10:00 - 14:00<span
+                                                class="pl-2">Weekends</span></span>
+                                    </div>
+                                    <div>
+                                        <span class=" bg-muted px-1 py-1 font-12 rounded-pill "><i
+                                                class="fas pr-1 text-primary fa-phone"></i> 024 897 6789</span>
+                                        <span class="bg-muted px-1 p-1 font-12 rounded-pill "><i
+                                                class="fas pr-1 text-primary fa-phone"></i> 024 897 6789</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-atm" role="tabpanel" aria-labelledby="pills-atm-tab">
+                        Atm</div>
+                    <div class="tab-pane fade" id="pills-agents" role="tabpanel" aria-labelledby="pills-agents-tab">
+                        Agents</div>
+                </div>
             </div>
         </div>
-
-
-        <br>
-
-
-
     </div>
-    <!-- end row -->
+</div>
+<!-- end row -->
 
 
 @endsection
@@ -81,8 +87,8 @@
 
 
 @section('scripts')
-    <script>
-        $("#branches_info_display").hide();
+<script>
+    $("#branches_info_display").hide();
         $("#branches_info_retry_btn").hide();
 
         function get_branches() {
@@ -153,6 +159,6 @@
                 get_branches();
             }, 2000);
         })
-    </script>
+</script>
 
 @endsection

@@ -205,7 +205,7 @@ Route::group(['middleware' => ['userAuth']], function () {
 
     Route::get('request-statement', [AccountServicesController::class, 'request_statement'])->name('request-statement');
     Route::get('close-account', [AccountServicesController::class, 'close_account'])->name('close-account');
-    Route::get('budgeting-spending-statics', [SpendingStaticsController::class, 'spending_statics'])->name('budgeting-spending-statics');
+    // Route::get('budgeting-spending-statics', [SpendingStaticsController::class, 'spending_statics'])->name('budgeting-spending-statics');
     Route::get('request-blink', [paymentController::class, 'request_blink_payment'])->name('request-blink');
     Route::get('order-blink-payment', [paymentController::class, 'order_blink_payment'])->name('order-blink-payment');
     Route::get('fd-creation', [AccountServicesController::class, 'fd_creation'])->name('fd-creation');
@@ -214,9 +214,9 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('cheque-book-request', [AccountServicesController::class, 'cheque_book_request'])->name('cheque-book-request');
     Route::get('confirm-cheque', [AccountServicesController::class, 'confirm_cheque'])->name('confirm-cheque');
     Route::get('activate-cheque-book', [AccountServicesController::class, 'activate_cheque_book'])->name('activate-cheque-book');
-    Route::get('cheque-approvals-pending', [ChequesPendingController::class, 'pending_cheques'])->name('cheque-approvals-pending');
-    Route::get('cheque-approvals-approved', [ChequesApprovedController::class, 'cheques_approved'])->name('cheque-approval-approved');
-    Route::get('cheque-approvals-rejected', [ChequesRejectedController::class, 'cheques_rejected'])->name('cheques-approvals-rejected');
+    // Route::get('cheque-approvals-pending', [ChequesPendingController::class, 'pending_cheques'])->name('cheque-approvals-pending');
+    // Route::get('cheque-approvals-approved', [ChequesApprovedController::class, 'cheques_approved'])->name('cheque-approval-approved');
+    // Route::get('cheque-approvals-rejected', [ChequesRejectedController::class, 'cheques_rejected'])->name('cheques-approvals-rejected');
     Route::get('stop-cheque', [AccountServicesController::class, 'stop_cheque'])->name('stop-cheque');
     Route::get('request-atm', [AccountServicesController::class, 'request_atm'])->name('request-atm');
     Route::get('block-debit-card', [AccountServicesController::class, 'block_atm'])->name('block-debit-card');
@@ -267,6 +267,7 @@ Route::post('account-trans-document-api', [AccountEnquiryController::class, 'acc
 Route::get('get-branches-api', [branchLocatorController::class, 'get_branches_api'])->name('get-branches-api');
 Route::get('/pending-request-details-api', [PendingController::class, 'pending_request_details'])->name('pending-request-details-api');
 Route::post('complaint-api', [ComplaintController::class, 'make_complaint_api'])->name('complaint-api');
+Route::get('get-service-type-api', [ComplaintController::class, 'getServiceType']);
 
 
 
