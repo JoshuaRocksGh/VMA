@@ -154,11 +154,11 @@
                         </ul>
                     </div> --}}
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ url('home') }}">
                         <i class="fas fa-hand-holding-usd"></i> <span> My Investments</span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="#sidebarAccountServices" data-toggle="collapse">
                         <i class="mdi mdi-email-multiple-outline"></i>
@@ -173,7 +173,7 @@
                             <li>
                                 <a href="{{ url('confirm-cheque') }}">Cheque Status</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="#sidebarChequeApprovals" data-toggle="collapse">
                                     <span>Cheque Approvals</span>
                                     <span class="menu-arrow"></span>
@@ -191,7 +191,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="#sidebarRequests" data-toggle="collapse">
