@@ -582,7 +582,7 @@
                                 <div class="col-xl-6">
                                     <label for="" class="text-dark"><b>To</b></label>
                                     <select class="form-control" id="exch_rate_to">
-                                        <option value="">-- Select Currency --</option>
+                                        {{-- <option value="">-- Select Currency --</option> --}}
                                         {{-- <option value="EUR">(EUR) EURO</option> --}}
                                         <option value="SLL" selected>(SLL) LOENE</option>
                                         {{-- <option value="USD">(USD) US DOLLAR</option> --}}
@@ -609,7 +609,8 @@
                                     <div class="form-group">
                                         <label class="text-dark"><b>Result</b></label>
                                         <div>
-                                            <input type="text" class="form-control readOnly" id="exchange_result" readonly>
+                                            <input type="text" class="form-control readOnly text-danger font-weight-bold"
+                                                id="exchange_result" readonly>
 
                                             {{-- <span></span> --}}
                                         </div>

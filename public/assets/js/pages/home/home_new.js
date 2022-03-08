@@ -849,7 +849,7 @@
                     };
 
 
-                    $("#exchange_amount").keyup(function() {
+                   /* $("#exchange_amount").keyup(function() {
                         var exch_rate_from = $("#exch_rate_from").val();
                         var exch_rate_to = $("#exch_rate_to").val();
                         let ex_amount = $(this).val();
@@ -858,7 +858,7 @@
                         //console.log(exch_rate_to)
                         //console.log($(this).val())
 
-                    })
+                    }) */
 
                     function formatToCurrency(amount) {
                         return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
@@ -883,7 +883,8 @@
                                 // console.log("getCorrectFxRates =>" , response)
                                 // return false;
                                 if (response.responseCode === "000") {
-                                    forex_rate = response.data
+                                   forex_rate = response.data
+                                   console.log("forex_rate =>",forex_rate)
                                     $(".currency_fx_rate tr").remove();
 
                                     data = response.data;
@@ -1295,7 +1296,7 @@
 
                         }, 500);
 
-                    })
+                    // })
 
                     $("#casa_line_chart").change(function() {
                         var account_details = $(this).val()
@@ -1335,7 +1336,7 @@
 
                     })
 
-                    $(function() {
+                    // $(function() {
 
 
 
@@ -1349,8 +1350,9 @@
 
                         $('#exch_rate_from').change(function(e) {
                             e.preventDefault();
+                            // alert("changed")
                             var exch_rate_from = $('#exch_rate_from').val();
-                            // {{-- console.log(forex_rate.length); --}}
+                            // console.log(forex_rate.length);
                             var exch_rate_to = $('#exch_rate_to').val();
                             var get_con = exch_rate_from + '/ ' + exch_rate_to;
                             var get_con_1 = exch_rate_to + '/ ' + exch_rate_from;
@@ -1364,11 +1366,11 @@
 
 
                             for (let index = 0; index < forex_rate.length; index++) {
-                                //console.log('final = ' + get_con);
+                                console.log('final = ' + get_con);
                                 // {{-- console.log(forex_rate.length) --}}
                                 if (forex_rate[index].PAIR == get_con) {
                                     rate = forex_rate[index].MIDRATE;
-                                    //console.log(rate)
+                                    console.log(rate)
                                     var amount = $('#exchange_amount').val();
                                     result = parseFloat(amount) * parseFloat(rate);
                                     //console.log(amount + '*' + rate)
@@ -1385,7 +1387,7 @@
 
                                 if (forex_rate[index].PAIR == get_con_1) {
                                     rate = forex_rate[index].MIDRATE;
-                                    //console.log(rate)
+                                    console.log(rate)
                                     var amount = $('#exchange_amount').val();
                                     result = parseFloat(amount) / parseFloat(rate);
                                     //console.log(amount + '/' + rate)
@@ -1471,29 +1473,36 @@
                             var exch_rate_to = $('#exch_rate_to').val();
                             var get_con = exch_rate_from + '/ ' + exch_rate_to;
                             var get_con_1 = exch_rate_to + '/ ' + exch_rate_from;
-                            var amount = $('#exchange_amount').val();
+                            // var amount = $('#exchange_amount').val();
+                            var amount = $(this).val();
+                            console.log(exch_rate_from)
+                            console.log(exch_rate_to)
+                            console.log("amount rate=>" ,rate)
 
-                            if (exch_rate_from = '' || exch_rate_from == undefined || exch_rate_to == '' ||
+                            if (exch_rate_from == '' || exch_rate_from == undefined || exch_rate_to == '' ||
                                 exch_rate_to == undefined) {
+                                toaster("Select Currency For Conversion", "error" ,1000)
                                 return false;
                             }
                             if (amount == '' || amount == undefined) {
                                 return false;
                             }
 
-                            if (!multiply) {
+                            if (multiply) {
                                 result = parseFloat(amount) * parseFloat(rate);
-                                //console.log(amount + '*' + rate)
-                                $('#exchange_result').html(exch_rate_to + ' ' + new Intl.NumberFormat('en-IN').format(
+                                console.log("multiply result=>" ,result)
+                                console.log(amount + '*' + rate)
+                                $('#exchange_result').val(exch_rate_to + ' ' + new Intl.NumberFormat('en-IN').format(
                                     result));
                             }
 
-                            if (!divided) {
-                                result = parseFloat(amount) * parseFloat(rate);
-                                //console.log(amount + '/' + rate)
-                                $('#exchange_result').html(exch_rate_to + ' ' + new Intl.NumberFormat('en-IN').format(
-                                    result));
-                            }
+                            // if (!divided) {
+                            //     result = parseFloat(amount) * parseFloat(rate);
+                            //     console.log("divided result=>" ,result)
+                            //     console.log(amount + '/' + rate)
+                            //     $('#exchange_result').html(exch_rate_to + ' ' + new Intl.NumberFormat('en-IN').format(
+                            //         result));
+                            // }
 
 
                         });
