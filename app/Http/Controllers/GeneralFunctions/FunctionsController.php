@@ -262,22 +262,6 @@ class FunctionsController extends Controller
         return $result->api_response($response);
     }
 
-    public function branches_list()
-    {
-
-        // $response = Http::get(env('API_BASE_URL') . "/utilities/getBranches");
-        $api_headers = session()->get('headers');
-
-        $response = Http::withHeaders($api_headers)->get(env('API_BASE_URL') . "/utilities/getBranches");
-
-
-        //return $response;
-        // return $response->status();
-        $result = new ApiBaseResponse();
-        return $result->api_response($response);
-    }
-
-
     public function lovs_list()
     {
 
