@@ -40,7 +40,10 @@ function formatToCurrency(amount) {
 }
 
 function somethingWentWrongHandler() {
-    toaster("Something went wrong ... please hold on", "error");
+    toaster(
+        "Something went wrong ... Please wait a while and try again",
+        "error"
+    );
     setTimeout(() => {
         location.reload();
     }, 3000);
