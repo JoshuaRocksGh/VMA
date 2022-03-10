@@ -220,7 +220,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('stop-cheque', [AccountServicesController::class, 'stop_cheque'])->name('stop-cheque');
     Route::get('request-atm', [AccountServicesController::class, 'request_atm'])->name('request-atm');
     Route::get('block-debit-card', [AccountServicesController::class, 'block_atm'])->name('block-debit-card');
-    Route::get('activate-card', [CardsController::class, 'activate_card'])->name('activate-card');
+    Route::get('card-services', [CardsController::class, 'cardServices']);
     Route::get('request-for-letter', [AccountServicesController::class, 'request_for_letter'])->name('request-for-letter');
     Route::get('open-additional-account', [AccountServicesController::class, 'open_additional_acc'])->name('open-additional-account');
     Route::get('request-draft', [AccountServicesController::class, 'request_draft'])->name('request-draft');
@@ -375,6 +375,10 @@ Route::post('change-password-api', [ChangePasswordController::class, 'change_pas
 Route::get('korpor-history-api', [KorporController::class, 'getKorporHistoryByType']);
 Route::post('reversed-korpor-request', [KorporController::class, 'send_reversed_request'])->name('reversed-korpor-request');
 Route::post('reverse-korpor', [KorporController::class, 'reverse_korpor'])->name('reverse-korpor');
+
+
+Route::get('get-card-types-api', [CardsController::class, 'getCardTypes']);
+
 
 
 //route to return interest rate types
