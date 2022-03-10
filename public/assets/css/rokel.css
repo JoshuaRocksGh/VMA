@@ -13,6 +13,11 @@ a:hover {
 .z-1 {
     z-index: -1;
 }
+.text-input {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: 1px solid #ced4da;
+}
 .form-control,
 .bootstrap-select .dropdown-toggle {
     height: auto;
