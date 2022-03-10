@@ -1,6 +1,6 @@
 <!-- ========== Left Sidebar Start ========== -->
 <div class="left-side-menu pt-3" style="background-image: linear-gradient( #0561ad, #00CCFF);">
-    <div class="h-100" data-simplebar>
+    <div class="slimscroll-menu" data-simplebar>
         <div id="sidebar-menu">
             <ul id=" side-menu">
                 <li>
@@ -322,6 +322,6 @@
                 </li>
             </ul>
         </div>
-        <div class="clearfix"></div>
+        {{-- <div class="clearfix"></div> --}}
     </div>
 </div>
