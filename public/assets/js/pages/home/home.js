@@ -444,7 +444,7 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             success: function(response) {
-                                // console.log("fixed deposit result=>",response);
+                                console.log("fixed deposit result=>",response);
 
                                 let data = response.data;
                                 let noInvestments = noDataAvailable.replace(
@@ -500,13 +500,20 @@
                                                 var rollover_ = "No"
                                             }
 
+                                            var fixedInterestRate = data[index].fixedInterestRate
+                                            if(fixedInterestRate == null || fixedInterestRate == undefined){
+                                                var interest_rate = "0"
+                                            }else {
+                                                var interest_rate = data[index].fixedInterestRate
+                                            }
+
                                             //console.log(`total investments ${account_data.i_invest_total}`)
                                             $('.fixed_deposit_account').append(
                                                 `<tr>
                                                     <td><b> ${data[index].interestAccount} </b></td>
                                                     <td><b class="float-right"> ${ formatToCurrency(parseFloat(data[index].dealAmount))} </b></td>
                                                     <td><b> ${data[index].tenure} </b></td>
-                                                    <td><b> ${data[index].fixedInterestRate} </b></td>
+                                                    <td><b> ${interest_rate} </b></td>
                                                     <td><b> ${rollover_ } </b></td>
                                                 </tr>`
                                             )
@@ -588,7 +595,7 @@
                             },
                             success: function(response) {
 
-                                // {{-- console.log("before get account:", response); --}}
+                                // console.log("CURRENT & SAVINGS ACCOUN:", response);
 
 
                                 if (response.responseCode == '000') {
@@ -642,9 +649,9 @@
                                         <td> <b> ${data[index].accountDesc} </b>  </td>
                                         <td> <b> ${data[index].accountType}  </b>  </td>
                                         <td> <b> ${data[index].currency}  </b>  </td>
-                                        {{-- <td>  <b> 0.00  </b> </td> --}}
-                                        {{-- <td> <b> ${formatToCurrency(parseFloat(data[index].ledgerBalance))}   </b>  </td> --}}
-                                        <td> <b class="float-right"> ${availableBalance}   </b></td>
+
+                                        <td> <b> ${formatToCurrency(parseFloat(data[index].ledgerBalance))}   </b>  </td>
+
                                     </tr>`
                                         )
                                     })
