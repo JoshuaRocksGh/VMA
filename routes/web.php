@@ -211,8 +211,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('fd-creation', [AccountServicesController::class, 'fd_creation'])->name('fd-creation');
     Route::get('stop-fd', [AccountServicesController::class, 'stop_fd'])->name('stop-fd');
     Route::get('lc-origination', [TradeFinanceController::class, 'lc_origination'])->name('lc-origination');
-    Route::get('cheque-book-request', [AccountServicesController::class, 'cheque_book_request'])->name('cheque-book-request');
-    Route::get('confirm-cheque', [AccountServicesController::class, 'confirm_cheque'])->name('confirm-cheque');
+    Route::get('cheque-services', [AccountServicesController::class, 'chequeServices']);
     Route::get('activate-cheque-book', [AccountServicesController::class, 'activate_cheque_book'])->name('activate-cheque-book');
     // Route::get('cheque-approvals-pending', [ChequesPendingController::class, 'pending_cheques'])->name('cheque-approvals-pending');
     // Route::get('cheque-approvals-approved', [ChequesApprovedController::class, 'cheques_approved'])->name('cheque-approval-approved');
@@ -251,7 +250,6 @@ Route::group(['middleware' => ['userAuth']], function () {
 
 // >>>>>>>>>>>>>>>>>>>>>>>>> API ROUTES <<<<<<<<<<<<<<<<<<<<<<<<<<
 Route::post('create-originator-api', [settingsController::class, 'create_originator_api'])->name('create-originator-api');
-Route::get('set-transaction-limits-api', [settingsController::class, 'set_transaction_limits_api'])->name('set-transaction-limits-api');
 Route::get('set-transaction-limits-api', [settingsController::class, 'set_transaction_limits_api'])->name('set-transaction-limits-api');
 Route::get('/get-bulk-upload-list-api', [BulkUploadBulkUploadsController::class, 'get_bulk_upload_list'])->name('get-bulk-upload-list-api');
 Route::get('/get-bulk-upload-detail-list-api', [BulkUploadBulkUploadsController::class, 'get_bulk_upload_file_details'])->name('get-bulk-upload-detail-list-api');

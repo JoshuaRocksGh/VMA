@@ -20,15 +20,15 @@ class AccountServicesController extends Controller
     }
 
     //method to return cheque book request screen
-    public function cheque_book_request()
-    {
-        return view('pages.accountServices.chequeBookRequest');
-    }
+    // public function cheque_book_request()
+    // {
+    //     return view('pages.accountServices.chequeBookRequest');
+    // }
 
     //method to return confirm cheque
-    public function confirm_cheque()
+    public function chequeServices()
     {
-        return view('pages.accountServices.confirm_cheque');
+        return view('pages.accountServices.chequeServices.cheque_services');
     }
 
     //method to return fd creation screen
