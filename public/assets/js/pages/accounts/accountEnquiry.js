@@ -1,4 +1,10 @@
 $(function () {
+    $("select").select2();
+    $(".accounts-select").select2({
+        minimumResultsForSearch: Infinity,
+        templateResult: accountTemplate,
+        templateSelection: accountTemplate,
+    });
     let today = new Date();
     let day = today.getDate().toString().padStart(2, "0");
     let month = (today.getMonth() + 1).toString().padStart(2, "0");
@@ -55,18 +61,16 @@ $(function () {
             } else {
                 from_account_info = from_account.split("~");
                 account_number = from_account_info[2].trim();
-                // blockUi(
-                //     "body",
-                //     "Getting Transactions...Please Wait",
-                //     "75px",
-                //     "#4fc6e1"
-                // );
                 siteLoading("show");
                 getAccountTransactions(
                     account_number,
                     startDate,
                     endDate
                 ).always(() => siteLoading("hide"));
+                $("#display_account_number").text(account_number);
+                $("#display_search_start_date").text(startDate);
+                $("#display_search_end_date").text(endDate);
+
                 const pdfPath = `print-account-statement\?ac=${encodeString(
                     account_number
                 )}&sd=${encodeString(startDate)}&ed=${encodeString(endDate)}`;

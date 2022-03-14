@@ -66,20 +66,20 @@
                         <div class="row site-card justify-content-md-around" id="transaction_form">
                             <div class="col-md-6 align-self-center">
                                 <div class="form-group row ">
-                                    <b class="col-md-3 text-primary align-self-center"> Account :</b>
-                                    <select class="form-control col-md-9" id="from_account" required>
+                                    <label class=" text-primary align-self-center"> Account :</label>
+                                    <select class="form-control accounts-select " id="from_account" required>
                                         <option value="" disabled selected> -- Select Your Account -- </option>
                                         @include("snippets.accounts")
                                     </select>
                                 </div>
 
                                 <div class="form-group row">
-                                    <b class="col-md-3 text-primary align-self-center">Start Date :</b>
-                                    <input type="date" id="startDate" class=" col-md-9 form-control ">
+                                    <label class="  text-primary align-self-center">Start Date :</label>
+                                    <input type="date" id="startDate" class=" text-input  form-control ">
                                 </div>
                                 <div class="form-group row">
-                                    <b class="col-md-3 text-primary align-self-center">End Date :</b>
-                                    <input type="date" id="endDate" class=" col-md-9 form-control ">
+                                    <label class=" text-primary align-self-center">End Date :</label>
+                                    <input type="date" id="endDate" class="text-input  form-control ">
                                 </div>
                                 <div class="form-group row justify-content-end">
                                     <button class="btn btn-primary mt-1 waves-effect waves-light"
@@ -90,7 +90,7 @@
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h4 class="text-bold text-center"> <b>Account Details</b> </h4>
+                                        <h4 class="text-bold text-primary text-center"> <b>Account Details</b> </h4>
                                     </div>
                                     <div class="col-5">
                                         <h4>Name:&nbsp; </h4>
@@ -137,11 +137,16 @@
                         <div class="alert alert-secondary" id="account_balance_info_display" role="alert">
                             <div class="row">
 
-                                <div class="col-md-6">
-                                    <h5>Account Number: <strong class="display_account_number"></strong>
+                                <div class="col-md-6 row">
+                                    <h5 class="col-5">Account Number:
                                     </h5>
-                                    <h5> Date Range: <strong class="display_search_date_range"></strong>
+                                    <h5 class="col-7" id="display_account_number"></h5>
+                                    <h5 class="col-5"> Start Date:
                                     </h5>
+                                    <h5 class="col-7" id="display_search_start_date"></h5>
+                                    <h5 class="col-5"> End Date:
+                                    </h5>
+                                    <h5 class="col-7" id="display_search_end_date"></h5>
                                 </div>
 
                                 <div class="col-9 col-md-4">
