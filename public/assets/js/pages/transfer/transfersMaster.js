@@ -287,15 +287,15 @@ $(() => {
     let confirmationCompleted = false;
     let validationsCompleted = false;
     let isOnetimeTransfer = false;
+    $("select").select2();
+    $("#to_account").select2({
+        minimumResultsForSearch: Infinity,
+    });
     $(".accounts-select").select2({
         minimumResultsForSearch: Infinity,
         templateResult: accountTemplate,
         templateSelection: accountTemplate,
     });
-    $("#to_account").select2({
-        minimumResultsForSearch: Infinity,
-    });
-    $("#category").select2();
 
     function renderOwnAccounts() {
         $("#to_account").empty()

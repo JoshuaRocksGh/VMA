@@ -25,17 +25,20 @@ $(function () {
 
         const accountProduct = option.attr("data-account-type");
         const accountCurrency = option.attr("data-account-currency");
+        const accountBalance = option.attr("data-account-balance");
         const accountDescription = option.attr("data-account-description");
         $(".account_product").text(accountProduct);
         $(".account_number").text(accountNumber);
         $(".display_from_account_currency").text(accountCurrency);
         $(".account_description").text(accountDescription);
         $(".account_currency").text(accountCurrency);
+        $("#account_balance").text(formatToCurrency(accountBalance));
         PageData.currentAccount = {
             accountCurrency,
             accountDescription,
             accountProduct,
             accountNumber,
+            accountBalance,
         };
     });
 

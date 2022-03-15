@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section("styles")
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/pagination/pagination.css') }}" />
 <style>
     .history-card {
         cursor: pointer;
@@ -66,7 +65,7 @@ $currentPath = 'CardServices';
 @endphp
 @include('snippets.pageHeader')
 
-<div class="tab-pane site-card p-2 p-sm-3 p-md-4" id="korpor_history_page">
+<div class="tab-pane site-card p-2 p-sm-3 p-md-4">
     <div class=" mt-lg-0 rounded">
         <div class="form-group mb-3 justify-content-center d-md-flex mx-md-auto"
             style="max-width: 750px; min-height: 70px;">
@@ -101,7 +100,7 @@ $currentPath = 'CardServices';
                     class="  transition-all py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
                     href="#tab_card_limit">Card Limits</button>
             </nav>
-            <div class="col-md-8 px-0" id="korpor_history_display" style="max-width: 650px;">
+            <div class="col-md-8 px-0" style="max-width: 650px;">
                 <div class="tab-content pt-0" id="tabContent_card_services">
                     <div class="tab-pane fade show active bg-white" id="tab_card_request" role="tabpanel">
                         @include('pages.cards.card_request')</div>

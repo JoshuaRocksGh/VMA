@@ -168,34 +168,8 @@
                     <div class="collapse" id="sidebarAccountServices">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">ATM Card Request </a>
+                                <a href="{{ url('cheque-services') }}">Cheque Services</a>
                             </li>
-                            <li>
-                                <a href="{{ url('cheque-book-request') }}">Cheque Book Request </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('confirm-cheque') }}">Cheque Status</a>
-                            </li>
-                            {{-- <li>
-                                <a href="#sidebarChequeApprovals" data-toggle="collapse">
-                                    <span>Cheque Approvals</span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarChequeApprovals">
-                                    <ul class="nav-second-level">
-                                        <li>
-                                            <a href="{{ url('cheque-approvals-pending') }}">Pending</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('cheque-approvals-approved') }}">Approved</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('cheque-approvals-rejected') }}">Rejected</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li> --}}
-
                             <li>
                                 <a href="#sidebarRequests" data-toggle="collapse">
                                     <span> Requests </span>
@@ -278,14 +252,17 @@
                             <li>
                                 <a href="{{ url('approvals-rejected') }}">Rejected</a>
                             </li>
-                            {{-- <li>
-                                <a href="#">All</a>
-                            </li> --}}
+
                         </ul>
                     </div>
                 </li>
                 @endif
-                <li><a href="#sidebarSetting" data-toggle="collapse">
+                <li>
+                    <a href="{{ url('settings') }}">
+                        <i class="mdi mdi-cog-outline"></i>
+                        <span> Settings </span>
+                    </a>
+                    {{-- <a href="#sidebarSetting" data-toggle="collapse">
                         <i class="mdi mdi-cog-outline"></i>
                         <span> Settings </span>
                         <span class="menu-arrow"></span>
@@ -304,7 +281,7 @@
                                 <a href="{{ url('change-pin') }}">Pin Setup</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
 
                 </li>
                 <li>
@@ -322,6 +299,5 @@
                 </li>
             </ul>
         </div>
-        {{-- <div class="clearfix"></div> --}}
     </div>
 </div>
