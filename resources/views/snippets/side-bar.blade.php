@@ -1,6 +1,6 @@
 <!-- ========== Left Sidebar Start ========== -->
 <div class="left-side-menu pt-3" style="background-image: linear-gradient( #0561ad, #00CCFF);">
-    <div class="h-100" data-simplebar>
+    <div class="slimscroll-menu" data-simplebar>
         <div id="sidebar-menu">
             <ul id=" side-menu">
                 <li>
@@ -63,9 +63,9 @@
                                 </div>
                             </li>
                             @if (config('app.corporate'))
-                                <li>
-                                    <a href="{{ url('bulk-transfer') }}">Bulk Transfer </a>
-                                </li>
+                            <li>
+                                <a href="{{ url('bulk-transfer') }}">Bulk Transfer </a>
+                            </li>
                             @endif
                             <li>
                                 <a href="{{ url('transfer-status') }}">Transfer Status</a>
@@ -101,12 +101,12 @@
                             </li>
 
                             @if (config('app.corporate'))
-                                <li>
-                                    <a href="{{ url('bulk-korpor') }}">Bulk E-Korpor</a>
-                                </li>
+                            <li>
+                                <a href="{{ url('bulk-korpor') }}">Bulk E-Korpor</a>
+                            </li>
 
 
-                                {{-- <li>
+                            {{-- <li>
                                 <a href="{{ url('bulk-upload-payment') }}">Bulk Upload (Mobile Money)</a>
                             </li> --}}
                             @endif
@@ -137,11 +137,11 @@
                 <li>
                     {{-- <a href="#sidebarLoans" data-toggle="collapse"> --}}
 
-                    {{-- <span> My Loans </span>4 --}}
-                    <a href="{{ url('loan-request') }}"> <i class="mdi mdi-briefcase-check-outline"></i><span> My
-                            Loans</span></a>
+                        {{-- <span> My Loans </span>4 --}}
+                        <a href="{{ url('loan-request') }}"> <i class="mdi mdi-briefcase-check-outline"></i><span> My
+                                Loans</span></a>
 
-                    {{-- <span class="menu-arrow"></span> --}}
+                        {{-- <span class="menu-arrow"></span> --}}
                     </a>
                     {{-- <div class="collapse" id="sidebarLoans">
                         <ul class="nav-second-level">
@@ -154,11 +154,11 @@
                         </ul>
                     </div> --}}
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ url('home') }}">
                         <i class="fas fa-hand-holding-usd"></i> <span> My Investments</span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="#sidebarAccountServices" data-toggle="collapse">
                         <i class="mdi mdi-email-multiple-outline"></i>
@@ -168,34 +168,8 @@
                     <div class="collapse" id="sidebarAccountServices">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="#">ATM Card Request </a>
+                                <a href="{{ url('cheque-services') }}">Cheque Services</a>
                             </li>
-                            <li>
-                                <a href="{{ url('cheque-book-request') }}">Cheque Book Request </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('confirm-cheque') }}">Cheque Status</a>
-                            </li>
-                            {{-- <li>
-                                <a href="#sidebarChequeApprovals" data-toggle="collapse">
-                                    <span>Cheque Approvals</span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarChequeApprovals">
-                                    <ul class="nav-second-level">
-                                        <li>
-                                            <a href="{{ url('cheque-approvals-pending') }}">Pending</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('cheque-approvals-approved') }}">Approved</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ url('cheque-approvals-rejected') }}">Rejected</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li> --}}
-
                             <li>
                                 <a href="#sidebarRequests" data-toggle="collapse">
                                     <span> Requests </span>
@@ -228,26 +202,32 @@
                     </div>
                 </li>
                 @if (!config('app.corporate'))
-                    <li>
-                        <a href="#sidebarTasks" data-toggle="collapse">
-                            <i class="fas fa-credit-card"></i>
-                            <span> Card Services </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="sidebarTasks">
-                            <ul class="nav-second-level">
-                                <li>
-                                    <a href="{{ url('request-atm') }}">Request Card</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('activate-card') }}">Activate Card</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('block-debit-card') }}">Block Debit Card</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                <li>
+                    <a href="{{ url('card-services') }}">
+                        <i class="mdi mdi-map-marker-outline"></i>
+                        <span> Card Services </span>
+                    </a>
+                </li>
+                {{-- <li>
+                    <a href="#sidebarTasks" data-toggle="collapse">
+                        <i class="fas fa-credit-card"></i>
+                        <span> Card Services </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarTasks">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ url('request-atm') }}">Request Card</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('activate-card') }}">Activate Card</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('block-debit-card') }}">Block Debit Card</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li> --}}
                 @endif
                 {{-- <li>
                     <a href="{{ url('home') }}">
@@ -255,31 +235,34 @@
                     </a>
                 </li> --}}
                 @if (config('app.corporate'))
-                    <li>
-                        <a href="#approvals" data-toggle="collapse">
-                            <i class="mdi mdi-checkbox-multiple-marked-outline"></i>
-                            <span> Approvals </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="approvals">
-                            <ul class="nav-second-level">
-                                <li>
-                                    <a href="{{ url('approvals-pending') }}">Pending</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('approvals-approved') }}">Approved</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('approvals-rejected') }}">Rejected</a>
-                                </li>
-                                {{-- <li>
-                                <a href="#">All</a>
-                            </li> --}}
-                            </ul>
-                        </div>
-                    </li>
+                <li>
+                    <a href="#approvals" data-toggle="collapse">
+                        <i class="mdi mdi-checkbox-multiple-marked-outline"></i>
+                        <span> Approvals </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="approvals">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ url('approvals-pending') }}">Pending</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('approvals-approved') }}">Approved</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('approvals-rejected') }}">Rejected</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
                 @endif
-                <li><a href="#sidebarSetting" data-toggle="collapse">
+                <li>
+                    <a href="{{ url('settings') }}">
+                        <i class="mdi mdi-cog-outline"></i>
+                        <span> Settings </span>
+                    </a>
+                    {{-- <a href="#sidebarSetting" data-toggle="collapse">
                         <i class="mdi mdi-cog-outline"></i>
                         <span> Settings </span>
                         <span class="menu-arrow"></span>
@@ -290,15 +273,15 @@
                                 <a href="{{ url('set-transaction-limit') }}">Set Transaction Limits</a>
                             </li>
                             @if (config('app.corporate'))
-                                <li>
-                                    <a href="{{ url('update-company-info') }}">Update Company Information</a>
-                                </li>
+                            <li>
+                                <a href="{{ url('update-company-info') }}">Update Company Information</a>
+                            </li>
                             @endif
                             <li>
                                 <a href="{{ url('change-pin') }}">Pin Setup</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
 
                 </li>
                 <li>
@@ -316,6 +299,5 @@
                 </li>
             </ul>
         </div>
-        <div class="clearfix"></div>
     </div>
 </div>

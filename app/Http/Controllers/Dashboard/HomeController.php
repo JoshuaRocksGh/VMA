@@ -15,8 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         $customerAccounts = session()->get('customerAccounts');
-        // return view('pages.dashboard.home', ["accounts" => $customerAccounts]);
-        return view('pages.dashboard.home_new', ["accounts" => $customerAccounts]);
+        return view('pages.dashboard.home', ["accounts" => $customerAccounts]);
     }
 
 

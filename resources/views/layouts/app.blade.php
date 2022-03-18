@@ -30,6 +30,7 @@
 
     <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
     @include('snippets.style')
+    @yield('styles')
     @include('snippets.script')
 
 

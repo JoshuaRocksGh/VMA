@@ -144,7 +144,12 @@ function cancelStandingOrder(orderNumber, pinCode) {
     });
 }
 
-$(document).ready(function () {
+$(function () {
+    $(".accounts-select").select2({
+        minimumResultsForSearch: Infinity,
+        templateResult: accountTemplate,
+        templateSelection: accountTemplate,
+    });
     $("#from_account").on("change", function () {
         console.log("here");
         let accountNumber = $("#from_account option:selected").attr(

@@ -205,22 +205,21 @@ Route::group(['middleware' => ['userAuth']], function () {
 
     Route::get('request-statement', [AccountServicesController::class, 'request_statement'])->name('request-statement');
     Route::get('close-account', [AccountServicesController::class, 'close_account'])->name('close-account');
-    Route::get('budgeting-spending-statics', [SpendingStaticsController::class, 'spending_statics'])->name('budgeting-spending-statics');
+    // Route::get('budgeting-spending-statics', [SpendingStaticsController::class, 'spending_statics'])->name('budgeting-spending-statics');
     Route::get('request-blink', [paymentController::class, 'request_blink_payment'])->name('request-blink');
     Route::get('order-blink-payment', [paymentController::class, 'order_blink_payment'])->name('order-blink-payment');
     Route::get('fd-creation', [AccountServicesController::class, 'fd_creation'])->name('fd-creation');
     Route::get('stop-fd', [AccountServicesController::class, 'stop_fd'])->name('stop-fd');
     Route::get('lc-origination', [TradeFinanceController::class, 'lc_origination'])->name('lc-origination');
-    Route::get('cheque-book-request', [AccountServicesController::class, 'cheque_book_request'])->name('cheque-book-request');
-    Route::get('confirm-cheque', [AccountServicesController::class, 'confirm_cheque'])->name('confirm-cheque');
+    Route::get('cheque-services', [AccountServicesController::class, 'chequeServices']);
     Route::get('activate-cheque-book', [AccountServicesController::class, 'activate_cheque_book'])->name('activate-cheque-book');
-    Route::get('cheque-approvals-pending', [ChequesPendingController::class, 'pending_cheques'])->name('cheque-approvals-pending');
-    Route::get('cheque-approvals-approved', [ChequesApprovedController::class, 'cheques_approved'])->name('cheque-approval-approved');
-    Route::get('cheque-approvals-rejected', [ChequesRejectedController::class, 'cheques_rejected'])->name('cheques-approvals-rejected');
+    // Route::get('cheque-approvals-pending', [ChequesPendingController::class, 'pending_cheques'])->name('cheque-approvals-pending');
+    // Route::get('cheque-approvals-approved', [ChequesApprovedController::class, 'cheques_approved'])->name('cheque-approval-approved');
+    // Route::get('cheque-approvals-rejected', [ChequesRejectedController::class, 'cheques_rejected'])->name('cheques-approvals-rejected');
     Route::get('stop-cheque', [AccountServicesController::class, 'stop_cheque'])->name('stop-cheque');
     Route::get('request-atm', [AccountServicesController::class, 'request_atm'])->name('request-atm');
     Route::get('block-debit-card', [AccountServicesController::class, 'block_atm'])->name('block-debit-card');
-    Route::get('activate-card', [CardsController::class, 'activate_card'])->name('activate-card');
+    Route::get('card-services', [CardsController::class, 'cardServices']);
     Route::get('request-for-letter', [AccountServicesController::class, 'request_for_letter'])->name('request-for-letter');
     Route::get('open-additional-account', [AccountServicesController::class, 'open_additional_acc'])->name('open-additional-account');
     Route::get('request-draft', [AccountServicesController::class, 'request_draft'])->name('request-draft');
@@ -252,7 +251,6 @@ Route::group(['middleware' => ['userAuth']], function () {
 // >>>>>>>>>>>>>>>>>>>>>>>>> API ROUTES <<<<<<<<<<<<<<<<<<<<<<<<<<
 Route::post('create-originator-api', [settingsController::class, 'create_originator_api'])->name('create-originator-api');
 Route::get('set-transaction-limits-api', [settingsController::class, 'set_transaction_limits_api'])->name('set-transaction-limits-api');
-Route::get('set-transaction-limits-api', [settingsController::class, 'set_transaction_limits_api'])->name('set-transaction-limits-api');
 Route::get('/get-bulk-upload-list-api', [BulkUploadBulkUploadsController::class, 'get_bulk_upload_list'])->name('get-bulk-upload-list-api');
 Route::get('/get-bulk-upload-detail-list-api', [BulkUploadBulkUploadsController::class, 'get_bulk_upload_file_details'])->name('get-bulk-upload-detail-list-api');
 Route::get('/post-bulk-transaction-api', [BulkUploadBulkUploadsController::class, 'post_bulk_transaction'])->name('post-bulk-transaction-api');
@@ -267,6 +265,7 @@ Route::post('account-trans-document-api', [AccountEnquiryController::class, 'acc
 Route::get('get-branches-api', [branchLocatorController::class, 'get_branches_api'])->name('get-branches-api');
 Route::get('/pending-request-details-api', [PendingController::class, 'pending_request_details'])->name('pending-request-details-api');
 Route::post('complaint-api', [ComplaintController::class, 'make_complaint_api'])->name('complaint-api');
+Route::get('get-service-type-api', [ComplaintController::class, 'getServiceType']);
 
 
 
@@ -278,7 +277,6 @@ Route::get('get-currency-list-api', [FunctionsController::class, 'currency_list'
 Route::get('get-bank-list-api', [FunctionsController::class, 'bank_list'])->name('get-bank-list-api');
 Route::get('get-countries-list-api', [FunctionsController::class, 'getCountries']);
 Route::get('get-international-bank-list-api', [FunctionsController::class, 'international_bank_list']);
-Route::get('get-bank-branches-list-api', [FunctionsController::class, 'branches_list'])->name('get-bank-branches-list-api');
 Route::get('get-security-question-api', [FunctionsController::class, 'security_question'])->name('get-security-question-api');
 Route::get('get-accounts-api', [FunctionsController::class, 'get_accounts'])->name('get-accounts-api');
 Route::get('get-expenses', [FunctionsController::class, 'get_expenses'])->name('get-expenses');
@@ -375,6 +373,10 @@ Route::post('change-password-api', [ChangePasswordController::class, 'change_pas
 Route::get('korpor-history-api', [KorporController::class, 'getKorporHistoryByType']);
 Route::post('reversed-korpor-request', [KorporController::class, 'send_reversed_request'])->name('reversed-korpor-request');
 Route::post('reverse-korpor', [KorporController::class, 'reverse_korpor'])->name('reverse-korpor');
+
+
+Route::get('get-card-types-api', [CardsController::class, 'getCardTypes']);
+
 
 
 //route to return interest rate types

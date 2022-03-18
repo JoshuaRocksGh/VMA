@@ -295,6 +295,13 @@ function formatToCurrency(amount) {
     return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
 }
 
+// $("#value_date").datetimepicker({
+//     format: "DD-MM-YYYY",
+//     minDate: Date(),
+// });
+
+// $("#value_date").attr("min", maxDate);
+
 $(document).ready(function () {
     setTimeout(function () {
         // bulk_upload_list('057725', "P")
@@ -302,6 +309,12 @@ $(document).ready(function () {
         //console.log(@json(session('excel_details')))
         //my_account()
     }, 500);
+
+    $("#value_date").datepicker({
+        numberOfMonths: 3,
+        showButtonPanel: true,
+        minDate: dateToday,
+    });
 
     let today = new Date();
     let dd = today.getDate();
