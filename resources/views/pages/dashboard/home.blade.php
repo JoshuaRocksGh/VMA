@@ -643,7 +643,8 @@
                                     aria-hidden="true">×</button>
                             </div>
                             <div class="modal-body">
-                                <div class="table-responsive table-bordered accounts_display_area" style="display: none">
+                                <div class="table-responsive table-bordered accounts_display_area"
+                                    style="display: none; zoom:0.9">
                                     <h3 class="text-center text-success">CURRENT & SAVINGS ACCOUNT</h3>
                                     <table id="" class="table table-striped mb-0 ">
                                         <thead>
@@ -653,8 +654,8 @@
                                                 <td> <b> Product </b> </td>
                                                 <td> <b> Cur </b> </td>
                                                 {{-- <td> <b> OverDraft </b> </td> --}}
-                                                {{-- <td> <b> Ledger Bal </b> </td> --}}
-                                                <td> <b> Av. Bal </b> </td>
+                                                <td> <b> Ledger Bal </b> </td>
+                                                <td> <b> Available Bal </b> </td>
                                             </tr>
                                         </thead>
                                         <tbody class="casa_list_display">
