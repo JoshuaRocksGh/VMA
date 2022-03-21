@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Http;
 
 class settingsController extends Controller
 {
+    public function settings()
+    {
+        return view('pages.settings.settings');
+    }
     //method to return the change pin screen
     public function change_pin()
     {
@@ -16,27 +20,32 @@ class settingsController extends Controller
     }
 
     //method to return the biometric setup screen
-    public function biometric_setup(){
+    public function biometric_setup()
+    {
         return view('pages.settings.biometric_setup');
     }
 
     //method to return the forgot transaction pin screen
-    public function forgot_transaction_pin(){
+    public function forgot_transaction_pin()
+    {
         return view('pages.settings.forgot_transaction_pin');
     }
 
     //method to return the set transaction limit screen
-    public function set_transaction_limit(){
+    public function set_transaction_limit()
+    {
         return view('pages.settings.set_transaction_limit');
     }
 
     //method to return the biometric setup
-    public function update_company_info(){
+    public function update_company_info()
+    {
         return view('pages.settings.update_company_info');
     }
 
     //method to return the create originator
-    public function create_originator(){
+    public function create_originator()
+    {
         return view('pages.settings.create_originator');
     }
 
@@ -66,11 +75,11 @@ class settingsController extends Controller
 
         $data = [
 
-            "accountNumber"=> $accountNumber,
-            "firstName"=> $firstName,
-            "otherName"=> $otherName,
-            "lastName"=> $lastName,
-            "email"=> $email
+            "accountNumber" => $accountNumber,
+            "firstName" => $firstName,
+            "otherName" => $otherName,
+            "lastName" => $lastName,
+            "email" => $email
 
         ];
         // for debugging purposes
@@ -89,7 +98,8 @@ class settingsController extends Controller
         // return $result->api_response($response);
     }
 
-    public function set_transaction_limits_api(Request $request){
+    public function set_transaction_limits_api(Request $request)
+    {
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
         $api_headers = session()->get("headers");
@@ -120,11 +130,11 @@ class settingsController extends Controller
             // "lastName"=> $lastName,
             // "email"=> $email
 
-            "rtgsLimit"=> $rtgsLimit,
-            "directCreditLimit"=> $directCreditLimit,
-            "rokelLimit"=> $rokelLimit,
-            "directCreditBulkLimit"=> $directCreditBulkLimit,
-            "rokelBulkLimit"=>$rokelBulkLimit
+            "rtgsLimit" => $rtgsLimit,
+            "directCreditLimit" => $directCreditLimit,
+            "rokelLimit" => $rokelLimit,
+            "directCreditBulkLimit" => $directCreditBulkLimit,
+            "rokelBulkLimit" => $rokelBulkLimit
 
         ];
         // for debugging purposes
@@ -141,5 +151,4 @@ class settingsController extends Controller
 
         // return $result->api_response($response);
     }
-
 }
