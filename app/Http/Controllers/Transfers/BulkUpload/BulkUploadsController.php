@@ -30,12 +30,12 @@ class BulkUploadsController extends Controller
 
     public function download_same_bank()
     {
-        $pathToFile = public_path() . '/assets/images/bulk_payment_same_bank.xlsx';
+        $pathToFile = public_path() . '/assets/images/Bulk_Transfer_File.xlsx';
 
         $header = array(
             'Content-Type' => 'application/xlsx'
         );
-        return response()->download($pathToFile, 'Bulk_Payment_Same_bank_File.xlsx');
+        return response()->download($pathToFile, 'Bulk_Transfer_File.xlsx');
     }
 
     public function download_other_bank()

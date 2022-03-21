@@ -163,7 +163,7 @@ function bulk_upload_list(fileBatch) {
 
                         $(".successful_uploads").append(
                             `<tr>
-                                <td><b>${valid_uploads_count}</b></td>
+                                <td><b>${uploadData[index].recordId}</b></td>
                                 <td><b>${uploadName}</b></td>
                                 <td><b>${uploadAccountNumber}</b></td>
                                 <td><b>${uploadAmount}</b></td>
@@ -225,12 +225,16 @@ function bulk_upload_list(fileBatch) {
 
                         $(".failed_uploads").append(
                             `<tr>
-                                <td><b>${invalid_uploads_count}</b></td>
+                                <td><b>${uploadData[index].recordId}</b></td>
                                 <td><b>${uploadName}</b></td>
                                 <td><b>${uploadAccountNumber}</b></td>
                                 <td><b>${uploadAmount}</b></td>
                                 <td><b>${uploadRefNumber}</b></td>
                                 <td><b class="text-danger">${uploadAcctValid}</b></td>
+                                <td><button type="button" class="btn btn-warning width-sm waves-effect waves-light edit_record_uploaded"
+                                recordID="${uploadData[index].recordId}" name="${uploadName}" accNumber="${uploadAccountNumber}" amount="${uploadAmount}
+                                refNumber="${uploadRefNumber}" bank="${uploadData[index].bank}" transDescription="${uploadData[index].transDescription}"
+                                uploadBatch="${uploadData[index].uploadBatch}">Edit Record</a></td>
                             </tr>
                             `
                         );
@@ -474,5 +478,13 @@ $(document).ready(function () {
                 document.getElementById("file").value = "";
             });
         }
+    });
+
+    let editButtons = document.querySelectorAll(".edit_record_uploaded");
+    editButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            const editButton = e.currentTarget;
+            console.log(editButton);
+        });
     });
 });

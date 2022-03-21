@@ -595,13 +595,13 @@
                             },
                             success: function(response) {
 
-                                // console.log("CURRENT & SAVINGS ACCOUN:", response);
+                                console.log("CURRENT & SAVINGS ACCOUNT:", response);
 
 
                                 if (response.responseCode == '000') {
 
                                     let data = response.data;
-                                    // {{-- console.log("accounts" + data) --}}
+                                    // console.log("accounts" + data)
 
                                     let i_have_total = 0
                                     let count = 0
@@ -649,7 +649,7 @@
                                         <td> <b> ${data[index].accountDesc} </b>  </td>
                                         <td> <b> ${data[index].accountType}  </b>  </td>
                                         <td> <b> ${data[index].currency}  </b>  </td>
-
+                                        <td><b> ${formatToCurrency(parseFloat(data[index].ledgerBalance))}</b></td>
                                         <td> <b> ${formatToCurrency(parseFloat(data[index].ledgerBalance))}   </b>  </td>
 
                                     </tr>`
