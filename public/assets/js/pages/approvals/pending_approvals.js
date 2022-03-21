@@ -112,6 +112,7 @@ function get_corporate_requests(customerNumber, requestStatus) {
                     table.column(0).visible(false);
 
                     // table.columns.adjust().draw();
+                    // siteLoading("hide");
                 });
 
                 $(".loans_error_area").hide();
@@ -142,4 +143,5 @@ $(document).ready(function () {
         get_corporate_requests(customer_no, "P");
     });
     get_corporate_requests(customer_no, request_status);
+    siteLoading("show");
 });
