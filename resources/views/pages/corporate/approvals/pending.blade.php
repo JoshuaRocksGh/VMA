@@ -309,7 +309,7 @@
 @endsection
 
 @section('scripts')
-    @include("extras.datatables")
+    @include('extras.datatables')
 
     <script>
         let customer_no = @json(session()->get('customerNumber'));
