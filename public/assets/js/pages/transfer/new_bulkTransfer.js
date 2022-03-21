@@ -310,25 +310,25 @@ $(document).ready(function () {
         //my_account()
     }, 500);
 
-    $("#value_date").datepicker({
-        numberOfMonths: 3,
-        showButtonPanel: true,
-        minDate: dateToday,
-    });
+    // $("#value_date").datepicker({
+    //     numberOfMonths: 3,
+    //     showButtonPanel: true,
+    //     minDate: dateToday,
+    // });
 
-    let today = new Date();
-    let dd = today.getDate();
+    // let today = new Date();
+    // let dd = today.getDate();
 
-    let mm = today.getMonth() + 1;
-    const yyyy = today.getFullYear();
-    console.log(mm);
-    console.log(String(mm).length);
-    if (String(mm).length == 1) {
-        mm = "0" + mm;
-    }
+    // let mm = today.getMonth() + 1;
+    // const yyyy = today.getFullYear();
+    // console.log(mm);
+    // console.log(String(mm).length);
+    // if (String(mm).length == 1) {
+    //     mm = "0" + mm;
+    // }
 
-    defaultDate = dd + mm + "-" + today.getFullYear();
-    console.log(defaultDate);
+    // defaultDate = dd + mm + "-" + today.getFullYear();
+    // console.log(defaultDate);
 
     //  $(".date-picker-valueDate").flatpickr({
     //     altInput: true,
