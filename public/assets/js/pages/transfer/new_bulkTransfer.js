@@ -72,6 +72,7 @@ function bulk_upload_list(fileBatch) {
 
             let all_failed_uploads = 0;
             // let upload_with_errors = uploadData.;
+            let data = response.data.uploadData;
 
             if (response.responseCode == "000") {
                 // NO ERRORS IN FILE UPLOAD
@@ -243,6 +244,53 @@ function bulk_upload_list(fileBatch) {
                         return false;
                     }
                 });
+                let editButtons = document.querySelectorAll(
+                    ".edit_record_uploaded"
+                );
+
+                editButtons.forEach((button) => {
+                    button.addEventListener("click", (e) => {
+                        const editButton = e.currentTarget;
+                        console.log(editButton);
+
+                        const recordDetail = data.find(
+                            (e) => e.recordId === $(editButton).attr("recordid")
+                        );
+                        // console.log("recordDetail =>", recordDetail);
+
+                        $(".upload_recordID").val(recordDetail.recordId);
+                        $(".upload_name").val(recordDetail.name);
+                        $(".upload_accountNumber").text(
+                            recordDetail.accountNumber
+                        );
+                        $(".upload_amount").val(recordDetail.amount);
+                        $(".upload_description").val(
+                            recordDetail.transDescription
+                        );
+                        $(".upload_bank").val(recordDetail.bank);
+                        $(".upload_referenceNumber").val(
+                            recordDetail.refNumber
+                        );
+                        $(".upload_batch").val(recordDetail.uploadBatch);
+
+                        // $("#full-width-modal").hide();
+                        // $("#full-width-modal").remove();
+                        // $("#full-width-modal").removeAttr("class");
+                        $(".edit_record_uploaded").click(function () {
+                            $(".all_upload_details").hide();
+                            $(".record_details_display").show();
+                        });
+
+                        $(".edit_record_close").click(function () {
+                            $(".all_upload_details").hide();
+                            $(".record_details_display").show();
+                        });
+
+                        // $(".edit_record_close").click(function(){
+
+                        // });
+                    });
+                });
 
                 console.log("valid_uploads_count=>", valid_uploads_count);
                 console.log("invalid_uploads_count=>", invalid_uploads_count);
@@ -267,10 +315,8 @@ function bulk_upload_list(fileBatch) {
                                 <td><button type="button" class="btn btn-sm btn-soft-success waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;<b>${total_upload}</b>&emsp;</button></td>
                                 <td><button type="button" class="btn btn-sm btn-soft-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;<b>${invalid_uploads}</b>&emsp;</button></td>
                                 <td>
-                                <a href="#" type="button" class="btn btn-danger  btn-sm waves-effect waves-light p-1">
-                                                    <i class="mdi mdi-close-circle-outline"></i>&nbsp;<b>Delete</b>
-                                                </a>
-                                                <a href="view-bulk-transfer?batch_no=${fileBatch}" type="button" class="btn btn-success btn-sm waves-effect waves-light">
+
+                                                <a href="view-bulk-transfer?batch_no=${fileBatch}" type="button" class="btn btn-success btn-sm waves-effect waves-light text-center">
                                                     <i class="mdi mdi-check-all"></i>&nbsp;<b>Upload</b>
                                                 </a>
 
@@ -307,6 +353,11 @@ function formatToCurrency(amount) {
 // $("#value_date").attr("min", maxDate);
 
 $(document).ready(function () {
+    $(".accounts-select").select2({
+        minimumResultsForSearch: Infinity,
+        templateResult: accountTemplate,
+        templateSelection: accountTemplate,
+    });
     setTimeout(function () {
         // bulk_upload_list('057725', "P")
         //alert('called')
@@ -431,6 +482,7 @@ $(document).ready(function () {
                         $("#submit_cheque_request").text("Submit File");
 
                         toaster(response.message, "success", 3000);
+                        document.getElementById("bulk_upload_form").reset();
 
                         setTimeout(function () {
                             bulk_upload_list(fileBatch);
@@ -448,6 +500,8 @@ $(document).ready(function () {
                         //bulk_upload_list(fileBatch, allErrors)
 
                         toaster(all_errors, "error", 3000);
+                        document.getElementById("bulk_upload_form").reset();
+
                         //location.reload();
                         /* setTimeout(function() {
                                      location.reload();
@@ -480,23 +534,10 @@ $(document).ready(function () {
         }
     });
 
-    let editButtons = document.querySelectorAll(".edit_record_uploaded");
+    // $(".edit_record_uploaded").click(function (e) {
+    //     e.preventDefault();
 
-    editButtons.forEach((button) => {
-        button.addEventListener("click", (e) => {
-            const editButton = e.currentTarget;
-            console.log(editButton);
-        });
-    });
-
-    $(".edit_record_uploaded").click(function (e) {
-        e.preventDefault();
-        $("#full-width-modal").hide();
-        $(".edit_record_uploaded").attr({
-            "data-toggle": "modal",
-            "data-target": "#standard-modal",
-        });
-    });
+    // });
 
     $(".save_update").click(function (e) {
         e.preventDefault();
@@ -528,14 +569,14 @@ $(document).ready(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                console.log(response);
+                console.log("update-upload =>", response);
                 if (response.responseCode == "000") {
                     $(".edit_record_uploaded").hide();
                     toaster(response.message, "success", 3000);
-                    setTimeout(function(){
-                        bulk_upload_list(batch)
-                    },3000)
-                }else{
+                    setTimeout(function () {
+                        bulk_upload_list(batch);
+                    }, 3000);
+                } else {
                     toaster(response.message, "error", 3000);
                 }
             },

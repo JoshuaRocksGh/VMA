@@ -115,7 +115,7 @@
                             </div>
 
                         </div>
-                        <button type="button" class="btn btn-primary hello_clicked">Hello</button>
+                        {{-- <button type="button" class="btn btn-primary hello_clicked">Hello</button> --}}
 
 
                     </form>

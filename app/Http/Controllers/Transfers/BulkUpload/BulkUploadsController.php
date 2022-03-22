@@ -118,8 +118,9 @@ class BulkUploadsController extends Controller
         return response()->download($pathToFile, 'Bulk_Payment_Other_bank_File.xlsx');
     }
 
-    public function update_upload(Request $request){
-        return $request;
+    public function update_upload(Request $request)
+    {
+        // return $request;
 
         $validator = Validator::make($request->all(), [
             'recordID' => 'required',
@@ -135,14 +136,16 @@ class BulkUploadsController extends Controller
         if ($validator->fails()) {
 
             // return $base_response->api_response('500', $validator->errors(), NULL);
-            return back()->withInput()->withErrors($validator->errors());
+            return $validator->errors();
         };
+
+        $base_response = new BaseResponse();
 
 
         $api_headers = session()->get('headers');
 
         $recordID = $request->recordID;
-        $name = $request->first_time_vonameter_id;
+        $name = $request->name;
         $accountNumber = $request->accountNumber;
         $description = $request->description;
         $amount = $request->amount;
@@ -161,7 +164,7 @@ class BulkUploadsController extends Controller
             "uploadBatch" => $batch
         ];
 
-        return $data;
+        // return $data;
 
 
         try {

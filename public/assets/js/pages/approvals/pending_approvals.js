@@ -1,3 +1,5 @@
+// siteLoading("show");
+
 function formatToCurrency(amount) {
     return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
 }
@@ -143,5 +145,4 @@ $(document).ready(function () {
         get_corporate_requests(customer_no, "P");
     });
     get_corporate_requests(customer_no, request_status);
-    siteLoading("show");
 });
