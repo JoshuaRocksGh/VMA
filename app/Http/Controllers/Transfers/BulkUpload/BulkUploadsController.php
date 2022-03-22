@@ -118,6 +118,77 @@ class BulkUploadsController extends Controller
         return response()->download($pathToFile, 'Bulk_Payment_Other_bank_File.xlsx');
     }
 
+    public function update_upload(Request $request){
+        return $request;
+
+        $validator = Validator::make($request->all(), [
+            'recordID' => 'required',
+            'name' => 'required',
+            'accountNumber' => 'required',
+            'amount' => 'required',
+            'description' => 'required',
+            'bank' => 'required',
+            'reference' => 'required',
+            'batch' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+
+            // return $base_response->api_response('500', $validator->errors(), NULL);
+            return back()->withInput()->withErrors($validator->errors());
+        };
+
+
+        $api_headers = session()->get('headers');
+
+        $recordID = $request->recordID;
+        $name = $request->first_time_vonameter_id;
+        $accountNumber = $request->accountNumber;
+        $description = $request->description;
+        $amount = $request->amount;
+        $bank = $request->bank;
+        $reference = $request->reference;
+        $batch = $request->batch;
+
+        $data = [
+            "accountNumber" => $accountNumber,
+            "amount" => $amount,
+            "bank" => $bank,
+            "name" => $name,
+            "recordId" => $recordID,
+            "refNumber" => $reference,
+            "transDecription" => $description,
+            "uploadBatch" => $batch
+        ];
+
+        return $data;
+
+
+        try {
+
+            $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "corporate/updateFileRecord", $data);
+
+            $result = new ApiBaseResponse();
+            // Log::alert($response);
+            return $result->api_response($response);
+
+
+
+            // $result = new ApiBaseResponse();
+
+            return $result->api_response($response);
+        } catch (\Exception $e) {
+
+            DB::table('tb_error_logs')->insert([
+                'platform' => 'ONLINE_INTERNET_BANKING',
+                'user_id' => 'AUTH',
+                'message' => (string) $e->getMessage()
+            ]);
+
+            return $base_response->api_response('500', "Internal Server Error",  NULL); // return API BASERESPONSE
+        }
+    }
+
 
     public function upload_(Request $request)
     {

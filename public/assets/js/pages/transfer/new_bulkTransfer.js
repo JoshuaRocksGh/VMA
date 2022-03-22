@@ -481,10 +481,64 @@ $(document).ready(function () {
     });
 
     let editButtons = document.querySelectorAll(".edit_record_uploaded");
+
     editButtons.forEach((button) => {
         button.addEventListener("click", (e) => {
             const editButton = e.currentTarget;
             console.log(editButton);
+        });
+    });
+
+    $(".edit_record_uploaded").click(function (e) {
+        e.preventDefault();
+        $("#full-width-modal").hide();
+        $(".edit_record_uploaded").attr({
+            "data-toggle": "modal",
+            "data-target": "#standard-modal",
+        });
+    });
+
+    $(".save_update").click(function (e) {
+        e.preventDefault();
+
+        var recordID = $(".upload_recordID").val();
+        var name = $(".upload_name").val();
+        var accountNumber = $(".upload_accountNumber").val();
+        var amount = $(".upload_amount").val();
+        var description = $(".upload_description").val();
+        var bank = $(".upload_bank").val();
+        var reference = $(".upload_referenceNumber").val();
+        var batch = $(".upload_batch").val();
+
+        $.ajax({
+            type: "POST",
+            url: "update-upload",
+            dataType: "application/json",
+            data: {
+                recordID: recordID,
+                name: name,
+                accountNumber: accountNumber,
+                amount: amount,
+                batch: batch,
+                description: description,
+                bank: bank,
+                reference: reference,
+            },
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.responseCode == "000") {
+                    $(".edit_record_uploaded").hide();
+                    toaster(response.message, "success", 3000);
+                    setTimeout(function(){
+                        bulk_upload_list(batch)
+                    },3000)
+                }else{
+                    toaster(response.message, "error", 3000);
+                }
+            },
         });
     });
 });
