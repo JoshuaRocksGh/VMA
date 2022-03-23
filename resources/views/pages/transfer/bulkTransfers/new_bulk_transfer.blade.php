@@ -317,13 +317,13 @@
                                     style="zoom: 0.9">
                                     <thead>
                                         <tr class="bg-danger  text-white">
-                                            <th><b>Record ID</b></th>
+                                            {{--  <th><b>Record ID</b></th>  --}}
                                             <th><b>Name</b></th>
                                             <th><b>Account No.</b></th>
                                             <th><b>Amount</b></th>
                                             <th><b>Ref No.</b></th>
                                             <th><b>&emsp;Description&emsp;</b></th>
-                                            <th><b>&emsp;Edit&emsp;</b></th>
+                                            {{--  <th><b>&emsp;Edit&emsp;</b></th>  --}}
                                         </tr>
                                     </thead>
                                     <tbody class="failed_uploads">

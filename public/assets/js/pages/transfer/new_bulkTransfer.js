@@ -499,7 +499,7 @@ $(document).ready(function () {
 
                     if (response.responseCode == "000") {
                         siteLoading("hide");
-                        $("#submit_cheque_request").text("Submit File");
+                        // $("#submit_cheque_request").text("Submit File");
 
                         toaster(response.message, "success", 3000);
                         document.getElementById("bulk_upload_form").reset();
@@ -509,7 +509,7 @@ $(document).ready(function () {
                         }, 500);
                     } else {
                         siteLoading("hide");
-                        $("#submit_cheque_request").text("Submit File");
+                        // $("#submit_cheque_request").text("Submit File");
                         let errorMessage = response.message;
 
                         let validationErrors = data.validationErrors;
