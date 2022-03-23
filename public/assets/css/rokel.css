@@ -60,6 +60,10 @@ a:hover {
         rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; */
     /* border: 1px solid #ced4da; */
 }
+
+.select2-selection__arrow {
+    display: none;
+}
 /* .account-icon {
     background-color: green;
     color: white;
@@ -250,6 +254,11 @@ select:hover {
     100% {
         transform: rotate(1800deg);
     }
+}
+.site-bg {
+    background-image: url("../images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 @media (max-width: 450.98px) {
