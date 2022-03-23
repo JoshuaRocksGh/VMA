@@ -50,8 +50,8 @@ function bulk_upload_list(fileBatch) {
     // console.log(fileBatch);
     // console.log(allErrors);
 
-    //var error_table = $('.failed_bulk_upload_table').DataTable();
-    //var _error_nodes = error_table.rows().nodes();
+    // var error_table = $('.failed_bulk_upload_table').DataTable();
+    // var _error_nodes = error_table.rows().nodes();
 
     // var all_invalid_uplaods = $(".all_failed_uploads_table").DataTable({
     //     paging: true,
@@ -89,7 +89,7 @@ function bulk_upload_list(fileBatch) {
                 let invalid_uploads_count = 1;
 
                 var all_valid_uploads = $(
-                    ".all_successful_uploads_table"
+                    "#all_successful_uploads_table"
                 ).DataTable();
                 var nodes = all_valid_uploads.rows().nodes();
 
@@ -151,28 +151,28 @@ function bulk_upload_list(fileBatch) {
                         } else {
                             var uploadAcctValid = uploadData[index].acctValid;
                         }
-                        // all_valid_uploads.row
-                        //     .add([
-                        //         `<b>${valid_uploads_count}</b>`,
-                        //         `<b>${uploadName}</b>`,
-                        //         `<b>${uploadAccountNumber}</b>`,
-                        //         `<b>${uploadAmount}</b>`,
-                        //         `<b>${uploadRefNumber}</b>`,
-                        //         `<b class="text-success">${uploadAcctValid}</b>`,
-                        //     ])
-                        //     .draw(false);
+                        all_valid_uploads.row
+                            .add([
+                                // `<b>${valid_uploads_count}</b>`,
+                                `<b>${uploadName}</b>`,
+                                `<b>${uploadAccountNumber}</b>`,
+                                `<b>${uploadAmount}</b>`,
+                                `<b>${uploadRefNumber}</b>`,
+                                `<b class="text-success">${uploadAcctValid}</b>`,
+                            ])
+                            .draw(false);
 
-                        $(".successful_uploads").append(
-                            `<tr>
-                                <td><b>${uploadData[index].recordId}</b></td>
-                                <td><b>${uploadName}</b></td>
-                                <td><b>${uploadAccountNumber}</b></td>
-                                <td><b>${uploadAmount}</b></td>
-                                <td><b>${uploadRefNumber}</b></td>
-                                <td><b class="text-success">${uploadAcctValid}</b></td>
-                            </tr>
-                            `
-                        );
+                        // $(".successful_uploads").append(
+                        //     `<tr>
+                        //         // <td><b>${uploadData[index].recordId}</b></td>
+                        //         <td><b>${uploadName}</b></td>
+                        //         <td><b>${uploadAccountNumber}</b></td>
+                        //         <td><b>${uploadAmount}</b></td>
+                        //         <td><b>${uploadRefNumber}</b></td>
+                        //         <td><b class="text-success">${uploadAcctValid}</b></td>
+                        //     </tr>
+                        //     `
+                        // );
 
                         valid_uploads_count++;
                     } else if (uploadData[index].valid != "Y") {
@@ -224,21 +224,45 @@ function bulk_upload_list(fileBatch) {
                             var uploadAcctValid = uploadData[index].acctValid;
                         }
 
-                        $(".failed_uploads").append(
-                            `<tr>
-                                <td><b>${uploadData[index].recordId}</b></td>
-                                <td><b>${uploadName}</b></td>
-                                <td><b>${uploadAccountNumber}</b></td>
-                                <td><b>${uploadAmount}</b></td>
-                                <td><b>${uploadRefNumber}</b></td>
-                                <td><b class="text-danger">${uploadAcctValid}</b></td>
-                                <td><button type="button" class="btn btn-warning width-sm waves-effect waves-light edit_record_uploaded"
-                                recordID="${uploadData[index].recordId}" name="${uploadName}" accNumber="${uploadAccountNumber}" amount="${uploadAmount}
-                                refNumber="${uploadRefNumber}" bank="${uploadData[index].bank}" transDescription="${uploadData[index].transDescription}"
-                                uploadBatch="${uploadData[index].uploadBatch}">Edit Record</a></td>
-                            </tr>
-                            `
-                        );
+                        var all_failed_uploads = $(
+                            "#all_failed_uploads_table"
+                        ).DataTable();
+                        // var nodes = all_valid_uploads.rows().nodes();
+
+                        // all_valid_uploads.destroy();
+
+                        // $(".successful_uploads tr").remove();
+                        $(".failed_uploads tr").remove();
+
+
+                        all_failed_uploads.row
+                            .add([
+                                // `<b>${valid_uploads_count}</b>`,
+                                `<b>${uploadName}</b>`,
+                                `<b>${uploadAccountNumber}</b>`,
+                                `<b>${uploadAmount}</b>`,
+                                `<b>${uploadRefNumber}</b>`,
+                                `<b class="text-success">${uploadAcctValid}</b>`,
+                            ])
+                            .draw(false);
+
+
+
+                        // $(".failed_uploads").append(
+                        //     `<tr>
+                        //         // <td><b>${uploadData[index].recordId}</b></td>
+                        //         <td><b>${uploadName}</b></td>
+                        //         <td><b>${uploadAccountNumber}</b></td>
+                        //         <td><b>${uploadAmount}</b></td>
+                        //         <td><b>${uploadRefNumber}</b></td>
+                        //         <td><b class="text-danger">${uploadAcctValid}</b></td>
+                        //         <td><button type="button" class="btn btn-warning width-sm waves-effect waves-light edit_record_uploaded"
+                        //         recordID="${uploadData[index].recordId}" name="${uploadName}" accNumber="${uploadAccountNumber}" amount="${uploadAmount}
+                        //         refNumber="${uploadRefNumber}" bank="${uploadData[index].bank}" transDescription="${uploadData[index].transDescription}"
+                        //         uploadBatch="${uploadData[index].uploadBatch}">Edit Record</a></td>
+                        //     </tr>
+                        //     `
+                        // );
                         invalid_uploads_count++;
                     } else {
                         return false;
@@ -302,6 +326,9 @@ function bulk_upload_list(fileBatch) {
 
                 //     ])
                 //     .draw(false);
+                let action_button = `<a href="view-bulk-transfer?batch_no=${fileBatch}" type="button" class="btn btn-success btn-sm waves-effect waves-light text-center">
+                <i class="mdi mdi-check-all"></i>&nbsp;<b>Upload</b>
+            </a>`
 
                 $(".all_bulk_upload_summary").append(
                     `
@@ -314,14 +341,7 @@ function bulk_upload_list(fileBatch) {
                                 <td><b>${value_date}</b></td>
                                 <td><button type="button" class="btn btn-sm btn-soft-success waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;<b>${total_upload}</b>&emsp;</button></td>
                                 <td><button type="button" class="btn btn-sm btn-soft-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;<b>${invalid_uploads}</b>&emsp;</button></td>
-                                <td>
-
-                                                <a href="view-bulk-transfer?batch_no=${fileBatch}" type="button" class="btn btn-success btn-sm waves-effect waves-light text-center">
-                                                    <i class="mdi mdi-check-all"></i>&nbsp;<b>Upload</b>
-                                                </a>
-
-
-                                </td>
+                                <td>${action_button}</td>
                             </tr>
                         `
                 );
@@ -399,7 +419,7 @@ $(document).ready(function () {
 
     $("#bulk_upload_form").submit(function (e) {
         e.preventDefault();
-        $("#submit_cheque_request").text("Processing ... ");
+        // $("#submit_cheque_request").text("Processing ... ");
 
         // FILE UPLOAD
         var file = document.getElementById("excel_file").files[0];

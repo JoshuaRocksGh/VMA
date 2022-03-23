@@ -712,11 +712,11 @@
 
 
                 },
-                {{-- error: function(xhr, status, error) {
+                error: function(xhr, status, error) {
                     setTimeout(function() {
                         ajax_call_bulk_details_endpoint(batch_no)
                     }, $.ajaxSetup().retryAfter)
-                } --}}
+                }
             })
 
         }
@@ -836,22 +836,24 @@
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire({
+                        {{--  Swal.fire({
                             title: `${result.value.login}'s avatar`,
                             imageUrl: result.value.avatar_url
-                        })
+                        })  --}}
+                        return false;
                     }
                 })
 
             })
 
             $("#approve_transaction").click(function(e) {
+
                 e.preventDefault();
 
 
 
                 {{-- alert("Approve Transaction"); --}}
-
+                {{--  return false;  --}}
                 approve_request();
 
 
@@ -865,7 +867,8 @@
 
             function ajax_post() {
                 $('#approve_transaction').text("Processing ...")
-                siteLoading('true')
+                siteLoading('show')
+
 
                 var customer = @json($customer_no);
                 var request = @json($request_id);
@@ -885,29 +888,40 @@
                         console.log(response)
                         let res = JSON.parse(response);
                         if (res.responseCode == '000') {
-                            siteLoading('false')
+                            siteLoading('hide')
 
-                            Swal.fire('', res.message, 'success');
-                            getAccounts();
+                            swal.fire({
+                                // title: "Transfer successful!",
+                                html: res.message,
+                                icon: "success",
+                                showConfirmButton: "false",
+                            });
+
+                            {{--  getAccounts();  --}}
+
+
+                            {{--  setTimeout(function() {
+                                window.location = 'approvals-pending'
+                            }, 3000)  --}}
 
 
                             setTimeout(function() {
                                 window.location = 'approvals-pending'
-                            }, 3000)
-
-
-                            {{-- setTimeout(function() {
-
                                 window.opener.location.reload();
                                 window.close();
-                            }, 3000) --}}
+                            }, 5000)
 
 
                         } else {
                             siteLoading('false')
 
 
-                            Swal.fire('', res.message, 'error');
+                            swal.fire({
+                                // title: "Transfer successful!",
+                                html: res.message,
+                                icon: "error",
+                                showConfirmButton: "false",
+                            });
 
                         }
 
@@ -938,7 +952,8 @@
                         ajax_post()
 
                     } else if (result.isDenied) {
-                        Swal.fire('Failed to approve transaction', '', 'info')
+                        toaster('Failed to approve transaction', 'error')
+                        {{--  Swal.fire('Failed to approve transaction', '', 'info')  --}}
                     }
                 })
 
@@ -947,6 +962,7 @@
 
             function ajax_post_for_reject() {
                 let narration = $('.swal2-input').val()
+                siteLoading('show')
                 $('#reject_transaction').text("Processing ...")
                 var customer_no = @json($customer_no);
                 var request_id = @json($request_id);
@@ -968,16 +984,33 @@
                     success: function(response) {
                         console.log(response)
                         if (response.responseCode == '000') {
+                            siteLoading('hide')
+
+                            swal.fire({
+                                // title: "Transfer successful!",
+                                html: response.message,
+                                icon: "success",
+                                showConfirmButton: "false",
+                            });
 
 
 
                             setTimeout(function() {
-                                Swal.fire('', response.message, 'success');
                                 window.location = 'approvals-pending'
-                            }, 3000)
+                                window.opener.location.reload();
+                                window.close();
+                            }, 5000)
+
 
                         } else {
-                            Swal.fire('', response.message, 'error');
+                            siteLoading('hide')
+                            {{--  Swal.fire('', response.message, 'error');  --}}
+                            swal.fire({
+                                // title: "Transfer successful!",
+                                html: response.message,
+                                icon: "error",
+                                showConfirmButton: "false",
+                            });
 
                         }
 

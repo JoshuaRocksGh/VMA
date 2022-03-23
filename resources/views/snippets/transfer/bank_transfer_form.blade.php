@@ -149,7 +149,7 @@
                             <div class="col-12">
                                 @if ($currentPath === 'International Bank')
                                 <div class="row align-items-center mb-1">
-                                    <label class="text-primary ">Bank Country</label>
+                                    <label class="text-primary col-md-4">Bank Country</label>
                                     <div class="px-0 col-md-8"> <select class="form-control "
                                             id="onetime_select_country" required>
                                             <option disabled selected>--- Not Selected ---</option>
@@ -178,7 +178,7 @@
                                 <div class="form-group align-items-center row">
                                     <label class="col-md-4  text-primary"> Beneficiary A/C Name</label>
                                     <div class="input-group px-0 col-md-8" style="position: relative">
-                                        <input type="text" class="form-control  text-input readOnly "
+                                        <input type="text" class="form-control  text-input readOnly onetime_beneficiary_name"
                                             placeholder="Beneficiary Name" id="onetime_beneficiary_name" readonly>
                                         <span class="spinner-grow-sm input-span  spinner-grow text-rokel-blue"
                                             role="status" id="onetime_beneficiary_name_loader" style="display: none">

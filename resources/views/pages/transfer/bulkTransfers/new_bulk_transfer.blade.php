@@ -183,7 +183,7 @@
                                                 <button type="submit"
                                                     class="btn btn-primary btn-sm  waves-effect waves-light disappear-after-success p-1"
                                                     id="submit_cheque_request">
-                                                    <b>Submit File</b>
+                                                    <b>Upload & Validate</b>
                                                 </button>
                                                 {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
                                                     data-target="#full-width-modal">Full width Modal</button></b> --}}
@@ -214,7 +214,7 @@
                                     <h4>{{ $errors->first() }}</h4>
                                 </div>
                             @endif
-                            <table id=""
+                            <table id="bulk_upload_list"
                                 class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list"
                                 style="zoom: 0.9;">
 
@@ -223,7 +223,7 @@
                                         {{-- <th> <b> Batch </b> </th> --}}
                                         <th> Reference </th>
                                         <th> Debit Account </th>
-                                        <th> File Total Amount </th>
+                                        <th> Total Upload Amount </th>
                                         <th> Value date </th>
                                         <th> Total Upload </th>
                                         {{-- <th> Successful </th> --}}
@@ -281,12 +281,12 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="home">
                             <div class="table-responsive">
-                                <table id="datatable-buttons"
+                                <table id=" all_successful_uploads_table"
                                     class="table table-bordered table-striped dt-responsive nowrap w-100 all_successful_uploads_table"
                                     style="zoom: 0.9">
                                     <thead>
                                         <tr class="bg-success  text-white">
-                                            <th><b>Record ID</b></th>
+                                            {{--  <th><b>Record ID</b></th>  --}}
                                             <th><b>Name</b></th>
                                             <th><b>Account No.</b></th>
                                             <th><b>Amount</b></th>
@@ -312,7 +312,7 @@
                         </div>
                         <div class="tab-pane show " id="profile">
                             <div class="table-responsive">
-                                <table id=""
+                                <table id="all_failed_uploads_table"
                                     class="table table-bordered table-striped dt-responsive nowrap w-100 all_failed_uploads_table"
                                     style="zoom: 0.9">
                                     <thead>

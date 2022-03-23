@@ -173,7 +173,7 @@ $pageTitle = 'account statement'; @endphp
                     <tr class="bg-info text-white ">
                         <th scope="col">Date</th>
                         <th scope="col">Amount <span class="currency_display"></span></th>
-                        <th scope="col">Credit Account</th>
+                        <th scope="col">Contra Account</th>
                         <th scope="col">Purpose of Transfer <span class="account_currency_display_"></span>
                         </th>
                         <th scope="col">Balance<span class="currency_display"></span>
