@@ -238,6 +238,7 @@ $(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
+                console.log(response);
                 if (
                     response.responseCode !== "000" ||
                     response.data.length === 0

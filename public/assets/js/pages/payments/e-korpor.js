@@ -367,7 +367,8 @@ $(function () {
             .val(userPhone)
             .attr("disabled", true)
             .trigger("keyup");
-        $("#receiver_address").val(userEmail);
+        $(".display_receiver_address").text("");
+        // $("#receiver_address").val(userEmail).trigger("keyup");
     });
 
     $("#transfer_to_others").on("click", function () {
@@ -476,7 +477,6 @@ $(function () {
         if (!$("#korpor_history_accounts").val()) {
             $("#korpor_history_accounts option:last").prop("selected", true);
         }
-        console.log("ll");
         $("#korpor_history_accounts").trigger("change");
     });
 
