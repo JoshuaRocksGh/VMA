@@ -68,59 +68,29 @@ function lovs_list() {
 }
 
 $(() => {
-    console.log("here");
     $("#spinner").hide(), $("#spinner-text").hide(), $("#print_receipt").hide();
-
     $(".mod-open").trigger("click");
     lovs_list();
-
-    //    $('#previewImg').hide();
+    $("select").select2();
     $(".display_selected_id_image").hide();
     $(".display_passport_picture").hide();
     $(".display_selfie").hide();
 
-    // $("#v-pills-tab").click(function (e) {
+    // $(".knav").on("click", function (e) {
+    //     e.preventDefault();
     //     return false;
     // });
 
-    $("#personal_details").submit(function (e) {
-        e.preventDefault();
+    // $("#personal_details").submit(function (e) {
+    //     e.preventDefault();
+    //     $("#custom-v-pills-personal-details-tab").removeClass("active show");
+    //     $("#custom-v-pills-contact-and-id-details-tab").addClass("active show");
+    //     $("#custom-v-pills-personal-details").removeClass("active show");
+    //     $("#custom-v-pills-contact-and-id-details").addClass("active show");
+    //     return false;
+    // });
 
-        var title = $("#title").val();
-        var surname = $("#surname").val();
-        var firstname = $("#firstname").val();
-        var othername = $("#othername").val();
-        var gender = $("#select_gender input[type='radio']:checked").val();
-        var birthday = $("#DOB").val();
-        var birth_place = $("#birth_place").val();
-        var country = $("#country").val().split("~");
-
-        $("#custom-v-pills-personal-details-tab").removeClass("active show");
-        $("#custom-v-pills-contact-and-id-details-tab").addClass("active show");
-        $("#custom-v-pills-personal-details").removeClass("active show");
-        $("#custom-v-pills-contact-and-id-details").addClass("active show");
-        return false;
-        //            alert(title + ' ' + surname + ' ' + firstname + ' ' + gender + ' ' + birthday + ' ' + birth_place + ' ' + country);
-    });
-
-    // Personal Details form
-    $("#next1").click(function (e) {
-        e.preventDefault();
-
-        var title = $("#title").val();
-        var surname = $("#surname").val();
-        var firstname = $("#firstname").val();
-        var othername = $("#othername").val();
-
-        var gender = $("#select_gender input[type='radio']:checked").val();
-        var birthday = $("#DOB").val();
-        var birth_place = $("#birth_place").val();
-        var country = $("#country").val();
-
-        //            alert(title + '' + surname + '' + firstname + '' + gender + '' + birthday + '' + birth_place + '' + country);
-    });
-
-    $("#image_upload").change(function () {
+    $("#image_upload").on("change", function () {
         var file = $("#image_upload[type=file]").get(0).files[0];
 
         if (file) {
@@ -129,11 +99,8 @@ $(() => {
             reader.onload = function () {
                 $(".display_selected_id_image").attr("src", reader.result);
             };
-
             reader.readAsDataURL(file);
-
             reader.onload = function () {
-                // {{--  alert(reader.result)  --}}
                 $(".display_selected_id_image").attr("src", reader.result);
                 $("#image_upload_").val(reader.result);
             };
@@ -142,7 +109,7 @@ $(() => {
         $(".display_selected_id_image").show();
     });
 
-    $("#previewImg").change(function () {
+    $("#previewImg").on("change", function () {
         var file = $("#previewImg[type=file]").get(0).files[0];
 
         if (file) {
@@ -156,24 +123,9 @@ $(() => {
         }
     });
 
-    // C0ntact Details Values
-    $("#contact_id_details").submit(function (e) {
-        //            $('#next2').submit(function(e){
+    // Contact Details Values
+    $("#contact_id_details").on("click", function (e) {
         e.preventDefault();
-
-        var mobile_number = $("#mobile_number").val();
-        var email = $("#email").val();
-        var city = $("#city").val();
-        var town = $("#town").val();
-        var residential_address = $("#residential_address").val();
-        var id_type = $("#id_type").val();
-        var id_number = $("#id_number").val();
-        var tin_number = $("#tin_number").val();
-        var issue_date = $("#issue_date").val();
-        var expiry_date = $("#expiry_date").val();
-        //                var image_upload = $('#image_upload').val(this.files && this.files.length ? this.files[0].name.split('.')[0] : '');
-        //                console.log(image_upload);
-
         var file = $("input[type=file]").get(0).files[0];
 
         if (file) {
@@ -186,8 +138,6 @@ $(() => {
             reader.readAsDataURL(file);
         }
 
-        //                alert(mobile_number + ' ' + email + ' ' + city + ' ' + town + ' ' + id_number + ' ' + residential_address + ' ' + issue_date + ' ' + expiry_date + ' ');
-
         $("#custom-v-pills-contact-and-id-details-tab").removeClass(
             "active show"
         );
@@ -196,9 +146,9 @@ $(() => {
         $("#custom-v-pills-bio-details").addClass("active show");
     });
 
-    $("#bio-previous-btn").click(function () {});
+    $("#bio-previous-btn").on("click", function () {});
 
-    $("#bio_details").submit(function (e) {
+    $("#bio_details").on("submit", function (e) {
         e.preventDefault();
 
         $("#custom-v-pills-bio-details-tab").removeClass("active show");
@@ -348,7 +298,34 @@ $(() => {
         $(".display_proof_of_address").show();
     });
 
-    $("#confirm_submit").click(function (e) {
+    $("#submit1").on("click", (e) => {
+        if (!document.forms["personal_details"].reportValidity()) {
+            e.preventDefault();
+            return false;
+        }
+        $("#custom-v-pills-contact-and-id-details-tab").tab("show");
+        return true;
+    });
+
+    $("#submit2").on("click", (e) => {
+        if (!document.forms["contact_id_details"].reportValidity()) {
+            e.preventDefault();
+            return false;
+        }
+        $("#custom-v-pills-bio-details").tab("show");
+        return true;
+    });
+
+    $("#final_submit").on("click", (e) => {
+        if (!document.forms["contact_id_details"].reportValidity()) {
+            e.preventDefault();
+            return false;
+        }
+        $("#summary-tab").tab("show");
+        return true;
+    });
+
+    $("#confirm_submit").on("click", function (e) {
         e.preventDefault();
 
         // Personal Details
@@ -425,12 +402,6 @@ $(() => {
 
         var proof_of_address = $("#proof_of_address_").val();
 
-        // $("#spinner").show();
-        // $("#spinner-text").show();
-
-        // $("#confirm_submit_text").hide();
-        // $("#confirm_submit").attr("disabled", true);
-
         $.ajax({
             type: "POST",
             url: "../savings-account-creation-api",
@@ -465,33 +436,22 @@ $(() => {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                // console.log(response);
                 var res = JSON.parse(response);
                 console.log(res);
 
                 if (res.responseCode == "000") {
-                    // let messages =
-                    //     `
-                    //     ${res.message},
-                    //     ${res.accountNumber},
-                    //     ${res.customerNumber}
-                    //     `,
-
                     Swal.fire({
                         title: res.messge,
                         html: `<p>customer Number: ${res.customerNumber}</p>
                 <p>Account Number:${res.accountNumber}</p>`,
                         icon: "success",
                     });
-                    // toaster(response.message, "success", 3000);
                 } else {
                     toaster(res.message, "error", 3000);
 
                     $("#spinner").hide();
                     $("#spinner-text").hide();
                     $("#confirm_submit_text").show(),
-                        // {{--  $('#print_receipt').hide();  --}}
-                        // {{--  $('#confirm_transfer').show();  --}}
                         $("#confirm_submit").attr("disabled", false);
                 }
             },
