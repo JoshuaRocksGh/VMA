@@ -571,7 +571,7 @@
 
                             <div class="row">
 
-                                <div class="col-xl-6">
+                                <div class="col-md-6">
                                     <label for="" class="text-dark"><b>From</b></label>
                                     <select class="form-control" id="exch_rate_from">
                                         <option value="">-- Select Currency --</option>
@@ -583,16 +583,18 @@
 
                                     </select>
                                 </div>
-
-                                <div class="col-xl-6">
-                                    <label for="" class="text-dark"><b>To</b></label>
-                                    <select class="form-control" id="exch_rate_to">
-                                        {{-- <option value="">-- Select Currency --</option> --}}
-                                        {{-- <option value="EUR">(EUR) EURO</option> --}}
-                                        <option value="SLL" selected>(SLL) LOENE</option>
-                                        {{-- <option value="USD">(USD) US DOLLAR</option> --}}
-                                        {{-- <option value="GBP">(GBP) BRITISH POUNDS</option> --}}
-                                    </select>
+                                {{-- <br> --}}
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" class="text-dark"><b>To</b></label>
+                                        <select class="form-control" id="exch_rate_to">
+                                            {{-- <option value="">-- Select Currency --</option> --}}
+                                            {{-- <option value="EUR">(EUR) EURO</option> --}}
+                                            <option value="SLL" selected>(SLL) LOENE</option>
+                                            {{-- <option value="USD">(USD) US DOLLAR</option> --}}
+                                            {{-- <option value="GBP">(GBP) BRITISH POUNDS</option> --}}
+                                        </select>
+                                    </div>
                                 </div>
 
                             </div>

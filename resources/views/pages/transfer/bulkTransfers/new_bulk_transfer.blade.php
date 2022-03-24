@@ -50,7 +50,8 @@
                 <span> <i class="fa fa-info-circle  text-red"></i> <b style="color:red;">Please Note:&nbsp;&nbsp;</b>
                 </span> You can download template for upload (<span class="text-danger"><a
                         href="{{ url('download_same_bank_file') }}" class="text-danger"> Same Bank </a></span>) / (<span
-                    class="text-danger"><a href="#" class="text-danger"> Other Bank </a></span>)
+                    class="text-danger"><a href="{{ url('download_other_bank_file') }}" class="text-danger"> Other
+                        Bank </a></span>)
 
                 {{-- and
                         (<span> <a href="{{ url('download_other_bank_file') }}" class="text-danger"> Other ACH Bank
@@ -228,14 +229,24 @@
                                         <th> Total Upload </th>
                                         {{-- <th> Successful </th> --}}
                                         <th> Failed </th>
-                                        <th>&emsp; &emsp;&emsp; Action &emsp;&emsp;&emsp; </th>
+                                        <th> Action </th>
                                         {{-- <th class="text-center"> <b>Actions </b> </th> --}}
 
                                     </tr>
                                 </thead>
 
                                 <tbody class="all_bulk_upload_summary">
+                                    {{-- <tr id="">
+                                        <td colspan="7">
+                                            <div class="d-flex justify-content-center">
+                                                <br>
+                                                {!! $noDataAvailable !!}
 
+
+                                            </div>
+                                        </td>
+
+                                    </tr> --}}
                                 </tbody>
 
 
@@ -281,12 +292,12 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="home">
                             <div class="table-responsive">
-                                <table id=" all_successful_uploads_table"
+                                <table id="all_successful_uploads_table"
                                     class="table table-bordered table-striped dt-responsive nowrap w-100 all_successful_uploads_table"
                                     style="zoom: 0.9">
                                     <thead>
                                         <tr class="bg-success  text-white">
-                                            {{--  <th><b>Record ID</b></th>  --}}
+                                            {{-- <th><b>Record ID</b></th> --}}
                                             <th><b>Name</b></th>
                                             <th><b>Account No.</b></th>
                                             <th><b>Amount</b></th>
@@ -295,8 +306,8 @@
                                         </tr>
                                     </thead>
                                     <tbody class="successful_uploads">
-                                        <tr>
-                                            <td colspan="6">
+                                        {{-- <tr>
+                                            <td colspan="5">
                                                 <div class="d-flex justify-content-center">
                                                     <br>
                                                     {!! $noDataAvailable !!}
@@ -305,7 +316,7 @@
                                                 </div>
                                             </td>
 
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -317,18 +328,18 @@
                                     style="zoom: 0.9">
                                     <thead>
                                         <tr class="bg-danger  text-white">
-                                            {{--  <th><b>Record ID</b></th>  --}}
+                                            {{-- <th><b>Record ID</b></th> --}}
                                             <th><b>Name</b></th>
                                             <th><b>Account No.</b></th>
                                             <th><b>Amount</b></th>
                                             <th><b>Ref No.</b></th>
                                             <th><b>&emsp;Description&emsp;</b></th>
-                                            {{--  <th><b>&emsp;Edit&emsp;</b></th>  --}}
+                                            {{-- <th><b>&emsp;Edit&emsp;</b></th> --}}
                                         </tr>
                                     </thead>
                                     <tbody class="failed_uploads">
-                                        <tr>
-                                            <td colspan="6">
+                                        {{-- <tr>
+                                            <td colspan="5">
                                                 <div class="d-flex justify-content-center">
                                                     <br>
                                                     {!! $noDataAvailable !!}
@@ -337,7 +348,7 @@
                                                 </div>
                                             </td>
 
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -521,7 +532,7 @@
     @include('extras.datatables')
     <script type="text/javascript" src="{{ asset('assets/js/pages/transfer/new_bulkTransfer.js') }}"></script>
     <script>
-        let noDataAvailable = {!! json_encode($noDataAvailable) !!}
+        let noDataAvailable = {!! json_encode($noDataAvailable) !!};
         let customer_no = @json(session('customerNumber'))
     </script>
 @endsection

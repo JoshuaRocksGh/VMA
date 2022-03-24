@@ -30,22 +30,22 @@ class BulkUploadsController extends Controller
 
     public function download_same_bank()
     {
-        $pathToFile = public_path() . '/assets/images/Bulk_Transfer_File.xlsx';
+        $pathToFile = public_path() . '/assets/images/Same_Bank_Bulk_Transfer_File.xlsx';
 
         $header = array(
             'Content-Type' => 'application/xlsx'
         );
-        return response()->download($pathToFile, 'Bulk_Transfer_File.xlsx');
+        return response()->download($pathToFile, 'Same_Bank_Bulk_Transfer_File.xlsx');
     }
 
     public function download_other_bank()
     {
-        $pathToFile = public_path() . '/assets/images/bulk_payment_other_bank.xlsx';
+        $pathToFile = public_path() . '/assets/images/Other_Bank_Bulk_Transfer_File.xlsx';
 
         $header = array(
             'Content-Type' => 'application/xlsx'
         );
-        return response()->download($pathToFile, 'Bulk_Payment_Other_bank_File.xlsx');
+        return response()->download($pathToFile, 'Other_Bank_Bulk_Transfer_File.xlsx');
     }
 
     // public function download_bulk_korpor()
@@ -561,27 +561,18 @@ class BulkUploadsController extends Controller
 
     public function delete_bulk_transfer(Request $request)
     {
-        // return $request;
+        $fileBatch = $request->query('batch_no');
+        $base_response = new BaseResponse();
 
-        $batch_no = $request->query('batch_no');
-        $customer_no = session()->get('customerNumber');
+        // return $fileBatch;
 
-        $query_result_delete = DB::table('tb_corp_bank_import_excel')
-            ->where('customer_no', $customer_no)
-            ->where('batch_no', $batch_no)
-            ->delete();
-
-        $error_insert_delete = DB::table('tb_bulk_error_logs')
-            ->where('customer_no', $customer_no)
-            ->where('batch_no', $batch_no)
-            ->delete();
-
-        $query_result_delete_1 = DB::table('TB_CORP_BANK_BULK_REF')
-            ->where('customer_no', $customer_no)
-            ->where('batch_no', $batch_no)
-            ->delete();
-
-        return view('pages.transfer.bulkTransfers.bulk_trasnfer');
+        try {
+            $response = Http::delete(env('API_BASE_URL') . "corporate/deleteFileRecord/$fileBatch");
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
+            return $base_response->api_response($result->responseCode, $result->message,  NULL);
+        }
     }
 
     public function view_bulk_transfer_korpor(Request $request)
@@ -750,7 +741,9 @@ class BulkUploadsController extends Controller
 
             // return $data;
             $response = Http::post(env('CIB_API_BASE_URL') . "post-bulk-upload-list", $data);
-            return $response;
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+            // urn $response;
         } catch (\Exception $e) {
             DB::table('tb_error_logs')->insert([
                 'platform' => 'ONLINE_INTERNET_BANKING',
