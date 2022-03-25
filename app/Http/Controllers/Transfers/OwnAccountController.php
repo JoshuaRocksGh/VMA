@@ -110,6 +110,7 @@ class OwnAccountController extends Controller
 
     public function corporate_own_account_transfer(Request $req)
     {
+        // return $req;
 
         $base_response = new BaseResponse();
 
@@ -125,9 +126,11 @@ class OwnAccountController extends Controller
 
 
             "account_no" => $req->accountNumber,
+            "account_name" => $req->accountName,
             "authToken" => $authToken,
             "channel" => 'NET',
             "destinationAccountId" => $req->beneficiaryAccountNumber,
+            "beneficiary_name" => $req->beneficiaryName,
             "amount" => $req->transferAmount,
             "currency" => $req->accountCurrency,
             "narration" => $req->transferPurpose,

@@ -472,6 +472,9 @@
                         let posted_by = pending_request.postedby;
                         posted_by != null ? append_approval_details("Posted By", posted_by) : '';
 
+                        let account_name = pending_request.account_name;
+                        account_name != null ? append_approval_details("Account Name", account_name) : '';
+
                         let debit_account = pending_request.account_no;
                         debit_account != null ? append_approval_details("Debit Account", debit_account) : '';
 
@@ -498,6 +501,10 @@
                         let bank_name = pending_request.bank_name;
                         bank_name != null ? append_approval_details("Bank Name", bank_name) : '';
 
+                        let beneficiary_name = pending_request.beneficiary_name;
+                        beneficiary_name != null ? append_approval_details("Beneficiary Name",
+                            beneficiary_name) : '';
+
                         let beneficiary_account = pending_request.creditaccountnumber;
                         beneficiary_account != null ? append_approval_details("Beneficiary Account",
                             beneficiary_account) : '';
@@ -506,9 +513,7 @@
                         beneficiary_address != null ? append_approval_details("Beneficiary Address",
                             beneficiary_address) : '';
 
-                        let beneficiary_name = pending_request.beneficiaryname;
-                        beneficiary_name != null ? append_approval_details("Beneficiary Name",
-                            beneficiary_name) : '';
+
 
                         let beneficiary_telephone = pending_request.beneficiarytelephone;
                         beneficiary_telephone != null ? append_approval_details("Beneficiary Telephone",
