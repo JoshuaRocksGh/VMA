@@ -182,6 +182,7 @@ $pageTitle = 'account statement'; @endphp
 
                         {{-- <th scope="col">Batch No</th> --}}
                         <th scope="col">Attachment</th>
+                        <th scope="col">Details</th>
                     </tr>
                 </thead>
 
@@ -225,6 +226,55 @@ $pageTitle = 'account statement'; @endphp
             </div>
         </div>
     </div>
+</div>
+
+<div id="accordion-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content p-0">
+            <div id="accordion">
+                <div class="card mb-0">
+                    <div class="card-header" id="headingOne" style="background-color: #00ccff">
+                        <h5 class="m-0">
+                            <a href="#collapseOne" class="text-white" data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
+                                Transaction Details
+                            </a>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped mb-0">
+
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">Transaction Date</th>
+                                        <td class="transaction_date"></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 
 

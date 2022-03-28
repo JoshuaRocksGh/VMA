@@ -205,10 +205,17 @@ $(function () {
                     // data[index].batchNumber,
                     trans.documentReference,
                     `${trans.imageCheck}~${trans.batchNumber}`,
+                    `<button type="button" class="btn btn-soft-info waves-effect waves-light more_details" data-toggle="modal" data-target="#accordion-modal" batch-no="${trans.batchNumber}"
+                    posting-date="${trans.postingSysDate}">Details</button>`
                 ])
                 .order([0, "desc"])
                 .draw(false);
         });
+        $(".more_details").click(function(){
+
+            console.log($(this).attr('batch-no'))
+            $(".transaction_date").html($(this).attr('posting-date'))
+        })
         $(".download").show();
         PageData.prompt = true;
         if (PageData?.accountAccount?.accountCurrency) {
@@ -238,6 +245,7 @@ $(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
+                console.log("account-transaction-history =>" , response)
                 if (
                     response.responseCode !== "000" ||
                     response.data.length === 0
