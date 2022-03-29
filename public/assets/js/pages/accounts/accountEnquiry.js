@@ -205,9 +205,23 @@ $(function () {
                     // data[index].batchNumber,
                     trans.documentReference,
                     `${trans.imageCheck}~${trans.batchNumber}`,
+                    `<button type="button" class="btn btn-soft-info waves-effect waves-light more_details" data-toggle="modal" data-target="#accordion-modal" batch-no="${trans.batchNumber}"
+                    posting-date="${trans.postingSysDate}" trans-number="${trans.transactionNumber}" value-date="${trans.valueDate}" branch="${trans.branch}"
+                    narration="${trans.narration}" amount="${trans.amount}" contra-account="${trans.contraAccount}" channel="${trans.channel}">Details</button>`,
                 ])
                 .order([0, "desc"])
                 .draw(false);
+        });
+        $(".more_details").click(function () {
+            console.log($(this).attr("batch-no"));
+            $(".transaction_date").html($(this).attr("posting-date"));
+            $(".value_date").html($(this).attr("value-date"));
+            $(".transaction_number").html($(this).attr("trans-number"));
+            $(".narration").html($(this).attr("narration"));
+            $(".amount").html($(this).attr("amount"));
+            $(".branch").html($(this).attr("branch"));
+            $(".contra-account").html($(this).attr("contra-account"));
+            $(".channel").html($(this).attr("channel"));
         });
         $(".download").show();
         PageData.prompt = true;
@@ -238,7 +252,7 @@ $(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                console.log(response);
+                console.log("account-transaction-history =>", response);
                 if (
                     response.responseCode !== "000" ||
                     response.data.length === 0

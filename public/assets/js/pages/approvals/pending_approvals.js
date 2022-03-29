@@ -1,3 +1,5 @@
+// siteLoading("show");
+
 function formatToCurrency(amount) {
     return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
 }
@@ -22,6 +24,7 @@ function get_corporate_requests(customerNumber, requestStatus) {
         success: function (response) {
             console.log(response);
             if (response.responseCode == "000") {
+                $(".rquest_table tr").remove()
                 let data = response.data;
                 //console.log(data);
                 // $(".pending_transaction_request tbody").empty();
@@ -112,6 +115,7 @@ function get_corporate_requests(customerNumber, requestStatus) {
                     table.column(0).visible(false);
 
                     // table.columns.adjust().draw();
+                    // siteLoading("hide");
                 });
 
                 $(".loans_error_area").hide();

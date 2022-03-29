@@ -147,6 +147,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/standing-order', [StandingOrderController::class, 'display_standing_order']);
     Route::get('/standing-order-status', [StandingOrderController::class, 'display_standing_order_status']);
     Route::get('/bulk-transfer', [BulkUploadBulkUploadsController::class, 'index']);
+    Route::post('/update-upload', [BulkUploadBulkUploadsController::class, 'update_upload']);
     Route::post('/initiate-cardless', [CardlessController::class, 'initiate_cardless'])->name('initiate-cardless');
     Route::post('/cardless-otp', [CardlessController::class, 'cardless_otp'])->name('cardless-otp');
     Route::post('/redeem-cardless', [CardlessController::class, 'redeem_cardless'])->name('redeem-cardless');
@@ -175,6 +176,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/payment-add-beneficiary/utility-payment-beneficiary', [paymentController::class, 'utility_payment_beneficiary'])->name('utility-payment-beneficiary');
     Route::post('/korpor_upload_', [BulkUploadBulkUploadsController::class, 'bulk_korpor_upload_'])->name('korpor_upload_');
     Route::get('/download_same_bank_file', [BulkUploadBulkUploadsController::class, 'download_same_bank'])->name('download-same-bank-file');
+    Route::get('/download_other_bank_file', [BulkUploadBulkUploadsController::class, 'download_other_bank'])->name('download-other-bank-file');
     // Route::get('/download_bulk_korpor_file', [BulkUploadBulkUploadsController::class, 'download_bulk_korpor']);
     // Route::get('/bulk_korpor_file_download', [BulkUploadBulkUploadsController::class, 'bulk_korpor_download'])->name('bulk-korpor-file-download');
     Route::get('/korpor_file_download', [BulkUploadBulkUploadsController::class, 'korpor_file_download']);

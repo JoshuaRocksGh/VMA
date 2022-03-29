@@ -13,7 +13,7 @@ function makeTransfer(url, data) {
             console.log(response);
             if (response.responseCode == "000") {
                 swal.fire({
-                    title: "Transfer successful!",
+                    // title: "Transfer successful!",
                     html: response.message,
                     icon: "success",
                     showConfirmButton: "false",
@@ -73,11 +73,11 @@ function getToAccount(endPoint) {
                     const value = `${e.BEN_ACCOUNT}`;
                     const dataAttr = `data-account-number='${e.BEN_ACCOUNT}'
                       data-account-type='${e.BENEF_TYPE}'
-                      data-account-description='${e.NICKNAME}'  
+                      data-account-description='${e.NICKNAME}'
                       data-account-email='${e.EMAIL}'
                       data-account-currency ='${e.BEN_ACCOUNT_CURRENCY}'
-                      data-account-address='${e.ADDRESS_1}' 
-                      data-bank-name='${e.BANK_NAME}' 
+                      data-account-address='${e.ADDRESS_1}'
+                      data-bank-name='${e.BANK_NAME}'
                       data-bank-swift-code='${e.BANK_SWIFT_CODE}'
                       data-bank-country='${e.BANK_COUNTRY}' `;
                     const text = `${e.BEN_ACCOUNT} || ${e.NICKNAME}`;
@@ -331,6 +331,7 @@ function getAccountDescription(account) {
                 details = response.data;
                 account.beneficiaryAccountName = details.accountDescription;
                 account.beneficiaryAccountCurrency = details.accountCurrencyIso;
+            // console.log("get-account-description =>",account)
                 handleToAccount(account);
             } else {
                 toaster(response.message, "warning");
@@ -349,8 +350,8 @@ function handleToAccount(account) {
         beneficiaryAccountCurrency,
         beneficiaryAccountNumber,
     } = account;
-    $("#onetime_beneficiary_name").val(beneficiaryName);
-    $(".display_to_account_name").text(beneficiaryName);
+    $(".onetime_beneficiary_name").text(beneficiaryName);
+    $(".display_to_account_name").val(beneficiaryName);
     $(".display_to_account_currency").text(beneficiaryAccountCurrency);
     $(".display_to_account_no").text(beneficiaryAccountNumber);
 }

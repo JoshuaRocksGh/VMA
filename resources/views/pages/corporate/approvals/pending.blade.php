@@ -72,7 +72,15 @@
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="rquest_table">
+                                            <tr>
+                                                <td colspan="8">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="spinner-border avatar-lg text-primary  m-2 canvas_spinner" role="status">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
 
                                         </tbody>
 
@@ -309,7 +317,7 @@
 @endsection
 
 @section('scripts')
-    @include("extras.datatables")
+    @include('extras.datatables')
 
     <script>
         let customer_no = @json(session()->get('customerNumber'));

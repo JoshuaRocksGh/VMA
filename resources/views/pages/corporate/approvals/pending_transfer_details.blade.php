@@ -1,7 +1,6 @@
 @extends('layouts.approval_detail')
 
 @section('styles')
-
     <style>
         @media print {
             .hide_on_print {
@@ -36,13 +35,9 @@
         }
 
     </style>
-
-
-
 @endsection
 
 @section('content')
-
     <div class="container-fluid">
 
         <div class="row">
@@ -192,16 +187,9 @@
                                     <div class="p-3 mt-4 mt-lg-0">
                                         <h4 class="mb-1 text-center">Account Mandate</h4>
                                         <h2 id="account_mandate"></h2>
-                                        {{-- <div class="table-responsive">
-                                            <table class="table mb-0 table-bordered">
-                                                <tbody>
-                                                    <tr>
-                                                        <td id="account_mandate"><h3></h3></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div> --}}
 
+                                        <br>
+                                        <p><span class="text-danger h3">1A</span></p>
                                     </div>
                                 </div>
 
@@ -337,7 +325,6 @@
 
     </div>
     </div>
-
 @endsection
 
 @section('scripts')
@@ -469,8 +456,10 @@
                         }
 
 
-                        let posted_by = pending_request.postedby;
-                        posted_by != null ? append_approval_details("Posted By", posted_by) : '';
+
+
+                        let account_name = pending_request.account_name;
+                        account_name != null ? append_approval_details("Account Name", account_name) : '';
 
                         let debit_account = pending_request.account_no;
                         debit_account != null ? append_approval_details("Debit Account", debit_account) : '';
@@ -498,6 +487,10 @@
                         let bank_name = pending_request.bank_name;
                         bank_name != null ? append_approval_details("Bank Name", bank_name) : '';
 
+                        let beneficiary_name = pending_request.beneficiary_name;
+                        beneficiary_name != null ? append_approval_details("Beneficiary Name",
+                            beneficiary_name) : '';
+
                         let beneficiary_account = pending_request.creditaccountnumber;
                         beneficiary_account != null ? append_approval_details("Beneficiary Account",
                             beneficiary_account) : '';
@@ -506,9 +499,7 @@
                         beneficiary_address != null ? append_approval_details("Beneficiary Address",
                             beneficiary_address) : '';
 
-                        let beneficiary_name = pending_request.beneficiaryname;
-                        beneficiary_name != null ? append_approval_details("Beneficiary Name",
-                            beneficiary_name) : '';
+
 
                         let beneficiary_telephone = pending_request.beneficiarytelephone;
                         beneficiary_telephone != null ? append_approval_details("Beneficiary Telephone",
@@ -556,6 +547,9 @@
 
                         let utility_id = pending_request.utility_id;
                         utility_id != null ? append_approval_details("Utility Id", utility_id) : '';
+
+                        let posted_by = pending_request.postedby;
+                        posted_by != null ? append_approval_details("Posted By", posted_by) : '';
 
                         let pending_approvers = pending_request.approvers
                         if (pending_approvers == null || pending_approvers == undefined) {
@@ -712,11 +706,11 @@
 
 
                 },
-                {{-- error: function(xhr, status, error) {
+                error: function(xhr, status, error) {
                     setTimeout(function() {
                         ajax_call_bulk_details_endpoint(batch_no)
                     }, $.ajaxSetup().retryAfter)
-                } --}}
+                }
             })
 
         }
@@ -836,22 +830,24 @@
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire({
+                        {{-- Swal.fire({
                             title: `${result.value.login}'s avatar`,
                             imageUrl: result.value.avatar_url
-                        })
+                        }) --}}
+                        return false;
                     }
                 })
 
             })
 
             $("#approve_transaction").click(function(e) {
+
                 e.preventDefault();
 
 
 
                 {{-- alert("Approve Transaction"); --}}
-
+                {{-- return false; --}}
                 approve_request();
 
 
@@ -865,7 +861,8 @@
 
             function ajax_post() {
                 $('#approve_transaction').text("Processing ...")
-                siteLoading('true')
+                siteLoading('show')
+
 
                 var customer = @json($customer_no);
                 var request = @json($request_id);
@@ -885,29 +882,40 @@
                         console.log(response)
                         let res = JSON.parse(response);
                         if (res.responseCode == '000') {
-                            siteLoading('false')
+                            siteLoading('hide')
 
-                            Swal.fire('', res.message, 'success');
-                            getAccounts();
+                            swal.fire({
+                                // title: "Transfer successful!",
+                                html: res.message,
+                                icon: "success",
+                                showConfirmButton: "false",
+                            });
+
+                            {{-- getAccounts(); --}}
+
+
+                            {{-- setTimeout(function() {
+                                window.location = 'approvals-pending'
+                            }, 3000) --}}
 
 
                             setTimeout(function() {
                                 window.location = 'approvals-pending'
-                            }, 3000)
-
-
-                            {{-- setTimeout(function() {
-
                                 window.opener.location.reload();
                                 window.close();
-                            }, 3000) --}}
+                            }, 5000)
 
 
                         } else {
                             siteLoading('false')
 
 
-                            Swal.fire('', res.message, 'error');
+                            swal.fire({
+                                // title: "Transfer successful!",
+                                html: res.message,
+                                icon: "error",
+                                showConfirmButton: "false",
+                            });
 
                         }
 
@@ -938,7 +946,8 @@
                         ajax_post()
 
                     } else if (result.isDenied) {
-                        Swal.fire('Failed to approve transaction', '', 'info')
+                        toaster('Failed to approve transaction', 'error')
+                        {{-- Swal.fire('Failed to approve transaction', '', 'info') --}}
                     }
                 })
 
@@ -947,6 +956,7 @@
 
             function ajax_post_for_reject() {
                 let narration = $('.swal2-input').val()
+                siteLoading('show')
                 $('#reject_transaction').text("Processing ...")
                 var customer_no = @json($customer_no);
                 var request_id = @json($request_id);
@@ -968,16 +978,33 @@
                     success: function(response) {
                         console.log(response)
                         if (response.responseCode == '000') {
+                            siteLoading('hide')
+
+                            swal.fire({
+                                // title: "Transfer successful!",
+                                html: response.message,
+                                icon: "success",
+                                showConfirmButton: "false",
+                            });
 
 
 
                             setTimeout(function() {
-                                Swal.fire('', response.message, 'success');
                                 window.location = 'approvals-pending'
-                            }, 3000)
+                                window.opener.location.reload();
+                                window.close();
+                            }, 5000)
+
 
                         } else {
-                            Swal.fire('', response.message, 'error');
+                            siteLoading('hide')
+                            {{-- Swal.fire('', response.message, 'error'); --}}
+                            swal.fire({
+                                // title: "Transfer successful!",
+                                html: response.message,
+                                icon: "error",
+                                showConfirmButton: "false",
+                            });
 
                         }
 

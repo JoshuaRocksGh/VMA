@@ -69,6 +69,7 @@ class SameBankController extends Controller
 
     public function corporate_same_bank(Request $request)
     {
+        // return $request;
         $base_response = new BaseResponse();
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
@@ -79,9 +80,11 @@ class SameBankController extends Controller
         // return $request;
         $data = [
             "account_no" => $request->accountNumber,
+            "account_name" => $request->accountName,
             "authToken" => $authToken,
             "channel" => 'NET',
             "destinationAccountId" => $request->beneficiaryAccountNumber,
+            "beneficiary_name" => $request->beneficiaryName,
             "beneficiaryName" => $request->beneficiaryName,
             "currency" => $request->accountCurrency,
             "account_mandate" => $request->accountMandate,

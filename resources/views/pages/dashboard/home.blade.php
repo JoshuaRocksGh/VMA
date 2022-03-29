@@ -571,7 +571,7 @@
 
                             <div class="row">
 
-                                <div class="col-xl-6">
+                                <div class="col-md-6">
                                     <label for="" class="text-dark"><b>From</b></label>
                                     <select class="form-control" id="exch_rate_from">
                                         <option value="">-- Select Currency --</option>
@@ -583,16 +583,18 @@
 
                                     </select>
                                 </div>
-
-                                <div class="col-xl-6">
-                                    <label for="" class="text-dark"><b>To</b></label>
-                                    <select class="form-control" id="exch_rate_to">
-                                        {{-- <option value="">-- Select Currency --</option> --}}
-                                        {{-- <option value="EUR">(EUR) EURO</option> --}}
-                                        <option value="SLL" selected>(SLL) LOENE</option>
-                                        {{-- <option value="USD">(USD) US DOLLAR</option> --}}
-                                        {{-- <option value="GBP">(GBP) BRITISH POUNDS</option> --}}
-                                    </select>
+                                {{-- <br> --}}
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="" class="text-dark"><b>To</b></label>
+                                        <select class="form-control" id="exch_rate_to">
+                                            {{-- <option value="">-- Select Currency --</option> --}}
+                                            {{-- <option value="EUR">(EUR) EURO</option> --}}
+                                            <option value="SLL" selected>(SLL) LOENE</option>
+                                            {{-- <option value="USD">(USD) US DOLLAR</option> --}}
+                                            {{-- <option value="GBP">(GBP) BRITISH POUNDS</option> --}}
+                                        </select>
+                                    </div>
                                 </div>
 
                             </div>
@@ -643,7 +645,8 @@
                                     aria-hidden="true">×</button>
                             </div>
                             <div class="modal-body">
-                                <div class="table-responsive table-bordered accounts_display_area" style="display: none">
+                                <div class="table-responsive table-bordered accounts_display_area"
+                                    style="display: none; zoom:0.9">
                                     <h3 class="text-center text-success">CURRENT & SAVINGS ACCOUNT</h3>
                                     <table id="" class="table table-striped mb-0 ">
                                         <thead>
@@ -653,8 +656,8 @@
                                                 <td> <b> Product </b> </td>
                                                 <td> <b> Cur </b> </td>
                                                 {{-- <td> <b> OverDraft </b> </td> --}}
-                                                {{-- <td> <b> Ledger Bal </b> </td> --}}
-                                                <td> <b> Av. Bal </b> </td>
+                                                <td> <b> Ledger Bal </b> </td>
+                                                <td> <b> Available Bal </b> </td>
                                             </tr>
                                         </thead>
                                         <tbody class="casa_list_display">

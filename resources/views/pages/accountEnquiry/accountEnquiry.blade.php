@@ -44,18 +44,15 @@
     }
 </style>
 
-@include("extras.datatables")
-
+@include('extras.datatables')
 @endsection
 
 @section('content')
-
-
 @php
 $currentPath = 'Account Statement';
 $basePath = 'Account';
 $pageTitle = 'account statement'; @endphp
-@include("snippets.pageHeader")
+@include('snippets.pageHeader')
 
 <div class="card-body p-0 px-sm-2">
     <div class="row site-card p-2 p-md-4  justify-content-md-around" id="transaction_form">
@@ -64,7 +61,7 @@ $pageTitle = 'account statement'; @endphp
                 <label class=" text-primary align-self-center"> Account :</label>
                 <select class="form-control accounts-select " id="from_account" required>
                     <option value="" disabled selected> -- Select Your Account -- </option>
-                    @include("snippets.accounts")
+                    @include('snippets.accounts')
                 </select>
             </div>
 
@@ -213,29 +210,96 @@ $pageTitle = 'account statement'; @endphp
                     <div class="carousel-inner">
 
                     </div>
-                    <a class="carousel-control-prev" href="#attachment_carousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#attachment_carousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div id="accordion-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content p-0">
+                <div id="accordion">
+                    <div class="card mb-0">
+                        <div class="card-header" id="headingOne" style="background-color: #00ccff">
+                            <h5 class="m-0">
+                                <a href="#collapseOne" class="text-white" data-toggle="collapse" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    <b>Transaction Details</b>
+                                </a>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                            data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped mb-0">
+
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Transaction Date</th>
+                                                <td class="text-danger transaction_date"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Value Date</th>
+                                                <td class="text-danger value_date"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Transaction No.</th>
+                                                <td class="text-danger transaction_number"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">NarrationS</th>
+                                                <td class="text-danger narration"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Amount</th>
+                                                <td class="text-danger amount"></td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th scope="row">Contra Account</th>
+                                                <td class="text-danger contra-account"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Branch</th>
+                                                <td class="text-danger branch"></td>
+
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Channel</th>
+                                                <td class="text-danger channel"></td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
 
 
-@endsection
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    @endsection
 
-@section('scripts')
-@include("extras.datatables")
-<script src="{{ asset('assets/js/pages/accounts/accountEnquiry.js') }}"></script>
-<script defer>
-    const PageData = new Object();
+    @section('scripts')
+    @include('extras.datatables')
+    <script src="{{ asset('assets/js/pages/accounts/accountEnquiry.js') }}"></script>
+    <script defer>
+        const PageData = new Object();
         PageData.reqAccount = @json($accountNumber);
         let noDataAvailable = {!! json_encode($noDataAvailable) !!}
-</script>
-@endsection
+    </script>
+    @endsection
