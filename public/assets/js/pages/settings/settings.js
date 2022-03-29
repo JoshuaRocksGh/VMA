@@ -3,54 +3,65 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     const settingsList = [
         {
-            title: "change password",
-            icon: "it",
-            color: "brown",
+            title: "change transaction pin",
+            icon: "unlock-alt",
+            bgClass: "grad-gray-blue",
+            dataTarget: "#change_transaction_pin_modal",
         },
         {
             title: "change password",
-            icon: "it",
-            color: "brown",
+            icon: "user-lock",
+            bgClass: "grad-blue-pink",
         },
         {
-            title: "change password",
-            icon: "it",
-            color: "brown",
+            title: "forgot transaction pin",
+            icon: "window-close",
+            bgClass: "green-yellow",
         },
         {
-            title: "change password",
-            icon: "it",
-            color: "brown",
+            title: "Enquiry",
+            icon: "comments",
+            bgClass: "pink-cyan",
         },
         {
-            title: "change password",
-            icon: "it",
-            color: "brown",
+            title: "Tarrif List",
+            icon: "chart-bar",
+            bgClass: "cyan-green",
         },
         {
-            title: "change password",
-            icon: "it",
-            color: "brown",
+            title: "Agent List",
+            icon: "users",
+            bgClass: "yellow-yellow",
         },
         {
-            title: "change password",
-            icon: "it",
-            color: "brown",
+            title: "Help (FAQs)",
+            icon: "question-circle",
+            bgClass: "blue-blue",
+        },
+        {
+            title: "Terms and Conditions",
+            icon: "file-contract",
+            bgClass: "red-orange",
+        },
+        {
+            title: "Contact Us",
+            icon: "address-card",
+            bgClass: "black-black",
         },
     ];
 
     let settingsHtml = "";
     settingsList.forEach((e) => {
-        const { title, color, icon } = e;
-        settingsHtml += `<div class="card settings-card">
-        <div class="card-img" style="background-color:${color}"><span class="fas fa-${icon}"></span></div>
-       
-        <div class="card-body">
-
-            <span class="">${title}</span>
+        const { title, bgClass, icon, dataTarget } = e;
+        settingsHtml += `   <button data-toggle="modal" data-target="${dataTarget}" class="card d-sm-block mx-auto d-flex  p-1  w-100 ${bgClass} pt-2 px-2 pt-sm-4 grad " style="max-width: 300px;">
+       <div class=" d-flex  card-img  w-100 justify-content-sm-center" >
+        <i class="fas  fa-${icon}"></i>
         </div>
-    </div>`;
+        <span class="sm-4 mt-2 mt-sm-4 d-sm-block  font-weight-bold font-12">${title}</span>
+<div class="text"> </div>
+    </button>`;
     });
-    console.log(settingsHtml);
     document.getElementById("settings_display").innerHTML = settingsHtml;
+
+    $(".pincode-input").pincodeInput({ inputs: 4 });
 });
