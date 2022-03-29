@@ -63,7 +63,6 @@ function getToAccount(endPoint) {
             let data = response.data;
             if (response.data.length > 0) {
                 $(".no_beneficiary").hide();
-                console.log(data);
                 $("#to_account")
                     .empty()
                     .trigger("change")
@@ -237,6 +236,84 @@ function getStandingOrderFrequencies() {
     });
 }
 
+function getCurrencies() {
+    $.ajax({
+        type: "GET",
+        url: "get-currency-list-api",
+        datatype: "application/json",
+        success: function (response) {
+            let data = response.data;
+            console.log(data);
+            $("#transfer_currency").empty();
+            $.each(data, function (index) {
+                const selected = data[index].isoCode === "SLL";
+                console.log(selected);
+                $("#transfer_currency").append(
+                    `<option ${selected ? "selected" : ""} data-description=${
+                        data[index].description
+                    } data-currCode=${data[index].currCode} value=${
+                        data[index].isoCode
+                    }>
+                        ${data[index].isoCode} </option>`
+                );
+            });
+            $("#transfer_currency").trigger("change");
+        },
+        error: function (xhr, status, error) {
+            setTimeout(function () {
+                getStandingOrderFrequencies();
+            }, $.ajaxSetup().retryAfter);
+        },
+    });
+}
+
+function getCurrencies() {
+    $.ajax({
+        type: "GET",
+        url: "get-currency-list-api",
+        datatype: "application/json",
+        success: function (response) {
+            let data = response.data;
+            console.log(data);
+            $("#transfer_currency").empty();
+            $.each(data, function (index) {
+                const selected = data[index].isoCode === "SLL";
+                console.log(selected);
+                $("#transfer_currency").append(
+                    `<option ${selected ? "selected" : ""} data-description=${
+                        data[index].description
+                    } data-currCode=${data[index].currCode} value=${
+                        data[index].isoCode
+                    }>
+                        ${data[index].isoCode} </option>`
+                );
+            });
+            $("#transfer_currency").trigger("change");
+        },
+        error: function (xhr, status, error) {
+            setTimeout(function () {
+                getStandingOrderFrequencies();
+            }, $.ajaxSetup().retryAfter);
+        },
+    });
+}
+
+function getFx() {
+    $.ajax({
+        type: "GET",
+        url: "get-correct-fx-rate-api",
+        datatype: "application/json",
+        success: function (response) {
+            pageData.fxRate = response.data;
+        },
+        error: function (xhr, status, error) {
+            setTimeout(function () {
+                getStandingOrderFrequencies();
+            }, $.ajaxSetup().retryAfter);
+        },
+    });
+}
+
 function getAccountDescription(account) {
     $("#onetime_beneficiary_name_loader").show();
     $.ajax({
@@ -295,6 +372,9 @@ $(() => {
         minimumResultsForSearch: Infinity,
         templateResult: accountTemplate,
         templateSelection: accountTemplate,
+    });
+    $("#transfer_currency").select2({
+        minimumResultsForSearch: Infinity,
     });
 
     function renderOwnAccounts() {
@@ -408,7 +488,7 @@ $(() => {
         $(".display_from_account_balance").text(
             formatToCurrency(accountBalance)
         );
-        if (transferInfo.amount) {
+        if (transferInfo.amount && transferType !== "International Bank") {
             $(".display_transfer_currency").text(accountCurrency);
         }
         if (transferType === "Own Account") {
@@ -491,14 +571,19 @@ $(() => {
             $(".display_transfer_currency").text("");
             return false;
         }
-        if (!fromAccount.accountCurrency) {
+        if (!fromAccount.accountCurrency && !transferInfo.transferCurrency) {
             $(".display_transfer_currency").text("SLL");
         } else {
-            $(".display_transfer_currency").text(fromAccount.accountCurrency);
+            $(".display_transfer_currency").text(
+                transferInfo?.transferCurrency || fromAccount.accountCurrency
+            );
         }
         $(".display_transfer_amount").text(
             formatToCurrency(transferInfo.transferAmount)
         );
+        if (transferType === "International Bank") {
+            convertToLocalCurrency();
+        }
     });
     // ===================================================
     //  isOnetimeTransfer
@@ -557,6 +642,31 @@ $(() => {
         });
         // international bank
         if (transferType === "International Bank") {
+            function convertToLocalCurrency() {
+                const localEq = currencyConvertor(
+                    pageData.fxRate,
+                    transferInfo.transferAmount,
+                    transferInfo.transferCurrency,
+                    "SLL"
+                );
+                $(".display_transfer_amount_local_eq").text(
+                    formatToCurrency(localEq?.convertedAmount)
+                );
+            }
+            $("#transfer_currency").on("change", () => {
+                transferInfo.transferCurrency = $(
+                    "#transfer_currency option:selected"
+                ).val();
+
+                $(".display_transfer_currency").text(
+                    transferInfo?.transferCurrency
+                );
+                convertToLocalCurrency();
+            });
+
+            getCurrencies();
+            getFx();
+
             $("#onetime_select_country").on("change", () => {
                 onetimeToAccount.bankCountryCode = $(
                     "#onetime_select_country"
@@ -569,7 +679,7 @@ $(() => {
     // =========================================================
     //Other Checks
     // =========================================================
-    $("#transfer_mode").change(function () {
+    $("#transfer_mode").on("change", function () {
         transferInfo.transferMode = $("#transfer_mode").val();
         $(".display_to_transfer_type").text(transferInfo.transferMode);
     });
