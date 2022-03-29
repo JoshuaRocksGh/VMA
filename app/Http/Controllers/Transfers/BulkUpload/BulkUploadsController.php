@@ -250,10 +250,11 @@ class BulkUploadsController extends Controller
         // return $account_no;
         $account_info = explode("~", $account_no);
         $account_no = $account_info[2];
+        $account_name = $account_info[1];
         $currency = $account_info[3];
 
         $account_mandate = $account_info[6];
-        // return $account_info;
+        return $account_info;
 
         $upload_file_excel = $request->file_name;
 

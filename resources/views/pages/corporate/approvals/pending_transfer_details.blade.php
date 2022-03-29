@@ -1,7 +1,6 @@
 @extends('layouts.approval_detail')
 
 @section('styles')
-
     <style>
         @media print {
             .hide_on_print {
@@ -36,13 +35,9 @@
         }
 
     </style>
-
-
-
 @endsection
 
 @section('content')
-
     <div class="container-fluid">
 
         <div class="row">
@@ -192,16 +187,9 @@
                                     <div class="p-3 mt-4 mt-lg-0">
                                         <h4 class="mb-1 text-center">Account Mandate</h4>
                                         <h2 id="account_mandate"></h2>
-                                        {{-- <div class="table-responsive">
-                                            <table class="table mb-0 table-bordered">
-                                                <tbody>
-                                                    <tr>
-                                                        <td id="account_mandate"><h3></h3></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div> --}}
 
+                                        <br>
+                                        <p><span class="text-danger h3">1A</span></p>
                                     </div>
                                 </div>
 
@@ -337,7 +325,6 @@
 
     </div>
     </div>
-
 @endsection
 
 @section('scripts')
@@ -469,8 +456,7 @@
                         }
 
 
-                        let posted_by = pending_request.postedby;
-                        posted_by != null ? append_approval_details("Posted By", posted_by) : '';
+
 
                         let account_name = pending_request.account_name;
                         account_name != null ? append_approval_details("Account Name", account_name) : '';
@@ -561,6 +547,9 @@
 
                         let utility_id = pending_request.utility_id;
                         utility_id != null ? append_approval_details("Utility Id", utility_id) : '';
+
+                        let posted_by = pending_request.postedby;
+                        posted_by != null ? append_approval_details("Posted By", posted_by) : '';
 
                         let pending_approvers = pending_request.approvers
                         if (pending_approvers == null || pending_approvers == undefined) {
@@ -841,10 +830,10 @@
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        {{--  Swal.fire({
+                        {{-- Swal.fire({
                             title: `${result.value.login}'s avatar`,
                             imageUrl: result.value.avatar_url
-                        })  --}}
+                        }) --}}
                         return false;
                     }
                 })
@@ -858,7 +847,7 @@
 
 
                 {{-- alert("Approve Transaction"); --}}
-                {{--  return false;  --}}
+                {{-- return false; --}}
                 approve_request();
 
 
@@ -902,12 +891,12 @@
                                 showConfirmButton: "false",
                             });
 
-                            {{--  getAccounts();  --}}
+                            {{-- getAccounts(); --}}
 
 
-                            {{--  setTimeout(function() {
+                            {{-- setTimeout(function() {
                                 window.location = 'approvals-pending'
-                            }, 3000)  --}}
+                            }, 3000) --}}
 
 
                             setTimeout(function() {
@@ -958,7 +947,7 @@
 
                     } else if (result.isDenied) {
                         toaster('Failed to approve transaction', 'error')
-                        {{--  Swal.fire('Failed to approve transaction', '', 'info')  --}}
+                        {{-- Swal.fire('Failed to approve transaction', '', 'info') --}}
                     }
                 })
 
@@ -1009,7 +998,7 @@
 
                         } else {
                             siteLoading('hide')
-                            {{--  Swal.fire('', response.message, 'error');  --}}
+                            {{-- Swal.fire('', response.message, 'error'); --}}
                             swal.fire({
                                 // title: "Transfer successful!",
                                 html: response.message,
