@@ -37,7 +37,7 @@
                     role="tablist" aria-orientation="vertical" style="max-width: 350px">
                     <button
                         class="nav-link knav active show py-2 transition-all py-md-2   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary"
-                        id="custom-v-pills-personal-details-tab" href="#custom-v-pills-personal-details"
+                        id="custom-v-pills-personal-details-tab" href="#custom-v-pills-personal-details" role="tab"
                         aria-controls="custom-v-pills-personal-details">
 
                         Personal Details
@@ -45,18 +45,19 @@
                     <button
                         class="nav-link mt-2 knav py-2 transition-all py-md-2   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary"
                         id="custom-v-pills-contact-and-id-details-tab" href="#custom-v-pills-contact-and-id-details"
-                        aria-controls="custom-v-pills-contact-and-id-details">
+                        role="tab" aria-controls="custom-v-pills-contact-and-id-details">
 
                         Contact & ID Details</button>
                     <button
                         class="nav-link knav mt-2 py-2 transition-all py-md-2   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary"
-                        id="custom-v-pills-bio-details-tab" href="#custom-v-pills-bio-details"
+                        id="custom-v-pills-bio-details-tab" href="#custom-v-pills-bio-details" role="tab"
                         aria-controls="custom-v-pills-bio-details">
 
                         Bio Details</button>
                     <button
                         class="nav-link knav mt-2 py-2 transition-all py-md-2   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary"
-                        id="summary-tab" href="#summary-v-pills-payment" aria-controls="custom-v-pills-payment-payment">
+                        id="summary-tab" role="tab" href="#summary-v-pills-payment"
+                        aria-controls="custom-v-pills-payment-payment">
 
                         Summary</button>
                 </div>
@@ -65,8 +66,7 @@
             <div class="col-md-8 mx-auto" style="max-width: 750px">
 
                 <div class="tab-content p-3">
-                    <div class="tab-pane fade active show" id="custom-v-pills-personal-details" role="tabpanel"
-                        aria-labelledby="custom-v-pills-personal-details-tab">
+                    <div class="tab-pane fade active show" id="custom-v-pills-personal-details" role="tabpanel">
 
                         <h5 class="mb-3 mt-0 bg-light p-2">Personal Details</h5>
 
@@ -284,12 +284,10 @@
 
 
                                 <div class="col-xl-5">
-                                    <button type="button" class="btn btn-secondary btn-rounded" data-toggle="pill"
-                                        href="#custom-v-pills-personal-details" role="tab"
-                                        aria-controls="custom-v-pills-personal-details">
+                                    <button type="button" class="btn btn-secondary btn-rounded" id="back_to_personal">
                                         <i class="fe-arrow-left"></i> Previous </button>
 
-                                    <button class="btn btn-primary btn-rounded float-right" type="submit" id="submit2">
+                                    <button class="btn btn-primary btn-rounded float-right" type="button" id="submit2">
                                         Next <i class="fe-arrow-right"></i>
                                     </button>
 
@@ -300,11 +298,8 @@
                         </form>
                     </div>
 
-                    <div class="tab-pane fade" id="custom-v-pills-bio-details" role="tabpanel"
-                        aria-labelledby="custom-v-pills-bio-details-tab">
+                    <div class="tab-pane fade" id="custom-v-pills-bio-details" role="tabpanel">
                         <h5 class="mb-3 mt-1 bg-light p-2">Bio Details</h5>
-
-
                         <!-- Passport Picture Upload-->
                         <form action="" id="bio_details" autocomplete="off" aria-autocomplete="off">
                             <div class="row">
@@ -336,24 +331,17 @@
                             </div>
 
                             <!-- end Cash on Delivery box-->
-                            <ul class="list-inline wizard mb-0">
-                                <li class=" list-inline-item"><button type="button"
-                                        class="btn btn-secondary btn-rounded" id="bio-previous-btn" data-toggle="pill"
-                                        href="#custom-v-pills-contact-and-id-details" role="tab"
-                                        aria-controls="custom-v-pills-contact-and-id-details">
-                                        <i class="fe-arrow-left"></i> Previous </button></li>
+                            <button type="button" role="tab" class="btn btn-secondary btn-rounded" id="back_to_contact">
+                                <i class="fe-arrow-left"></i> Previous </button>
 
-                                <li class="list-inline-item float-right"><button
-                                        class="btn btn-primary btn-rounded float-right" type="submit" id="final_submit">
-                                        Next <i class="fe-arrow-right"></i>
-                                    </button></li>
-                            </ul>
+                            <button class="btn btn-primary btn-rounded float-right" type="button" id="final_submit">
+                                Next <i class="fe-arrow-right"></i>
+                            </button>
 
                         </form>
                     </div>
 
-                    <div class="tab-pane fade" id="summary-v-pills-payment" role="tabpanel"
-                        aria-labelledby="custom-v-pills-bio-details-tab">
+                    <div class="tab-pane fade" id="summary-v-pills-payment" role="tabpanel">
                         <h5 class="mb-3 mt-1 bg-light p-2">Personal Details</h5>
                         <div class="row">
                             <div class="col-12">
@@ -512,8 +500,8 @@
                         </div>
                         <ul class="list-inline wizard mb-0">
                             <li class=" list-inline-item"><button type="button" class="btn btn-secondary btn-rounded"
-                                    id="bio-previous-btn" data-toggle="pill" href="#custom-v-pills-bio-details"
-                                    role="tab" aria-controls="custom-v-pills-bio-details"><i class="fe-arrow-left"></i>
+                                    id="back_to_bio" data-toggle="pill" href="#custom-v-pills-bio-details" role="tab"
+                                    aria-controls="custom-v-pills-bio-details"><i class="fe-arrow-left"></i>
                                     Previous</button></li>
 
                             <li class="list-inline-item float-right"><button
@@ -524,12 +512,7 @@
                                     <span id="spinner-text">Loading...</span>
                                 </button></li>
                         </ul>
-
-
-
                     </div>
-
-
                 </div>
             </div>
         </div> <!-- end col-->

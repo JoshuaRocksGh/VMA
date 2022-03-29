@@ -76,21 +76,7 @@ $(() => {
     $(".display_passport_picture").hide();
     $(".display_selfie").hide();
 
-    // $(".knav").on("click", function (e) {
-    //     e.preventDefault();
-    //     return false;
-    // });
-
-    // $("#personal_details").submit(function (e) {
-    //     e.preventDefault();
-    //     $("#custom-v-pills-personal-details-tab").removeClass("active show");
-    //     $("#custom-v-pills-contact-and-id-details-tab").addClass("active show");
-    //     $("#custom-v-pills-personal-details").removeClass("active show");
-    //     $("#custom-v-pills-contact-and-id-details").addClass("active show");
-    //     return false;
-    // });
-
-    $("#image_upload").on("change", function () {
+    $("#image_uploads").on("change", function () {
         var file = $("#image_upload[type=file]").get(0).files[0];
 
         if (file) {
@@ -109,7 +95,7 @@ $(() => {
         $(".display_selected_id_image").show();
     });
 
-    $("#previewImg").on("change", function () {
+    $("#previewImgs").on("change", function () {
         var file = $("#previewImg[type=file]").get(0).files[0];
 
         if (file) {
@@ -124,38 +110,23 @@ $(() => {
     });
 
     // Contact Details Values
-    $("#contact_id_details").on("click", function (e) {
+    // $("#contact_id_details").on("click", function (e) {
+    //     e.preventDefault();
+    //     var file = $("input[type=file]").get(0).files[0];
+
+    //     if (file) {
+    //         var reader = new FileReader();
+
+    //         reader.onload = function () {
+    //             $("#previewImg").attr("src", reader.result);
+    //         };
+
+    //         reader.readAsDataURL(file);
+    //     }
+    // });
+
+    $("#bio_detailss").on("submit", function (e) {
         e.preventDefault();
-        var file = $("input[type=file]").get(0).files[0];
-
-        if (file) {
-            var reader = new FileReader();
-
-            reader.onload = function () {
-                $("#previewImg").attr("src", reader.result);
-            };
-
-            reader.readAsDataURL(file);
-        }
-
-        $("#custom-v-pills-contact-and-id-details-tab").removeClass(
-            "active show"
-        );
-        $("#custom-v-pills-bio-details-tab").addClass("active show");
-        $("#custom-v-pills-contact-and-id-details").removeClass("active show");
-        $("#custom-v-pills-bio-details").addClass("active show");
-    });
-
-    $("#bio-previous-btn").on("click", function () {});
-
-    $("#bio_details").on("submit", function (e) {
-        e.preventDefault();
-
-        $("#custom-v-pills-bio-details-tab").removeClass("active show");
-        $("#summary-tab").addClass("active show");
-        $("#custom-v-pills-bio-details").removeClass("active show");
-        $("#summary-v-pills-payment").addClass("active show");
-
         // Personal Details
         var title = $("#title").val();
         $("#display_title").text(title);
@@ -232,7 +203,7 @@ $(() => {
 
     // Bio Details
 
-    $("#passport_picture").change(function () {
+    $("#passport_pictures").change(function () {
         var file = $("#passport_picture[type=file]").get(0).files[0];
 
         if (file) {
@@ -254,7 +225,7 @@ $(() => {
         $(".display_passport_picture").show();
     });
 
-    $("#selfie_upload").change(function () {
+    $("#selfie_uploads").change(function () {
         var file = $("#selfie_upload[type=file]").get(0).files[0];
 
         if (file) {
@@ -276,7 +247,7 @@ $(() => {
         $(".display_selfie").show();
     });
 
-    $("#proof_of_address").change(function () {
+    $("#proof_of_addresss").change(function () {
         var file = $("#proof_of_address[type=file]").get(0).files[0];
 
         if (file) {
@@ -299,8 +270,8 @@ $(() => {
     });
 
     $("#submit1").on("click", (e) => {
+        console.log("click");
         if (!document.forms["personal_details"].reportValidity()) {
-            e.preventDefault();
             return false;
         }
         $("#custom-v-pills-contact-and-id-details-tab").tab("show");
@@ -309,23 +280,30 @@ $(() => {
 
     $("#submit2").on("click", (e) => {
         if (!document.forms["contact_id_details"].reportValidity()) {
-            e.preventDefault();
             return false;
         }
-        $("#custom-v-pills-bio-details").tab("show");
+        $("#custom-v-pills-bio-details-tab").tab("show");
         return true;
     });
 
     $("#final_submit").on("click", (e) => {
-        if (!document.forms["contact_id_details"].reportValidity()) {
+        if (!document.forms["bio_details"].reportValidity()) {
             e.preventDefault();
             return false;
         }
         $("#summary-tab").tab("show");
         return true;
     });
-
-    $("#confirm_submit").on("click", function (e) {
+    $("#back_to_personal").on("click", (e) => {
+        $("#custom-v-pills-personal-details-tab").tab("show");
+    });
+    $("#back_to_contact").on("click", (e) => {
+        $("#custom-v-pills-contact-and-id-details-tab").tab("show");
+    });
+    $("#back_to_bio").on("click", (e) => {
+        $("#custom-v-pills-bio-details-tab").tab("show");
+    });
+    $("#confirm_submits").on("click", function (e) {
         e.preventDefault();
 
         // Personal Details
