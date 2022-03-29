@@ -10,6 +10,8 @@
         color: #00bdf3 !important
     }
 </style>
+
+
 <div class="site-card px-4 h-100" id="transaction_form"> <br>
     <div class="container">
         <form action="#" id="payment_details_form" autocomplete="off" aria-autocomplete="none">
@@ -149,7 +151,7 @@
                             <div class="col-12">
                                 @if ($currentPath === 'International Bank')
                                 <div class="row align-items-center mb-1">
-                                    <label class="text-primary ">Bank Country</label>
+                                    <label class="text-primary  col-md-4 ">Bank Country</label>
                                     <div class="px-0 col-md-8"> <select class="form-control "
                                             id="onetime_select_country" required>
                                             <option disabled selected>--- Not Selected ---</option>
@@ -226,8 +228,16 @@
 
                             <div class="input-group mb-1 col-md-8" style="padding: 0px;">
                                 <div class="input-group-prepend">
+                                    @if ($currentPath !== 'International Bank')
                                     <input type="text" placeholder="SLL" class="input-group-text account_currency "
                                         style="width: 80px;" readonly>
+                                    @endif
+                                    @if ($currentPath === 'International Bank')
+
+                                    <select class="" style="width: 100px;" id="transfer_currency" required>
+                                        <option value="SLL">SLL</option>
+                                    </select>
+                                    @endif
                                 </div>
 
                                 &nbsp;&nbsp;

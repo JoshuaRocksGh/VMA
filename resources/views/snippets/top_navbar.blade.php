@@ -5,7 +5,7 @@
 
             <!-- LOGO -->
             <div class="logo-box">
-                <a href="#" class="logo logo-dark text-center">
+                <a href="/" class="logo logo-dark text-center">
                     <span class="logo-sm">
                         <img src="{{  asset('assets/images/' . env('APPLICATION_INFO_LOGO_SMALL') )}} " alt=""
                             height="40">
@@ -18,7 +18,7 @@
                     </span>
                 </a>
 
-                <a href="#" class="logo logo-light text-center">
+                <a href="/" class="logo logo-light text-center">
                     <span class="logo-sm">
                         <button class="button-menu-mobile waves-effect waves-light" onclick="window.history.back()">
                             <b> <i class="mdi mdi-arrow-left  font-22 text-white"></i></b>
