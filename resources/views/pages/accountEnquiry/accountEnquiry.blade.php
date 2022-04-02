@@ -179,6 +179,7 @@ $pageTitle = 'account statement'; @endphp
 
                         {{-- <th scope="col">Batch No</th> --}}
                         <th scope="col">Attachment</th>
+                        <th scope="col">Details</th>
                     </tr>
                 </thead>
 
@@ -192,30 +193,7 @@ $pageTitle = 'account statement'; @endphp
     </div>
 </div>
 
-
-<div class="modal fade" id="attachment_modal" tabindex="-1" role="dialog" aria-labelledby="attachment_modal_title"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-info">
-                <h5 class="modal-title text-white font-weight-bold" id="attachment_modal_title">Attachments</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="attachment_carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                    </ol>
-                    <div class="carousel-inner">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="accordion-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div id="accordion-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content p-0">
@@ -292,6 +270,30 @@ $pageTitle = 'account statement'; @endphp
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
+
+<div class="modal fade" id="attachment_modal" tabindex="-1" role="dialog" aria-labelledby="attachment_modal_title"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title text-white font-weight-bold" id="attachment_modal_title">Attachments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="attachment_carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                    </ol>
+                    <div class="carousel-inner">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     @endsection
 
     @section('scripts')
