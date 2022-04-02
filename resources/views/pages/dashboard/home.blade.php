@@ -635,7 +635,7 @@
                 </div>
 
                 <div class="modal fade" id="bs-example-modal-lg" role="dialog"
-                    style="position: absolute; left:50%; top:60%;transform: translate(-50%, -50%);"
+                    style="position: absolute; left:50%; top:60%;transform: translate(-50%, -50%); "
                     aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" style="max-width: 1500px">
                         <div class="modal-content">
