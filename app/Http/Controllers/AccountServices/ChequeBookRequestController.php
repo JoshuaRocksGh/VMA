@@ -18,30 +18,21 @@ class ChequeBookRequestController extends Controller
     {
 
 
-        $accountNumber = $request->accountNumber;
-        $numberOfLeaves = $request->leaflet;
-        $branchCode = $request->branchCode;
-        $pinCode = $request->pinCode;
-
-
         $authToken = session()->get('userToken');
-        $userID = session()->get('userId');
 
 
         $data = [
 
-            "accountNumber" => $accountNumber,
-            "branch" => $branchCode,
+            "accountNumber" => $request->accountNumber,
+            "branch" => $request->branchCode,
             "deviceIP" => "A",
             "Channel" => "NET",
-            "numberOfLeaves" => $numberOfLeaves,
-            "pinCode" => $pinCode,
+            "numberOfLeaves" => $request->leaflets,
+            "pinCode" => $request->pinCode,
             "tokenID" => $authToken
 
         ];
-
-        // return $data;
-
+        // return ($data);
         $response = Http::post(env('API_BASE_URL') . "/request/chequeBook", $data);
         // return $response;
         $result = new ApiBaseResponse();

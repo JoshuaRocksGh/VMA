@@ -171,6 +171,9 @@
                                 <a href="{{ url('cheque-services') }}">Cheque Services</a>
                             </li>
                             <li>
+                                <a href="{{ url('requests') }}">Requests</a>
+                            </li>
+                            <li>
                                 <a href="#sidebarRequests" data-toggle="collapse">
                                     <span> Requests </span>
                                     <span class="menu-arrow"></span>

@@ -91,9 +91,9 @@ class AccountServicesController extends Controller
     }
 
     //method to return request for a letter screen
-    public function request_for_letter()
+    public function requests()
     {
-        return view('pages.accountServices.request_for_letter');
+        return view('pages.accountServices.requests.requests');
     }
 
     //method to return close account screen

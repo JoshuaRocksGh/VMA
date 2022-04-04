@@ -222,7 +222,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('request-atm', [AccountServicesController::class, 'request_atm'])->name('request-atm');
     Route::get('block-debit-card', [AccountServicesController::class, 'block_atm'])->name('block-debit-card');
     Route::get('card-services', [CardsController::class, 'cardServices']);
-    Route::get('request-for-letter', [AccountServicesController::class, 'request_for_letter'])->name('request-for-letter');
+    Route::get('requests', [AccountServicesController::class, 'requests']);
     Route::get('open-additional-account', [AccountServicesController::class, 'open_additional_acc'])->name('open-additional-account');
     Route::get('request-draft', [AccountServicesController::class, 'request_draft'])->name('request-draft');
     Route::get('add-signature', [AccountServicesController::class, 'add_signature'])->name('add-signature');
@@ -323,7 +323,7 @@ Route::post('make-payment-api', [PaymentsController::class, 'makePayment']);
 
 
 //route for cheque book request api
-Route::get('cheque-book-request-api', [AccountServicesChequeBookRequestController::class, 'cheque_book_request'])->name('cheque-book-request-api');
+Route::post('cheque-book-request-api', [AccountServicesChequeBookRequestController::class, 'cheque_book_request']);
 Route::post('submit-cheque-book-request', [AccountServicesChequeBookRequestController::class, 'cheque_book_request'])->name('submit-cheque-book-request');
 Route::post('submit-stop-cheque-book-request', [StopChequeController::class, 'submit_stop_cheque_book_request'])->name('submit-stop-cheque-book-request');
 
