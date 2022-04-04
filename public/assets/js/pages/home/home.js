@@ -650,7 +650,9 @@
                                         <td> <b> ${data[index].accountType}  </b>  </td>
                                         <td> <b> ${data[index].currency}  </b>  </td>
                                         <td><b> ${formatToCurrency(parseFloat(data[index].ledgerBalance))}</b></td>
-                                        <td> <b> ${formatToCurrency(parseFloat(data[index].ledgerBalance))}   </b>  </td>
+                                        <td> <b> ${formatToCurrency(parseFloat(data[index].availableBalance))}   </b>  </td>
+                                        <td> <b> ${formatToCurrency(parseFloat(data[index].odLimit))}   </b>  </td>
+                                        <td> <b> ${formatToCurrency(parseFloat(data[index].lienAmount))}   </b>  </td>
 
                                     </tr>`
                                         )

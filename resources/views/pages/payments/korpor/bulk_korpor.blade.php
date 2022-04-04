@@ -1,45 +1,19 @@
 @extends('layouts.master')
 
-@section('styles')
 
-@endsection
 
 @section('content')
+    @php
+    $pageTitle = 'BULK E-KORPOR PAYMENTS';
+    $basePath = 'Payments';
+    $currentPath = 'Bulk E-Korpor';
+    @endphp
+
+    @include('snippets.pageHeader')
 
     <div class="container-fluid ">
         <br>
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-md-4">
-                <a href="{{ url()->previous() }}" type="button"
-                    class="btn btn-soft-blue btn-sm waves-effect waves-light float-left"><i
-                        class="mdi mdi-reply-all-outline"></i>&nbsp;Go
-                    Back</a>
-            </div>
-            <div class="col-md-4">
-                <h4 class="text-primary my-0 page-header text-center text-uppercase">
-                    <img src="{{ asset('assets/images/logoRKB.png') }}" alt="logo" style="zoom: 0.05">&emsp;
-                    BULK E-KORPOR PAYMENTS
-                </h4>
-            </div>
 
-            <div class="col-md-4 text-right">
-                <h6>
-
-                    <span class="flaot-right">
-                        <b class="text-primary"> Payments </b> &nbsp; > &nbsp; <b class="text-danger">Bulk E-Korpor </b>
-                    </span>
-
-                </h6>
-
-            </div>
-
-            <div class="col-md-12 ">
-                <hr class="text-primary" style="margin: 0px;">
-            </div>
-
-        </div>
-        <br>
 
         <div class="col-md-12">
             <p class="text-muted font-14 m-r-20 m-b-20">
@@ -65,18 +39,22 @@
 
                         <div class="row">
 
-                            <div class="col-md-4">
-                                <div class="form-group ">
-                                    <div class="col-12">
-                                        <label for="inputEmail3" class="col-12 col-form-label text-primary"> Account<span
-                                                class="text-danger"> *</span></label>
-                                        <select class="custom-select " name="my_account" id="my_account" required>
-                                            <option value="">Select Account</option>
-                                            @include("snippets.accounts")
+                            <div class="card-box col-md-12">
 
-                                        </select>
-                                    </div>
+                                <h4 for="" class=" text-primary"> <b> Account to transfer from</b><span
+                                        class="text-danger"> *</span></h4>
+                                <div class="form-group">
+                                    <select class="accounts-select " name="my_account" id="my_account" required>
+                                        <option disabled selected value=""> --- Select Source Account --- </option>
+                                        @include('snippets.accounts')
+
+                                    </select>
                                 </div>
+
+
+                            </div>
+                            <div class="col-md-4">
+
                             </div>
 
                             <div class="col-md-4">
@@ -190,190 +168,13 @@
             </div>
         </div>
     </div>
-
-
-
-
 @endsection
 
 @section('scripts')
-
-    <!-- third party js -->
-    @include("extras.datatables")
-    <!-- third party js ends -->
-
-    <!-- Datatables init -->
+    @include('extras.datatables')
+    <script type="text/javascript" src="{{ asset('assets/js/pages/payments/bulk_korpor.js') }}"></script>
     <script>
-        function my_account() {
-            $.ajax({
-                'type': 'GET',
-                'url': 'get-my-account',
-                "datatype": "application/json",
-                success: function(response) {
-                    console.log(response.data);
-                    let data = response.data
-                    $.each(data, function(index) {
-
-                        $('#my_account').append($('<option>', {
-                            value: data[index].accountType + '~' + data[index].accountDesc +
-                                '~' + data[index].accountNumber + '~' + data[index]
-                                .currency + '~' + data[index].availableBalance + '~' + data[
-                                    index].accountMandate
-                        }).text(data[index].accountType + '~' + data[index].accountNumber +
-                            '~' + data[index].currency + '~' + data[index].availableBalance));
-
-                    });
-                },
-                error: function(xhr, status, error) {
-
-                    setTimeout(function() {
-                        my_account();
-                    }, $.ajaxSetup().retryAfter)
-                }
-
-            })
-        }
-
-
-        var bulk_upload_array_list = []
-
-
-        function bulk_upload_list(customer_no, status) {
-            var table = $('.bulk_upload_list').DataTable();
-            var nodes = table.rows().nodes();
-            $.ajax({
-                'tpye': 'GET',
-                'url': 'get-bulk-korpor-upload-list?customer_no=' + customer_no,
-                "datatype": "application/json",
-                success: function(response) {
-                    //console.log(response.data);
-
-
-                    if (response.responseCode == '000') {
-                        bulk_upload_array_list = response.data;
-
-                        data = bulk_upload_array_list
-
-                        $.each(data, function(index) {
-                            console.log(data[index])
-
-                            let status = ''
-                            let bank_type = ''
-
-                            if (data[index].status == 'A') {
-                                status =
-                                    `<span class="badge badge-success"> &nbsp; Approved &nbsp; </span> `
-                            } else if (data[index].status == 'R') {
-                                status =
-                                    `<span class="badge badge-danger"> &nbsp; Rejected &nbsp; </span> `
-                            } else if (data[index].status == 'P') {
-                                status =
-                                    `<span class="badge badge-warning"> &nbsp; Pending &nbsp; </span> `
-                            } else {
-                                return false;
-                            }
-
-                            if (data[index].bank_code == 'I') {
-                                bank_type = `<span class=""> &nbsp; Same Bank &nbsp; </span> `
-                            } else {
-                                bank_type = `<span class=""> &nbsp; Other Bank &nbsp; </span> `
-                            }
-
-                            {{-- if (data[index].status == "P") {
-                                        var status = "Pending"
-                                    } --}}
-
-                            let batch =
-                                `<a href="{{ url('view-bulk-transfer-korpor?batch_no=${data[index].batch_no}&bulk_amount=${data[index].total_amount}&account_no=${data[index].account_no}&bank_type=${data[index].bank_code}') }}">${data[index].batch_no}</a>`
-
-                            let action =
-                                `<span class="btn-group mb-2">
-                                                                                                                                                                                        <button class="btn btn-sm btn-success" style="zoom:0.8;"> Approved</button>
-                                                                                                                                                                                         &nbsp;
-                                                                                                                                                                                         <button class="btn btn-sm btn-danger" style="zoom:0.8;"> Reject</button>
-                                                                                                                                                                                         </span>  `
-
-                            table.row.add([
-                                batch, data[index].ref_no, data[index].account_no, data[index]
-                                .total_amount, data[index].value_date, status,
-                                // status,
-                                //action
-
-
-                            ]).draw(false)
-
-                        })
-
-                    } else {
-                        $('#beneficiary_table').hide();
-                        $('#beneficiary_list_loader').hide();
-                        $('#beneficiary_list_retry_btn').show();
-                    }
-
-                },
-                // error: function(xhr, status, error) {
-
-                //     setTimeout(function() {
-                //         bulk_upload_list(customer_no, status)
-                //     }, $.ajaxSetup().retryAfter)
-                // }
-            })
-        }
-
-
-        function formatToCurrency(amount) {
-            return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-        };
-
-
-        $(document).ready(function() {
-
-
-            let today = new Date();
-            let dd = today.getDate();
-
-            let mm = today.getMonth() + 1;
-            const yyyy = today.getFullYear()
-            console.log(mm)
-            console.log(String(mm).length)
-            if (String(mm).length == 1) {
-                mm = '0' + mm
-            }
-
-            defaultDate = dd + mm + '-' + today.getFullYear()
-            console.log(defaultDate)
-
-
-            // $(".date-picker-valueDate").flatpickr({
-            //     altInput: true,
-            //     altFormat: "j F, Y",
-            //     dateFormat: "d-m-Y",
-            //     defaultDate: [defaultDate],
-            //     position: "below"
-            // })
-
-            var customer_no = @json(session('customerNumber'))
-
-            setTimeout(function() {
-                // bulk_upload_list('057725', "P")
-                bulk_upload_list(customer_no, "P")
-                //my_account()
-            }, 1000)
-
-            $('#bulk_upload_form').submit(function(e) {
-                $('#submit_cheque_request').text('Processing ... ')
-            })
-
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-
-
-        });
+        let noDataAvailable = {!! json_encode($noDataAvailable) !!}
+        let customer_no = @json(session('customerNumber'))
     </script>
-
 @endsection

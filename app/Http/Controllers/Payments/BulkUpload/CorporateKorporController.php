@@ -66,6 +66,7 @@ class CorporateKorporController extends Controller
             'postBy' => $sender_name,
             'credit_account' => $receiverPhone,
             'account_no' => $debitAccount,
+            'account_name' => $request->sender_name,
             'customer_no' => $customer_no,
             'user_alias' => $sender_name,
             'currency' => $account_currency,

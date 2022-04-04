@@ -124,7 +124,7 @@ function bulk_upload_list(fileBatch) {
                         refNumber,
                         acctValid,
                     } = e;
-                    if (e.valid === "Y") {
+                    if (e.acctValid === "Y") {
                         group.valid.push(e);
                         all_valid_uploads.row
                             .add([
