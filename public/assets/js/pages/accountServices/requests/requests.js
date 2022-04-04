@@ -64,12 +64,7 @@ function getCardTypes() {
 }
 
 $(function () {
-    siteLoading("show");
-    Promise.all([getCardTypes(), getBranches()])
-        .finally((e) => siteLoading("hide"))
-        .catch((e) => {
-            somethingWentWrongHandler(e);
-        });
+    // siteLoading("show");
 
     $("select").select2();
     $(".accounts-select").select2({
@@ -78,9 +73,38 @@ $(function () {
         templateSelection: accountTemplate,
     });
 
-    $(".coming-soon").on("click", function (e) {
+    $(".statement-type").on("change", (e) => {
+        const statementType = e.currentTarget.value;
+        $(".period").attr("disabled", statementType === "account_details");
+    });
+
+    $(".date-select").on("click", (e) => {
+        $(".date-select").removeClass("selected");
+        $(e.currentTarget).addClass("selected");
+        const selected = $(e.currentTarget);
+        console.log(selected);
+        console.log(selected.attr("data-value"));
+    });
+
+    $("#custom_date_toggle").on("change", (e) => {
+        const isCustomDateDisabled = e.currentTarget.checked;
+        $(".custom_date").attr("disabled", !isCustomDateDisabled);
+        $(".date-select").attr("disabled", isCustomDateDisabled);
+        console.log(isCustomDateDisabled);
+    });
+
+    let date = new Date(2010, 7, 5);
+    let year = new Intl.DateTimeFormat("en", { year: "numeric" }).format(date);
+    let month = new Intl.DateTimeFormat("en", { month: "2-digit" }).format(
+        date
+    );
+    let day = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date);
+    const today = `${year}-${month}-${day}`;
+    $(".custom_date").attr("max", today);
+
+    $(".coming-soon").on("click", (e) => {
         e.preventDefault();
-        comingSoonToast("");
+        comingSoonToast("Stay tuned for more features");
     });
     // make card request
     $("#btn_submit_request_statement").on("click", (e) => {

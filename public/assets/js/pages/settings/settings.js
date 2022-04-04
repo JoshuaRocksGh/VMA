@@ -1,3 +1,26 @@
+const changePin = ({ oldPin, newPin, confirmPin }) => {
+    return $.ajax({
+        type: "POST",
+        url: "change-pin-api",
+        datatype: "application/json",
+        data: {
+            oldPin,
+            newPin,
+            confirmPin,
+        },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    }).done((response) => {
+        console.log(response);
+        if (response.responseCode == "000") {
+            toaster(response.message, "success");
+        } else {
+            toaster(response.message, "error");
+        }
+    });
+};
+
 document.addEventListener("DOMContentLoaded", function (event) {
     console.log("dong");
 
@@ -64,4 +87,33 @@ document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("settings_display").innerHTML = settingsHtml;
 
     $(".pincode-input").pincodeInput({ inputs: 4 });
+
+    $("#change_pin_button").on("click", () => {
+        const oldPin = $("#old_pin").val();
+        const newPin = $("#new_pin").val();
+        const confirmPin = $("#confirm_new_pin").val();
+
+        if (!oldPin || !newPin || !confirmPin) {
+            toaster("Please enter all fields", "warning");
+            return false;
+        }
+        if (newPin !== confirmPin) {
+            toaster("New pin and confirm pin do not match", "warning");
+            return false;
+        }
+        if (newPin.length !== 4) {
+            toaster("Please enter a valid pin code", "warning");
+            return false;
+        }
+        siteLoading("show");
+        changePin({
+            oldPin,
+            newPin,
+            confirmPin,
+        }).then(() => {
+            siteLoading("hide");
+        });
+    });
+
+    console.log({ oldPin, newPin, confirmPin });
 });
