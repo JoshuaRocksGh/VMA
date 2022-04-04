@@ -2,13 +2,19 @@
 
 
 @section('content')
-    <div class="container-fluid">
+    @php
+    $pageTitle = 'DETAIL OF BULK UPLOAD';
+    $basePath = 'Bulk Transfer';
+    $currentPath = 'Detail of Bulk Transfer';
+    @endphp
+    @include('snippets.pageHeader')
+    {{-- <div class="container-fluid">
         <br>
         <div class="row">
             <div class="col-md-4">
                 <a href="{{ url()->previous() }}" type="button"
                     class="btn btn-sm btn-soft-blue waves-effect waves-light float-left"><i
-                        class="mdi mdi-reply-all-outline"></i>&nbsp;Go
+                        class="mdi mdi-reply-all-outline"></i>&nbsp;
                     Back</a>
             </div>
             <div class="col-md-4">
@@ -22,8 +28,8 @@
             <div class="col-md-4 text-right">
                 <h6>
                     <span class="float-right">
-                        <p class="text-primary"> Bulk Transfer </b> &nbsp; > &nbsp; <b class="text-danger">Bulk Transfer
-                                Detail</b>
+                        <p class="text-primary"> Bulk Transfer </b> &nbsp; > &nbsp; <b class="text-danger">Detail of
+                                Bulk Transfer</b>
                     </span>
                 </h6>
             </div>
@@ -32,7 +38,7 @@
 
         <hr style="margin: 0px;">
         <br>
-    </div>
+    </div> --}}
 
 
 
@@ -61,25 +67,29 @@
 
 
                                 <div class="col-md-6">
-                                    <h4 class="mb-2 text-primary">Batch Number : <b
-                                            class="text-danger display_batch_no font-12">{{ $uploadData[0]['uploadBatch'] }}</b>
+                                    <h4 class="mb-2 text-primary">Debit Account Number : <b
+                                            class="text-danger display_debit_account_no font-16">{{ $uploadDetails['debitAccount'] }}</b>
                                     </h4>
 
-                                    <h4 class="mb-2 text-primary">Narration : <b
-                                            class="text-danger display_narrations font-12">{{ $uploadData[0]['transDescription'] }}</b>
+                                    <h4 class="mb-2 text-primary">Bulk Amount : <b
+                                            class="text-danger display_total_amount font-16">{{ number_format($uploadDetails['totalAmount'], 2) }}</b>
                                     </h4>
+
+
+
+
 
                                 </div>
 
 
 
                                 <div class="col-md-6">
-                                    <h4 class="mb-2 text-primary">Debit Account Number : <b
-                                            class="text-danger display_debit_account_no font-12">{{ $uploadDetails['debitAccount'] }}</b>
+                                    <h4 class="mb-2 text-primary">Narration : <b
+                                            class="text-danger display_narrations font-16">{{ $uploadData[0]['transDescription'] }}</b>
                                     </h4>
 
-                                    <h4 class="mb-2 text-primary">Bulk Amount : <b
-                                            class="text-danger display_total_amount font-12">{{ $uploadDetails['totalAmount'] }}</b>
+                                    <h4 class="mb-2 text-primary">Batch Number : <b
+                                            class="text-danger display_batch_no font-16">{{ $uploadData[0]['uploadBatch'] }}</b>
                                     </h4>
 
                                 </div>
@@ -106,7 +116,7 @@
 
                                             <button type="button" class="btn btn-primary btn-sm  waves-effect waves-light"
                                                 id="approve_upload_btn">
-                                                Submit Upload
+                                                Submit for Approval
                                             </button>
 
                                         </div>
@@ -115,7 +125,7 @@
                             </div>
 
                         </div>
-                        <button type="button" class="btn btn-primary hello_clicked">Hello</button>
+                        {{-- <button type="button" class="btn btn-primary hello_clicked">Hello</button> --}}
 
 
                     </form>
@@ -200,23 +210,30 @@
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function(response) {
-                    console.log(response)
-                    return false
-                    siteLoading("hide")
+                        console.log(response)
+                        //return false
+                        siteLoading("hide")
 
-                    if (response.responseCode == '000') {
+                        if (response.responseCode == '000') {
 
-                        Swal.fire({
-                            icon: 'success',
-                            title: response.message
-                        })
-
-                        setTimeout(function() {
+                            swal.fire({
+                                // title: "Transfer successful!",
+                                html: response.message,
+                                icon: "success",
+                                showConfirmButton: "false",
+                            }).then(() => {
+                                {{-- window.location.reload(); --}}
+                                setTimeout(function() {
+                                    window.location = "{{ url('bulk-transfer') }}"
+                                }, 3000)
+                            });
+                        }
+                        {{-- setTimeout(function() {
                             window.location = "{{ url('bulk-transfer') }}"
-                        }, 3000)
+                        }, 3000) --}}
                     }
 
-                },
+                    ,
                 error: function(xhr, status, error) {
                     siteLoading("hide")
                     Swal.fire({
@@ -229,6 +246,52 @@
 
         }
 
+
+        function reject_upload(customer_no) {
+
+            const ipAPI = 'reject-bulk-transaction-api?customer_no=' + customer_no
+
+            Swal.fire([{
+                title: 'Are you sure you want to reject',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, Reject!',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return fetch(ipAPI)
+                        .then(response => response.json())
+                        .then((data) => {
+                            if (data.responseCode == '000') {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: data.message
+                                })
+
+                                setTimeout(function() {
+                                    window.location = "{{ url('bulk-transfer') }}"
+                                }, 2000)
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: data.message
+                                })
+                            }
+                            {{-- Swal.fire(data.ip) --}}
+                        })
+                        .catch(() => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'API SERVER ERROR'
+                            })
+                        })
+                }
+            }])
+
+
+        }
+
         $(document).ready(function() {
             var batch_no = @json($batch_no)
 
@@ -238,7 +301,7 @@
             })
 
             $('#reject_upload_btn').click(function() {
-                console.log(batch_no)
+                reject_upload(batch_no)
             })
 
 

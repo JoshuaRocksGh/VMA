@@ -110,6 +110,7 @@ class InternationalBankController extends Controller
             "user_alias" => $userAlias,
             "account_mandate" => $request->accountMandate,
             "account_no" => $request->accountNumber,
+            "account_name" => $request->accountName,
             "bank_code" => $request->bankCode,
             "bank_country_code" => $request->bankCountryCode,
             "bank_name" => $request->bankName,

@@ -174,21 +174,21 @@ function getSecurityQuestion(resetUserId) {
             if (response.responseCode == 000) {
                 let securityQuestion = response.data[0].description;
                 let securityQuestionCode = response.data[0].code;
-                $("#security_question_answer").attr(
-                    "placeholder",
-                    securityQuestion
-                );
+                $("#security_question").text(securityQuestion);
                 $("#security_question_answer").attr(
                     "securityQuestionCode",
                     securityQuestionCode
+                );
+                $("#security_question_answer").attr(
+                    "placeholder",
+                    securityQuestion
                 );
                 $("#security_question_form").toggle(500);
                 $("#security_question_submit").show();
                 $("#reset_password_submit_btn").hide();
                 $("#user_id_next_btn").hide();
                 $("#password_verification").hide();
-                $("#user_id").hide();
-                $("#reset_user_id").hide();
+                $("#user_id_view").hide();
                 $("#password_verification").hide();
             } else {
                 error_alert(response.message, "#no_question");
@@ -267,7 +267,7 @@ $(document).ready(function () {
         $("#password_reset_area").show(500);
     });
 
-    $("#user_id_next_btn").click(function (e) {
+    $("#user_id_next_btn").on("click", (e) => {
         userData.resetUserId = $("#reset_user_id").val();
         e.preventDefault();
         let { resetUserId } = userData;
@@ -310,9 +310,7 @@ $(document).ready(function () {
     });
 
     $("#self_enroll").on("click", function (e) {
-        console.log("enroll");
         e.preventDefault();
-
         $("#login_form").hide(500);
         // $("#login_page_extras").toggle(300);
         $("#self_enroll_form2").hide();
@@ -398,5 +396,18 @@ $(document).ready(function () {
             $("#b_next3").attr("disabled", true);
             registerCustomer(userData);
         }
+    });
+
+    $("#reset_password_back_button").on("click", (e) => {
+        $("#security_question_submit").hide();
+        $("#user_id_next_btn").show();
+        $("#security_question_form").hide();
+        $("#user_id_view").show();
+        $("#password_reset_area").hide(500);
+        $("#login_form").show(500);
+        $("#user_id_next_btn").attr("disabled", false);
+        $(".spinner-text-next").hide();
+        $(".user_id_next_btn_text").show();
+        document.getElementById("reset_password_form").reset();
     });
 });

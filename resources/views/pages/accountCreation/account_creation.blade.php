@@ -1,191 +1,69 @@
 @extends('layouts.app')
+@section("styles")
+<style>
+    .nodata {
+        text-align: center !important
+    }
 
+    #no_data_available_img {
+        max-width: 150px !important;
+    }
+
+    .knav.active {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+        background-color: var(--primary-alt) !important;
+        border-color: var(--primary-alt) !important;
+        color: white !important;
+    }
+</style>
+@endsection
 @section('content')
 
 @include('snippets.top_navbar', ['page_title' => 'ACCOUNT OPENING'])
 
 
 
-<div class="container-fluid">
+<div class="container-fluid px-md-4 pt-5">
 
-    <br>
-    <div class="row">
-        <legend></legend>
-        <br>
-        <legend></legend>
-        <p class="sub-header font-18 purple-color">
-            <br>
-        </p>
-        <br>
-        <div class="col-md-1">
-            <a href="{{ url('/') }}" type="button"
-                class="btn btn-soft-blue btn-sm waves-effect waves-light float-left"><i
-                    class="mdi mdi-reply-all-outline"></i>&nbsp;Go
-                Back</a>
-        </div>
-        <div class="col-md-10">
-            <div class="col-md-12">
-
-                <div class="row">
-
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4 text-center">
-                        <div class="spinner-border avatar-md text-primary m-2" role="status"></div>
-                    </div>
-                    <div class="col-md-4"></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 prod_list" style="display: none">
-
-                        <h3 class="text-center">SAVINGS ACCOUNTS</h3>
-                        <hr class="mt-0">
-                        <div class="savings_product_list row">
-
-
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-
-                    <div class="col-md-5 prod_list" style="display: none">
-                        <h3 class="text-center">CURRENT ACCOUNTS</h3>
-                        <hr class="mt-0">
-
-                        <div class="current_product_list row ">
-
-                        </div>
-
-
-
+    <div class=" row pt-md-5 mx-auto">
+        <nav id="card_services_tabs" class="col-md-4  nav nav-pills flex-column mx-auto mb-3 flex-row"
+            style="max-width: 350px" role="tablist">
+            <button data-toggle="pill"
+                class=" transition-all py-md-2 active   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                href="#tab_card_request">SAVINGS ACCOUNTS</button>
+            <button data-toggle="pill"
+                class=" transition-all py-md-2   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link "
+                href="#tab_block_card">CURRENT ACCOUNTS</button>
+        </nav>
+        <div class="col-md-8 px-0 mr-auto" style="max-width: 800px">
+            <div class="tab-content pt-0" id="tabContent_card_services">
+                <div class="tab-pane fade show active " id="tab_card_request" role="tabpanel">
+                    <div class="savings_product_list row">
                     </div>
                 </div>
-
+                <div class="tab-pane fade" id="tab_block_card" role="tabpanel">
+                    <div class="current_product_list row ">
+                    </div>
+                </div>
             </div>
-            {{-- <label for="" class="text-center">1463</label>
-                <div id="demo" data-value="1463"></div> --}}
         </div>
-        <div class="col-md-1">
-
-        </div>
-
-        <br>
-
-
-
     </div>
-    <!-- end row -->
+</div>
+<!-- end row -->
 
 
-    @endsection
+@endsection
 
 
-    @section('scripts')
-
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script type="text/javascript" src="{{ asset('assets/libs/jquery-barcode/jquery-barcode.js') }}"></script>
-
-    <script>
-        $(".prod_list").hide();
-
-            function productList() {
-                $.ajax({
-                    type: "GET",
-                    url: "get-lovs-list-api",
-                    datatype: "application/json",
-                    success: function(response) {
-                        $(".spinner-border").hide()
-                        $(".prod_list").toggle('500');
-                        {{-- console.log(response.data.productList) --}}
-
-                        {{-- console.log(response.data.productList) --}}
-                        let product = response.data.productList
-                        {{-- console.log(product); --}}
-
-                        $.each(product, function(index) {
-                            {{-- console.log(product[index]) --}}
-                            let subCode = product[index].subCode;
-                            let description = product[index].description;
-                            {{-- console.log(subCode) --}}
-
-
-                            {{-- console.log(product[index].description.trim() == ) --}}
+@section('scripts')
 
 
 
-                            if (subCode == "M" && description.indexOf("CA") >= 0) {
-                                console.log("=====")
-                                console.log(product[index].description)
-                                console.log("-------")
-                                $('.current_product_list').append(
-                                    `
-                                        <div class="col-md-6">
-                                            <div class="card card-body">
-                                                <i class="mdi mdi-account-plus-outline  mdi-48px" style="margin-left: 40%"></i>
-                                                <h5 class="card-title" style="text-align: center">${product[index].description}</h5>
+<script src='{{ asset("assets/js/pages/accountCreation.js") }}'>
 
-                                                <a href="#"
-                                                    class="btn btn-outline-primary waves-effect waves-light">Apply</a>
-                                            </div>
-                                        </div>
-                                        `
-                                )
-
-                            }
+</script>
 
 
-
-                            if (subCode == "M" && description.indexOf("SA") >= 0) {
-
-                                {{-- console.log(product[index]); --}}
-
-
-                                if (description.indexOf("STAFF") >= 0) {
-
-                                } else {
-                                    {{-- console.log("=====")
-                                    console.log(product[index].description)
-                                    console.log("-------") --}}
-                                    $('.savings_product_list').append(
-                                        `
-                                        <div class="col-md-6">
-                                            <div class="card card-body">
-                                                <i class="mdi mdi-account-plus-outline  mdi-48px" style="margin-left: 40%"></i>
-                                                <h5 class="card-title" style="text-align: center">${product[index].description}</h5>
-
-                                                <a href="{{ url('/account-creation/savings-account-creation') }}"
-                                                    class="btn btn-outline-primary waves-effect waves-light">Apply</a>
-                                            </div>
-                                        </div>
-                                        `
-                                    )
-
-                                }
-                            }
-
-                        })
-                    }
-                })
-            }
-
-            $(document).ready(function() {
-                setTimeout(function() {
-                    productList();
-
-                }, 500)
-
-                {{-- var data = $("#demo").attr("data-value")
-                $("#demo").barcode(
-                    data,
-                    "code128"
-
-                ) --}}
-
-            })
-    </script>
-
-
-    @endsection
+@endsection

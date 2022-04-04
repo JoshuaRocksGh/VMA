@@ -27,27 +27,22 @@
 
         }
     </style>
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        //         $.ajaxSetup({
-//    timeout: 3000,
-//    retryAfter: 5000
-// }); --}}
-    {{-- 
-    </script> --}}
-    <script src="assets\plugins\jquery\jquery-3.6.0.min.js"></script>
+
+    <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
     @include('snippets.style')
+    @yield('styles')
     @include('snippets.script')
 
 
 </head>
 
-<body class="auth-fluid-pages pb-0">
-
-    <!-- Pre-loader -->
+<body class=" auth-fluid-pages pb-0" style="background-image: url('../../assets/images/background.png');
+    background-repeat: no-repeat; background-size: cover;">
+    <!-- Pre-loader 
+        -->
     <div id="preloader" class="preloader">
         <div id="status" class="preloader">
-            <img class="pulse" style="width: 100px; top: -50px;" src="assets/images/logoRKB.png" />
+            <img class="pulse" style="width: 100px; top: -50px;" src="{{ asset('assets/images/logoRKB.png') }}" />
         </div>
     </div> <!-- End Preloader-->
 

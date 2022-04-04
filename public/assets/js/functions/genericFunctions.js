@@ -21,13 +21,13 @@ function toaster(message, icon, timer = 3000) {
         } else if (icon.toLowerCase() === "error") {
             color = "#dc3545";
         }
-        Swal.fire({
-            html: `<span class="font-16 ">${message}</span>`,
-            icon: icon,
-            confirmButtonColor: color,
-            width: 400,
-        });
     }
+    return Swal.fire({
+        html: `<span class="font-16 ">${message}</span>`,
+        icon: icon,
+        confirmButtonColor: color,
+        width: 400,
+    });
 }
 
 function formatToCurrency(amount) {
@@ -40,7 +40,10 @@ function formatToCurrency(amount) {
 }
 
 function somethingWentWrongHandler() {
-    toaster("Something went wrong ... please hold on", "error");
+    toaster(
+        "Something went wrong ... Please wait a while and try again",
+        "error"
+    );
     setTimeout(() => {
         location.reload();
     }, 3000);
@@ -112,12 +115,16 @@ function getAccounts(account_data) {
         },
         success: function (response) {
             if (response.responseCode !== "000") {
-                toater(response.message, "error");
-                setTimeout(() => {
-                    if (response.data == null) {
+                Swal.fire({
+                    html: `<span class="font-16 ">${response.message}</span>`,
+                    icon: "error",
+                    confirmButtonColor: "red",
+                    width: 400,
+                    didDestroy: () => {
                         window.location = "logout";
-                    }
-                }, 1500);
+                    },
+                });
+                // toaster(response.message, "error").then(() => console.log("okay"));
             }
         },
         error: function (xhr, status, error) {
@@ -126,6 +133,38 @@ function getAccounts(account_data) {
             }, $.ajaxSetup().retryAfter);
         },
     });
+}
+function accountTemplate(account) {
+    const data = $(account.element).attr("data-content");
+    if (!data) return $(account.element).text();
+    return $(data);
+}
+
+function getAccountOption(account) {
+    let {
+        accountDesc,
+        accountMandate,
+        currencyCode,
+        accountNumber,
+        accountType,
+        availableBalance,
+        currency,
+    } = account;
+    let option = ` <option data-content="<div class='account-card row'>
+<div class='col-2 text-center'><div class='account-icon mx-auto'><span>${accountDesc[0]}</span></div></div>
+<div class='col-10 align-self-center'>
+    <div class='font-16 font-weight-bold' style='line-height:1.2;'>${accountDesc}</div>
+    <div class='d-flex'><div class='mr-auto font-14'>${accountNumber}</div>
+    <div class='font-14'><span class='mr-1'>${currency}</span> <span>${availableBalance}</span></div>
+</div></div>
+</div>" data-account-type="${accountType}" data-account-number="${accountNumber}"
+data-account-currency="${currency}" data-account-balance="${availableBalance}"
+data-account-mandate="${accountMandate}" data-account-description="${accountDesc}"
+data-account-currency-code="${currencyCode}"
+value="${accountType}~${accountDesc}~${accountNumber}~${currency}~${availableBalance}~${currencyCode}~${accountMandate}">
+${accountDesc} || ${accountNumber} || ${currency} ${availableBalance}
+</option>`;
+    return option;
 }
 
 function siteLoading(state) {

@@ -1,4 +1,10 @@
 $(function () {
+    $("select").select2();
+    $(".accounts-select").select2({
+        minimumResultsForSearch: Infinity,
+        templateResult: accountTemplate,
+        templateSelection: accountTemplate,
+    });
     let today = new Date();
     let day = today.getDate().toString().padStart(2, "0");
     let month = (today.getMonth() + 1).toString().padStart(2, "0");
@@ -16,22 +22,25 @@ $(function () {
             $(this).val("");
             return;
         }
+
         const accountProduct = option.attr("data-account-type");
         const accountCurrency = option.attr("data-account-currency");
+        const accountBalance = option.attr("data-account-balance");
         const accountDescription = option.attr("data-account-description");
         $(".account_product").text(accountProduct);
         $(".account_number").text(accountNumber);
         $(".display_from_account_currency").text(accountCurrency);
         $(".account_description").text(accountDescription);
         $(".account_currency").text(accountCurrency);
+        $("#account_balance").text(formatToCurrency(accountBalance));
+        PageData.currentAccount = {
+            accountCurrency,
+            accountDescription,
+            accountProduct,
+            accountNumber,
+            accountBalance,
+        };
     });
-    if (PageData.reqAccount) {
-        PageData.reqAccount = decodeString(PageData.reqAccount);
-        $(`#from_account option[data-account-number=${PageData.reqAccount}]`)
-            .prop("selected", true)
-            .trigger("change");
-        $("#search_transaction").trigger("click");
-    }
 
     $("#search_transaction").on("click", function () {
         startDate = $("#startDate").val();
@@ -55,30 +64,40 @@ $(function () {
             } else {
                 from_account_info = from_account.split("~");
                 account_number = from_account_info[2].trim();
-                blockUi(
-                    "body",
-                    "Getting Transactions...Please Wait",
-                    "75px",
-                    "#4fc6e1"
-                );
+                siteLoading("show");
                 getAccountTransactions(
                     account_number,
                     startDate,
                     endDate
-                ).always(() => unblockUi("body"));
+                ).always(() => siteLoading("hide"));
+                $("#display_account_number").text(account_number);
+                $("#display_search_start_date").text(startDate);
+                $("#display_search_end_date").text(endDate);
+
                 const pdfPath = `print-account-statement\?ac=${encodeString(
                     account_number
                 )}&sd=${encodeString(startDate)}&ed=${encodeString(endDate)}`;
                 $("#pdf_print").attr("href", pdfPath);
 
-                $("#excel_print").html(`
-                                <a href="{{ url('print-account-statement') }}">
-                                    <img src="assets/images/excel.png" alt="" style="width: 22px; height: 25px;">
-                                </a>
-                            `);
+                $("#excel_print").on("click", (e) => {
+                    e.preventDefault();
+                    $(".buttons-excel").trigger("click");
+                });
             }
         }
     });
+
+    $("#from_account option:last").prop("selected", true).trigger("change");
+    $("#search_transaction").trigger("click");
+    if (PageData.requestAccount) {
+        PageData.requestAccount = decodeString(PageData.requestAccount);
+        $(
+            `#from_account option[data-account-number=${PageData.requestAccount}]`
+        )
+            .prop("selected", true)
+            .trigger("change");
+        $("#search_transaction").trigger("click");
+    }
 
     $("#filter").on("change", (e) => {
         e.preventDefault();
@@ -109,10 +128,20 @@ $(function () {
                 `<td colspan="100%" class="text-center">
                 ${noTrans} </td>`
             );
+            $(".download").hide();
             return;
         }
         let transactionTableOptions = {
+            dom: "Bfrtip",
+            buttons: ["excel"],
             destroy: true,
+            language: {
+                emptyTable: `${noDataAvailable}`,
+                zeroRecords: `${noDataAvailable.replace(
+                    "Data Available",
+                    "Records Found"
+                )}`,
+            },
             columnDefs: [
                 {
                     targets: 0,
@@ -138,13 +167,17 @@ $(function () {
                             const color =
                                 data < 0 ? "text-danger" : "text-success";
                             // <i class="fe-arrow-up text-${color} mr-1"></i>
-                            return `<b class='${color}'>
+                            return `<div class="text-right"><b class='${color}'>
                                 ${formatToCurrency(parseFloat(data))}
-                            </b>
+                            </b></div>
                             `;
                         }
                         return data;
                     },
+                },
+                {
+                    targets: 5,
+                    render: (data) => `<p class="text-left">${data}</p>`,
                 },
                 {
                     targets: 6,
@@ -172,10 +205,31 @@ $(function () {
                     // data[index].batchNumber,
                     trans.documentReference,
                     `${trans.imageCheck}~${trans.batchNumber}`,
+                    `<button type="button" class="btn btn-soft-info waves-effect waves-light more_details" data-toggle="modal" data-target="#accordion-modal" batch-no="${trans.batchNumber}"
+                    posting-date="${trans.postingSysDate}" trans-number="${trans.transactionNumber}" value-date="${trans.valueDate}" branch="${trans.branch}"
+                    narration="${trans.narration}" amount="${trans.amount}" contra-account="${trans.contraAccount}" channel="${trans.channel}">Details</button>`,
                 ])
                 .order([0, "desc"])
                 .draw(false);
         });
+        $(".more_details").click(function () {
+            console.log($(this).attr("batch-no"));
+            $(".transaction_date").html($(this).attr("posting-date"));
+            $(".value_date").html($(this).attr("value-date"));
+            $(".transaction_number").html($(this).attr("trans-number"));
+            $(".narration").html($(this).attr("narration"));
+            $(".amount").html($(this).attr("amount"));
+            $(".branch").html($(this).attr("branch"));
+            $(".contra-account").html($(this).attr("contra-account"));
+            $(".channel").html($(this).attr("channel"));
+        });
+        $(".download").show();
+        PageData.prompt = true;
+        if (PageData?.accountAccount?.accountCurrency) {
+            $(".currency_display").text(
+                `(${PageData.accountAccount.accountCurrency})`
+            );
+        }
         $(".attachment-icon").on("click", function (e) {
             e.preventDefault();
             const docId = $(this).attr("data-value");
@@ -198,11 +252,14 @@ $(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
+                console.log("account-transaction-history =>", response);
                 if (
                     response.responseCode !== "000" ||
                     response.data.length === 0
                 ) {
-                    toaster(response.message, "warning");
+                    if (PageData?.prompt) {
+                        toaster(response.message, "warning");
+                    }
                     PageData.transaction = [];
                 } else {
                     PageData.transaction = response.data;

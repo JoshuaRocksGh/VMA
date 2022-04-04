@@ -112,6 +112,7 @@ class LocalBankController extends Controller
             "user_alias" => $userAlias,
             "account_mandate" => $request->accountMandate,
             "account_no" => $request->accountNumber,
+            "account_name" => $request->accountName,
             "bank_code" => $request->bankCode,
             "bank_name" => $request->bankName,
             "bene_account" => $request->beneficiaryAccountNumber,

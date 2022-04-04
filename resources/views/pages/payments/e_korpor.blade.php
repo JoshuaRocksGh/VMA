@@ -4,9 +4,17 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/pagination/pagination.css') }}" />
 <style>
     .history-card {
+        cursor: pointer;
+
         box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
         /* box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px; */
         /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
+    }
+
+    .history-card:hover {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
     }
 
     .nodata {
@@ -30,6 +38,7 @@
         border-color: var(--success) !important;
 
     }
+
 
     #pending_history.active {
         background-color: var(--primary-alt) !important;
@@ -65,12 +74,6 @@
                     Send E-Korpor
                 </a>
             </li>
-            {{-- <li class="nav-item">
-                <a href="#reverse_korpor_page" data-toggle="tab" aria-expanded="false"
-                    class="nav-link reverse_korpor_tab">
-                    Reverse E-Korpor
-                </a>
-            </li> --}}
             <li class="nav-item mb-1 col-sm-4">
                 <a href="#korpor_history_page" id="korpor_history_tab" data-toggle="tab" aria-expanded="false"
                     class="nav-link korpor_trans_tab">
@@ -113,7 +116,7 @@
                                                         <span class="text-danger">*</span> </b>
 
 
-                                                    <select class="form-control col-md-12 my-accounts-select"
+                                                    <select class="form-control col-md-12 accounts-select"
                                                         id="account_of_transfer" required>
                                                         <option disabled selected value=""> ---
                                                             Select Source Account ---
@@ -305,186 +308,179 @@
 
                                 </div>
                             </div>
-                            {{-- <div class="form-group text-center display_button_print">
 
-                                <span>&nbsp;
-                                    <span>&nbsp; <button class="btn btn-light btn-rounded" type="button"
-                                            id="print_receipt" onclick="window.print()">Print
-                                            Receipt
-                                        </button></span>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="tab-pane" id="redeem_korpor_page">
 
+                <div class="row px-2">
+                    <div class="col-lg-6  pt-5 px-4 site-card " id="request_form_div" style="max-height: 75%">
 
-                <div class=" col-lg-6  pt-5 px-4 site-card " id="request_form_div" style="max-height: 75%">
+                        <form action="#" class="select_beneficiary" id="redeem_korpor_payment_details_form"
+                            autocomplete="off" aria-autocomplete="none">
+                            @csrf
 
-                    <form action="#" class="select_beneficiary" id="redeem_korpor_payment_details_form"
-                        autocomplete="off" aria-autocomplete="none">
-                        @csrf
+                            <div class="row">
+                                <div class="col-md-12 redeem_korpor">
 
-                        <div class="row">
-                            <div class="col-md-12 redeem_korpor">
+                                    <p class="text-muted font-14 m-b-20">
+                                        <span> <i class="fa fa-info-circle  text-red"></i> <b style="color:red;">Please
+                                                Note:&nbsp;&nbsp;</b> <span class="">Enter the
+                                                remittance and phone number for korpor payment details.
 
-                                <p class="text-muted font-14 m-b-20">
-                                    <span> <i class="fa fa-info-circle  text-red"></i> <b style="color:red;">Please
-                                            Note:&nbsp;&nbsp;</b> <span class="">Enter the
-                                            remittance and phone number for korpor payment details.
-
-                                            <hr>
-                                </p>
-
-
-                                <div class="form-group row">
-
-                                    <b class="col-md-5 text-primary"> Mobile Number &nbsp; <span
-                                            class="text-danger">*</span></b>
+                                                <hr>
+                                    </p>
 
 
-                                    <input type="text" class="form-control col-md-7" id="mobile_no" autocomplete="off"
-                                        placeholder="Enter Phone Number" required>
+                                    <div class="form-group row">
+
+                                        <b class="col-md-5 text-primary"> Mobile Number &nbsp; <span
+                                                class="text-danger">*</span></b>
+
+
+                                        <input type="text" class="form-control col-md-7" id="mobile_no"
+                                            autocomplete="off" placeholder="Enter Phone Number" required>
+                                    </div>
+
+                                    <div class=" form-group row">
+
+                                        <b class="col-md-5 text-primary"> Remittance Number:
+                                            &nbsp; <span class="text-danger">*</span></b>
+
+                                        <input type="text" class="form-control col-md-7" id="remittance_no"
+                                            placeholder="Enter Remittance Number" autocomplete="off"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                            required>
+                                    </div>
+
+                                    <div class="form-group text-right ">
+                                        <button type="button"
+                                            class="btn btn-primary btn-rounded mt-2 waves-effect waves-light disappear-after-success "
+                                            id="proceed_to_redeem_button">
+                                            <span id="next-text">Proceed</span> &nbsp;<i class="fe-arrow-right"></i>
+                                        </button>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-12 korpor_details" style="display: none">
+                                    <div class="form-group row ">
+                                        <b class="col-md-12 text-primary">Select Account To Redeem Into
+                                            &nbsp;
+                                            <span class="text-danger"></span> </b>
+                                        <select class="form-control col-md-12 accounts-select" id="redeem_account"
+                                            required>
+                                            <option disabled selected value=""> ---
+                                                Select
+                                                Account ---
+                                            </option>
+                                            @include("snippets.accounts")
+                                        </select>
+                                    </div>
+                                    <hr style="padding-top: 0px; padding-bottom: 0px;">
+
+                                    <div class="form-group row">
+
+                                        <b class="col-md-5 text-primary"> Receiver's Name:</b>
+
+
+                                        <input type="text" class="form-control col-md-7" id="receiver_name_redeem"
+                                            autocomplete="off" readonly>
+                                        <br>
+
+                                    </div>
+                                    <div class="form-group row">
+
+                                        <b class="col-md-5 text-primary"> Receiver's Phone:
+                                        </b>
+
+                                        <input type="text" class="form-control col-md-7" id="receiver_phone_redeem"
+                                            autocomplete="off"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                            readonly>
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <b class="col-md-5 text-primary"> Receiver Address:
+                                        </b>
+
+                                        <input type="text" class="form-control col-md-7" id="receiver_address_redeem"
+                                            autocomplete="off"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                            readonly>
+                                    </div>
+                                    <div class="form-group row">
+
+                                        <b class="col-md-5 text-primary"> Amount:</b>
+
+                                        <input type="text" class="form-control col-md-7" id="receiver_amount_redeem"
+                                            autocomplete="off"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                            readonly>
+
+                                    </div>
+
+                                    <div class="form-group text-right ">
+                                        <button type="button"
+                                            class="btn btn-primary btn-rounded waves-effect waves-light disappear-after-success"
+                                            id="done_button">
+                                            <span id="redeem-text">Redeem</span>
+
+                                        </button>
+                                    </div>
+
+
                                 </div>
 
-                                <div class=" form-group row">
+                            </div>
 
-                                    <b class="col-md-5 text-primary"> Remittance Number:
-                                        &nbsp; <span class="text-danger">*</span></b>
+                        </form>
 
-                                    <input type="text" class="form-control col-md-7" id="remittance_no"
-                                        placeholder="Enter Remittance Number" autocomplete="off"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        required>
-                                </div>
-
-                                <div class="form-group text-right ">
-                                    <button type="button"
-                                        class="btn btn-primary btn-rounded mt-2 waves-effect waves-light disappear-after-success "
-                                        id="proceed_to_redeem_button">
-                                        <span id="next-text">Proceed</span> &nbsp;<i class="fe-arrow-right"></i>
-                                    </button>
+                    </div>
+                    <div class="d-none d-lg-block col-lg-6 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"
+                                    style="min-height: 120px; max-height: auto;">
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item active">
+                                            <img class="d-block mx-auto img-fluid" style="height: 30rem"
+                                                src="{{ asset('assets/images/rokel/sim_korpor_5.jpeg') }}"
+                                                alt="First slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block mx-auto img-fluid" style="height: 30rem"
+                                                src="{{ asset('assets/images/rokel/sim_korpor_3.jpeg') }}"
+                                                alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block mx-auto img-fluid" style="height: 30rem"
+                                                src="{{ asset('assets/images/rokel/sim_korpor_4.jpeg') }}"
+                                                alt="Third slide">
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
 
 
                             </div>
-                            <div class="col-md-12 korpor_details" style="display: none">
-                                <div class="form-group row ">
-                                    <b class="col-md-12 text-primary">Select Account To Redeem Into
-                                        &nbsp;
-                                        <span class="text-danger"></span> </b>
-                                    <select class="form-control col-md-12 my-accounts-select" id="redeem_account"
-                                        required>
-                                        <option disabled selected value=""> ---
-                                            Select
-                                            Account ---
-                                        </option>
-                                        @include("snippets.accounts")
-                                    </select>
-                                </div>
-                                <hr style="padding-top: 0px; padding-bottom: 0px;">
-
-                                <div class="form-group row">
-
-                                    <b class="col-md-5 text-primary"> Receiver's Name:</b>
-
-
-                                    <input type="text" class="form-control col-md-7" id="receiver_name_redeem"
-                                        autocomplete="off" readonly>
-                                    <br>
-
-                                </div>
-                                <div class="form-group row">
-
-                                    <b class="col-md-5 text-primary"> Receiver's Phone:
-                                    </b>
-
-                                    <input type="text" class="form-control col-md-7" id="receiver_phone_redeem"
-                                        autocomplete="off"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        readonly>
-                                </div>
-
-                                <div class="form-group row">
-
-                                    <b class="col-md-5 text-primary"> Receiver Address:
-                                    </b>
-
-                                    <input type="text" class="form-control col-md-7" id="receiver_address_redeem"
-                                        autocomplete="off"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        readonly>
-                                </div>
-                                <div class="form-group row">
-
-                                    <b class="col-md-5 text-primary"> Amount:</b>
-
-                                    <input type="text" class="form-control col-md-7" id="receiver_amount_redeem"
-                                        autocomplete="off"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                        readonly>
-
-                                </div>
-
-                                <div class="form-group text-right ">
-                                    <button type="button"
-                                        class="btn btn-primary btn-rounded waves-effect waves-light disappear-after-success"
-                                        id="done_button">
-                                        <span id="redeem-text">Redeem</span>
-
-                                    </button>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
-                    </form>
-
-                </div>
-                <div class="d-none d-lg-block col-lg-6 mx-auto">
-                    <div class="card">
-                        <div class="card-body">
-                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"
-                                style="min-height: 120px; max-height: auto;">
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active">
-                                        <img class="d-block mx-auto img-fluid" style="height: 30rem"
-                                            src="{{ asset('assets/images/rokel/sim_korpor_5.jpeg') }}"
-                                            alt="First slide">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block mx-auto img-fluid" style="height: 30rem"
-                                            src="{{ asset('assets/images/rokel/sim_korpor_3.jpeg') }}"
-                                            alt="Second slide">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block mx-auto img-fluid" style="height: 30rem"
-                                            src="{{ asset('assets/images/rokel/sim_korpor_4.jpeg') }}"
-                                            alt="Third slide">
-                                    </div>
-                                </div>
-                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
-                                    data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleControls" role="button"
-                                    data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-
-
                         </div>
                     </div>
+
                 </div>
-
             </div>
-
             <div class="tab-pane site-card p-2 p-sm-3 p-md-4" id="korpor_history_page">
 
                 <div class="px-md-3 mt-lg-0 rounded">
@@ -496,7 +492,7 @@
                                 Select
                                 Account</label></div>
                         <div class="pl-md-3 w-100">
-                            <select class="form-control unredeemed my-accounts-select" id="korpor_history_accounts"
+                            <select class="form-control unredeemed accounts-select" id="korpor_history_accounts"
                                 required>
                                 <option disabled selected value="">Select
                                     Account Number</option>

@@ -171,6 +171,8 @@ function redeemKorpor(data) {
                     imageUrl: "assets/images/animations/payment_successful.gif",
                     imageHeight: 200,
                     confirmButtonColor: "#1abc9c",
+                }).then(({ isDismissed }) => {
+                    isDismissed && location.reload();
                 });
             } else {
                 Swal.fire({
@@ -223,6 +225,7 @@ function getKorporHistory(type, accountNumber) {
 
 function renderKorporHistoryItem(data) {
     console.log(data);
+
     const {
         BENEF_NAME: name,
         BENEF_TEL: tel,
@@ -235,10 +238,12 @@ function renderKorporHistoryItem(data) {
         month: "long",
         day: "numeric",
     };
+
+    // TODO: history cards should show modal with details on click
     const color = $(".knav.active").css("background-color");
     const type = $(".knav.active").text();
     const dateFormatted = new Date(date).toDateString("en-US", dateOptions);
-    return `  <div class="history-card d-flex justify-content-between font-12 mb-1 py-1 px-3 bg-white" style="border-left: 4px solid ${color}">
+    return `  <div class="history-card d-flex mx-2 transition-all justify-content-between font-12 mb-1 py-1 px-3 bg-white" style="border-left: 4px solid ${color}; ">
     <div>
         <div><i class=" fas fa-user" style="color: ${color} !important"></i> <span
                 class="account-name font-weight-bold px-1">${name}</span></div>
@@ -306,7 +311,7 @@ $(function () {
         }
         const otp = $("#user_pin").val();
         if (!otp || otp.length < 4) {
-            toaster("Invalid Pin Code", "warning");
+            toaster("Invalid OTP code", "warning");
             return;
         }
         redeemInfo.otp = otp;
@@ -362,7 +367,8 @@ $(function () {
             .val(userPhone)
             .attr("disabled", true)
             .trigger("keyup");
-        $("#receiver_address").val(userEmail);
+        $(".display_receiver_address").text("");
+        // $("#receiver_address").val(userEmail).trigger("keyup");
     });
 
     $("#transfer_to_others").on("click", function () {
@@ -471,17 +477,16 @@ $(function () {
         if (!$("#korpor_history_accounts").val()) {
             $("#korpor_history_accounts option:last").prop("selected", true);
         }
-        console.log("ll");
         $("#korpor_history_accounts").trigger("change");
     });
 
-    function accountTemplate(account) {
-        const data = $(account.element).attr("data-content");
-        if (!data) return $(account.element).text();
-        return $(data);
-    }
+    // function accountTemplate(account) {
+    //     const data = $(account.element).attr("data-content");
+    //     if (!data) return $(account.element).text();
+    //     return $(data);
+    // }
     //initialize select2 on accounts select
-    $(".my-accounts-select").select2({
+    $(".accounts-select").select2({
         minimumResultsForSearch: Infinity,
         templateResult: accountTemplate,
         templateSelection: accountTemplate,

@@ -76,6 +76,7 @@ class StandingOrderController extends Controller
     public function corporate_standing_order_request(Request $req)
     {
 
+        // return $req;
         $base_response = new BaseResponse();
         // return $req;
 
@@ -95,11 +96,12 @@ class StandingOrderController extends Controller
                 "amount" => $req->transferAmount,
                 "authToken" => $authToken,
                 // "bankCode" => $req->backCode,
-                "destinationAccountId" => $req->accountNumber,
-                "account_no" => $req->beneficiaryAccountNumber,
+                "destinationAccountId" => $req->beneficiaryAccountNumber,
+                "account_no" => $req->accountNumber,
+                "account_name" => $req->accountName,
                 "deviceIp" => $terminalId,
                 "effectiveDate" => $req->soStartDate,
-                "expiryDate" => $req->soEndndDate,
+                "expiryDate" => $req->soEndDate,
                 "frequency" => $req->soFrequencyCode . '~' . $req->soFrequency,
                 // "pinCode" => $req->secPin,
                 "narration" => $req->transferPurpose,

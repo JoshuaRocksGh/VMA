@@ -76,6 +76,14 @@
             <span class="text-danger o-wrap display_transfer_amount col-md-8"></span>
 
         </span>
+        @if ($currentPath === 'International Bank')
+        <p class="col-md-5 transfer-detail-text">Local Equivalence:</p>
+        <span class="row col-md-7">
+            <span class="text-primary col-md-4">SLL</span>
+            <span class="text-primary o-wrap display_transfer_amount_local_eq col-md-8"></span>
+
+        </span>
+        @endif
         @if ($currentPath === 'Standing Order')
 
         <p class="col-md-5 transfer-detail-text ">Start Date:</p>

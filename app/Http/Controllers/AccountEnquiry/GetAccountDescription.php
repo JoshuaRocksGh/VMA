@@ -52,6 +52,7 @@ class GetAccountDescription extends Controller
     public function get_account_description(Request $request)
     {
 
+        // return $request;
         $validator = Validator::make($request->all(), [
             'accountNumber' => 'required',
         ]);
@@ -71,7 +72,8 @@ class GetAccountDescription extends Controller
             "userId"    => $accountNo
         ];
 
-        $response = Http::post(env('API_BASE_URL') . "/account/getAccountDescription", $data);
+        // return $data;
+        $response = Http::post(env('API_BASE_URL') . "account/getAccountDescription", $data);
         $result = new ApiBaseResponse();
         return $result->api_response($response);
     }

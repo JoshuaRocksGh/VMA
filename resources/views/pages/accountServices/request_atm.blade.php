@@ -2,330 +2,338 @@
 
 @section('content')
 
-    <div class="___class_+?0___">
+<div class="___class_+?0___">
 
-        <div class="container-fluid">
-            <br>
-            <!-- start page title -->
-            <div class="row">
-                <div class="col-md-4">
-                    <a href="{{ url()->previous() }}" type="button" class="btn btn-soft-blue waves-effect waves-light"><i
-                            class="mdi mdi-reply-all-outline"></i>&nbsp;Back</a>
-                </div>
-                <div class="col-md-4">
-                    <h4 class="text-primary">
-                        <img src="{{ asset('assets/images/logoRKB.png') }}" alt="logo" style="zoom: 0.05">&emsp;
-                        CARD REQUEST
+    <div class="container-fluid">
+        <br>
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-md-4">
+                <a href="{{ url()->previous() }}" type="button" class="btn btn-soft-blue waves-effect waves-light"><i
+                        class="mdi mdi-reply-all-outline"></i>&nbsp;Back</a>
+            </div>
+            <div class="col-md-4">
+                <h4 class="text-primary">
+                    <img src="{{ asset('assets/images/logoRKB.png') }}" alt="logo" style="zoom: 0.05">&emsp;
+                    CARD REQUEST
 
-                    </h4>
-                </div>
+                </h4>
+            </div>
 
-                <div class="col-md-4 text-right">
-                    <h6>
+            <div class="col-md-4 text-right">
+                <h6>
 
-                        <span class="flaot-right">
-                            <b class="text-primary"> Account Services </b> &nbsp; > &nbsp; <b class="text-primary">Card
-                                Services</b> &nbsp; > &nbsp; <b class="text-danger">Card
-                                Request</b>
+                    <span class="flaot-right">
+                        <b class="text-primary"> Account Services </b> &nbsp; > &nbsp; <b class="text-primary">Card
+                            Services</b> &nbsp; > &nbsp; <b class="text-danger">Card
+                            Request</b>
 
 
-                        </span>
+                    </span>
 
-                    </h6>
-
-                </div>
-
-                <div class="col-md-12 ">
-                    <hr class="text-primary" style="margin: 0px;">
-                </div>
+                </h6>
 
             </div>
+
+            <div class="col-md-12 ">
+                <hr class="text-primary" style="margin: 0px;">
+            </div>
+
         </div>
+    </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card-body">
-                    <div class="row">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-body">
+                <div class="row">
 
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class=" col-md-7 m-2" id="request_form_div"
-                                    style="background-image: linear-gradient(to bottom right, white, rgb(223, 225, 226));">
-                                    <br><br><br>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class=" col-md-7 m-2" id="request_form_div"
+                                style="background-image: linear-gradient(to bottom right, white, rgb(223, 225, 226));">
+                                <br><br><br>
 
-                                    <form action="#" class="select_beneficiary" id="payment_details_form" autocomplete="off"
-                                        aria-autocomplete="none">
-                                        @csrf
-                                        <div class="row container">
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-10">
+                                <form action="#" class="select_beneficiary" id="payment_details_form" autocomplete="off"
+                                    aria-autocomplete="none">
+                                    @csrf
+                                    <div class="row container">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-10">
 
-                                                {{-- <br><br><br> --}}
-                                                <div class="row">
-                                                    {{-- <div class="col-md-1"></div> --}}
+                                            {{-- <br><br><br> --}}
+                                            <div class="row">
+                                                {{-- <div class="col-md-1"></div> --}}
 
-                                                    <div class="col-md-12">
+                                                <div class="col-md-12">
 
-                                                        <div class="form-group row mb-3">
-                                                            <b class="col-md-12 text-primary">Account which card will be
-                                                                made for &nbsp; <span class="text-danger">*</span> </b>
-
-
-                                                            <select class="form-control col-md-12 " id="my_account"
-                                                                required>
-                                                                <option value="">Select Account
-                                                                </option>
+                                                    <div class="form-group row mb-3">
+                                                        <b class="col-md-12 text-primary">Account which card will be
+                                                            made for &nbsp; <span class="text-danger">*</span> </b>
 
 
-                                                            </select>
-                                                        </div>
+                                                        <select class="form-control col-md-12 " id="my_account"
+                                                            required>
+                                                            <option value="">Select Account
+                                                            </option>
 
+
+                                                        </select>
+                                                    </div>
+
+                                                    <br>
+                                                    <hr class="mt-0">
+
+
+                                                    <div class="form-group row mb-3" id="pay_from_account">
+
+                                                        <b class="col-md-4 text-primary">Type Of Card &nbsp;
+                                                            <span class="text-danger">*</span></b>
+
+                                                        <select class="form-control col-md-8" id="cardType" required>
+                                                            <option value="">Select Type of Card</option>
+                                                            <option value="0">Visa Card</option>
+                                                            <option value="1">Master Card</option>
+                                                        </select>
                                                         <br>
-                                                        <hr class="mt-0">
 
-
-                                                        <div class="form-group row mb-3" id="pay_from_account">
-
-                                                            <b class="col-md-4 text-primary">Type Of Card &nbsp;
-                                                                <span class="text-danger">*</span></b>
-
-                                                            <select class="form-control col-md-8" id="cardType" required>
-                                                                <option value="">Select Type of Card</option>
-                                                                <option value="0">Visa Card</option>
-                                                                <option value="1">Master Card</option>
-                                                            </select>
-                                                            <br>
-
-
-
-                                                        </div>
-
-
-
-                                                        <div class="form-group row">
-
-                                                            <b class="col-md-4 text-primary"> Pick Up Branch &nbsp; <span
-                                                                    class="text-danger">*</span></b>
-
-
-                                                            <select class="form-control col-md-8" id="pUBranch"
-                                                                placeholder="Select Pick Up Branch" required>
-                                                                <option value="">Select Pick Up Branch</option>
-                                                            </select>
-                                                            <br>
-
-                                                        </div>
-                                                        <div class="form-group row">
-
-                                                            <b class="col-md-4 text-primary" for="pin">
-                                                                Enter Pin
-                                                                <span class="text-danger">*</span></b>
-                                                            <input type="password" class="form-control col-md-8" id="pin"
-                                                                placeholder="Enter Your Pin"
-                                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')">
-
-
-
-                                                        </div>
-
-                                                        <div class="form-group text-right yes_beneficiary">
-                                                            <button type="button"
-                                                                class="btn btn-primary btn-rounded waves-effect waves-light disappear-after-success"
-                                                                id="btn_submit_request_statement">
-                                                                <span class="submit-text">Submit</span>
-                                                                <span class="spinner-border spinner-border-sm mr-1"
-                                                                    role="status" id="spinner" aria-hidden="true"></span>
-                                                                <span id="spinner-text">Loading...</span>
-                                                            </button>
-                                                        </div>
 
 
                                                     </div>
 
-                                                    {{-- <div class="col-md-1"></div> --}}
+
+
+                                                    <div class="form-group row">
+
+                                                        <b class="col-md-4 text-primary"> Pick Up Branch &nbsp; <span
+                                                                class="text-danger">*</span></b>
+
+
+                                                        <select class="form-control col-md-8" id="pUBranch"
+                                                            placeholder="Select Pick Up Branch" required>
+                                                            <option value="">Select Pick Up Branch</option>
+                                                        </select>
+                                                        <br>
+
+                                                    </div>
+                                                    <div class="form-group row">
+
+                                                        <b class="col-md-4 text-primary" for="pin">
+                                                            Enter Pin
+                                                            <span class="text-danger">*</span></b>
+                                                        <input type="password" class="form-control col-md-8" id="pin"
+                                                            placeholder="Enter Your Pin"
+                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')">
+
+
+
+                                                    </div>
+
+                                                    <div class="form-group text-right yes_beneficiary">
+                                                        <button type="button"
+                                                            class="btn btn-primary btn-rounded waves-effect waves-light disappear-after-success"
+                                                            id="btn_submit_request_statement">
+                                                            <span class="submit-text">Submit</span>
+                                                            <span class="spinner-border spinner-border-sm mr-1"
+                                                                role="status" id="spinner" aria-hidden="true"></span>
+                                                            <span id="spinner-text">Loading...</span>
+                                                        </button>
+                                                    </div>
+
+
                                                 </div>
 
-
-
-
-
-
-
-
-
+                                                {{-- <div class="col-md-1"></div> --}}
                                             </div>
-                                            <div class="col-md-1"></div>
+
+
+
+
+
+
+
+
 
                                         </div>
-
-
-
-
-
-
-
-
-
-
-
-                                    </form>
-
-
-                                </div> <!-- end col -->
-
-                                <div class="col-md-4 m-2" id="atm_request_summary"
-                                    style="background-image: linear-gradient(to bottom right, white, rgb(223, 225, 226));">
-                                    <br><br>
-                                    <div class=" col-md-12 card card-body">
-                                        <h4 class="text-primary">Account Info.</h4>
-                                        <hr class="mt-0">
-                                        {{-- <br><br> --}}
-                                        <div class="row">
-                                            <span class="col-md-12 success-message"></span>
-                                            <p class="col-md-5">Account Name:</p>
-                                            <span class="text-primary display_my_account_name col-md-7"></span>
-
-                                            <p class="col-md-5">Account Number:</p>
-                                            <span class="text-primary display_my_account_no col-md-7"></span>
-
-                                            <p class="col-md-5">Available Balance:</p>
-                                            <span class="text-primary display_my_account_amount col-md-7"></span>
-
-                                            <p class="col-md-5">Account Currency:</p>
-                                            <span class="text-primary display_my_account_currency col-md-7"></span>
-                                        </div>
-
-                                        <h4 class="text-primary">Request Info.</h4>
-                                        <hr class="mt-0">
-
-                                        <div class="row">
-                                            <p class="col-md-5">Type Of Card:</p>
-                                            <span class="text-primary display_type_of_card col-md-7"></span>
-
-                                            <p class="col-md-5">Pick Up Branch:</h6>
-                                                <span class="text-primary display_pick_up_branch col-md-7"></span>
-
-                                        </div>
+                                        <div class="col-md-1"></div>
 
                                     </div>
 
-                                    <div class="form-group text-center display_button">
 
-                                        <span> <button class="btn btn-secondary btn-rounded" type="button"
-                                                id="back_button">Back</button> &nbsp; </span>
-                                        <span>&nbsp;
-                                            <span>&nbsp; <button class="btn btn-light btn-rounded hide_on_print"
-                                                    type="button" id="print_receipt" onclick="window.print()">Print
-                                                    Receipt
-                                                </button></span>
-                                    </div>
-                                </div>
 
-                                {{-- <div class="col-md-8 text-center success_message" id="request_detail_div" style="background-image: linear-gradient(to bottom right, white, rgb(223, 225, 226));">
+
+
+
+
+
+
+
+
+                                </form>
+
+
+                            </div> <!-- end col -->
+
+                            <div class="col-md-4 m-2" id="atm_request_summary"
+                                style="background-image: linear-gradient(to bottom right, white, rgb(223, 225, 226));">
+                                <br><br>
+                                <div class=" col-md-12 card card-body">
+                                    <h4 class="text-primary">Account Info.</h4>
+                                    <hr class="mt-0">
+                                    {{-- <br><br> --}}
                                     <div class="row">
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-10">
-                                            <br><br><br>
+                                        <span class="col-md-12 success-message"></span>
+                                        <p class="col-md-5">Account Name:</p>
+                                        <span class="text-primary display_my_account_name col-md-7"></span>
 
-                                            <div class="table-responsive">
-                                                <table class="table mb-0 table-bordered table-striped">
+                                        <p class="col-md-5">Account Number:</p>
+                                        <span class="text-primary display_my_account_no col-md-7"></span>
 
-                                                    <tbody>
-                                                        <tr class="success_gif">
-                                                            <td class="text-center bg-white" colspan="2">
-                                                                <img src="{{ asset('land_asset/images/statement_success.gif') }}"
-                                                                     alt="">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Account Name:</td>
-                                                            <td>
-                                                                <span
-                                                                    class="font-13 text-primary text-bold display_my_account_name"></span>
-                                                            </td>
-                                                        </tr>
+                                        <p class="col-md-5">Available Balance:</p>
+                                        <span class="text-primary display_my_account_amount col-md-7"></span>
 
-                                                        <tr>
-                                                            <td>Account Number:</td>
-                                                            <td>
-                                                                <span class="font-13 text-primary text-bold display_my_account_no"></span>
-                                                            </td>
-                                                        </tr>
+                                        <p class="col-md-5">Account Currency:</p>
+                                        <span class="text-primary display_my_account_currency col-md-7"></span>
+                                    </div>
 
-                                                        <tr>
-                                                            <td>Available Balance:</td>
-                                                            <td>
-                                                                <span class="font-15 text-primary h3 display_my_account_amount"> </span>
-                                                            </td>
-                                                        </tr>
+                                    <h4 class="text-primary">Request Info.</h4>
+                                    <hr class="mt-0">
 
+                                    <div class="row">
+                                        <p class="col-md-5">Type Of Card:</p>
+                                        <span class="text-primary display_type_of_card col-md-7"></span>
 
-                                                        <tr>
-                                                            <td>Account Currency:</td>
-                                                            <td>
-                                                                <span class="font-13 text-primary h3 display_my_account_currency"></span>
+                                        <p class="col-md-5">Pick Up Branch:</h6>
+                                            <span class="text-primary display_pick_up_branch col-md-7"></span>
 
-                                                            </td>
-                                                        </tr>
-
-
-                                                        <tr>
-                                                            <td>Type Of Card:</td>
-                                                            <td>
-                                                                <span class="font-13 text-primary h3 display_type_of_card"></span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Pick Up Branch:</td>
-                                                            <td>
-                                                                <span
-                                                                    class="font-13 text-success h3 display_pick_up_branch"></span>
-                                                            </td>
-                                                        </tr>
-
-
-                                                        <tr>
-                                                            <td>Request Date: </td>
-                                                            <td>
-                                                                <span class="font-13 text-primary h3">{{ date('d F, Y') }}</span>
-                                                            </td>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td>Posted BY: </td>
-                                                            <td>
-                                                                <span class="font-13 text-primary h3">{{ session()->get('userAlias') }}</span>
-                                                            </td>
-                                                        </tr>
-
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- end table-responsive -->
-                                            <br>
-
-                                        </div>
-                                        <div class="col-md-1"></div>
                                     </div>
 
                                 </div>
+
+                                <div class="form-group text-center display_button">
+
+                                    <span> <button class="btn btn-secondary btn-rounded" type="button"
+                                            id="back_button">Back</button> &nbsp; </span>
+                                    <span>&nbsp;
+                                        <span>&nbsp; <button class="btn btn-light btn-rounded hide_on_print"
+                                                type="button" id="print_receipt" onclick="window.print()">Print
+                                                Receipt
+                                            </button></span>
+                                </div>
+                            </div>
+
+                            {{-- <div class="col-md-8 text-center success_message" id="request_detail_div"
+                                style="background-image: linear-gradient(to bottom right, white, rgb(223, 225, 226));">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-10">
+                                        <br><br><br>
+
+                                        <div class="table-responsive">
+                                            <table class="table mb-0 table-bordered table-striped">
+
+                                                <tbody>
+                                                    <tr class="success_gif">
+                                                        <td class="text-center bg-white" colspan="2">
+                                                            <img src="{{ asset('land_asset/images/statement_success.gif') }}"
+                                                                alt="">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Account Name:</td>
+                                                        <td>
+                                                            <span
+                                                                class="font-13 text-primary text-bold display_my_account_name"></span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Account Number:</td>
+                                                        <td>
+                                                            <span
+                                                                class="font-13 text-primary text-bold display_my_account_no"></span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Available Balance:</td>
+                                                        <td>
+                                                            <span
+                                                                class="font-15 text-primary h3 display_my_account_amount">
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td>Account Currency:</td>
+                                                        <td>
+                                                            <span
+                                                                class="font-13 text-primary h3 display_my_account_currency"></span>
+
+                                                        </td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td>Type Of Card:</td>
+                                                        <td>
+                                                            <span
+                                                                class="font-13 text-primary h3 display_type_of_card"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Pick Up Branch:</td>
+                                                        <td>
+                                                            <span
+                                                                class="font-13 text-success h3 display_pick_up_branch"></span>
+                                                        </td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td>Request Date: </td>
+                                                        <td>
+                                                            <span class="font-13 text-primary h3">{{ date('d F, Y')
+                                                                }}</span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>Posted BY: </td>
+                                                        <td>
+                                                            <span class="font-13 text-primary h3">{{
+                                                                session()->get('userAlias') }}</span>
+                                                        </td>
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- end table-responsive -->
+                                        <br>
+
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+
+                            </div>
 
 
                         </div> --}}
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
+    </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-                crossorigin="anonymous"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        <script>
-            function my_account() {
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    function my_account() {
                 $.ajax({
                     type: 'GET',
                     url: 'get-my-account',
@@ -545,6 +553,6 @@
                 });
 
             });
-        </script>
+</script>
 
-    @endsection
+@endsection
