@@ -306,17 +306,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="successful_uploads">
-                                        {{-- <tr>
-                                            <td colspan="5">
-                                                <div class="d-flex justify-content-center">
-                                                    <br>
-                                                    {!! $noDataAvailable !!}
 
-
-                                                </div>
-                                            </td>
-
-                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -338,17 +328,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="failed_uploads">
-                                        {{-- <tr>
-                                            <td colspan="5">
-                                                <div class="d-flex justify-content-center">
-                                                    <br>
-                                                    {!! $noDataAvailable !!}
 
-
-                                                </div>
-                                            </td>
-
-                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>

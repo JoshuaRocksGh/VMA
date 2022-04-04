@@ -54,7 +54,7 @@ class PaymentsController extends Controller
 
             $data = [
                 "account_no" => $req->account,
-                // "authToken" => $authToken,
+                "account_name" => $req->accountName,
                 "channel" => 'NET',
                 'amount' => $req->amount,
                 "currency" => $req->accountCurrency,

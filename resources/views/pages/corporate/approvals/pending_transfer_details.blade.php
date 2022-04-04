@@ -189,7 +189,7 @@
                                         <h2 id="account_mandate"></h2>
 
                                         <br>
-                                        <p><span class="text-danger h3">1A</span></p>
+                                        <p>One User Mandate <span class="text-danger h3">A</span> </p>
                                     </div>
                                 </div>
 
@@ -490,6 +490,10 @@
                         let beneficiary_name = pending_request.beneficiary_name;
                         beneficiary_name != null ? append_approval_details("Beneficiary Name",
                             beneficiary_name) : '';
+
+                        let beneficiary_name_ = pending_request.beneficiaryname;
+                        beneficiary_name_ != null ? append_approval_details("Beneficiary Name",
+                            beneficiary_name_) : '';
 
                         let beneficiary_account = pending_request.creditaccountnumber;
                         beneficiary_account != null ? append_approval_details("Beneficiary Account",
