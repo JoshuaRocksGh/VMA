@@ -635,9 +635,9 @@
                 </div>
 
                 <div class="modal fade" id="bs-example-modal-lg" role="dialog"
-                    style="position: absolute; left:50%; top:60%;transform: translate(-50%, -50%);"
+                    style="position: absolute; left:50%; top:60%;transform: translate(-50%, -50%); "
                     aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog modal-lg" style="max-width: 1500px">
                         <div class="modal-content">
                             <div class="modal-header">
                                 {{-- <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4> --}}
@@ -646,7 +646,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="table-responsive table-bordered accounts_display_area"
-                                    style="display: none; zoom:0.9">
+                                    style="display: none; zoom:0.9;">
                                     <h3 class="text-center text-success">CURRENT & SAVINGS ACCOUNT</h3>
                                     <table id="" class="table table-striped mb-0 ">
                                         <thead>
@@ -658,6 +658,8 @@
                                                 {{-- <td> <b> OverDraft </b> </td> --}}
                                                 <td> <b> Ledger Bal </b> </td>
                                                 <td> <b> Available Bal </b> </td>
+                                                <td> <b> Over Draft</b> </td>
+                                                <td> <b> Blocked Amount </b> </td>
                                             </tr>
                                         </thead>
                                         <tbody class="casa_list_display">
