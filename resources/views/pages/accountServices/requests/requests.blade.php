@@ -41,12 +41,13 @@
         padding: 0.5rem 1rem;
         outline: none;
         cursor: pointer;
+        transition: all 0.2s ease-in-out;
     }
 
     .date-select:hover {
-        background-color: var(--primary);
-        color: white;
-        focus transition: all 0.3s ease-in-out;
+        /* background-color: var(--info); */
+        /* color: white; */
+        /* transition: all 0.3s ease-in-out; */
         box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     }
 
@@ -54,12 +55,22 @@
         background-color: var(--primary);
         color: white;
     }
+
+    .date-select:disabled {
+        background: #eef0f2 !important;
+        color: var(--secondary) !important;
+        border-color: #d9d9d9 !important;
+    }
+
+    .date-select:disabled:hover {
+        box-shadow: none !important;
+    }
 </style>
 @endsection
 @section('content')
 
 @php
-$pageTitle='Request';
+$pageTitle='Requests';
 $basePath = 'AccountServices';
 $currentPath = 'requests';
 @endphp
@@ -89,16 +100,16 @@ $currentPath = 'requests';
                 <button id="request_statement" data-toggle="pill"
                     class=" transition-all py-md-2 active  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
                     href="#tab_request_statement">Statement Request</button>
-                <button data-toggle="pill"
-                    class=" transition-all py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link "
+                <button {{-- data-toggle="pill" --}}
+                    class=" transition-all coming-soon py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link "
                     id="request_letter" href="#tab_request_letter">Request For Letter</button>
 
-                <button id="request_bank_draft" data-toggle="pill"
-                    class="  transition-all py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                <button id="request_bank_draft" {{-- data-toggle="pill" --}}
+                    class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
                     href="#tab_request_bank_draft">Request Bank Draft</button>
 
             </nav>
-            <div class="col-md-8 px-0" style="max-width: 650px;">
+            <div class="col-md-8 mx-auto px-0" style="max-width: 650px;">
                 <div class="tab-content pt-0" id="tabContent_requests">
                     <div class="tab-pane fade show active" id="tab_request_statement" role="tabpanel">
                         @include('pages.accountServices.requests.statement_request')</div>
@@ -117,6 +128,8 @@ $currentPath = 'requests';
 @endsection
 
 @section('scripts')
-<script src="{{ asset('assets/js/pages/cardServices/cardServices.js') }}">
+<script src="{{ asset('assets/js/pages/accountServices/requests/requests.js') }}">
+</script>
+<script src="{{ asset('assets/js/functions/comingSoon.js') }}">
 </script>
 @endsection

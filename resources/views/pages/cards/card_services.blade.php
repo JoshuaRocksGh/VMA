@@ -93,11 +93,11 @@ $currentPath = 'CardServices';
                     class=" transition-all py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link "
                     id="block_card" href="#tab_block_card">Block Card</button>
 
-                <button id="activate_card" data-toggle="pill" data-value="reversed"
-                    class="  transition-all py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                <button id="activate_card" {{-- data-toggle="pill" data-value="reversed" --}}
+                    class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
                     href="#tab_activate_card">Activate Card</button>
-                <button id="card_limits" data-toggle="pill" data-value="reversed"
-                    class="  transition-all py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                <button id="card_limits" {{-- data-toggle="pill" data-value="reversed" --}}
+                    class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
                     href="#tab_card_limit">Card Limits</button>
             </nav>
             <div class="col-md-8 px-0" style="max-width: 650px;">
@@ -120,5 +120,7 @@ $currentPath = 'CardServices';
 
 @section('scripts')
 <script src="{{ asset('assets/js/pages/cardServices/cardServices.js') }}">
+</script>
+<script src="{{ asset('assets/js/functions/comingSoon.js') }}">
 </script>
 @endsection
