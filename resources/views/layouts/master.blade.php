@@ -15,25 +15,11 @@
 
     @include('snippets.style')
     <style type="text/css">
-        .navbar-custom {
-            background-color: {
-                    {
-                    env('APPLICATION_CUSTOM_COLOR')
-                }
-            }
-        }
-
-        .card-icon {
-            color: white;
-        }
-
-        /* Works on Firefox */
         * {
             scrollbar-width: thin;
             scrollbar-color: rgb(221, 221, 223) rgb(217, 217, 216);
         }
 
-        /* Works on Chrome, Edge, and Safari */
         *::-webkit-scrollbar {
             width: 12px;
         }
@@ -77,6 +63,18 @@
             font-size: 100px;
         }
 
+
+        #body {
+            width: 100%;
+            /* background-image: url('assets/images/background.png');
+            background-repeat: horizontal;
+            min-height: 100vh;
+            background-size: cover; */
+            /* background-color: ##00bdf3;
+            background-image: linear-gradient(180deg, #8c7d53 0%, skyblue 50%); */
+            background-color: white;
+        }
+
         /* .table_over_flow {
             overflow-y: hidden;
         } */
@@ -86,35 +84,37 @@
     @include('snippets.script')
 </head>
 
-<body id="body" class="body"
-    style="background-image: url('assets/images/background.png'); background-repeat: no-repeat; background-size: cover;"
-    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
+<body id="body" class="position-relative">
 
     <!-- Pre-loader -->
-    <div id="preloader" class="preloader">
-        <div id="status" class="preloader">
-            {{-- <img class="pulse" style="width: 100px; top: -50px;" src="assets/images/logoRKB.png" /> --}}
-            <div><img class="pulse " style="width: 100px;" src="{{ asset('assets/images/logoRKB.png') }}" />
-                <div class="mt-2  text-primary d-flex tw-relative"><span class="lds-hourglass tw-absolute"></span> <span
-                        class="text-semibold align-self-center mx-2 font-weight-bold">
-                        Loading</span></div>
-            </div>
-        </div> <!-- End Preloader-->
-    </div>
-    <!-- Begin page -->
-    <div id="wrapper">
-        @include('snippets.nav')
-
-        @include('snippets.side-bar')
-
-        <div class="content-page">
-            <div class="content">
-                @yield('content')
-            </div>
-
+    <div id="site_loader">
+        <div>
+            <img class="pulse mx-auto" style="width: 100px;" src="{{ asset('assets/images/logoRKB.png') }}" />
+            <div class="mt-2  text-primary d-flex tw-relative"><span class="lds-hourglass tw-absolute"></span> <span
+                    class="text-semibold align-self-center mx-2 font-weight-bold">
+                    Loading</span></div>
         </div>
     </div>
+    <!-- Begin page -->
+    <div id="wrapper" class="w-100" style="min-height:100vh; display: none">
+        @include('snippets.nav')
+        <div class="row mx-0">
+            <div class="offcanvas-collapse col-md-4 d-md-block mt-2 col-xl-2  ">
+                @include('snippets.side-bar')
+            </div>
+            <div class="col-md-8">
+                <div class="content">
+                    @yield('content')
+                </div>
 
+            </div>
+            <div class="d-none d-xl-block mt-2  col-xl-2">
+                <div class="site-card py-4 ">
+                    aaaaaaaa
+                </div>
+            </div>
+        </div>
+    </div>
 
     @yield('scripts')
 </body>
