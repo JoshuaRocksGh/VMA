@@ -106,37 +106,37 @@
                                 <div class="form-group align-items-center row bank_div">
                                     <label class="text-primary  col-md-4">{{ $destination }} Bank</label>
                                     <input
-                                        class="form-control  text-input col-md-8 display_to_account display_to_account_bank readOnly"
-                                        type="text" id="beneficiary_bank_name" readonly>
+                                        class="form-control  text-input col-md-8 display_to_account display_to_account_bank "
+                                        type="text" id="beneficiary_bank_name" disabled>
                                 </div>
                                 @endif
                                 <div class="form-group align-items-center row">
                                     <label class="col-md-4 text-primary"> {{ $destination }}
                                         Number</label>
                                     <input type="text"
-                                        class="form-control  text-input  display_to_account display_to_account_no col-md-8 readOnly"
-                                        id="saved_beneficiary_account_number" readonly>
+                                        class="form-control  text-input  display_to_account display_to_account_no col-md-8 "
+                                        id="saved_beneficiary_account_number" disabled>
                                 </div>
 
                                 <div class="form-group align-items-center row">
                                     <label class="col-md-4 text-primary"> {{ $destination }} Name</label>
                                     <input type="text"
-                                        class="form-control  text-input display_to_account display_to_account_name col-md-8 readOnly "
-                                        id="saved_beneficiary_name" readonly>
+                                        class="form-control  text-input display_to_account display_to_account_name col-md-8  "
+                                        id="saved_beneficiary_name" disabled>
                                 </div>
                                 @if ($currentPath !== 'Own Account')
                                 <div class="form-group align-items-center row email-div">
                                     <label class="col-md-4 text-primary"> {{ $destination }} Email</label>
                                     <input type="text"
-                                        class="form-control  text-input display_to_account display_to_receiver_email col-md-8 readOnly"
-                                        id="saved_beneficiary_email" readonly>
+                                        class="form-control  text-input display_to_account display_to_receiver_email col-md-8 "
+                                        id="saved_beneficiary_email" disabled>
                                 </div>
                                 @endif
                                 @if ($currentPath === 'Local Bank' || $currentPath === 'International Bank')
                                 <div class="row align-items-center mb-1">
                                     <label class="text-primary col-md-4">Beneficiary Address</label>
-                                    <input class="form-control  text-input col-md-8  readOnly" type="text"
-                                        id="beneficiary_address" readonly>
+                                    <input class="form-control  text-input col-md-8  " type="text"
+                                        id="beneficiary_address" disabled>
                                 </div>
                                 @endif
                             </div>
@@ -180,9 +180,8 @@
                                 <div class="form-group align-items-center row">
                                     <label class="col-md-4  text-primary"> Beneficiary A/C Name</label>
                                     <div class="input-group px-0 col-md-8" style="position: relative">
-                                        <input type="text"
-                                            class="form-control  text-input readOnly onetime_beneficiary_name"
-                                            placeholder="Beneficiary Name" id="onetime_beneficiary_name" readonly>
+                                        <input type="text" class="form-control  text-input  onetime_beneficiary_name"
+                                            placeholder="Beneficiary Name" id="onetime_beneficiary_name" disabled>
                                         <span class="spinner-grow-sm input-span  spinner-grow text-rokel-blue"
                                             role="status" id="onetime_beneficiary_name_loader" style="display: none">
                                             {{-- <span class="sr-only">Loading...</span> --}}
@@ -231,7 +230,7 @@
                                 <div class="input-group-prepend">
                                     @if ($currentPath !== 'International Bank')
                                     <input type="text" placeholder="SLL" class="input-group-text account_currency "
-                                        style="width: 80px;" readonly>
+                                        style="width: 80px;" disabled>
                                     @endif
                                     @if ($currentPath === 'International Bank')
 

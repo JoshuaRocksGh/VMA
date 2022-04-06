@@ -1,92 +1,74 @@
 <!-- Topbar Start -->
-<div class="navbar-custom" style="zoom: 0.9;">
-    <div class="container-fluid">
-        <ul class="list-unstyled topnav-menu float-right mb-0">
-            <li class="dropdown notification-list topbar-dropdown d-none d-md-block d-lg-block ">
-                <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"
-                    role="button" aria-haspopup="false" aria-expanded="false">
-                    <span class="" id='google_translate_element'></span>
+<div class="d-flex  align-items-center justify-content-between py-2 px-2 px-sm-5 mb-4 bg-white site-shadow">
+    <a class="d-block d-md-none " type="button" data-toggle="offcanvas">
+        <div class="hamburger-menu"><span></span><span></span><span></span></div>
+    </a>
 
-                </a>
-            </li>
+    <a href="{{ url('home') }}" class="d-none d-md-block">
+        <img src="{{ asset('assets/images/rokel_logos.png') }}" height="40" alt="company logo">
+    </a>
 
 
-            <li class="dropdown notification-list topbar-dropdown">
-                <a class="nav-link  nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#"
-                    role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt="user-image" class="rounded-circle">
-                    <span class="d-md-inline d-none  ml-1 h4" style="color:white">
-                        <b> {{ session()->get('userAlias') }} </b>
-                    </span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                    <!-- item-->
-                    <div class="dropdown-header noti-title">
-                        <h6 class="text-overflow m-0">Welcome !</h6>
-                    </div>
+    <div class="logo-box" style="display: flex; align-items: center;">
 
-                    <!-- item-->
-                    {{-- <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-user"></i>
-                        <span>My Account</span>
-                    </a> --}}
-
-                    <!-- item-->
-                    {{-- <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-settings"></i>
-                        <span>Settings</span>
-                    </a> --}}
-
-                    <!-- item-->
-                    {{-- <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-lock"></i>
-                        <span>Lock Screen</span>
-                    </a> --}}
-
-                    <div class="dropdown-divider"></div>
-
-                    <!-- item-->
-                    <a href="logout" id="sidebar_logout" class="dropdown-item notify-item">
-                        <i class="fe-log-out"></i>
-                        <span>Logout</span>
-                    </a>
-
-                </div>
-            </li>
-
-        </ul>
-
-        <!-- LOGO -->
-        <div class="logo-box" style="display: flex; align-items: center;">
-            <a href="/" class="logo logo-light text-center" style="padding-left:2rem">
-                <span class="logo-sm">
-                    <img src="{{ asset('assets/images/logoRKB.png') }}" alt="company logo" height="22">
-                </span>
-                <span class="logo-lg">
-                    <img src="{{ asset('assets/images/rokel_logos.png') }} " alt="company logo" height="40">
-                </span>
-            </a>
+        {{-- <span>
+            {{ session()->get('accountDescription') }}
+        </span> --}}
+        <div class="d-none d-md-block rounded-pill border font-11 mx-4 py-1  text-capitalize px-2 border-primary">
+            @if(config('app.corporate'))
+            corporate
+            @else
+            personal
+            @endif
+            Internet Banking
         </div>
 
-        <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
-            <li>
-                <button class="button-menu-mobile waves-effect waves-light">
-                    <i class="fe-menu"></i>
-                </button>
-            </li>
 
+        <div class="d-none d-xl-flex align-items-center mx-4">
+            <div>
+                <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="mx-2">
+                <div class="font-12 ">
+                    {{session()->get('deviceInfo')["deviceIp"] }}
+                </div>
+                <div class="text-primary  font-10">
+                    Last Login IP
+                </div>
+            </div>
+        </div>
 
-            <li class="notification-list d-none d-sm-block mt-3 ml-2">
-                <span class="fs-6 h3" style="color:white">
-                    {{ session()->get('accountDescription') }}
-                </span>
+        <div class="d-none d-lg-flex align-items-center mx-4">
+            <div>
+                <i class="far fa-clock"></i>
+            </div>
+            <div class="mx-2">
+                <div class="font-12">
+                    {{ explode("GMT",session()->get('lastLogin'), 4)[0] }}
+                </div>
+                <div class="text-primary  font-10">
+                    Last Login Date
+                </div>
+            </div>
+        </div>
 
-            </li>
+        <div class="d-flex align-items-center">
+            <div class="d-none d-md-block">
+                <img src="{{ asset('assets/images/logoRKB.png') }}" alt="company logo" height="45">
+            </div>
 
+            <div class="mx-2">
+                <div class="font-10 text-center text-primary" style="line-height: 1"> Welcome Back </div>
+                <div class="font-14 font-weight-bold text-uppercase">
+                    {{ session()->get('userAlias') }}
 
-        </ul>
+                </div>
+            </div>
+            <a href="{{ url('logout') }}" class="btn  btn-primarysm ml-2">
+                <i class="d-none d-sm-inline-block text-primary fas fa-sign-out-alt"></i>
+            </a>
 
-        <div class="clearfix"></div>
+        </div>
     </div>
+
 </div>
-<!-- end Topbar -->

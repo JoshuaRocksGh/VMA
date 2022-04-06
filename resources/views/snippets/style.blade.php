@@ -1,14 +1,12 @@
-<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.css') }}" type="text/css" />
-<link href="{{ asset('assets/css/bootstrap-purple.min.css') }}" rel="stylesheet" type="text/css"
-    id="bs-default-stylesheet" />
-<link href="{{ asset('assets\plugins\select2\select2.min.css') }}" rel="stylesheet" />
-<link href="{{ asset('assets/css/app-purple.min.css') }}" rel="stylesheet" type="text/css"
-    id="app-default-stylesheet" />
-<link href="{{ asset('assets/css/rokel.css') }}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
+{{--
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.css') }}" />
+--}}
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/bootstrap/bootstrap-v.4.6.1.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/select2/select2.min.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/icons.min.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/rokel.css') }}" id="app-default-stylesheet" />
 
-<link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-
-<style>
+{{-- <style>
     .readOnly {
         background-color: #eceff1 !Important;
     }
@@ -189,10 +187,9 @@
         height: auto;
     }
 
-    /* Slide In, Slide Off */
     .sliding-u-l-r-l {
         display: inline-block;
         position: relative;
         padding-bottom: 5px;
     }
-</style>
+</style> --}}
