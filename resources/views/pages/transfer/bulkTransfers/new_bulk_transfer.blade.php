@@ -14,35 +14,6 @@
     <div class="container-fluid">
         <br>
 
-        {{-- <div class="row">
-            <div class="col-md-4">
-                <a href="{{ url()->previous() }}" type="button"
-                    class="btn btn-sm btn-soft-blue waves-effect waves-light float-left"><i
-                        class="mdi mdi-reply-all-outline"></i>&nbsp;Go
-                    Back</a>
-            </div>
-            <div class="col-md-4">
-                <h4 class="text-primary mb-0 page-header text-center text-uppercase">
-                    <img src="{{ asset('assets/images/logoRKB.png') }}" alt="logo" style="zoom: 0.05">&emsp;
-
-
-
-
-                </h4>
-            </div>
-
-            <div class="col-md-4 text-right">
-                <h6>
-                    <span class="float-right">
-                        <p class="text-primary"> Transfer </b> &nbsp; > &nbsp; <b class="text-danger">Bulk Transfer</b>
-                    </span>
-                </h6>
-            </div>
-
-        </div> --}}
-
-        {{-- <hr style="margin: 0px;">
-        <br> --}}
 
         <div class="col-md-12 ">
 
@@ -75,7 +46,7 @@
 
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
 
             <div class="row">
                 <div class="col-md-1"></div>
