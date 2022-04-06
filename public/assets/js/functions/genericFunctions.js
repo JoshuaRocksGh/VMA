@@ -169,11 +169,11 @@ ${accountDesc} || ${accountNumber} || ${currency} ${availableBalance}
 
 function siteLoading(state) {
     if (state === "show") {
-        $("#preloader").css("background-color", "#4fc6e17a");
-        $(".preloader").fadeIn(500);
+        $("#site_loader").css("background-color", "#4fc6e17a");
+        $("#site_loader").fadeIn(500, "linear");
         return;
     }
-    $(".preloader").fadeOut(1500);
+    $("#site_loader").fadeOut(1500, "linear");
     return;
 }
 
