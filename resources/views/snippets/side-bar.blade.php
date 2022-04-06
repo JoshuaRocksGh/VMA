@@ -173,7 +173,7 @@
                             <li>
                                 <a href="{{ url('requests') }}">Requests</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="#sidebarRequests" data-toggle="collapse">
                                     <span> Requests </span>
                                     <span class="menu-arrow"></span>
@@ -191,7 +191,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ url('open-additional-account') }}">Open additional account</a>
                             </li>

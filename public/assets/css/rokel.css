@@ -64,6 +64,18 @@ a:hover {
 .select2-selection__arrow {
     display: none;
 }
+
+input[type="checkbox" i]:disabled {
+    background: #eef0f2 !important;
+    color: var(--secondary) !important;
+    border-color: #d9d9d9 !important;
+}
+.custom-switch
+    .custom-control-input:disabled:checked
+    ~ .custom-control-label::before {
+    background-color: #eef0f2 !important;
+    border-color: #d9d9d9 !important;
+}
 /* .account-icon {
     background-color: green;
     color: white;

@@ -16,25 +16,24 @@
                         <div class="text-center mb-4">Your new PIN must be different from your current pin</div>
                         <div class="text-left font-weight-bold mx-auto mt-2" style="max-width: 250px">
                             Enter Old Pin
-                            <input type="text" name="mycode" class="pincode-input">
+                            <input type="text" id="old_pin" class="pincode-input">
 
                         </div>
                         <div class="text-left font-weight-bold mx-auto mt-2" style="max-width: 250px">
                             Enter New Pin
-                            <input type="text" name="mycode" class="pincode-input">
+                            <input type="text" id="new_pin" class="pincode-input">
 
                         </div>
                         <div class="text-left font-weight-bold mx-auto mt-2" style="max-width: 250px">
                             Confirm New Pin
-                            <input type="text" name="mycode" class="pincode-input">
-
+                            <input type="text" id="confirm_new_pin" class="pincode-input">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" id='change_pin_button' class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
