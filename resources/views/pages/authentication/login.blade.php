@@ -19,13 +19,7 @@
     .demo {
         font-weight: 500;
         font-size: 36px;
-        /* position: absolute; */
-        /* width: 450px; */
-        /* left: 50%; */
-        /* margin-left: -225px; */
         height: 40px;
-        /* top: 50%; */
-        /* margin-top: -20px; */
     }
 
     p {
@@ -64,7 +58,6 @@
         animation-iteration-count: infinite;
         animation-name: anim;
         animation-duration: 7.5s;
-        /*calculate the exact time for looping*/
     }
 
     .word:nth-child(2) {
@@ -131,7 +124,7 @@ $TYPE = 'Corporate';
 }
 @endphp
 <div class="overflow-hidden d-flex" style="height: 100vh">
-    <div class="auth-card h-100 py-5 "
+    <div class="auth-card h-100 px-3 py-5 "
         style="background-image: url({{ asset('assets/images/login-bg.jpg') }});background-repeat: no-repeat;background-size: cover; min-width:400 ">
         <div class="text-center">
             <a class="d-inline-block mb-4" href="{{ url('/') }}">
@@ -347,57 +340,36 @@ $TYPE = 'Corporate';
                         </div>
                     </form>
                 </div>
-
-                {{-- <div class="bg-success">
-                    <div class="modal-body p-4">
-                        <div class="text-center">
-                            {{-- <i class="dripicons-checkmark h1 text-white"></i> -
-                            <p class=" text-white" id="success_modal_text"> </p>
-                            {{-- <button type="button" class="btn btn-light btn-sm my-2" {{--
-                                data-dismiss="modal">Continue</button>
-                        </div>
-                    </div>
-                </div> --}}
-
-
             </div>
             @endif
             </form>
-            <!-- end form-->
 
-            <!-- Footer-->
 
             <br><br><br>
             @if (!config('app.corporate'))
-            <div class="text-center d-lg-none" id="">
-                {{-- <div class="row "> --}}
+            <div class="auth-extras  d-xl-none row" id="">
 
 
-                    <div>
-                        <a href="{{ url('account-creation') }}"
-                            class="btn btn-outline-primary btn-rounded waves-effect waves-light mb-1 mx-1"
-                            style="min-width: 170px;"> <i class="fas fa-book-open mr-1"></i> Open an account</a>
-                        {{-- &nbsp; --}}
-                        <a href="{{ url('enquiry') }}"
-                            class="btn btn-outline-primary btn-rounded waves-effect waves-light mb-1 mx-1"
-                            style="min-width: 170px;"> <i class="fas fa-desktop mr-1"></i> Make Enquiry</a>
+                <div class="col-6 py-2">
+                    <a href="{{ url('account-creation') }}" class="btn btn-outline-primary w-100 btn-rounded"> <i
+                            class="fas fa-book-open"></i> Open an account</a>
+                </div>
+                <div class="col-6 py-2">
 
+                    <a href="{{ url('enquiry') }}" class="btn btn-outline-primary w-100 btn-rounded"> <i
+                            class="fas fa-desktop"></i> Make Enquiry</a>
+                </div>
 
-                    </div>
-                    {{--
-                </div> --}}
-                {{-- <div class="row "> --}}
-                    <div>
-                        <a href="{{ url('branches') }}"
-                            class="btn btn-outline-primary btn-rounded waves-effect waves-light mb-1 mx-1"
-                            style="min-width: 170px;"> <i class="fas fa-map-marked-alt mr-1"></i> Branches</a>
-                        {{-- &nbsp; --}}
-                        <a href="{{ url('faq') }}"
-                            class="btn btn-outline-primary btn-rounded waves-effect waves-light mb-1 mx-1"
-                            style="min-width: 170px;"> <i class="fas fa-headset mr-1"></i> FAQs</a>
-                    </div>
-                    {{--
-                </div> --}}
+                <div class="col-6 py-2">
+                    <a href="{{ url('branches') }}" class="btn btn-outline-primary w-100 btn-rounded"> <i
+                            class="fas fa-map-marked-alt"></i> Branches</a>
+                </div>
+                <div class="col-6 py-2">
+
+                    <a href="{{ url('faq') }}" class="btn btn-outline-primary w-100 btn-rounded"> <i
+                            class="fas fa-headset"></i> FAQs</a>
+                </div>
+
             </div>
             @endif
 

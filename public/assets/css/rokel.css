@@ -253,6 +253,15 @@
     width: 100%;
     min-width: 450px;
     height: 100%;
+    max-width: 500px;
+}
+
+@media (max-width: 1200px) {
+    .auth-card {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
 }
 
 .transition-all {
