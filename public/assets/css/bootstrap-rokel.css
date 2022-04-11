@@ -45,7 +45,12 @@ a:not([href]):hover {
     color: inherit;
     text-decoration: none;
 }
-.btn {
+button {
+    box-shadow: none;
+    background-color: transparent;
+    border: none;
+}
+.btn:focus {
     box-shadow: none;
 }
 .btn-primary {
@@ -146,8 +151,39 @@ a:not([href]):hover {
     box-shadow: none !important;
 }
 .form-control:focus:not(:disabled):not(.readOnly) {
-    border-color: var(--primary) !important;
+    border-color: var(--primary);
     box-shadow: var(--primary) 0px 0px 0px 1px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+input[type="checkbox" i]:disabled {
+    background: #eef0f2 !important;
+    color: var(--secondary) !important;
+    border-color: #d9d9d9 !important;
+}
+.custom-switch
+    .custom-control-input:disabled:checked
+    ~ .custom-control-label::before {
+    background-color: #eef0f2 !important;
+    border-color: #d9d9d9 !important;
+}
+
+.form-control:disabled,
+.form-control[readonly],
+.disabled {
+    background-color: #eef0f2;
+    opacity: 1;
+}
+
+select:active,
+select:hover {
+    outline: none;
 }
 
 ul {
