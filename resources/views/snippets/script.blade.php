@@ -28,6 +28,13 @@ $(window).on("load", ()=>{
     $('.hamburger-menu').toggleClass('open');
   })
   $("#wrapper").css("background-color", "#ddeefe").show();
+  $('.password-eye').on('click', function () {
+    var $this = $(this),
+        $passwordInput = $this.prev(),
+        isPasswordVisible = $passwordInput.attr('type') === 'text';
+    $passwordInput.attr('type', isPasswordVisible ? 'password' : 'text');
+    $this.toggleClass('show');
+  });
   $("#site_loader").fadeOut(1500,'linear');
     $("a[href*='" + location.pathname + "']").addClass("current-page");
     $("a.current-page").parents('.menu-item-body').collapse('show')

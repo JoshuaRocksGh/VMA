@@ -34,13 +34,6 @@
             border: 3px solid rgb(217, 217, 216);
         }
 
-        #datatable-buttons_filter {
-            float: right;
-        }
-    </style>
-
-
-    <style>
         @media print {
             .hide_on_print {
                 display: none
@@ -55,7 +48,6 @@
                 /* src: url(https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf); */
         }
 
-
         input.key {
             font-family: 'password';
             width: 300px;
@@ -63,21 +55,10 @@
             font-size: 100px;
         }
 
-
         #body {
             width: 100%;
-            /* background-image: url('assets/images/background.png');
-            background-repeat: horizontal;
-            min-height: 100vh;
-            background-size: cover; */
-            /* background-color: ##00bdf3;
-            background-image: linear-gradient(180deg, #8c7d53 0%, skyblue 50%); */
             background-color: white;
         }
-
-        /* .table_over_flow {
-            overflow-y: hidden;
-        } */
     </style>
     @yield('styles')
     <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
@@ -96,7 +77,7 @@
         </div>
     </div>
     <!-- Begin page -->
-    <div id="wrapper" class="w-100" style="min-height:100vh; display: none">
+    <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none">
         @include('snippets.nav')
         <div class="row mx-0">
             <div class="offcanvas-collapse col-md-4 d-md-block mt-2 col-xl-2  ">
@@ -109,8 +90,10 @@
 
             </div>
             <div class="d-none d-xl-block mt-2  col-xl-2">
-                <div class="site-card py-4 ">
-                    aaaaaaaa
+                <div class="dashboard site-card p-0">
+                    <div>
+
+                    </div>
                 </div>
             </div>
         </div>

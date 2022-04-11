@@ -193,12 +193,79 @@
 } */
 /* ------------------------ side menu end--------------------- */
 
-.transition-all {
-    transition: all 400ms;
+/* ========================== Dashboard ========================== */
+.dashboard .dashboard-header .nav-link {
+    border-radius: 1rem;
+    margin-right: 10px;
+    padding: 6px 30px;
+    /* background-color: var(--white); */
+    border: 2px solid transparent;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--primary);
+    position: relative;
+}
+.dashboard .dashboard-header .nav-link.active::after {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: var(--primary);
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+}
+.dashboard .dashboard-header .nav-link:hover {
+    border-color: var(--primary);
+}
+.dashboard .dashboard-header .nav-link.active {
+    background-color: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
 }
 
-.readOnly {
-    background-color: #eceff1 !important;
+.dashboard.site-card {
+    padding: 2rem;
+    padding-top: 1rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.dashboard .tab-content {
+    margin-top: 1rem;
+    border-radius: 1rem;
+    min-height: 500px;
+    background-color: var(--white);
+}
+.dashboard .tab-content .tab-pane {
+    padding: 2rem;
+}
+/* ------------------------ Dashboard end--------------------- */
+
+/* ============================================================= */
+/* Login Page */
+/* ============================================================= */
+
+.auth-card {
+    width: 100%;
+    min-width: 450px;
+    height: 100%;
+    max-width: 500px;
+}
+
+@media (max-width: 1200px) {
+    .auth-card {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
+
+.transition-all {
+    transition: all 400ms;
 }
 
 .site-shadow {
@@ -221,13 +288,36 @@
     min-height: 150px;
 }
 
-.z-1 {
-    z-index: -1;
+.password-group {
+    position: relative;
+}
+.password-group .password-input {
+    padding-right: 30px;
+}
+.password-group .password-eye {
+    z-index: 5;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--secondary);
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+.password-group .password-eye::before {
+    content: "";
+}
+.password-group .password-eye.show::before {
+    content: "";
 }
 
-.text-input {
+/* .text-input {
     border: 1px solid #ced4da;
-}
+} */
 
 .form-control,
 .bootstrap-select .dropdown-toggle {
@@ -325,41 +415,13 @@
     color: white;
 }
 
-input[type="checkbox" i]:disabled {
-    background: #eef0f2 !important;
-    color: var(--secondary) !important;
-    border-color: #d9d9d9 !important;
-}
-.custom-switch
-    .custom-control-input:disabled:checked
-    ~ .custom-control-label::before {
-    background-color: #eef0f2 !important;
-    border-color: #d9d9d9 !important;
-}
-
-.form-control:disabled,
-.form-control[readonly],
-.disabled {
-    background-color: #eef0f2;
-    opacity: 1;
-}
-
-.form-control:focus {
-    /* border-color: #17a2b8; */
-    border-color: #ced4da;
-}
-select:active,
-select:hover {
-    outline: none;
-}
-
-.input-group-text {
+/* .input-group-text {
     font-size: 0.9rem;
-}
+} */
 
-.tab-pane {
+/* .tab-pane {
     animation: slide-right 300ms ease-out;
-}
+} */
 
 @keyframes slide-right {
     0% {
@@ -414,17 +476,13 @@ select:hover {
     background-color: #00bdf3 !important;
     color: white;
 }
-/* .page-item.active .page-link {
-    background-color: var(--info);
-    border-color: var(--info);
-} */
 
-.next-button {
+/* .next-button {
     height: 2rem !important;
     font-size: 0.9rem !important;
     margin-top: 2rem !important;
     line-height: normal !important;
-}
+} */
 
 .transfer-detail-header {
     font-size: 1rem;
@@ -437,11 +495,11 @@ select:hover {
     overflow-wrap: anywhere;
 }
 
-.btn-soft-blue {
+/* .btn-soft-blue {
     color: #4a81d4;
     background-color: rgba(74, 129, 212, 0.18);
     border-color: rgba(74, 129, 212, 0.12);
-}
+} */
 
 /* pulse animation for page loading */
 .pulse {
