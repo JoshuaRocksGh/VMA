@@ -15,10 +15,10 @@
             {{ session()->get('accountDescription') }}
         </span> --}}
         <div class="d-none d-md-block rounded-pill border font-11 mx-4 py-1  text-capitalize px-2 border-primary">
-            @if(config('app.corporate'))
-            corporate
+            @if (config('app.corporate'))
+                corporate
             @else
-            personal
+                personal
             @endif
             Internet Banking
         </div>
@@ -30,7 +30,7 @@
             </div>
             <div class="mx-2">
                 <div class="font-12 ">
-                    {{session()->get('deviceInfo')["deviceIp"] }}
+                    {{ session()->get('deviceInfo')['deviceIp'] }}
                 </div>
                 <div class="text-primary  font-10">
                     Last Login IP
@@ -44,7 +44,7 @@
             </div>
             <div class="mx-2">
                 <div class="font-12">
-                    {{ explode("GMT",session()->get('lastLogin'), 4)[0] }}
+                    {{ explode('GMT', session()->get('lastLogin'), 4)[0] }}
                 </div>
                 <div class="text-primary  font-10">
                     Last Login Date
@@ -54,7 +54,7 @@
 
         <div class="d-flex align-items-center">
             <div class="d-none d-md-block">
-                <img src="{{ asset('assets/images/logoRKB.png') }}" alt="company logo" height="45">
+                {{-- <img src="{{ asset('assets/images/logoRKB.png') }}" alt="company logo" height="45"> --}}
             </div>
 
             <div class="mx-2">
