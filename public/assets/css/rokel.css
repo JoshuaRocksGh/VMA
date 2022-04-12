@@ -234,13 +234,13 @@
     backdrop-filter: blur(5px);
 }
 
-.dashboard .tab-content {
+.dashboard .dashboard-body {
     margin-top: 1rem;
     border-radius: 1rem;
-    min-height: 500px;
+    border: 1px solid var(--primary);
     background-color: var(--white);
 }
-.dashboard .tab-content .tab-pane {
+.dashboard .dashboard-body .tab-pane {
     padding: 2rem;
 }
 /* ------------------------ Dashboard end--------------------- */
@@ -385,8 +385,9 @@
     color: #6c757d;
 }
 
-.select2-container {
+.select2 {
     width: 100% !important;
+    box-sizing: border-box;
 }
 
 .select2-container .select2-selection--single {

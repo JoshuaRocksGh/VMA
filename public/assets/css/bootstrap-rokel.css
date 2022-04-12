@@ -33,6 +33,9 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
         "Liberation Mono", "Courier New", monospace;
 }
+select2 body {
+    box-sizing: border-box;
+}
 a: hover {
     text-decoration: none !important;
 }
@@ -58,7 +61,11 @@ button {
     background-color: var(--primary);
     border-color: var(--primary);
 }
-
+.btn {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
 .btn:focus,
 .btn:hover {
     box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
@@ -120,6 +127,18 @@ h6 {
 label {
     font-size: 12px;
     font-weight: 600;
+}
+
+div,
+span,
+p,
+input.form-control,
+.input-group-text,
+.select2 {
+    font-size: 12px;
+}
+.alert {
+    font-size: 14px;
 }
 .font-10 {
     font-size: 10px;
@@ -188,13 +207,7 @@ label {
 .readonly: {
     box-shadow: none !important;
 }
-input,
-button,
-input.form-control,
-.input-group-text,
-.select2 {
-    font-size: 14px;
-}
+
 .form-control:focus:not(:disabled):not(.readOnly) {
     border-color: var(--primary);
     box-shadow: var(--primary) 0px 0px 0px 1px;

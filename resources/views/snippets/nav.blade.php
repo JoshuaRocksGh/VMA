@@ -64,7 +64,7 @@
 
                 </div>
             </div>
-            <a href="{{ url('logout') }}" class="btn  btn-primarysm ml-2">
+            <a href="{{ url('logout') }}" class=" ml-2">
                 <i class="d-none d-sm-inline-block text-primary fas fa-sign-out-alt"></i>
             </a>
 
