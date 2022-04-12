@@ -59,6 +59,10 @@ button {
     border-color: var(--primary);
 }
 
+.btn:focus,
+.btn:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+}
 .btn-primary:hover,
 .btn-primary:focus {
     color: var(--white);
@@ -88,7 +92,35 @@ button {
     box-shadow: rgba(0, 0, 0, 0) 0px 1px 1px;
 }
 
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.btn-outline-primary:not(:disabled):not(.disabled):focus,
+.btn-outline-primary:not(:disabled):not(.disabled):hover,
+.show > .btn-outline-primary.dropdown-toggle:focus {
+    color: var(--white);
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
 /* ------------------------- Fonts ----------------------------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 14px;
+    font-weight: 600;
+}
+label {
+    font-size: 12px;
+    font-weight: 600;
+}
 .font-10 {
     font-size: 10px;
 }
@@ -128,6 +160,12 @@ button {
 .font-22 {
     font-size: 22px;
 }
+.font-24 {
+    font-size: 24px;
+}
+.font-28 {
+    font-size: 28px;
+}
 
 /* ------------------------- Text ----------------------------------- */
 .o-wrap {
@@ -149,6 +187,13 @@ button {
 /* ------------------------- Forms ----------------------------------- */
 .readonly: {
     box-shadow: none !important;
+}
+input,
+button,
+input.form-control,
+.input-group-text,
+.select2 {
+    font-size: 14px;
 }
 .form-control:focus:not(:disabled):not(.readOnly) {
     border-color: var(--primary);
