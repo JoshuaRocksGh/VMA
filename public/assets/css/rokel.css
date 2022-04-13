@@ -237,7 +237,7 @@
 .dashboard .tab-content {
     margin-top: 1rem;
     border-radius: 1rem;
-    min-height: 500px;
+    /* min-height: 500px; */
     background-color: var(--white);
 }
 .dashboard .tab-content .tab-pane {

@@ -429,7 +429,7 @@
                                 <br><br>
                                 {!! $noDataAvailable !!}
                             </span>
-                            <canvas id="casa_myChart" style="width:200px;max-width:700px;">
+                            <canvas id="casa_myChart" >
 
                             </canvas>
 

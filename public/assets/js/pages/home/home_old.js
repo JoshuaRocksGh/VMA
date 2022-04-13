@@ -1300,7 +1300,7 @@
                             setTimeout(function() {
                                 getAccountTransactions(acc_num, acc_cur, start_date, end_date, transLimit)
                                 //line_graph()
-                                //account_line_chart(cus_accounts, acc_line_details)
+                                account_line_chart(cus_accounts, acc_line_details)
                             }, 500)
 
                         }, 500);
