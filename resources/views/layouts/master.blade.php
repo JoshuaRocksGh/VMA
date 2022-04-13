@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8" />
     <title>RC BANKING</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,6 +58,7 @@
             width: 100%;
             background-color: white;
         }
+
     </style>
     @yield('styles')
     <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
@@ -77,10 +77,10 @@
         </div>
     </div>
     <!-- Begin page -->
-    <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none">
+    <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none;">
         @include('snippets.nav')
         <div class="row mx-2">
-            <div class="offcanvas-collapse col-md-4 d-md-block mt-2 col-xl-2  ">
+            <div class="offcanvas-collapse col-md-2 d-md-block mt-2 col-xl-2  ">
                 @include('snippets.side-bar')
             </div>
             <div class="col-md-8">
@@ -89,10 +89,12 @@
                 </div>
 
             </div>
-            <div class="d-none d-xl-block mt-2  col-xl-2">
-                <div class="dashboard site-card p-0">
-                    <div>
-
+            <div class="col-md-2 d-none d-xl-block mt-2  col-xl-2">
+                <div class=" site-card p-1">
+                    <div class="site-card-body">
+                        <h6>21 April 2022</h6>
+                        <br>
+                        <p>Demo on SLCB Internet Banking</p>
                     </div>
                 </div>
             </div>

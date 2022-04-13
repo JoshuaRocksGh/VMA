@@ -14,19 +14,20 @@
             <nav class="dashboard-header ">
                 <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
                     <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                        aria-controls="nav-home" aria-selected="true">Acc Summary</a>
+                        aria-controls="nav-home" aria-selected="true">Acc. Summary</a>
                     <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                         aria-controls="nav-profile" aria-selected="false">Approvals &nbsp;<span
                             class="badge badge-danger badge-pill float-right p-1" style="font-size:12px"></span></a>
                     <a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-                        aria-controls="nav-contact" aria-selected="false">History</a>
+                        aria-controls="nav-contact" aria-selected="false">Acc. History</a>
                 </div>
             </nav>
-            <div class="tab-content border-primary border " id="nav-tabContent">
+            <div class="tab-content dashboard-body border-primary border " id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    {{-- <div class="d-flex justify-content-center">
-                        <div class="spinner-grow text-primary m-2" role="status"></div>
-                    </div> --}}
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border avatar-lg text-primary  m-2 canvas_spinner" role="status">
+                        </div>
+                    </div>
 
                     <div class="">
                         <canvas id="myChart" style="max-height: 250px"></canvas>
@@ -166,10 +167,43 @@
 
                     </div> <!-- end card body-->
                 </div>
-                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
-                {{-- <br> --}}
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <strong class="text-success">CURRENT & SAVINGS</strong>
+                    <select name="" id="casa_line_chart" class="form-control ">
+
+                        @foreach (session()->get('customerAccounts') as $i => $account)
+                            <option selected
+                                value="{{ $account->accountType .' ~ ' .$account->accountDesc .' ~ ' .$account->accountNumber .' ~ ' .$account->currency .' ~ ' .$account->availableBalance }}">
+                                {{ $account->accountDesc .
+                                    ' || ' .
+                                    $account->accountNumber .
+                                    ' || ' .
+                                    $account->currency .
+                                    ' ' .
+                                    $account->availableBalance }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    {{-- <div class="form-group  ">
+                        <label class=" text-primary align-self-center"> Select Account :</label>
+                        <select class="form-control accounts-select " id="casa_line_chart" required>
+                            <option value="" disabled selected> -- Select Your Account -- </option>
+                            @include('snippets.accounts')
+                        </select>
+                    </div> --}}
+
+                    <span colspan="100%" class="text-center" id="line_chart_no_data">
+                        <br><br>
+                        {!! $noDataAvailable !!}
+                    </span>
+                    <canvas id="casa_myChart">
+
+                    </canvas>
+                </div>
+
             </div>
-            <div class="tab-content border-primary border " style="min-height:200px">
+            <div class="tab-content dashboard-body border-primary border " style="min-height:200px">
 
 
                 <div class="">

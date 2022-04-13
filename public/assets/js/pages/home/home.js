@@ -113,7 +113,7 @@
                             dd + "/" + mm + "/" + yyyy,
                             data[index].postedby,
                             `<a onclick="window.open('approvals-pending-transfer-details/${request_id}/${customer_no}'), '_blank', 'location=yes,height=670,width=1200,scrollbars=yes,status=yes'">
-                                        <button type="button" class=" btn btn-xs waves-effect waves-light" style="background-color: #998f38; color: white"> View Details</button>
+                                        <button type="button" class=" btn btn-xs btn-outline-primary waves-effect waves-light" > View Details</button>
                                     </a>
                                     `,
                         ])
@@ -334,10 +334,10 @@
 
                     function account_line_chart(cus_accounts, acc_line_details) {
 
-                        console.log("========")
-                        console.log([cus_accounts, acc_line_details])
-                        console.log("========")
-                        return false;
+                        // console.log("========")
+                        // console.log([cus_accounts, acc_line_details])
+                        // console.log("========")
+                        // return false;
                         let acc_dataset = []
                         let chart_data_details = new Array
                         //  let show_chart_data = []
@@ -1189,8 +1189,8 @@
                     let acc_line_details = []
 
                     function getAccountTransactions(account_number, account_currency, start_date, end_date, transLimit) {
-                        console.log([account_number, account_currency, start_date, end_date, transLimit]);
-                        return false;
+                        // console.log([account_number, account_currency, start_date, end_date, transLimit]);
+                        // return false;
                         $.ajax({
                             "type": "POST",
                             "url": "account-transaction-history",
@@ -1285,20 +1285,12 @@
 
                     $(document).ready(function() {
 
-                        setTimeout(function() {
-
-                            getCorrectFxRates()
-
-                            // show_chart(account_data.i_have_total, account_data.i_owe_total, account_data.i_invest_total)
-                            setTimeout(function() {
-                                alert("document is ready")
-                                return false;
-                                getAccountTransactions(acc_num, acc_cur, start_date, end_date, transLimit)
-                                //line_graph()
-                                // account_line_chart(cus_accounts, acc_line_details)
-                            }, 500)
-
-                        }, 500);
+                        $("select").select2();
+                    $(".accounts-select").select2({
+                        minimumResultsForSearch: Infinity,
+                        templateResult: accountTemplate,
+                        templateSelection: accountTemplate,
+                    });
 
                         // ============ ============== //
 
@@ -1413,6 +1405,21 @@
                         var acc_num = my_acc[2].trim()
                         var acc_cur = my_acc[3].trim()
 
+                        setTimeout(function() {
+
+                            getCorrectFxRates()
+
+                            // show_chart(account_data.i_have_total, account_data.i_owe_total, account_data.i_invest_total)
+                            setTimeout(function() {
+                                // alert("document is ready")
+                                // return false;
+                                getAccountTransactions(acc_num, acc_cur, start_date, end_date, transLimit)
+                                // line_graph()
+                                // account_line_chart(cus_accounts, acc_line_details)
+                            }, 500)
+
+                        }, 500);
+
 
 
                     // })
@@ -1420,7 +1427,8 @@
                     $("#casa_line_chart").change(function() {
                         var account_details = $(this).val()
                         var my_account = account_details.split("~")
-                        //console.log("my_account:", my_account)
+                        // console.log("my_account:", my_account)
+                        // return false
 
                         getAccountTransactions(my_account[2], my_account[3],
                             start_date,
