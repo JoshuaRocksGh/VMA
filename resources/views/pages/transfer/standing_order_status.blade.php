@@ -12,7 +12,7 @@ $pageTitle =" STANDING ORDER STATUS";
 <div class="mx-sm-2  m-lg-3">
     <div class="site-card">
         <div class="col-md-6 mx-auto">
-            <label class="d-block text-center f-18 font-weight-bold mb-1 text-primary"> Select Account To Transfer
+            <label class="d-block text-center  font-weight-bold mb-1 text-primary"> Select Account To Transfer
                 From</label>
             <select data-style="" class="form-control accounts-select" id="from_account" required>
                 @include("snippets.accounts")
@@ -20,7 +20,7 @@ $pageTitle =" STANDING ORDER STATUS";
         </div>
         <hr class="col-md-9">
         <div class="table-responsive p-2 table-centered table-striped table-bordered ">
-            <table class="table table-striped mb-0 " id="standing_order_display_area" style="zoom:0.8">
+            <table class="table table-striped mb-0 " id="standing_order_display_area">
                 <thead>
                     <tr class="bg-info text-white ">
                         <td> <b> Account No </b> </td>

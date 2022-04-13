@@ -36,7 +36,7 @@ $(window).on("load", ()=>{
     $this.toggleClass('show');
   });
   $("#site_loader").fadeOut(1500,'linear');
-    $("a[href*='" + location.pathname + "']").addClass("current-page");
+    $("a[href$='" + location.pathname + "']").addClass("current-page");
     $("a.current-page").parents('.menu-item-body').collapse('show')
     $("a.current-page").parents('.menu-item-body').prev().addClass('current-menu-header')
 })

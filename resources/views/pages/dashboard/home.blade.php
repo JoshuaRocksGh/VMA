@@ -166,17 +166,8 @@
 
                     </div> <!-- end card body-->
                 </div>
-                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                    <span colspan="100%" class="text-center" id="line_chart_no_data">
-                        <br><br>
-                        {!! $noDataAvailable !!}
-                    </span>
-                    <canvas id="casa_myChart">
-
-                    </canvas>
-
-                </div>
-
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                {{-- <br> --}}
             </div>
             <div class="tab-content border-primary border " style="min-height:200px">
 
@@ -184,12 +175,12 @@
                 <div class="">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a href="#home" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                            <a href="#home" data-toggle="tab" aria-expanded="false" class="nav-link">
                                 <b>Accounts</b>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#profile" data-toggle="tab" aria-expanded="true" class="nav-link ">
+                            <a href="#profile" data-toggle="tab" aria-expanded="true" class="nav-link active">
                                 <b>Investments</b>
                             </a>
                         </li>
@@ -200,7 +191,7 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane show active" id="home">
+                        <div class="tab-pane" id="home">
                             <div class="table-responsive table-bordered accounts_display_area" style=" zoom:0.8;">
                                 <table id="accounts_display_area" class="table table-striped mb-0 ">
                                     <thead>
@@ -223,7 +214,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane " id="profile">
+                        <div class="tab-pane show active" id="profile">
                             <div class="table-responsive table-bordered my_investment_display_area" style="zoom:0.9;">
 
                                 <table id="my_investment_display_area" class="table table-striped mb-0 ">
@@ -284,3 +275,4 @@
         let customer_no = @json(session()->get('customerNumber'));
     </script>
 @endsection
+9

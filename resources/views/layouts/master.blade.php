@@ -79,7 +79,7 @@
     <!-- Begin page -->
     <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none">
         @include('snippets.nav')
-        <div class="row mx-0">
+        <div class="row mx-2">
             <div class="offcanvas-collapse col-md-4 d-md-block mt-2 col-xl-2  ">
                 @include('snippets.side-bar')
             </div>

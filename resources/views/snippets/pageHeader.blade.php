@@ -6,13 +6,10 @@
             </span>
         </div>
 
-        <span class="font-12 font-weight-medium ">
+        <span class="d-none d-sm-block font-12 font-weight-medium ">
             <span class="text-primary "> {{ $basePath }} </span> &nbsp; > &nbsp; <span class="text-danger">{{
                 $currentPath }}</span>
         </span>
 
     </div>
-    {{--
-    <hr class="text-primary my-2"> --}}
-
 </div>

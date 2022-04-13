@@ -18,7 +18,7 @@
 
     .demo {
         font-weight: 500;
-        font-size: 36px;
+        /* font-size: 36px; */
         height: 40px;
     }
 
@@ -74,11 +74,6 @@
 
     .word:nth-child(5) {
         animation-delay: 6s;
-    }
-
-    label {
-        font-weight: 500;
-        font-size: 14px;
     }
 
     @keyframes anim {
@@ -240,7 +235,7 @@ $TYPE = 'Corporate';
                                 id="submit_spinner" style="display: none"></span>
                         </button>
                     </div>
-                    <div type="button" class="mt-4 text-center"> <button class="btn text-primary  mx-auto"
+                    <div class="mt-4 text-center"> <button type="button" class=" text-primary  mx-auto"
                             id="reset_password_back_button">Back to Login
                         </button>
                     </div>
@@ -352,7 +347,7 @@ $TYPE = 'Corporate';
 
                 <div class="col-6 py-2">
                     <a href="{{ url('account-creation') }}" class="btn btn-outline-primary w-100 btn-rounded"> <i
-                            class="fas fa-book-open"></i> Open an account</a>
+                            class="fas fa-book-open"></i> Open Account</a>
                 </div>
                 <div class="col-6 py-2">
 
@@ -376,165 +371,105 @@ $TYPE = 'Corporate';
         </div> <!-- end .card-body -->
     </div>
 
-    <div class="d-none d-xl-block h-100 w-100"
+    <div class="d-none d-xl-block w-100"
         style="background-image:  linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),url({{ asset('assets/images/meeting.jpg') }});background-repeat: no-repeat;background-size: cover;">
         <div class="auth-user-testimonial">
             @if (!config('app.corporate'))
-            <div class="container h-100" id="login_page_extras">
+            <div class="container d-flex p-5 flex-column justify-content-around align-content-between "
+                id="login_page_extras" style="height: 100vh;">
 
-                <div class="card-body mb-3 pb-3 mb-lg-5 pb-lg-5 h-75">
-                    <div class="row mx-auto" style="width: 65rem">
-                        <div class="col-md-7 my-auto">
-                            <h1 class=" text-white" style="font-size: 3.5rem;font-family: 'Oswald', sans-serif;">
-                                . . . Do more with<br>
-                                <span class="pl-5"> BestMobile App </span>
-                            </h1>
+                <div class="d-flex justify-content-around w-100 mx-auto">
+                    <div class=" my-auto">
+                        <h1 class="font-weight-bold text-white font-28">
+                            . . . Do more with<br>
+                            <span class="pl-5"> BestMobile App </span>
+                        </h1>
 
-                            <div class="demo p-2 mt-2 ">
-                                <p class="mr-3">BestMobile App</p>
-                                <p class="word-wrap">
-                                    <span class="word wisteria">anywhere...</span>
-                                    <span class="word belize">anytime...</span>
-                                    <span class="word pomegranate">secure...</span>
-                                    <span class="word green">convenient...</span>
-                                    <span class="word midnight">fast...</span>
-                                </p>
-                            </div>
-
-
+                        <div class="demo  mt-5 font-28">
+                            <span class="mr-3">BestMobile App</span>
+                            <span class="word-wrap">
+                                <span class="word wisteria">anywhere...</span>
+                                <span class="word belize">anytime...</span>
+                                <span class="word pomegranate">secure...</span>
+                                <span class="word green">convenient...</span>
+                                <span class="word midnight">fast...</span>
+                            </span>
                         </div>
 
-                        {{-- Carousel --}}
-                        <div class="col-md-5 text-center">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="{{ asset('assets/images/mobile-login.png') }}" alt="image"
-                                            class="img-fluid rounded" width="200" />
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="img-fluid rounded" alt="image" width="200"
-                                            src="{{ asset('assets/images/mobile-home.png') }}">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="img-fluid rounded" alt="image" width="200"
-                                            src="{{ asset('assets/images/home-summary.png') }}">
-                                    </div>
+
+                    </div>
+
+                    <div class=" text-center">
+                        <div id="login_carousel" style="width: 350px" class="carousel slide" data-ride="carousel">
+
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="{{ asset('assets/images/mobile-login.png') }}" alt="image"
+                                        class=" rounded" style="width:200px !important;max-height:380px;" />
                                 </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                                    data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                                    data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
+                                <div class="carousel-item">
+                                    <img class=" rounded" alt="image" style="width:200px !important;max-height:380px;"
+                                        src="{{ asset('assets/images/mobile-home.png') }}">
+                                </div>
+                                <div class="carousel-item">
+                                    <img class=" rounded" alt="image" style="width:200px !important;max-height:380px;"
+                                        src="{{ asset('assets/images/home-summary.png') }}">
+                                </div>
                             </div>
-
-
+                            <a class="carousel-control-prev" href="#login_carousel" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#login_carousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
+
+
                     </div>
                 </div>
-                {{-- <br><br><br><br> --}}
-                <div class="___class_+?100___ mt-5 ">
-                    {{-- NEW LAYOUT --}}
-                    <div class="___class_+?77___" style="zoom: 0.8">
-                        <div class="col-md-12 pb-0">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <a href="{{ url('account-creation') }}">
-                                        <div class="text-center card-box">
-                                            <div class="pt-1 pb-1">
+                <div class="row mt-5">
+                    <div class="col-md-3">
+                        <a class="text-center d-block bg-white rounded p-4" href="{{ url('account-creation') }}">
+                            <i class="fas fa-book-open text-primary font-20"></i>
+                            <h4 class="mt-3 font-14 text-primary"> Open Account
+                            </h4>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a class="text-center d-block bg-white rounded p-4" href="{{ url('branches') }}">
+                            <i class=" fas fa-map-marked-alt  text-primary font-20"></i>
+                            <h4 class="mt-3 font-14  text-primary">Branches</h4>
+                        </a>
+                    </div> <!-- end .padding -->
 
 
+                    <div class="col-md-3">
+                        <a class="text-center d-block bg-white rounded p-4" href="{{ url('enquiry') }}">
+                            <i class=" fas fa-desktop  text-primary font-20"></i>
+                            <h4 class="mt-3 font-14  text-primary">Enquiries
+                            </h4>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a class="text-center d-block bg-white rounded p-4" href="{{ url('faq') }}">
+                            <i class="fas fa-headset  text-primary font-20"></i>
 
-                                                <i class="fas fa-book-open text-primary font-20"
-                                                    style="font-size: 100px;"></i>
-                                                <h4 class="mt-3 font-24 text-primary"> Open Account
-                                                </h4>
-
-
-                                            </div> <!-- end .padding -->
-                                        </div> <!-- end card-box-->
-                                    </a>
-
-                                </div>
-                                <div class="col-md-3">
-
-                                    {{-- <div class="col-md-12"> --}}
-                                        <a href="{{ url('branches') }}">
-                                            <div class="text-center card-box">
-                                                <div class="pt-1 pb-1">
-
-                                                    <i class=" fas fa-map-marked-alt  text-primary font-20"
-                                                        style="font-size: 100px;"></i>
-
-                                                    <h4 class="mt-3 font-24  text-primary">Branches</h4>
-
-                                        </a>
-
-                                    </div> <!-- end .padding -->
-                                </div> <!-- end card-box-->
-                                </a>
-
-                                {{--
-                            </div> --}}
-                        </div>
-                        <div class="col-md-3">
-                            <a href="{{ url('enquiry') }}">
-                                <div class="text-center card-box">
-                                    <div class="pt-1 pb-1">
-                                        <i class=" fas fa-desktop  text-primary font-20" style="font-size: 100px;"></i>
-                                        <h4 class="mt-3 font-24  text-primary">Enquiries
-                                        </h4>
-
-
-                                    </div> <!-- end .padding -->
-                                </div> <!-- end card-box-->
-                            </a>
-
-                        </div>
-                        <div class="col-md-3">
-                            <a href="{{ url('faq') }}">
-                                <div class="text-center card-box">
-                                    <div class="pt-1 pb-1">
-
-                                        <i class="fas fa-headset  text-primary font-20" style="font-size: 100px;"></i>
-
-                                        <h4 class="mt-3 font-24 text-primary">FAQ
-                                        </h4>
-
-
-                                    </div> <!-- end .padding -->
-                                </div> <!-- end card-box-->
-
-                            </a>
-
-                        </div>
+                            <h4 class="mt-3 font-14 text-primary">FAQ</h4>
+                        </a>
                     </div>
 
                 </div>
+
+
 
             </div>
 
-
         </div>
-        {{--
-    </div> --}}
+        @endif
 
-    {{--
-</div> --}}
-</div>
-@endif
-
-</div> <!-- end auth-user-testimonial-->
+    </div> <!-- end auth-user-testimonial-->
 </div>
 </div>
 @endsection
