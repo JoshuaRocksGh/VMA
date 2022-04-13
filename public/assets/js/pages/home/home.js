@@ -334,10 +334,10 @@
 
                     function account_line_chart(cus_accounts, acc_line_details) {
 
-                        //console.log("========")
-                        //console.log([cus_accounts, acc_line_details])
-                        //console.log("========")
-
+                        console.log("========")
+                        console.log([cus_accounts, acc_line_details])
+                        console.log("========")
+                        return false;
                         let acc_dataset = []
                         let chart_data_details = new Array
                         //  let show_chart_data = []
@@ -433,7 +433,7 @@
 
 
                         // w3schools chart
-                        var xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+                        // var xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
 
                         new Chart("casa_myChart", {
                             type: "line",
@@ -455,42 +455,6 @@
                         });
                     }
 
-                    $(document).ready(function() {
-                        $('.close-money').show()
-                        $('.open-money').hide()
-
-                        $('.eye-open').hide()
-                        $('.eye-close').show()
-
-                        $('.eye-open').click(function() {
-
-                            $('.eye-open').hide()
-                            $('.eye-close').show()
-
-                            $('.open-money').hide()
-                            $('.close-money').show()
-
-                        })
-
-                        $('.eye-close').click(function() {
-
-                            $('.eye-close').hide()
-                            $('.eye-open').show()
-
-                            $('.open-money').show()
-                            $('.close-money').hide()
-                        })
-
-                        all_my_account_balance()
-                        var request_status = "P";
-                        //console.log(customer_no);
-                        $(".transfer_tab_btn").click(function () {
-                            get_corporate_requests(customer_no, "P");
-                        });
-                        get_corporate_requests(customer_no, request_status);
-
-
-                    })
 
             //     function formatToCurrency(amount) {
             //     return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
@@ -1225,8 +1189,8 @@
                     let acc_line_details = []
 
                     function getAccountTransactions(account_number, account_currency, start_date, end_date, transLimit) {
-                        //console.log([account_number, account_currency, start_date, end_date, transLimit]);
-                        //return false;
+                        console.log([account_number, account_currency, start_date, end_date, transLimit]);
+                        return false;
                         $.ajax({
                             "type": "POST",
                             "url": "account-transaction-history",
@@ -1321,6 +1285,64 @@
 
                     $(document).ready(function() {
 
+                        setTimeout(function() {
+
+                            getCorrectFxRates()
+
+                            // show_chart(account_data.i_have_total, account_data.i_owe_total, account_data.i_invest_total)
+                            setTimeout(function() {
+                                alert("document is ready")
+                                return false;
+                                getAccountTransactions(acc_num, acc_cur, start_date, end_date, transLimit)
+                                //line_graph()
+                                // account_line_chart(cus_accounts, acc_line_details)
+                            }, 500)
+
+                        }, 500);
+
+                        // ============ ============== //
+
+                        $('.close-money').show()
+                        $('.open-money').hide()
+
+                        $('.eye-open').hide()
+                        $('.eye-close').show()
+
+                        $('.eye-open').click(function() {
+
+                            $('.eye-open').hide()
+                            $('.eye-close').show()
+
+                            $('.open-money').hide()
+                            $('.close-money').show()
+
+                        })
+
+                        $('.eye-close').click(function() {
+
+                            $('.eye-close').hide()
+                            $('.eye-open').show()
+
+                            $('.open-money').show()
+                            $('.close-money').hide()
+                        })
+
+                        all_my_account_balance()
+                        var request_status = "P";
+                        //console.log(customer_no);
+                        $(".transfer_tab_btn").click(function () {
+                            get_corporate_requests(customer_no, "P");
+                        });
+                        get_corporate_requests(customer_no, request_status);
+
+
+
+
+
+
+
+                        // =========== ================//
+
 
                         $(".casa_chart").click(function() {
                             // {{-- alert("welcome") --}}
@@ -1391,18 +1413,7 @@
                         var acc_num = my_acc[2].trim()
                         var acc_cur = my_acc[3].trim()
 
-                        setTimeout(function() {
 
-                            getCorrectFxRates()
-
-                            // show_chart(account_data.i_have_total, account_data.i_owe_total, account_data.i_invest_total)
-                            setTimeout(function() {
-                                getAccountTransactions(acc_num, acc_cur, start_date, end_date, transLimit)
-                                //line_graph()
-                                //account_line_chart(cus_accounts, acc_line_details)
-                            }, 500)
-
-                        }, 500);
 
                     // })
 
