@@ -11,8 +11,8 @@
     @endphp
 
     @include('snippets.pageHeader')
-    <div class="container-fluid">
-        <br>
+    {{--  <div class="container-fluid">  --}}
+        {{--  <br>  --}}
 
 
         <div class="col-md-12 ">
@@ -41,19 +41,19 @@
 
 
 
-    </div>
+    {{--  </div>  --}}
 
 
 
-    <div class="row">
-        <div class="col-md-12">
+    {{--  <div class="row">  --}}
+        {{--  <div class="col-md-12">  --}}
 
-            <div class="row">
-                <div class="col-md-1"></div>
+            {{--  <div class="row">  --}}
+                {{--  <div class="col-md-1"></div>  --}}
 
-                <div class="col-md-10">
+                <div class="dashboard site-card ">
 
-                    <form id="bulk_upload_form" action="#" enctype="multipart/form-data">
+                    <form id="bulk_upload_form" class="dashboard-body p-4" action="#" enctype="multipart/form-data">
                         @csrf
 
 
@@ -62,8 +62,8 @@
                         {{-- <hr class="mt-0"> --}}
 
 
-                        <div class="row">
-                            <div class="card-box col-md-12">
+                        <div class="row ">
+                            <div class="col-md-12">
                                 <h4 for="" class=" text-primary"><b> Account to transfer from</b><span
                                         class="text-danger">*</span></h4>
 
@@ -168,12 +168,12 @@
                             </div>
 
 
-
+                        </div>
 
                     </form>
 
 
-                    <div class="card-box col-md-12" id="beneficiary_table">
+                    <div class="dashboard-body p-4" id="beneficiary_table">
 
 
                         <div class="col-md-12">
@@ -230,12 +230,12 @@
 
                 </div>
 
-                <div class="col-md-1"></div>
+                {{--  <div class="col-md-1"></div>  --}}
 
-            </div> <!-- end card-body -->
+            {{--  </div> <!-- end card-body -->  --}}
 
-        </div>
-    </div>
+        {{--  </div>  --}}
+    {{--  </div>  --}}
 
     <!-- Full width modal content -->
     <div id="full-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"

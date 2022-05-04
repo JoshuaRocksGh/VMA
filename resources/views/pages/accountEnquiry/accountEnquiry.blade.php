@@ -50,124 +50,96 @@ $pageTitle = 'account statement'; @endphp
                         id="search_transaction">Search</button>
                 </div>
             </div>
-            {{-- <div class="w-100  px-0 px-xl-2 d-none d-sm-block">
-                <div class="w-100  mx-auto p-2 text-center  overflow-hidden text-white rounded-lg"
-                    style="max-width: 450px; background-image: linear-gradient(to right, #0561ad, #00ccff)">
-                    <span class="d-block p-2 font-weight-bold font-12 text-right "> Rokel Commercial
-                        Bank
-                    </span>
-                    <div class="d-flex justify-content-start mt-2 pl-2">
-                        <img style="max-height: 50px" src="assets/images/logoRKB.png" />
-                        <div class="w-100"><span
-                                class="account_number text-center w-100 text-black font-weight-bold  font-sm-22"
-                                style="letter-spacing: .1rem;">
-                            </span>
-                            <div><span class=" font-11 font-weight-bold mr-2 account_currency">
-                                </span>
-                                <span class="font-weight-bold " id="account_balance">
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center mt-4 justify-content-between">
-                        <span class="account_description text-left font-weight-bold font-sm-18">
+        </div>
+    </div>
+    <div class=" tab-content dashboard-body border-primary border" id="transaction_summary">
+        {{-- <div class="dashboard-body p-4"> --}}
+            <div class="accordion-arrow mb-3 p-2 rounded alert-secondary w-100" id="account_balance_info_display"
+                role="alert">
+                <div class="row">
 
+                    <div class="col-md-6 row">
+                        <h5 class="col-5">Account Number:
+                        </h5>
+                        <h5 class="col-7" id="display_account_number"></h5>
+                        <h5 class="col-5"> Start Date:
+                        </h5>
+                        <h5 class="col-7" id="display_search_start_date"></h5>
+                        <h5 class="col-5"> End Date:
+                        </h5>
+                        <h5 class="col-7" id="display_search_end_date"></h5>
+                    </div>
+
+                    <div class="col-9 col-md-4">
+                        <select class="form-control col-md-8" id="filter" required>
+
+                            <option value="all" selected> ALL</option>
+                            <option value="credit"> CREDIT </option>
+                            <option value="debit"> DEBIT </option>
+                        </select>
+                    </div>
+
+                    <div class="col-3 col-md-2">
+                        <span style="float: right">
+                            &nbsp;&nbsp;
+                            {{-- <span> --}}
+                                <a id="pdf_print" style="display: none" class="download"
+                                    href="{{ url('print-account-statement') }}">
+                                    <img src="{{ asset('assets/images/pdf.png') }}" alt=""
+                                        style="width: 22px; height: 25px;">
+                                </a>
+                                {{-- </span> --}}
+
+                            &nbsp;&nbsp;&nbsp;
                         </span>
-                        <span class="account_product font-11 font-weight-bold text-right">
+                        <span style="float: right">
+                            {{-- <span> --}}
+                                <a id="excel_print" style="display: none" class="download"
+                                    href="{{ url('print-account-statement') }}">
+                                    <img src="{{ asset('assets/images/excel.png') }}" alt=""
+                                        style="width: 22px; height: 25px;">
+                                </a>
+                                {{-- </span> --}}
 
                         </span>
                     </div>
                 </div>
-            </div> --}}
-        </div>
+            </div>
+            <div class="table-responsive rounded ">
+
+                <table role="table" class="table table-sm font-12  p-3 table-bordered table-striped table-centered"
+                    id="account_transaction_display_table" style="">
+                    <thead>
+
+                        <tr class="bg-primary text-white ">
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount <span class="currency_display"></span></th>
+                            <th scope="col">Contra Account</th>
+                            <th scope="col">Purpose of Transfer <span class="account_currency_display_"></span>
+                            </th>
+                            <th scope="col">Balance<span class="currency_display"></span>
+                            </th>
+                            <th scope="col">Document Ref</th>
+
+                            {{-- <th scope="col">Batch No</th> --}}
+                            <th scope="col">Attachment</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+
+                    <tbody role="rowgroup" id="table-body-display">
+                        <td colspan="100%" class="text-center">
+                            {!! $noDataAvailable !!}
+                        </td>
+                    </tbody>
+                </table>
+            </div>
+            {{--
+        </div> --}}
     </div>
 </div>
 
-<div class=" site-card" id="transaction_summary">
-    {{-- <div class="dashboard-body p-4"> --}}
-        <div class="accordion-arrow mb-3 p-2 rounded alert-secondary w-100" id="account_balance_info_display"
-            role="alert">
-            <div class="row">
 
-                <div class="col-md-6 row">
-                    <h5 class="col-5">Account Number:
-                    </h5>
-                    <h5 class="col-7" id="display_account_number"></h5>
-                    <h5 class="col-5"> Start Date:
-                    </h5>
-                    <h5 class="col-7" id="display_search_start_date"></h5>
-                    <h5 class="col-5"> End Date:
-                    </h5>
-                    <h5 class="col-7" id="display_search_end_date"></h5>
-                </div>
-
-                <div class="col-9 col-md-4">
-                    <select class="form-control col-md-8" id="filter" required>
-
-                        <option value="all" selected> ALL</option>
-                        <option value="credit"> CREDIT </option>
-                        <option value="debit"> DEBIT </option>
-                    </select>
-                </div>
-
-                <div class="col-3 col-md-2">
-                    <span style="float: right">
-                        &nbsp;&nbsp;
-                        {{-- <span> --}}
-                            <a id="pdf_print" style="display: none" class="download"
-                                href="{{ url('print-account-statement') }}">
-                                <img src="{{ asset('assets/images/pdf.png') }}" alt=""
-                                    style="width: 22px; height: 25px;">
-                            </a>
-                            {{-- </span> --}}
-
-                        &nbsp;&nbsp;&nbsp;
-                    </span>
-                    <span style="float: right">
-                        {{-- <span> --}}
-                            <a id="excel_print" style="display: none" class="download"
-                                href="{{ url('print-account-statement') }}">
-                                <img src="{{ asset('assets/images/excel.png') }}" alt=""
-                                    style="width: 22px; height: 25px;">
-                            </a>
-                            {{-- </span> --}}
-
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="table-responsive rounded ">
-
-            <table role="table" class="table table-sm font-12  p-3 table-bordered table-striped table-centered"
-                id="account_transaction_display_table" style="">
-                <thead>
-
-                    <tr class="bg-primary text-white ">
-                        <th scope="col">Date</th>
-                        <th scope="col">Amount <span class="currency_display"></span></th>
-                        <th scope="col">Contra Account</th>
-                        <th scope="col">Purpose of Transfer <span class="account_currency_display_"></span>
-                        </th>
-                        <th scope="col">Balance<span class="currency_display"></span>
-                        </th>
-                        <th scope="col">Document Ref</th>
-
-                        {{-- <th scope="col">Batch No</th> --}}
-                        <th scope="col">Attachment</th>
-                        <th scope="col">Details</th>
-                    </tr>
-                </thead>
-
-                <tbody role="rowgroup" id="table-body-display">
-                    <td colspan="100%" class="text-center">
-                        {!! $noDataAvailable !!}
-                    </td>
-                </tbody>
-            </table>
-        </div>
-        {{--
-    </div> --}}
-</div>
 
 <div id="accordion-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true" style="display: none;">
