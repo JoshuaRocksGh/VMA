@@ -1,59 +1,61 @@
 @extends('layouts.master')
 @section('styles')
-<style>
-    @media print {
-        .hide_on_print {
-            display: none
+    <style>
+        @media print {
+            .hide_on_print {
+                display: none
+            }
         }
-    }
 
-    .table_over_flow {
-        overflow-y: hidden;
+        .table_over_flow {
+            overflow-y: hidden;
 
-    }
-</style>
+        }
 
-@include('extras.datatables')
+    </style>
+
+    @include('extras.datatables')
 @endsection
 
 @section('content')
-@php
-$currentPath = 'Account Statement';
-$basePath = 'Account';
-$pageTitle = 'account statement'; @endphp
-@include('snippets.pageHeader')
+    @php
+    $currentPath = 'Account Statement';
+    $basePath = 'Account';
+    $pageTitle = 'account statement';
+    @endphp
+    @include('snippets.pageHeader')
 
-<div class=" dashboard site-card" id="transaction_form">
-    <div class="dashboard-body p-4">
-        <div class="d-flex align-items-center justify-content-around">
-            <div class="w-100" style="max-width: 600px">
-                <div class="form-group  ">
-                    <label class=" text-primary align-self-center"> Account :</label>
-                    <select class="form-control accounts-select " id="from_account" required>
-                        <option value="" disabled selected> -- Select Your Account -- </option>
-                        @include('snippets.accounts')
-                    </select>
-                </div>
+    <div class=" dashboard site-card" id="transaction_form">
+        <div class="dashboard-body p-4">
+            <div class="d-flex align-items-center justify-content-around">
+                <div class="w-100" style="max-width: 600px">
+                    <div class="form-group  ">
+                        <label class=" text-primary align-self-center"> Account :</label>
+                        <select class="form-control accounts-select " id="from_account" required>
+                            <option value="" disabled selected> -- Select Your Account -- </option>
+                            @include('snippets.accounts')
+                        </select>
+                    </div>
 
-                <div class="form-group d-flex justify-content-around align-items-end">
-                    <div class=" pr-4 w-100">
-                        <label class="  text-primary align-self-center">Start Date :</label>
-                        <input type="date" id="startDate" class=" text-input  form-control ">
+                    <div class="form-group d-flex justify-content-around align-items-end">
+                        <div class=" pr-4 w-100">
+                            <label class="  text-primary align-self-center">Start Date :</label>
+                            <input type="date" id="startDate" class=" text-input  form-control ">
+                        </div>
+                        <div class=" pr-0 w-100">
+                            <label class=" text-primary align-self-center">End Date :</label>
+                            <input type="date" id="endDate" class="text-input  form-control ">
+                        </div>
                     </div>
-                    <div class=" pr-0 w-100">
-                        <label class=" text-primary align-self-center">End Date :</label>
-                        <input type="date" id="endDate" class="text-input  form-control ">
+                    <div class="form-group text-right">
+                        <button class="btn btn-primary mt-1 waves-effect waves-light"
+                            id="search_transaction">Search</button>
                     </div>
-                </div>
-                <div class="form-group text-right">
-                    <button class="btn btn-primary mt-1 waves-effect waves-light"
-                        id="search_transaction">Search</button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class=" tab-content dashboard-body border-primary border" id="transaction_summary">
-        {{-- <div class="dashboard-body p-4"> --}}
+        <div class=" tab-content dashboard-body border-primary border" id="transaction_summary">
+            {{-- <div class="dashboard-body p-4"> --}}
             <div class="accordion-arrow mb-3 p-2 rounded alert-secondary w-100" id="account_balance_info_display"
                 role="alert">
                 <div class="row">
@@ -83,23 +85,22 @@ $pageTitle = 'account statement'; @endphp
                         <span style="float: right">
                             &nbsp;&nbsp;
                             {{-- <span> --}}
-                                <a id="pdf_print" style="display: none" class="download"
-                                    href="{{ url('print-account-statement') }}">
-                                    <img src="{{ asset('assets/images/pdf.png') }}" alt=""
-                                        style="width: 22px; height: 25px;">
-                                </a>
-                                {{-- </span> --}}
+                            <a id="pdf_print" style="display: none" class="download"
+                                href="{{ url('print-account-statement') }}">
+                                <img src="{{ asset('assets/images/pdf.png') }}" alt="" style="width: 22px; height: 25px;">
+                            </a>
+                            {{-- </span> --}}
 
                             &nbsp;&nbsp;&nbsp;
                         </span>
                         <span style="float: right">
                             {{-- <span> --}}
-                                <a id="excel_print" style="display: none" class="download"
-                                    href="{{ url('print-account-statement') }}">
-                                    <img src="{{ asset('assets/images/excel.png') }}" alt=""
-                                        style="width: 22px; height: 25px;">
-                                </a>
-                                {{-- </span> --}}
+                            <a id="excel_print" style="display: none" class="download"
+                                href="{{ url('print-account-statement') }}">
+                                <img src="{{ asset('assets/images/excel.png') }}" alt=""
+                                    style="width: 22px; height: 25px;">
+                            </a>
+                            {{-- </span> --}}
 
                         </span>
                     </div>
@@ -134,115 +135,115 @@ $pageTitle = 'account statement'; @endphp
                     </tbody>
                 </table>
             </div>
-            {{--
-        </div> --}}
+            {{-- </div> --}}
+        </div>
     </div>
-</div>
 
 
 
-<div id="accordion-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content p-0">
-            <div id="accordion">
-                <div class="card mb-0">
-                    <div class="card-header" id="headingOne" style="background-color: #00ccff">
-                        <h5 class="m-0">
-                            <a href="#collapseOne" class="text-white" data-toggle="collapse" aria-expanded="true"
-                                aria-controls="collapseOne">
-                                <b>Transaction Details</b>
-                            </a>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </h5>
-                    </div>
+    <div id="accordion-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content p-0">
+                <div id="accordion">
+                    <div class="card mb-0">
+                        <div class="card-header" id="headingOne" style="background-color: #00ccff">
+                            <h5 class="m-0">
+                                <a href="#collapseOne" class="text-white" data-toggle="collapse" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    <b>Transaction Details</b>
+                                </a>
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">×</button>
+                            </h5>
+                        </div>
 
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped mb-0">
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped mb-0">
 
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Transaction Date</th>
-                                            <td class="text-danger transaction_date"></td>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Transaction Date</th>
+                                                <td class="text-danger transaction_date"></td>
 
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Value Date</th>
-                                            <td class="text-danger value_date"></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Value Date</th>
+                                                <td class="text-danger value_date"></td>
 
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Transaction No.</th>
-                                            <td class="text-danger transaction_number"></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Transaction No.</th>
+                                                <td class="text-danger transaction_number"></td>
 
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Narration</th>
-                                            <td class="text-danger narration"></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Narration</th>
+                                                <td class="text-danger narration"></td>
 
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Amount</th>
-                                            <td class="text-danger amount"></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Amount</th>
+                                                <td class="text-danger amount"></td>
 
-                                        </tr>
+                                            </tr>
 
-                                        <tr>
-                                            <th scope="row">Contra Account</th>
-                                            <td class="text-danger contra-account"></td>
+                                            <tr>
+                                                <th scope="row">Contra Account</th>
+                                                <td class="text-danger contra-account"></td>
 
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Branch</th>
-                                            <td class="text-danger branch"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Channel</th>
-                                            <td class="text-danger channel"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Branch</th>
+                                                <td class="text-danger branch"></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Channel</th>
+                                                <td class="text-danger channel"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
 
-<div class="modal fade" id="attachment_modal" tabindex="-1" role="dialog" aria-labelledby="attachment_modal_title"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-info">
-                <h5 class="modal-title text-white font-weight-bold" id="attachment_modal_title">Attachments</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="attachment_carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                    </ol>
-                    <div class="carousel-inner">
+    <div class="modal fade" id="attachment_modal" tabindex="-1" role="dialog" aria-labelledby="attachment_modal_title"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-info">
+                    <h5 class="modal-title text-white font-weight-bold" id="attachment_modal_title">Attachments</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="attachment_carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                        </ol>
+                        <div class="carousel-inner">
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @section('scripts')
-@include('extras.datatables')
-<script src="{{ asset('assets/js/pages/accounts/accountEnquiry.js') }}"></script>
-<script defer>
-    const PageData = new Object();
-            PageData.reqAccount = @json($accountNumber);
-            let noDataAvailable = {!! json_encode($noDataAvailable) !!}
-</script>
+    @include('extras.datatables')
+    <script src="{{ asset('assets/js/pages/accounts/accountEnquiry.js') }}"></script>
+    <script defer>
+        const PageData = new Object();
+        PageData.reqAccount = @json($accountNumber);
+        let noDataAvailable = {!! json_encode($noDataAvailable) !!}
+    </script>
 @endsection
