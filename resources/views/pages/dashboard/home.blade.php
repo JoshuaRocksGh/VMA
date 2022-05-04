@@ -28,21 +28,28 @@ $currentPath = 'Dashboard';
         </nav>
         <div class="tab-content dashboard-body border-primary border " id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <div class="d-flex">
-                    <nav class=" dashboard-header h-100 align-items-center">
-                        <div class="nav nav-tabs flex-column border-0" id="nav-tab" role="tablist">
-
-                            <a href="#home" data-toggle="tab" aria-expanded="false" class="nav-link mb-2 active">
+                <div class="row ">
+                    <nav class="d-flex col-sm-2 col-md-auto  align-self-center no-after dashboard-header h-100 align-items-center"
+                        style="height: 100%">
+                        <div class="nav nav-tabs flex-column  border-0" id="nav-tab" role="tablist">
+                            <a href="#canvas_total" data-toggle="tab" data-target="totalsPie" aria-expanded="false"
+                                class="nav-link canvas-tab  mb-2 font-10 active">
+                                <b>Total</b>
+                            </a>
+                            <a href="#canvas_account" data-toggle="tab" data-target="accountsPie" aria-expanded="false"
+                                class="nav-link mb-2 canvas-tab font-10 ">
                                 <b>Accounts</b>
                             </a>
-                            <a href="#messages" data-toggle="tab" aria-expanded="false" class="mb-2 nav-link">
+                            <a href="#canvas_loan" data-toggle="tab" data-target="loansPie" aria-expanded="false"
+                                class="mb-2  font-10 canvas-tab nav-link">
                                 <b>Loans</b>
                             </a>
-                            <a href="#profile" data-toggle="tab" aria-expanded="true" class="mb-2 nav-link ">
+                            <a href="#canvas_investment" data-toggle="tab" data-target="investmentsPie"
+                                aria-expanded="true" class="mb-2 canvas-tab font-10 nav-link ">
                                 <b>Investments</b>
                             </a>
                     </nav>
-                    <div class="mb-4 w-100">
+                    <div class="mb-4 w-100 col-md overflow-hidden">
                         <canvas id="accountsPieChart" style="max-height: 300px"></canvas>
 
                     </div>

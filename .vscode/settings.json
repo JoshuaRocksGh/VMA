@@ -23,5 +23,6 @@
         "tab.activeBorder": "#3399ff",
         "titleBar.border": "#007fff"
     },
-    "peacock.color": "#007fff"
+    "peacock.color": "#007fff",
+    "editor.codeActionsOnSave": {}
 }

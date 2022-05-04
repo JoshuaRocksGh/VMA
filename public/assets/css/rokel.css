@@ -218,6 +218,9 @@
     width: 0;
     height: 0;
 }
+.no-after .nav-link.active::after {
+    display: none !important;
+}
 .dashboard .dashboard-header .nav-link:hover {
     border-color: var(--primary);
 }

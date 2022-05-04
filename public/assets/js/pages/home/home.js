@@ -90,20 +90,8 @@ function getCorporateRequests(customerNumber, requestStatus) {
     });
 }
 
-function accountsPieChart() {
-    var xValues = pageData.accounts.map((account) =>
-        String(account.accountNumber)
-    );
-    var yValues = pageData.accounts.map(
-        (account) =>
-            parseFloat(
-                String(account.localEquivalentAvailableBalance).replace(
-                    /,/g,
-                    ""
-                )
-            ) || 0.0
-    );
-    console.log({ xValues, yValues });
+function accountsPieChart({ xValues = [], yValues = [], title }) {
+    console.log("pp", { xValues, yValues, title });
     const barColors = [
         "#F15BB5",
         "#007ECC",
@@ -115,7 +103,11 @@ function accountsPieChart() {
         "#00BBF9",
         "#FEE440",
     ];
-
+    // check for previous chart and destroy it if any
+    let chartStatus = Chart.getChart("accountsPieChart");
+    if (chartStatus != undefined) {
+        chartStatus.destroy();
+    }
     new Chart("accountsPieChart", {
         type: "doughnut",
         data: {
@@ -140,7 +132,7 @@ function accountsPieChart() {
                 title: {
                     position: "top",
                     display: true,
-                    text: "MY ACCOUNTS",
+                    text: title.toUpperCase(),
                 },
             },
         },
@@ -684,6 +676,62 @@ function getData(url, name, data) {
 
 // var global_selected_currency = "";
 
+function prepareGraphValues() {
+    const accountsPie = {};
+    console.log(accountsPie);
+    const totalsPie = {
+        xValues: ["Deposits", "Loans", "Investments"],
+        yValues: [],
+    };
+    accountsPie.xValues = pageData.accounts.map((account) =>
+        String(account.accountNumber)
+    );
+
+    //accounts
+    let accountsTotal = 0;
+    accountsPie.yValues = pageData.accounts.map((account) => {
+        const amount =
+            parseFloat(
+                String(account.localEquivalentAvailableBalance).replace(
+                    /,/g,
+                    ""
+                )
+            ) || 0.0;
+        accountsTotal += amount;
+        return amount;
+    });
+
+    //loans
+    const loansPie = {};
+    loansPie.xValues = pageData.loans.map((loan) => String(loan.facilityNo));
+    let loansTotal = 0;
+    loansPie.yValues = pageData.loans.map((loan) => {
+        const amount = parseFloat(loan.loanBalance) || 0.0;
+        loansTotal += amount;
+        return amount;
+    });
+
+    //investments
+    const investmentPie = {};
+    investmentPie.xValues = pageData.investments.map((investment) =>
+        String(investment.investmentAccountNumber)
+    );
+    let investmentsTotal = 0;
+    investmentPie.yValues = pageData.investments.map((investment) => {
+        const amount = parseFloat(investment.investmentBalance) || 0.0;
+        investmentsTotal += amount;
+        return amount;
+    });
+
+    totalsPie.yValues = [accountsTotal, loansTotal, investmentsTotal];
+    pageData.pieValues = {
+        accountsPie,
+        loansPie,
+        investmentPie,
+        totalsPie,
+    };
+}
+
 $(async () => {
     $("select").select2();
     $(".accounts-select").select2({
@@ -698,14 +746,23 @@ $(async () => {
         getData("get-accounts-api", "accounts"),
     ]);
 
-    console.log(pageData);
     siteLoading("hide");
-    accountsPieChart();
+    prepareGraphValues();
+    console.log("pageData", pageData);
+    accountsPieChart({ title: "Accounts", ...pageData.pieValues.totalsPie });
     function renderCurrency(data) {
         return `<div class="text-right">${formatToCurrency(
             parseFloat(data)
         )}</div>`;
     }
+    $(".canvas-tab").on("click", (e) => {
+        const selectedTab = $(e.currentTarget).attr("data-target");
+        console.log(selectedTab);
+        accountsPieChart({
+            title: selectedTab.slice(0, -3),
+            ...pageData.pieValues[selectedTab],
+        });
+    });
     $("#accounts_table")
         .DataTable({
             searching: false,
