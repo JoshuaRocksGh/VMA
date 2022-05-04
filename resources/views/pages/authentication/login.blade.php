@@ -39,7 +39,7 @@
     }
 
     .belize {
-        color: #2980b9;
+        color: #F15BB5;
     }
 
     .pomegranate {
@@ -382,17 +382,17 @@ $TYPE = 'Corporate';
                     <div class=" my-auto">
                         <h1 class="font-weight-bold text-white font-28">
                             . . . Do more with<br>
-                            <span class="pl-5"> BestMobile App </span>
+                            <span class="pl-5 font-28"> BestMobile App </span>
                         </h1>
 
                         <div class="demo  mt-5 font-28">
-                            <span class="mr-3">BestMobile App</span>
-                            <span class="word-wrap">
-                                <span class="word wisteria">anywhere...</span>
-                                <span class="word belize">anytime...</span>
-                                <span class="word pomegranate">secure...</span>
-                                <span class="word green">convenient...</span>
-                                <span class="word midnight">fast...</span>
+                            <span class="mr-3 font-24 text-primary">BestMobile App</span>
+                            <span class="font-24 word-wrap">
+                                <span class="word font-weight-bold font-24 wisteria">anywhere...</span>
+                                <span class="word font-weight-bold font-24 belize">anytime...</span>
+                                <span class="word font-weight-bold font-24 pomegranate">secure...</span>
+                                <span class="word font-weight-bold font-24 green">convenient...</span>
+                                <span class="word font-weight-bold font-24 midnight">fast...</span>
                             </span>
                         </div>
 

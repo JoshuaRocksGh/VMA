@@ -140,6 +140,9 @@ input.form-control,
 .alert {
     font-size: 14px;
 }
+.font-9 {
+    font-size: 9px;
+}
 .font-10 {
     font-size: 10px;
 }
@@ -252,4 +255,15 @@ ul {
 
 a:hover {
     text-decoration: none;
+}
+
+.page-link {
+    color: var(--primary);
+}
+.page-link:focus {
+    box-shadow: none;
+}
+.page-item.active .page-link {
+    background: var(--primary);
+    border-color: var(--primary);
 }
