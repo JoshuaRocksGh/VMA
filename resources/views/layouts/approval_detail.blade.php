@@ -13,78 +13,13 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-
     @include('snippets.style')
-
-
     <style type="text/css">
-        .navbar-custom {
-            background-color: {
-                    {
-                    env('APPLICATION_CUSTOM_COLOR')
-                }
-            }
-
-            ;
-        }
-
-        .purple-color {
-            color: ##0561ad !important;
-        }
-
-        .btn-color {
-            background-color: #0561ad;
-            color: white;
-        }
-
-
-        .custom-color-gold {
-            background-color: #a19472;
-        }
-
-        .custom-text-color-gold {
-            color: #a19472;
-        }
-
-
-
-        .btn-primary {
-            color: #fff;
-            background-color: #0561ad;
-            border-color: #0561ad;
-            box-shadow: 0 0 0 0 rgb(6 55 195 / 70%);
-        }
-
-        .btn-primary:hover {
-
-            background-color: #2793ec;
-            border-color: #0561ad;
-
-        }
-
-        .p-text {
-            color: white;
-        }
-
-        .card-icon {
-            color: white;
-        }
-
-        .card-background-image {
-
-            background-image: url("{{ asset('assets/images/login-bg.jpg') }}");
-            background-repeat: no-repeat;
-            background-size: cover;
-
-        }
-
-        /* Works on Firefox */
         * {
             scrollbar-width: thin;
             scrollbar-color: rgb(221, 221, 223) rgb(217, 217, 216);
         }
 
-        /* Works on Chrome, Edge, and Safari */
         *::-webkit-scrollbar {
             width: 12px;
         }
@@ -99,14 +34,6 @@
             border: 3px solid rgb(217, 217, 216);
         }
 
-        #datatable-buttons_filter {
-            float: right;
-        }
-
-    </style>
-
-
-    <style>
         @media print {
             .hide_on_print {
                 display: none
@@ -117,9 +44,9 @@
             font-family: 'password';
             font-style: normal;
             font-weight: 400;
-            src: url(https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf);
+            src: url("assets/fonts/password.ttf")
+                /* src: url(https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf); */
         }
-
 
         input.key {
             font-family: 'password';
@@ -128,37 +55,31 @@
             font-size: 100px;
         }
 
-        .table_over_flow {
-            overflow-y: hidden;
-
+        #body {
+            width: 100%;
+            background-color: white;
         }
 
     </style>
-
-
-
     @yield('styles')
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
-
+    <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
+    @include('snippets.script')
 </head>
 
-<body
-    style="background-image: url('assets/images/background.png'); background-repeat: no-repeat; background-size: cover;"
-    class="loading"
-    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
+<body>
 
 
-    <!-- Pre-loader -->
+    {{-- <!-- Pre-loader -->
     <div id="preloader" class="preloader">
         <div id="status" class="preloader">
             <img class="pulse" style="width: 100px; top: -50px;"
                 src="{{ asset('assets/images/logoRKB.png') }}" />
         </div>
-    </div> <!-- End Preloader-->
+    </div> <!-- End Preloader--> --}}
 
     <!-- Begin page -->
-    <div id="wrapper" style="zoom: 0.9;">
+    <div id="wrapper">
+        @include('snippets.nav')
 
 
         <div>

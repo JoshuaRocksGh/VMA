@@ -40,47 +40,31 @@
 @section('content')
     <div class="container-fluid">
 
+        @php
+            $currentPath = ' Approval Form';
+            $basePath = 'Pending Approval';
+            $pageTitle = 'Approval Form';
+        @endphp
+        @include('snippets.pageHeader')
         <div class="row">
             <div class="col-12">
                 <div class="">
                     <div class=" card-body ">
-                        <div class="              row">
+                        <div class="row">
                             {{-- <div class="col-md-1"></div> --}}
 
                             <div class="col-md-8">
 
-                                <div class="receipt">
-                                    <div class="container card card-body">
+                                <div class="dashboard site-card">
+                                    <div class=" tab-content dashboard-body border-primary border table-responsive p-4">
 
-                                        <div class="container">
+                                        <div class="">
                                             <div class="">
-                                                <div class=" col-md-12
-                                        body-main">
+                                                <div class=" col-md-12">
                                                     <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-4 "> <img class="img "
-                                                                    alt="InvoIce Template"
-                                                                    src="{{ asset('assets/images/' . env('APPLICATION_INFO_LOGO_LIGHT')) }} "
-                                                                    style="zoom: 0.6" /> </div>
-                                                            <div class="col-md-4"></div>
-                                                            <div class="col-md-4 text-right">
-                                                                <h4 class="text-primary"><strong>ROKEL COMMERCIAL
-                                                                        BANK</strong>
-                                                                </h4>
-                                                                <p>25-27 Siaka Stevens St</p>
-                                                                <p> Freetown, Sierra Leone</p>
-                                                                <p>rokelsl@rokelbank.sl</p>
-                                                                <p>(+232)-76-22-25-01</p>
-                                                            </div>
-                                                        </div>
-                                                        <br>
-                                                        <div class="page-header">
-                                                            <h2>Approval Form</h2>
-                                                        </div>
-                                                        <br>
-                                                        <div class="col-md-1"></div>
 
-                                                        <div class="container col-md-10 text-center">
+
+                                                        <div class="  text-center">
                                                             <div class="col-md-12">
                                                                 <div id="approval_details"></div>
 
@@ -150,30 +134,8 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-1"></div>
 
 
-                                                        <br><br>
-
-                                                        {{-- <div>
-                                                            <div class="col-md-12">
-                                                                <p><b>Date Posted :</b> {{ date('d F, Y') }}</p> <br /> <br />
-                                                                <p><b>Posted By : {{ session('userId') }}</b></p>
-                                                            </div>
-                                                        </div> --}}
-                                                        <br><br>
-                                                        {{-- <div class="row">
-                                                            <div class="col-md-5"></div>
-                                                            <div class="col-md-2">
-                                                                  <button class="btn btn-light btn-rounded hide_on_print text-center"
-                                                                    type="button" onclick="window.print()">Print
-                                                                    Receipt
-                                                                </button>
-
-
-                                                            </div>
-                                                            <div class="col-md-5"></div>
-                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,23 +144,24 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <div class="card ">
-                                    <div class="p-3 mt-4 mt-lg-0">
-                                        <h4 class="mb-1 text-center">Account Mandate</h4>
-                                        <h2 id="account_mandate"></h2>
+                            <div class="col-md-4 ">
+                                <div class="dashboard site-card">
+                                    <div class="card ">
+                                        <div class="p-3 mt-4 mt-lg-0">
+                                            <h4 class="mb-1 text-center">Account Mandate</h4>
+                                            <h2 id="account_mandate"></h2>
 
-                                        <br>
-                                        <p>One User Mandate <span class="text-danger h3">A</span> </p>
+                                            <br>
+                                            <p>One User Mandate <span class="text-danger h3">A</span> </p>
+                                        </div>
                                     </div>
-                                </div>
 
-                                {{-- <br> --}}
-                                <div class="card">
-                                    <div class="p-3 mt-4 mt-lg-0">
-                                        <h4 class="mb-1 text-center">Initiated By</h4>
-                                        <h2 id="initiated_by"></h2>
-                                        {{-- <div class="table-responsive">
+                                    {{-- <br> --}}
+                                    <div class="card">
+                                        <div class="p-3 mt-4 mt-lg-0">
+                                            <h4 class="mb-1 text-center">Initiated By</h4>
+                                            <h2 id="initiated_by"></h2>
+                                            {{-- <div class="table-responsive">
                                                 <table class="table mb-0 table-bordered">
                                                     <tbody>
                                                         <tr>
@@ -208,21 +171,23 @@
                                                 </table>
                                             </div> --}}
 
+                                        </div>
                                     </div>
-                                </div>
 
-                                {{-- <br> --}}
-                                <div class="card">
-                                    <div class="p-3 mt-4 mt-lg-0">
-                                        <h4 class="mb-1 text-center">Status</h4>
-                                        <span id="approvers_list"></span>
+                                    {{-- <br> --}}
+                                    <div class="card">
+                                        <div class="p-3 mt-4 mt-lg-0">
+                                            <h4 class="mb-1 text-center">Status</h4>
+                                            <span id="approvers_list"></span>
 
-                                        {{-- <h2 class="approvers">Jonas Korankye</h2>
+                                            {{-- <h2 class="approvers">Jonas Korankye</h2>
                                         <h2 class="approvers">Joshua Tetteh</h2> --}}
 
 
+                                        </div>
                                     </div>
                                 </div>
+
 
 
                                 <div class="">
@@ -787,8 +752,8 @@
         function append_approval_details(description, data) {
 
             $('#approval_details').append(`<div class="row ">
-                    <span class="col-md-6 text-left h4">${description}</span>
-                    <span class="col-md-6 text-right text-primary h4">${data}</span>
+                    <span class="col-md-6 text-left font-14">${description}</span>
+                    <span class="col-md-6 text-right text-primary font-14">${data}</span>
                 </div>
                 <hr class="mt-0">`)
         };
