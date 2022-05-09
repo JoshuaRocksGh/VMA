@@ -16,8 +16,8 @@ $currentPath = 'Dashboard';
                 <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                     aria-controls="nav-home" aria-selected="true">Acc. Summary</a>
 
-                <a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-                    aria-controls="nav-contact" aria-selected="false">Acc. History</a>
+                <a class="nav-link" id="nav_acc_history_tab" data-toggle="tab" href="#nav_acc_history" role="tab"
+                    aria-controls="nav_acc_history" aria-selected="false">Acc. History</a>
                 @if (config('app.corporate'))
                 <a class="nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                     aria-controls="nav-profile" aria-selected="false">Approvals<span id="#approval-count"
@@ -58,45 +58,59 @@ $currentPath = 'Dashboard';
                     <nav class=" dashboard-header">
                         <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
 
-                            <a href="#home" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                            <a href="#accounts" data-toggle="tab" aria-expanded="false" class="nav-link active">
                                 <b>Accounts</b>
                             </a>
-                            <a href="#messages" data-toggle="tab" aria-expanded="false" class="nav-link">
+                            <a href="#loans" data-toggle="tab" aria-expanded="false" class="nav-link">
                                 <b>Loans</b>
                             </a>
-                            <a href="#profile" data-toggle="tab" aria-expanded="true" class="nav-link ">
+                            <a href="#investments" data-toggle="tab" aria-expanded="true" class="nav-link ">
                                 <b>Investments</b>
                             </a>
                     </nav>
-                    <div class="tab-content dashboard-body">
-                        <div class="tab-pane" id="home">
+                    <div class="tab-content ">
+                        <div class="tab-pane show active" id="accounts">
                             <div class="table-responsive accounts_display_area">
                                 <table id="accounts_table" width="100%"
-                                    class="table nowrap table-striped table-borderless mb-0 ">
+                                    class="table nowrap display table-striped table-bordered mb-0 ">
                                     <thead>
                                         <tr class="bg-primary font-weight-bold text-white ">
                                             <td> Account No. </td>
-                                            <td> Description </td>
-                                            {{-- <td> Product </td> --}}
-                                            <td> Cur </td>
-                                            {{-- <td> <b> OverDraft </b> </td> --}}
+                                            <td> Account Name </td>
+                                            <td> Account Type </td>
                                             <td> Ledger Bal </td>
                                             <td> Available Bal </td>
                                             <td> Over Draft </td>
-                                            <td> Blocked Amount </td>
                                         </tr>
                                     </thead>
-                                    <tbody class="casa_list_display">
+
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="loans">
+                            <div class="table-responsive  loans_display_area">
+                                <table id="loans_table" width="100%"
+                                    class="table nowrap display table-striped table-bordered mb-0 ">
+                                    <thead>
+                                        <tr class="bg-primary text-white ">
+                                            <td> Facility No. </td>
+                                            <td> Description </td>
+                                            <td> Amount Granted </td>
+                                            <td> Loan Bal </td>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="loans_display">
 
 
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane show active" id="profile">
-                            <div class="table-responsive table-bordered my_investment_display_area">
-
-                                <table id="my_investment_display_area" class="table table-striped mb-0 ">
+                        <div class="tab-pane " id="investments">
+                            <div class="table-responsive investments_display_area">
+                                <table id="investments_table" width="100%"
+                                    class="table nowrap display table-striped table-bordered mb-0 ">
                                     <thead>
                                         <tr class="bg-primary text-white ">
                                             <td> Account No. </td>
@@ -114,26 +128,7 @@ $currentPath = 'Dashboard';
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane" id="messages">
-                            <div class="table-responsive table-bordered loans_display_area">
-                                <table id="loans_display_area" class="table table-striped mb-0 ">
-                                    <thead>
-                                        <tr class="bg-primary text-white ">
-                                            <td> Facility No. </td>
-                                            <td> Description </td>
-                                            <td> Cur </td>
-                                            <td> Amount Granted </td>
-                                            <td> Loan Bal </td>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody class="loans_display">
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 {{-- <div class="mx-auto" style="max-width: 600px">
@@ -223,15 +218,20 @@ $currentPath = 'Dashboard';
                     </table>
                 </div> <!-- end card body-->
             </div>
-            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                <strong class="text-primary">CURRENT & SAVINGS</strong>
-                <select name="" id="chart_account" class="form-control accounts-select">
-                    @include("snippets.accounts") </select>
-                <span colspan="100%" class="text-center" id="line_chart_no_data">
-                    {!! $noDataAvailable !!}
-                </span>
-                <canvas id="casa_myChart">
-                </canvas>
+            <div class="tab-pane fade" id="nav_acc_history" role="tabpanel" aria-labelledby="nav_acc_history_tab">
+
+                <div class="p-2" id="acc_history">
+                    <div class="mx-auto mb-4" style="max-width: 650px;"> <strong class="text-primary">CURRENT &
+                            SAVINGS</strong>
+                        <select name="" id="chart_account" class="form-control accounts-select">
+                            @include("snippets.accounts") </select>
+                    </div>
+                    <span class="text-center" id="transactionNoData">
+                        {!! $noDataAvailable !!}
+                    </span>
+                    <canvas id="transactionsBarChart">
+                    </canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -242,13 +242,13 @@ $currentPath = 'Dashboard';
 
 @section('scripts')
 @include('extras.datatables')
-<script src="{{ asset('assets/plugins/chartjs/chartjs-v3.7.1.min.js') }}" defer></script>
-<script src="{{ asset('assets/js/pages/home/home.js') }}"></script>
-
 
 <script>
     let noDataAvailable = {!! json_encode($noDataAvailable) !!};
     let customer_no = @json(session()->get('customerNumber'));
     const pageData = {}
 </script>
+<script src="{{ asset('assets/plugins/chartjs/chartjs-v3.7.1.min.js') }}" defer></script>
+<script src="{{ asset('assets/js/pages/home/home.js') }}"></script>
+
 @endsection

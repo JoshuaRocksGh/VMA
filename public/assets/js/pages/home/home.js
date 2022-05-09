@@ -89,20 +89,83 @@ function getCorporateRequests(customerNumber, requestStatus) {
         error: function (xhr, status, error) {},
     });
 }
-
+pageData.barColors = [
+    "#F15BB5",
+    "#007ECC",
+    "#F3704B",
+    "#9B5DE5",
+    "#00F5D4",
+    "#686770",
+    "#99E9FF",
+    "#00BBF9",
+    "#FEE440",
+];
+function transactionsBarChart(transactions) {
+    // check if transactions is an array
+    if (transactions?.length <= 0) {
+        $("#transactionNoData").show();
+        return;
+    } //trim transactions to 30
+    transactions = transactions.slice(0, 10).reverse();
+    // check for previous chart and destroy it if any
+    let chartStatus = Chart.getChart("transactionsBarChart");
+    if (chartStatus != undefined) {
+        chartStatus.destroy();
+    }
+    const transactionAmount = transactions.map(
+        (transaction) => transaction.amount
+    );
+    const runningBalance = transactions.map(
+        (transaction) => transaction.runningBalance
+    );
+    const labels = transactions.map((transaction) => {
+        const date = new Date(transaction.postingSysDate).toLocaleString("en", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+        });
+        return date;
+    });
+    $("#transactionNoData").hide();
+    new Chart("transactionsBarChart", {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [
+                {
+                    data: transactionAmount,
+                    label: "Transaction Amount",
+                    backgroundColor: "#00F5D4",
+                },
+                {
+                    data: runningBalance,
+                    label: "Account Balance",
+                    backgroundColor: "#00BBF9",
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: "top",
+                },
+                title: {
+                    display: true,
+                    text: "Last 10 transactions",
+                },
+            },
+            scales: {
+                y: {
+                    beginAtZero: false,
+                },
+            },
+        },
+    });
+}
 function accountsPieChart({ xValues = [], yValues = [], title }) {
-    console.log("pp", { xValues, yValues, title });
-    const barColors = [
-        "#F15BB5",
-        "#007ECC",
-        "#F3704B",
-        "#9B5DE5",
-        "#00F5D4",
-        "#686770",
-        "#99E9FF",
-        "#00BBF9",
-        "#FEE440",
-    ];
     // check for previous chart and destroy it if any
     let chartStatus = Chart.getChart("accountsPieChart");
     if (chartStatus != undefined) {
@@ -114,7 +177,7 @@ function accountsPieChart({ xValues = [], yValues = [], title }) {
             labels: xValues,
             datasets: [
                 {
-                    backgroundColor: barColors,
+                    backgroundColor: pageData?.barColors,
                     data: yValues,
                 },
             ],
@@ -141,14 +204,16 @@ function accountsPieChart({ xValues = [], yValues = [], title }) {
 
 // PIE CHART NEW FUNCTIONS //
 
-function getData(url, name, data) {
+function getData({ url, name, data, method }) {
     return $.ajax({
-        type: "GET",
+        type: method ?? "GET",
         url,
         data,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
         datatype: "application/json",
         success: function (response) {
-            console.log(name, response);
             const { data } = response;
             pageData[name] = data;
         },
@@ -678,7 +743,6 @@ function getData(url, name, data) {
 
 function prepareGraphValues() {
     const accountsPie = {};
-    console.log(accountsPie);
     const totalsPie = {
         xValues: ["Deposits", "Loans", "Investments"],
         yValues: [],
@@ -740,90 +804,147 @@ $(async () => {
         templateSelection: accountTemplate,
     });
     siteLoading("show");
+
     await Promise.all([
-        getData("fixed-deposit-account-api", "investments"),
-        getData("get-loan-accounts-api", "loans"),
-        getData("get-accounts-api", "accounts"),
+        getData({ url: "fixed-deposit-account-api", name: "investments" }),
+        getData({ url: "get-loan-accounts-api", name: "loans" }),
+        getData({ url: "get-accounts-api", name: "accounts" }),
     ]);
 
-    siteLoading("hide");
+    // siteLoading("hide");
     prepareGraphValues();
-    console.log("pageData", pageData);
     accountsPieChart({ title: "Accounts", ...pageData.pieValues.totalsPie });
-    function renderCurrency(data) {
-        return `<div class="text-right">${formatToCurrency(
+    function renderCurrency(data, row) {
+        return `<div class="float-right">${
+            row.currency ?? row.isoCode
+        } <span class="font-weight-bold">${formatToCurrency(
             parseFloat(data)
-        )}</div>`;
+        )}</span></div>`;
     }
     $(".canvas-tab").on("click", (e) => {
         const selectedTab = $(e.currentTarget).attr("data-target");
-        console.log(selectedTab);
         accountsPieChart({
             title: selectedTab.slice(0, -3),
             ...pageData.pieValues[selectedTab],
         });
     });
+    const noDataDisplay = `<div colspan='100%' class='text-center' >
+    ${noDataAvailable}
+</div>`;
+    const datatableOptions = {
+        searching: false,
+        lengthChange: false,
+        paging: false,
+        info: false,
+        visible: true,
+        language: {
+            emptyTable: noDataDisplay,
+            zeroRecords: noDataDisplay,
+        },
+    };
     $("#accounts_table")
         .DataTable({
-            searching: false,
-            lengthChange: false,
-            paging: false,
-            info: false,
+            ...datatableOptions,
             data: pageData.accounts,
             columns: [
                 {
                     data: "accountNumber",
                     render: function (data) {
-                        return `<a href="('account-enquiry?ac=${encodeString(
+                        return `<a href='account-enquiry?ac=${encodeString(
                             data
-                        )}') }}">${data}</a>`;
+                        )}'>${data}</a>`;
                     },
                 },
                 { data: "accountDesc" },
                 { data: "accountType" },
-                { data: "currency" },
                 {
                     data: "ledgerBalance",
-                    render: (data) => renderCurrency(data),
+                    render: (data, type, row) => renderCurrency(data, row),
                 },
                 {
                     data: "availableBalance",
-                    render: (data) => renderCurrency(data),
+                    render: (data, type, row) => renderCurrency(data, row),
                 },
-                { data: "odLimit", render: (data) => renderCurrency(data) },
+                {
+                    data: "odLimit",
+                    render: (data, type, row) => renderCurrency(data, row),
+                },
             ],
         })
-        .draw("page");
+        .draw();
+    $("#investments_table")
+        .DataTable({
+            ...datatableOptions,
+            data: pageData.investments,
+            columns: [
+                {
+                    data: "AccountNo",
+                },
+                {
+                    data: "dealAmount",
+                    render: (data, type, row) => renderCurrency(data, row),
+                },
+                { data: "tenure" },
+                { data: "fixedInterestRate" },
+                { data: "rollover" },
+            ],
+        })
+        .draw();
+    $("#loans_table")
+        .DataTable({
+            ...datatableOptions,
+            data: pageData.loans,
+            columns: [
+                {
+                    data: "facilityNo",
+                },
+                { data: "description" },
+                {
+                    data: "amountGranted",
+                    render: (data, type, row) => renderCurrency(data, row),
+                },
+                {
+                    data: "loanBalance",
+                    render: (data, type, row) => renderCurrency(data, row),
+                },
+            ],
+        })
+        .draw();
 
     $(".toggle-account-visibility").on("click", function () {
         $(".eye-open").toggle();
         $(".open-money").toggleClass("password-font");
     });
     // all_my_account_balance();
-    var request_status = "P";
-    //console.log(customer_no);
-    $(".transfer_tab_btn").on("click", function () {
-        getCorporateRequests(customer_no, "P");
-    });
-    getCorporateRequests(customer_no, request_status);
 
-    // const today = new Date();
-    // const startDate = new Date(today.setMonth(today.getMonth() - 3)); // 3months ago from today
-    // const endDate = today.toISOString().split("T")[0];
-    // const transLimit = 20;
+    getCorporateRequests(customer_no, "P");
 
-    $("#chart_account").on("change", function (e) {
-        const target = $("#chart_account");
+    $("#chart_account").on("change", async function (e) {
+        const target = $("#chart_account option:selected");
         const accountNumber = target.attr("data-account-number");
         const accountCurrency = target.attr("data-account-currency");
-        console.log("A", { accountCurrency, accountNumber });
-        // getAccountTransactions(
-        //     accountNumber,
-        //     accountCurrency,
-        //     startDate,
-        //     endDate,
-        //     transLimit
-        // );
+        console.log("A", { target, accountCurrency, accountNumber });
+        const today = new Date();
+        let startDate = new Date(today.setMonth(today.getMonth() - 300))
+            .toISOString()
+            .split("T")[0];
+        const endDate = new Date().toISOString().split("T")[0];
+        const transLimit = "20";
+        blockUi({ block: "#acc_history" });
+        await getData({
+            url: "account-transaction-history",
+            name: "transactions",
+            method: "POST",
+            data: {
+                accountNumber,
+                startDate,
+                endDate,
+                transLimit,
+            },
+        });
+        unblockUi("#acc_history");
+        transactionsBarChart(pageData.transactions);
+        console.log("trans", pageData);
     });
     $("#chart_account").trigger("change");
 });
