@@ -28,6 +28,11 @@ class AccountEnquiryController extends Controller
         return view('pages.accountEnquiry.listOfAccounts');
     }
 
+    public function accounts_statement()
+    {
+        return view('pages.accountEnquiry.accountStatementPrint');
+    }
+
     public function print_account_statement(Request $request)
     {
 
