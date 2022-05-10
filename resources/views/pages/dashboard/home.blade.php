@@ -54,8 +54,8 @@ $currentPath = 'Dashboard';
 
                     </div>
                 </div>
-                <div class="site-card  border-0 overflow-hidden">
-                    <nav class=" dashboard-header">
+                <div class="  overflow-hidden">
+                    <nav class="mb-2 dashboard-header">
                         <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
 
                             <a href="#accounts" data-toggle="tab" aria-expanded="false" class="nav-link active">
@@ -69,12 +69,12 @@ $currentPath = 'Dashboard';
                             </a>
                     </nav>
                     <div class="tab-content ">
-                        <div class="tab-pane show active" id="accounts">
-                            <div class="table-responsive accounts_display_area">
+                        <div class="tab-pane p-0 show active" id="accounts">
+                            <div class=" accounts_display_area">
                                 <table id="accounts_table" width="100%"
-                                    class="table nowrap display table-striped table-bordered mb-0 ">
+                                    class="table nowrap display  border dt-responsive table-hover rounded mb-0 ">
                                     <thead>
-                                        <tr class="bg-primary font-weight-bold text-white ">
+                                        <tr class="bg-primary font-weight-bold  text-white ">
                                             <td> Account No. </td>
                                             <td> Account Name </td>
                                             <td> Account Type </td>
@@ -87,10 +87,9 @@ $currentPath = 'Dashboard';
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane" id="loans">
+                        <div class="tab-pane p-0" id="loans">
                             <div class="table-responsive  loans_display_area">
-                                <table id="loans_table" width="100%"
-                                    class="table nowrap display table-striped table-bordered mb-0 ">
+                                <table id="loans_table" width="100%" class="table nowrap display  border rounded mb-0 ">
                                     <thead>
                                         <tr class="bg-primary text-white ">
                                             <td> Facility No. </td>
@@ -107,10 +106,10 @@ $currentPath = 'Dashboard';
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane " id="investments">
+                        <div class="tab-pane p-0" id="investments">
                             <div class="table-responsive investments_display_area">
                                 <table id="investments_table" width="100%"
-                                    class="table nowrap display table-striped table-bordered mb-0 ">
+                                    class="table nowrap display border rounded  mb-0 ">
                                     <thead>
                                         <tr class="bg-primary text-white ">
                                             <td> Account No. </td>

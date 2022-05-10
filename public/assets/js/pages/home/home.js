@@ -123,8 +123,8 @@ function transactionsBarChart(transactions) {
             year: "numeric",
             month: "short",
             day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
+            // hour: "numeric",
+            // minute: "numeric",
         });
         return date;
     });
@@ -815,7 +815,7 @@ $(async () => {
     prepareGraphValues();
     accountsPieChart({ title: "Accounts", ...pageData.pieValues.totalsPie });
     function renderCurrency(data, row) {
-        return `<div class="float-right">${
+        return `<div class="table-cur text-right">${
             row.currency ?? row.isoCode
         } <span class="font-weight-bold">${formatToCurrency(
             parseFloat(data)
@@ -836,7 +836,6 @@ $(async () => {
         lengthChange: false,
         paging: false,
         info: false,
-        visible: true,
         language: {
             emptyTable: noDataDisplay,
             zeroRecords: noDataDisplay,
@@ -845,6 +844,24 @@ $(async () => {
     $("#accounts_table")
         .DataTable({
             ...datatableOptions,
+            responsive: {
+                details: {
+                    renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                        tableClass: "table table-detail",
+                    }),
+                    display: $.fn.dataTable.Responsive.display.modal({
+                        header: function (row) {
+                            const data = row.data();
+                            return (
+                                "Details for " +
+                                data["accountNumber"] +
+                                " " +
+                                data["accountDesc"]
+                            );
+                        },
+                    }),
+                },
+            },
             data: pageData.accounts,
             columns: [
                 {
@@ -875,6 +892,22 @@ $(async () => {
     $("#investments_table")
         .DataTable({
             ...datatableOptions,
+            responsive: {
+                details: {
+                    renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                        tableClass: "table table-detail",
+                    }),
+                    display: $.fn.dataTable.Responsive.display.modal({
+                        header: function (row) {
+                            const data = row.data();
+                            return (
+                                "Details for Investment with Account Number: " +
+                                data["AccountNo"]
+                            );
+                        },
+                    }),
+                },
+            },
             data: pageData.investments,
             columns: [
                 {
@@ -893,6 +926,24 @@ $(async () => {
     $("#loans_table")
         .DataTable({
             ...datatableOptions,
+            responsive: {
+                details: {
+                    renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                        tableClass: "table table-detail",
+                    }),
+                    display: $.fn.dataTable.Responsive.display.modal({
+                        header: function (row) {
+                            const data = row.data();
+                            return (
+                                "Details for " +
+                                data["description"] +
+                                " with facility Number: " +
+                                data["facilityNo"]
+                            );
+                        },
+                    }),
+                },
+            },
             data: pageData.loans,
             columns: [
                 {
