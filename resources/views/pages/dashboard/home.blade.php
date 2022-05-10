@@ -27,7 +27,7 @@ $currentPath = 'Dashboard';
             </div>
         </nav>
         <div class="tab-content dashboard-body border-primary border " id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="tab-pane fade h-100 show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="row ">
                     <nav class="d-flex col-sm-2 col-md-auto  align-self-center no-after dashboard-header h-100 align-items-center"
                         style="height: 100%">
@@ -115,7 +115,7 @@ $currentPath = 'Dashboard';
                                             <td> Account No. </td>
                                             <td> Deal Amount </td>
                                             <td> Tunure </td>
-                                            <td> FixedInterestRate </td>
+                                            <td> M+aturity Date </td>
                                             <td> Rollover </td>
 
                                         </tr>

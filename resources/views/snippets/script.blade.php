@@ -39,5 +39,14 @@ $(window).on("load", ()=>{
     $("a[href$='" + location.pathname + "']").addClass("current-page");
     $("a.current-page").parents('.menu-item-body').collapse('show')
     $("a.current-page").parents('.menu-item-body').prev().addClass('current-menu-header')
+
+
+    $("select").select2();
+        $(".accounts-select").select2({
+            minimumResultsForSearch: Infinity,
+            templateResult: accountTemplate,
+            templateSelection: accountTemplate,
+        });
 })
+
 </script>

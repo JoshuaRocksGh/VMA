@@ -57,429 +57,295 @@
 @endsection
 @section('content')
 
-<div class="">
-    @php
-    $pageTitle = 'E-Korpor Payment';
-    $basePath = 'Payment';
-    $currentPath = 'E-Korpor';
-    @endphp
-    @include("snippets.pageHeader")
-    <br>
-    <div class="mx-lg-3 mx-md-2">
-
-        <ul class="nav nav-pills mx-1 navtab-bg row text-center">
-            <li class="nav-item mb-1 col-sm-4">
+@php
+$pageTitle = 'E-Korpor Payment';
+$basePath = 'Payment';
+$currentPath = 'E-Korpor';
+@endphp
+@include("snippets.pageHeader")
+<div class="px-2">
+    <div class="dashboard site-card overflow-hidden">
+        <nav class="dashboard-header">
+            <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
                 <a href="#send_korpor_page" data-toggle="tab" aria-expanded="true"
                     class="nav-link active send_korpor_tab">
                     Send E-Korpor
                 </a>
-            </li>
-            <li class="nav-item mb-1 col-sm-4">
                 <a href="#korpor_history_page" id="korpor_history_tab" data-toggle="tab" aria-expanded="false"
                     class="nav-link korpor_trans_tab">
                     E-Korpor History
                 </a>
-            </li>
 
-            <li class="nav-item mb-1 col-sm-4">
                 <a href="#redeem_korpor_page" data-toggle="tab" aria-expanded="false"
                     class="nav-link redeem_korpor_tab">
                     Redeem E-Korpor
                 </a>
-            </li>
-
-        </ul>
-        <div class="tab-content">
+            </div>
+        </nav>
+        <div class="tab-content dashboard-body">
             <div class="tab-pane show active" id="send_korpor_page">
+                <div class="mx-auto  h-100 " style="max-width: 650px" id="request_form_div">
+                    <form action="#" class="select_beneficiary" id="send_korpor_payment_details_form" autocomplete="off"
+                        aria-autocomplete="none">
+                        @csrf
 
-                <div class="form_process p row">
-                    <div class="p-1 col-lg-8">
-                        <div class="site-card p-1 p-md-3 p-lg-4 h-100 " id="request_form_div">
-                            <br>
-
-                            <form action="#" class="select_beneficiary" id="send_korpor_payment_details_form"
-                                autocomplete="off" aria-autocomplete="none">
-                                @csrf
-                                <div class="row container mx-auto">
-                                    <div class="col-md-1"></div>
-                                    <div class="col-md-10">
-
-                                        {{-- <br><br><br> --}}
-                                        <div class="row">
-                                            {{-- <div class="col-md-1"></div> --}}
-
-                                            <div class="col-md-12">
-
-                                                <div class="form-group row ">
-                                                    <b class="col-md-12 text-primary">Account to
-                                                        transfer from &nbsp;
-                                                        <span class="text-danger">*</span> </b>
+                        <div class="form-group row ">
+                            <b class="col-md-12 text-primary">Account to
+                                transfer from &nbsp;
+                                <span class="text-danger">*</span> </b>
 
 
-                                                    <select class="form-control col-md-12 accounts-select"
-                                                        id="account_of_transfer" required>
-                                                        <option disabled selected value=""> ---
-                                                            Select Source Account ---
-                                                        </option>
-                                                        @include("snippets.accounts")
-                                                    </select>
-                                                </div>
-                                                <hr style="padding-top: 0px; padding-bottom: 0px;">
+                            <select class="form-control col-md-12 accounts-select" id="account_of_transfer" required>
+                                <option disabled selected value=""> ---
+                                    Select Source Account ---
+                                </option>
+                                @include("snippets.accounts")
+                            </select>
+                        </div>
+                        <hr style="padding-top: 0px; padding-bottom: 0px;">
 
 
-                                                <div class="form-group row">
+                        <div class="form-group row">
 
-                                                    <b class="col-sm-5 text-primary align-self-center"> Type of
-                                                        Transfer &nbsp; <span class="text-danger">*</span></b>
+                            <label class="col-sm-5 text-primary align-self-center"> Type of
+                                Transfer &nbsp; <span class="text-danger">*</span></label>
 
-                                                    <div class="row col-sm-7 ml-3 ml-sm-0">
-                                                        <div
-                                                            class="radio radio-primary form-check-inline m-1 col-sm-5 destination">
-                                                            <input type="radio" id="transfer_to_self" value="SELF"
-                                                                name="self_transfer_toggle">
-                                                            <label for="transfer_to_self"> Self
-                                                            </label>
-                                                        </div>
-                                                        <div
-                                                            class="radio  radio-primary form-check-inline m-1 col-sm-5 transfer_type">
-                                                            <input type="radio" id="transfer_to_others" value="OTHERS"
-                                                                name="self_transfer_toggle" checked>
-                                                            <label for="transfer_to_others">
-                                                                Others</label>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                                <hr style="padding-top: 0px; padding-bottom: 0px;">
-
-
-                                                <div id="korpor_transfer_form">
-
-
-                                                    <div class="form-group row">
-
-                                                        <b class="col-md-4 text-primary"> Receiver
-                                                            Name
-                                                            &nbsp; <span class="text-danger">*</span></b>
-
-
-                                                        <input type="text" class="form-control col-md-8 "
-                                                            id="receiver_name" placeholder="Enter Receiver Name"
-                                                            autocomplete="off" required>
-                                                        <br>
-
-                                                    </div>
-
-                                                    <div class="form-group row">
-
-                                                        <b class="col-md-4 text-primary"> Receiver
-                                                            Telphone &nbsp; <span class="text-danger">*</span></b>
-
-                                                        <input type="text" class="form-control col-md-8 "
-                                                            id="receiver_phoneNum"
-                                                            placeholder="Enter Receiver Phone Number" autocomplete="off"
-                                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                                            required>
-                                                        <br>
-
-                                                    </div>
-
-                                                    <div class="form-group row hide-if-self-transfer">
-
-                                                        <b class="col-md-4 text-primary"> Receiver
-                                                            Address: &nbsp; <span class="text-danger">*</span></b>
-
-                                                        <input type="text" class="form-control col-md-8 "
-                                                            id="receiver_address" placeholder="Enter Receiver Address"
-                                                            autocomplete="off" required>
-                                                        <br>
-
-                                                    </div>
-
-                                                    <div class="form-group row mb-3">
-
-                                                        <b class="col-md-4 text-primary">Amount&nbsp;
-                                                            <span class="text-danger">*</span></b>
-
-
-                                                        <div class="input-group mb-1 col-md-8" style="padding: 0px;">
-                                                            <div class="input-group-prepend">
-                                                                <input type="text" value="SLL"
-                                                                    class="input-group-text display_currency"
-                                                                    id="select_currency" style="width: 80px;" readonly>
-                                                            </div>
-
-                                                            &nbsp;&nbsp;
-                                                            <input type="text" class="form-control " id="amount"
-                                                                placeholder="Enter Amount To Transfer"
-                                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
-                                                                required>
-                                                        </div>
-
-
-
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <b class="col-md-4 text-primary">Purpose of
-                                                            Transfer<span class="text-danger">*</span></b>
-
-                                                        <input type="text" class="form-control col-md-8 " id="narration"
-                                                            placeholder="Enter Naration" autocomplete="off" required
-                                                            value="E-Korpor Transfer">
-
-                                                    </div>
-
-                                                </div>
-
-
-                                                <div class="form-group text-right mt-2">
-                                                    <button type="button"
-                                                        class="btn btn-primary btn-rounded waves-effect waves-light disappear-after-success "
-                                                        id="confirm_next_button">
-                                                        <span class="submit-text">&nbsp; Next
-                                                            &nbsp;<i class="fe-arrow-right"></i></span>
-
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-md-1"></div> --}}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1"></div>
+                            <div class="row col-sm-7 ml-3 ml-sm-0">
+                                <div class="radio radio-primary form-check-inline m-1 col-sm-5 destination">
+                                    <input type="radio" id="transfer_to_self" value="SELF" name="self_transfer_toggle">
+                                    <label class="col-form-label ml-2" for="transfer_to_self"> Self
+                                    </label>
                                 </div>
-                            </form>
-
-
-                        </div> <!-- end col -->
-                    </div>
-                    <div class="d-none d-lg-block p-1 col-md-4 ">
-                        <div class=" site-card px-1 h-100 others_summary">
-                            <br>
-                            <div class=" col-md-12">
-                                <h4 class="text-primary transfer-detail-header">Sender Acc. Info
-                                </h4>
-                                <hr class="mt-0">
-
-                                <div class="row">
-                                    <p class="col-md-5 transfer-detail-text">Account Name:</p>
-                                    <span class="text-primary o-wrap display_from_account_name col-md-7"></span>
-
-                                    <p class="col-md-5 transfer-detail-text">Account Number:</p>
-                                    <span class="text-primary o-wrap display_from_account_no col-md-7"></span>
-
-                                    <p class="col-md-5 transfer-detail-text">Available Balance:</p>
-                                    <span class="text-primary o-wrap display_from_account_amount col-md-7"></span>
-
-                                    <p class="col-md-5 transfer-detail-text">Account Currency:</p>
-                                    <span class="text-primary o-wrap display_currency col-md-7"></span>
-
+                                <div class="radio  radio-primary form-check-inline m-1 col-sm-5 transfer_type">
+                                    <input type="radio" id="transfer_to_others" value="OTHERS"
+                                        name="self_transfer_toggle" checked>
+                                    <label class="col-form-label ml-2" for="transfer_to_others">
+                                        Others</label>
                                 </div>
 
-
-
-                                <h4 class="text-primary">Receiver Acc. Info</h4>
-                                <hr class="mt-0">
-                                <div class="row">
-                                    <p class="col-md-5 transfer-detail-text">Receiver Name: </p>
-                                    <span class="text-primary o-wrap display_receiver_name col-md-7"></span>
-
-                                    <p class="col-md-5 transfer-detail-text">Receiver Phone Number:
-                                    </p>
-                                    <span class="text-primary o-wrap display_receiver_phoneNum col-md-7"></span>
-
-                                    <p class="col-md-5 hide-if-self-transfer transfer-detail-text">
-                                        Receiver Address:</p>
-                                    <span
-                                        class="text-primary o-wrap hide-if-self-transfer display_receiver_address col-md-7"></span>
-
-                                </div>
-                                <hr class="mt-0">
-                                <div class="row">
-                                    <p class="col-md-5 mt-2 text-primary transfer-detail-text">
-                                        Transfer Amount:</p>
-                                    <h4 class="row text-danger align-items-center  mt-2 col-md-7">
-                                        <span class="display_currency mr-1"></span>
-                                        <span class="display_amount o-wrap "></span>
-
-                                    </h4>
-
-                                </div>
                             </div>
 
                         </div>
-                    </div>
+
+                        <hr style="padding-top: 0px; padding-bottom: 0px;">
+
+
+                        <div id="korpor_transfer_form">
+
+
+                            <div class="form-group row">
+
+                                <b class="col-md-4 text-primary"> Receiver
+                                    Name
+                                    &nbsp; <span class="text-danger">*</span></b>
+
+
+                                <input type="text" class="form-control col-md-8 " id="receiver_name"
+                                    placeholder="Enter Receiver Name" autocomplete="off" required>
+                                <br>
+
+                            </div>
+
+                            <div class="form-group row">
+
+                                <b class="col-md-4 text-primary"> Receiver
+                                    Telphone &nbsp; <span class="text-danger">*</span></b>
+
+                                <input type="text" class="form-control col-md-8 " id="receiver_phoneNum"
+                                    placeholder="Enter Receiver Phone Number" autocomplete="off"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    required>
+                                <br>
+
+                            </div>
+
+                            <div class="form-group row hide-if-self-transfer">
+
+                                <b class="col-md-4 text-primary"> Receiver
+                                    Address: &nbsp; <span class="text-danger">*</span></b>
+
+                                <input type="text" class="form-control col-md-8 " id="receiver_address"
+                                    placeholder="Enter Receiver Address" autocomplete="off" required>
+                                <br>
+
+                            </div>
+
+                            <div class="form-group row mb-3">
+
+                                <b class="col-md-4 text-primary">Amount&nbsp;
+                                    <span class="text-danger">*</span></b>
+
+
+                                <div class="input-group mb-1 col-md-8" style="padding: 0px;">
+                                    <div class="input-group-prepend">
+                                        <input type="text" value="SLL" class="input-group-text display_currency"
+                                            id="select_currency" style="width: 80px;" readonly>
+                                    </div>
+
+                                    &nbsp;&nbsp;
+                                    <input type="text" class="form-control " id="amount"
+                                        placeholder="Enter Amount To Transfer"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
+                                        required>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="form-group row">
+                                <b class="col-md-4 text-primary">Purpose of
+                                    Transfer<span class="text-danger">*</span></b>
+
+                                <input type="text" class="form-control col-md-8 " id="narration"
+                                    placeholder="Enter Naration" autocomplete="off" required value="E-Korpor Transfer">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group text-right mt-2">
+                            <button type="button"
+                                class="btn btn-primary btn-rounded waves-effect waves-light disappear-after-success "
+                                id="confirm_next_button">
+                                <span class="submit-text">&nbsp; Next
+                                    &nbsp;<i class="fe-arrow-right"></i></span>
+
+                            </button>
+                        </div>
+                    </form>
+
+
                 </div>
             </div>
             <div class="tab-pane" id="redeem_korpor_page">
 
-                <div class="row px-2">
-                    <div class="col-lg-6  pt-5 px-4 site-card " id="request_form_div" style="max-height: 75%">
+                <div class="  pt-5 px-4 mx-auto " id="request_form_div" style="max-width: 650px">
 
-                        <form action="#" class="select_beneficiary" id="redeem_korpor_payment_details_form"
-                            autocomplete="off" aria-autocomplete="none">
-                            @csrf
+                    <form action="#" class="select_beneficiary" id="redeem_korpor_payment_details_form"
+                        autocomplete="off" aria-autocomplete="none">
+                        @csrf
 
-                            <div class="row">
-                                <div class="col-md-12 redeem_korpor">
+                        <div class="row">
+                            <div class="col-md-12 redeem_korpor">
 
-                                    <p class="text-muted font-14 m-b-20">
-                                        <span> <i class="fa fa-info-circle  text-red"></i> <b style="color:red;">Please
-                                                Note:&nbsp;&nbsp;</b> <span class="">Enter the
-                                                remittance and phone number for korpor payment details.
+                                <p class="text-muted font-14 m-b-20">
+                                    <span> <i class="fa fa-info-circle  text-red"></i> <b style="color:red;">Please
+                                            Note:&nbsp;&nbsp;</b> <span class="">Enter the
+                                            remittance and phone number for korpor payment details.
 
-                                                <hr>
-                                    </p>
-
-
-                                    <div class="form-group row">
-
-                                        <b class="col-md-5 text-primary"> Mobile Number &nbsp; <span
-                                                class="text-danger">*</span></b>
+                                            <hr>
+                                </p>
 
 
-                                        <input type="text" class="form-control col-md-7" id="mobile_no"
-                                            autocomplete="off" placeholder="Enter Phone Number" required>
-                                    </div>
+                                <div class="form-group row">
 
-                                    <div class=" form-group row">
-
-                                        <b class="col-md-5 text-primary"> Remittance Number:
-                                            &nbsp; <span class="text-danger">*</span></b>
-
-                                        <input type="text" class="form-control col-md-7" id="remittance_no"
-                                            placeholder="Enter Remittance Number" autocomplete="off"
-                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                            required>
-                                    </div>
-
-                                    <div class="form-group text-right ">
-                                        <button type="button"
-                                            class="btn btn-primary btn-rounded mt-2 waves-effect waves-light disappear-after-success "
-                                            id="proceed_to_redeem_button">
-                                            <span id="next-text">Proceed</span> &nbsp;<i class="fe-arrow-right"></i>
-                                        </button>
-                                    </div>
+                                    <b class="col-md-5 text-primary"> Mobile Number &nbsp; <span
+                                            class="text-danger">*</span></b>
 
 
-                                </div>
-                                <div class="col-md-12 korpor_details" style="display: none">
-                                    <div class="form-group row ">
-                                        <b class="col-md-12 text-primary">Select Account To Redeem Into
-                                            &nbsp;
-                                            <span class="text-danger"></span> </b>
-                                        <select class="form-control col-md-12 accounts-select" id="redeem_account"
-                                            required>
-                                            <option disabled selected value=""> ---
-                                                Select
-                                                Account ---
-                                            </option>
-                                            @include("snippets.accounts")
-                                        </select>
-                                    </div>
-                                    <hr style="padding-top: 0px; padding-bottom: 0px;">
-
-                                    <div class="form-group row">
-
-                                        <b class="col-md-5 text-primary"> Receiver's Name:</b>
-
-
-                                        <input type="text" class="form-control col-md-7" id="receiver_name_redeem"
-                                            autocomplete="off" readonly>
-                                        <br>
-
-                                    </div>
-                                    <div class="form-group row">
-
-                                        <b class="col-md-5 text-primary"> Receiver's Phone:
-                                        </b>
-
-                                        <input type="text" class="form-control col-md-7" id="receiver_phone_redeem"
-                                            autocomplete="off"
-                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                            readonly>
-                                    </div>
-
-                                    <div class="form-group row">
-
-                                        <b class="col-md-5 text-primary"> Receiver Address:
-                                        </b>
-
-                                        <input type="text" class="form-control col-md-7" id="receiver_address_redeem"
-                                            autocomplete="off"
-                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                            readonly>
-                                    </div>
-                                    <div class="form-group row">
-
-                                        <b class="col-md-5 text-primary"> Amount:</b>
-
-                                        <input type="text" class="form-control col-md-7" id="receiver_amount_redeem"
-                                            autocomplete="off"
-                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                            readonly>
-
-                                    </div>
-
-                                    <div class="form-group text-right ">
-                                        <button type="button"
-                                            class="btn btn-primary btn-rounded waves-effect waves-light disappear-after-success"
-                                            id="done_button">
-                                            <span id="redeem-text">Redeem</span>
-
-                                        </button>
-                                    </div>
-
-
+                                    <input type="text" class="form-control col-md-7" id="mobile_no" autocomplete="off"
+                                        placeholder="Enter Phone Number" required>
                                 </div>
 
-                            </div>
+                                <div class=" form-group row">
 
-                        </form>
+                                    <b class="col-md-5 text-primary"> Remittance Number:
+                                        &nbsp; <span class="text-danger">*</span></b>
 
-                    </div>
-                    <div class="d-none d-lg-block col-lg-6 mx-auto">
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"
-                                    style="min-height: 120px; max-height: auto;">
-                                    <div class="carousel-inner" role="listbox">
-                                        <div class="carousel-item active">
-                                            <img class="d-block mx-auto img-fluid" style="height: 30rem"
-                                                src="{{ asset('assets/images/rokel/sim_korpor_5.jpeg') }}"
-                                                alt="First slide">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block mx-auto img-fluid" style="height: 30rem"
-                                                src="{{ asset('assets/images/rokel/sim_korpor_3.jpeg') }}"
-                                                alt="Second slide">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block mx-auto img-fluid" style="height: 30rem"
-                                                src="{{ asset('assets/images/rokel/sim_korpor_4.jpeg') }}"
-                                                alt="Third slide">
-                                        </div>
-                                    </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
-                                        data-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button"
-                                        data-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
+                                    <input type="text" class="form-control col-md-7" id="remittance_no"
+                                        placeholder="Enter Remittance Number" autocomplete="off"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        required>
+                                </div>
+
+                                <div class="form-group text-right ">
+                                    <button type="button"
+                                        class="btn btn-primary btn-rounded mt-2 waves-effect waves-light disappear-after-success "
+                                        id="proceed_to_redeem_button">
+                                        <span id="next-text">Proceed</span> &nbsp;<i class="fe-arrow-right"></i>
+                                    </button>
                                 </div>
 
 
                             </div>
+                            <div class="col-md-12 korpor_details" style="display: none">
+                                <div class="form-group row ">
+                                    <b class="col-md-12 text-primary">Select Account To Redeem Into
+                                        &nbsp;
+                                        <span class="text-danger"></span> </b>
+                                    <select class="form-control col-md-12 accounts-select" id="redeem_account" required>
+                                        <option disabled selected value=""> ---
+                                            Select
+                                            Account ---
+                                        </option>
+                                        @include("snippets.accounts")
+                                    </select>
+                                </div>
+                                <hr style="padding-top: 0px; padding-bottom: 0px;">
+
+                                <div class="form-group row">
+
+                                    <b class="col-md-5 text-primary"> Receiver's Name:</b>
+
+
+                                    <input type="text" class="form-control col-md-7" id="receiver_name_redeem"
+                                        autocomplete="off" readonly>
+                                    <br>
+
+                                </div>
+                                <div class="form-group row">
+
+                                    <b class="col-md-5 text-primary"> Receiver's Phone:
+                                    </b>
+
+                                    <input type="text" class="form-control col-md-7" id="receiver_phone_redeem"
+                                        autocomplete="off"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        readonly>
+                                </div>
+
+                                <div class="form-group row">
+
+                                    <b class="col-md-5 text-primary"> Receiver Address:
+                                    </b>
+
+                                    <input type="text" class="form-control col-md-7" id="receiver_address_redeem"
+                                        autocomplete="off"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        readonly>
+                                </div>
+                                <div class="form-group row">
+
+                                    <b class="col-md-5 text-primary"> Amount:</b>
+
+                                    <input type="text" class="form-control col-md-7" id="receiver_amount_redeem"
+                                        autocomplete="off"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                        readonly>
+
+                                </div>
+
+                                <div class="form-group text-right ">
+                                    <button type="button"
+                                        class="btn btn-primary btn-rounded waves-effect waves-light disappear-after-success"
+                                        id="done_button">
+                                        <span id="redeem-text">Redeem</span>
+
+                                    </button>
+                                </div>
+
+
+                            </div>
+
                         </div>
-                    </div>
+
+                    </form>
 
                 </div>
+
+
             </div>
             <div class="tab-pane site-card p-2 p-sm-3 p-md-4" id="korpor_history_page">
 
@@ -516,16 +382,19 @@
                         </nav>
                         <div class="col-md-8" id="korpor_history_display" style="max-width: 650px;">
                             <div id="korpor_history_container" style="min-height: 350px; " class="mb-3">
-                                <div class="text-center" {!! $noDataAvailable !!} </div>
+                                <div class="text-center" {!! $noDataAvailable !!}>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                @include("snippets.pinCodeModal")
+
             </div>
         </div>
     </div>
+    @include("snippets.pinCodeModal")
+    @endsection
+    @section('scripts')
     <script>
         const customerInfo = new Object();
         customerInfo.customerType = @json(session()->get('customerType'));

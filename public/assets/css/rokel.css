@@ -239,9 +239,11 @@
 
 .dashboard .dashboard-body {
     margin-top: 1rem;
+    overflow: hidden;
     border-radius: 1rem;
     border: 1px solid var(--primary);
     background-color: var(--white);
+    min-height: max(60vh, 600px);
 }
 .dashboard .dashboard-body .tab-pane {
     padding: 2rem;
@@ -478,7 +480,7 @@
 }
 
 .switch:hover {
-    border-color: #00bdf3 !important;
+    border-color: var(--primary) !important;
 }
 
 .switch .leftbtn {
@@ -486,7 +488,7 @@
 }
 
 .switch.active {
-    background-color: #00bdf3 !important;
+    background-color: var(--primary) !important;
     color: white;
 }
 
@@ -696,3 +698,66 @@
         display: block !important;
     }
 }
+
+/* knav toggles */
+.knav.active {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+}
+
+.knav{
+    transition: all 0.4s;
+    display: block;
+    width: 90%;
+    font-weight: bold;
+    text-align: center;
+    border-radius:  33px;
+    border: 1px solid;
+    padding: 8px 5px ; 
+    margin: 0 auto;   
+}
+
+.knav-primary{
+    color: var(--primary);
+    background-color: var(--white);
+    border-color: var(--primary);
+}
+.knav-primary.active{
+    background-color: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+.knav-success.active{
+    color: var(--white);
+    background-color: var(--success);
+    border-color: var(--success);
+}
+.knav-danger.active{
+    color: var(--white);
+    background-color: var(--danger);
+    border-color: var(--danger);
+}
+.knav-warning.active{
+    color: var(--white);
+    background-color: var(--warning);
+    border-color: var(--warning);
+}
+.knav-info.active{
+    color: var(--white);
+    background-color: var(--info);
+    border-color: var(--info);
+}
+.knav-light.active{
+    color: var(--white);
+    background-color: var(--pink);
+    border-color: var(--pink);
+}
+.knav-secondary.active{
+    color: var(--white);
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+/*  transition-all py-md-2   text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link */

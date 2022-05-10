@@ -207,7 +207,7 @@ input.form-control,
     background-color: var(--primary) !important;
 }
 /* ------------------------- Forms ----------------------------------- */
-.readonly: {
+.readonly {
     box-shadow: none !important;
 }
 
@@ -266,4 +266,8 @@ a:hover {
 .page-item.active .page-link {
     background: var(--primary);
     border-color: var(--primary);
+}
+
+.col-form-label{
+    align-self: center;
 }
