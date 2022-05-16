@@ -295,7 +295,7 @@ $(async () => {
     accountsPieChart({ title: "Accounts", ...pageData.pieValues.totalsPie });
     function renderCurrency(data, row) {
         return `<div class="table-cur text-right">${
-            row.currency ?? row.isoCode
+            row.currency ?? row.isoCode ?? "SLL"
         } <span class="font-weight-bold">${formatToCurrency(
             parseFloat(data)
         )}</span></div>`;

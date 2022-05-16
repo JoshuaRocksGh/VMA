@@ -1,18 +1,17 @@
 $(function () {
-    $("select").select2();
-    $(".accounts-select").select2({
+    $("#filter").select2({
         minimumResultsForSearch: Infinity,
-        templateResult: accountTemplate,
-        templateSelection: accountTemplate,
     });
-    let today = new Date();
-    let day = today.getDate().toString().padStart(2, "0");
-    let month = (today.getMonth() + 1).toString().padStart(2, "0");
-    let startDate = today.getFullYear() + "-" + month + "-01";
-    let endDate = today.getFullYear() + "-" + month + "-" + day;
-    let this_day = endDate;
 
-    $("#startDate").val(startDate);
+    let date = new Date();
+    let day = date.getDate().toString().padStart(2, "0");
+    let month = (date.getMonth() + 1).toString().padStart(2, "0");
+    let startDate = date.getFullYear() + "-" + month + "-01";
+    let endDate = date.getFullYear() + "-" + month + "-" + day;
+    let today = endDate;
+
+    $("#startDate").val(startDate).attr("max", today);
+    $("#endDate").val(startDate).attr("max", today);
     $("#endDate").val(endDate);
 
     $("#from_account").on("change", function (e) {
@@ -45,46 +44,40 @@ $(function () {
     $("#search_transaction").on("click", function () {
         startDate = $("#startDate").val();
         endDate = $("#endDate").val();
-        if (startDate > this_day) {
+        if (startDate > today) {
             toaster("Start Date can't be greater than today", "warning");
             return false;
-        } else if (endDate > this_day) {
+        } else if (endDate > today) {
             toaster("End Date can't be greater than today", "warning");
             return false;
         } else if (startDate > endDate) {
             toaster("Start Date can't be greater than End Date", "warning");
             return false;
-        } else {
-            var from_account = $("#from_account").val();
-            console.log(startDate);
-            if (!from_account) {
-                toaster("please select an account", "warning");
-                $("#search_transaction").text("Search");
-                return false;
-            } else {
-                from_account_info = from_account.split("~");
-                account_number = from_account_info[2].trim();
-                siteLoading("show");
-                getAccountTransactions(
-                    account_number,
-                    startDate,
-                    endDate
-                ).always(() => siteLoading("hide"));
-                $("#display_account_number").text(account_number);
-                $("#display_search_start_date").text(startDate);
-                $("#display_search_end_date").text(endDate);
-
-                const pdfPath = `print-account-statement\?ac=${encodeString(
-                    account_number
-                )}&sd=${encodeString(startDate)}&ed=${encodeString(endDate)}`;
-                $("#pdf_print").attr("href", pdfPath);
-
-                $("#excel_print").on("click", (e) => {
-                    e.preventDefault();
-                    $(".buttons-excel").trigger("click");
-                });
-            }
         }
+        var from_account = $("#from_account").val();
+        if (!from_account) {
+            toaster("please select an account", "warning");
+            return false;
+        }
+        from_account_info = from_account.split("~");
+        account_number = from_account_info[2].trim();
+        siteLoading("show");
+        getAccountTransactions(account_number, startDate, endDate).always(() =>
+            siteLoading("hide")
+        );
+        $("#display_account_number").text(account_number);
+        $("#display_search_start_date").text(startDate);
+        $("#display_search_end_date").text(endDate);
+
+        const pdfPath = `print-account-statement\?ac=${encodeString(
+            account_number
+        )}&sd=${encodeString(startDate)}&ed=${encodeString(endDate)}`;
+        $("#pdf_print").attr("href", pdfPath);
+
+        $("#excel_print").on("click", (e) => {
+            e.preventDefault();
+            $(".buttons-excel").trigger("click");
+        });
     });
 
     $("#from_account option:last").prop("selected", true).trigger("change");

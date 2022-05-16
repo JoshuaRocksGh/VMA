@@ -25,7 +25,7 @@ $pageTitle = 'account statement';
 @include('snippets.pageHeader')
 
 <div class=" dashboard site-card" id="transaction_form">
-    <div class="dashboard-body p-4">
+    <div class="dashboard-body p-4" style="min-height: 0px;">
         <div class="d-flex align-items-center justify-content-around">
             <div class="w-100" style="max-width: 600px">
                 <div class="form-group  ">
@@ -53,7 +53,7 @@ $pageTitle = 'account statement';
             </div>
         </div>
     </div>
-    <div class=" tab-content dashboard-body border-primary border" id="transaction_summary">
+    <div class=" tab-content dashboard-body border-primary border" id="transaction_summary" style="min-height: 0px;">
         {{-- <div class="dashboard-body p-4"> --}}
             <div class="accordion-arrow  p-3 rounded alert-secondary w-100" id="account_balance_info_display"
                 role="alert">
