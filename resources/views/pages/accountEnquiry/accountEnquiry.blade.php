@@ -11,6 +11,28 @@
         overflow-y: hidden;
 
     }
+
+    .dt-buttons {
+        display: none;
+    }
+
+    .dataTables_filter {
+        padding: 2px 10px;
+        background-color: #e2e3e5;
+    }
+
+    .dataTables_info {
+        padding: 2px 10px;
+
+    }
+
+    .pagination {
+        padding: 2px 10px;
+    }
+
+    table.dataTable#account_transaction_display_table {
+        margin-top: 0px !important;
+    }
 </style>
 
 @include('extras.datatables')
@@ -31,7 +53,6 @@ $pageTitle = 'account statement';
                 <div class="form-group  ">
                     <label class=" text-primary align-self-center"> Account :</label>
                     <select class="form-control accounts-select " id="from_account" required>
-                        <option value="" disabled selected> -- Select Your Account -- </option>
                         @include('snippets.accounts')
                     </select>
                 </div>
@@ -114,7 +135,7 @@ $pageTitle = 'account statement';
                             </th>
                             <th scope="col">Balance<span class="currency_display"></span>
                             </th>
-                            <th scope="col">Document Ref</th>
+                            {{-- <th scope="col">Document Ref</th> --}}
                             <th scope="col">Attachment</th>
                             <th scope="col">Details</th>
                         </tr>
@@ -232,10 +253,10 @@ $pageTitle = 'account statement';
 
 @section('scripts')
 @include('extras.datatables')
-<script src="{{ asset('assets/js/pages/accounts/accountEnquiry.js') }}"></script>
 <script defer>
     const PageData = new Object();
         PageData.reqAccount = @json($accountNumber);
         let noDataAvailable = {!! json_encode($noDataAvailable) !!}
 </script>
+<script src="{{ asset('assets/js/pages/accounts/accountEnquiry.js') }}"></script>
 @endsection
