@@ -3,7 +3,7 @@
     <div class="col-12 py-3 px-2 px-sm-4 px-lg-5">
         @include('snippets.pinCodeModal')
         <div class="form_process row">
-            <section class="col-lg-12 mb-3 px-2">
+            <section class="col-lg-12 mb-3 px-2 ">
 
                 @include('snippets.transfer.bank_transfer_form')
                 @include('snippets.transactionSummary')
