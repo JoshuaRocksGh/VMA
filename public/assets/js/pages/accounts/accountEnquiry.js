@@ -81,13 +81,16 @@ $(function () {
         minimumResultsForSearch: Infinity,
     });
 
-    let date = new Date();
-    let day = date.getDate().toString().padStart(2, "0");
-    let month = (date.getMonth() + 1).toString().padStart(2, "0");
-    let startDate = date.getFullYear() + "-" + "01" + "-01";
-    let endDate = date.getFullYear() + "-" + month + "-" + day;
-    let today = endDate;
-
+    const date = new Date();
+    const today = date.toISOString().slice(0, 10);
+    const startDate = new Date(date.getFullYear()).toISOString().slice(0, 10);
+    const endDate = today;
+    // let day = date.getDate().toString().padStart(2, "0");
+    // let month = (date.getMonth() + 1).toString().padStart(2, "0");
+    // let startDate = date.getFullYear() + "-" + "01" + "-01";
+    // let endDate = date.getFullYear() + "-" + month + "-" + day;
+    // let today = endDate;
+    console.log(today, startDate, endDate);
     $("#startDate").val(startDate).attr("max", today);
     $("#endDate").val(startDate).attr("max", today);
     $("#endDate").val(endDate);
