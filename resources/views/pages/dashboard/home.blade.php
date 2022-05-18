@@ -27,7 +27,7 @@
                 </div>
             </nav>
             <div class="tab-content dashboard-body border-primary border " id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade h-100 show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row ">
                         <nav class="d-flex col-sm-2 col-md-auto  align-self-center no-after dashboard-header h-100 align-items-center"
                             style="height: 100%">
@@ -106,26 +106,26 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane p-0" id="investments">
-                                <div class="table-responsive investments_display_area">
-                                    <table id="investments_table" width="100%"
-                                        class="table nowrap display border rounded  mb-0 ">
-                                        <thead>
-                                            <tr class="bg-primary text-white ">
-                                                <td> Account No. </td>
-                                                <td> Deal Amount </td>
-                                                <td> Tunure </td>
-                                                <td> FixedInterestRate </td>
-                                                <td> Rollover </td>
+                        </div>
+                        <div class="tab-pane p-0" id="investments">
+                            <div class="table-responsive investments_display_area">
+                                <table id="investments_table" width="100%"
+                                    class="table nowrap display border rounded  mb-0 ">
+                                    <thead>
+                                        <tr class="bg-primary text-white ">
+                                            <td> Account No. </td>
+                                            <td> Deal Amount </td>
+                                            <td> Tunure </td>
+                                            <td> M+aturity Date </td>
+                                            <td> Rollover </td>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody class="fixed_deposit_account">
+                                        </tr>
+                                    </thead>
+                                    <tbody class="fixed_deposit_account">
 
 
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
 
                         </div>

@@ -1,18 +1,95 @@
-$(function () {
-    $("select").select2();
-    $(".accounts-select").select2({
-        minimumResultsForSearch: Infinity,
-        templateResult: accountTemplate,
-        templateSelection: accountTemplate,
+function getAccountTransactions(accountNumber, startDate, endDate) {
+    return $.ajax({
+        type: "POST",
+        url: "account-transaction-history",
+        datatype: "application/json",
+        data: {
+            accountNumber: accountNumber,
+            endDate: endDate,
+            entrySource: "A",
+            startDate: startDate,
+            transLimit: "20",
+        },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            console.log("account-transaction-history =>", response);
+            if (response.responseCode !== "000" || response.data.length === 0) {
+                if (PageData?.prompt) {
+                    toaster(response.message, "warning");
+                }
+                PageData.transaction = [];
+            } else {
+                PageData.transaction = response.data;
+            }
+            $("#filter").trigger("change");
+            return;
+        },
+        error: function (xhr, status, error) {
+            toaster(error, "error");
+        },
     });
-    let today = new Date();
-    let day = today.getDate().toString().padStart(2, "0");
-    let month = (today.getMonth() + 1).toString().padStart(2, "0");
-    let startDate = today.getFullYear() + "-" + month + "-01";
-    let endDate = today.getFullYear() + "-" + month + "-" + day;
-    let this_day = endDate;
+}
 
-    $("#startDate").val(startDate);
+const pdfHeader = () => {
+    return `<div>
+    <div class="d-flex justify-content-between px-3 items-center">
+        <div style="height: 150px"> <img src='assets/images/rokel_logo.png'>
+        </div>
+        <div class="font-14 font-weight-bold"> ROKEL COMMERCIAL BANK<br>
+            25-27 Siaka Stevens Street<br>
+            Freetown, Sierra Leone<br>
+            rokelsl@rokelbank.sl<br>
+            (+232)-76-22-25-01
+        </div>
+    </div>
+    <div class="d-flex justify-content-around">
+        <div>
+            <div class="font-weight-bold font-14"> Account Details</div>
+            <div class="details-label">Account Name: <span id="account_description"> </span></div>
+            <div class="details-label">Account Number: <span id="account_number"></span> </div>
+            <div class="details-label">Account Product: <span id="account_product"> </span></div>
+        </div>
+        <div>
+            <div class="font-weight-bold font-14"> Balance Details</div>
+            <div class="details-label">Account Currency:<span class="account_currency"></span> </div>
+            <div class="details-label">Book Balance : <span id="account_legder_balance"></span> </div>
+            <div class="details-label">Cleared Balance : <span id="account_available_balance"></span> </div>
+        </div>
+        <div>
+            <div class="font-weight-bold font-14"> Statement Details </div>
+            <div class="details-label">From: <span id="start_date"></span></div>
+            <div class="details-label">To: <span id="end_date"></span></div>
+
+            <div class="details-label">Requested On: <span id="request_date">${new Date().toLocaleString(
+                "en",
+                {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                }
+            )}</span></div>
+
+        </div>
+    </div>
+</div>`;
+};
+
+$(function () {
+    $("#filter").select2({
+        minimumResultsForSearch: Infinity,
+    });
+
+    let date = new Date();
+    let day = date.getDate().toString().padStart(2, "0");
+    let month = (date.getMonth() + 1).toString().padStart(2, "0");
+    let startDate = date.getFullYear() + "-" + "01" + "-01";
+    let endDate = date.getFullYear() + "-" + month + "-" + day;
+    let today = endDate;
+
+    $("#startDate").val(startDate).attr("max", today);
+    $("#endDate").val(startDate).attr("max", today);
     $("#endDate").val(endDate);
 
     $("#from_account").on("change", function (e) {
@@ -42,53 +119,44 @@ $(function () {
         };
     });
 
-    $("#search_transaction").on("click", function () {
+    $("#search_transaction").on("click", async function () {
         startDate = $("#startDate").val();
         endDate = $("#endDate").val();
-        if (startDate > this_day) {
+        if (startDate > today) {
             toaster("Start Date can't be greater than today", "warning");
             return false;
-        } else if (endDate > this_day) {
+        } else if (endDate > today) {
             toaster("End Date can't be greater than today", "warning");
             return false;
         } else if (startDate > endDate) {
             toaster("Start Date can't be greater than End Date", "warning");
             return false;
-        } else {
-            var from_account = $("#from_account").val();
-            console.log(startDate);
-            if (!from_account) {
-                toaster("please select an account", "warning");
-                $("#search_transaction").text("Search");
-                return false;
-            } else {
-                from_account_info = from_account.split("~");
-                account_number = from_account_info[2].trim();
-                siteLoading("show");
-                getAccountTransactions(
-                    account_number,
-                    startDate,
-                    endDate
-                ).always(() => siteLoading("hide"));
-                $("#display_account_number").text(account_number);
-                $("#display_search_start_date").text(startDate);
-                $("#display_search_end_date").text(endDate);
-
-                const pdfPath = `print-account-statement\?ac=${encodeString(
-                    account_number
-                )}&sd=${encodeString(startDate)}&ed=${encodeString(endDate)}`;
-                $("#pdf_print").attr("href", pdfPath);
-
-                $("#excel_print").on("click", (e) => {
-                    e.preventDefault();
-                    $(".buttons-excel").trigger("click");
-                });
-            }
         }
+        const accountNumber = $("#from_account option:selected").attr(
+            "data-account-number"
+        );
+        if (!from_account) {
+            toaster("please select an account", "warning");
+            return false;
+        }
+        await getAccountTransactions(accountNumber, startDate, endDate);
+        siteLoading("hide");
+
+        $("#display_account_number").text(accountNumber);
+        $("#display_search_start_date").text(startDate);
+        $("#display_search_end_date").text(endDate);
+
+        $("#pdf_print").on("click", (e) => {
+            e.preventDefault();
+            $(".buttons-print").trigger("click");
+        });
+
+        $("#excel_print").on("click", (e) => {
+            e.preventDefault();
+            $(".buttons-excel").trigger("click");
+        });
     });
 
-    $("#from_account option:last").prop("selected", true).trigger("change");
-    $("#search_transaction").trigger("click");
     if (PageData.requestAccount) {
         PageData.requestAccount = decodeString(PageData.requestAccount);
         $(
@@ -96,8 +164,8 @@ $(function () {
         )
             .prop("selected", true)
             .trigger("change");
-        $("#search_transaction").trigger("click");
     }
+    $("#search_transaction").trigger("click");
 
     $("#filter").on("change", (e) => {
         e.preventDefault();
@@ -122,18 +190,22 @@ $(function () {
 
     function drawTransactionsTable(workingTransactions) {
         $("#account_transaction_display_table tbody").empty();
-        if (!workingTransactions || workingTransactions.length === 0) {
-            let noTrans = noDataAvailable.replace("Data", "Transactions");
-            $("#account_transaction_display_table tbody").append(
-                `<td colspan="100%" class="text-center">
-                ${noTrans} </td>`
-            );
-            $(".download").hide();
-            return;
-        }
+        // if (!workingTransactions || workingTransactions.length === 0) {
+        //     let noTrans = noDataAvailable.replace("Data", "Transactions");
+
+        //     $(".download").hide();
+        //     return;
+        // }
+
         let transactionTableOptions = {
             dom: "Bfrtip",
-            buttons: ["excel"],
+            buttons: [
+                "excel",
+                {
+                    extend: "print",
+                    messageTop: pdfHeader(),
+                },
+            ],
             destroy: true,
             language: {
                 emptyTable: `${noDataAvailable}`,
@@ -145,28 +217,23 @@ $(function () {
             columnDefs: [
                 {
                     targets: 0,
-                    // "data": "description",
                     render: function (data, type) {
                         if (type === "display" || type === "filter") {
-                            const d = new Date(data);
-                            return (
-                                String(d.getDate()).padStart(2, "0") +
-                                "-" +
-                                String(d.getMonth() + 1).padStart(2, "0") +
-                                "-" +
-                                d.getFullYear()
-                            );
+                            return new Date(data).toLocaleString("en", {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                            });
                         }
                         return data;
                     },
                 },
                 {
-                    targets: [1, 4],
+                    targets: [1, 3],
                     render: function (data, type) {
                         if (type === "display" || type === "filter") {
                             const color =
                                 data < 0 ? "text-danger" : "text-success";
-                            // <i class="fe-arrow-up text-${color} mr-1"></i>
                             return `<div class="text-right"><b class='${color}'>
                                 ${formatToCurrency(parseFloat(data))}
                             </b></div>
@@ -175,12 +242,12 @@ $(function () {
                         return data;
                     },
                 },
+                // {
+                //     targets: 4,
+                //     render: (data) => `<p class="text-left">${data}</p>`,
+                // },
                 {
-                    targets: 5,
-                    render: (data) => `<p class="text-left">${data}</p>`,
-                },
-                {
-                    targets: 6,
+                    targets: 4,
                     render: (data) =>
                         data.split("~")[0] === 0
                             ? (attachment = `<a href="#" data-value='${
@@ -199,20 +266,19 @@ $(function () {
                 .add([
                     trans.postingSysDate,
                     trans.amount,
-                    trans.contraAccount,
+                    // trans.contraAccount,
                     trans.narration,
                     trans.runningBalance,
-                    // data[index].batchNumber,
-                    trans.documentReference,
+                    // trans.documentReference,
                     `${trans.imageCheck}~${trans.batchNumber}`,
-                    `<button type="button" class="btn btn-soft-info waves-effect waves-light more_details" data-toggle="modal" data-target="#accordion-modal" batch-no="${trans.batchNumber}"
+                    `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#accordion-modal" batch-no="${trans.batchNumber}"
                     posting-date="${trans.postingSysDate}" trans-number="${trans.transactionNumber}" value-date="${trans.valueDate}" branch="${trans.branch}"
                     narration="${trans.narration}" amount="${trans.amount}" contra-account="${trans.contraAccount}" channel="${trans.channel}">Details</button>`,
                 ])
                 .order([0, "desc"])
                 .draw(false);
         });
-        $(".more_details").click(function () {
+        $(".more_details").on("click", function () {
             console.log($(this).attr("batch-no"));
             $(".transaction_date").html($(this).attr("posting-date"));
             $(".value_date").html($(this).attr("value-date"));
@@ -224,85 +290,50 @@ $(function () {
             $(".channel").html($(this).attr("channel"));
         });
         $(".download").show();
-        PageData.prompt = true;
-        if (PageData?.accountAccount?.accountCurrency) {
-            $(".currency_display").text(
-                `(${PageData.accountAccount.accountCurrency})`
-            );
-        }
-        $(".attachment-icon").on("click", function (e) {
-            e.preventDefault();
-            const docId = $(this).attr("data-value");
-            getTransDocument(docId);
-        });
+        // PageData.prompt = true;
+        // if (PageData?.accountAccount?.accountCurrency) {
+        //     $(".currency_display").text(
+        //         `(${PageData.accountAccount.accountCurrency})`
+        //     );
+        // }
+        // $(".attachment-icon").on("click", function (e) {
+        //     e.preventDefault();
+        //     const docId = $(this).attr("data-value");
+        //     getTransDocument(docId);
+        // });
     }
-    function getAccountTransactions(accountNumber, startDate, endDate) {
-        return $.ajax({
-            type: "POST",
-            url: "account-transaction-history",
-            datatype: "application/json",
-            data: {
-                accountNumber: accountNumber,
-                endDate: endDate,
-                entrySource: "A",
-                startDate: startDate,
-                transLimit: "20",
-            },
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            success: function (response) {
-                console.log("account-transaction-history =>", response);
-                if (
-                    response.responseCode !== "000" ||
-                    response.data.length === 0
-                ) {
-                    if (PageData?.prompt) {
-                        toaster(response.message, "warning");
-                    }
-                    PageData.transaction = [];
-                } else {
-                    PageData.transaction = response.data;
-                }
-                $("#filter").trigger("change");
-                return;
-            },
-            error: function (xhr, status, error) {
-                toaster(error, "error");
-            },
-        });
-    }
-    function getTransDocument(batchNumber) {
-        $.ajax({
-            type: "POST",
-            url: "account-trans-document-api",
-            datatype: "application/json",
-            data: { batchNumber },
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            success: function (response) {
-                if (response.responseCode == "000") {
-                    const data = response.data;
-                    $.each(data, (i) => {
-                        Object.entries(data[i]).forEach(([key, value], j) => {
-                            if (key.includes("image")) {
-                                let active = j === 0 ? "active" : "";
-                                let img = `<div class="carousel-item ${active}">
-                                <img class="d-block w-100" src="data:image/jpg;base64,${value}" alt="slide-${j}">
-                                </div>`;
-                                $(".carousel-inner").append(img);
-                                let indicator = `<li data-target="#attachment_carousel" data-slide-to="${j}" class="${active}"></li>
-                              `;
-                                $(".carousel-indicators").append(indicator);
-                            }
-                        });
-                    });
-                    $("#attachment_modal").modal("show");
-                } else {
-                    $("#search_transaction").text("Search");
-                }
-            },
-        });
-    }
+
+    // function getTransDocument(batchNumber) {
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "account-trans-document-api",
+    //         datatype: "application/json",
+    //         data: { batchNumber },
+    //         headers: {
+    //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    //         },
+    //         success: function (response) {
+    //             if (response.responseCode == "000") {
+    //                 const data = response.data;
+    //                 $.each(data, (i) => {
+    //                     Object.entries(data[i]).forEach(([key, value], j) => {
+    //                         if (key.includes("image")) {
+    //                             let active = j === 0 ? "active" : "";
+    //                             let img = `<div class="carousel-item ${active}">
+    //                             <img class="d-block w-100" src="data:image/jpg;base64,${value}" alt="slide-${j}">
+    //                             </div>`;
+    //                             $(".carousel-inner").append(img);
+    //                             let indicator = `<li data-target="#attachment_carousel" data-slide-to="${j}" class="${active}"></li>
+    //                           `;
+    //                             $(".carousel-indicators").append(indicator);
+    //                         }
+    //                     });
+    //                 });
+    //                 $("#attachment_modal").modal("show");
+    //             } else {
+    //                 $("#search_transaction").text("Search");
+    //             }
+    //         },
+    //     });
+    // }
 });

@@ -10,13 +10,6 @@
         max-width: 150px !important;
     }
 
-    .knav.active {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
-        /* box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); */
-    }
-
     #cheque_book_request.active {
         background-color: var(--primary-alt) !important;
         border-color: var(--primary-alt) !important;

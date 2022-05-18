@@ -53,10 +53,8 @@
         input.key,
             {
             font-family: 'password';
-            width: 300px;
-            height: 80px;
-            font-size: 100px;
         }
+
 
 
         #body {

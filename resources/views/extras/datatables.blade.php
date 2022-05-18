@@ -12,7 +12,7 @@
 {{-- <script src="{{ asset('assets/plugins/datatables/vfs_fonts.js') }}" defer></script> --}}
 <script src="{{ asset('assets/plugins/datatables/buttons.html5.min.js') }}" defer></script>
 {{-- <script src="{{ asset('assets/plugins/datatables/buttons.colVis.min.js') }}" defer></script> --}}
-{{-- <script src="{{ asset('assets/plugins/datatables/buttons.print.min.js') }}" defer></script> --}}
+<script src="{{ asset('assets/plugins/datatables/buttons.print.min.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.responsive.min.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/datatables/dataTables.responsive.bootstrap4.min.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/datatables/ellipsis.js') }}" defer></script>

@@ -40,17 +40,15 @@ function paymentType() {
                 pageData.payTypes = [];
 
                 if (data.length > 0) {
-                    let color = [
-                        "bg-success",
-                        "bg-info",
-                        "bg-warning",
-                        "bg-danger",
-                        "bg-primary",
-                        "bg-pink",
-                        "bg-blue",
-                        "bg-secondary",
-                        "bg-dark",
-                    ];
+                    // let color = [
+                    //     "knav-primary",
+                    //     "knav-warning",
+                    //     "knav-success",
+                    //     "knav-info",
+                    //     "knav-danger",
+                    //     "knav-pink",
+                    //     "knav-secondary",
+                    // ];
                     $(".payments-carousel").empty();
                     $.each(data, function (i) {
                         const type = data[i].paymentType;
@@ -58,10 +56,10 @@ function paymentType() {
                         pageData["pay_" + type] = data[i];
                         const { label, paymentType, description } = data[i];
                         if (!label) return;
-                        let paymentCard = `<div class="display-card payments ${color[i]}"  id='${paymentType}_card' data-span="${paymentType}">
-                    <span class="box-circle"></span>
-                    <span id='${paymentType}_text'>${description}</span>
-                    </div>`;
+                        let paymentCard = `<button type="button" class="knav knav-primary mb-2
+                        payments "  id='${paymentType}_card' data-span="${paymentType}">
+                    ${description}
+                    </button>`;
                         $(".payments-carousel").append(paymentCard);
                     });
                     getPaymentBeneficiaries();
@@ -189,9 +187,9 @@ function initPaymentsCarousel() {
     let payments = document.querySelectorAll(".payments");
     payments.forEach((item, i) => {
         item.addEventListener("click", (e) => {
-            $(".payments").removeClass("current-type");
+            $(".payments").removeClass("current-type active");
             const type = $(e.currentTarget).attr("data-span");
-            $(e.currentTarget).addClass("current-type");
+            $(e.currentTarget).addClass("current-type active");
             pageData.currentType = type;
             //populate beneficiaries
             $("#to_account");
@@ -215,6 +213,7 @@ function populateBeneficiariesSelect(type) {
         $("#to_account").append(
             `<option selected disabled> --- Select Beneficiary --- </option>`
         );
+        console.log(beneData);
         beneData.forEach((bene, i) => {
             let { ACCOUNT, NICKNAME, PAYEE_NAME } = bene;
             const paymentLogo = pageData["pay_" + type].paySubTypes.find(
@@ -223,12 +222,16 @@ function populateBeneficiariesSelect(type) {
             let logo = paymentLogo
                 ? "data:image/jpg;base64," + paymentLogo
                 : "assets/images/add.png";
-            let content = `<span class='row text-capitalize'><img src='${logo}' class='ml-2 mr-3' style='width:2rem'><span class='mr-3'>${ACCOUNT}</span> <span>${NICKNAME}</span></span>`;
+            let content = `<div class='d-flex text-capitalize px-2 align-items-center' style='line-height: 1.5 !important'>
+            <div class='text-right mr-2'><img style='width: 50px;' src='${logo}' class='img-fluid'/></div>
+            <div class='font-14  '>
+                 <div class='text-primary font-weight-bold'>${NICKNAME}</div>
+                 <div >${ACCOUNT}</div>
+            </div> </div>`;
             let option = `<option data-content="${content}" data-type='${PAYEE_NAME}' value='${ACCOUNT}'> </option> `;
             $("#to_account").append(option);
         });
     }
-    $("#to_account").selectpicker("refresh");
 }
 
 function populateSubtypesSelect(type) {
@@ -250,20 +253,18 @@ function populateSubtypesSelect(type) {
         paymentDescription = paymentDescription.toLowerCase();
         $("#payment_label").val(paymentLabel).text(paymentLabel);
         $("#payment_label_input").attr("placeholder", `Enter ${paymentLabel}`);
-        let content = `<span class='text-capitalize'><img src='${logo}' class='mx-2' style='width:2rem'>${paymentDescription}</span>`;
+        let content = `<span class='text-capitalize font-14'><img src='${logo}' class='mx-2' style='width:50px'>${paymentDescription}</span>`;
         let option = `<option data-content="${content}"  value='${paymentCode}'> </option> `;
         $("#subtype_select").append(option);
         $("#subtype_div").show();
         return;
     });
-    $("#subtype_select").selectpicker("refresh");
 }
 
 $(() => {
     let isOnetimePayment = false;
     siteLoading("show");
     paymentType();
-    $(".form-control").selectpicker("refresh");
 
     function updateTransactionType(type) {
         if (type === "onetime") {
@@ -293,7 +294,6 @@ $(() => {
         }
         $("#pin_code_modal").modal("show");
     });
-
     $("#next_button").on("click", (e) => {
         e.preventDefault();
         let account = $("#from_account option:selected").attr(
