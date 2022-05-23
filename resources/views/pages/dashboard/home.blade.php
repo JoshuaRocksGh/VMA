@@ -78,9 +78,10 @@ $currentPath = 'Dashboard';
                                             <td> Account No. </td>
                                             <td> Account Name </td>
                                             <td> Account Type </td>
-                                            <td> Ledger Bal </td>
-                                            <td> Available Bal </td>
-                                            <td> Over Draft </td>
+                                            <td> Cur </td>
+                                            <td class="text-right"> Ledger Bal </td>
+                                            <td class="text-right"> Available Bal </td>
+                                            <td class="text-right"> Over Draft </td>
                                         </tr>
                                     </thead>
 
@@ -94,6 +95,7 @@ $currentPath = 'Dashboard';
                                         <tr class="bg-primary text-white ">
                                             <td> Facility No. </td>
                                             <td> Description </td>
+                                            <td> Cur </td>
                                             <td> Amount Granted </td>
                                             <td> Loan Bal </td>
 
