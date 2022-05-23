@@ -166,10 +166,9 @@
 
             </div>
         </div>
+        <span id="beneficiary_modal_backup" hidden disabled style="display: none"></span>
     </div>
-</div>
-<span id="beneficiary_modal_backup" hidden disabled style="display: none"></span>
-@include("snippets.blockui")
-<script src="assets/js/pages/transfer/beneficiary/beneficiaryForm.js"></script>
-<script src="assets/js/pages/transfer/beneficiary/saveBeneficiary.js"></script>
-{{-- <script src="assets/js/functions/validateEmail.js"></script> --}}
+    @include("snippets.blockui")
+    <script src="assets/js/pages/transfer/beneficiary/beneficiaryForm.js"></script>
+    <script src="assets/js/pages/transfer/beneficiary/saveBeneficiary.js"></script>
+    {{-- <script src="assets/js/functions/validateEmail.js"></script> --}}
