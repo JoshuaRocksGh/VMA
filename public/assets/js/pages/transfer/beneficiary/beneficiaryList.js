@@ -59,7 +59,9 @@ function drawBeneficiaryTable() {
     let table = $("#beneficiary_list")
         .DataTable({
             destroy: true,
+            responsive: true,
             columnDefs: [
+                { responsivePriority: 1, targets: 5 },
                 {
                     targets: "_all",
                     orderable: false,
@@ -103,7 +105,7 @@ function drawBeneficiaryTable() {
     });
 }
 
-$(document).ready(function () {
+$(() => {
     getBeneficiaryList();
     $("#add_beneficiary").on("click", () => {
         addBankBeneficiary($(".current-type").attr("data-bene-type"));

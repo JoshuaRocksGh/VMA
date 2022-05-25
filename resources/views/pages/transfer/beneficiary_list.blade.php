@@ -2,12 +2,6 @@
 
 @section('styles')
 <style>
-    .page-item.active .page-link {
-
-        background-color: #17a2b8;
-        border-color: #17a2b8;
-    }
-
     .table_over_flow {
         overflow-y: hidden;
 
@@ -110,11 +104,11 @@ $currentPath = "Transfer Beneficiary";
                 id="add_beneficiary"><i class="pr-2 fa fa-user-plus"></i>Add</button>
         </div>
 
-        <div class="p-3 mt-3 rounded-lg m-2 customize_card table-responsive" id="transaction_summary">
+        <div class="p-3 mt-3 rounded-lg m-2 customize_card " id="transaction_summary">
             <table id="beneficiary_list"
                 class="table table-bordered table-centered table-striped  dt-responsive w-100 mb-0 beneficiary_list_display">
                 <thead>
-                    <tr class="bg-info text-white">
+                    <tr class="bg-primary text-white">
                         <th> <b> Alias </b> </th>
                         <th> <b> Account Name </b> </th>
                         <th> <b> Account Number </b> </th>
@@ -139,7 +133,7 @@ $currentPath = "Transfer Beneficiary";
 @section('scripts')
 
 <script>
-    const pageData = new Object()
+    const pageData = {}
     const noDataAvailable =   {!! json_encode($noDataAvailable) !!}
 </script>
 <script src="assets/js/pages/transfer/beneficiary/beneficiaryList.js">
