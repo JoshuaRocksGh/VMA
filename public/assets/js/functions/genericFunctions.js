@@ -215,6 +215,7 @@ function blockUi(data) {
     });
 }
 function unblockUi(block = "#body") {
+    console.log(block);
     $(block).unblock();
 }
 
