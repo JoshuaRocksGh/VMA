@@ -1,13 +1,4 @@
 $(() => {
-    let qrData = new Object();
-
-    $("#accounts").on("change", function () {
-        if (!$("#accounts").val()) {
-            return false;
-        }
-        qrData.accountNumber = $("#accounts").val().split("~")[2];
-    });
-
     $("#receive_payment_tab").on("click", () => {
         $("#amount_view").show(500);
     });
@@ -17,21 +8,31 @@ $(() => {
     });
 
     $("#generate_qr").on("click", () => {
-        const { accountNumber, amount } = qrData;
+        const isCashIn = $("#cash_in_tab").hasClass("active");
+        const accountNumber = $("#accounts option:selected").attr(
+            "data-account-number"
+        );
+        const amount = $("#amount").val();
         if (!accountNumber) {
             toaster("select account number", "warning");
             return false;
         }
-        if (isCashIn) {
-            qrData.amount = $("#amount").val();
+        if (!isCashIn) {
             if (!amount || isNaN(amount)) {
                 toaster("invalid amount", "warning");
                 return false;
             }
-        } else {
-            delete qrCode.amount;
         }
+        const qrData = { accountNumber, amount };
+        if (isCashIn) delete qrData.amount;
+
         $("#qrcode").empty();
+
+        blockUi({ block: "#qrcode" });
+        setTimeout(() => {
+            console.log(qrData);
+            unblockUi("#qrcode");
+        }, 500);
         let qrCode = new QRCode(document.getElementById("qrcode"), {
             text: JSON.stringify(qrData),
             logo: "assets/images/rokel_logo.png",
