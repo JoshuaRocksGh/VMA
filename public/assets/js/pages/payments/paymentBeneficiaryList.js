@@ -1,4 +1,3 @@
-const pageData = new Object();
 function getBeneficiaryList() {
     $.ajax({
         tpye: "GET",
@@ -110,9 +109,9 @@ function drawBeneficiaryTable() {
         const img = logo
             ? "data:image/jpg;base64," + logo
             : "assets/images/add.png";
-        const payeeImage = `<img src="${img}" class="payment_icon">`;
+        const payeeImage = `<img src="${img}" height="25" class="payment_icon">`;
         const payeeText = `<span> ${PAYEE_NAME} </span>`;
-        const payee = `<div class="d-flex m-0">${payeeImage}${payeeText}</div>`;
+        const payee = `<div class="d-flex align-items-center m-0">${payeeImage}<span class="ml-2">${payeeText}</span></div>`;
         table.row.add([NICKNAME, ACCOUNT, payee, editIcon]).draw("full-reset");
     });
     // return;
@@ -129,7 +128,7 @@ function drawBeneficiaryTable() {
     siteLoading("hide");
 }
 
-$(document).ready(function () {
+$(() => {
     siteLoading("show");
     getPaymentTypes();
     $("#add_beneficiary").on("click", () => {
@@ -139,8 +138,10 @@ $(document).ready(function () {
     beneficiaryType.forEach((item, i) => {
         item.addEventListener("click", (e) => {
             const currentType = e.currentTarget;
-            $(".beneficiary-type").removeClass("current-type");
-            $(currentType).addClass("current-type");
+            $(".beneficiary-type")
+                .removeClass("current-type")
+                .removeClass("active");
+            $(currentType).addClass("current-type").addClass("active");
             $("#beneficiary_type_title").text(
                 $(currentType).attr("data-title") + " "
             );
