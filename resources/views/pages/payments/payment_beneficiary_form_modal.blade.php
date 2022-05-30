@@ -18,7 +18,7 @@
 <div class="modal fade" id="edit_modal" data-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header bg-info" id="beneficiary_form_header">
+            <div class="modal-header bg-primary" id="beneficiary_form_header">
                 <h5 class="modal-title text-white text-capitalize font-weight-bold" id="beneficiary_form_title">
                     Beneficiary Form</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

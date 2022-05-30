@@ -72,7 +72,7 @@ async function prepareBeneficiaryForm(currentType, mode) {
         const option = `<option value='${paymentCode}' >${paymentDescription} </option>`;
         $("#payment_subtype").append(option);
     });
-    $("#payment_subtype").selectpicker("refresh");
+    $("#payment_subtype").select2();
     $("#payment_subtype")
         .on("change", function () {
             const i = document.getElementById("payment_subtype").selectedIndex;
