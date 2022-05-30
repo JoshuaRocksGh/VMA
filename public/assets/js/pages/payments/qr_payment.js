@@ -1,7 +1,7 @@
 $(() => {
     let qrData = new Object();
 
-    $("#accounts").change(function () {
+    $("#accounts").on("change", function () {
         if (!$("#accounts").val()) {
             return false;
         }
