@@ -227,7 +227,8 @@
                                 style="width: 80px;" disabled>
                             @endif
                             @if ($currentPath === 'International Bank')
-                            <select class="" style="width: 100px;" id="transfer_currency" required>
+                            <select class="select2-no-search currency_select" style="width: 100px;"
+                                id="transfer_currency" required>
                                 <option value="SLL">SLL</option>
                             </select>
                             @endif
@@ -238,6 +239,8 @@
                             id="amount"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                             required>
+                        <button type="button" class="btn btn-brand  ml-2 btn-sm" id="rate_button"><span
+                                class="mr-1">Rate</span><i class="fas fa-calculator"></i></button>
                     </div>
                 </div>
 

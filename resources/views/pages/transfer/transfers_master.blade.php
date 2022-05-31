@@ -5,6 +5,7 @@
 
         @include('snippets.transfer.bank_transfer_form')
         @include('snippets.transactionSummary')
+
     </section>
     {{-- <section class="col-md-5 mb-3 z-1 px-2 d-none d-lg-block" id="transfer_details_view">
         @include('snippets.transfer.transfers_detail_view')
@@ -13,6 +14,7 @@
         <hr>
     </div>
 </div>
+@include('snippets.rateCalculator')
 <script>
     const pageData = new Object();
     pageData.transferType = @json($currentPath);
