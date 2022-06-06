@@ -274,11 +274,10 @@ function getCurrencies() {
         datatype: "application/json",
         success: function (response) {
             let data = response.data;
-            console.log(data);
+            pageData.currencies = data;
             $(".currency_select").empty();
             $.each(data, function (index) {
                 const selected = data[index].isoCode === "SLL";
-                console.log(selected);
                 $(".currency_select").append(
                     `<option ${selected ? "selected" : ""} data-description=${
                         data[index].description

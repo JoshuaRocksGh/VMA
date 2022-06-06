@@ -16,7 +16,7 @@
 </div>
 @include('snippets.rateCalculator')
 <script>
-    const pageData = new Object();
+    pageData = {};
     pageData.transferType = @json($currentPath);
     pageData.userAccounts = @json(session()->get('customerAccounts'));
     var {
