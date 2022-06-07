@@ -236,36 +236,36 @@ function getStandingOrderFrequencies() {
     });
 }
 
-function getCurrencies() {
-    $.ajax({
-        type: "GET",
-        url: "get-currency-list-api",
-        datatype: "application/json",
-        success: function (response) {
-            let data = response.data;
-            console.log(data);
-            $("#transfer_currency").empty();
-            $.each(data, function (index) {
-                const selected = data[index].isoCode === "SLL";
-                console.log(selected);
-                $("#transfer_currency").append(
-                    `<option ${selected ? "selected" : ""} data-description=${
-                        data[index].description
-                    } data-currCode=${data[index].currCode} value=${
-                        data[index].isoCode
-                    }>
-                        ${data[index].isoCode} </option>`
-                );
-            });
-            $("#transfer_currency").trigger("change");
-        },
-        error: function (xhr, status, error) {
-            setTimeout(function () {
-                getStandingOrderFrequencies();
-            }, $.ajaxSetup().retryAfter);
-        },
-    });
-}
+// function getCurrencies() {
+//     $.ajax({
+//         type: "GET",
+//         url: "get-currency-list-api",
+//         datatype: "application/json",
+//         success: function (response) {
+//             let data = response.data;
+//             console.log(data);
+//             $("#transfer_currency").empty();
+//             $.each(data, function (index) {
+//                 const selected = data[index].isoCode === "SLL";
+//                 console.log(selected);
+//                 $("#transfer_currency").append(
+//                     `<option ${selected ? "selected" : ""} data-description=${
+//                         data[index].description
+//                     } data-currCode=${data[index].currCode} value=${
+//                         data[index].isoCode
+//                     }>
+//                         ${data[index].isoCode} </option>`
+//                 );
+//             });
+//             $("#transfer_currency").trigger("change");
+//         },
+//         error: function (xhr, status, error) {
+//             setTimeout(function () {
+//                 getStandingOrderFrequencies();
+//             }, $.ajaxSetup().retryAfter);
+//         },
+//     });
+// }
 
 function getCurrencies() {
     $.ajax({
@@ -274,12 +274,11 @@ function getCurrencies() {
         datatype: "application/json",
         success: function (response) {
             let data = response.data;
-            console.log(data);
-            $("#transfer_currency").empty();
+            pageData.currencies = data;
+            $(".currency_select").empty();
             $.each(data, function (index) {
                 const selected = data[index].isoCode === "SLL";
-                console.log(selected);
-                $("#transfer_currency").append(
+                $(".currency_select").append(
                     `<option ${selected ? "selected" : ""} data-description=${
                         data[index].description
                     } data-currCode=${data[index].currCode} value=${
@@ -288,7 +287,10 @@ function getCurrencies() {
                         ${data[index].isoCode} </option>`
                 );
             });
-            $("#transfer_currency").trigger("change");
+            console.log("here");
+            $(".currency_select").trigger("change").select2({
+                minimumResultsForSearch: Infinity,
+            });
         },
         error: function (xhr, status, error) {
             setTimeout(function () {
@@ -331,7 +333,7 @@ function getAccountDescription(account) {
                 details = response.data;
                 account.beneficiaryAccountName = details.accountDescription;
                 account.beneficiaryAccountCurrency = details.accountCurrencyIso;
-            // console.log("get-account-description =>",account)
+                // console.log("get-account-description =>",account)
                 handleToAccount(account);
             } else {
                 toaster(response.message, "warning");
@@ -356,12 +358,12 @@ function handleToAccount(account) {
     $(".display_to_account_no").text(beneficiaryAccountNumber);
 }
 
-$(() => {
-    let transferInfo = new Object();
-    let fromAccount = new Object();
+$(async () => {
+    let transferInfo = {};
+    let fromAccount = {};
     $(".account_currency").text("SLL");
-    let toAccount = new Object();
-    let onetimeToAccount = new Object();
+    let toAccount = {};
+    let onetimeToAccount = {};
     let confirmationCompleted = false;
     let validationsCompleted = false;
     let isOnetimeTransfer = false;
@@ -374,10 +376,9 @@ $(() => {
         templateResult: accountTemplate,
         templateSelection: accountTemplate,
     });
-    $("#transfer_currency").select2({
-        minimumResultsForSearch: Infinity,
-    });
 
+    getCurrencies();
+    getFx();
     function renderOwnAccounts() {
         $("#to_account").empty()
             .append(`<option disabled selected value=""> -- Select
@@ -665,9 +666,6 @@ $(() => {
                 convertToLocalCurrency();
             });
 
-            getCurrencies();
-            getFx();
-
             $("#onetime_select_country").on("change", () => {
                 onetimeToAccount.bankCountryCode = $(
                     "#onetime_select_country"
@@ -878,5 +876,13 @@ $(() => {
     $("#save_as_beneficiary").on("click", () => {
         const beneData = Object.assign({}, transferInfo);
         beneData.accountNumber = transferInfo.console.log(beneData);
+    });
+
+    $("#rate_button").on("click", (e) => {
+        $("#rate_modal").modal("show");
+        $(".rate-select").select2({
+            dropdownParent: $("#rate_modal"),
+            minimumResultsForSearch: Infinity,
+        });
     });
 });

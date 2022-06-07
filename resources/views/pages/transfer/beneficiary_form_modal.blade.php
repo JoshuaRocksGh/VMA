@@ -20,7 +20,7 @@
     }
 
     .wizard-header.active {
-        background-color: #4fc6e1;
+        background-color: var(--primary);
         color: #ffffff;
         border: none
     }
@@ -29,7 +29,7 @@
 <div class="modal fade" id="edit_modal" data-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header bg-info" id="beneficiary_form_header">
+            <div class="modal-header bg-primary" id="beneficiary_form_header">
                 <h5 class="modal-title font-18 py-1 text-center text-white text-capitalize font-weight-bold"
                     id="beneficiary_form_title">
                     Beneficiary Form</h5>
@@ -75,7 +75,7 @@
                                                 placeholder="Enter Account Number" minlength="9" maxlength="30">
                                             <div class="input-group-append" id="account_number_search"
                                                 style="display: none">
-                                                <button class="btn btn-info" type="button"> <i
+                                                <button class="btn btn-primary" type="button"> <i
                                                         class="fas fa-search"></i> </button>
                                             </div>
                                         </div>
@@ -164,7 +164,6 @@
         </div>
         <span id="beneficiary_modal_backup" hidden disabled style="display: none"></span>
     </div>
-    @include("snippets.blockui")
     <script src="assets/js/pages/transfer/beneficiary/beneficiaryForm.js"></script>
     <script src="assets/js/pages/transfer/beneficiary/saveBeneficiary.js"></script>
     {{-- <script src="assets/js/functions/validateEmail.js"></script> --}}

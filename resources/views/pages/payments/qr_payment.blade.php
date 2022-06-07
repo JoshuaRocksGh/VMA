@@ -55,7 +55,7 @@ $basePath = "Payment"
                 <div class="form-group row" id="amount_view">
                     <label for="pin" class="col-4 col-form-label text-primary">
                         Enter Amount </label>
-                    <input type="text" class="form-control col-8" placeholder="Enter a fixed amount to receive"
+                    <input type="number" class="form-control col-8" placeholder="Enter a fixed amount to receive"
                         id="amount"
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')">
                 </div>

@@ -1,7 +1,7 @@
 <div class="container-fluid  mb-2">
     <div class="d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
-            <img style="width: 30px;" src="{{ asset('assets/images/logoRKB.png') }}" alt="logo">&emsp;
+            <img style="width: 40px;" src="{{ asset('assets/images/logoRKB.png') }}" alt="logo">&emsp;
             <span class="font-14 text-primary font-weight-bold text-uppercase"> {{ $pageTitle }}
             </span>
         </div>

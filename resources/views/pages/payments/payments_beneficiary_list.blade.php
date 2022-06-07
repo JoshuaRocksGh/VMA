@@ -10,8 +10,18 @@ $currentPath = "payment Beneficiary";
 
 <div class="dashboard site-card ">
     <div class="dashboard-body p-4">
+        <div class="d-flex justify-content-center mt-1 ">
+            <h3
+                class="font-14 pr-3 text-capitalize text-center  font-weight-bold align-self-center text-primary my-auto">
+                <i class="mx-2 fa fa-user-friends"></i><span class="font-14" id="beneficiary_type_title">Mobile
+                    Money
+                </span>Beneficiaries
+            </h3>
+            <button type="button" class="btn px-3  btn-sm font-12 font-weight-bold btn-primary btn-rounded"
+                id="add_beneficiary"><i class="pr-2 fa fa-user-plus"></i>Add</button>
+        </div>
         <div class="row mx-auto" style="max-width: 80rem;">
-            <div class="col-md-4 mt-lg-5 mx-auto" style="max-width: 20rem">
+            <div class="col-md-4 mt-lg-4 mx-auto" style="max-width: 20rem">
                 <h2 class="font-14 text-center font-weight-bold text-capitalize mb-3 text-primary">select Beneficiary
                     type
                 </h2>
@@ -45,20 +55,8 @@ $currentPath = "payment Beneficiary";
                 <hr>
             </div>
             <div class="col-md-8 mx-auto" style="max-width: 55rem;">
-
-                <div class="d-flex justify-content-center mt-1 ">
-                    <h3
-                        class="font-14 pr-3 text-capitalize text-center  font-weight-bold align-self-center text-primary my-auto">
-                        <i class="mx-2 fa fa-user-friends"></i><span class="font-14" id="beneficiary_type_title">Mobile
-                            Money
-                        </span>Beneficiaries
-                    </h3>
-                    <button type="button" class="btn px-3  btn-sm font-12 font-weight-bold btn-primary btn-rounded"
-                        id="add_beneficiary"><i class="pr-2 fa fa-user-plus"></i>Add</button>
-                </div>
-
-                <div class="p-3 mt-3 rounded-lg  customize_card table-responsive" id="transaction_summary">
-                    <table id="beneficiary_list"
+                <div class="pt-4 table-responsive" id="transaction_summary">
+                    <table id="beneficiary_list" style="min-height: 200px"
                         class="table table-hover table-centered w-100 mb-0 beneficiary_list_display">
                         <thead>
                             <tr class="bg-primary text-white">
