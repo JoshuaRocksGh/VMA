@@ -26,7 +26,7 @@
                     <div class="d-flex pt-1 align-items-center">
                         <i class="fas fa-caret-down"></i>
                         <div class="px-2" style="width: 120px;">
-                            <select id="currency2" data-abbr-target="abbr2" data-img-target="curr_img2"
+                            <select id="currency2" value='SLO' data-abbr-target="abbr2" data-img-target="curr_img2"
                                 class="select2-no-search no-select-border  rate-select currency_select" required>
                             </select>
                         </div>
@@ -151,7 +151,8 @@ $('.rate-select').on('change', (e)=>{
     console.log(currencyConvertor(pageData.fxRate, 1.00, currency1, currency2))
 })
 
- 
+$('#currency2').val('USD')
+
     document.getElementById('amount_to_convert').addEventListener('keyup', amountChange)
     $('.rate-select').trigger('change')
     const keyup = new Event('keyup')
