@@ -123,7 +123,7 @@ $pageTitle = 'account statement';
             </div>
             <div class="table-responsive mb-0  rounded ">
 
-                <table role="table" class="table mb-0  font-12   table-bordered table-striped table-centered"
+                <table role="table" class="table mb-0  font-12  w-100 table-bordered table-striped table-centered"
                     id="account_transaction_display_table" style="">
                     <thead>
 

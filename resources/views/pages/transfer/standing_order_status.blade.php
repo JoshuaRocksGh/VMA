@@ -9,39 +9,41 @@ $pageTitle =" STANDING ORDER STATUS";
 @include("snippets.pageHeader")
 
 
-<div class="mx-sm-2  m-lg-3">
-    <div class="site-card">
-        <div class="col-md-6 mx-auto">
-            <label class="d-block text-center  font-weight-bold mb-1 text-primary"> Select Account To Transfer
-                From</label>
-            <select data-style="" class="form-control accounts-select" id="from_account" required>
-                @include("snippets.accounts")
-            </select>
-        </div>
-        <hr class="col-md-9">
-        <div class="table-responsive p-2 table-centered table-striped table-bordered ">
-            <table class="table table-striped mb-0 " id="standing_order_display_area">
-                <thead>
-                    <tr class="bg-info text-white ">
-                        <td> <b> Account No </b> </td>
-                        <td> <b> Beneficiary Account </b> </td>
-                        <td> <b> Amount (SLL) </b> </td>
-                        <td> <b> Order Date </b> </td>
-                        <td> <b> End Date </b> </td>
-                        <td> <b> Frequency </b> </td>
-                        <td> <b> First Payment </b> </td>
-                        <td> <b> Last Payment </b> </td>
-                        <td> <b> Cancel </b> </td>
-                    </tr>
-                </thead>
-                <tbody class="standing_order_details">
-                    <td colspan="100%" class="text-center">
-                        {{-- global noDataAvailable image variable shared with all views --}}
-                        {!! $noDataAvailable !!}
-                    </td>
+<div class="dashboard site-card">
+    <div class=" dashboard-body p-4">
+        <div>
+            <div style="max-width: 650px;" class="mx-auto">
+                <label class="d-block text-center  font-weight-bold mb-1 text-primary"> Select Account To Transfer
+                    From</label>
+                <select data-style="" class="form-control accounts-select" id="from_account" required>
+                    @include("snippets.accounts")
+                </select>
+            </div>
+            <hr class="col-md-9">
+            <div class=" p-2 table-responsive">
+                <table class="table table-striped w-100 rounded table-bordered nowrap" id="standing_order_display_area">
+                    <thead>
+                        <tr class="bg-primary text-white ">
+                            <td> <b> Account No </b> </td>
+                            <td> <b> Beneficiary Account </b> </td>
+                            <td> <b> Amount (SLL) </b> </td>
+                            <td> <b> Order Date </b> </td>
+                            <td> <b> End Date </b> </td>
+                            <td> <b> Frequency </b> </td>
+                            <td> <b> First Payment </b> </td>
+                            <td> <b> Last Payment </b> </td>
+                            <td> <b> Cancel </b> </td>
+                        </tr>
+                    </thead>
+                    <tbody class="standing_order_details">
+                        <td colspan="100%" class="text-center">
+                            {{-- global noDataAvailable image variable shared with all views --}}
+                            {!! $noDataAvailable !!}
+                        </td>
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

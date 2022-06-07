@@ -717,6 +717,9 @@
     border: 1px solid;
     padding: 8px 5px;
     margin: 0 auto;
+    color: var(--primary);
+    background-color: var(--white);
+    border-color: var(--primary);
 }
 
 .knav-primary {

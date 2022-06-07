@@ -3,35 +3,35 @@
     <div class=" site-card p-1">
         <h6 class="pl-3 pt-2">Quick Links</h6>
         <div class="d-flex w-100">
-            <button
+            <a href='/payments'
                 class="site-card-body px-2 d-flex align-items-center justify-content-center grad-blue-pink  w-100 border-0  grad "
                 style="min-height: 75px">
 
                 <span class=""><i class="fas font-28 fa-money-check-alt"></i> </span>
                 <span class="font-weight-bold font-14">&nbsp; MAKE PAYMENT</span>
-            </button>
-            <button
+            </a>
+            <a href="/qr-payment"
                 class="site-card-body d-flex align-items-center justify-content-center  border-0  grad-gray-blue grad "
                 style="min-height: 75px">
                 <span class=""><i class="fas font-28 fa-qrcode"></i> </span>
                 <span class=" font-weight-bold ml-2 font-14">QR</span>
-            </button>
+            </a>
 
         </div>
         <div class="d-flex">
-            <button
+            <a href="/own-account"
                 class="site-card-body px-2 d-flex align-items-center justify-content-center grad-blue-pink  w-100 border-0  grad-gray-blue red-orange grad "
                 style="min-height: 25px">
                 <span class=""><i class="fas font-18 fa-sync"></i> </span>
 
                 <span class=" font-weight-bold ml-2 font-12">MAKE TRANSFER</span>
-            </button>
-            <button
+            </a>
+            <a href="/card-services"
                 class="site-card-body px-2 d-flex align-items-center justify-content-center grad-blue-pink  w-100 border-0  grad-gray-blue grad "
                 style="min-height: 25px">
                 <span class=""><i class="fas font-18 fa-credit-card"></i> </span>
                 <span class=" font-weight-bold ml-2 font-12">Card Services</span>
-            </button>
+            </a>
         </div>
     </div>
     <div class="dashboard site-card p-1">

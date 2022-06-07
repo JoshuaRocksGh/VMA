@@ -42,7 +42,6 @@ function getCountries() {
                     option = `<option value="${codeType}"  data-country-code="${actualCode}">${description}</option>`;
                     $("#select_country").append(option);
                 });
-                $("#select_country").select2({ theme: "bootstrap4" });
             } else {
                 toaster(response.message);
             }
@@ -78,8 +77,6 @@ function getInternationalBanks(countryCode) {
                     $("#select_bank").val(`${selectedBank}`).trigger("change");
                     $("#select_country").attr("data-bank", "");
                 }
-
-                $("#select_bank").select2({ theme: "bootstrap4" });
                 $("#select_bank").attr("disabled", false);
             } else {
                 toaster(response.message);
@@ -151,9 +148,10 @@ async function addBankBeneficiary(currentType) {
     await prepareBeneficiaryForm(currentType, "Add");
     $("#delete_btn").hide();
     $(".modal-footer").removeClass("justify-content-between");
+    $("#edit_modal").modal("show");
 }
-
 async function prepareBeneficiaryForm(currentType, mode) {
+    console.log(currentType, mode);
     $("#edit_modal").attr("data-mode", mode);
     $("#edit_modal").attr("data-type", currentType);
     if (currentType === "SAB") {
@@ -163,12 +161,11 @@ async function prepareBeneficiaryForm(currentType, mode) {
             $("#account_name").val("");
             $("#account_currency").val("");
         });
-        $("#account_number_search").on("click", () => {
+        $("#account_number_search").on("click", async () => {
             if ($("#account_number").val().length >= ACCOUNT_NUMBER_LENGTH) {
-                blockUi("#beneficiary_form");
-                getAccountDescription($("#account_number").val()).always(() => {
-                    unBlockUi("#beneficiary_form");
-                });
+                blockUi({ block: "#beneficiary_form" });
+                await getAccountDescription($("#account_number").val());
+                unblockUi("#beneficiary_form");
             } else {
                 toaster("invalid account length", "warning");
             }
@@ -186,16 +183,16 @@ async function prepareBeneficiaryForm(currentType, mode) {
         );
         await getCountries();
         $("#select_country").on("change", (e) => {
-            blockUi("#beneficiary_form");
+            blockUi({ block: "#beneficiary_form" });
             getInternationalBanks($("#select_country").val()).always(() => {
-                unBlockUi("#beneficiary_form");
+                unblockUi("#beneficiary_form");
             });
         });
         $(".international-bank-form").show();
         $("#account_name").attr("disabled", false);
         $("#select_bank").attr("disabled", true);
     }
-    $("#edit_modal").modal("show");
+    $("select").select2({ dropdownParent: $("#edit_modal") });
 }
 
 //editting beneficiary
@@ -322,7 +319,7 @@ function validateFormInputs() {
     return true;
 }
 
-$(document).ready(function () {
+$(() => {
     initialModalHtml = $("#edit_modal").html();
     initBeneficiaryForm();
     $("#edit_modal").on("hidden.bs.modal", (e) => {

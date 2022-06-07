@@ -83,14 +83,10 @@ $(function () {
 
     const date = new Date();
     const today = date.toISOString().slice(0, 10);
-    const startDate = new Date(date.getFullYear()).toISOString().slice(0, 10);
-    const endDate = today;
-    // let day = date.getDate().toString().padStart(2, "0");
-    // let month = (date.getMonth() + 1).toString().padStart(2, "0");
-    // let startDate = date.getFullYear() + "-" + "01" + "-01";
-    // let endDate = date.getFullYear() + "-" + month + "-" + day;
-    // let today = endDate;
-    console.log(today, startDate, endDate);
+    let startDate = new Date(date.getFullYear() + "-01-01")
+        .toISOString()
+        .slice(0, 10);
+    let endDate = today;
     $("#startDate").val(startDate).attr("max", today);
     $("#endDate").val(startDate).attr("max", today);
     $("#endDate").val(endDate);
@@ -142,6 +138,7 @@ $(function () {
             toaster("please select an account", "warning");
             return false;
         }
+        siteLoading("show");
         await getAccountTransactions(accountNumber, startDate, endDate);
         siteLoading("hide");
 
@@ -158,6 +155,7 @@ $(function () {
             e.preventDefault();
             $(".buttons-excel").trigger("click");
         });
+        $("#filter").trigger("change");
     });
 
     if (PageData.requestAccount) {
@@ -172,36 +170,35 @@ $(function () {
 
     $("#filter").on("change", (e) => {
         e.preventDefault();
-        let workingTransactions;
-        switch (e.currentTarget.value) {
-            case "credit":
-                workingTransactions = PageData.transaction.filter(
-                    (e) => e.amount > 0
-                );
-                break;
-            case "debit":
-                workingTransactions = PageData.transaction.filter(
-                    (e) => e.amount < 0
-                );
-                break;
-            default:
-                workingTransactions = PageData.transaction;
-                break;
-        }
-        drawTransactionsTable(workingTransactions);
+        drawTransactionsTable();
     });
 
-    function drawTransactionsTable(workingTransactions) {
+    // filter
+    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        const amount = parseFloat(data[1]) ?? 0; // use data for amount column
+        let ret;
+        switch ($("#filter").val()) {
+            case "credit":
+                ret = amount > 0 ? true : false;
+                break;
+            case "debit":
+                ret = amount < 0 ? false : true;
+                break;
+            case "all":
+                ret = true;
+                break;
+            default:
+                ret = false;
+                break;
+        }
+        return ret;
+    });
+
+    function drawTransactionsTable() {
         $("#account_transaction_display_table tbody").empty();
-        // if (!workingTransactions || workingTransactions.length === 0) {
-        //     let noTrans = noDataAvailable.replace("Data", "Transactions");
-
-        //     $(".download").hide();
-        //     return;
-        // }
-
         let transactionTableOptions = {
             dom: "Bfrtip",
+            responsive: true,
             buttons: [
                 "excel",
                 {
@@ -217,20 +214,39 @@ $(function () {
                     "Records Found"
                 )}`,
             },
-            columnDefs: [
+            data: PageData.transaction,
+            columns: [
                 {
-                    targets: 0,
-                    render: function (data, type) {
-                        if (type === "display" || type === "filter") {
-                            return new Date(data).toLocaleString("en", {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                            });
-                        }
-                        return data;
+                    data: "postingSysDate",
+                    render: (data) =>
+                        new Date(data).toLocaleString("en", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                        }),
+                },
+                { data: "amount" },
+                { data: "narration" },
+                { data: "runningBalance" },
+                {
+                    data: "imageCheck",
+                    render: (data, type, row) =>
+                        data === 0
+                            ? (attachment = `<a href="#" data-value='${row.transactionNumber}' class="attachment-icon" >
+                <i class="fe-file-text d-block text-center text-success"></a>`)
+                            : "N/A",
+                },
+                {
+                    data: "transactionNumber",
+                    render: (data, type, row) => {
+                        console.log({ data, type, row });
+                        return `<button type="button" class="btn btn-primary more-details" data-toggle="modal" data-target="#accordion-modal" batch-no="${row.batchNumber}"
+                                posting-date="${row.postingSysDate}" trans-number="${row.transactionNumber}" value-date="${row.valueDate}" branch="${row.branch}"
+                                narration="${row.narration}" amount="${row.amount}" contra-account="${row.contraAccount}" channel="${row.channel}">Details</button>`;
                     },
                 },
+            ],
+            columnDefs: [
                 {
                     targets: [1, 3],
                     render: function (data, type) {
@@ -245,43 +261,18 @@ $(function () {
                         return data;
                     },
                 },
-                // {
-                //     targets: 4,
-                //     render: (data) => `<p class="text-left">${data}</p>`,
-                // },
-                {
-                    targets: 4,
-                    render: (data) =>
-                        data.split("~")[0] === 0
-                            ? (attachment = `<a href="#" data-value='${
-                                  data.split("~")[1]
-                              }' class="attachment-icon" >
-                    <i class="fe-file-text d-block text-center text-success"></a>`)
-                            : "N/A",
-                },
             ],
         };
-        let table = $("#account_transaction_display_table")
-            .DataTable(transactionTableOptions)
-            .clear();
-        workingTransactions.forEach((trans) => {
-            table.row
-                .add([
-                    trans.postingSysDate,
-                    trans.amount,
-                    // trans.contraAccount,
-                    trans.narration,
-                    trans.runningBalance,
-                    // trans.documentReference,
-                    `${trans.imageCheck}~${trans.batchNumber}`,
-                    `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#accordion-modal" batch-no="${trans.batchNumber}"
-                    posting-date="${trans.postingSysDate}" trans-number="${trans.transactionNumber}" value-date="${trans.valueDate}" branch="${trans.branch}"
-                    narration="${trans.narration}" amount="${trans.amount}" contra-account="${trans.contraAccount}" channel="${trans.channel}">Details</button>`,
-                ])
-                .order([0, "desc"])
-                .draw(false);
+        $("#account_transaction_display_table").DataTable(
+            transactionTableOptions
+        );
+        $(".attachment-icon").on("click", function (e) {
+            e.preventDefault();
+            const docId = $(this).attr("data-value");
+            console.log(docId);
+            getTransDocument(docId);
         });
-        $(".more_details").on("click", function () {
+        $(".more-details").on("click", function () {
             console.log($(this).attr("batch-no"));
             $(".transaction_date").html($(this).attr("posting-date"));
             $(".value_date").html($(this).attr("value-date"));
@@ -292,51 +283,63 @@ $(function () {
             $(".contra-account").html($(this).attr("contra-account"));
             $(".channel").html($(this).attr("channel"));
         });
-        $(".download").show();
+        // .clear();
+        // PageData.transaction.forEach((trans) => {
+        //     table.row
+        //         .add([
+        //             trans.postingSysDate,
+        //             trans.amount,
+        //             trans.narration,
+        //             trans.runningBalance,
+        //             `${trans.imageCheck}~${trans.batchNumber}`,
+        //             `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#accordion-modal" batch-no="${trans.batchNumber}"
+        //             posting-date="${trans.postingSysDate}" trans-number="${trans.transactionNumber}" value-date="${trans.valueDate}" branch="${trans.branch}"
+        //             narration="${trans.narration}" amount="${trans.amount}" contra-account="${trans.contraAccount}" channel="${trans.channel}">Details</button>`,
+        //         ])
+        //         .order([0, "desc"])
+        //         .draw(false);
+        // });
+
+        // $(".download").show();
         // PageData.prompt = true;
         // if (PageData?.accountAccount?.accountCurrency) {
         //     $(".currency_display").text(
         //         `(${PageData.accountAccount.accountCurrency})`
         //     );
         // }
-        // $(".attachment-icon").on("click", function (e) {
-        //     e.preventDefault();
-        //     const docId = $(this).attr("data-value");
-        //     getTransDocument(docId);
-        // });
     }
 
-    // function getTransDocument(batchNumber) {
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "account-trans-document-api",
-    //         datatype: "application/json",
-    //         data: { batchNumber },
-    //         headers: {
-    //             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    //         },
-    //         success: function (response) {
-    //             if (response.responseCode == "000") {
-    //                 const data = response.data;
-    //                 $.each(data, (i) => {
-    //                     Object.entries(data[i]).forEach(([key, value], j) => {
-    //                         if (key.includes("image")) {
-    //                             let active = j === 0 ? "active" : "";
-    //                             let img = `<div class="carousel-item ${active}">
-    //                             <img class="d-block w-100" src="data:image/jpg;base64,${value}" alt="slide-${j}">
-    //                             </div>`;
-    //                             $(".carousel-inner").append(img);
-    //                             let indicator = `<li data-target="#attachment_carousel" data-slide-to="${j}" class="${active}"></li>
-    //                           `;
-    //                             $(".carousel-indicators").append(indicator);
-    //                         }
-    //                     });
-    //                 });
-    //                 $("#attachment_modal").modal("show");
-    //             } else {
-    //                 $("#search_transaction").text("Search");
-    //             }
-    //         },
-    //     });
-    // }
+    function getTransDocument(batchNumber) {
+        $.ajax({
+            type: "POST",
+            url: "account-trans-document-api",
+            datatype: "application/json",
+            data: { batchNumber },
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.responseCode !== "000") {
+                    return;
+                }
+                const data = response.data;
+                $.each(data, (i) => {
+                    Object.entries(data[i]).forEach(([key, value], j) => {
+                        if (key.includes("image")) {
+                            let active = j === 0 ? "active" : "";
+                            let img = `<div class="carousel-item ${active}">
+                                <img class="d-block w-100" src="data:image/jpg;base64,${value}" alt="slide-${j}">
+                                </div>`;
+                            $(".carousel-inner").append(img);
+                            let indicator = `<li data-target="#attachment_carousel" data-slide-to="${j}" class="${active}"></li>
+                              `;
+                            $(".carousel-indicators").append(indicator);
+                        }
+                    });
+                });
+                $("#attachment_modal").modal("show");
+            },
+        });
+    }
 });

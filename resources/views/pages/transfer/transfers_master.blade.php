@@ -1,20 +1,16 @@
 @include('snippets.pageHeader')
-<div class="row">
-    <div class="col-12 py-3 px-2 px-sm-4 px-lg-5">
-        @include('snippets.pinCodeModal')
-        <div class="form_process row">
-            <section class="col-lg-12 mb-3 px-2 ">
+@include('snippets.pinCodeModal')
+<div class="form_process row">
+    <section class="col-lg-12 mb-3 px-2 ">
 
-                @include('snippets.transfer.bank_transfer_form')
-                @include('snippets.transactionSummary')
-            </section>
-            {{-- <section class="col-md-5 mb-3 z-1 px-2 d-none d-lg-block" id="transfer_details_view">
-                @include('snippets.transfer.transfers_detail_view')
-            </section> --}}
-        </div>
-        <div class="col-md-10">
-            <hr>
-        </div>
+        @include('snippets.transfer.bank_transfer_form')
+        @include('snippets.transactionSummary')
+    </section>
+    {{-- <section class="col-md-5 mb-3 z-1 px-2 d-none d-lg-block" id="transfer_details_view">
+        @include('snippets.transfer.transfers_detail_view')
+    </section> --}}
+    <div class="mx-auto col-md-10">
+        <hr>
     </div>
 </div>
 <script>
