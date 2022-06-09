@@ -6,12 +6,12 @@
     --orange: #fd7e14;
     --yellow: #f7b84b;
     --green: #1abc9c;
-    --teal: #02a8b5;
+    --teal: #226f9a;
     --cyan: #4fc6e1;
     --white: #fff;
     --gray: #98a6ad;
     --gray-dark: #343a40;
-    --primary: #0089c1;
+    /* --primary: #f672a7; */
     --primary-alt: #0388cb;
     --black: #000000;
     --primary: #0188bf;
@@ -56,11 +56,6 @@ button {
 .btn:focus {
     box-shadow: none;
 }
-.btn-primary {
-    color: var(--white);
-    background-color: var(--primary);
-    border-color: var(--primary);
-}
 .btn {
     font-size: 12px;
     font-weight: bold;
@@ -71,6 +66,11 @@ button {
     box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 }
 .btn-primary:hover,
+.btn-primary {
+    color: var(--white);
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
 .btn-primary:focus {
     color: var(--white);
     background-color: var(--primary);
@@ -111,6 +111,54 @@ button {
     color: var(--white);
     background-color: var(--primary);
     border-color: var(--primary);
+}
+
+.btn-brand:hover,
+.btn-brand {
+    color: var(--white);
+    background-color: var(--brand);
+    border-color: var(--brand);
+}
+.btn-brand:focus {
+    color: var(--white);
+    background-color: var(--brand);
+    border-color: var(--brand);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+}
+
+.btn-brand.disabled,
+.btn-brand:disabled {
+    color: var(--white);
+    background-color: var(--brand);
+    border-color: var(--brand);
+}
+
+.btn-brand:not(:disabled):not(.disabled).active,
+.btn-brand:not(:disabled):not(.disabled):active,
+.show > .btn-brand.dropdown-toggle {
+    color: var(--white);
+    background-color: var(--brand);
+    border-color: var(--brand);
+}
+
+.btn-brand:not(:disabled):not(.disabled).active:focus,
+.btn-brand:not(:disabled):not(.disabled):active:focus,
+.show > .btn-brand.dropdown-toggle:focus {
+    box-shadow: rgba(0, 0, 0, 0) 0px 1px 1px;
+}
+
+.btn-outline-brand {
+    color: var(--brand);
+    border-color: var(--brand);
+}
+
+.btn-outline-brand:not(:disabled):not(.disabled):active,
+.btn-outline-brand:not(:disabled):not(.disabled):focus,
+.btn-outline-brand:not(:disabled):not(.disabled):hover,
+.show > .btn-outline-brand.dropdown-toggle:focus {
+    color: var(--white);
+    background-color: var(--brand);
+    border-color: var(--brand);
 }
 
 /* ------------------------- Fonts ----------------------------------- */

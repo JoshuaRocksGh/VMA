@@ -16,7 +16,9 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 return;
             }
             $(".request_table tr").remove();
-            $("#approval-count").text(data.length > 0 ? data.length : 0);
+            console.log("data length =>", data.length);
+            // $("#approval-count").html(data.length > 0 ? data.length : 0);
+            $("#approval-count").text(10);
             const tableOptions = {
                 lengthChange: false,
                 pageLength: 5,
@@ -294,9 +296,7 @@ $(async () => {
     prepareGraphValues();
     accountsPieChart({ title: "Accounts", ...pageData.pieValues.totalsPie });
     function renderCurrency(data, row) {
-        return `<div class="table-cur text-right">${
-            row.currency ?? row.isoCode ?? "SLL"
-        } <span class="font-weight-bold">${formatToCurrency(
+        return `<div class="table-cur text-right"><span class="font-weight-bold">${formatToCurrency(
             parseFloat(data)
         )}</span></div>`;
     }
@@ -353,6 +353,7 @@ $(async () => {
                 },
                 { data: "accountDesc" },
                 { data: "accountType" },
+                { data: "currency" },
                 {
                     data: "ledgerBalance",
                     render: (data, type, row) => renderCurrency(data, row),
@@ -437,6 +438,7 @@ $(async () => {
                     data: "facilityNo",
                 },
                 { data: "description" },
+                { data: "isoCode" },
                 {
                     data: "amountGranted",
                     render: (data, type, row) => renderCurrency(data, row),

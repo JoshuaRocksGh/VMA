@@ -2,12 +2,6 @@
 
 @section('styles')
 <style>
-    .page-item.active .page-link {
-
-        background-color: #17a2b8;
-        border-color: #17a2b8;
-    }
-
     .table_over_flow {
         overflow-y: hidden;
 
@@ -78,6 +72,7 @@ $currentPath = "Transfer Beneficiary";
 @endphp
 @include("snippets.pageHeader")
 
+<<<<<<< HEAD
 <div class="">
     <div class="dashboard site-card ">
         <div class="row dashboard-body p-2">
@@ -130,10 +125,59 @@ $currentPath = "Transfer Beneficiary";
                     </table>
                 </div>
             </div> <!-- end card body-->
+=======
+<div class="dashboard site-card ">
+    <div class="dashboard-body p-4">
+        <h2 class="font-14 text-left font-weight-bold text-capitalize mb-3 text-primary">select Beneficiary type
+        </h2>
+        <div class="row mb-4 justify-content-center mx-auto" style="max-width: 750px;">
+            <div class="col-md-3 mb-2 mx-2 mx-lg-3  beneficiary-type current-type display-card bg-same-bank"
+                data-bene-type="SAB" data-title="Same Bank" id=''>
+                <span class="box-circle"></span>
+                <span class="mt-1 beneficiary-text" id=''>Same Bank</span>
+            </div>
+
+            <div class="col-md-3 mb-2 mx-2 mx-lg-3 beneficiary-type display-card  bg-other-bank" data-bene-type="OTB"
+                data-title="Other Bank" id=''>
+                <span class="box-circle"></span>
+                <span class="mt-1 beneficiary-text" id=''>Other Local Bank</span>
+            </div>
+            <div class="col-md-3 mb-2 mx-2 mx-lg-3 beneficiary-type display-card  bg-international-bank"
+                data-bene-type="INTB" data-title="International Bank" id=''>
+                <span class="box-circle"></span>
+                <span class="mt-1 beneficiary-text" id=''>International Bank</span>
+            </div>
         </div>
-        {{-- <div class="col-md-1"></div> --}}
-    </div> <!-- end card-body -->
-</div> <!-- end col -->
+        <hr>
+        <div class="row justify-content-center">
+            <h3 class=" text-capitalize text-center mx-3 font-weight-bold align-self-center my-auto"><i
+                    class="font-18 text-info mx-2 fa fa-user-friends"></i><span id="beneficiary_type_title">Same
+                    Bank
+                </span><span>Beneficiaries</span></h3>
+            <button type="button" class="btn px-3 btn-sm font-12 font-weight-bold btn-info btn-rounded"
+                id="add_beneficiary"><i class="pr-2 fa fa-user-plus"></i>Add</button>
+        </div>
+
+        <div class="p-3 mt-3 rounded-lg m-2 customize_card " id="transaction_summary">
+            <table id="beneficiary_list"
+                class="table table-bordered table-centered table-striped  dt-responsive w-100 mb-0 beneficiary_list_display">
+                <thead>
+                    <tr class="bg-primary text-white">
+                        <th> <b> Alias </b> </th>
+                        <th> <b> Account Name </b> </th>
+                        <th> <b> Account Number </b> </th>
+                        <th> <b> Email </b> </th>
+                        <th> <b> Bank </b> </th>
+                        <th class="text-center"> <b>Actions </b> </th>
+                    </tr>
+                </thead>
+
+            </table>
+>>>>>>> b3e195f5d87a9d97ae56f46b5e9f5c5819d052a9
+        </div>
+    </div>
+    {{-- <div class="col-md-1"></div> --}}
+</div> <!-- end card-body -->
 
 
 @include("pages.transfer.beneficiary_form_modal")
@@ -143,22 +187,8 @@ $currentPath = "Transfer Beneficiary";
 
 @section('scripts')
 
-<link href="assets\plugins\select2\select2.min.css" rel="stylesheet" />
-<link href="assets\plugins\select2\select2-bootstrap4.min.css" rel="stylesheet" />
-<style>
-    .select2-container--bootstrap4 .select2-selection--single .select2-selection__arrow b {
-        top: 0;
-    }
-
-    .select2-container--bootstrap4.select2-container--focus .select2-selection {
-        box-shadow: none;
-        border: 1px solid #ced4da;
-    }
-</style>
-<script src="assets\plugins\select2\select2.min.js" defer></script>
-
 <script>
-    const pageData = new Object()
+    const pageData = {}
     const noDataAvailable =   {!! json_encode($noDataAvailable) !!}
 </script>
 <script src="assets/js/pages/transfer/beneficiary/beneficiaryList.js">

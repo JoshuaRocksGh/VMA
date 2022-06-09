@@ -13,7 +13,7 @@ $currentPath = 'Tansfer Status';
 </div> --}}
 <div class="dashboard site-card" id="transaction_summary">
 
-    <div class="table-responsive dashboard-body p-2">
+    <div class="table-responsive p-4 dashboard-body p-2">
 
         <table class="table table-bordered mt-5 table-striped table-centered mb-0" id="transfer_status_table">
             <thead>

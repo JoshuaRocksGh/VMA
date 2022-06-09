@@ -165,12 +165,12 @@
 
 #side-menu a:hover {
     /* background-color: var(--brand); */
-    background-color: #226f9a;
+    background-color: var(--teal);
 }
 #side-menu a[aria-expanded="true"] {
     border-left: solid 5px var(--brand);
     padding-left: 15px;
-    background-color: #226f9a;
+    background-color: var(--teal);
 }
 
 .menu-arrow {
@@ -332,7 +332,7 @@
 /* .text-input {
     border: 1px solid #ced4da;
 } */
-
+/* 
 .form-control,
 .bootstrap-select .dropdown-toggle {
     height: auto;
@@ -354,7 +354,7 @@
 
 .bootstrap-select .dropdown-menu li a span.text {
     display: block;
-}
+} */
 
 .select2-container--default
     .select2-results__option--highlighted.select2-results__option--selectable
@@ -429,7 +429,10 @@
     background-color: var(--primary) !important;
     color: white;
 }
-
+.no-select-border .select2-container .select2-selection--single
+{
+border: 0px solid white;
+}
 /* .input-group-text {
     font-size: 0.9rem;
 } */
@@ -707,54 +710,57 @@
     box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
 }
 
-.knav{
+.knav {
     transition: all 0.4s;
     display: block;
     width: 90%;
     font-weight: bold;
     text-align: center;
-    border-radius:  33px;
+    border-radius: 33px;
     border: 1px solid;
-    padding: 8px 5px ; 
-    margin: 0 auto;   
-}
-
-.knav-primary{
+    padding: 8px 5px;
+    margin: 0 auto;
     color: var(--primary);
     background-color: var(--white);
     border-color: var(--primary);
 }
-.knav-primary.active{
+
+.knav-primary {
+    color: var(--primary);
+    background-color: var(--white);
+    border-color: var(--primary);
+}
+.knav-primary.active {
     background-color: var(--primary);
     color: var(--white);
     border-color: var(--primary);
 }
-.knav-success.active{
+.knav-success.active {
     color: var(--white);
     background-color: var(--success);
     border-color: var(--success);
 }
-.knav-danger.active{
+.knav-danger.active {
     color: var(--white);
     background-color: var(--danger);
     border-color: var(--danger);
 }
-.knav-warning.active{
+.knav-warning.active {
     color: var(--white);
     background-color: var(--warning);
     border-color: var(--warning);
 }
-.knav-info.active{
+.knav-info.active {
     color: var(--white);
     background-color: var(--info);
     border-color: var(--info);
 }
-.knav-light.active{
+.knav-light.active {
     color: var(--white);
     background-color: var(--pink);
     border-color: var(--pink);
 }
-.knav-secondary.active{
+.knav-secondary.active {
     color: var(--white);
     background-color: var(--secondary);
     border-color: var(--secondary);
