@@ -78,9 +78,9 @@ $currentPath = "Transfer Beneficiary";
 @endphp
 @include("snippets.pageHeader")
 
-<div class="p-3">
-    <div class="site-card ">
-        <div class="row">
+<div class="">
+    <div class="dashboard site-card ">
+        <div class="row dashboard-body p-2">
             <div class="col-md-12">
                 <h2 class="font-17 text-left font-weight-bold text-capitalize mb-3 text-primary">select Beneficiary type
                 </h2>
