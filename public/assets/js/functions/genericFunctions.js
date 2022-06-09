@@ -104,6 +104,51 @@ function currencyConvertor(
     return conversionData;
 }
 
+function getCurrencies() {
+    return $.ajax({
+        type: "GET",
+        url: "get-currency-list-api",
+        datatype: "application/json",
+        success: function (response) {
+            let data = response.data;
+            pageData.currencies = data;
+            $(".currency_select").empty();
+            $.each(data, function (index) {
+                const selected = data[index].isoCode === "SLL";
+                $(".currency_select").append(
+                    `<option ${selected ? "selected" : ""} data-description=${
+                        data[index].description
+                    } data-currCode=${data[index].currCode} value=${
+                        data[index].isoCode
+                    }>
+                        ${data[index].isoCode} </option>`
+                );
+            });
+            console.log("here");
+            $(".currency_select").trigger("change").select2({
+                minimumResultsForSearch: Infinity,
+            });
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
+
+function getFx() {
+    return $.ajax({
+        type: "GET",
+        url: "get-correct-fx-rate-api",
+        datatype: "application/json",
+        success: function (response) {
+            pageData.fxRate = response.data;
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        },
+    });
+}
+
 function getAccounts(account_data) {
     return $.ajax({
         type: "GET",
