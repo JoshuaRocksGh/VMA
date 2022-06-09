@@ -34,12 +34,18 @@
             </a>
         </div>
     </div>
-    <div class="dashboard site-card p-1">
+    <div class="dashboard site-card p-1 mb-0">
         <div class="site-card-body p-0 border-0">
             <img class="img-fluid rounded" src="{{ asset('assets/images/placeholders/banking.png') }}" />
 
         </div>
     </div>
+    <div class="carousel slide bg-transparent p-1 my-2" data-ride="carousel">
+        <div id="rate_carousel" class="carousel-inner">
+
+        </div>
+    </div>
+
     <div class=" site-card p-1">
         <div class="site-card-body py-2 bg-primary" style="min-height: 10px !important;">
             <h6 class="text-center mb-0 text-white">Account Agent</h6>
@@ -58,3 +64,54 @@
         </div>
     </div>
 </div>
+
+<div data-currency='${currency.isoCode}'
+    class="d-flex w-100 carousel-item  currency-button justify-content-between bg-white  align-items-center p-3 mt-2 rounded-lg ">
+    <div class="d-flex align-items-center"> <img class="rounded-circle" style="width: 30px; height: 30px;"
+            src="assets/images/flags/${currency.isoCode}.png" alt="logo">
+        <span class="font-weight-bold pl-2 text-primary">${currency?.description}</span>
+    </div>
+    <div class="">
+        <div class="font-weight-bold text-right text-primary">
+            1 ${currency.isoCode} = SLL ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency.isoCode,
+            'SLL')?.convertedAmount)}
+        </div>
+        <div class="text-secondary text-right font-10">updated on => ${new
+            Date(pageData?.fxRate?.find(r=>r.PAIR===(currency.isoCode + '/' + "
+            SLL"))?.POSTING_DATE).toISOString().slice(0,10)}
+        </div>
+    </div>
+</div>
+<script>
+    $(async()=>{
+        
+        
+   await getCurrencies();
+   await getFx();
+   console.log(pageData)
+     document.getElementById('rate_carousel').innerHTML = '';
+         pageData.currencies.forEach(function (currency , i) {
+        if (currency.isoCode === "SLL") return
+        document.getElementById('rate_carousel').innerHTML += `
+        <div class="carousel-item active">
+            <button data-currency='${currency.isoCode}' class="d-flex w-100 currency-button justify-content-between bg-white  align-items-center p-3 mt-2 rounded-lg ">
+          <div class="d-flex align-items-center">  <img  class="rounded-circle" style="width: 30px; height: 30px;"
+          src="assets/images/flags/${currency.isoCode}.png" alt="logo">
+         <span class="font-weight-bold pl-2 text-primary">${currency?.description}</span>
+          </div>
+          <div class=""> 
+           <div class="font-weight-bold text-right text-primary">
+             1 ${currency.isoCode} = SLL ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency.isoCode, 'SLL')?.convertedAmount)}
+              </div>
+               <div class="text-secondary text-right font-10">updated on => ${new Date(pageData?.fxRate?.find(r=>r.PAIR===(currency.isoCode + '/' + " SLL"))?.POSTING_DATE).toISOString().slice(0,10)} </div>
+             </div>
+            </button>
+            </div>
+            `;
+            // <div data-currency='${currency.isoCode}' class="d-flex w-100 carousel-item  currency-button justify-content-between bg-white  align-items-center p-3 mt-2 rounded-lg ">
+            //     ${currency.isoCode}
+            //      </div>
+    }); 
+})
+   
+</script>

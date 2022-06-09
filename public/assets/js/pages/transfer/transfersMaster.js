@@ -226,87 +226,6 @@ function getStandingOrderFrequencies() {
                     ${data[index].name} </option>`
                 );
             });
-            // $("#beneficiary_frequency").selectpicker("refresh");
-        },
-        error: function (xhr, status, error) {
-            setTimeout(function () {
-                getStandingOrderFrequencies();
-            }, $.ajaxSetup().retryAfter);
-        },
-    });
-}
-
-// function getCurrencies() {
-//     $.ajax({
-//         type: "GET",
-//         url: "get-currency-list-api",
-//         datatype: "application/json",
-//         success: function (response) {
-//             let data = response.data;
-//             console.log(data);
-//             $("#transfer_currency").empty();
-//             $.each(data, function (index) {
-//                 const selected = data[index].isoCode === "SLL";
-//                 console.log(selected);
-//                 $("#transfer_currency").append(
-//                     `<option ${selected ? "selected" : ""} data-description=${
-//                         data[index].description
-//                     } data-currCode=${data[index].currCode} value=${
-//                         data[index].isoCode
-//                     }>
-//                         ${data[index].isoCode} </option>`
-//                 );
-//             });
-//             $("#transfer_currency").trigger("change");
-//         },
-//         error: function (xhr, status, error) {
-//             setTimeout(function () {
-//                 getStandingOrderFrequencies();
-//             }, $.ajaxSetup().retryAfter);
-//         },
-//     });
-// }
-
-function getCurrencies() {
-    $.ajax({
-        type: "GET",
-        url: "get-currency-list-api",
-        datatype: "application/json",
-        success: function (response) {
-            let data = response.data;
-            pageData.currencies = data;
-            $(".currency_select").empty();
-            $.each(data, function (index) {
-                const selected = data[index].isoCode === "SLL";
-                $(".currency_select").append(
-                    `<option ${selected ? "selected" : ""} data-description=${
-                        data[index].description
-                    } data-currCode=${data[index].currCode} value=${
-                        data[index].isoCode
-                    }>
-                        ${data[index].isoCode} </option>`
-                );
-            });
-            console.log("here");
-            $(".currency_select").trigger("change").select2({
-                minimumResultsForSearch: Infinity,
-            });
-        },
-        error: function (xhr, status, error) {
-            setTimeout(function () {
-                getStandingOrderFrequencies();
-            }, $.ajaxSetup().retryAfter);
-        },
-    });
-}
-
-function getFx() {
-    $.ajax({
-        type: "GET",
-        url: "get-correct-fx-rate-api",
-        datatype: "application/json",
-        success: function (response) {
-            pageData.fxRate = response.data;
         },
         error: function (xhr, status, error) {
             setTimeout(function () {
@@ -377,8 +296,6 @@ $(async () => {
         templateSelection: accountTemplate,
     });
 
-    getCurrencies();
-    getFx();
     function renderOwnAccounts() {
         $("#to_account").empty()
             .append(`<option disabled selected value=""> -- Select
@@ -388,16 +305,10 @@ $(async () => {
             .filter(
                 (account) => account.accountNumber !== fromAccount.accountNumber
             )
-            .forEach(
-                (account) => {
-                    let option = getAccountOption(account);
-                    $("#to_account").append(option);
-                }
-                //             $("#to_account").append(`<option
-                //     value=" ${account.accountType} ~ ${account.accountDesc} ~ ${account.accountNumber} ~ ${account.currency} ~ ${account.availableBalance}">
-                //      ${account.accountDesc}  ||  ${account.accountNumber} || ${account.currency} || ${account.availableBalance}
-                // </option>`)
-            );
+            .forEach((account) => {
+                let option = getAccountOption(account);
+                $("#to_account").append(option);
+            });
         $("#to_account").trigger("change");
     }
 
