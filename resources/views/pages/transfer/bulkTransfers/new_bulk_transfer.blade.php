@@ -180,12 +180,12 @@
     {{-- </div> --}}
 
     <!-- Full width modal content -->
-    {{-- <div id="full-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
+    <div id="full-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
         aria-hidden="true" style="background-color:">
         <div class="modal-dialog modal-full-width all_upload_details">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title text-danger" id="myLargeModalLabel">Bulk Upload Deatails</h4>
+                    <h4 class="modal-title text-danger" id="fullWidthModalLabel">Bulk Upload Deatails</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
@@ -210,7 +210,7 @@
                                     style="zoom: 0.9">
                                     <thead>
                                         <tr class="bg-success  text-white">
-                                            // <th><b>Record ID</b></th>
+                                            {{-- <th><b>Record ID</b></th> --}}
                                             <th><b>Name</b></th>
                                             <th><b>Account No.</b></th>
                                             <th><b>Amount</b></th>
@@ -231,7 +231,7 @@
                                     style="zoom: 0.9">
                                     <thead>
                                         <tr class="bg-danger  text-white">
-                                            //<th><b>Record ID</b></th>
+                                            {{-- //<th><b>Record ID</b></th> --}}
                                             <th><b>Name</b></th>
                                             <th><b>Account No.</b></th>
                                             <th><b>Amount</b></th>
@@ -252,83 +252,7 @@
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-        <div class="modal-dialog record_details_display" style="max-width: 800px; display:none">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="standard-modalLabel">Record Details</h4>
-                    <button type="button" class="close " data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <form action="" id="update_uplod_form">
-                        @csrf
-
-                        @if ($errors->any())
-                            <div class="alert  alert-warning alert-dismissible fade show" role="alert">
-                                @foreach ($errors->all() as $error)
-                                    <span>{{ $error }}</span>
-                                @endforeach
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
-
-                        <div class="form-group row mb-1">
-                            <label for="" class="col-md-5">Record ID</label>
-                            <input type="text" class="form-control col-md-7 upload_recordID" required>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label for="" class="col-md-5">Name</label>
-                            <input type="text" class="form-control col-md-7 upload_name" required>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label for="" class="col-md-5">Account No.</label>
-                            <input type="text" class="form-control col-md-7 upload_accountNumber" required>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label for="" class="col-md-5">Amount</label>
-                            <input type="text" class="form-control col-md-7 upload_amount" required>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label for="" class="col-md-5">Trans. Descripition</label>
-                            <input type="text" class="form-control col-md-7 upload_description" required>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label for="" class="col-md-5">Bank</label>
-                            <input type="text" class="form-control col-md-7 upload_bank" required>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label for="" class="col-md-5">Reference No.</label>
-                            <input type="text" class="form-control col-md-7 upload_referenceNumber" required>
-                        </div>
-
-                        <div class="form-group row mb-1">
-                            <label for="" class="col-md-5">Batch</label>
-                            <input type="text" class="form-control col-md-7 upload_batch" readOnly required>
-                        </div>
-
-
-
-                        <div class="modal-footer">
-
-                            <button type="button"
-                                class="btn btn-secondary save_update float-left edit_record_close">Back</button>
-
-
-                            <button type="submit" class="btn btn-primary save_update">Save changes</button>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+    </div>
     <!-- /.modal -->
 @endsection
 

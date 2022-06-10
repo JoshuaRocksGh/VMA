@@ -63,7 +63,6 @@ function bulk_upload_list(fileBatch) {
         url: "get-bulk-upload-list-api?fileBatch=" + fileBatch,
         datatype: "application/json",
         success: function (response) {
-            console.log("get-bulk-upload-list-api=>", response);
             // return false;
             //console.log("bulk upload list:", response.data);
 
@@ -115,6 +114,9 @@ function bulk_upload_list(fileBatch) {
                 // $(".all_bulk_upload_summary tr").remove();
 
                 // let total_bulk_upload = $("#bulk_upload_list").DataTable();
+                // console.log("uploadData=>", uploadData);
+                // return false;
+
                 const group = { valid: [], invalid: [] };
                 uploadData.forEach((e) => {
                     const {
@@ -123,9 +125,13 @@ function bulk_upload_list(fileBatch) {
                         amount,
                         refNumber,
                         acctValid,
+                        valid,
                     } = e;
-                    if (e.acctValid === "Y") {
+                    console.log("e=>", e);
+                    // return false;
+                    if (e.valid === "Y") {
                         group.valid.push(e);
+                        console.log("name => ", acctValid);
                         all_valid_uploads.row
                             .add([
                                 // `<b>${valid_uploads_count}</b>`,
@@ -139,17 +145,17 @@ function bulk_upload_list(fileBatch) {
                         return;
                     }
                     group.invalid.push(e);
-                    all_failed_uploads.row
-                        .add([
-                            // `<b>${valid_uploads_count}</b>`,
-                            `<b>${name}</b>`,
-                            `<b>${accountNumber}</b>`,
-                            `<b>${amount}</b>`,
-                            `<b>${refNumber}</b>`,
-                            `<b class="text-danger">${acctValid}</b>`,
-                        ])
-                        .draw(false);
-                    return;
+                    // all_failed_uploads.row
+                    //     .add([
+                    //         // `<b>${valid_uploads_count}</b>`,
+                    //         `<b>${name}</b>`,
+                    //         `<b>${accountNumber}</b>`,
+                    //         `<b>${amount}</b>`,
+                    //         `<b>${refNumber}</b>`,
+                    //         `<b class="text-danger">${acctValid}</b>`,
+                    //     ])
+                    //     .draw(false);
+                    // return;
                 });
 
                 //         all_valid_uploads.row
@@ -182,8 +188,8 @@ function bulk_upload_list(fileBatch) {
                         )}</b>`,
                         `<b>${value_date}</b>`,
                         // `<b class="text-success">${uploadAcctValid}</b>`,
-                        `<td><button type="button" class="btn btn-sm btn-soft-success waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;<b>${total_upload}</b>&emsp;</button></td>`,
-                        `<td><button type="button" class="btn btn-sm btn-soft-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" data="">&emsp;<b>${invalid.length}</b>&emsp;</button></td>`,
+                        `<td><button type="button" class="btn btn-sm btn-primary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" >&emsp;<b>${total_upload}</b>&emsp;</button></td>`,
+                        `<td><button type="button" class="btn btn-sm btn-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" >&emsp;<b>${invalid.length}</b>&emsp;</button></td>`,
                         ` <td>${action_button}</td>`,
                     ])
                     .draw(false);
@@ -193,13 +199,14 @@ function bulk_upload_list(fileBatch) {
                     var fileBatch = $(this).attr("batch_no");
                     // alert(fileBatch);
                     // return false;
-
+                    siteLoading("show");
                     $.ajax({
                         type: "GET",
                         url: "delete-bulk-transfer?batch_no=" + fileBatch,
                         datatype: "application/json",
                         success: function (response) {
                             console.log(response);
+                            siteLoading("hide");
                             if (response.responseCode == "000") {
                                 swal.fire({
                                     // title: "Transfer successful!",
