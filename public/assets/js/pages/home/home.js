@@ -278,7 +278,7 @@ function prepareGraphValues() {
     };
 }
 
-$(async () => {
+$(() => {
     $("select").select2();
     $(".accounts-select").select2({
         minimumResultsForSearch: Infinity,
@@ -286,15 +286,19 @@ $(async () => {
         templateSelection: accountTemplate,
     });
     blockUi({ block: "#nav-tabContent" });
-    await Promise.all([
+    Promise.all([
         getData({ url: "fixed-deposit-account-api", name: "investments" }),
         getData({ url: "get-loan-accounts-api", name: "loans" }),
         getData({ url: "get-accounts-api", name: "accounts" }),
-    ]);
-
-    // siteLoading("hide");
-    prepareGraphValues();
-    accountsPieChart({ title: "Accounts", ...pageData.pieValues.totalsPie });
+    ]).then(() => {
+        // siteLoading("hide");
+        prepareGraphValues();
+        accountsPieChart({
+            title: "Accounts",
+            ...pageData.pieValues.totalsPie,
+        });
+        unblockUi("#nav-tabContent");
+    });
     function renderCurrency(data, row) {
         return `<div class="table-cur text-right"><span class="font-weight-bold">${formatToCurrency(
             parseFloat(data)
@@ -314,6 +318,7 @@ $(async () => {
         searching: false,
         lengthChange: false,
         paging: false,
+        responsive: true,
         info: false,
         language: {
             emptyTable: noDataDisplay,
@@ -450,14 +455,12 @@ $(async () => {
             ],
         })
         .draw();
-    unblockUi("#nav-tabContent");
     $(".toggle-account-visibility").on("click", function () {
         $(".eye-open").toggle();
         $(".open-money").toggleClass("password-font");
     });
     // all_my_account_balance();
-
-    getCorporateRequests(customer_no, "P");
+    ISCORPORATE && getCorporateRequests(customer_no, "P");
 
     $("#chart_account").on("change", async function (e) {
         const target = $("#chart_account option:selected");
@@ -471,7 +474,7 @@ $(async () => {
         const endDate = new Date().toISOString().split("T")[0];
         const transLimit = "20";
         blockUi({ block: "#acc_history" });
-        await getData({
+        getData({
             url: "account-transaction-history",
             name: "transactions",
             method: "POST",
@@ -481,10 +484,11 @@ $(async () => {
                 endDate,
                 transLimit,
             },
+        }).then((data) => {
+            unblockUi("#acc_history");
+            transactionsBarChart(pageData.transactions);
+            console.log("trans", pageData);
         });
-        unblockUi("#acc_history");
-        transactionsBarChart(pageData.transactions);
-        console.log("trans", pageData);
     });
     $("#chart_account").trigger("change");
 });
