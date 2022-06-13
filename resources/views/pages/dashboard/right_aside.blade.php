@@ -11,23 +11,23 @@
             </a>
             <a href="/qr-payment"
                 class="site-card-body d-flex align-items-center justify-content-center  border-0  grad-gray-blue grad "
-                style="min-height: 75px">
+                style="min-height: 75px; min-width: 100px;">
                 <div class=""><i class="fas font-24 fa-qrcode"></i> </div>
                 <div class=" font-weight-bold ml-2 font-12">QR</div>
             </a>
 
         </div>
-        <div class="d-flex">
+        <div class="d-flex w-100">
             <a href="/own-account"
                 class="site-card-body px-2 d-flex align-items-center justify-content-center grad-blue-pink  w-100 border-0  grad-gray-blue red-orange grad "
-                style="min-height: 25px">
+                style="min-height: 75px">
                 <div class=""><i class="fas font-18 fa-sync"></i> </div>
 
                 <div class=" font-weight-bold ml-2 font-12">MAKE TRANSFER</div>
             </a>
             <a href="/card-services"
                 class="site-card-body px-2 d-flex align-items-center justify-content-center grad-blue-pink  w-100 border-0  grad-gray-blue grad "
-                style="min-height: 25px">
+                style="min-height: 75px">
                 <div class=""><i class="fas font-18 fa-credit-card"></i> </div>
                 <div class=" font-weight-bold ml-2 font-12">Card Services</div>
             </a>
@@ -74,12 +74,12 @@
         document.getElementById('rate_carousel').innerHTML += `
         <div class="carousel-item ${currency.isoCode === 'SLO' ? 'active' : ''}">
                 <button data-currency='${currency.isoCode}' class="d-flex w-100 currency-button justify-content-between bg-white  align-items-center p-3 mt-2 rounded-lg ">
-          <div class="d-flex align-items-center">  <img  class="rounded-circle" style="width: 30px; height: 30px;"
+          <div class="d-flex align-items-center">  <img  class="rounded-circle" style="width: 25px; height: 25px;"
           src="assets/images/flags/${currency.isoCode}.png" alt="logo">
-         <span class="font-weight-bold pl-2 text-primary">${currency?.description}</span>
+         <span class="font-weight-bold text-12 pl-2 text-primary">${currency?.description}</span>
           </div>
           <div class=""> 
-           <div class="font-weight-bold text-right text-primary">
+           <div class="font-weight-bold text-12 text-right text-primary">
              1 ${currency.isoCode} = SLL ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency.isoCode, 'SLL')?.convertedAmount)}
               </div>
                <div class="text-secondary text-right font-10">updated on => ${new Date(pageData?.fxRate?.find(r=>r.PAIR===(currency.isoCode + '/' + " SLL"))?.POSTING_DATE).toISOString().slice(0,10)} </div>
