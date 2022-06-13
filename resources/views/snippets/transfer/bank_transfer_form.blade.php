@@ -280,16 +280,13 @@
                 <div class="form-group align-items-center row">
                     <label class="col-md-4 text-primary">Purpose of Transfer
                     </label>
-                    <input type="text" class="form-control text-input col-md-8" id="purpose"
-                        placeholder="Enter purpose of transaction" class="form-group row mb-3">
+                    <input type="text" value="{{$currentPath}} Transfer" class="form-control text-input col-md-8"
+                        id="purpose" placeholder="Enter purpose of transaction" class="form-group row mb-3">
                 </div>
                 @endif
                 <div class="form-group align-items-center row">
                     <label class="text-primary col-4">Expense Category
                     </label>
-                    {{-- <input type="hidden" value="Others" id="category_"> --}}
-
-
                     <div class="col-md-8 px-0"> <select class="  " id="category" required>
                             <option disabled selected value="">-- Select expense
                                 category --
@@ -308,20 +305,3 @@
 
     </div>
 </div>
-{{-- <div class="form-group row">
-    <b class="col-md-4 text-primary"> Cur / Rate / Amount</b>
-    <div class="input-group mb-1 col-md-8" style="padding: 0px;">
-        <div class="input-group-prepend">
-            <select name="" class="input-group-text select_conversion_currency" id="conversion_currency">
-            </select>
-        </div>
-        &nbsp;&nbsp;
-        <div class="input-group-prepend">
-            <input type="text" class="form-control readOnly " id="convertor_rate" value="1.00" style="width: 80px;"
-                readonly>
-        </div>
-        &nbsp;&nbsp;
-        <input type="text" class="form-control" id="converted_amount" placeholder="Converted Amount"
-            aria-label="converted_amount" aria-describedby="basic-addon1" readonly>
-    </div>
-</div> --}}

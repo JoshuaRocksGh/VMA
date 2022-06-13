@@ -191,7 +191,7 @@ $currentPath = 'Dashboard';
 
 <script>
     let noDataAvailable = {!! json_encode($noDataAvailable) !!};
-        let customer_no = @json(session()->get('customerNumber'));
+    let customer_no = @json(session()->get('customerNumber'));
 </script>
 <script src="{{ asset('assets/plugins/chartjs/chartjs-v3.7.1.min.js') }}" defer></script>
 <script src="{{ asset('assets/js/pages/home/home.js') }}"></script>
