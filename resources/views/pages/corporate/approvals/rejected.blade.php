@@ -14,42 +14,6 @@
 @endsection
 
 @section('content')
-    {{-- <div class="container-fluid hide_on_print">
-        <br>
-        <!-- start page title -->
-        <div class="row">
-            <div class="col-md-4">
-                <a href="{{ url()->previous() }}" type="button" class="btn btn-sm btn-soft-blue waves-effect waves-light"
-                    id="page_back_button"><i class="mdi mdi-reply-all-outline"></i>&nbsp;Back</a>
-            </div>
-            <div class="col-md-4">
-                <h4 class="text-primary mb-0 page-header text-center text-uppercase">
-                    <img src="{{ asset('assets/images/logoRKB.png') }}" alt="logo" style="zoom: 0.05">&emsp;
-                    REJECTED TRANSACTION
-
-                </h4>
-            </div>
-
-            <div class="col-md-4 text-right">
-                <h6>
-
-                    <span class="flaot-right">
-                        <b class="text-primary"> Approval </b> &nbsp; > &nbsp; <b class="text-danger">Rejected
-                            Transaction</b>
-
-
-                    </span>
-
-                </h6>
-
-            </div>
-
-            <div class="col-md-12 ">
-                <hr class="text-primary" style="margin: 0px;">
-            </div>
-
-        </div>
-    </div> --}}
     @php
     $currentPath = 'Rejected ';
     $basePath = 'Approvals';
@@ -73,17 +37,16 @@
             <div class="tab-content dashboard-body border-primary border table-responsive p-4">
 
                 <table id="datatable-buttons"
-                    class="table dt-responsive  table-bordered table-striped nowrap w-100 pending_transaction_request "
-                    style="zoom: 0.8;">
+                    class="table dt-responsive  table-bordered table-striped display responsive nowrap w-100 pending_transaction_request ">
                     <thead>
                         <tr class="bg-info text-white">
-                            <th>Rquest Id</th>
-                            <th>Req-Type</th>
-                            <th>Account No</th>
-                            <th>Narration</th>
-                            <th>Posted Date</th>
-                            <th>Initiated By</th>
-                            <th>Action</th>
+                            <th class="all">Rquest Id</th>
+                            <th class="all">Req-Type</th>
+                            <th class="all">Account No</th>
+                            <th class="all">Narration</th>
+                            <th class="all">Posted Date</th>
+                            <th class="none">Initiated By</th>
+                            <th class="none">Action</th>
                         </tr>
                     </thead>
 

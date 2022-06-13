@@ -14,9 +14,11 @@
     <div class="dashboard site-card overflow-hidden">
         <p class="text-muted font-14 m-r-20 m-b-20">
             <span> <i class="fa fa-info-circle  text-red"></i> <b style="color:red;">Please Note:&nbsp;&nbsp;</b>
-            </span> You can download template for upload (<span class="text-danger"><a
-                    href="{{ url('download_same_bank_file') }}" class="text-danger"> Same Bank </a></span>) / (<span
-                class="text-danger"><a href="{{ url('download_other_bank_file') }}" class="text-danger"> Other
+            </span> Download template for upload (<span class="text-danger"><a
+                    href="{{ url('download_same_bank_file') }}" class="text-danger"> Click Here for Same Bank
+                </a></span>)
+            / (<span class="text-danger"><a href="{{ url('download_other_bank_file') }}" class="text-danger"> Click
+                    Here for Other
                     Bank </a></span>)
 
 

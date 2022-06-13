@@ -13,7 +13,7 @@ let datatableOptions = {
         {
             targets: [8],
             render: (data) =>
-                `<button class="text-white d-flex align-items-center btn  bg-danger cancel-order text-center" data-order-number="${data}"><i style="cursor: pointer;" class="fas fa-ban mr-1"></i> cancel</button>`,
+                `<button class="text-white align-items-center btn  bg-danger cancel-order text-center" data-order-number="${data}"><i style="cursor: pointer;" class="fas fa-ban mr-1"></i> cancel</button>`,
         },
         {
             // trancate with ellipses ex

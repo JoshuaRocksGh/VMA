@@ -240,7 +240,7 @@ $(function () {
                     data: "transactionNumber",
                     render: (data, type, row) => {
                         console.log({ data, type, row });
-                        return `<button type="button" class="btn btn-primary more-details" data-toggle="modal" data-target="#accordion-modal" batch-no="${row.batchNumber}"
+                        return `<button type="button" class="btn  btn-outline-primary more-details" data-toggle="modal" data-target="#accordion-modal" batch-no="${row.batchNumber}"
                                 posting-date="${row.postingSysDate}" trans-number="${row.transactionNumber}" value-date="${row.valueDate}" branch="${row.branch}"
                                 narration="${row.narration}" amount="${row.amount}" contra-account="${row.contraAccount}" channel="${row.channel}">Details</button>`;
                     },

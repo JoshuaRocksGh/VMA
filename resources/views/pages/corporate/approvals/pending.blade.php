@@ -63,18 +63,18 @@
 
             <div class="tab-content dashboard-body border-primary border table-responsive p-4">
 
-                <table id="" class="table   table-bordered table-striped nowrap w-100 pending_transaction_request "
-                    style="zoom: 0.8;">
+                <table id=""
+                    class="table   table-bordered table-striped display responsive nowrap w-100  pending_transaction_request ">
                     <thead>
                         <tr class="bg-info text-white">
                             <th>Rquest Id</th>
-                            <th>Req-Type</th>
-                            <th>Account No</th>
-                            <th>Amount</th>
-                            <th>Transfer Purpose</th>
-                            <th>Posted Date</th>
-                            <th>Initiated By</th>
-                            <th>Action</th>
+                            <th class="all">Req-Type</th>
+                            <th class="all">Account No</th>
+                            <th class="all">Amount</th>
+                            <th class="all">Transfer Purpose</th>
+                            <th class="none">Posted Date</th>
+                            <th class="none">Initiated By</th>
+                            <th class="none">Action</th>
                         </tr>
                     </thead>
                     <tbody class="rquest_table">

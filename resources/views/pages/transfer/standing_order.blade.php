@@ -1,21 +1,18 @@
 @extends('layouts.master')
 @section('content')
-@php
-$pageTitle = "standing order";
-$basePath = "Transfer";
-$currentPath = "Standing Order";
-@endphp
-@include('pages.transfer.transfers_master')
+    @php
+    $pageTitle = 'standing order';
+    $basePath = 'Transfer';
+    $currentPath = 'Standing Order';
+    @endphp
+    @include('pages.transfer.transfers_master')
 @endsection
 @section('scripts')
-{{-- <script src="{{ asset('assets/js/pages/transfer/standingOrder.js') }}">
-    --}}
-{{-- 
-</script> --}}
+    {{-- <script src="{{ asset('assets/js/pages/transfer/standingOrder.js') }}"> --}}
+    {{-- </script> --}}
 @endsection
 
-{{--
-<div class="col-md-7 site-card m-2" id="transaction_form">
+{{-- <div class="col-md-7 site-card m-2" id="transaction_form">
     <br>
     <form action="#" id="payment_details_form" autocomplete="off" aria-autocomplete="none">
         @csrf
@@ -142,9 +139,7 @@ $currentPath = "Standing Order";
         <hr>
     </form>
 </div> --}}
-{{--
-
-<div class="col-md-4 site-card m-2" id="related_information_display">
+{{-- <div class="col-md-4 site-card m-2" id="related_information_display">
     <h4 class="text-primary mt-3">Sender Acc. Info</h4>
     <hr class="mt-0 mb-1">
 

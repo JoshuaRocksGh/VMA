@@ -68,8 +68,8 @@
                                                             <div class="col-md-12">
                                                                 <div id="approval_details"></div>
 
-
-                                                                <div class="mt-1">
+                                                                <br><br>
+                                                                <div class="mt-3">
 
                                                                     <div class="col-md-12 mb-3 pending_status">
                                                                         <div class="row">
@@ -156,7 +156,7 @@
                                         <p id="initiated_by" class="text-center text-danger" style="font-size:18px"></p>
 
                                         <br>
-                                        <h3 class="mb-1 text-center">Status</h3>
+                                        <h3 class="mb-1 text-center approvers_list_title">Status</h3>
                                         <p id="approvers_list" class="text-center text-danger" style="font-size:18px">
                                         </p>
 
@@ -505,8 +505,9 @@
                             $('#approvers_list').append(
                                 `<p class="approvers" style="font-size:18px">${approvers}</p>`)
                         } else {
+                            $('.approvers_list_title').text('Approved By')
                             $('#approvers_list').append(
-                                `<p class="approvers" style="font-size:18px">${pending_approvers}</p>`)
+                                `<p class="approvers" style="font-size:18px">  ${pending_approvers}</p>`)
                         }
 
 
@@ -557,7 +558,7 @@
 
                         })
 
-                        let request_status = response.data.request_status
+                        let request_status = response.data[0].request_status
 
                         console.log('======');
                         console.log(request_status);
