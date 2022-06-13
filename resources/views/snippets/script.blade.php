@@ -1,12 +1,13 @@
 @if (config('app.corporate'))
 <script>
-    const ISCORPORATE = true;
+    ISCORPORATE = true;
 </script>
 @else
 <script>
-    const ISCORPORATE = false;
+    ISCORPORATE = false;
 </script>
 @endif
+
 
 <!-- Third Party js-->
 {{-- <script src="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.js')}}" defer> </script> --}}
@@ -18,7 +19,8 @@
 <script defer>
     const ACCOUNT_NUMBER_LENGTH = 13
 
-$(window).on("load", ()=>{
+    pageData = {};
+$( ()=>{
     $('.menu-item-header').on('click', (e)=>{
         $('.menu-item-body').collapse('hide')
         $(e.currentTarget).next().collapse('show')

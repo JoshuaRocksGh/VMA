@@ -57,8 +57,8 @@
 
 
 
-        #body {
-            width: 100%;
+        body {
+            width: 100vw;
             background-color: white;
         }
     </style>
@@ -81,17 +81,16 @@
     <!-- Begin page -->
     <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none;">
         @include('snippets.nav')
-        <div class="row mx-2">
-            <div class="offcanvas-collapse col-md-3 col-xl-2 d-md-block mt-2 col-xl-2 ">
+        <div class="d-flex px-2 w-100">
+            <div class="offcanvas-collapse px-2 d-md-block mt-2 w-100" style="max-width: 250px; min-width: 250px;">
                 @include('snippets.side-bar')
             </div>
-            <div class="col-md-9 col-xl-7">
-                <div class="content">
-                    @yield('content')
-                </div>
-
+            <div class="content w-100 px-2">
+                @yield('content')
             </div>
-            @include('pages.dashboard.right_aside')
+            <div class=" d-none d-xl-block px-2 mt-2 " style="width:400px !important">
+                @include('pages.dashboard.right_aside')
+            </div>
         </div>
     </div>
 

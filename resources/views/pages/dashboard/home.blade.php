@@ -55,7 +55,7 @@
 
                         </div>
                     </div>
-                    <div class="  overflow-hidden">
+                    <div class="overflow-hidden">
                         <nav class="mb-2 dashboard-header">
                             <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
 
@@ -71,11 +71,11 @@
                         </nav>
                         <div class="tab-content ">
                             <div class="tab-pane p-0 show active" id="accounts">
-                                <div class=" accounts_display_area">
+                                <div class="table-responsive  accounts_display_area">
                                     <table id="accounts_table" width="100%"
-                                        class="table nowrap display  border dt-responsive table-hover rounded mb-0 ">
+                                        class="table display  border dt-responsive table-hover rounded mb-0 ">
                                         <thead>
-                                            <tr class="bg-primary font-weight-bold  text-white ">
+                                            <tr class="bg-primary font-weight-bold text-white ">
                                                 <td> Account No. </td>
                                                 <td> Account Name </td>
                                                 <td> Account Type </td>
@@ -91,7 +91,7 @@
                             </div>
                             <div class="tab-pane p-0" id="loans">
                                 <div class="table-responsive  loans_display_area">
-                                    <table id="loans_table" width="100%" class="table nowrap display  border rounded mb-0 ">
+                                    <table id="loans_table" width="100%" class="table  display  border rounded mb-0 ">
                                         <thead>
                                             <tr class="bg-primary text-white ">
                                                 <td> Facility No. </td>
@@ -133,90 +133,34 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="mx-auto" style="max-width: 600px">
-                    <div class="card-body">
-
-                        <ul class="list-group">
-                            <li
-                                class="list-group-item d-flex justify-content-between bg-primary align-items-center active">
-
-                                <strong>Total Local Amount: </strong>
-                                <strong>
-
-                                    <button type="button" class="toggle-account-visibility"> <i
-                                            class="fas pointer fa-eye-slash eye-open text-white" data-toggle="tooltip"
-                                            data-placement="bottom" title="" data-original-title="More Info"></i>
-                                        <i class="fa fa-eye eye-open  text-white" style="display: none"
-                                            data-toggle="tooltip" data-placement="bottom" title=""
-                                            data-original-title="More Info"></i>
-                                    </button>
-                                </strong>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="#" data-toggle="modal" data-target="#bs-example-modal-lg"><strong
-                                        class="text-success casa_chart">
-                                        CURRENT &
-                                        SAVINGS
-                                        ACCOUNT</strong></a>
-
-                                <strong>
-                                    SLL <span
-                                        class="text-success total_casa_amount  password-font open-money">0.00</span>
-                                </strong>
-                            </li>
-
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="#" data-toggle="modal" data-target="#bs-example-modal-lg"><strong
-                                        class="text-warning investment_chart">INVESTMENTS</strong></a>
-                                <strong>
-                                    SLL <span
-                                        class="text-warning total_investment_amount password-font open-money">0.00</span>
-                                </strong>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="#" data-toggle="modal" data-target="#bs-example-modal-lg"><strong
-                                        class="text-danger loans_chart"> LOANS </strong></a>
-                                <strong>
-                                    SLL <span
-                                        class="text-danger total_loan_account   password-font open-money">0.00</span>
-                                </strong>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </div> --}}
-
-
-
-                </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <div class="table-responsive ">
-                        <table id="pending_transaction_request"
-                            class="table table-bordered  table-striped display responsive nowrap w-100 pending_transaction_request ">
-                            <thead>
-                                <tr class="bg-primary  border-primary text-white">
-                                    <th class="all">Rquest Id</th>
-                                    <th class="all">Req-Type</th>
-                                    <th class="all">Account No</th>
-                                    <th class="all">Amount</th>
-                                    <th class="all">Transfer Purpose</th>
-                                    <th class="none">Posted Date</th>
-                                    <th class="none">Initiated By</th>
-                                    <th class="none">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="request_table">
-                                <tr>
-                                    <td colspan="8">
-                                        <div class="d-flex justify-content-center">
-                                            <div class="spinner-border avatar-lg text-primary  m-2 canvas_spinner"
-                                                role="status">
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="table-responsive ">
+                            <table id="pending_transaction_request"
+                                class="table table-bordered  table-striped display responsive nowrap w-100 pending_transaction_request ">
+                                <thead>
+                                    <tr class="bg-primary  border-primary text-white">
+                                        <th class="all">Rquest Id</th>
+                                        <th class="all">Req-Type</th>
+                                        <th class="all">Account No</th>
+                                        <th class="all">Amount</th>
+                                        <th class="all">Transfer Purpose</th>
+                                        <th class="none">Posted Date</th>
+                                        <th class="none">Initiated By</th>
+                                        <th class="none">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="request_table">
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="d-flex justify-content-center">
+                                                <div class="spinner-border avatar-lg text-primary  m-2 canvas_spinner"
+                                                    role="status">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
+                        </div>
+                        </td>
+                        </tr>
+                        </tbody>
                         </table>
                     </div> <!-- end card body-->
                 </div>
@@ -248,7 +192,6 @@
     <script>
         let noDataAvailable = {!! json_encode($noDataAvailable) !!};
         let customer_no = @json(session()->get('customerNumber'));
-        const pageData = {}
     </script>
     <script src="{{ asset('assets/plugins/chartjs/chartjs-v3.7.1.min.js') }}" defer></script>
     <script src="{{ asset('assets/js/pages/home/home.js') }}"></script>
