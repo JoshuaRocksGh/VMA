@@ -111,6 +111,9 @@
 
 
                         <br>
+                        <!-- Large modal -->
+                        {{-- <button type="button" class="btn btn-info" data-toggle="modal"
+                            data-target="#bs-example-modal-lg">Large Modal</button> --}}
                         <div class="col-md-12">
                             <div class="form-group row">
                                 <div class="col-8 offset-4 text-right">
@@ -134,25 +137,27 @@
 
             <hr>
 
-            <div class="">
+            <div class="breakpoint">
                 <label class="text-primary">Transfer Summary</label>
                 <br>
 
+
+
                 <table id="bulk_upload_list"
-                    class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list"
+                    class="table table-bordered table-striped display responsive nowrap w-100 bulk_upload_list"
                     style="zoom: 0.9;">
 
                     <thead>
                         <tr class="bg-info text-white">
                             {{-- <th> <b> Batch </b> </th> --}}
-                            <th> Reference </th>
-                            <th> Debit Account </th>
-                            <th> Total Upload Amount </th>
-                            <th> Value date </th>
-                            <th> Total Upload </th>
+                            <th class="all"> Reference </th>
+                            <th class="all"> Debit Account </th>
+                            <th class="all"> Total Upload Amount </th>
+                            <th class="all"> Value date </th>
+                            <th class="none"> Total Upload </th>
                             {{-- <th> Successful </th> --}}
-                            <th> Failed </th>
-                            <th> Action </th>
+                            <th class="none"> Failed </th>
+                            <th class="none"> Action </th>
                             {{-- <th class="text-center"> <b>Actions </b> </th> --}}
 
                         </tr>
@@ -179,13 +184,16 @@
     {{-- </div> --}}
     {{-- </div> --}}
 
-    <!-- Full width modal content -->
-    <div id="full-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
-        aria-hidden="true" style="background-color:">
-        <div class="modal-dialog modal-full-width all_upload_details">
+
+
+
+    <!--  Modal content for the Large example -->
+    <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title text-danger" id="fullWidthModalLabel">Bulk Upload Deatails</h4>
+                    <h4 class="modal-title" id="myLargeModalLabel">Bulk Upload Details</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
@@ -204,6 +212,7 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="home">
+                            <br>
                             <div class="table-responsive">
                                 <table id="all_successful_uploads_table"
                                     class="table table-bordered table-striped dt-responsive nowrap w-100 all_successful_uploads_table"
@@ -225,6 +234,7 @@
                             </div>
                         </div>
                         <div class="tab-pane show " id="profile">
+                            <br>
                             <div class="table-responsive">
                                 <table id="all_failed_uploads_table"
                                     class="table table-bordered table-striped dt-responsive nowrap w-100 all_failed_uploads_table"
@@ -237,7 +247,7 @@
                                             <th><b>Amount</b></th>
                                             <th><b>Ref No.</b></th>
                                             <th><b>&emsp;Description&emsp;</b></th>
-                                            //<th><b>&emsp;Edit&emsp;</b></th>
+                                            {{-- //<th><b>&emsp;Edit&emsp;</b></th> --}}
                                         </tr>
                                     </thead>
                                     <tbody class="failed_uploads">
@@ -252,13 +262,16 @@
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+    </div><!-- /.modal -->
 @endsection
 
 
 @section('scripts')
     @include('extras.datatables')
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script> --}}
+
     <script type="text/javascript" src="{{ asset('assets/js/pages/transfer/new_bulkTransfer.js') }}"></script>
     <script>
         let noDataAvailable = {!! json_encode($noDataAvailable) !!};
