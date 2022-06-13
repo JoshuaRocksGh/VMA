@@ -50,8 +50,12 @@ $currentPath = 'Dashboard';
                                 <b>Investments</b>
                             </a>
                     </nav>
-                    <div class="mb-4 w-100 col-md overflow-hidden">
+                    <div class="mb-4 w-100 col-md relative overflow-hidden">
                         <canvas id="accountsPieChart" style="max-height: 300px"></canvas>
+                        <span class="text-center position-relative " style="display: none; top:50%; left:50%; "
+                            id="transactionNoData">
+                            {!! $noDataAvailable !!}
+                        </span>
 
                     </div>
                 </div>

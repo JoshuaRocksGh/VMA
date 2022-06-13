@@ -88,7 +88,7 @@
             <div class="content w-100 px-2">
                 @yield('content')
             </div>
-            <div class=" d-none d-xl-block px-2 mt-2 " style="width:400px !important">
+            <div class=" d-none d-xl-block px-2 mt-2 " style="width:500px !important">
                 @include('pages.dashboard.right_aside')
             </div>
         </div>
