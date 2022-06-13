@@ -1,4 +1,4 @@
-let pageData = new Object;
+// let pageData = new Object();
 
 function transactionSuccessToaster(message, timer = 3000) {
     Swal.fire({

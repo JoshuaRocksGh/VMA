@@ -192,18 +192,18 @@
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <div class="table-responsive ">
-                        <table id=""
-                            class="table table-bordered  table-centered table-condensed nowrap table-nowrap   w-100 pending_transaction_request ">
+                        <table id="pending_transaction_request"
+                            class="table table-bordered  table-striped display responsive nowrap w-100 pending_transaction_request ">
                             <thead>
                                 <tr class="bg-primary  border-primary text-white">
-                                    <th>Rquest Id</th>
-                                    <th>Req-Type</th>
-                                    <th>Account No</th>
-                                    <th>Amount</th>
-                                    <th>Transfer Purpose</th>
-                                    <th>Posted Date</th>
-                                    <th>Initiated By</th>
-                                    <th>Action</th>
+                                    <th class="all">Rquest Id</th>
+                                    <th class="all">Req-Type</th>
+                                    <th class="all">Account No</th>
+                                    <th class="all">Amount</th>
+                                    <th class="all">Transfer Purpose</th>
+                                    <th class="none">Posted Date</th>
+                                    <th class="none">Initiated By</th>
+                                    <th class="none">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="request_table">

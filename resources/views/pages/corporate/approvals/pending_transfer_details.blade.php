@@ -145,65 +145,44 @@
                             </div>
 
                             <div class="col-md-4 ">
-                                <div class="dashboard site-card">
-                                    <div class="card ">
-                                        <div class="p-3 mt-4 mt-lg-0">
-                                            <h4 class="mb-1 text-center">Account Mandate</h4>
-                                            <h2 id="account_mandate"></h2>
+                                <div class=" site-card p-1">
+                                    <div class="site-card-body ">
+                                        <h3 class=" text-center">Account Mandate</h3>
+                                        <p id="account_mandate" class="text-center text-danger" style="font-size:18px">
+                                        </p>
 
-                                            <br>
-                                            <p>One User Mandate <span class="text-danger h3">A</span> </p>
-                                        </div>
+                                        <br>
+                                        <h3 class=" text-center">Initiated By</h3>
+                                        <p id="initiated_by" class="text-center text-danger" style="font-size:18px"></p>
+
+                                        <br>
+                                        <h3 class="mb-1 text-center">Status</h3>
+                                        <p id="approvers_list" class="text-center text-danger" style="font-size:18px">
+                                        </p>
+
                                     </div>
 
-                                    {{-- <br> --}}
-                                    <div class="card">
-                                        <div class="p-3 mt-4 mt-lg-0">
-                                            <h4 class="mb-1 text-center">Initiated By</h4>
-                                            <h2 id="initiated_by"></h2>
-                                            {{-- <div class="table-responsive">
-                                                <table class="table mb-0 table-bordered">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td id="initiated_by"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div> --}}
-
-                                        </div>
-                                    </div>
-
-                                    {{-- <br> --}}
-                                    <div class="card">
-                                        <div class="p-3 mt-4 mt-lg-0">
-                                            <h4 class="mb-1 text-center">Status</h4>
-                                            <span id="approvers_list"></span>
-
-                                            {{-- <h2 class="approvers">Jonas Korankye</h2>
-                                        <h2 class="approvers">Joshua Tetteh</h2> --}}
-
-
-                                        </div>
-                                    </div>
                                 </div>
 
 
 
-                                <div class="">
-                                    <div class="card-box">
-                                        <h4 class="header-title mb-1 text-center">Approvers</h4>
+                                <div class="site-card p-1">
+                                    <div class="site-card-body py-2 bg-primary" style="min-height: 10px !important;">
+                                        <h6 class="text-center mb-0 text-white">Approvers</h6>
+                                    </div>
+                                    <div class="site-card-body">
+
 
 
                                         <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <thead class="thead-light">
+                                            <table class="table table-borderless mb-0">
+                                                {{-- <thead class="bg-primary">
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Mandate</th>
 
                                                     </tr>
-                                                </thead>
+                                                </thead> --}}
                                                 <tbody class="approvers_list">
 
                                                 </tbody>
@@ -523,9 +502,11 @@
                         let pending_approvers = pending_request.approvers
                         if (pending_approvers == null || pending_approvers == undefined) {
                             var approvers = 'PENDING APPROVAL'
-                            $('#approvers_list').append(`<h2 class="approvers">${approvers}</h2>`)
+                            $('#approvers_list').append(
+                                `<p class="approvers" style="font-size:18px">${approvers}</p>`)
                         } else {
-                            $('#approvers_list').append(`<h2 class="approvers">${pending_approvers}</h2>`)
+                            $('#approvers_list').append(
+                                `<p class="approvers" style="font-size:18px">${pending_approvers}</p>`)
                         }
 
 
@@ -761,8 +742,8 @@
         function append_approval_details_bulk(description, data) {
 
             $('#approval_details').append(`<div class="row ">
-                    <span class="col-md-6 text-left h4">Bulk Details</span>
-                    <span class="col-md-6 text-right text-primary h4">
+                    <span class="col-md-6 text-left font-14">Bulk Details</span>
+                    <span class="col-md-6 text-right text-primary ">
                         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#bs-example-modal-lg">View Transaction Details</button>
 
                     </span>

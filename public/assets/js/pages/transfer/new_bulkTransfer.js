@@ -46,7 +46,9 @@ function my_account() {
 var bulk_upload_array_list = [];
 var bulk_detail_list = [];
 
-function bulk_upload_list(fileBatch) {
+function bulk_upload_list(fileBatch, upload_response) {
+    // siteLoading("show");
+
     // console.log(fileBatch);
     // console.log(allErrors);
 
@@ -109,6 +111,7 @@ function bulk_upload_list(fileBatch) {
                         },
                     ],
                 });
+
                 // $(".failed_uploads tr").remove();
 
                 // $(".all_bulk_upload_summary tr").remove();
@@ -127,7 +130,7 @@ function bulk_upload_list(fileBatch) {
                         acctValid,
                         valid,
                     } = e;
-                    console.log("e=>", e);
+                    // console.log("e=>", e);
                     // return false;
                     if (e.valid === "Y") {
                         group.valid.push(e);
@@ -145,17 +148,17 @@ function bulk_upload_list(fileBatch) {
                         return;
                     }
                     group.invalid.push(e);
-                    // all_failed_uploads.row
-                    //     .add([
-                    //         // `<b>${valid_uploads_count}</b>`,
-                    //         `<b>${name}</b>`,
-                    //         `<b>${accountNumber}</b>`,
-                    //         `<b>${amount}</b>`,
-                    //         `<b>${refNumber}</b>`,
-                    //         `<b class="text-danger">${acctValid}</b>`,
-                    //     ])
-                    //     .draw(false);
-                    // return;
+                    all_failed_uploads.row
+                        .add([
+                            // `<b>${valid_uploads_count}</b>`,
+                            `<b>${name}</b>`,
+                            `<b>${accountNumber}</b>`,
+                            `<b>${amount}</b>`,
+                            `<b>${refNumber}</b>`,
+                            `<b class="text-danger">${acctValid}</b>`,
+                        ])
+                        .draw(false);
+                    return;
                 });
 
                 //         all_valid_uploads.row
@@ -188,8 +191,8 @@ function bulk_upload_list(fileBatch) {
                         )}</b>`,
                         `<b>${value_date}</b>`,
                         // `<b class="text-success">${uploadAcctValid}</b>`,
-                        `<td><button type="button" class="btn btn-sm btn-primary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" >&emsp;<b>${total_upload}</b>&emsp;</button></td>`,
-                        `<td><button type="button" class="btn btn-sm btn-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#full-width-modal" >&emsp;<b>${invalid.length}</b>&emsp;</button></td>`,
+                        `<td><button type="button" class="btn btn-sm btn-primary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>${total_upload}</b>&emsp;</button></td>`,
+                        `<td><button type="button" class="btn btn-sm btn-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>${invalid.length}</b>&emsp;</button></td>`,
                         ` <td>${action_button}</td>`,
                     ])
                     .draw(false);
@@ -453,6 +456,9 @@ function bulk_upload_list(fileBatch) {
                 //             </tr>
                 //         `
                 // );
+                siteLoading("hide");
+
+                toaster(upload_response, "success", 3000);
 
                 return false;
             } else {
@@ -482,6 +488,11 @@ function formatToCurrency(amount) {
 
 $(document).ready(function () {
     window.total_bulk_upload = $("#bulk_upload_list").DataTable();
+    // new $.fn.dataTable.Responsive(total_bulk_upload);
+    // total_bulk_upload = $("#bulk_upload_list").DataTable({
+    //     dom: "Bfrtip",
+    //     buttons: ["colvis"],
+    // });
 
     $(".accounts-select").select2({
         minimumResultsForSearch: Infinity,
@@ -613,12 +624,13 @@ $(document).ready(function () {
                     if (response.responseCode == "000") {
                         // $("#submit_cheque_request").text("Submit File");
 
-                        toaster(response.message, "success", 3000);
                         document.getElementById("bulk_upload_form").reset();
 
                         setTimeout(function () {
-                            bulk_upload_list(fileBatch);
-                        }, 500);
+                            bulk_upload_list(fileBatch, response.message);
+                        }, 200);
+                        // siteLoading("hide");
+                        // toaster(response.message, "success", 3000);
                     } else {
                         // $("#submit_cheque_request").text("Submit File");
                         let errorMessage = response.message;
