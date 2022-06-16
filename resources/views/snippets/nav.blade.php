@@ -1,5 +1,5 @@
 <!-- Topbar Start -->
-<div class="d-flex  align-items-center justify-content-between py-2 px-2 px-sm-5 mb-4 bg-white site-shadow">
+<div class="d-flex  align-items-center justify-content-between py-2 px-2 px-sm-5 mb-4 bg-white site-shadow ">
     <a class="d-block d-md-none " type="button" data-toggle="offcanvas">
         <div class="hamburger-menu"><span></span><span></span><span></span></div>
     </a>

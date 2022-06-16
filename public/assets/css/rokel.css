@@ -278,6 +278,12 @@
 
     /* box-shadow: 4px 4px 15px rgb(26 35 126 / 20%); */
 }
+.sticky-site-card {
+    position: fixed;
+    top: 0;
+    margin-bottom: 25px;
+    width: 100%;
+}
 
 .site-card {
     /* background-color: rgba(255, 255, 255, 0.5);
@@ -332,7 +338,7 @@
 /* .text-input {
     border: 1px solid #ced4da;
 } */
-/* 
+/*
 .form-control,
 .bootstrap-select .dropdown-toggle {
     height: auto;
@@ -429,9 +435,8 @@
     background-color: var(--primary) !important;
     color: white;
 }
-.no-select-border .select2-container .select2-selection--single
-{
-border: 0px solid white;
+.no-select-border .select2-container .select2-selection--single {
+    border: 0px solid white;
 }
 /* .input-group-text {
     font-size: 0.9rem;
