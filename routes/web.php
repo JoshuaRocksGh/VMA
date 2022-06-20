@@ -136,6 +136,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     // --- ACCOUNTS
     Route::get('account-enquiry', [AccountEnquiryController::class, 'account_enquiry']);
     Route::get('my-accounts', [AccountEnquiryController::class, 'my_accounts']);
+    Route::get('accounts-statement', [AccountEnquiryController::class, 'accounts_statement']);
 
     // --- TRANSFERS
     Route::get('/transfer-status', [TransferStatusController::class, 'transfer_status']);

@@ -1,19 +1,18 @@
 @extends('layouts.master')
 @section('content')
-@php
-$pageTitle = "standing order";
-$basePath = "Transfer";
-$currentPath = "Standing Order";
-@endphp
-@include('pages.transfer.transfers_master')
+    @php
+    $pageTitle = 'standing order';
+    $basePath = 'Transfer';
+    $currentPath = 'Standing Order';
+    @endphp
+    @include('pages.transfer.transfers_master')
 @endsection
 @section('scripts')
-{{-- <script src="{{ asset('assets/js/pages/transfer/standingOrder.js') }}"> --}}
-</script>
+    {{-- <script src="{{ asset('assets/js/pages/transfer/standingOrder.js') }}"> --}}
+    {{-- </script> --}}
 @endsection
 
-{{-- 
-<div class="col-md-7 site-card m-2" id="transaction_form">
+{{-- <div class="col-md-7 site-card m-2" id="transaction_form">
     <br>
     <form action="#" id="payment_details_form" autocomplete="off" aria-autocomplete="none">
         @csrf
@@ -38,12 +37,11 @@ $currentPath = "Standing Order";
 
                 <div class="form-group row select_saved_beneficiary">
 
-                    <b class="col-md-4 text-primary">Beneficiary &nbsp; <span
-                            class="text-danger">*</span></b>
+                    <b class="col-md-4 text-primary">Beneficiary &nbsp; <span class="text-danger">*</span></b>
 
 
-                    <select class="form-control col-md-8" id="saved_beneficiary"
-                        placeholder="Select Pick Up Branch" required>
+                    <select class="form-control col-md-8" id="saved_beneficiary" placeholder="Select Pick Up Branch"
+                        required>
                         <option disabled selected value="">--- Select Saved
                             Beneficiary ---</option>
                     </select>
@@ -53,22 +51,19 @@ $currentPath = "Standing Order";
 
                 <div class="form-group row">
                     <b class="col-md-4 text-primary"> Beneficiary A/C Number</b>
-                    <input type="text" class="form-control col-md-8 readOnly"
-                        id="saved_account_number" readonly>
+                    <input type="text" class="form-control col-md-8 readOnly" id="saved_account_number" readonly>
                 </div>
 
                 <div class="form-group row">
                     <b class="col-md-4 text-primary"> Beneficiary Name</b>
-                    <input type="text" class="form-control col-md-8 readOnly "
-                        id="saved_beneficiary_name" readonly>
+                    <input type="text" class="form-control col-md-8 readOnly " id="saved_beneficiary_name" readonly>
                 </div>
 
 
 
                 <div class="form-group row">
                     <b class="col-md-4 text-primary"> Beneficiary Email</b>
-                    <input type="text" class="form-control col-md-8 readOnly"
-                        id="saved_beneficiary_email" readonly>
+                    <input type="text" class="form-control col-md-8 readOnly" id="saved_beneficiary_email" readonly>
                 </div>
 
                 <hr>
@@ -78,14 +73,12 @@ $currentPath = "Standing Order";
 
                     <div class="form-group row">
 
-                        <b class="col-4 text-primary"> Amount &nbsp; <span
-                                class="text-danger">*</span></b>
+                        <b class="col-4 text-primary"> Amount &nbsp; <span class="text-danger">*</span></b>
 
                         <div class="col-2">
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend" style="margin-right:-1px;">
-                                    <div
-                                        class="input-group-text display_from_account_currency">
+                                    <div class="input-group-text display_from_account_currency">
                                         CUR</div>
                                 </div>
                             </div>
@@ -100,12 +93,11 @@ $currentPath = "Standing Order";
 
 
                     <div class="form-group row mb-3">
-                        <b class=" col-md-4 text-primary">Start Date &nbsp; <span
-                                class="text-danger">*</span></b>
+                        <b class=" col-md-4 text-primary">Start Date &nbsp; <span class="text-danger">*</span></b>
 
 
-                        <input type="date" class="form-control col-md-8" min="01-01-1997"
-                            max="31-12-2030" id="so_start_date" required>
+                        <input type="date" class="form-control col-md-8" min="01-01-1997" max="31-12-2030"
+                            id="so_start_date" required>
 
 
                     </div>
@@ -113,21 +105,18 @@ $currentPath = "Standing Order";
                     <div class="form-group row mb-3">
                         <b class=" col-md-4 text-primary">End Date</b>
 
-                        <input type="date" class="form-control col-md-8" id="so_end_date"
-                            required>
+                        <input type="date" class="form-control col-md-8" id="so_end_date" required>
 
 
                     </div>
 
                     <div class="form-group row">
 
-                        <b class="col-md-4 text-primary">Frequency &nbsp; <span
-                                class="text-danger">*</span></b>
+                        <b class="col-md-4 text-primary">Frequency &nbsp; <span class="text-danger">*</span></b>
 
 
-                        <select class="form-control col-md-8 so_frequency"
-                            id="beneficiary_frequency" placeholder="Select Pick Up Branch"
-                            required>
+                        <select class="form-control col-md-8 so_frequency" id="beneficiary_frequency"
+                            placeholder="Select Pick Up Branch" required>
                             <option disabled selected value="">--Select Frequency--
                             </option>
                         </select>
@@ -141,8 +130,7 @@ $currentPath = "Standing Order";
                     </div>
                 </div>
                 <div class="form-group text-right">
-                    <button class="btn btn-primary btn-rounded" type="submit"
-                        id="next_button">
+                    <button class="btn btn-primary btn-rounded" type="submit" id="next_button">
                         &nbsp; Next &nbsp; <i class="fe-arrow-right"></i></button>
                 </div>
             </div>
@@ -151,9 +139,7 @@ $currentPath = "Standing Order";
         <hr>
     </form>
 </div> --}}
-{{-- 
-   
-<div class="col-md-4 site-card m-2" id="related_information_display">
+{{-- <div class="col-md-4 site-card m-2" id="related_information_display">
     <h4 class="text-primary mt-3">Sender Acc. Info</h4>
     <hr class="mt-0 mb-1">
 
@@ -191,7 +177,7 @@ $currentPath = "Standing Order";
         <h6 class="text-primary display_frequency_so col-md-7"></h6>
     </div>
     <br>
-    
+
     <hr style="margin-top: 2px; margin-bottom: 5px; ">
 
     <div class="row">
@@ -203,4 +189,5 @@ $currentPath = "Standing Order";
         </h6>
     </div>
 
-    {{-- </div> --}}
+    {{--
+</div> --}}

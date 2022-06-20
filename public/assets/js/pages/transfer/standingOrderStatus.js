@@ -2,13 +2,9 @@ let datatableOptions = {
     destroy: true,
     // lengthChange: false,
     pageLength: 5,
-    // searching: false,
-    // scrollY: "500px",
-    // info: false,
-    // "scrollX":        true,
-    // scrollCollapse: true,
-    // paging: false,
+    responsive: true,
     columnDefs: [
+        { responsivePriority: 1, targets: 8 },
         {
             //ignore time and render only dates
             targets: [3, 4, 6, 7],
@@ -17,7 +13,7 @@ let datatableOptions = {
         {
             targets: [8],
             render: (data) =>
-                `<div class="text-danger cancel-order text-center" data-order-number="${data}"><i style="cursor: pointer;" class="fas fa-ban"></i></div>`,
+                `<button class="text-white align-items-center btn  bg-danger cancel-order text-center" data-order-number="${data}"><i style="cursor: pointer;" class="fas fa-ban mr-1"></i> cancel</button>`,
         },
         {
             // trancate with ellipses ex

@@ -12,21 +12,6 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-    <style>
-        .btn-primary {
-            color: #fff;
-            background-color: #0561ad;
-            border-color: #0561ad;
-
-        }
-
-        .btn-primary:hover {
-
-            background-color: #2793ec;
-            border-color: #0561ad;
-
-        }
-    </style>
 
     <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
     @include('snippets.style')
@@ -36,17 +21,21 @@
 
 </head>
 
-<body class=" auth-fluid-pages pb-0" style="background-image: url('../../assets/images/background.png');
+<body class="pb-0" style="background-image: url('../../assets/images/background.png');
     background-repeat: no-repeat; background-size: cover;">
     <!-- Pre-loader 
         -->
-    <div id="preloader" class="preloader">
-        <div id="status" class="preloader">
-            <img class="pulse" style="width: 100px; top: -50px;" src="{{ asset('assets/images/logoRKB.png') }}" />
+    <div id="site_loader">
+        <div>
+            <img class="pulse mx-auto" style="width: 100px;" src="{{ asset('assets/images/logoRKB.png') }}" />
+            <div class="mt-2  text-primary d-flex tw-relative"><span class="lds-hourglass tw-absolute"></span> <span
+                    class="text-semibold align-self-center mx-2 font-weight-bold">
+                    Loading</span></div>
         </div>
-    </div> <!-- End Preloader-->
-
-    @yield('content')
+    </div>
+    <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none">
+        @yield('content')
+    </div>
 
 
     @yield('scripts')

@@ -1,48 +1,54 @@
 @if (config('app.corporate'))
 <script>
-    const ISCORPORATE = true;
+    ISCORPORATE = true;
 </script>
 @else
 <script>
-    const ISCORPORATE = false;
+    ISCORPORATE = false;
 </script>
 @endif
 
+
 <!-- Third Party js-->
-<script src="{{ asset('assets/js/vendor.min.js') }}" defer></script>
-<script src="{{ asset('assets\plugins\sweet-alert\sweetalert2@11.js') }}" defer></script>
-<script src="{{ asset('assets/js/app.min.js') }}" defer></script>
-{{-- <script src="{{ asset('assets/js/functions/getAccounts.js') }}" defer></script> --}}
-<script src="{{  asset('assets/plugins/blockui/jquery.blockUI.min.js') }}" defer></script>
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js" defer></script>
---}}
-<script src="{{ asset('assets\plugins\bootstrap-select\bootstrap-select.min.js')}}" defer> </script>
-<script defer src="{{ asset('assets/js/functions/genericFunctions.js') }}">
-</script>
-<script src="{{asset('assets\plugins\select2\select2.min.js')  }}" defer></script>
+{{-- <script src="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.js')}}" defer> </script> --}}
+<script src="{{ asset('assets/plugins/bootstrap/bootstrap-v.4.6.1.min.js') }}" defer></script>
+<script src="{{ asset('assets/plugins/sweet-alert/sweetalert2@11.js') }}" defer></script>
+<script src="{{ asset('assets/plugins/blockui/jquery.blockUI.min.js') }}" defer></script>
+<script src="{{ asset('assets/plugins/select2/select2.min.js')  }}" defer></script>
+<script src="{{ asset('assets/js/functions/genericFunctions.js') }}" defer></script>
 <script defer>
     const ACCOUNT_NUMBER_LENGTH = 13
-    // $("input[type=number]").on("focus", function() {
-    //     $(this).on("keydown", function(event) {
-    //         if (event.keyCode === 38 || event.keyCode === 40) {
-    //             event.preventDefault();
-    //         }
-    //     });
-    // });
+
+    pageData = {};
+$( ()=>{
+    $('.menu-item-header').on('click', (e)=>{
+        $('.menu-item-body').collapse('hide')
+        $(e.currentTarget).next().collapse('show')
+    })
+    $('[data-toggle="offcanvas"]').on('click', function () {
+    $('.offcanvas-collapse').toggleClass('open')
+    $('.hamburger-menu').toggleClass('open');
+  })
+  $("#wrapper").css("background-color", "#ddeefe").show();
+  $('.password-eye').on('click', function () {
+    var $this = $(this),
+        $passwordInput = $this.prev(),
+        isPasswordVisible = $passwordInput.attr('type') === 'text';
+    $passwordInput.attr('type', isPasswordVisible ? 'password' : 'text');
+    $this.toggleClass('show');
+  });
+  $("#site_loader").fadeOut(1500,'linear');
+    $("a[href$='" + location.pathname + "']").addClass("current-page");
+    $("a.current-page").parents('.menu-item-body').collapse('show')
+    $("a.current-page").parents('.menu-item-body').prev().addClass('current-menu-header')
 
 
-$(window).on("load", ()=>{
-    siteLoading("hide")
+    $("select").select2();
+        $(".accounts-select").select2({
+            minimumResultsForSearch: Infinity,
+            templateResult: accountTemplate,
+            templateSelection: accountTemplate,
+        });
 })
-</script>
-{{-- <script type='text/javascript'>
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'en',
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
-    }
-</script>
 
-<script type='text/javascript' src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'>
-</script> --}}
+</script>

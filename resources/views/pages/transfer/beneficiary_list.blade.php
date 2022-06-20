@@ -2,12 +2,6 @@
 
 @section('styles')
 <style>
-    .page-item.active .page-link {
-
-        background-color: #17a2b8;
-        border-color: #17a2b8;
-    }
-
     .table_over_flow {
         overflow-y: hidden;
 
@@ -78,9 +72,9 @@ $currentPath = "Transfer Beneficiary";
 @endphp
 @include("snippets.pageHeader")
 
-<div class="p-3">
-    <div class="site-card ">
-        <div class="row">
+<div class="">
+    <div class="dashboard site-card ">
+        <div class="row dashboard-body p-2">
             <div class="col-md-12">
                 <h2 class="font-17 text-left font-weight-bold text-capitalize mb-3 text-primary">select Beneficiary type
                 </h2>
@@ -131,9 +125,9 @@ $currentPath = "Transfer Beneficiary";
                 </div>
             </div> <!-- end card body-->
         </div>
-        {{-- <div class="col-md-1"></div> --}}
-    </div> <!-- end card-body -->
-</div> <!-- end col -->
+    </div>
+    {{-- <div class="col-md-1"></div> --}}
+</div> <!-- end card-body -->
 
 
 @include("pages.transfer.beneficiary_form_modal")
@@ -143,22 +137,8 @@ $currentPath = "Transfer Beneficiary";
 
 @section('scripts')
 
-<link href="assets\plugins\select2\select2.min.css" rel="stylesheet" />
-<link href="assets\plugins\select2\select2-bootstrap4.min.css" rel="stylesheet" />
-<style>
-    .select2-container--bootstrap4 .select2-selection--single .select2-selection__arrow b {
-        top: 0;
-    }
-
-    .select2-container--bootstrap4.select2-container--focus .select2-selection {
-        box-shadow: none;
-        border: 1px solid #ced4da;
-    }
-</style>
-<script src="assets\plugins\select2\select2.min.js" defer></script>
-
 <script>
-    const pageData = new Object()
+    const pageData = {}
     const noDataAvailable =   {!! json_encode($noDataAvailable) !!}
 </script>
 <script src="assets/js/pages/transfer/beneficiary/beneficiaryList.js">

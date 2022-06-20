@@ -40,52 +40,36 @@
 @section('content')
     <div class="container-fluid">
 
+        @php
+            $currentPath = ' Approval Form';
+            $basePath = 'Pending Approval';
+            $pageTitle = 'Approval Form';
+        @endphp
+        @include('snippets.pageHeader')
         <div class="row">
             <div class="col-12">
                 <div class="">
                     <div class=" card-body ">
-                        <div class="              row">
+                        <div class="row">
                             {{-- <div class="col-md-1"></div> --}}
 
                             <div class="col-md-8">
 
-                                <div class="receipt">
-                                    <div class="container card card-body">
+                                <div class="dashboard site-card">
+                                    <div class=" tab-content dashboard-body border-primary border table-responsive p-4">
 
-                                        <div class="container">
+                                        <div class="">
                                             <div class="">
-                                                <div class=" col-md-12
-                                        body-main">
+                                                <div class=" col-md-12">
                                                     <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-4 "> <img class="img "
-                                                                    alt="InvoIce Template"
-                                                                    src="{{ asset('assets/images/' . env('APPLICATION_INFO_LOGO_LIGHT')) }} "
-                                                                    style="zoom: 0.6" /> </div>
-                                                            <div class="col-md-4"></div>
-                                                            <div class="col-md-4 text-right">
-                                                                <h4 class="text-primary"><strong>ROKEL COMMERCIAL
-                                                                        BANK</strong>
-                                                                </h4>
-                                                                <p>25-27 Siaka Stevens St</p>
-                                                                <p> Freetown, Sierra Leone</p>
-                                                                <p>rokelsl@rokelbank.sl</p>
-                                                                <p>(+232)-76-22-25-01</p>
-                                                            </div>
-                                                        </div>
-                                                        <br>
-                                                        <div class="page-header">
-                                                            <h2>Approval Form</h2>
-                                                        </div>
-                                                        <br>
-                                                        <div class="col-md-1"></div>
 
-                                                        <div class="container col-md-10 text-center">
+
+                                                        <div class="  text-center">
                                                             <div class="col-md-12">
                                                                 <div id="approval_details"></div>
 
-
-                                                                <div class="mt-1">
+                                                                <br><br>
+                                                                <div class="mt-3">
 
                                                                     <div class="col-md-12 mb-3 pending_status">
                                                                         <div class="row">
@@ -150,30 +134,8 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-1"></div>
 
 
-                                                        <br><br>
-
-                                                        {{-- <div>
-                                                            <div class="col-md-12">
-                                                                <p><b>Date Posted :</b> {{ date('d F, Y') }}</p> <br /> <br />
-                                                                <p><b>Posted By : {{ session('userId') }}</b></p>
-                                                            </div>
-                                                        </div> --}}
-                                                        <br><br>
-                                                        {{-- <div class="row">
-                                                            <div class="col-md-5"></div>
-                                                            <div class="col-md-2">
-                                                                  <button class="btn btn-light btn-rounded hide_on_print text-center"
-                                                                    type="button" onclick="window.print()">Print
-                                                                    Receipt
-                                                                </button>
-
-
-                                                            </div>
-                                                            <div class="col-md-5"></div>
-                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,63 +144,45 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <div class="card ">
-                                    <div class="p-3 mt-4 mt-lg-0">
-                                        <h4 class="mb-1 text-center">Account Mandate</h4>
-                                        <h2 id="account_mandate"></h2>
+                            <div class="col-md-4 ">
+                                <div class=" site-card p-1">
+                                    <div class="site-card-body ">
+                                        <h3 class=" text-center">Account Mandate</h3>
+                                        <p id="account_mandate" class="text-center text-danger" style="font-size:18px">
+                                        </p>
 
                                         <br>
-                                        <p>One User Mandate <span class="text-danger h3">A</span> </p>
-                                    </div>
-                                </div>
+                                        <h3 class=" text-center">Initiated By</h3>
+                                        <p id="initiated_by" class="text-center text-danger" style="font-size:18px"></p>
 
-                                {{-- <br> --}}
-                                <div class="card">
-                                    <div class="p-3 mt-4 mt-lg-0">
-                                        <h4 class="mb-1 text-center">Initiated By</h4>
-                                        <h2 id="initiated_by"></h2>
-                                        {{-- <div class="table-responsive">
-                                                <table class="table mb-0 table-bordered">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td id="initiated_by"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div> --}}
+                                        <br>
+                                        <h3 class="mb-1 text-center approvers_list_title">Status</h3>
+                                        <p id="approvers_list" class="text-center text-danger" style="font-size:18px">
+                                        </p>
 
                                     </div>
-                                </div>
 
-                                {{-- <br> --}}
-                                <div class="card">
-                                    <div class="p-3 mt-4 mt-lg-0">
-                                        <h4 class="mb-1 text-center">Status</h4>
-                                        <span id="approvers_list"></span>
-
-                                        {{-- <h2 class="approvers">Jonas Korankye</h2>
-                                        <h2 class="approvers">Joshua Tetteh</h2> --}}
-
-
-                                    </div>
                                 </div>
 
 
-                                <div class="">
-                                    <div class="card-box">
-                                        <h4 class="header-title mb-1 text-center">Approvers</h4>
+
+                                <div class="site-card p-1">
+                                    <div class="site-card-body py-2 bg-primary" style="min-height: 10px !important;">
+                                        <h6 class="text-center mb-0 text-white">Approvers</h6>
+                                    </div>
+                                    <div class="site-card-body">
+
 
 
                                         <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <thead class="thead-light">
+                                            <table class="table table-borderless mb-0">
+                                                {{-- <thead class="bg-primary">
                                                     <tr>
                                                         <th>Name</th>
                                                         <th>Mandate</th>
 
                                                     </tr>
-                                                </thead>
+                                                </thead> --}}
                                                 <tbody class="approvers_list">
 
                                                 </tbody>
@@ -558,9 +502,12 @@
                         let pending_approvers = pending_request.approvers
                         if (pending_approvers == null || pending_approvers == undefined) {
                             var approvers = 'PENDING APPROVAL'
-                            $('#approvers_list').append(`<h2 class="approvers">${approvers}</h2>`)
+                            $('#approvers_list').append(
+                                `<p class="approvers" style="font-size:18px">${approvers}</p>`)
                         } else {
-                            $('#approvers_list').append(`<h2 class="approvers">${pending_approvers}</h2>`)
+                            $('.approvers_list_title').text('Approved By')
+                            $('#approvers_list').append(
+                                `<p class="approvers" style="font-size:18px">  ${pending_approvers}</p>`)
                         }
 
 
@@ -611,7 +558,7 @@
 
                         })
 
-                        let request_status = response.data.request_status
+                        let request_status = response.data[0].request_status
 
                         console.log('======');
                         console.log(request_status);
@@ -787,8 +734,8 @@
         function append_approval_details(description, data) {
 
             $('#approval_details').append(`<div class="row ">
-                    <span class="col-md-6 text-left h4">${description}</span>
-                    <span class="col-md-6 text-right text-primary h4">${data}</span>
+                    <span class="col-md-6 text-left font-14">${description}</span>
+                    <span class="col-md-6 text-right text-primary font-14">${data}</span>
                 </div>
                 <hr class="mt-0">`)
         };
@@ -796,8 +743,8 @@
         function append_approval_details_bulk(description, data) {
 
             $('#approval_details').append(`<div class="row ">
-                    <span class="col-md-6 text-left h4">Bulk Details</span>
-                    <span class="col-md-6 text-right text-primary h4">
+                    <span class="col-md-6 text-left font-14">Bulk Details</span>
+                    <span class="col-md-6 text-right text-primary ">
                         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#bs-example-modal-lg">View Transaction Details</button>
 
                     </span>

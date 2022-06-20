@@ -48,7 +48,7 @@ function getTransferStatus(customerNumber) {
                     extraData = JSON.stringify(data[i]);
                     // console.log(extraData);
                     let button = `
-                        <button type="button" class="btn btn-info btn-sm waves-effect waves-light" extra-data='${extraData}'> Details</button>`;
+                        <button type="button" class="btn btn-outline-primary btn-sm waves-effect waves-light" extra-data='${extraData}'> Details</button>`;
                     table.row
                         .add([
                             data[i].postingDate.split(" ")[0],

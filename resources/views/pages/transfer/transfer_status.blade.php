@@ -1,72 +1,42 @@
 @extends('layouts.master')
 
-<style>
-    td {
-        text-align: center;
-        font-size: 0.8rem !important;
-    }
 
-    .table-sm {
-        font-size: 0.8rem !important;
-    }
-
-    h4 {
-        font-size: 1rem !important;
-        font-weight: bold !important;
-    }
-
-</style>
 @section('content')
     @php
     $pageTitle = ' TRANSFER STATUS';
     $basePath = 'Transfer';
     $currentPath = 'Tansfer Status';
     @endphp
-    <div class="container-fluid hide_on_print">
-        <!-- start page title -->
-        @include('snippets.pageHeader')
-        {{-- </div> --}}
-        <div>
-            <br>
-            <div class="row">
-                <br> <br><br>
-                <div class="col-12 p-3">
-                    <div class="container-fluid">
-                        <div class=" row">
-                            <div class="col-12 m-2 site-card" id="transaction_summary">
+    <!-- start page title -->
+    @include('snippets.pageHeader')
+    {{-- </div> --}}
+    <div class="dashboard site-card" id="transaction_summary">
 
-                                <div class="table-responsive">
+        <div class="table-responsive p-4 dashboard-body p-2">
 
-                                    <table class="table table-bordered mt-5 table-striped table-centered mb-0"
-                                        id="transfer_status_table" style="zoom:0.9">
-                                        <thead>
-                                            <tr class="bg-info  text-white text-center">
-                                                <td> <b> Date</b></td>
-                                                <td> <b> Beneficiary Name</b></td>
-                                                <td> <b> Amount</b></td>
-                                                <td> <b> Account Description</b></td>
-                                                <td> <b> Account Number</b></td>
-                                                <td> <b> Status</b></td>
-                                                <td> <b> Action</b></td>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="transfer_status_body">
-                                            <td colspan="100%" class="text-center">
+            <table class="table table-bordered mt-5 table-striped display responsive nowrap w-100"
+                id="transfer_status_table">
+                <thead>
+                    <tr class="bg-primary  text-white ">
+                        <th class="all"> Date </th>
+                        <th class="all"> Beneficiary Name </th>
+                        <th class="all"> Amount </th>
+                        <th class="all"> Account Description </th>
+                        <th class="all"> Account Number </th>
+                        <th class="none"> Status </th>
+                        <th class="none"> Action </th>
+                    </tr>
+                </thead>
+                <tbody id="transfer_status_body">
+                    <td colspan="100%" class="text-center">
 
-                                                {!! $noDataAvailable !!}
-                                            </td>
+                        {!! $noDataAvailable !!}
+                    </td>
 
-                                        </tbody>
-                                    </table>
-                                </div> <!-- end card body-->
-                            </div>
-                        </div> <!-- end card-body -->
-                    </div>
-
-                </div> <!-- end col -->
-            </div> <!-- end row -->
-        </div>
-    </div>
+                </tbody>
+            </table>
+        </div> <!-- end card body-->
+    </div> <!-- end row -->
 
 
     <!-- Standard modal content -->
@@ -149,7 +119,6 @@
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 @endsection
 
 @section('scripts')
@@ -157,7 +126,5 @@
     <script>
         const customerNumber = @json(session()->get('customerNumber'));
     </script>
-    <script src="{{ asset('assets/js/pages/transfer/transferStatus.js') }}">
-
-    </script>
+    <script src="{{ asset('assets/js/pages/transfer/transferStatus.js') }}"></script>
 @endsection

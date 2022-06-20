@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8" />
     <title>RC BANKING</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,25 +14,11 @@
 
     @include('snippets.style')
     <style type="text/css">
-        .navbar-custom {
-            background-color: {
-                    {
-                    env('APPLICATION_CUSTOM_COLOR')
-                }
-            }
-        }
-
-        .card-icon {
-            color: white;
-        }
-
-        /* Works on Firefox */
         * {
             scrollbar-width: thin;
             scrollbar-color: rgb(221, 221, 223) rgb(217, 217, 216);
         }
 
-        /* Works on Chrome, Edge, and Safari */
         *::-webkit-scrollbar {
             width: 12px;
         }
@@ -48,13 +33,6 @@
             border: 3px solid rgb(217, 217, 216);
         }
 
-        #datatable-buttons_filter {
-            float: right;
-        }
-    </style>
-
-
-    <style>
         @media print {
             .hide_on_print {
                 display: none
@@ -66,55 +44,55 @@
             font-style: normal;
             font-weight: 400;
             src: url("assets/fonts/password.ttf")
-                /* src: url(https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf); */
         }
 
+        .password-font {
+            font-family: 'password' !important;
+        }
 
-        input.key {
+        input.key,
+            {
             font-family: 'password';
-            width: 300px;
-            height: 80px;
-            font-size: 100px;
         }
 
-        /* .table_over_flow {
-            overflow-y: hidden;
-        } */
+
+
+        body {
+            width: 100vw;
+            background-color: white;
+        }
     </style>
     @yield('styles')
     <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
     @include('snippets.script')
 </head>
 
-<body id="body" class="body"
-    style="background-image: url('assets/images/background.png'); background-repeat: no-repeat; background-size: cover;"
-    data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
+<body id="body" class="position-relative">
 
     <!-- Pre-loader -->
-    <div id="preloader" class="preloader">
-        <div id="status" class="preloader">
-            {{-- <img class="pulse" style="width: 100px; top: -50px;" src="assets/images/logoRKB.png" /> --}}
-            <div><img class="pulse " style="width: 100px;" src="{{ asset('assets/images/logoRKB.png') }}" />
-                <div class="mt-2  text-primary d-flex tw-relative"><span class="lds-hourglass tw-absolute"></span> <span
-                        class="text-semibold align-self-center mx-2 font-weight-bold">
-                        Loading</span></div>
-            </div>
-        </div> <!-- End Preloader-->
-    </div>
-    <!-- Begin page -->
-    <div id="wrapper">
-        @include('snippets.nav')
-
-        @include('snippets.side-bar')
-
-        <div class="content-page">
-            <div class="content">
-                @yield('content')
-            </div>
-
+    <div id="site_loader">
+        <div>
+            <img class="pulse mx-auto" style="width: 100px;" src="{{ asset('assets/images/logoRKB.png') }}" />
+            <div class="mt-2  text-primary d-flex tw-relative"><span class="lds-hourglass tw-absolute"></span> <span
+                    class="text-semibold align-self-center mx-2 font-weight-bold">
+                    Loading</span></div>
         </div>
     </div>
-
+    <!-- Begin page -->
+    <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none;">
+        @include('snippets.nav')
+        <div class="d-flex px-2 w-100">
+            <div class="offcanvas-collapse px-2 d-md-block mt-2 w-100" style="max-width: 250px; min-width: 250px;">
+                @include('snippets.side-bar')
+            </div>
+            <div class="content w-100 px-2">
+                @yield('content')
+            </div>
+            <div class=" d-none d-xl-block px-2 mt-2 " style="width:500px !important">
+                @include('pages.dashboard.right_aside')
+            </div>
+        </div>
+    </div>
 
     @yield('scripts')
 </body>

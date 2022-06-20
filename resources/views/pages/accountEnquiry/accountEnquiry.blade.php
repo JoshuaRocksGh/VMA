@@ -1,35 +1,10 @@
 @extends('layouts.master')
 @section('styles')
     <style>
-        .carousel-control-next,
-        .carousel-control-prev,
-        .carousel-indicators {
-            filter: invert(100%);
-        }
-
         @media print {
             .hide_on_print {
                 display: none
             }
-        }
-
-        .buttons-excel {
-            display: none !important;
-        }
-
-        @font-face {
-            font-family: 'password';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 40px;
-            src: url(https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf);
-        }
-
-        input.key {
-            font-family: 'password';
-            width: 300px;
-            height: 80px;
-            font-size: 100px;
         }
 
         .table_over_flow {
@@ -37,10 +12,26 @@
 
         }
 
-        h4,
-        h5 {
-            font-size: 0.9rem;
+        .dt-buttons {
+            display: none;
+        }
 
+        .dataTables_filter {
+            padding: 2px 10px;
+            background-color: #e2e3e5;
+        }
+
+        .dataTables_info {
+            padding: 2px 10px;
+
+        }
+
+        .pagination {
+            padding: 2px 10px;
+        }
+
+        table.dataTable#account_transaction_display_table {
+            margin-top: 0px !important;
         }
 
     </style>
@@ -52,67 +43,41 @@
     @php
     $currentPath = 'Account Statement';
     $basePath = 'Account';
-    $pageTitle = 'account statement'; @endphp
+    $pageTitle = 'account statement';
+    @endphp
     @include('snippets.pageHeader')
 
-    <div class="card-body p-0 px-sm-2">
-        <div class="row site-card p-2 p-md-4  justify-content-md-around" id="transaction_form">
-            <div class="col-12 col-xl-6 align-self-center" style="max-width: 800px">
-                <div class="form-group row ">
-                    <label class=" text-primary align-self-center"> Account :</label>
-                    <select class="form-control accounts-select " id="from_account" required>
-                        <option value="" disabled selected> -- Select Your Account -- </option>
-                        @include('snippets.accounts')
-                    </select>
-                </div>
+    <div class=" dashboard site-card" id="transaction_form">
+        <div class="dashboard-body p-4" style="min-height: 0px;">
+            <div class="d-flex align-items-center justify-content-around">
+                <div class="w-100" style="max-width: 600px">
+                    <div class="form-group  ">
+                        <label class=" text-primary align-self-center"> Account :</label>
+                        <select class="form-control accounts-select " id="from_account" required>
+                            @include('snippets.accounts')
+                        </select>
+                    </div>
 
-                <div class="form-group row align-items-end">
-                    <div class="col-6 pl-0">
-                        <label class="  text-primary align-self-center">Start Date :</label>
-                        <input type="date" id="startDate" class=" text-input  form-control ">
-                    </div>
-                    <div class="col-6 pr-0">
-                        <label class=" text-primary align-self-center">End Date :</label>
-                        <input type="date" id="endDate" class="text-input  form-control ">
-                    </div>
-                </div>
-                <div class="form-group row justify-content-end">
-                    <button class="btn btn-primary mt-1 waves-effect waves-light" id="search_transaction">Search</button>
-                </div>
-            </div>
-            <div class="w-100 col-xl-6 align-self-center px-0 px-xl-2 d-none d-sm-block">
-                <div class="w-100  mx-auto p-2 text-center  overflow-hidden text-white rounded-lg"
-                    style="max-width: 450px; background-image: linear-gradient(to right, #0561ad, #00ccff)">
-                    <span class="d-block p-2 font-weight-bold font-12 text-right "> Rokel Commercial
-                        Bank
-                    </span>
-                    <div class="d-flex justify-content-start mt-2 pl-2">
-                        <img style="max-height: 50px" src="assets/images/logoRKB.png" />
-                        <div class="w-100"><span
-                                class="account_number text-center w-100 text-black font-weight-bold  font-sm-22"
-                                style="letter-spacing: .1rem;">
-                            </span>
-                            <div><span class=" font-11 font-weight-bold mr-2 account_currency">
-                                </span>
-                                <span class="font-weight-bold " id="account_balance">
-                                </span>
-                            </div>
+                    <div class="form-group d-flex justify-content-around align-items-end">
+                        <div class=" pr-4 w-100">
+                            <label class="  text-primary align-self-center">Start Date :</label>
+                            <input type="date" id="startDate" class=" text-input  form-control ">
+                        </div>
+                        <div class=" pr-0 w-100">
+                            <label class=" text-primary align-self-center">End Date :</label>
+                            <input type="date" id="endDate" class="text-input  form-control ">
                         </div>
                     </div>
-                    <div class="d-flex align-items-center mt-4 justify-content-between">
-                        <span class="account_description text-left font-weight-bold font-sm-18">
-
-                        </span>
-                        <span class="account_product font-11 font-weight-bold text-right">
-
-                        </span>
+                    <div class="form-group text-right">
+                        <button class="btn btn-primary mt-1 waves-effect waves-light"
+                            id="search_transaction">Search</button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row site-card" id="transaction_summary">
-            <div class="mb-3 p-2 rounded alert-secondary w-100" id="account_balance_info_display" role="alert">
+        <div class=" tab-content dashboard-body border-primary border" id="transaction_summary" style="min-height: 0px;">
+            {{-- <div class="dashboard-body p-4"> --}}
+            <div class="accordion-arrow  p-3 rounded alert-secondary w-100" id="account_balance_info_display" role="alert">
                 <div class="row">
 
                     <div class="col-md-6 row">
@@ -139,45 +104,37 @@
                     <div class="col-3 col-md-2">
                         <span style="float: right">
                             &nbsp;&nbsp;
-                            {{-- <span> --}}
                             <a id="pdf_print" style="display: none" class="download"
                                 href="{{ url('print-account-statement') }}">
                                 <img src="{{ asset('assets/images/pdf.png') }}" alt="" style="width: 22px; height: 25px;">
                             </a>
-                            {{-- </span> --}}
-
                             &nbsp;&nbsp;&nbsp;
                         </span>
                         <span style="float: right">
-                            {{-- <span> --}}
                             <a id="excel_print" style="display: none" class="download"
                                 href="{{ url('print-account-statement') }}">
                                 <img src="{{ asset('assets/images/excel.png') }}" alt=""
                                     style="width: 22px; height: 25px;">
                             </a>
-                            {{-- </span> --}}
-
                         </span>
                     </div>
                 </div>
             </div>
-            <div class="table-responsive  ">
+            <div class="table-responsive mb-0  rounded ">
 
-                <table role="table" class="table p-3 table-bordered table-striped table-centered"
-                    id="account_transaction_display_table" style="zoom:0.9">
+                <table role="table" class="table mb-0  font-12  w-100 table-bordered table-striped table-centered"
+                    id="account_transaction_display_table" style="">
                     <thead>
 
-                        <tr class="bg-info text-white ">
+                        <tr class="bg-primary text-white ">
                             <th scope="col">Date</th>
                             <th scope="col">Amount <span class="currency_display"></span></th>
-                            <th scope="col">Contra Account</th>
+                            {{-- <th scope="col">Contra Account</th> --}}
                             <th scope="col">Purpose of Transfer <span class="account_currency_display_"></span>
                             </th>
                             <th scope="col">Balance<span class="currency_display"></span>
                             </th>
-                            <th scope="col">Document Ref</th>
-
-                            {{-- <th scope="col">Batch No</th> --}}
+                            {{-- <th scope="col">Document Ref</th> --}}
                             <th scope="col">Attachment</th>
                             <th scope="col">Details</th>
                         </tr>
@@ -190,8 +147,11 @@
                     </tbody>
                 </table>
             </div>
+            {{-- </div> --}}
         </div>
     </div>
+
+
 
     <div id="accordion-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true" style="display: none;">
@@ -199,7 +159,7 @@
             <div class="modal-content p-0">
                 <div id="accordion">
                     <div class="card mb-0">
-                        <div class="card-header" id="headingOne" style="background-color: #00ccff">
+                        <div class="card-header bg-primary" id="headingOne">
                             <h5 class="m-0">
                                 <a href="#collapseOne" class="text-white" data-toggle="collapse" aria-expanded="true"
                                     aria-controls="collapseOne">
@@ -250,22 +210,17 @@
                                             <tr>
                                                 <th scope="row">Branch</th>
                                                 <td class="text-danger branch"></td>
-
                                             </tr>
                                             <tr>
                                                 <th scope="row">Channel</th>
                                                 <td class="text-danger channel"></td>
-
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -292,14 +247,15 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
-    @section('scripts')
-        @include('extras.datatables')
-        <script src="{{ asset('assets/js/pages/accounts/accountEnquiry.js') }}"></script>
-        <script defer>
-            const PageData = new Object();
-            PageData.reqAccount = @json($accountNumber);
-            let noDataAvailable = {!! json_encode($noDataAvailable) !!}
-        </script>
-    @endsection
+@section('scripts')
+    @include('extras.datatables')
+    <script defer>
+        const PageData = new Object();
+        PageData.reqAccount = @json($accountNumber);
+        let noDataAvailable = {!! json_encode($noDataAvailable) !!}
+    </script>
+    <script src="{{ asset('assets/js/pages/accounts/accountEnquiry.js') }}"></script>
+@endsection

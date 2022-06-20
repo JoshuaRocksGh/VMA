@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <br>
+
     <div class="row">
         <div class="col-md-12">
             <div class="row">
@@ -44,8 +44,8 @@
                                 <h4 for="" class=" text-primary"> <b> Account to transfer from</b><span
                                         class="text-danger"> *</span></h4>
                                 <div class="form-group">
-                                    <select class="accounts-select " name="my_account" id="my_account" required>
-                                        <option disabled selected value=""> --- Select Source Account --- </option>
+                                    <select class="accounts-select" name="my_account" id="my_account" required>
+                                        {{-- <option disabled selected value=""> --- Select Source Account --- </option> --}}
                                         @include('snippets.accounts')
 
                                     </select>
@@ -53,97 +53,105 @@
 
 
                             </div>
-                            <div class="col-md-4">
+                            <div class="card-box col-md-12">
 
-                            </div>
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
 
-                            <div class="col-md-4">
-                                <div class="col-12">
-                                    <label for="inputEmail3" class="col-12 col-form-label text-primary">Total Amount<span
-                                            class="text-danger"> *</span></label>
-                                    <input type="text" name="bulk_amount" id="bulk_amount"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
-                                        class="form-control input-sm" required>
-                                </div>
-                            </div>
+                                        <label for="inputEmail3" class=" text-primary">Total
+                                            Amount<span class="text-danger"> *</span></label>
+                                        <input type="text" name="bulk_amount" id="bulk_amount"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
+                                            class="form-control input-sm" required>
 
-                            <div class="col-md-4">
-                                <div class="form-group ">
-                                    <div class="col-12">
-                                        <label for="inputEmail3" class="col-12 col-form-label text-primary">Value Date<span
-                                                class="text-danger"> *</span></label>
+                                    </div>
+
+
+                                    <div class="col-md-6 form-group ">
+
+                                        <label for="inputEmail3" class=" text-primary">Value
+                                            Date<span class="text-danger"> *</span></label>
                                         <input type="date" name="value_date" id="value_date" class="form-control"
                                             required>
 
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-md-4">
-                                <div class="form-group ">
-                                    <div class="col-12">
-                                        <label for="inputEmail3" class="col-12 col-form-label text-primary">Reference
+                                    </div>
+
+
+                                    <div class="col-md-6 form-group ">
+
+                                        <label for="" class=" text-primary">Reference
                                             Number<span class="text-danger"> *</span></label>
                                         <input type="text" name="reference_no" id="reference_no"
                                             class="form-control input-sm" required>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-md-4">
-                                <div class="form-group ">
-                                    <div class="col-12">
-                                        <label for="inputEmail3" class="col-12 col-form-label text-primary">File<span
-                                                class="text-danger"> *</span></label>
+                                    </div>
+
+
+
+                                    <div class="col-md-6 form-group ">
+
+                                        <label for="" class=" text-primary">File<span class="text-danger">
+                                                *</span></label>
+                                        <br>
                                         <input type="file" name="excel_file" id="excel_file" class=" input-sm"
                                             required>
+
                                     </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-8 offset-4 text-right">
+                                                <button type="submit"
+                                                    class="btn btn-primary btn-sm waves-effect waves-light disappear-after-success"
+                                                    id="submit_cheque_request">
+                                                    Upload & Validate
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
+
                             </div>
+
+
+
+
+
+
+
 
                         </div>
 
 
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group row">
-                                    <div class="col-8 offset-4 text-right">
-                                        <button type="submit"
-                                            class="btn btn-primary btn-sm btn-rounded waves-effect waves-light disappear-after-success"
-                                            id="submit_cheque_request">
-                                            Submit Upload
-                                        </button>
 
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </form>
 
-                    <div class="row card" id="beneficiary_table" style="zoom: 0.8;">
+                    <div class="row card-box" id="beneficiary_table" style="zoom: 0.8;">
                         <br>
 
                         <div class="col-md-12">
-
-                            @if (session()->has('error'))
-                                <div class="alert alert-danger">
-                                    {{ session()->get('error') }}
+                            <h4 class="text-primary"><b>E-Korpor Payment Summary</b></h4>
+                            @if ($errors->any())
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4>{{ $errors->first() }}</h4>
                                 </div>
                             @endif
-
-                            @if (session('success'))
-                                <div class="alert alert-success">{{ session('success') }}</div>
-                            @endif
-                        </div>
-
-                        <div class="col-md-12">
-
                             <table id="datatable-buttons"
                                 class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list">
 
                                 <thead>
-                                    <tr class="bg-secondary text-white">
+                                    <tr class="bg-info text-white">
                                         <th> <b> Batch </b> </th>
                                         <th> <b>Reference </b> </th>
                                         <th> <b> Debit Account </b> </th>
