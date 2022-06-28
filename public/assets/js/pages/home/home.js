@@ -278,39 +278,7 @@ function prepareGraphValues() {
     };
 }
 
-$(() => {
-    $("select").select2();
-    $(".accounts-select").select2({
-        minimumResultsForSearch: Infinity,
-        templateResult: accountTemplate,
-        templateSelection: accountTemplate,
-    });
-    blockUi({ block: "#nav-tabContent" });
-    Promise.all([
-        getData({ url: "fixed-deposit-account-api", name: "investments" }),
-        getData({ url: "get-loan-accounts-api", name: "loans" }),
-        getData({ url: "get-accounts-api", name: "accounts" }),
-    ]).then(() => {
-        // siteLoading("hide");
-        prepareGraphValues();
-        accountsPieChart({
-            title: "Accounts",
-            ...pageData.pieValues.totalsPie,
-        });
-        unblockUi("#nav-tabContent");
-    });
-    function renderCurrency(data, row) {
-        return `<div class="table-cur text-right"><span class="font-weight-bold">${formatToCurrency(
-            parseFloat(data)
-        )}</span></div>`;
-    }
-    $(".canvas-tab").on("click", (e) => {
-        const selectedTab = $(e.currentTarget).attr("data-target");
-        accountsPieChart({
-            title: selectedTab.slice(0, -3),
-            ...pageData.pieValues[selectedTab],
-        });
-    });
+const renderDataTables = (data, tableId) => {
     const noDataDisplay = `<div colspan='100%' class='text-center' >
     ${noDataAvailable}
 </div>`;
@@ -325,6 +293,12 @@ $(() => {
             zeroRecords: noDataDisplay,
         },
     };
+    function renderCurrency(data, row) {
+        return `<div class="table-cur text-right"><span class="font-weight-bold">${formatToCurrency(
+            parseFloat(data)
+        )}</span></div>`;
+    }
+
     $("#accounts_table")
         .DataTable({
             ...datatableOptions,
@@ -346,7 +320,7 @@ $(() => {
                     }),
                 },
             },
-            data: pageData.accounts,
+            data: pageData?.accounts,
             columns: [
                 {
                     data: "accountNumber",
@@ -455,6 +429,39 @@ $(() => {
             ],
         })
         .draw();
+};
+
+$(() => {
+    $("select").select2();
+    $(".accounts-select").select2({
+        minimumResultsForSearch: Infinity,
+        templateResult: accountTemplate,
+        templateSelection: accountTemplate,
+    });
+    blockUi({ block: "#nav-tabContent" });
+    Promise.all([
+        getData({ url: "fixed-deposit-account-api", name: "investments" }),
+        getData({ url: "get-loan-accounts-api", name: "loans" }),
+        getData({ url: "get-accounts-api", name: "accounts" }),
+    ]).then(() => {
+        // siteLoading("hide");
+        prepareGraphValues();
+        accountsPieChart({
+            title: "Accounts",
+            ...pageData.pieValues.totalsPie,
+        });
+        unblockUi("#nav-tabContent");
+        renderDataTables();
+    });
+
+    $(".canvas-tab").on("click", (e) => {
+        const selectedTab = $(e.currentTarget).attr("data-target");
+        accountsPieChart({
+            title: selectedTab.slice(0, -3),
+            ...pageData.pieValues[selectedTab],
+        });
+    });
+
     $(".toggle-account-visibility").on("click", function () {
         $(".eye-open").toggle();
         $(".open-money").toggleClass("password-font");
