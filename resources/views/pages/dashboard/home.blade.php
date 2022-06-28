@@ -20,8 +20,8 @@
                         aria-controls="nav_acc_history" aria-selected="false">Acc. History</a>
                     @if (config('app.corporate'))
                         <a class="nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                            aria-controls="nav-profile" aria-selected="false">Approvals<span id="#approval-count"
-                                class="badge badge-danger badge-pill font-10 ml-1"></span>
+                            aria-controls="nav-profile" aria-selected="false">Approvals
+                            <span id="#approval_count" class="badge badge-danger badge-pill font-10 ml-1"></span>
                         </a>
                     @endif
                 </div>
@@ -90,7 +90,8 @@
                             </div>
                             <div class="tab-pane p-0" id="loans">
                                 <div class="table-responsive  loans_display_area">
-                                    <table id="loans_table" width="100%" class="table nowrap display  border rounded mb-0 ">
+                                    <table id="loans_table" width="100%"
+                                        class="table nowrap display  border rounded mb-0 ">
                                         <thead>
                                             <tr class="bg-primary text-white ">
                                                 <td> Facility No. </td>
