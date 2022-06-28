@@ -47,18 +47,7 @@ var bulk_upload_array_list = [];
 var bulk_detail_list = [];
 
 function bulk_upload_list(fileBatch, upload_response) {
-    // siteLoading("show");
-
-    // console.log(fileBatch);
-    // console.log(allErrors);
-
-    // var error_table = $('.failed_bulk_upload_table').DataTable();
-    // var _error_nodes = error_table.rows().nodes();
-
-    // var all_invalid_uplaods = $(".all_failed_uploads_table").DataTable({
-    //     paging: true,
-    // });
-    // var nodes = all_valid_uplaods.rows().nodes();
+    siteLoading("show");
 
     $.ajax({
         tpye: "GET",
@@ -66,23 +55,23 @@ function bulk_upload_list(fileBatch, upload_response) {
         datatype: "application/json",
         success: function (response) {
             // return false;
-            //console.log("bulk upload list:", response.data);
+            // console.log("bulk upload list:", response);
 
             // console.log("uploadData => ", uploadData);
             // return false;
 
             // let all_failed_uploads = 0;
             // let upload_with_errors = uploadData.;
-            let data = response.data.uploadData;
 
             if (response.responseCode == "000") {
                 // NO ERRORS IN FILE UPLOAD
+                let data = response.data.uploadData;
                 let uploadData = response.data.uploadData;
                 let uploadDetails = response.data.uploadDetails;
                 let uploadDetails_date = uploadDetails.valueDate;
                 var uploadDetails_date_split = uploadDetails_date.split("T");
                 let value_date = uploadDetails_date_split[0];
-                let total_upload = uploadData.length;
+                let total_upload = data.length;
 
                 let valid_uploads = 0;
                 let valid_uploads_count = 1;
@@ -177,9 +166,9 @@ function bulk_upload_list(fileBatch, upload_response) {
                 <i class="mdi mdi-check-all"></i>&nbsp;<b>Upload</b>
             </a>`;
                 } else {
-                    var action_button = `<button  type="button" class="btn btn-danger btn-sm waves-effect waves-light text-center delete_bulk_transfer_upload" batch_no="${fileBatch}">
+                    var action_button = `<a href="delete-bulk-transfer?batch_no=${fileBatch}"  type="button" class="btn btn-danger btn-sm waves-effect waves-light text-center delete_bulk_transfer_upload" batch_no="${fileBatch}">
                 <i class="mdi mdi-close-circle-outline"></i>&nbsp;<b>Delete</b>
-            </button>`;
+            </a>`;
                 }
                 total_bulk_upload.row
                     .add([
@@ -197,32 +186,31 @@ function bulk_upload_list(fileBatch, upload_response) {
                     ])
                     .draw(false);
 
-                $(".delete_bulk_transfer_upload").click(function (e) {
-                    e.preventDefault();
-                    var fileBatch = $(this).attr("batch_no");
-                    // alert(fileBatch);
-                    // return false;
-                    siteLoading("show");
-                    $.ajax({
-                        type: "GET",
-                        url: "delete-bulk-transfer?batch_no=" + fileBatch,
-                        datatype: "application/json",
-                        success: function (response) {
-                            console.log(response);
-                            siteLoading("hide");
-                            if (response.responseCode == "000") {
-                                swal.fire({
-                                    // title: "Transfer successful!",
-                                    html: response.message,
-                                    icon: "success",
-                                    showConfirmButton: "false",
-                                }).then(() => {
-                                    window.location.reload();
-                                });
-                            }
-                        },
-                    });
-                });
+                // $(".delete_bulk_transfer_upload").click(function (e) {
+                //     alert("cliked");
+                //     e.preventDefault();
+                //     var fileBatch = $(this).attr("batch_no");
+
+                //     siteLoading("show");
+                //     $.ajax({
+                //         type: "GET",
+                //         url: "delete-bulk-transfer?batch_no=" + fileBatch,
+                //         datatype: "application/json",
+                //         success: function (response) {
+                //             console.log(response);
+                //             siteLoading("hide");
+                //             if (response.responseCode == "000") {
+                //                 swal.fire({
+                //                     html: response.message,
+                //                     icon: "success",
+                //                     showConfirmButton: "false",
+                //                 }).then(() => {
+                //                     window.location.reload();
+                //                 });
+                //             }
+                //         },
+                //     });
+                // });
 
                 console.log(group);
                 //     $.each(uploadData, function (index) {

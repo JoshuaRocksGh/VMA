@@ -449,7 +449,7 @@ class BulkUploadsController extends Controller
         try {
             $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadData/$fileBatch");
             $result = new ApiBaseResponse();
-
+            // dd($response);
             return $result->api_response($response);
         } catch (\Exception $e) {
 
@@ -570,9 +570,13 @@ class BulkUploadsController extends Controller
         try {
             $response = Http::delete(env('API_BASE_URL') . "corporate/deleteFileRecord/$fileBatch");
             $result = new ApiBaseResponse();
-            return $result->api_response($response);
+            Alert::success('', 'Record Deleted Successfully');
+            return back();
+            // return $result->api_response($response);
         } catch (\Exception $e) {
-            return $base_response->api_response($result->responseCode, $result->message,  NULL);
+            Alert::error('', 'Failed To Delete Record');
+            return back();
+            // return $base_response->api_response($result->responseCode, $result->message,  NULL);
         }
     }
 

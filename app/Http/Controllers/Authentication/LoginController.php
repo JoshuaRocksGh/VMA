@@ -43,6 +43,7 @@ class LoginController extends Controller
 
     public function login()
     {
+
         if (session()->get('userToken')) {
             return redirect('/home');
         }
