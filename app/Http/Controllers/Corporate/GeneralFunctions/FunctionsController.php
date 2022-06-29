@@ -30,6 +30,7 @@ class FunctionsController extends Controller
             "authToken" => $authToken,
             "userId"    => $userID
         ];
+        // return $data;
 
         // dd((env('CIB_API_BASE_URL') . "pending-request-api?customerNumber=$customerNumber&requestStatus=$requestStatus"));
 

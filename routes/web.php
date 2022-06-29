@@ -131,7 +131,7 @@ Route::get('currency-converter', [transferController::class, 'forex_request'])->
 Route::group(['middleware' => ['userAuth']], function () {
 
     // --- Home ---------------
-    Route::get('/home', [HomeController::class, 'index']);
+    Route::get('home', [HomeController::class, 'index'])->name('home');
 
     // --- ACCOUNTS
     Route::get('account-enquiry', [AccountEnquiryController::class, 'account_enquiry']);
