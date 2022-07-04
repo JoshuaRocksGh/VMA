@@ -507,6 +507,7 @@ $(function () {
         }
 
         const navId = e.currentTarget.id;
+        console.log(navId);
         const type = e.currentTarget.getAttribute("data-value");
         $(".knav").removeClass("active");
         $(`#${navId}`).addClass("active");
