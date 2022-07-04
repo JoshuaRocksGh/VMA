@@ -88,6 +88,10 @@
                     <li>
                         <a href="{{ url('e-korpor') }}">E-Korpor</a>
                     </li>
+
+                    <li>
+                        <a href="{{ url('cardless-payment') }}">Cardless</a>
+                    </li>
                     <li>
                         <a href="{{ url('qr-payment') }}">
                             <span> QR Payment</span>
