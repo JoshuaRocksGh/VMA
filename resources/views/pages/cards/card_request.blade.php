@@ -9,13 +9,13 @@
 
             <label class=" text-primary">Card Type</label>
 
-            <select class="form-control " id="card_type" required>
+            <select class="form-control select" id="card_type" required>
                 <option disabled selected value="">Select Type of Card</option>
             </select>
         </div>
         <div class="form-group ">
             <label class=" text-primary"> Pick Up Branch</label>
-            <select class="form-control " id="pick_up_branch" placeholder="Select Pick Up Branch" required>
+            <select class="form-control select" id="pick_up_branch" placeholder="Select Pick Up Branch" required>
                 <option disabled selected value="">Select Pick Up Branch</option>
             </select>
         </div>
