@@ -79,6 +79,9 @@
         </div>
     </div>
     <!-- Begin page -->
+    @isset ($isApp)
+    @endisset
+    @empty($isApp)
     <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none;">
         @include('snippets.nav')
         <div class="d-flex px-2 w-100">
@@ -93,6 +96,7 @@
             </div>
         </div>
     </div>
+    @endempty
 
     @yield('scripts')
 </body>

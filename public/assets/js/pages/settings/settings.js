@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     let settingsHtml = "";
     settingsList.forEach((e) => {
         const { title, bgClass, icon, dataTarget } = e;
-        settingsHtml += `   <button data-toggle="modal" data-target="${dataTarget}" class="card d-sm-block mx-auto d-flex  p-1  w-100 ${bgClass} pt-2 px-2 pt-sm-4 grad " style="max-width: 300px;">
+        settingsHtml += `   <button data-toggle="modal" data-target="${dataTarget}" class="card d-sm-block mx-auto d-flex  p-1  w-100 ${bgClass} pt-2 px-2 pt-sm-4 grad m-3" style="max-width: 300px;">
        <div class=" d-flex  card-img  w-100 justify-content-sm-center" >
         <i class="fas  fa-${icon}"></i>
         </div>
