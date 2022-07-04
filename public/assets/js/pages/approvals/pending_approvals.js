@@ -101,7 +101,7 @@ function get_corporate_requests(customerNumber, requestStatus) {
                             data[index].request_id,
                             request_type,
                             data[index].account_no,
-                            amount,
+                            (amount = " " ? " " : amount),
                             data[index].narration,
                             dd + "/" + mm + "/" + yyyy,
                             data[index].postedby,

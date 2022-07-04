@@ -1,4 +1,9 @@
 // TODO : Test the request Card method. especially the API response
+if (ISCORPORATE) {
+    var url = "corporate-chequebook-request";
+} else {
+    var url = "cheque-book-request-api";
+}
 const PageData = {};
 function getBranches() {
     $.ajax({
@@ -21,14 +26,14 @@ function getBranches() {
 }
 
 function submitChequeRequest(data) {
-    console.log(data);
+    // console.log(data);
     return $.ajax({
         type: "POST",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         dataType: "application/json",
-        url: "cheque-book-request-api",
+        url: url,
         data,
         beforeSend: (xhr) => {
             siteLoading("show");
@@ -78,9 +83,13 @@ $(function () {
         const accountNumber = $("#from_account option:selected").attr(
             "data-account-number"
         );
+        let accountMandate = $("#from_account option:selected").attr(
+            "data-account-mandate"
+        );
         // const chequeName = $("#cheque_name").val();
         const leaflets = $("#no_of_leaflets").val();
         const branchCode = $("#pick_up_branch").val();
+        const branchName = $("#pick_up_branch option:selected").html();
         console.log({ leaflets, branchCode, accountNumber });
         if (!accountNumber || !leaflets || !branchCode) {
             toaster("Please fill all the fields", "warning");
@@ -90,8 +99,14 @@ $(function () {
             accountNumber,
             leaflets,
             branchCode,
+            accountMandate,
+            branchName,
         };
-        $("#pin_code_modal").modal("show");
+        if (!ISCORPORATE) {
+            $("#pin_code_modal").modal("show");
+        } else {
+            submitChequeRequest(PageData.chequeRequestData);
+        }
     });
 
     $("#transfer_pin").on("click", (e) => {
