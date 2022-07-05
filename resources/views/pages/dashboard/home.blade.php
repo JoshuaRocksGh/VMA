@@ -70,7 +70,7 @@
                         </nav>
                         <div class="tab-content ">
                             <div class="tab-pane p-0 show active" id="accounts">
-                                <div class=" accounts_display_area">
+                                <div class=" accounts_display_area" style="min-height: 220px">
                                     <table id="accounts_table" width="100%"
                                         class="table nowrap display  border dt-responsive table-hover rounded mb-0 ">
                                         <thead>
@@ -87,30 +87,30 @@
 
                                     </table>
                                 </div>
-                            </div>
-                            <div class="tab-pane p-0" id="loans">
-                                <div class="table-responsive  loans_display_area">
-                                    <table id="loans_table" width="100%"
-                                        class="table nowrap display  border rounded mb-0 ">
-                                        <thead>
-                                            <tr class="bg-primary text-white ">
-                                                <td> Facility No. </td>
-                                                <td> Description </td>
-                                                <td> Cur </td>
-                                                <td> Amount Granted </td>
-                                                <td> Loan Bal </td>
+                                <div class="tab-pane p-0" id="loans">
+                                    <div class="table-responsive  loans_display_area">
+                                        <table id="loans_table" width="100%"
+                                            class="table nowrap display  border rounded mb-0 ">
+                                            <thead>
+                                                <tr class="bg-primary text-white ">
+                                                    <td> Facility No. </td>
+                                                    <td> Description </td>
+                                                    <td> Cur </td>
+                                                    <td> Amount Granted </td>
+                                                    <td> Loan Bal </td>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody class="loans_display">
+                                                </tr>
+                                            </thead>
+                                            <tbody class="loans_display">
 
 
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane p-0" id="investments">
-                                <div class="table-responsive investments_display_area">
+                                <div class="table-responsive investments_display_area" style="min-height: 220px">
                                     <table id="investments_table" width="100%"
                                         class="table nowrap display border rounded  mb-0 ">
                                         <thead>
@@ -223,7 +223,7 @@
                 <div class="tab-pane fade" id="nav_acc_history" role="tabpanel" aria-labelledby="nav_acc_history_tab">
 
                     <div class="p-2" id="acc_history">
-                        <div class="mx-auto mb-4" style="max-width: 650px;"> <strong class="text-primary">CURRENT &
+                        <div class="mx-auto mb-4" style="max-width: 550px;"> <strong class="text-primary">CURRENT &
                                 SAVINGS</strong>
                             <select name="" id="chart_account" class="form-control accounts-select">
                                 @include('snippets.accounts') </select>

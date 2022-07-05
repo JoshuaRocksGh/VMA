@@ -65,9 +65,9 @@ $currentPath = 'CardServices';
 @endphp
 @include('snippets.pageHeader')
 
-<div class="tab-pane site-card p-2 p-sm-3 p-md-4">
-    <div class=" mt-lg-0 rounded">
-        <div class="form-group mb-3 justify-content-center d-md-flex mx-md-auto"
+<div class="tab-pane dashboard site-card p-2 p-sm-3 p-md-4">
+    <div class=" mt-lg-0 dashboard-body rounded">
+        <div class="form-group  p-3 justify-content-center d-md-flex mx-md-auto"
             style="max-width: 750px; min-height: 70px;">
 
             <div class=" align-self-center" style="min-width: 100px"> <label

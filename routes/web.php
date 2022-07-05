@@ -159,7 +159,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/payments', [PaymentsController::class, 'paymentTypes'])->name('payment-type');
     Route::get('/mobile-money', [MobileMoneyController::class, 'index'])->name('mobile-money');
     Route::get('qr-payment', [paymentController::class, 'qr_payment']);
-    Route::get('cardless-payment', [paymentController::class, 'cardless_payment'])->name('cardless-payment');
+    Route::get('cardless-payment', [paymentController::class, 'cardless_payment']);
     Route::get('airtime-payment', [paymentController::class, 'airtime_payment'])->name('airtime-payment');
     Route::get('/bulk-korpor', [KorporController::class, 'bulk_korpor'])->name('bulk-korpor');
     Route::get('/utility-payment', [paymentController::class, 'utilities'])->name('utility-payment');
@@ -361,16 +361,6 @@ Route::post('change-pin-api', [ChangePinController::class, 'change_pin'])->name(
 
 //Route for change-password-api
 Route::post('change-password-api', [ChangePasswordController::class, 'change_password'])->name('change-password-api');
-
-
-//Route to send unredeem request
-// Route::post('unredeem-cardless-request', [CardlessController::class, 'send_unredeemed_request'])->name('unredeem-cardless-request');
-
-// //Route to send reversed request
-// Route::post('reversed-cardless-request', [CardlessController::class, 'send_reversed_request'])->name('reversed-cardless-request');
-
-// //Route to reverse cardless
-// Route::post('reverse-cardless', [CardlessController::class, 'reverse_cardless'])->name('reverse-cardless');
 
 //Route to send unredeem request
 Route::get('korpor-history-api', [KorporController::class, 'getKorporHistoryByType']);
