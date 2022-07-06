@@ -55,8 +55,6 @@
             font-family: 'password';
         }
 
-
-
         body {
             width: 100vw;
             background-color: white;
@@ -80,6 +78,10 @@
     </div>
     <!-- Begin page -->
     @isset ($isApp)
+    <div id="wrapper">
+        @include('snippets.top_navbar', ['page_title' => 'FAQ'])
+        @yield('content')
+    </div>
     @endisset
     @empty($isApp)
     <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none;">
