@@ -545,6 +545,14 @@
 }
 /* =============== Gradient Cards ============== */
 
+.grad-rokel {
+    background-image: linear-gradient(
+        to right,
+        #61b0f5 0%,
+        #004f74 51%,
+        #5eadf3 100%
+    );
+}
 .grad-gray-blue {
     background-image: linear-gradient(
         to right,
