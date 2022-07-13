@@ -78,8 +78,7 @@
     </div>
     <!-- Begin page -->
     @isset ($isApp)
-    <div id="wrapper">
-        @include('snippets.top_navbar', ['page_title' => 'FAQ'])
+    <div id="wrapper" class="pb-4">
         @yield('content')
     </div>
     @endisset

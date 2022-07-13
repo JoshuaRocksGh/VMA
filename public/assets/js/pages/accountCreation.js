@@ -53,12 +53,6 @@ function productList() {
     });
 }
 
-$(function () {
+$(() => {
     productList();
-    // {{-- var data = $("#demo").attr("data-value")
-    // $("#demo").barcode(
-    //     data,
-    //     "code128"
-
-    // ) --}}
 });
