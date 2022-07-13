@@ -12,14 +12,19 @@ function login(email, password) {
         },
 
         success: function (response) {
-            console.log(response);
+            // console.log("login response =>", response);
+            // return false;
             $("#submit").attr("disabled", false);
 
             if (response.responseCode == "000") {
+                // console.log("login response =>", response.responseCode);
+
                 if (response.data.firstTimeLogin == true) {
                     window.location = "change-password";
                     $("#submit").attr("disabled", true);
                 } else {
+                    // console.log("login response => home");
+
                     window.location = "home";
                     $("#submit").attr("disabled", true);
                 }

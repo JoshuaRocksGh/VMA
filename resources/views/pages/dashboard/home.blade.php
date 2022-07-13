@@ -87,26 +87,27 @@
 
                                     </table>
                                 </div>
-                                <div class="tab-pane p-0" id="loans">
-                                    <div class="table-responsive  loans_display_area">
-                                        <table id="loans_table" width="100%"
-                                            class="table nowrap display  border rounded mb-0 ">
-                                            <thead>
-                                                <tr class="bg-primary text-white ">
-                                                    <td> Facility No. </td>
-                                                    <td> Description </td>
-                                                    <td> Cur </td>
-                                                    <td> Amount Granted </td>
-                                                    <td> Loan Bal </td>
 
-                                                </tr>
-                                            </thead>
-                                            <tbody class="loans_display">
+                            </div>
+                            <div class="tab-pane p-0" id="loans">
+                                <div class="table-responsive  loans_display_area">
+                                    <table id="loans_table" width="100%"
+                                        class="table nowrap display  border rounded mb-0 ">
+                                        <thead>
+                                            <tr class="bg-primary text-white ">
+                                                <td> Facility No. </td>
+                                                <td> Description </td>
+                                                <td> Cur </td>
+                                                <td> Amount Granted </td>
+                                                <td> Loan Bal </td>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody class="loans_display">
 
 
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             <div class="tab-pane p-0" id="investments">

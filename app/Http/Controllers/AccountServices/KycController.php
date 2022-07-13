@@ -29,7 +29,7 @@ class KycController extends Controller
         $userID = session()->get('userId');
         $customerNumber = session()->get('customerNumber');
 
-        // return $customerNumber ;
+        // return $customerNumber;
 
 
         $data = [
