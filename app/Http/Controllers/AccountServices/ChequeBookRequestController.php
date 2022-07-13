@@ -41,12 +41,13 @@ class ChequeBookRequestController extends Controller
 
     public function corporate_cheque_book_request(Request $request)
     {
+        // return $request;
 
         $validator = Validator::make($request->all(), [
             'accountNumber' => 'required',
             'branchCode' => 'required',
-            'leaflet' => 'required',
-            'account_mandate' => 'required'
+            'leaflets' => 'required',
+            // 'account_mandate' => 'required'
         ]);
 
 
@@ -58,20 +59,21 @@ class ChequeBookRequestController extends Controller
             return $base_response->api_response('500', $validator->errors(), NULL);
         };
 
-        return $request;
+        // return $request;
 
 
         $userID = session()->get('userId');
         $userAlias = session()->get('userAlias');
         $customerNumber = session()->get('customerNumber');
-        $userMandate = $request->account_mandate;
+        $userMandate = $request->accountMandate;
         $userAlias = session()->get('userAlias');
         $accountNumber = $request->accountNumber;
         $branchCode = $request->branchCode;
-        $numberOfLeaves = $request->leaflet;
+        $numberOfLeaves = $request->leaflets;
         $deviceIP = $request->ip();
         $postBy = session()->get('userAlias');
         $transBy = session()->get('userAlias');
+        $branchName = $request->branchName;
 
         //         'customer_no' => 'required',
         // 'account_mandate' => 'required',
@@ -90,7 +92,7 @@ class ChequeBookRequestController extends Controller
             "user_name" => $userAlias,
             "customer_no" => $customerNumber,
             "account_mandate" => $userMandate,
-            // "user_id" = $userID,
+            "branch_name" => $branchName,
             "account_no" => $accountNumber,
             "branch_code" => $branchCode,
             // "deviceIP" => $deviceIP,

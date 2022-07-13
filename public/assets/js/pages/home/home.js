@@ -1,4 +1,6 @@
 // --------- PENDING APPROVAL ------------ //
+$("#approval_count").html(4);
+
 function getCorporateRequests(customerNumber, requestStatus) {
     $.ajax({
         type: "GET",
@@ -17,8 +19,8 @@ function getCorporateRequests(customerNumber, requestStatus) {
             }
             $(".request_table tr").remove();
             console.log("data length =>", data.length);
-            // $("#approval-count").html(data.length > 0 ? data.length : 0);
-            $("#approval-count").text(10);
+            $("#approval_count").html(data.length > 0 ? data.length : 0);
+            // $("#approval_count").val(4);
             const tableOptions = {
                 lengthChange: false,
                 pageLength: 5,

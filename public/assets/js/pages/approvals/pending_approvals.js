@@ -42,11 +42,14 @@ function get_corporate_requests(customerNumber, requestStatus) {
                     let dd = String(today.getDate()).padStart(2, "0");
                     let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
                     let yyyy = today.getFullYear();
-
-                    let amount =
-                        data[index].currency +
-                        " " +
-                        formatToCurrency(parseFloat(data[index].amount));
+                    if (data[index].amount) {
+                        var amount =
+                            data[index].currency +
+                            " " +
+                            formatToCurrency(parseFloat(data[index].amount));
+                    } else {
+                        var amount = "";
+                    }
 
                     let request_type = "";
 
@@ -101,7 +104,7 @@ function get_corporate_requests(customerNumber, requestStatus) {
                             data[index].request_id,
                             request_type,
                             data[index].account_no,
-                            amount,
+                            (amount = null ? " " : amount),
                             data[index].narration,
                             dd + "/" + mm + "/" + yyyy,
                             data[index].postedby,
