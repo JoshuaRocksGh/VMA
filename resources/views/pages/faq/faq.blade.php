@@ -4,6 +4,7 @@ $isApp = true;
 @extends('layouts.master')
 
 @section('content')
+@include('snippets.top_navbar', ['page_title' => 'FAQ'])
 
 <div class="dashboard mx-auto mb-0 site-card" style="max-width: 1080px; ">
 

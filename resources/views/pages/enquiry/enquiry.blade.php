@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@php
+$isApp = true;
+@endphp
+@extends('layouts.master')
 
 @section('content')
 

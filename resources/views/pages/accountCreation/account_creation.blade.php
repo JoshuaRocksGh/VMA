@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@php
+$isApp = true;
+@endphp
+@extends('layouts.master')
 @section("styles")
 <style>
     .nodata {
@@ -25,16 +28,18 @@
 
 
 
-<div class="container-fluid px-md-4 pt-5">
+<div class="dashboard site-card container">
 
-    <div class=" row pt-md-5 mx-auto">
-        <nav id="card_services_tabs" class="col-md-4  nav nav-pills flex-column mx-auto mb-3 flex-row"
+    <div class=" dashboard-body p-4 row pt-md-5 mx-auto">
+        <nav id="card_services_tabs"
+            class="col-md-4  nav nav-pills align-items-between flex-column mx-auto mb-3 flex-row"
             style="max-width: 350px" role="tablist">
+            <span class="font-weight-bold font-14 text-center mb-2">Select Account Type: </span>
             <button data-toggle="pill"
-                class=" transition-all py-md-2 active   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                class=" transition-all py-md-2 active   font-weight-bold mb-2 bg-white rounded-pill border text-primary border-primary knav nav-link"
                 href="#tab_card_request">SAVINGS ACCOUNTS</button>
             <button data-toggle="pill"
-                class=" transition-all py-md-2   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link "
+                class=" transition-all py-md-2   font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link "
                 href="#tab_block_card">CURRENT ACCOUNTS</button>
         </nav>
         <div class="col-md-8 px-0 mr-auto" style="max-width: 800px">
