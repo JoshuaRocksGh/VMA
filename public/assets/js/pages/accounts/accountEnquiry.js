@@ -204,6 +204,7 @@ $(function () {
                 "excel",
                 {
                     extend: "print",
+                    autoPrint: false,
                     messageTop: pdfHeader(),
                 },
             ],
