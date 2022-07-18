@@ -2,11 +2,13 @@
 
 @section('content')
 
-<div    <legend></legend>
+<div <legend>
+    </legend>
 
     <div class="row">
         <div class="col-12">
-            <div class="card" style="background-image: url('assets/images/background.png'); background-repeat: no-repeat; background-size: cover;">
+            <div class="card"
+                style="background-image: url('assets/images/background.png'); background-repeat: no-repeat; background-size: cover;">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-2"></div>
@@ -19,17 +21,18 @@
                             <hr>
 
 
-                        <form action="#" id="payment_details_form" autocomplete="off" aria-autocomplete="none">
+                            <form action="#" id="payment_details_form" autocomplete="off" aria-autocomplete="none">
                                 @csrf
-                            <div class="row" id="transaction_form">
+                                <div class="row" id="transaction_form">
 
 
-                                <div class="col-md-6">
+                                    <div class="col-md-6">
 
 
                                         {{-- <div class="form-group">
                                             <label class="h6">Status*</label>
-                                            <input type="text" class="form-control" placeholder="Amount" style="color:red"value="NEW REQUEST" disabled/>
+                                            <input type="text" class="form-control" placeholder="Amount"
+                                                style="color:red" value="NEW REQUEST" disabled />
                                         </div> --}}
 
                                         <div class="form-group">
@@ -48,13 +51,17 @@
                                                     <tr class="text-primary">
 
                                                         <td class="text-primary">
-                                                            <a class="text-body font-weight-semibold display_from_account_name text-primary"></a>
-                                                            <small class="d-block display_from_account_no text-primary"></small>
+                                                            <a
+                                                                class="text-body font-weight-semibold display_from_account_name text-primary"></a>
+                                                            <small
+                                                                class="d-block display_from_account_no text-primary"></small>
                                                         </td>
 
                                                         <td class="text-right font-weight-semibold text-primary">
-                                                            <span class="display_from_account_currency text-primary"></span>
-                                                            <span class="display_from_account_amount text-primary"></span>
+                                                            <span
+                                                                class="display_from_account_currency text-primary"></span>
+                                                            <span
+                                                                class="display_from_account_amount text-primary"></span>
 
                                                         </td>
                                                     </tr>
@@ -68,60 +75,36 @@
 
                                         <div class="form-group">
                                             <label class="h6">From Cheque No:<b style="color:red">*</b></label>
-                                            <input type="text" class="form-control"/>
+                                            <input type="text" class="form-control" />
                                         </div>
 
                                         <div class="form-group">
                                             <label class="h6">To Cheque No:<b style="color:red">*</b></label>
-                                            <input type="text" class="form-control"/>
+                                            <input type="text" class="form-control" />
+                                        </div>
+                                    </div> <!-- end col -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Date issued:<b style="color:red">*</b></label>
+                                            <input type="date" class="form-control" />
                                         </div>
 
+                                        <div class="form-group">
+                                            <label>Beneficiary Name:<b style="color:red">*</b></label>
+                                            <input type="text" class="form-control" />
+                                        </div>
 
-
-
-
-
-                                </div> <!-- end col -->
-
-
-
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label>Date issued:<b style="color:red">*</b></label>
-                                        <input type="date" class="form-control"/>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Beneficiary Name:<b style="color:red">*</b></label>
-                                        <input type="text" class="form-control"/>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Amount on Cheque:<b style="color:red">*</b></label>
-                                        <input type="number" class="form-control"/>
-                                    </div>
-
-
-
-                                    <div class="form-group text-right">
-                                        <button class="btn btn-primary btn-rounded" type="button" id="next_button">
-                                            &nbsp; PROCEED &nbsp;</button>
-                                    </div>
-
-                                    {{-- <img src="{{ asset('assets/images/cheque_book.jpg') }}" class="img-fluid" alt=""> --}}
-
-
-                                </div> <!-- end col -->
-
-
-
-                                <!-- end row -->
-
-
-
-                            </div>
-                        </form>
+                                        <div class="form-group">
+                                            <label>Amount on Cheque:<b style="color:red">*</b></label>
+                                            <input type="number" class="form-control" />
+                                        </div>
+                                        <div class="form-group text-right">
+                                            <button class="btn btn-primary btn-rounded" type="button" id="next_button">
+                                                &nbsp; PROCEED &nbsp;</button>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div>
+                            </form>
                             <div class="row" id="transaction_summary">
 
 
@@ -165,21 +148,25 @@
 
                                                             <span
                                                                 class="d-block font-13 text-primary text-bold display_to_account_name"
-                                                                id="online_display_beneficiary_alias_name"> Daniel Hammond</span>
+                                                                id="online_display_beneficiary_alias_name"> Daniel
+                                                                Hammond</span>
 
-                                                            <span class="font-13 text-primary h3 online_display_beneficiary_account_no"
+                                                            <span
+                                                                class="font-13 text-primary h3 online_display_beneficiary_account_no"
                                                                 id="">0000333030303 </span>
-                                                                &nbsp; | &nbsp;
-                                                            <span class="font-13 text-primary h3 online_display_beneficiary_account_currency" id=""> GHS
+                                                            &nbsp; | &nbsp;
+                                                            <span
+                                                                class="font-13 text-primary h3 online_display_beneficiary_account_currency"
+                                                                id=""> GHS
                                                             </span>
 
                                                             <span
-                                                            class="d-block font-13 text-primary text-bold online_display_beneficiary_email"
-                                                            id="online_display_beneficiary_email">dan@gmail.com</span>
+                                                                class="d-block font-13 text-primary text-bold online_display_beneficiary_email"
+                                                                id="online_display_beneficiary_email">dan@gmail.com</span>
 
                                                             <span
-                                                            class="d-block font-13 text-primary text-bold online_display_beneficiary_phone"
-                                                            id="online_display_beneficiary_phone">0554602954</span>
+                                                                class="d-block font-13 text-primary text-bold online_display_beneficiary_phone"
+                                                                id="online_display_beneficiary_phone">0554602954</span>
 
 
                                                         </td>
@@ -191,7 +178,8 @@
                                                             <span class="font-15 text-primary h3 display_currency"
                                                                 id="display_currency"> </span>
                                                             &nbsp;
-                                                            <span class="font-15 text-primary h3 display_transfer_amount"
+                                                            <span
+                                                                class="font-15 text-primary h3 display_transfer_amount"
                                                                 id="display_transfer_amount"></span>
 
                                                         </td>
@@ -220,10 +208,13 @@
                                                     <tr>
                                                         <td>Schedule Payment:</td>
                                                         <td>
-                                                            <span class="font-13 text-primary h3 display_schedule_payment"
+                                                            <span
+                                                                class="font-13 text-primary h3 display_schedule_payment"
                                                                 id="display_schedule_payment">NO </span>
-                                                                &nbsp; | &nbsp;
-                                                            <span class="font-13 text-primary h3 display_schedule_payment_date" id="display_schedule_payment_date"> N/A
+                                                            &nbsp; | &nbsp;
+                                                            <span
+                                                                class="font-13 text-primary h3 display_schedule_payment_date"
+                                                                id="display_schedule_payment_date"> N/A
                                                             </span>
                                                         </td>
                                                     </tr>
@@ -233,7 +224,7 @@
                                                         <td>Transfer Date: </td>
                                                         <td>
                                                             <span class="font-13 text-primary h3"
-                                                                id="display_transfer_date">{{  date('d F, Y') }}</span>
+                                                                id="display_transfer_date">{{ date('d F, Y') }}</span>
                                                         </td>
                                                     </tr>
 
@@ -642,4 +633,4 @@
             });
 
         </script>
-    @endsection
+        @endsection

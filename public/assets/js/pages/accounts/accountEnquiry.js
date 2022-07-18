@@ -196,6 +196,7 @@ $(function () {
 
     function drawTransactionsTable() {
         $("#account_transaction_display_table tbody").empty();
+        $(".download").show();
         let transactionTableOptions = {
             dom: "Bfrtip",
             responsive: true,
@@ -203,6 +204,7 @@ $(function () {
                 "excel",
                 {
                     extend: "print",
+                    autoPrint: false,
                     messageTop: pdfHeader(),
                 },
             ],
@@ -300,7 +302,6 @@ $(function () {
         //         .draw(false);
         // });
 
-        // $(".download").show();
         // PageData.prompt = true;
         // if (PageData?.accountAccount?.accountCurrency) {
         //     $(".currency_display").text(

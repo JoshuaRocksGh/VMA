@@ -55,8 +55,6 @@
             font-family: 'password';
         }
 
-
-
         body {
             width: 100vw;
             background-color: white;
@@ -79,6 +77,12 @@
         </div>
     </div>
     <!-- Begin page -->
+    @isset ($isApp)
+    <div id="wrapper" class="pb-4">
+        @yield('content')
+    </div>
+    @endisset
+    @empty($isApp)
     <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none;">
         @include('snippets.nav')
         <div class="d-flex px-2 w-100">
@@ -93,6 +97,7 @@
             </div>
         </div>
     </div>
+    @endempty
 
     @yield('scripts')
 </body>

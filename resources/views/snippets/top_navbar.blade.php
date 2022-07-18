@@ -1,59 +1,24 @@
-<!-- Topbar Start -->
-<div class="navbar-custom">
-    <div class="container-fluid">
-        <ul class="list-unstyled topnav-menu float-left mb-0">
+<div class="d-flex align-items-center grad-rokel justify-content-between py-2 px-2 px-sm-5 mb-4  site-shadow ">
 
-            <!-- LOGO -->
-            <div class="logo-box">
-                <a href="/" class="logo logo-dark text-center">
-                    <span class="logo-sm">
-                        <img src="{{  asset('assets/images/' . env('APPLICATION_INFO_LOGO_SMALL') )}} " alt=""
-                            height="40">
-                        <!-- <span class="logo-lg-text-light">UBold</span> -->
-                    </span>
-                    <span class="logo-lg">
-                        <img src="{{  asset('assets/images/' . env('APPLICATION_INFO_LOGO_DARK') )}} " alt=""
-                            height="40">
-                        <!-- <span class="logo-lg-text-light">U</span> -->
-                    </span>
-                </a>
+    <a href="{{ url('home') }}" class="d-none d-md-block">
+        <img src="{{ asset('assets/images/rokel_logo.png') }}" height="40" alt="company logo">
+    </a>
 
-                <a href="/" class="logo logo-light text-center">
-                    <span class="logo-sm">
-                        <button class="button-menu-mobile waves-effect waves-light" onclick="window.history.back()">
-                            <b> <i class="mdi mdi-arrow-left  font-22 text-white"></i></b>
 
-                        </button>
-                    </span>
-                    <span class="logo-lg">
-                        <img src="{{  asset('assets/images/' . env('APPLICATION_INFO_LOGO_LIGHT') )}} " alt=""
-                            height="40">
-                    </span>
-                </a>
-            </div>
-            <li class="dropdown notification-list topbar-dropdown">
-                <a onclick="window.history.back()" class="nav-link dropdown-toggle waves-effect waves-light"
-                    data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <span class="font-20"> <b> {{ $page_title }}</b> </span>
-                </a>
-            </li>
-        </ul>
-        <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
-            <li>
-                <!-- Mobile menu toggle (Horizontal Layout)-->
-                <a class="navbar-toggle nav-link" data-toggle="collapse" data-target="#topnav-menu-content">
-                    <div class="lines">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+    <div class="logo-box text-white" style="display: flex; align-items: center;">
+        <span class="font-20"> <b> {{ $page_title }}</b> </span>
 
-                </a>
-                <!-- End mobile menu toggle-->
-            </li>
+    </div>
+    <div class="d-flex align-items-center">
+        <div
+            class="d-none d-md-block rounded-pill text-white font-weight-bold border font-11 mx-4 py-1  text-capitalize px-2 border-white">
+            @if (config('app.corporate'))
+            corporate
+            @else
+            personal
+            @endif
+            Internet Banking
+        </div>
 
-        </ul>
-        <div class="clearfix"></div>
     </div>
 </div>
-<!-- end Topbar -->

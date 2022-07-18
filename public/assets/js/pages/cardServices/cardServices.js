@@ -71,7 +71,7 @@ $(function () {
             somethingWentWrongHandler(e);
         });
 
-    $("select").select2();
+    $(".select").select2();
     $(".accounts-select").select2({
         minimumResultsForSearch: Infinity,
         templateResult: accountTemplate,

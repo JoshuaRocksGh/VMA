@@ -19,43 +19,43 @@
 
 @include("snippets.top_navbar", ['page_title' => 'ACCOUNT OPENING'])
 @include("pages.accountCreation.saving_account_requirement_modal")
-<div class="container-fluid pt-5">
+<div class="container dashboard site-card">
 
-    <div class="site-card mt-3 mx-auto card-background-image container-lg" style="">
+    <div class="dashboard-body p-4  mx-auto" style="">
 
-        <div class="justify-content-between font-weight-bolder text-primary  row font-18 purple-color">
+        <div class="justify-content-between font-weight-bolder text-primary  d-flex font-18 ">
             SAVINGS ACCOUNT OPENING
             <button type="button" class="btn btn-info btn-sm text-right mod-open" data-toggle="modal"
                 data-target="#centermodal"> <span class="fe-info mr-1"></span>
                 info</button>
         </div>
         <hr>
-        <div class="row">
+        <div class="d-flex">
             <div class="col-md-4">
                 <br><br>
                 <div class="nav nav-pills mx-auto flex-column navtab-bg nav-pills-tab text-center" id="v-pills-tab"
                     role="tablist" aria-orientation="vertical" style="max-width: 350px">
                     <button
-                        class="nav-link knav active show py-2 transition-all py-md-2   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary"
+                        class="nav-link knav active show py-2 transition-all py-md-2   mb-1 mb-md-2   font-weight-bold bg-white rounded-pill border text-primary border-primary"
                         id="custom-v-pills-personal-details-tab" href="#custom-v-pills-personal-details" role="tab"
                         aria-controls="custom-v-pills-personal-details">
 
                         Personal Details
                     </button>
                     <button
-                        class="nav-link mt-2 knav py-2 transition-all py-md-2   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary"
+                        class="nav-link mt-2 knav py-2 transition-all py-md-2   mb-1 mb-md-2   font-weight-bold bg-white rounded-pill border text-primary border-primary"
                         id="custom-v-pills-contact-and-id-details-tab" href="#custom-v-pills-contact-and-id-details"
                         role="tab" aria-controls="custom-v-pills-contact-and-id-details">
 
                         Contact & ID Details</button>
                     <button
-                        class="nav-link knav mt-2 py-2 transition-all py-md-2   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary"
+                        class="nav-link knav mt-2 py-2 transition-all py-md-2   mb-1 mb-md-2   font-weight-bold bg-white rounded-pill border text-primary border-primary"
                         id="custom-v-pills-bio-details-tab" href="#custom-v-pills-bio-details" role="tab"
                         aria-controls="custom-v-pills-bio-details">
 
                         Bio Details</button>
                     <button
-                        class="nav-link knav mt-2 py-2 transition-all py-md-2   mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary"
+                        class="nav-link knav mt-2 py-2 transition-all py-md-2   mb-1 mb-md-2   font-weight-bold bg-white rounded-pill border text-primary border-primary"
                         id="summary-tab" role="tab" href="#summary-v-pills-payment"
                         aria-controls="custom-v-pills-payment-payment">
 
@@ -104,7 +104,7 @@
 
                                             <div class="radio form-check-inline radio-primary">
                                                 <input type="radio" id="radio1" value="M" name="radioInline" required>
-                                                <label for="inlineRadio1">Male </label>
+                                                <label class="mb-0 ml-2" for="inlineRadio1">Male </label>
                                             </div>
 
                                         </div>
@@ -115,7 +115,7 @@
 
                                             <div class="radio form-check-inline radio-primary">
                                                 <input type="radio" id="radio2" value="F" name="radioInline" required>
-                                                <label for="inlineRadio2">Female </label>
+                                                <label class="mb-0 ml-2" for="inlineRadio2">Female </label>
                                             </div>
                                         </div>
                                     </div>
