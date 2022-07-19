@@ -1,7 +1,7 @@
 // ==============================================================
-// ------------------- Reverse Korpor ---------------------------
+// ------------------- Reverse Payment ---------------------------
 // ==============================================================
-function korporReversal(data) {
+function paymentReversal(data) {
     // transferInfo.type = "reversal";
     data.pass = true;
     $("#pin_code_modal").modal("show");
@@ -16,24 +16,24 @@ function korporReversal(data) {
             userPin = "";
             return false;
         }
-        let korporData = new Object();
-        korporData.pinCode = userPin;
-        korporData.referenceNo = data.REMITTANCE_REF;
-        korporData.beneficiaryMobileNo = data.BENEF_TEL;
-        reverseKorpor("reverse-korpor", korporData);
+        let paymentData = new Object();
+        paymentData.pinCode = userPin;
+        paymentData.referenceNo = data.REMITTANCE_REF;
+        paymentData.beneficiaryMobileNo = data.BENEF_TEL;
+        reversePayment(`reverse-${paymentType}`, paymentData);
         $("#user_pin").val("");
         userPin = "";
         data.pass = false;
     });
 }
 
-function reverseKorpor(url, data) {
+function reversePayment(url, data) {
     siteLoading("show");
     $.ajax({
         type: "POST",
-        url: url,
+        url,
         datatype: "application/json",
-        data: data,
+        data,
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
@@ -51,7 +51,7 @@ function reverseKorpor(url, data) {
     });
 }
 
-function initiateKorpor(url, data) {
+function initiatePayment(url, data) {
     // console.log(data);
     // return false;
     siteLoading("show");
@@ -103,11 +103,11 @@ function initiateKorpor(url, data) {
         },
     });
 }
-function getKorporDetails(mobileNumber, remittanceNumber) {
+function getPaymentDetails(mobileNumber, remittanceNumber) {
     siteLoading("show");
     $.ajax({
         type: "POST",
-        url: "korpor-otp",
+        url: `${paymentType}-otp`,
         datatype: "application/json",
         data: {
             remittance_no: remittanceNumber,
@@ -121,8 +121,8 @@ function getKorporDetails(mobileNumber, remittanceNumber) {
             if (response.responseCode == "000") {
                 console.log(response);
                 toaster(response.message, "success");
-                $(".redeem_korpor").hide();
-                $(".korpor_details").show();
+                $(`.redeem_${paymentType}`).hide();
+                $(`.${paymentType}_details`).show();
                 let receiver_name = response.data.beneficiaryName;
                 let receiver_address = response.data.beneficiaryAddress;
                 let receiver_amount = response.data.remittanceAmount;
@@ -145,10 +145,10 @@ function getKorporDetails(mobileNumber, remittanceNumber) {
     });
 }
 
-function redeemKorpor(data) {
+function redeemPayment(data) {
     $.ajax({
         type: "POST",
-        url: "redeem-korpor",
+        url: `redeem-${paymentType}`,
         datatype: "application/json",
         data: {
             redeem_amount: data.redeemAmount,
@@ -191,10 +191,10 @@ function redeemKorpor(data) {
         },
     });
 }
-function getKorporHistory(type, accountNumber) {
+function getPaymentHistory(type, accountNumber) {
     return $.ajax({
         type: "GET",
-        url: "korpor-history-api",
+        url: `${paymentType}-history-api`,
         datatype: "application/json",
         data: {
             accountNumber,
@@ -206,24 +206,24 @@ function getKorporHistory(type, accountNumber) {
         success: function (response) {
             const data = response.data;
             // console.log(renderedHistoryItems);
-            $("#korpor_history_display").pagination({
+            $(`#${paymentType}_history_display`).pagination({
                 dataSource: data,
                 pageSize: 5,
                 callback: function (data, pagination) {
                     let items = [];
-                    items = data.map((e) => renderKorporHistoryItem(e));
+                    items = data.map((e) => renderPaymentHistoryItem(e));
 
                     if (items.length < 1) {
                         items = noDataAvailable;
                     }
-                    $("#korpor_history_container").html(items);
+                    $(`#${paymentType}_history_container`).html(items);
                 },
             });
         },
     });
 }
 
-function renderKorporHistoryItem(data) {
+function renderPaymentHistoryItem(data) {
     console.log(data);
 
     const {
@@ -271,7 +271,7 @@ function renderKorporHistoryItem(data) {
 
 $(function () {
     // ==============================================================
-    // ------------------- Redeem Korpor ---------------------------
+    // ------------------- Redeem Payment ---------------------------
     // ==============================================================
     const redeemInfo = new Object();
     $("#redeem_account option[data-account-currency!='SLL']").remove();
@@ -282,7 +282,7 @@ $(function () {
             toaster("All Fields Are Required", "warning");
             return false;
         }
-        getKorporDetails(mobileNumber, remittanceNumber);
+        getPaymentDetails(mobileNumber, remittanceNumber);
     });
     $("#done_button").click(function () {
         transferInfo.type = "redeem";
@@ -315,14 +315,14 @@ $(function () {
             return;
         }
         redeemInfo.otp = otp;
-        redeemKorpor(redeemInfo);
+        redeemPayment(redeemInfo);
         $("#user_pin").val("");
         transferInfo.type = "";
     });
-    //------------- end of redeem korpor -------------
+    //------------- end of redeem Payment -------------
 
     // ====================================================
-    //  ------------- Korpor Transfer ------------------
+    //  ------------- Payment Transfer ------------------
     // ===================================================
     let transferInfo = new Object();
     $("#account_of_transfer").on("change", function () {
@@ -440,7 +440,7 @@ $(function () {
             return;
         }
         if (ISCORPORATE) {
-            corporateInitiateKorpor(transferInfo);
+            corporateInitiatePayment(transferInfo);
             return;
         }
         transferInfo.type = "transfer";
@@ -456,28 +456,31 @@ $(function () {
                 return;
             }
             transferInfo.pinCode = pinCode;
-            initiateKorpor("initiate-korpor", transferInfo);
+            initiatePayment(`initiate-${paymentType}`, transferInfo);
             transferInfo.pinCode = "";
             $("#user_pin").val("");
             transferInfo.type = "";
         });
     });
-    function corporateInitiateKorpor(transferInfo) {
-        const endPoint = "corporate-initiate-korpor";
-        initiateKorpor(endPoint, transferInfo);
+    function corporateInitiatePayment(transferInfo) {
+        const endPoint = `corporate-initiate-${paymentType}`;
+        initiatePayment(endPoint, transferInfo);
     }
 
-    // ----------- korpor transfer end -----------
+    // ----------- Payment transfer end -----------
 
     //     ####################################################
-    //                    Korpor History
+    //                    Payment History
     //     ####################################################
 
-    $("#korpor_history_tab").on("click", () => {
-        if (!$("#korpor_history_accounts").val()) {
-            $("#korpor_history_accounts option:last").prop("selected", true);
+    $(`#${paymentType}_history_tab`).on("click", () => {
+        if (!$(`#${paymentType}_history_accounts`).val()) {
+            $(`#${paymentType}_history_accounts option:last`).prop(
+                "selected",
+                true
+            );
         }
-        $("#korpor_history_accounts").trigger("change");
+        $(`#${paymentType}_history_accounts`).trigger("change");
     });
 
     // function accountTemplate(account) {
@@ -493,13 +496,13 @@ $(function () {
     });
 
     //trigger knav click on accounts change.
-    $("#korpor_history_accounts").on("change", (e) => {
+    $(`#${paymentType}_history_accounts`).on("change", (e) => {
         $(".knav.active").trigger("click");
     });
 
     $(".knav").on("click", (e) => {
         const accountNumber = $(
-            "#korpor_history_accounts option:selected"
+            `#${paymentType}_history_accounts option:selected`
         ).attr("data-account-number");
         if (!accountNumber) {
             toaster("Please select a valid account", "warning");
@@ -511,8 +514,8 @@ $(function () {
         $(".knav").removeClass("active");
         $(`#${navId}`).addClass("active");
         siteLoading("show");
-        getKorporHistory(type, accountNumber).always(siteLoading("hide"));
+        getPaymentHistory(type, accountNumber).always(siteLoading("hide"));
     });
 
-    // ================= End of Korpor history =======================
+    // ================= End of Payment history =======================
 });
