@@ -367,14 +367,14 @@
                     <div class="row pt-md-4 mx-auto" style="max-width: 1250px">
                         <nav class="col-md-4  nav nav-pills flex-column mx-auto mb-3 flex-row" style="max-width: 350px">
                             <button id="pending_history" data-value="unredeemed"
-                                class=" transition-all py-md-2 active  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                                class=" transition-all py-md-2 active  text-sm-center mb-1 mb-md-2   font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
                                 href="#">Pending</button>
                             <button data-value="redeemed"
-                                class=" transition-all py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link "
+                                class=" transition-all py-md-2  text-sm-center mb-1 mb-md-2   font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link "
                                 id="redeemed_history" href="#">Redeemed</button>
 
                             <button id="cancelled_history" data-value="reversed"
-                                class="  transition-all py-md-2 text-sm-center mtb1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                                class="  transition-all py-md-2 text-sm-center mtb1  mb-md-2  font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
                                 href="#">Cancelled</button>
                         </nav>
                         <div class="col-md-8" id="{{ $currentType }}_history_display" style="max-width: 650px;">
@@ -398,11 +398,13 @@
         customerInfo.userAlias = @json(session()->get('userAlias'));
         customerInfo.userPhone = @json(session()->get('customerPhone'));
         customerInfo.userEmail = @json(session()->get('email'));
+        const paymentType = @json($currentType);
     </script>
     <script>
         let noDataAvailable = {!! json_encode($noDataAvailable) !!}
+
     </script>
-    <script src="{{ asset('assets/js/pages/payments/'.$currentType.'.js') }}">
+    <script src="{{ asset('assets/js/pages/payments/paymentMaster.js') }}">
     </script>
     <script src="{{ asset('assets/plugins/pagination/pagination-2.1.5.min.js') }}" defer>
     </script>
