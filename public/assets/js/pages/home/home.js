@@ -96,9 +96,9 @@ function getCorporateRequests(customerNumber, requestStatus) {
 pageData.barColors = [
     "#F15BB5",
     "#007ECC",
-    "#F3704B",
     "#9B5DE5",
     "#00F5D4",
+    "#F3704B",
     "#686770",
     "#99E9FF",
     "#00BBF9",
@@ -275,7 +275,7 @@ function prepareGraphValues() {
     pageData.pieValues = {
         accountsPie,
         loansPie,
-        investmentPie: investmentsPie,
+        investmentsPie,
         totalsPie,
     };
 }
@@ -458,6 +458,13 @@ $(() => {
 
     $(".canvas-tab").on("click", (e) => {
         const selectedTab = $(e.currentTarget).attr("data-target");
+        console.log(pageData.pieValues[selectedTab]?.yValues?.length);
+        if (!pageData.pieValues[selectedTab]?.yValues?.length) {
+        }
+        $(".chart-no-data").attr(
+            "hidden",
+            !!pageData.pieValues[selectedTab]?.yValues?.length
+        );
         accountsPieChart({
             title: selectedTab.slice(0, -3),
             ...pageData.pieValues[selectedTab],
