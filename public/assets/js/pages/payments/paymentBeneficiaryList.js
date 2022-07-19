@@ -15,8 +15,9 @@ function getBeneficiaryList() {
                         );
                     });
                     drawBeneficiaryTable();
+                    return;
                 }
-            } else {
+                siteLoading("hide");
             }
         },
         error: function (xhr, status, error) {
@@ -37,11 +38,21 @@ function getPaymentTypes() {
                 const data = response.data;
                 pageData.payTypes = [];
                 $.each(data, function (i) {
-                    const type = data[i].paymentType;
-                    pageData.payTypes.push(type);
-                    pageData["pay_" + type] = data[i];
+                    console.log(data[i]);
+                    const { label, paymentType, description } = data[i];
+                    pageData.payTypes.push(paymentType);
+                    pageData["pay_" + paymentType] = data[i];
+                    const comingSoon = !label ? "coming-soon" : "";
+                    let paymentCard = `
+                    <button class="${comingSoon} beneficiary-type knav mb-2  current-type  knav-primary" data-value=${paymentType}
+                    data-title=${description} id=''>
+                    <span class="box-circle"></span>
+                    <span id=''>${description}</span>
+                </button>
+                    `;
+                    $(".payment-tabs").append(paymentCard);
                 });
-            } else {
+                initPaymentTabs();
             }
             getBeneficiaryList();
         },
@@ -127,17 +138,18 @@ function drawBeneficiaryTable() {
     });
     siteLoading("hide");
 }
-
-$(() => {
-    siteLoading("show");
-    getPaymentTypes();
-    $("#add_beneficiary").on("click", () => {
-        addPaymentBeneficiary($(".current-type").attr("data-value"));
-    });
+const initPaymentTabs = () => {
     let beneficiaryType = document.querySelectorAll(".beneficiary-type");
     beneficiaryType.forEach((item, i) => {
         item.addEventListener("click", (e) => {
             const currentType = e.currentTarget;
+            if (e.currentTarget.classList.contains("coming-soon")) {
+                e.preventDefault();
+                comingSoonToast(
+                    "Feature not available at the moment. Please check back later"
+                );
+                return;
+            }
             $(".beneficiary-type")
                 .removeClass("current-type")
                 .removeClass("active");
@@ -147,5 +159,15 @@ $(() => {
             );
             drawBeneficiaryTable();
         });
+        if (i === 0) {
+            $(item).trigger("click");
+        }
+    });
+};
+$(() => {
+    siteLoading("show");
+    getPaymentTypes();
+    $("#add_beneficiary").on("click", () => {
+        addPaymentBeneficiary($(".current-type").attr("data-value"));
     });
 });
