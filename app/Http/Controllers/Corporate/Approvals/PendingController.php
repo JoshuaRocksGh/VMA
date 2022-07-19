@@ -32,7 +32,18 @@ class PendingController extends Controller
         // return $customer_no;
 
         $mandate = session()->get('userMandate');
-        // return $mandate;
+        // $customerAccounts = session()->get('customerAccounts');
+        // $accountMandate = $customerAccounts[0]->accountMandate;
+        // $getMandate = explode(' ', $accountMandate);
+        // return $getMandate[1];
+
+        // if (strpos($accountMandate, 'AND' !== false)) {
+        //     return $accountMandate;
+        // } else if (strpos($accountMandate, 'OR' !== false)) {
+        //     return $accountMandate;
+        // } else {
+        //     return $accountMandate;
+        // }
 
         // Alert::error('', 'Not Authorized To Approve Pending Request');
         // return back();
