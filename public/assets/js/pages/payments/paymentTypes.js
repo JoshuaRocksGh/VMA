@@ -7,16 +7,14 @@ function getPaymentBeneficiaries() {
         success: function (response) {
             let data = response.data;
             if (data.length > 0) {
-                $.each(pageData.payTypes, (i) => {
+                $.each(pageData.payTypes, async (i) => {
                     const type = pageData.payTypes[i];
                     pageData["bene_" + type] = data.filter(
                         (e) => e.PAYMENT_TYPE === type
                     );
                 });
-                initPaymentsCarousel();
-            } else {
-                return false;
             }
+            initPaymentsCarousel();
         },
         error: function (xhr, status, error) {
             $("#loader").show();
