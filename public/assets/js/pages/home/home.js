@@ -19,8 +19,9 @@ function getCorporateRequests(customerNumber, requestStatus) {
             }
             $(".request_table tr").remove();
             console.log("data length =>", data.length);
-            // $("#approval_count").html(data.length > 0 ? data.length : 0);
-            $("#approval_count").text(data.length);
+            $("#approval_count").text(data.length > 0 ? data.length : 0);
+            // $("#approval_count").text(data.length);
+            // $("#approval_count").text("1");
             const tableOptions = {
                 lengthChange: false,
                 pageLength: 5,

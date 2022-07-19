@@ -107,6 +107,8 @@ class LoginController extends Controller
                 "accountDescription" => $userDetail->accountsList[0]->accountDesc,
                 "customerAccounts" => $userDetail->accountsList,
                 "userMandate" => 'A',
+                // "userMandate" => $userDetail->userMandate,
+
                 "deviceInfo" => [
                     "appVersion" => "web",
                     "deviceBrand" => Browser::deviceFamily(),

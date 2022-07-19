@@ -21,7 +21,8 @@
                     @if (config('app.corporate'))
                         <a class="nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                             aria-controls="nav-profile" aria-selected="false">Approvals
-                            <p id="#approval_count" class="badge badge-danger badge-pill font-10 ml-1"></p>
+                            <p id="approval_count" class="badge badge-danger badge-pill font-5 m-0 p-1"></p>
+                            {{-- <p id="approval_count" class="badge badge-danger badge-pill font-5 ml-1"></p> --}}
                         </a>
                     @endif
                 </div>
