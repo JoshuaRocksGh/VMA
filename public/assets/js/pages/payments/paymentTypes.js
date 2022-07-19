@@ -38,15 +38,6 @@ function paymentType() {
                 pageData.payTypes = [];
 
                 if (data.length > 0) {
-                    // let color = [
-                    //     "knav-primary",
-                    //     "knav-warning",
-                    //     "knav-success",
-                    //     "knav-info",
-                    //     "knav-danger",
-                    //     "knav-pink",
-                    //     "knav-secondary",
-                    // ];
                     $(".payments-carousel").empty();
                     $.each(data, function (i) {
                         const type = data[i].paymentType;

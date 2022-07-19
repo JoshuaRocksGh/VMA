@@ -1,7 +1,7 @@
-function comingSoonToast(message, timer = 3000) {
+function comingSoonToast(message, title, timer = 3000) {
     Swal.fire({
-        title: "Coming Soon",
-        text: "Stay tuned for more features",
+        title: title ?? "Coming Soon",
+        text: message ?? "Stay tuned for more features",
         imageUrl: "assets/images/placeholders/coming-soon.gif",
         imageHeight: "10rem",
         width: "30rem",

@@ -25,32 +25,10 @@ $currentPath = "payment Beneficiary";
                 <h2 class="font-14 text-center font-weight-bold text-capitalize mb-3 text-primary">select Beneficiary
                     type
                 </h2>
-                <div class="mb-4   mx-auto" style="max-width: 750px;">
-                    <button class="beneficiary-type knav mb-2 active current-type  knav-primary" data-value="MOM"
-                        data-title="Mobile Money" id=''>
-                        <span class="box-circle"></span>
-                        <span id=''>Mobile Money</span>
-                    </button>
+                <div class="mb-4 payment-tabs  mx-auto" style="max-width: 750px;">
 
-                    <button class="beneficiary-type  knav mb-2 knav-info  " data-value="AIR" data-title="Airtime" id=''>
-                        <span class="box-circle"></span>
-                        <span id=''>Airtime</span>
-                    </button>
-                    <button class="beneficiary-type  knav mb-2 knav-success " data-value="UTL" data-title="Utility"
-                        id=''>
-                        <span class="box-circle"></span>
-                        <span id=''>Utility </span>
-                    </button>
-                    <button class="beneficiary-type  knav mb-2 knav-warning  " data-value="EDU" data-title="Education"
-                        id=''>
-                        <span class="box-circle"></span>
-                        <span id=''>Education </span>
-                    </button>
-                    <button class="beneficiary-type  knav mb-2 knav-danger  " data-value="GVT"
-                        data-title="Government tax" id=''>
-                        <span class="box-circle"></span>
-                        <span id=''>Government tax </span>
-                    </button>
+
+
                 </div>
                 <hr>
             </div>
@@ -86,5 +64,7 @@ $currentPath = "payment Beneficiary";
     const pageData= {}
 </script>
 <script src="{{ asset('assets/js/pages/payments/paymentBeneficiaryList.js') }}">
+</script>
+<script src="{{ asset('assets/js/functions/comingSoon.js') }}">
 </script>
 @endsection
