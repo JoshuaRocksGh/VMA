@@ -1,35 +1,5 @@
 @extends('layouts.master')
 @section('styles')
-{{--
-<link href="{{ asset('assets/css/payments.css') }}" rel="stylesheEet" type="text/css" id="app-default-stylesheet" />
---}}
-{{-- <style>
-    .tab-pane {
-        animation: slide-right 500ms ease-out;
-    }
-
-    @keyframes slide-right {
-        0% {
-            opacity: 0;
-            /* transform: translateY(-50%); */
-        }
-
-        100% {
-            opacity: 1;
-            /* transform: translateY(0); */
-        }
-    }
-
-    @keyframes fadein {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-</style> --}}
 @endsection
 @section('content')
 @php
@@ -145,6 +115,7 @@ $currentPath = 'Make Payment';
 </script>
 
 <script src="{{ asset('assets/js/pages/payments/paymentTypes.js') }}"></script>
+<script src="{{ asset('assets/js/functions/comingSoon.js') }}"></script>
 
 
 @endsection
