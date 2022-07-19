@@ -112,5 +112,10 @@
         var myaccount = @json(session()->get('customerAccounts'))
     </script>
 
+    <script>
+        var myaccount = @json(session()->get('customerAccounts'))
+    </script>
+
     <script src="{{ asset('assets/js/pages/payments/paymentTypes.js') }}"></script>
+    <script src="{{ asset('assets/js/functions/comingSoon.js') }}"></script>
 @endsection

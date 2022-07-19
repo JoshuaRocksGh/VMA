@@ -7,16 +7,14 @@ function getPaymentBeneficiaries() {
         success: function (response) {
             let data = response.data;
             if (data.length > 0) {
-                $.each(pageData.payTypes, (i) => {
+                $.each(pageData.payTypes, async (i) => {
                     const type = pageData.payTypes[i];
                     pageData["bene_" + type] = data.filter(
                         (e) => e.PAYMENT_TYPE === type
                     );
                 });
-                initPaymentsCarousel();
-            } else {
-                return false;
             }
+            initPaymentsCarousel();
         },
         error: function (xhr, status, error) {
             $("#loader").show();
@@ -55,9 +53,9 @@ function paymentType() {
                         pageData.payTypes.push(type);
                         pageData["pay_" + type] = data[i];
                         const { label, paymentType, description } = data[i];
-                        if (!label) return;
-                        let paymentCard = `<button type="button" class="knav knav-primary mb-2
-                        payments "  id='${paymentType}_card' data-span="${paymentType}">
+                        const comingSoon = !label ? "coming-soon" : "";
+                        let paymentCard = `<button type="button" class="${comingSoon} knav knav-primary mb-2
+                        payments"  id='${paymentType}_card' data-span="${paymentType}">
                     ${description}
                     </button>`;
                         $(".payments-carousel").append(paymentCard);
@@ -187,6 +185,11 @@ function initPaymentsCarousel() {
     let payments = document.querySelectorAll(".payments");
     payments.forEach((item, i) => {
         item.addEventListener("click", (e) => {
+            if (e.target.classList.contains("coming-soon")) {
+                e.preventDefault();
+                comingSoonToast("Stay tuned for more features");
+                return;
+            }
             $(".payments").removeClass("current-type active");
             const type = $(e.currentTarget).attr("data-span");
             $(e.currentTarget).addClass("current-type active");
