@@ -149,10 +149,6 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/standing-order-status', [StandingOrderController::class, 'display_standing_order_status']);
     Route::get('/bulk-transfer', [BulkUploadBulkUploadsController::class, 'index']);
     Route::post('/update-upload', [BulkUploadBulkUploadsController::class, 'update_upload']);
-    Route::post('/initiate-cardless', [CardlessController::class, 'initiate_cardless'])->name('initiate-cardless');
-    Route::post('/cardless-otp', [CardlessController::class, 'cardless_otp'])->name('cardless-otp');
-    Route::post('/redeem-cardless', [CardlessController::class, 'redeem_cardless'])->name('redeem-cardless');
-    Route::post('/redeemed-cardless', [CardlessController::class, 'send_redeemed_request'])->name('redeemed-cardless');
 
 
     // --- PAYMENTS
@@ -188,16 +184,12 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/view-bulk-transfer-korpor', [BulkUploadBulkUploadsController::class, 'view_bulk_transfer_korpor'])->name('view-bulk-transfer-korpor');
     Route::get('/view-error-bulk-transfer', [BulkUploadBulkUploadsController::class, 'view_error_bulk_transfer'])->name('view-error-bulk-transfer');
     Route::get('/bulk-korpor-error-transfer', [BulkUploadBulkUploadsController::class, 'bulk_korpor_error_transfer'])->name('bulk-korpor-error-transfer');
+    Route::get('/bulk-korpor_detail', [KorporController::class, 'bulk_korpor_detail'])->name('bulk-korpor_detail');
     Route::get('/get-bulk-korpor-upload-list', [BulkUploadBulkUploadsController::class, 'get_bulk_korpor_upload_list'])->name('get-bulk-korpor-upload-list');
     Route::get('/get-bulk-korpor-upload-detail-list', [BulkUploadBulkUploadsController::class, 'get_bulk_korpor_file_details'])->name('get-bulk-korpor-upload-detail-list');
-    Route::post('/get-bulk-detail-list-for-approval', [PendingController::class, 'get_bulk_detail_list_for_approval'])->name('get-bulk-detail-list-for-approval');
-    Route::post('/initiate-korpor', [KorporController::class, 'initiate_korpor'])->name('initiate-korpor');
-    Route::post('/korpor-otp', [KorporController::class, 'korpor_otp'])->name('korpor-otp');
-    Route::post('/redeem-korpor', [KorporController::class, 'redeem_korpor'])->name('redeem-korpor');
-    Route::post('/redeemed-korpor', [KorporController::class, 'send_redeemed_request'])->name('redeemed-korpor');
+    Route::post('/corporate-reverse-korpor', [BulkUploadCorporateKorporController::class, 'corporate_reverse_korpor'])->name('corporate-reverse-korpor');
     Route::post('/corporate-initiate-korpor', [BulkUploadCorporateKorporController::class, 'corporate_initiate_korpor'])->name('corporate-initiate-korpor');
-    Route::post('corporate-reverse-korpor', [BulkUploadCorporateKorporController::class, 'corporate_reverse_korpor'])->name('corporate-reverse-korpor');
-    Route::get('/bulk-korpor_detail', [KorporController::class, 'bulk_korpor_detail'])->name('bulk-korpor_detail');
+    Route::post('/get-bulk-detail-list-for-approval', [PendingController::class, 'get_bulk_detail_list_for_approval'])->name('get-bulk-detail-list-for-approval');
 
 
 
@@ -270,6 +262,24 @@ Route::get('/pending-request-details-api', [PendingController::class, 'pending_r
 Route::post('complaint-api', [ComplaintController::class, 'make_complaint_api'])->name('complaint-api');
 Route::get('get-service-type-api', [ComplaintController::class, 'getServiceType']);
 
+
+//korpor payment
+Route::post('/initiate-korpor', [KorporController::class, 'initiate_korpor']);
+Route::post('/korpor-otp', [KorporController::class, 'korpor_otp']);
+Route::post('/redeem-korpor', [KorporController::class, 'redeem_korpor']);
+Route::post('/redeemed-korpor', [KorporController::class, 'send_redeemed_request']);
+Route::get('korpor-history-api', [KorporController::class, 'getKorporHistoryByType']);
+Route::post('reversed-korpor-request', [KorporController::class, 'send_reversed_request'])->name('reversed-korpor-request');
+Route::post('reverse-korpor', [KorporController::class, 'reverse_korpor'])->name('reverse-korpor');
+
+//cardless payment
+Route::post('/initiate-cardless', [CardlessController::class, 'initiate_cardless']);
+Route::post('/cardless-otp', [CardlessController::class, 'cardless_otp']);
+Route::post('/redeem-cardless', [CardlessController::class, 'redeem_cardless']);
+Route::post('/redeemed-cardless', [CardlessController::class, 'send_redeemed_request']);
+Route::get('/cardless-history-api', [CardlessController::class, 'getCardlessHistoryByType']);
+Route::post('reversed-cardless-request', [CardlessController::class, 'send_reversed_request']);
+Route::post('reverse-cardless', [CardlessController::class, 'reverse_cardless']);
 
 
 
@@ -362,10 +372,6 @@ Route::post('change-pin-api', [ChangePinController::class, 'change_pin'])->name(
 //Route for change-password-api
 Route::post('change-password-api', [ChangePasswordController::class, 'change_password'])->name('change-password-api');
 
-//Route to send unredeem request
-Route::get('korpor-history-api', [KorporController::class, 'getKorporHistoryByType']);
-Route::post('reversed-korpor-request', [KorporController::class, 'send_reversed_request'])->name('reversed-korpor-request');
-Route::post('reverse-korpor', [KorporController::class, 'reverse_korpor'])->name('reverse-korpor');
 
 
 Route::get('get-card-types-api', [CardsController::class, 'getCardTypes']);
