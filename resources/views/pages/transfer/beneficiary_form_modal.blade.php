@@ -48,10 +48,9 @@
                                 <div class="form-group row international-bank-form" style="display: none">
                                     <label class="col-md-4"> Select Country:</label>
                                     <div class="col-md-8">
-                                        {{-- <input type="hidden" value="" id="bank_i"> --}}
                                         <select class="form-control " id="select_country" required>
-                                            {{-- <option selected disabled value="">--- Select Country ---
-                                            </option> --}}
+                                            <option selected disabled value=""> --- Select Country ---</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -59,10 +58,8 @@
                                     style="display: none">
                                     <label class="col-md-4"> Select Bank:</label>
                                     <div class="col-md-8">
-                                        {{-- <input type="hidden" value="" id="bank_i"> --}}
                                         <select class="form-control" data-container="body" id="select_bank">
-                                            {{-- <option selected disabled value=""> --- Select Bank ---
-                                            </option> --}}
+                                            <option selected disabled value=""> --- Select Bank ---</option>
                                         </select>
                                     </div>
                                 </div>
@@ -106,14 +103,6 @@
                                             placeholder="Enter Beneficiary Name" minlength="2" maxlength="20">
                                     </div>
                                 </div>
-
-                                {{-- <div class="form-group row">
-                                    <label class="col-4">Phone Number:</label>
-                                    <div class="col-8">
-                                        <input type="number" class="form-control" id="beneficiary_number"
-                                            placeholder="Enter Beneficiary Phone Number" required>
-                                    </div>
-                                </div> --}}
 
                                 <div class="form-group row other-bank-form international-bank-form"
                                     style="display: none">

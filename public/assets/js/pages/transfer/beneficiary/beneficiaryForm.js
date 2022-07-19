@@ -59,11 +59,11 @@ function getInternationalBanks(countryCode) {
         datatype: "application/json",
         success: function (response) {
             let data = response.data;
+            $("#select_bank").empty();
+            $("#select_bank").append(
+                `<option selected disabled value=""> --- Select Bank ---</option>`
+            );
             if (data && data.length > 1) {
-                $("#select_bank").empty();
-                $("#select_bank").append(
-                    `<option selected disabled value=""> --- Select Bank ---</option>`
-                );
                 data = data.sort((a, b) => a.COUNTRY - b.COUNTRY);
                 $.each(data, (i) => {
                     let { BICODE, BANK_DESC, COUNTRY } = data[i];
@@ -78,6 +78,7 @@ function getInternationalBanks(countryCode) {
                     $("#select_country").attr("data-bank", "");
                 }
                 $("#select_bank").attr("disabled", false);
+                $("#select_bank");
             } else {
                 toaster(response.message);
             }
@@ -320,6 +321,8 @@ function validateFormInputs() {
 }
 
 $(() => {
+    //delete default select2 created by global
+    $("select").select2("destroy");
     initialModalHtml = $("#edit_modal").html();
     initBeneficiaryForm();
     $("#edit_modal").on("hidden.bs.modal", (e) => {
