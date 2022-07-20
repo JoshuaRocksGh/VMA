@@ -92,7 +92,7 @@ Route::post('/submit-kyc', [KycController::class, 'submit_kyc'])->name('submit-k
 // Route::get('/approvals-pending/{request_id}/{customer_no}', [PendingController::class, 'approvals_pending'])->name('approvals-pending/request_id/customer_no');
 Route::get('/get-pending-requests', [GeneralFunctionsFunctionsController::class, 'get_pending_requests'])->name('get-pending-requests');
 Route::get('/get-transfer-status', [GeneralFunctionsFunctionsController::class, 'get_transfer_requests']);
-Route::get('/approvals-pending-transfer-details', [PendingController::class, 'approvals_pending_transfer_details']);
+// Route::get('/approvals-pending-transfer-details', [PendingController::class, 'approvals_pending_transfer_details']);
 Route::get('/approvals-pending-transfer-details/{request_id}/{customer_no}', [PendingController::class, 'approvals_pending_transfer_details']);
 Route::post('/approved-pending-request', [ApprovedRequestController::class, 'approved_request'])->name('approved-pending-request');
 Route::post('/reject-pending-request', [ApprovedRequestController::class, 'reject_request'])->name('reject-pending-request');
