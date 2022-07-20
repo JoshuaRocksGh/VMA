@@ -606,9 +606,9 @@ $(document).ready(function () {
                     console.log(response);
                     siteLoading("hide");
                     //return false;
+                    let data = response?.data;
 
                     if (response.responseCode == "000") {
-                        let data = response.data;
                         let fileBatch = data.fileBatch;
                         // $("#submit_cheque_request").text("Submit File");
 
@@ -623,7 +623,8 @@ $(document).ready(function () {
                         // $("#submit_cheque_request").text("Submit File");
                         let errorMessage = response.message;
 
-                        let validationErrors = data.validationErrors;
+                        let validationErrors =
+                            data?.validationErrors?.[0] ?? "";
 
                         let all_errors =
                             errorMessage + `<br>` + validationErrors;
@@ -631,7 +632,7 @@ $(document).ready(function () {
                         //bulk_upload_list(fileBatch, allErrors)
 
                         // toaster(all_errors, "error", 3000);
-                        toaster(errorMessage, "error", 3000);
+                        toaster(all_errors, "error", 3000);
                         document.getElementById("bulk_upload_form").reset();
 
                         //location.reload();
