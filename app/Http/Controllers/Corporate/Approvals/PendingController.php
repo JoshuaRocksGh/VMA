@@ -32,10 +32,43 @@ class PendingController extends Controller
         // return $customer_no;
 
         $mandate = session()->get('userMandate');
-        // $customerAccounts = session()->get('customerAccounts');
-        // $accountMandate = $customerAccounts[0]->accountMandate;
-        // $getMandate = explode(' ', $accountMandate);
-        // return $getMandate[1];
+        // $mandate = '2B';
+        $customerAccounts = session()->get('customerAccounts');
+        $accountMandate = $customerAccounts[0]->accountMandate;
+        $getMandate = explode(' ', $accountMandate);
+
+
+        if (in_array("AND", $getMandate) || in_array("OR", $getMandate)) {
+            $firstMandate = $getMandate[0];
+            $secondMandate = $getMandate[2];
+
+            $getSecondMandate =
+                str_split($secondMandate);
+            $getfirstMandate = str_split($firstMandate);
+            $mandateType1 = $getfirstMandate[1];
+            $mandateType2 = $getSecondMandate[1];
+
+            if ($mandate == $mandateType1 || $mandate == $mandateType2) {
+
+                return view('pages.corporate.approvals.pending_transfer_details', ['request_id' => $request_id, 'customer_no' => $customer_no, 'mandate' => $mandate]);
+            } else {
+                Alert::error('', 'Not Authorized To Approve Pending Request');
+                return back();
+            }
+            // return $getMandate;
+            // echo json_encode('AND');
+        } else {
+            $getMandate =
+                str_split($accountMandate);
+            $mandateType = $getMandate[1];
+            if ($mandate == $mandateType) {
+
+                return view('pages.corporate.approvals.pending_transfer_details', ['request_id' => $request_id, 'customer_no' => $customer_no, 'mandate' => $mandate]);
+            } else {
+                Alert::error('', 'Not Authorized To Approve Pending Request');
+                return back();
+            }
+        }
 
         // if (strpos($accountMandate, 'AND' !== false)) {
         //     return $accountMandate;
@@ -51,13 +84,7 @@ class PendingController extends Controller
 
         // return $errorMessage ;
 
-        if ($mandate == 'A') {
 
-            return view('pages.corporate.approvals.pending_transfer_details', ['request_id' => $request_id, 'customer_no' => $customer_no, 'mandate' => $mandate]);
-        } else {
-            Alert::error('', 'Not Authorized To Approve Pending Request');
-            return back();
-        }
     }
 
 

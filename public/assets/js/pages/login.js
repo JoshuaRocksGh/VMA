@@ -12,7 +12,7 @@ function login(email, password) {
         },
 
         success: function (response) {
-            // console.log("login response =>", response);
+            console.log("login response =>", response);
             // return false;
             $("#submit").attr("disabled", false);
 
