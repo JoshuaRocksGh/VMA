@@ -104,7 +104,7 @@ class FunctionsController extends Controller
             "userId"    => $userID
         ];
 
-        $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "account/getAccounts", $data);
+        $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "/account/getAccounts", $data);
         if ($response->ok()) { // API response status code is 200
 
             $res = json_decode($response->body());
