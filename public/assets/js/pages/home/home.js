@@ -1,6 +1,6 @@
 // --------- PENDING APPROVAL ------------ //
 // $("#approval_count").html(4);
-alert("welcome home");
+// alert("welcome home");
 
 function getCorporateRequests(customerNumber, requestStatus) {
     $.ajax({
