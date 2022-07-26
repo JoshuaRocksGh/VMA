@@ -96,6 +96,10 @@ class FunctionsController extends Controller
 
     public function get_accounts()
     {
+        $base_response = new BaseResponse();
+
+
+
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
         $api_headers = session()->get('headers');
@@ -104,18 +108,23 @@ class FunctionsController extends Controller
             "userId"    => $userID
         ];
 
-        $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "/account/getAccounts", $data);
-        if ($response->ok()) { // API response status code is 200
+        try {
+            $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "/account/getAccounts", $data);
+            if ($response->ok()) { // API response status code is 200
 
-            $res = json_decode($response->body());
-            if ($res->responseCode === "000") {
-                session([
-                    "customerAccounts" => $res->data
-                ]);
+                $res = json_decode($response->body());
+                if ($res->responseCode === "000") {
+                    session([
+                        "customerAccounts" => $res->data
+                    ]);
+                }
             }
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $error) {
+            Log::alert($error);
+            return $base_response->api_response('500', $error,  NULL); // return API BASERESPONSE
         }
-        $result = new ApiBaseResponse();
-        return $result->api_response($response);
     }
 
 

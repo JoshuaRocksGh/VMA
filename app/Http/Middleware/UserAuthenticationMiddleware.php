@@ -28,18 +28,18 @@ class UserAuthenticationMiddleware
             return redirect('login');
         }
 
-        try {
-            $token = $request->session()->get('userToken');
-            $response = Http::post(env('API_BASE_URL') . "/user/validateUser/" . $token);
-            $responseBody = json_decode($response->body());
-            if ($responseBody->responseCode === "999") {
-                session()->flush();
-                return redirect('login');
-            }
-        } catch (\Exception $e) {
-            session()->flush();
-            return redirect('login');
-        }
+        // try {
+        //     $token = $request->session()->get('userToken');
+        //     $response = Http::post(env('API_BASE_URL') . "/user/validateUser/" . $token);
+        //     $responseBody = json_decode($response->body());
+        //     if ($responseBody->responseCode === "999") {
+        //         session()->flush();
+        //         return redirect('login');
+        //     }
+        // } catch (\Exception $e) {
+        //     session()->flush();
+        //     return redirect('login');
+        // }
         return $next($request);
     }
 }

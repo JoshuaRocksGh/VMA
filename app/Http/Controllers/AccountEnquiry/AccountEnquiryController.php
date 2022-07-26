@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\AccountEnquiry;
 
+use App\Http\classes\API\BaseResponse;
 use App\Http\classes\WEB\ApiBaseResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class AccountEnquiryController extends Controller
 {
@@ -45,6 +47,9 @@ class AccountEnquiryController extends Controller
 
     public function account_transaction_history(Request $request)
     {
+        $base_response = new BaseResponse();
+
+
         $accountNumber = $request->accountNumber;
         $startDate = $request->startDate;
         $endDate = $request->endDate;
@@ -70,11 +75,15 @@ class AccountEnquiryController extends Controller
         ];
         // return $data;
         // return env('API_BASE_URL') . "account/getTransactions";
+        try {
+            $response = Http::post(env('API_BASE_URL') . "account/getTransactions", $data);
 
-        $response = Http::post(env('API_BASE_URL') . "account/getTransactions", $data);
 
-
-        return $result->api_response($response);
+            return $result->api_response($response);
+        } catch (\Exception $error) {
+            Log::alert($error);
+            return $base_response->api_response('500', $error,  NULL); // return API BASERESPONSE
+        }
     }
 
 

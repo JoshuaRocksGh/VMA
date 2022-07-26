@@ -25,7 +25,7 @@ class StatementRequestController extends Controller
             'medium' => 'required',
             'pin' => 'required'
         ]);
-        return $request;
+        // return $request;
 
 
 
