@@ -23,7 +23,7 @@ function login(email, password) {
                     window.location = "change-password";
                     $("#submit").attr("disabled", true);
                 } else {
-                    // console.log("login response => home");
+                    console.log("login response => home");
 
                     window.location = "home";
                     $("#submit").attr("disabled", true);
