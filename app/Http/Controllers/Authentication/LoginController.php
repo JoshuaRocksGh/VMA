@@ -53,7 +53,7 @@ class LoginController extends Controller
 
 
 
-    public function login_(Request $req)
+    public function loginApi(Request $req)
     {
         $base_response = new BaseResponse();
         $user_id = strtoupper($req->user_id);

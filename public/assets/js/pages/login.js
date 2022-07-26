@@ -1,7 +1,7 @@
 function login(email, password) {
     $.ajax({
         type: "POST",
-        url: "login",
+        url: "/login-api",
         datatype: "application/json",
         data: {
             user_id: email,

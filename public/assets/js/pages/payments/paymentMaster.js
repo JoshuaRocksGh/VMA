@@ -224,8 +224,6 @@ function getPaymentHistory(type, accountNumber) {
 }
 
 function renderPaymentHistoryItem(data) {
-    console.log(data);
-
     const {
         BENEF_NAME: name,
         BENEF_TEL: tel,
