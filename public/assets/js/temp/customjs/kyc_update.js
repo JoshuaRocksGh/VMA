@@ -1,3 +1,5 @@
+$("#nav_acc_history_tab").prop("disabled", true);
+
 function get_kyc_details() {
     // alert("function called");
     $.ajax({

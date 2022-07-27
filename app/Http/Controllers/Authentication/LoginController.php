@@ -106,8 +106,8 @@ class LoginController extends Controller
                 "checkerMaker" => $userDetail->checkerMaker,
                 "accountDescription" => $userDetail->accountsList[0]->accountDesc,
                 "customerAccounts" => $userDetail->accountsList,
-                // "userMandate" => 'A',
-                "userMandate" => $userDetail->userMandate,
+                "userMandate" => 'A',
+                // "userMandate" => $userDetail->userMandate,
 
                 "deviceInfo" => [
                     "appVersion" => "web",
