@@ -423,7 +423,7 @@
 
                                 if (response.responseCode == "000") {
 
-                                    window.location = 'home';
+                                    window.location = 'login';
 
                                 } else {
                                     $('#spinner').hide()
