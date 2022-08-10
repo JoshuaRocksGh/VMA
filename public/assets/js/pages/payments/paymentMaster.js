@@ -77,6 +77,8 @@ function initiatePayment(url, data) {
         },
         success: function (response) {
             siteLoading("hide");
+            console.log("response");
+            // return false;
             if (response.responseCode == "000") {
                 Swal.fire({
                     width: 400,

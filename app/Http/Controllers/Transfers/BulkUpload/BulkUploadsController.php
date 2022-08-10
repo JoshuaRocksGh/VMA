@@ -442,7 +442,7 @@ class BulkUploadsController extends Controller
         $base_response = new BaseResponse();
 
 
-        // $fileBatch;
+        // return $fileBatch;
         // dd('http://192.168.1.225:9096/corporate/getBulkUploadFilesDetails?' . "customerNumber=$customerNumber&batchNumber=$fileBatch");
 
 

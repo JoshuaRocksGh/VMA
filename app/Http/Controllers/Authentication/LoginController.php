@@ -106,8 +106,8 @@ class LoginController extends Controller
                 "checkerMaker" => $userDetail->checkerMaker,
                 "accountDescription" => $userDetail->accountsList[0]->accountDesc,
                 "customerAccounts" => $userDetail->accountsList,
-                // "userMandate" => 'A',
-                "userMandate" => $userDetail->userMandate,
+                "userMandate" => 'A',
+                // "userMandate" => $userDetail->userMandate,
 
                 "deviceInfo" => [
                     "appVersion" => "web",
@@ -127,6 +127,14 @@ class LoginController extends Controller
                 ]
 
             ]);
+
+            // return response()->json([
+            //     'responseCode' => '000',
+            //     'data' => session()->get('customerAccounts'),
+            //     'message' => NULL
+
+            // ]);
+
             return  $base_response->api_response($result->responseCode, $result->message,  $result->data); // return API BASERESPONSE
         } catch (\Exception $error) {
             Log::alert($error);

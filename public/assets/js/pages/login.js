@@ -1,7 +1,7 @@
 function login(email, password) {
     $.ajax({
         type: "POST",
-        url: "/login-api",
+        url: "login-api",
         datatype: "application/json",
         data: {
             user_id: email,
@@ -23,7 +23,7 @@ function login(email, password) {
                     window.location = "change-password";
                     $("#submit").attr("disabled", true);
                 } else {
-                    // console.log("login response => home");
+                    console.log("login response => home");
 
                     window.location = "home";
                     $("#submit").attr("disabled", true);

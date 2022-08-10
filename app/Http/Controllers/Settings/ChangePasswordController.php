@@ -80,6 +80,7 @@ class ChangePasswordController extends Controller
         ];
 
         // return $data;
+        // dd($data);
 
         $response = Http::post(env('API_BASE_URL') . "/user/initialPasswordSetup", $data);
 

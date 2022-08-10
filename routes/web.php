@@ -190,6 +190,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::post('/corporate-reverse-korpor', [BulkUploadCorporateKorporController::class, 'corporate_reverse_korpor'])->name('corporate-reverse-korpor');
     Route::post('/corporate-initiate-korpor', [BulkUploadCorporateKorporController::class, 'corporate_initiate_korpor'])->name('corporate-initiate-korpor');
     Route::post('/get-bulk-detail-list-for-approval', [PendingController::class, 'get_bulk_detail_list_for_approval'])->name('get-bulk-detail-list-for-approval');
+    Route::post('/corporate-initiate-cardless', [CardlessController::class, 'corporate_cardless_transfer'])->name('corporate-initiate-cardless');
 
 
 
