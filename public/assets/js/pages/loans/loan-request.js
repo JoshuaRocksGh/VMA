@@ -18,9 +18,6 @@ function getOptions(optionUrl, optionId, incomingData) {
             $(optionId).select2().trigger("change");
         },
         error: (xhr, status, error) => {
-            // setTimeout(() => {
-            //     getOptions(optionUrl, optionId);
-            // }, $.ajaxSetup().retryAfter);
             console.error(error);
         },
     });
@@ -42,27 +39,6 @@ function validateKyc() {
             console.log(error);
         });
 }
-
-// function getBranches() {
-//     $.ajax({
-//         type: "GET",
-//         url: "get-branches-api",
-//         datatype: "application/json",
-//         success: function (response) {
-//             let data = response.data;
-//             $.each(data, (i) => {
-//                 let { branchCode, branchDescription } = data[i];
-//                 $("#product_branch").append(
-//                     $("<option>", {
-//                         value: branchCode,
-//                     }).text(branchDescription)
-//                 );
-//             });
-//             // $("#product_branch").selectpicker("refresh");
-//         },
-//     });
-// }
-
 function getLoanQuotationDetails(loanData) {
     return $.ajax({
         type: "POST",
@@ -398,6 +374,7 @@ function getLoans() {
             });
 
             res.data.forEach((e) => {
+                console.log(e);
                 table.row
                     .add([
                         e.description,
@@ -441,10 +418,21 @@ function getLoanDetails(facilityNo) {
             }
 
             const loan = res.data[0];
-
+            console.log(loan);
             $("#principal_account").text(loan.PRINCIPAL_ACCOUNT);
+            $("#principal_in_areas").text(
+                formatToCurrency(loan.AMOUNT_IN_AREAS ?? 0)
+            );
+            $("#interest_in_amount").text(
+                formatToCurrency(loan.INTEREST_DUE ?? "0")
+            );
             $("#accrued_interest").text(loan.ACCRUED_INTEREST);
-            $("#penal_accrued").text(loan.ACCRUED_PENALTY);
+            $("#interest_in_areas").text(loan.INTEREST_DUE);
+            $("#pinal_accrued").text(loan.ACCRUED_PENALTY);
+            $("#last_repay_date").text(
+                new Date(loan.LAST_REPAY_DATE).toLocaleDateString()
+            );
+            $("#next_review_date").text(loan.NEXT_REVIEW_DATE);
             $("#loan_detail_modal").modal("show");
         })
         .fail((res) => {});
@@ -461,6 +449,7 @@ $(function () {
         getOptions("get-loan-frequencies-api", "#principal_repay_frequency"),
         getOptions("get-loan-frequencies-api", "#interest_repay_frequency"),
         getOptions("get-loan-types-api", "#loan_product").then((res) => {
+            console.log("data", res);
             const data = res.data;
             data.forEach((e) => {
                 $("#loan_product").append(
