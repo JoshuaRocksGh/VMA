@@ -1,4 +1,8 @@
 $("#nav_acc_history_tab").prop("disabled", true);
+$("#residential_details_tab").prop("disabled", true);
+$("#employment_details_tab").prop("disabled", true);
+$("#tax_information_details_tab").prop("disabled", true);
+// $("#nav_acc_history_tab").prop("disabled", true);
 
 function get_kyc_details() {
     // alert("function called");

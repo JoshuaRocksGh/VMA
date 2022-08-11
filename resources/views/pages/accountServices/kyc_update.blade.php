@@ -11,11 +11,11 @@
 
     <div class="">
         <div class="dashboard site-card overflow-hidden">
-            <nav class="dashboard-header ">
+            <nav class="dashboard-header " style="zoom:0.9">
                 <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
                     <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                         aria-controls="nav-home" aria-selected="true">Basic Infornation</a>
-                    <a class="nav-link" id="nav_acc_history_tab" data-toggle="tab" href="#nav_acc_history" role="tab"
+                    <a class="nav-link " id="nav_acc_history_tab" data-toggle="tab" href="#nav_acc_history" role="tab"
                         aria-controls="nav_acc_history" aria-selected="false">Personal Details</a>
                     <a class="nav-link" id="residential_details_tab" data-toggle="tab" href="#residential_details"
                         role="tab" aria-controls="residential_details" aria-selected="false">Residential Details</a>

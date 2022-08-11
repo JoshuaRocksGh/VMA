@@ -59,11 +59,10 @@
             width: 100%;
             background-color: white;
         }
-
     </style>
     @yield('styles')
     <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
-    @include('snippets.script')
+    {{-- @include('snippets.script') --}}
 </head>
 
 <body>

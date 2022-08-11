@@ -33,7 +33,6 @@
             font-weight: 400;
             src: url(https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf);
         }
-
     </style>
 @endsection
 
@@ -76,7 +75,8 @@
                                                                             <div class="col-md-2"></div>
                                                                             <button
                                                                                 class="btn btn-danger waves-effect waves-light col-md-3 btn-lg"
-                                                                                id="reject_transaction" type="button">Reject
+                                                                                id="reject_transaction"
+                                                                                type="button">Reject
                                                                                 <i class="mdi mdi-cancel"></i>
                                                                             </button>
                                                                             <div class="col-md-2"></div>
@@ -388,6 +388,9 @@
 
                         } else if (request_type == 'KORP') {
                             let request_type = 'E-Korpor Transaction'
+                            request_type != null ? append_approval_details("Request Type", request_type) : '';
+                        } else if (request_type == 'CARD') {
+                            let request_type = 'Cardless Transaction'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
                         } else if (request_type == 'BKORP') {
                             let request_type = 'Bulk E-Korpor Transaction'

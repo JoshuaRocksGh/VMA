@@ -276,11 +276,11 @@ class CardlessController extends Controller
 
         try {
 
-            // dd(env('CIB_API_BASE_URL') . "send-korpor-gone-for-pending");
+            // dd(env('CIB_API_BASE_URL') . "send-cardless-gone-for-pending");
 
             $response = Http::post(env('CIB_API_BASE_URL') . "send-cardless-gone-for-pending", $data);
 
-
+            // dd($response);
             // return $response;
 
             $result = new ApiBaseResponse();
