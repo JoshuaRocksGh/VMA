@@ -101,8 +101,7 @@ Route::get('/account-creation/savings-account-creation', [accountCreationControl
 Route::get('/branches', [BranchesController::class, 'branches'])->name('branches');
 Route::get('/faq', [FAQController::class, 'index'])->name('faq');
 Route::get('/enquiry', [EnquiryController::class, 'index'])->name('enquiry');
-// SETTINGS
-Route::get('/settings', [settingsController::class, 'settings'])->name('settings');
+
 //route to control the accountEnquiry screen
 Route::get('print-account-statement', [AccountEnquiryController::class, 'print_account_statement'])->name('print-account-statement');
 Route::get('print-account-statement-history', [AccountEnquiryController::class, 'print_account_statement_history'])->name('print-account-statement-history');
@@ -235,7 +234,8 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('change-pin', [settingsController::class, 'change_pin'])->name('change-pin');
     Route::get('branch-locator', [branchLocatorController::class, 'branch_locator'])->name('branch-locator');
     //Middleware closing tag below
-
+    // SETTINGS
+    Route::get('/settings', [settingsController::class, 'settings'])->name('settings');
     Route::post('post-change-password', [ChangePasswordController::class, 'post_chnage_password']);
 });
 

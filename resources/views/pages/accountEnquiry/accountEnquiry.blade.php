@@ -40,9 +40,9 @@
 
 @section('content')
 @php
-$currentPath = 'Account Statement';
+$currentPath = 'Transactions Enquiry';
 $basePath = 'Account';
-$pageTitle = 'account statement';
+$pageTitle = 'Transactions Enquiry';
 @endphp
 @include('snippets.pageHeader')
 

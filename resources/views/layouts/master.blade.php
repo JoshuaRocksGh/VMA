@@ -68,7 +68,7 @@
 <body id="body" class="position-relative">
 
     <!-- Pre-loader -->
-    <div id="site_loader">
+    <div id="site_loader" style="z-index: 9999999999999">
         <div>
             <img class="pulse mx-auto" style="width: 100px;" src="{{ asset('assets/images/logoRKB.png') }}" />
             <div class="mt-2  text-primary d-flex tw-relative"><span class="lds-hourglass tw-absolute"></span> <span

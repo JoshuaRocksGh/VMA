@@ -47,7 +47,11 @@ $currentPath = 'Settings';
         </span>
     </div>
 </div>
+
+@include('pages.settings.enquiry')
+@include('pages.settings.forgot_transaction_pin')
 @include("pages.settings.change_transaction_pin")
+@include('pages.settings.faq')
 @endsection
 @section('scripts')
 <script src="{{ asset('assets/js/pages/settings/settings.js') }}">
