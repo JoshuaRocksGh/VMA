@@ -338,6 +338,8 @@ $(document).ready(function () {
 
     $("#basic_information").submit(function (e) {
         e.preventDefault();
+        // alert("cliked");
+        // return false;
 
         var customer_number = $("#customer_number").val();
         var title = $("#title").val();
@@ -360,10 +362,13 @@ $(document).ready(function () {
         console.log(date_of_birth);
         console.log(select_gender); */
 
-        $("#basic_information_tab").addClass("active show");
-        $("#personal_details_tab").addClass("active show");
-        $("#first").removeClass("active show");
-        $("#second").addClass("active show");
+        $("#nav-home").hide();
+
+        $("#personal_details").addClass("active show");
+        // $("#personal_details").toggle(500);
+        $("#personal_details_tab").addClass("active");
+        $("#basic_information").removeClass("active show");
+        $("#nav-home-tab").removeClass("active ");
     });
 
     $("#personal_details_back_btn").click(function (e) {
