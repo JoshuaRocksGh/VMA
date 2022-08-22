@@ -373,14 +373,17 @@ $(document).ready(function () {
 
     $("#personal_details_back_btn").click(function (e) {
         e.preventDefault();
+        // alert("clicked");
+        // return false;
 
-        $("#basic_information_tab").addClass("active show");
-        $("#personal_details_tab").removeClass("active show");
-
-        $("#first").addClass("active show");
-        $("#second").removeClass("active show");
+        $("#personal_details").removeClass("active show");
+        $("#personal_details_tab").removeClass("active");
+        $("#basic_information").addClass("active show");
+        $("#nav-home-tab").addClass("active");
+        $("#nav-home").show();
     });
 
+    // Personal Details
     $("#personal_details").submit(function (e) {
         e.preventDefault();
 
@@ -396,25 +399,29 @@ $(document).ready(function () {
         var next_of_kin_address = $("#next_of_kin_address").val();
         var next_of_kin_telephone = $("#next_of_kin_telephone").val();
 
-        $("#basic_information_tab").addClass("active show");
-        $("#personal_details_tab").addClass("active show");
-        $("#residential_details_tab").addClass("active show");
+        $("#personal_details").hide();
 
-        $("#first").removeClass("active show");
-        $("#second").removeClass("active show");
-        $("#third").addClass("active show");
+        $("#residential_details").addClass("active show");
+        $("#residential_details_tab").addClass("active");
+        // $("#residential_details_tab").addClass("active show");
+
+        $("#personal_details_tab").removeClass("active");
+        $("#personal_details").removeClass("active show");
+        // $("#third").addClass("active show");
     });
 
     $("#residential_details_back_btn").click(function (e) {
         e.preventDefault();
 
-        $("#basic_information_tab").addClass("active show");
-        $("#personal_details_tab").addClass("active show");
-        $("#residential_details_tab").removeClass("active show");
+        $("#personal_details").addClass("active show");
+        $("#personal_details_tab").addClass("active");
+        $("#residential_details").removeClass("active show");
 
-        $("#first").removeClass("active show");
-        $("#second").addClass("active show");
-        $("#third").removeClass("active show");
+        $("#residential_details_tab").removeClass("active");
+        $("#personal_details").show();
+
+        // $("#second").addClass("active show");
+        // $("#third").removeClass("active show");
     });
 
     $("#residential_details").submit(function (e) {
@@ -426,27 +433,20 @@ $(document).ready(function () {
         var town = $("#town").val();
         var residential_address = $("#residential_address").val();
         var postal_address = $("#postal_address").val();
+        $("#residential_details").hide();
 
-        $("#basic_information_tab").addClass("active show");
-        $("#personal_details_tab").addClass("active show");
-        $("#residential_details_tab").addClass("active show");
-        $("#employment_details_tab").addClass("active show");
+        $("#employment_details").addClass("active show");
+        $("#employment_details_tab").addClass("active ");
+        $("#residential_details_tab").removeClass("active ");
+        $("#residential_details").removeClass("active show");
 
-        $("#first").removeClass("active show");
-        $("#second").removeClass("active show");
-        $("#third").removeClass("active show");
-        $("#fourth").addClass("active show");
+        // $("#first").removeClass("active show");
+        // $("#second").removeClass("active show");
+        // $("#third").removeClass("active show");
+        // $("#fourth").addClass("active show");
     });
 
-    $("#employment_details_back_btn").click(function (e) {
-        e.preventDefault();
-
-        $("#residential_details_tab").addClass("active show");
-        $("#employment_details_tab").removeClass("active show");
-
-        $("#third").addClass("active show");
-        $("#fourth").removeClass("active show");
-    });
+    //EMPLOYMENT INFO
 
     $("#employment_details").submit(function (e) {
         e.preventDefault();
@@ -457,27 +457,27 @@ $(document).ready(function () {
         var department = $("#department").val();
         var date_of_employment = $("#date_of_employment").val();
 
-        $("#basic_information_tab").addClass("active show");
-        $("#personal_details_tab").addClass("active show");
-        $("#residential_details_tab").addClass("active show");
-        $("#employment_details_tab").addClass("active show");
-        $("#tax_information_tab").addClass("active show");
+        $("#employment_details").hide();
 
-        $("#fourth").removeClass("active show");
-        $("#sixth").addClass("active show");
+        $("#tax_information").addClass("active show");
+        $("#tax_information_details_tab").addClass("active");
+        // $("#residential_details_tab").addClass("active show");
+        $("#employment_details").removeClass("active show");
+        $("#employment_details_tab").removeClass("active");
+
+        // $("#tax_information_details_tab").removeClass("active show");
+        // $("#sixth").addClass("active show");
     });
 
-    $("#tax_information_back_btn").click(function (e) {
+    $("#employment_details_back_btn").click(function (e) {
         e.preventDefault();
 
-        $("#basic_information_tab").addClass("active show");
-        $("#personal_details_tab").addClass("active show");
-        $("#residential_details_tab").addClass("active show");
-        $("#employment_details_tab").addClass("active show");
-        $("#tax_information_tab").removeClass("active show");
+        $("#residential_details_tab").addClass("active");
+        $("#residential_details").addClass("active show");
 
-        $("#fourth").addClass("active show");
-        $("#sixth").removeClass("active show");
+        $("#employment_details").removeClass("active show");
+        $("#employment_details_tab").removeClass("active ");
+        $("#residential_details").show();
     });
 
     $("#tax_information").submit(function (e) {
@@ -644,6 +644,20 @@ $(document).ready(function () {
 
             $(".display_selected_id_image").show();
         });
+    });
+
+    $("#tax_information_back_btn").click(function (e) {
+        e.preventDefault();
+
+        $("#employment_details").addClass("active show");
+        $("#employment_details_tab").addClass("active ");
+        // $("#residential_details_tab").addClass("active show");
+        $("#tax_information").removeClass("active show");
+        $("#tax_information_details_tab").removeClass("active");
+
+        // $("#fourth").addClass("active show");
+        // $("#sixth").removeClass("active show");
+        $("#employment_details").show();
     });
 
     $("#kyc_confirm_btn").click(function (e) {

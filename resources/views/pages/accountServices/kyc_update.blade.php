@@ -383,7 +383,7 @@
                 </div>
 
                 {{-- Tax Information --}}
-                <div class="tab-pane fade" id="tax_information_details" role="tabpanel"
+                <div class="tab-pane fade" id="tax_information" role="tabpanel"
                     aria-labelledby="tax_information_details_tab">
                     <form id="tax_information" method="post" action="#" class="form-horizontal">
                         <div class="row">
