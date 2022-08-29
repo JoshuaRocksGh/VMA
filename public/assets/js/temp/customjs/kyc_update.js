@@ -488,10 +488,11 @@ $(document).ready(function () {
 
         var title = $("#title").val().split("~");
         var title_ = title[0];
-        console.log(title_);
+        console.log("title", title_);
         $("#display_title").text(title_);
 
         var firstname = $("#firstname").val();
+        console.log("firstname", firstname);
         $("#display_firstname").text(firstname);
 
         var surname = $("#surname").val();
@@ -662,6 +663,7 @@ $(document).ready(function () {
 
     $("#kyc_confirm_btn").click(function (e) {
         e.preventDefault();
+        siteLoading("show");
 
         if ($("#gender_male").is(":checked")) {
             var select_gender = "M";
@@ -738,7 +740,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: " submit-kyc",
+            url: "submit-kyc",
             datatype: "application/json",
             data: {
                 customer_number: customer_number,
@@ -783,7 +785,9 @@ $(document).ready(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
+                siteLoading("hide");
                 console.log(response);
+                return false;
                 if (response.responseCode == "000") {
                     toaster(response.message, "success", 10000);
                 } else {
