@@ -59,16 +59,18 @@ class LoginController extends Controller
         $user_id = strtoupper($req->user_id);
         $password = $req->password;
         $data =  [
-            "appVersion" => "string",
-            "brand" => "string",
-            "country" => "string",
-            "deviceId" => "string",
-            "deviceIp" => "string",
+            "appVersion" => env('APP_CHANNEL'),
+            "brand" => Browser::deviceFamily(),
+            "country" => Location::get()->countryName,
+            "deviceId" => Browser::browserName(),
+            "deviceIp" => request()->ip(),
             "deviceOs" => "A",
-            "manufacturer" => "string",
-            "model" => "string",
+            "manufacturer" => Browser::deviceFamily(),
+            "model" => Browser::deviceModel(),
             "password" => $password,
-            "userId" => $user_id
+            "userId" => $user_id,
+            "channel" => env('APP_CHANNEL')
+
         ];
 
         try {

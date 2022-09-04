@@ -109,8 +109,8 @@
           <div class=""> 
            <div class="font-weight-bold text-right text-primary">
              1 ${currency.isoCode} = SLL ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency.isoCode, 'SLL')?.convertedAmount)}
-              </div>
-               <div class="text-secondary text-right font-10">updated on => ${new Date(pageData?.fxRate?.find(r=>r.PAIR===(currency.isoCode + '/' + " SLL"))?.POSTING_DATE).toISOString().slice(0,10)} </div>
+             </div>
+             <div class="text-secondary text-right font-10">updated on => ${new Date(pageData?.fxRate?.find(r=>r.PAIR===(currency.isoCode + '/' + " SLL"))?.POSTING_DATE).toISOString().slice(0,10)} </div>
              </div>
             </button>
         `;
@@ -123,11 +123,23 @@
     })
   // do something...
   console.log(pageData)
+  
+  
+  
+  document.getElementById('amount_to_convert').addEventListener('keyup', amountChange)
+  $('.rate-select').trigger('change')
+  const keyup = new Event('keyup')
+ document.getElementById('amount_to_convert').dispatchEvent(keyup)
+ document.getElementById('amount_to_convert').focus()
 
-
-$('.rate-select').on('change', (e)=>{
-    const currency = e.target.value
-    const selected = e.target.id
+})
+$('#rate_modal').on('hidden.bs.modal', function (event) {
+  document.getElementById('amount_to_convert').removeEventListener('keyup', amountChange)
+  $('.rate-select').off('change')
+})
+  $('.rate-select').on('change', (e)=>{
+      const currency = e.target.value
+      const selected = e.target.id
     if(currency !== 'SLL'){
        const other = ['currency1', 'currency2'].find(e=>e !== selected)
          $('#'+other).val('SLL').trigger('change')
@@ -146,22 +158,10 @@ $('.rate-select').on('change', (e)=>{
     console.log({currency1, currency2, conversion1, conversion2})
     conversion1.innerHTML = `1 ${currency1} = ${currency2} ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency1, currency2)?.convertedAmount)}`
     conversion2.innerHTML = `1 ${currency2} = ${currency1} ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency2, currency1)?.convertedAmount)}`
-    $('#amount_to_convert').trigger('keyup')
-
+    const keyup = new Event('keyup')
+ document.getElementById('amount_to_convert').dispatchEvent(keyup)
     console.log(currencyConvertor(pageData.fxRate, 1.00, currency1, currency2))
 })
 
 $('#currency2').val('USD')
-
-    document.getElementById('amount_to_convert').addEventListener('keyup', amountChange)
-    $('.rate-select').trigger('change')
-    const keyup = new Event('keyup')
-   document.getElementById('amount_to_convert').dispatchEvent(keyup)
-   document.getElementById('amount_to_convert').focus()
-
-})
-$('#rate_modal').on('hidden.bs.modal', function (event) {
-    document.getElementById('amount_to_convert').removeEventListener('keyup', amountChange)
-    $('.rate-select').off('change')
-})
 </script>

@@ -78,6 +78,8 @@ function get_corporate_requests(customerNumber, requestStatus) {
                         request_type = "Cheque Book Request";
                     } else if (data[index].request_type == "KORP") {
                         request_type = "E-Korpor";
+                    } else if (data[index].request_type == "CARD") {
+                        request_type = "Cardless";
                     } else if (data[index].request_type == "BKORP") {
                         amount =
                             data[index].currency +

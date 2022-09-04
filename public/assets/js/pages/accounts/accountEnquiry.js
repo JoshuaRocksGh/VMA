@@ -174,24 +174,18 @@ $(function () {
     });
 
     // filter
-    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-        const amount = parseFloat(data[1]) ?? 0; // use data for amount column
-        let ret;
+    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex, row) {
+        const amount = parseFloat(row?.amount) ?? 0; // use data for amount column
         switch ($("#filter").val()) {
             case "credit":
-                ret = amount > 0 ? true : false;
-                break;
+                return amount > 0;
             case "debit":
-                ret = amount < 0 ? false : true;
-                break;
+                return amount < 0;
             case "all":
-                ret = true;
-                break;
+                return true;
             default:
-                ret = false;
-                break;
+                return false;
         }
-        return ret;
     });
 
     function drawTransactionsTable() {
@@ -241,7 +235,6 @@ $(function () {
                 {
                     data: "transactionNumber",
                     render: (data, type, row) => {
-                        console.log({ data, type, row });
                         return `<button type="button" class="btn  btn-outline-primary more-details" data-toggle="modal" data-target="#accordion-modal" batch-no="${row.batchNumber}"
                                 posting-date="${row.postingSysDate}" trans-number="${row.transactionNumber}" value-date="${row.valueDate}" branch="${row.branch}"
                                 narration="${row.narration}" amount="${row.amount}" contra-account="${row.contraAccount}" channel="${row.channel}">Details</button>`;

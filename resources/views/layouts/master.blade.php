@@ -68,7 +68,7 @@
 <body id="body" class="position-relative">
 
     <!-- Pre-loader -->
-    <div id="site_loader">
+    <div id="site_loader" style="z-index: 9999999999999">
         <div>
             <img class="pulse mx-auto" style="width: 100px;" src="{{ asset('assets/images/logoRKB.png') }}" />
             <div class="mt-2  text-primary d-flex tw-relative"><span class="lds-hourglass tw-absolute"></span> <span
@@ -77,26 +77,26 @@
         </div>
     </div>
     <!-- Begin page -->
-    @isset ($isApp)
-    <div id="wrapper" class="pb-4">
-        @yield('content')
-    </div>
+    @isset($isApp)
+        <div id="wrapper" class="pb-4">
+            @yield('content')
+        </div>
     @endisset
     @empty($isApp)
-    <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none;">
-        @include('snippets.nav')
-        <div class="d-flex px-2 w-100">
-            <div class="offcanvas-collapse px-2 d-md-block mt-2 w-100" style="max-width: 250px; min-width: 250px;">
-                @include('snippets.side-bar')
-            </div>
-            <div class="content w-100 px-2">
-                @yield('content')
-            </div>
-            <div class=" d-none d-xl-block px-2 mt-2 " style="width:500px !important">
-                @include('pages.dashboard.right_aside')
+        <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none;">
+            @include('snippets.nav')
+            <div class="d-flex px-2 w-100">
+                <div class="offcanvas-collapse px-2 d-md-block mt-2 w-100" style="max-width: 250px; min-width: 250px;">
+                    @include('snippets.side-bar')
+                </div>
+                <div class="content w-100 px-2">
+                    @yield('content')
+                </div>
+                <div class=" d-none d-xl-block px-2 mt-2 " style="width:500px !important">
+                    @include('pages.dashboard.right_aside')
+                </div>
             </div>
         </div>
-    </div>
     @endempty
 
     @yield('scripts')

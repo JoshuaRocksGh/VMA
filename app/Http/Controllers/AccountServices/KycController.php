@@ -87,7 +87,7 @@ class KycController extends Controller
 
         ]);
 
-        // return $request;
+        return $request;
 
         $base_response = new BaseResponse();
 

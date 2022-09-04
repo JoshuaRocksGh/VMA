@@ -11,11 +11,11 @@
 
     <div class="">
         <div class="dashboard site-card overflow-hidden">
-            <nav class="dashboard-header ">
+            <nav class="dashboard-header " style="zoom:0.9">
                 <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
                     <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                         aria-controls="nav-home" aria-selected="true">Basic Infornation</a>
-                    <a class="nav-link" id="nav_acc_history_tab" data-toggle="tab" href="#nav_acc_history" role="tab"
+                    <a class="nav-link " id="personal_details_tab" data-toggle="tab" href="#nav_acc_history" role="tab"
                         aria-controls="nav_acc_history" aria-selected="false">Personal Details</a>
                     <a class="nav-link" id="residential_details_tab" data-toggle="tab" href="#residential_details"
                         role="tab" aria-controls="residential_details" aria-selected="false">Residential Details</a>
@@ -116,8 +116,16 @@
                                 <label class="text-primary">Proof of Address<span class="text-danger">*</span></label>
                                 <input type="hidden" id="proof_of_address_">
                                 <input type="file" class="form-control-file" id="proof_of_address" required><br>
-                                <img class="img-fluid display_selected_id_image" id="display_selected_id_image"
-                                    src="#" alt="your image" />
+                                {{-- <img class="img-fluid display_selected_id_image" id="display_selected_id_image"
+                                    src="#" alt="your image" /> --}}
+
+                                <div class="col-md-3">
+                                    <img src="#" alt="image" id="display_selected_id_image"
+                                        class="img-fluid display_selected_id_image avatar-xl rounded" />
+                                    {{-- <p class="mb-0">
+                                        <code>.avatar-xl</code>
+                                    </p> --}}
+                                </div>
 
                                 <br>
                             </div>
@@ -130,7 +138,7 @@
                 </div>
 
                 {{-- Perosnal Details --}}
-                <div class="tab-pane fade" id="nav_acc_history" role="tabpanel" aria-labelledby="nav_acc_history_tab">
+                <div class="tab-pane fade" id="personal_details" role="tabpanel" aria-labelledby="personal_details_tab">
                     <form id="personal_details" method="post" action="#" class="form-horizontal">
                         <div class="row">
 
@@ -383,7 +391,7 @@
                 </div>
 
                 {{-- Tax Information --}}
-                <div class="tab-pane fade" id="tax_information_details" role="tabpanel"
+                <div class="tab-pane fade" id="tax_information" role="tabpanel"
                     aria-labelledby="tax_information_details_tab">
                     <form id="tax_information" method="post" action="#" class="form-horizontal">
                         <div class="row">
@@ -455,8 +463,10 @@
                             <li class="list-inline-item float-right">
                                 {{-- <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#bs-example-modal-lg" type="submit" id="tax_information_next_btn">Submit</button> --}}
                                 <button class="btn btn-primary btn-rounded waves-effect waves-light" data-toggle="modal"
-                                    data-target="#bs-example-modal-lg" type="submit"
+                                    data-target="#full-width-modal" type="submit"
                                     id="tax_information_next_btn">Submit</button>
+
+
 
                                 {{-- <button  type="button" class="btn btn-secondary" data-toggle="modal" data-target="#scrollable-modal" type="submit" id="tax_information_next_btn">Submit</button> --}}
 
@@ -470,7 +480,258 @@
 
             </div>
         </div>
+
+
+        <!-- Full width modal content -->
+        <div id="full-width-modal" class="modal fade" tabindex="-1" role="dialog"
+            aria-labelledby="fullWidthModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-full-width">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h4 class="modal-title text-white" id="myLargeModalLabel">KYC Summary</h4>
+                        <button type="button" class="close text-white" data-dismiss="modal"
+                            aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Customer Number:</label>
+                                    <span class="col-md-6" id="display_customer_number"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Firstname:</label>
+                                    <span class="col-md-6" id="display_firstname"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Othername:</label>
+                                    <span class="col-md-6" id="display_othername"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Email Address:</label>
+                                    <span class="col-md-6" id="display_email_address"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Select Gender:</label>
+                                    <span class="col-md-6" id="display_gender_male"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Number of Children:</label>
+                                    <span class="col-md-6" id="display_number_of_children"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Nationality:</label>
+                                    <span class="col-md-6" id="display_nationality"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">ID Number:</label>
+                                    <span class="col-md-6" id="display_id_number"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Date of Expiry:</label>
+                                    <span class="col-md-6" id="display_date_of_expiry"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Next of Kin Name:</label>
+                                    <span class="col-md-6" id="display_next_of_kin_name"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Next of Kin
+                                        Telephone:</label>
+                                    <span class="col-md-6" id="display_next_of_kin_telephone"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Number of years at
+                                        residence:</label>
+                                    <span class="col-md-6" id="display_years_at_residence"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Town:</label>
+                                    <span class="col-md-6" id="display_town"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Postal Address:</label>
+                                    <span class="col-md-6" id="display_postal_address"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Employee Number:</label>
+                                    <span class="col-md-6" id="display_employee_number"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Department:</label>
+                                    <span class="col-md-6" id="display_department"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Last Update Date:</label>
+                                    <span class="col-md-6" id="display_last_update_date"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Are you a citizen of
+                                        US?</label>
+                                    <span class="col-md-6" id="display_citizen_of_us"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Proof of Address:
+                                        <img class="img-fluid display_selected_id_image" id="display_selected_id_image"
+                                            src="#" alt="your image" />
+                                    </label>
+                                    <span class="col-md-6" id="display_proof_of_address"></span>
+
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Title:</label>
+                                    <span class="col-md-6" id="display_title"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Surname:</label>
+                                    <span class="col-md-6" id="display_surname"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Telephone Number:</label>
+                                    <span class="col-md-6" id="display_telephone_number"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Date of Birth:</label>
+                                    <span class="col-md-6" id="display_date_of_birth"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Marital Status:</label>
+                                    <span class="col-md-6" id="display_marital_status"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Number of
+                                        Dependents:</label>
+                                    <span class="col-md-6" id="display_number_of_dependents"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">ID Type:</label>
+                                    <span class="col-md-6" id="display_id_type"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Date of Issue:</label>
+                                    <span class="col-md-6" id="display_date_of_issue"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Mother Maiden Name:</label>
+                                    <span class="col-md-6" id="display_mother_maiden_name"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Next of Kin Address:</label>
+                                    <span class="col-md-6" id="display_next_of_kin_address"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Country of
+                                        Residence:</label>
+                                    <span class="col-md-6" id="display_country_of_residence"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Building Name:</label>
+                                    <span class="col-md-6" id="display_building_name"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Residential Address:</label>
+                                    <span class="col-md-6" id="display_residential_address"></span>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Employment Type:</label>
+                                    <span class="col-md-6" id="display_employment_type"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Employee Code:</label>
+                                    <span class="col-md-6" id="display_employee_code"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Date of
+                                        Employement:</label>
+                                    <span class="col-md-6" id="display_date_of_employment"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">Tax Identification
+                                        Number:</label>
+                                    <span class="col-md-6" id="display_tax_identification_number"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="form-label col-md-6">US Resident:</label>
+
+                                    <span class="col-md-6" id="display_us_resident"></span>
+                                </div>
+
+                            </div>
+
+                            {{-- </div> --}}
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light"
+                                data-dismiss="modal" id="kyc_confirm_btn">Confirm</button>
+
+                        </div>
+                    </div>
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+
+
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous"></script>
