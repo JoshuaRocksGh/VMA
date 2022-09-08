@@ -55,13 +55,16 @@ class LoginController extends Controller
 
     public function loginApi(Request $req)
     {
+        // Get Location
+        $res = Http::get('http://ip-api.com/json');
         $base_response = new BaseResponse();
+
         $user_id = strtoupper($req->user_id);
         $password = $req->password;
         $data =  [
             "appVersion" => env('APP_CHANNEL'),
             "brand" => Browser::deviceFamily(),
-            "country" => Location::get()->countryName,
+            "country" => $res['country'],
             "deviceId" => Browser::browserName(),
             "deviceIp" => request()->ip(),
             "deviceOs" => "A",
@@ -114,7 +117,7 @@ class LoginController extends Controller
                 "deviceInfo" => [
                     "appVersion" => "web",
                     "deviceBrand" => Browser::deviceFamily(),
-                    "deviceCountry" => Location::get()->countryName,
+                    "deviceCountry" =>  $res['country'],
                     "deviceId" => Browser::browserName(),
                     "deviceIp" => request()->ip(),
                     "deviceManufacturer" => Browser::deviceFamily(),
