@@ -61,20 +61,28 @@ class LoginController extends Controller
 
         $user_id = strtoupper($req->user_id);
         $password = $req->password;
+        $deviceType = $req->deviceType;
+        $deviceOS = $req->deviceOS;
+        $deviceID = $req->deviceID;
+        // return $deviceType;
         $data =  [
             "appVersion" => env('APP_CHANNEL'),
-            "brand" => Browser::deviceFamily(),
+            // "brand" => Browser::deviceFamily(),
+            "brand" => $deviceType,
             "country" => $res['country'],
-            "deviceId" => Browser::browserName(),
+            // "deviceId" => Browser::browserName(),
+            // "deviceId" => Browser::browserName(),
+            "deviceId" => $deviceID,
             "deviceIp" => request()->ip(),
             "deviceOs" => "A",
-            "manufacturer" => Browser::deviceFamily(),
-            "model" => Browser::deviceModel(),
+            "manufacturer" => $deviceOS,
+            "model" => Browser::browserName(),
             "password" => $password,
             "userId" => $user_id,
             "channel" => env('APP_CHANNEL')
 
         ];
+        // return $data;
 
         try {
             $response = Http::post(env('API_BASE_URL') . "/user/login", $data);
@@ -115,14 +123,14 @@ class LoginController extends Controller
                 // "userMandate" => $userDetail->userMandate,
 
                 "deviceInfo" => [
-                    "appVersion" => "web",
-                    "deviceBrand" => Browser::deviceFamily(),
+                    "appVersion" => "Web",
+                    "deviceBrand" => $deviceType,
                     "deviceCountry" =>  $res['country'],
-                    "deviceId" => Browser::browserName(),
+                    "deviceId" => $deviceID,
                     "deviceIp" => request()->ip(),
-                    "deviceManufacturer" => Browser::deviceFamily(),
-                    "deviceModel" => Browser::deviceModel(),
-                    "deviceOs" =>  Browser::platformName(),
+                    "deviceManufacturer" => $deviceOS,
+                    "deviceModel" => Browser::browserName(),
+                    "deviceOs" =>  $deviceOS,
                 ],
                 "headers" => [
                     "x-api-key" => "123",
