@@ -16,10 +16,10 @@
 <script src="{{ asset('assets/plugins/blockui/jquery.blockUI.min.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/select2/select2.min.js') }}" defer></script>
 <script src="{{ asset('assets/js/functions/genericFunctions.js') }}" defer></script>
-<script src="https://theapicompany.com/deviceAPI.js" defer></script>
-<script defer>
-    let DeviceType = deviceAPI.deviceType;
-    console.log("DeviceType", DeviceType);
+{{--  <script src="https://theapicompany.com/deviceAPI.js"></script>  --}}
+<script>
+    {{--  let DeviceType = deviceAPI.deviceType;  --}}
+    {{--  console.log("DeviceType", DeviceType);  --}}
 </script>
 <script defer>
     const ACCOUNT_NUMBER_LENGTH = 13
