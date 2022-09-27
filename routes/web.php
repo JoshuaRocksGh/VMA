@@ -115,6 +115,7 @@ Route::get('manage-cards', [CardsController::class, 'block_debit_card'])->name('
 Route::get('replace-card', [CardsController::class, 'replace_card'])->name('replace-card');
 Route::get('biometric-setup', [settingsController::class, 'biometric_setup'])->name('biometric-setup');
 Route::get('/logout', [LogoutController::class, 'logout']);
+Route::get('/session-logout', [LogoutController::class, 'session_logout']);
 Route::get('/send-email', [MaileController::class, 'send_email'])->name('send-email');
 
 //route to display the stop fd screen

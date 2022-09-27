@@ -11,6 +11,9 @@
 
 <!-- Third Party js-->
 {{-- <script src="{{ asset('assets/plugins/bootstrap-select/bootstrap-select.min.js')}}" defer> </script> --}}
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 <script src="{{ asset('assets/plugins/bootstrap/bootstrap-v.4.6.1.min.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/sweet-alert/sweetalert2@11.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/blockui/jquery.blockUI.min.js') }}" defer></script>
@@ -111,4 +114,46 @@
         return vendor
     }
     getGPU()
+</script>
+
+<script>
+    // Set timeout variables.
+    //var timoutWarning = 840000; // Display warning in 14 Mins.
+    var timoutWarning = 30000; // Display warning in 14 Mins.
+    var timoutNow = 60000; // Warning has been shown, give the user 1 minute to interact
+    var logoutUrl = '/session-logout'; // URL to logout page.
+
+    var warningTimer;
+    var timeoutTimer;
+
+    // Start warning timer.
+    function StartWarningTimer() {
+        warningTimer = setTimeout("IdleWarning()", timoutWarning);
+    }
+
+    // Reset timers.
+    function ResetTimeOutTimer() {
+        clearTimeout(timeoutTimer);
+        StartWarningTimer();
+        $("#timeout").dialog('close');
+    }
+
+    // Show idle timeout warning dialog.
+    function IdleWarning() {
+        clearTimeout(warningTimer);
+        timeoutTimer = setTimeout("IdleTimeout()", timoutNow);
+        $("#timeout").dialog({
+            modal: true
+        });
+        // Add code in the #timeout element to call ResetTimeOutTimer() if
+        // the "Stay Logged In" button is clicked
+    }
+
+    // Logout the user.
+    function IdleTimeout() {
+        window.location = logoutUrl;
+    }
+
+    //StartWarningTimer()
+    //IdleWarning()
 </script>
