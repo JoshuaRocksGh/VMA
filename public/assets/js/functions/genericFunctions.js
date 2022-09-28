@@ -142,6 +142,7 @@ function getFx() {
         datatype: "application/json",
         success: function (response) {
             pageData.fxRate = response.data;
+            console.log("data", response.data);
         },
         error: function (xhr, status, error) {
             console.log(error);

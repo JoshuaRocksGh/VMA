@@ -11,6 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
 
     @include('snippets.style')
     <style type="text/css">
@@ -105,6 +106,7 @@
     @endempty
 
     @yield('scripts')
+
 </body>
 
 </html>
