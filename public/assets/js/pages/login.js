@@ -1,9 +1,15 @@
+var deviceType = getDeviceType();
+var deviceOS = getDeviceOS();
+var deviceID = getGPU();
 function login(email, password) {
     $.ajax({
         type: "POST",
         url: "login-api",
         datatype: "application/json",
         data: {
+            deviceOS: deviceOS,
+            deviceType: deviceType,
+            deviceID: deviceID,
             user_id: email,
             password: password,
         },

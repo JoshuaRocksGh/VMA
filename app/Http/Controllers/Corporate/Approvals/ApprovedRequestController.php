@@ -41,6 +41,8 @@ class ApprovedRequestController extends Controller
         $userAlias = session()->get('userAlias');
         $userToken = session()->get('userToken');
         $deviceIp = $request->ip();
+        $deviceInfo = session()->get('deviceInfo');
+
 
         $data = [
             "authToken" => $userToken,
@@ -49,7 +51,8 @@ class ApprovedRequestController extends Controller
             "user_id" => $userId,
             "request_id" => $request_id,
             "user_alias" => $userAlias,
-            "customer_no" => $customer_no
+            "customer_no" => $customer_no,
+            "deviceInfo" => $deviceInfo,
         ];
 
         // return $data;

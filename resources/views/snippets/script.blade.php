@@ -16,11 +16,6 @@
 <script src="{{ asset('assets/plugins/blockui/jquery.blockUI.min.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/select2/select2.min.js') }}" defer></script>
 <script src="{{ asset('assets/js/functions/genericFunctions.js') }}" defer></script>
-{{--  <script src="https://theapicompany.com/deviceAPI.js"></script>  --}}
-<script>
-    {{--  let DeviceType = deviceAPI.deviceType;  --}}
-    {{--  console.log("DeviceType", DeviceType);  --}}
-</script>
 <script defer>
     const ACCOUNT_NUMBER_LENGTH = 13
 
@@ -55,4 +50,64 @@
             templateSelection: accountTemplate,
         });
     })
+</script>
+{{-- Get Device Type --}}
+<script>
+    const getDeviceType = () => {
+        const ua = navigator.userAgent;
+        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+            return "Tablet";
+        }
+        if (
+            /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/
+            .test(
+                ua
+            )
+        ) {
+            return "Mobile";
+        }
+        return "Desktop";
+    };
+    getDeviceType()
+    {{-- console.log(getDeviceType()) --}}
+</script>
+
+<script type="text/javascript">
+    const getDeviceOS = () => {
+        if (navigator.appVersion.indexOf("Win") != -1) {
+            return "Windows";
+        } else if (navigator.appVersion.indexOf("Mac") != -1) {
+            return "MacOS";
+        } else if (navigator.appVersion.indexOf("Linux") != -1) {
+            return "Linux";
+        } else {
+            return "Unknown";
+        }
+
+    }
+
+    getDeviceOS()
+    {{-- alert(getDeviceOS()) --}}
+</script>
+
+<script>
+    const getGPU = () => {
+        var canvas = document.createElement('canvas');
+        var gl;
+        var debugInfo;
+        var vendor;
+        var renderer;
+
+        try {
+            gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        } catch (e) {}
+
+        if (gl) {
+            debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+            vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+            renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        }
+        return vendor
+    }
+    getGPU()
 </script>
