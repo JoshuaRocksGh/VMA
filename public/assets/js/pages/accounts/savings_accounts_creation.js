@@ -68,6 +68,7 @@ function lovs_list() {
 }
 
 $(() => {
+    const userDetails = new Object;
     $("#spinner").hide(), $("#spinner-text").hide(), $("#print_receipt").hide();
     $(".mod-open").trigger("click");
     lovs_list();
@@ -125,68 +126,71 @@ $(() => {
     //     }
     // });
 
-    $("#bio_detailss").on("submit", function (e) {
+    $("#bio_details").submit(function (e) {
         e.preventDefault();
         // Personal Details
-        var title = $("#title").val();
-        $("#display_title").text(title);
+        // var title = $("#title").val();
+        // $("#display_title").text(title);
+        // userDetails.title = title;
+        // conaole.log(userDetails);
+        // console.log("title =>", title)
 
-        var surname = $("#surname").val();
-        $("#display_surname").text(surname);
+        // var surname = $("#surname").val();
+        // $("#display_surname").text(surname);
 
-        var firstname = $("#firstname").val();
-        $("#display_firstname").text(firstname);
+        // var firstname = $("#firstname").val();
+        // $("#display_firstname").text(firstname);
 
-        var othername = $("#othername").val();
-        $("#display_othername").text(othername);
+        // var othername = $("#othername").val();
+        // $("#display_othername").text(othername);
 
-        var gender = $("#select_gender input[type='radio']:checked").val();
-        $("#display_select_gender").text(gender);
+        // var gender = $("#select_gender input[type='radio']:checked").val();
+        // $("#display_select_gender").text(gender);
 
-        var birthday = $("#DOB").val();
-        $("#display_DOB").text(birthday);
+        // var birthday = $("#DOB").val();
+        // $("#display_DOB").text(birthday);
 
-        var birth_place = $("#birth_place").val();
-        $("#display_birth_place").text(birth_place);
+        // var birth_place = $("#birth_place").val();
+        // $("#display_birth_place").text(birth_place);
 
-        var country = $("#country").val();
-        var country_info = country.split("~");
-        $("#display_country").text(country_info[1]);
+        // var country = $("#country").val();
+        // var country_info = country.split("~");
+        // $("#display_country").text(country_info[1]);
 
-        var residence_status = $("#residence_status").val();
-        var residence_status_info = residence_status.split("~");
-        $("#display_residence_status").text(residence_status_info[1]);
+        // var residence_status = $("#residence_status").val();
+        // var residence_status_info = residence_status.split("~");
+        // $("#display_residence_status").text(residence_status_info[1]);
 
         // Contact & ID Details
-        var mobile_number = $("#mobile_number").val();
-        $("#display_mobile_number").text(mobile_number);
+        // var mobile_number = $("#mobile_number").val();
+        // $("#display_mobile_number").text(mobile_number);
 
-        var email = $("#email").val();
-        $("#display_email").text(email);
+        // var email = $("#email").val();
+        // $("#display_email").text(email);
 
-        var city = $("#city").val();
-        $("#display_city").text(city);
+        // var city = $("#city").val();
+        // $("#display_city").text(city);
 
-        var town = $("#town").val();
-        $("#display_town").text(town);
+        // var town = $("#town").val();
+        // $("#display_town").text(town);
 
-        var residential_address = $("#residential_address").val();
-        $("#display_residential_address").text(residential_address);
+        // var residential_address = $("#residential_address").val();
+        // $("#display_residential_address").text(residential_address);
 
-        var id_type = $("#id_type").val();
-        $("#display_id_type").text(id_type);
+        // var id_type = $("#id_type").val();
+        // $("#display_id_type").text(id_type);
 
-        var id_number = $("#id_number").val();
-        $("#display_id_number").text(id_number);
+        // var id_number = $("#id_number").val();
+        // $("#display_id_number").text(id_number);
 
-        var tin_number = $("#tin_number").val();
-        $("#display_tin_number").text(tin_number);
+        // var tin_number = $("#tin_number").val();
+        // $("#display_tin_number").text(tin_number);
 
-        var issue_date = $("#issue_date").val();
-        $("#display_issue_date").text(issue_date);
+        // var issue_date = $("#issue_date").val();
+        // $("#display_issue_date").text(issue_date);
 
-        var expiry_date = $("#expiry_date").val();
-        $("#display_expiry_date").text(expiry_date);
+        // var expiry_date = $("#expiry_date").val();
+        // $("#display_expiry_date").text(expiry_date);
 
         var file = $("input[type=file]").get(0).files[0];
 
@@ -203,7 +207,7 @@ $(() => {
 
     // Bio Details
 
-    $("#passport_pictures").change(function () {
+    $("#passport_picture").change(function () {
         var file = $("#passport_picture[type=file]").get(0).files[0];
 
         if (file) {
@@ -225,7 +229,7 @@ $(() => {
         $(".display_passport_picture").show();
     });
 
-    $("#selfie_uploads").change(function () {
+    $("#selfie_upload").change(function () {
         var file = $("#selfie_upload[type=file]").get(0).files[0];
 
         if (file) {
@@ -247,7 +251,7 @@ $(() => {
         $(".display_selfie").show();
     });
 
-    $("#proof_of_addresss").change(function () {
+    $("#proof_of_address").change(function () {
         var file = $("#proof_of_address[type=file]").get(0).files[0];
 
         if (file) {
@@ -274,14 +278,119 @@ $(() => {
         if (!document.forms["personal_details"].reportValidity()) {
             return false;
         }
+        let customerTitle = $("#title").val();
+        $("#display_title").text(customerTitle);
+        userDetails.title = customerTitle;
+        // console.log(userDetails);
+        // console.log("title =>", title)
+
+        var customerSurname = $("#surname").val();
+        $("#display_surname").text(customerSurname);
+        userDetails.surname = customerSurname;
+
+        var customerFirstname = $("#firstname").val();
+        $("#display_firstname").text(customerFirstname);
+        userDetails.firstname = customerFirstname;
+
+        var customerOthername = $("#othername").val();
+        $("#display_othername").text(customerOthername);
+        userDetails.othername = customerOthername;
+
+        var customerGender = $("#select_gender input[type='radio']:checked").val();
+        $("#display_select_gender").text(customerGender);
+        userDetails.gender = customerGender;
+
+        var customerBirthday = $("#DOB").val();
+        $("#display_DOB").text(customerBirthday);
+        userDetails.birthday = customerBirthday;
+
+        var customerBirthPlace = $("#birth_place").val();
+        $("#display_birth_place").text(customerBirthPlace);
+        userDetails.birth_place = customerBirthPlace;
+
+        var customerCountry = $("#country").val();
+        var country_info = customerCountry.split("~");
+        $("#display_country").text(country_info[1]);
+        userDetails.birth_place = customerCountry;
+
+        var countryResidenceStatus = $("#residence_status").val();
+        var residence_status_info = countryResidenceStatus.split("~");
+        $("#display_residence_status").text(residence_status_info[1]);
+        userDetails.residence_status = countryResidenceStatus;
+
+
+
+        console.log(userDetails)
         $("#custom-v-pills-contact-and-id-details-tab").tab("show");
         return true;
+
     });
 
     $("#submit2").on("click", (e) => {
         if (!document.forms["contact_id_details"].reportValidity()) {
             return false;
         }
+
+        // Contact & ID Details
+        var customerMobileNumber = $("#mobile_number").val();
+        $("#display_mobile_number").text(customerMobileNumber);
+        userDetails.mobile_number = customerMobileNumber;
+
+        var customerEmail = $("#email").val();
+        $("#display_email").text(customerEmail);
+        userDetails.email = customerEmail;
+
+        var customerCity = $("#city").val();
+        $("#display_city").text(customerCity);
+        userDetails.city = customerCity;
+
+        var customerTown = $("#town").val();
+        $("#display_town").text(customerTown);
+        userDetails.town = customerTown;
+
+        var customerResidentialAddress = $("#residential_address").val();
+        $("#display_residential_address").text(customerResidentialAddress);
+        userDetails.residential_address = customerResidentialAddress;
+
+        var customerIdType = $("#id_type").val();
+        $("#display_id_type").text(customerIdType);
+        userDetails.id_type = customerIdType;
+
+        var customerIdNumber = $("#id_number").val();
+        $("#display_id_number").text(customerIdNumber);
+        userDetails.id_number = customerIdNumber;
+
+        var customerTinNumber = $("#tin_number").val();
+        $("#display_tin_number").text(customerTinNumber);
+        userDetails.tin_number = customerTinNumber;
+
+        var customerIssueDate = $("#issue_date").val();
+        $("#display_issue_date").text(customerIssueDate);
+        userDetails.issue_date = customerIssueDate;
+
+        var customerExpiryDate = $("#expiry_date").val();
+        $("#display_expiry_date").text(customerExpiryDate);
+        userDetails.expiry_date = customerExpiryDate;
+
+        console.log(userDetails)
+
+        var file = $("input[type=file]").get(0).files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function () {
+                $("#previewImg").attr("src", reader.result);
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+
+
+
+
+
         $("#custom-v-pills-bio-details-tab").tab("show");
         return true;
     });
@@ -291,6 +400,8 @@ $(() => {
             e.preventDefault();
             return false;
         }
+
+
         $("#summary-tab").tab("show");
         return true;
     });

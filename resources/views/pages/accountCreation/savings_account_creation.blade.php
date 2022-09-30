@@ -266,7 +266,7 @@
                                     <h4 for="example-fileinput">Upload Image of Selected ID</h4>
                                     <input type="file" id="image_upload" class="form-control-file" required><br>
                                     <input type="hidden" id="image_upload_">
-                                    <img class="img-fluid display_selected_id_image text-center w-50 h-50"
+                                    <img class="img-fluid display_selected_id_image text-center avatar-xl rounded"
                                         id="display_selected_id_image" src="#" alt="your image" />
                                 </div>
 
@@ -308,7 +308,7 @@
                                     <input type="file" id="passport_picture" class="form-control-file" required><br>
                                     <input type="hidden" id="passport_picture_">
                                     <img src="{{asset('assets/images/placeholders/placeholder_avatar.webp')}}"
-                                        class="img-fluid img_display display_passport_picture previewImg1 w-50 h-50"
+                                        class="img-fluid img_display display_passport_picture previewImg1 avatar-xl rounded"
                                         id="previewImg1" style="display:none;" alt="your image" />
                                 </div>
 
@@ -316,14 +316,14 @@
                                     <h4 for="example-fileinput">Picture of a signed paper</h4>
                                     <input type="file" id="selfie_upload" class="form-control-file" required><br>
                                     <input type="hidden" id="selfie_upload_">
-                                    <img class="img-fluid img_display display_selfie previewImg2 w-50 h-50"
+                                    <img class="img-fluid img_display display_selfie previewImg2 avatar-xl rounded"
                                         id="previewImg2" src="#" alt="your image" />
                                 </div>
                                 <div class="col-md-6 form-group mb-3">
                                     <h4 for="example-fileinput">Proof of address</h4>
                                     <input type="file" id="proof_of_address" class="form-control-file" required><br>
                                     <input type="hidden" id="proof_of_address_">
-                                    <img class="img-fluid img_display display_proof_of_address previewImg3 w-50 h-50"
+                                    <img class="img-fluid img_display display_proof_of_address previewImg3 avatar-xl rounded"
                                         id="previewImg3" style="display:none" src="#" alt="your image" />
                                 </div>
 
@@ -463,7 +463,7 @@
                             </div>
                             <p class="mb-1"><span class="font-weight-light ">
                                     <h4> ID image:
-                                    </h4> <br> <img class="img-fluid display_selected_id_image w-50 h-50"
+                                    </h4> <br> <img class="img-fluid display_selected_id_image avatar-xl rounded"
                                         id="previewImg" src="#" alt="your image" /><span
                                         class="font-weight-semibold mr-3" id="display_title">
                                         &nbsp</span>
@@ -473,7 +473,7 @@
                         <div>
                             <div class="font-weight-light mr-2">
                                 <h4>Passport Picture: </h4>
-                                <img class="img-fluid display_passport_picture previewImg1 w-50 h-50"
+                                <img class="img-fluid display_passport_picture previewImg1 avatar-xl rounded"
                                     id="_passport_picture_summary" src="#" alt="your image" /><span
                                     class="font-weight-semibold mr-3">
                                     &nbsp</span>
@@ -483,7 +483,7 @@
                                 <h4>
                                     Signature
                                     Image: </h4>
-                                <img class="img-fluid display_selfie previewImg2 w-50 h-50" id="selfie_picture_summary"
+                                <img class="img-fluid display_selfie previewImg2 avatar-xl rounded" id="selfie_picture_summary"
                                     src="#" alt="your image" /><span class="font-weight-semibold mr-3">
                                     &nbsp</span>
                             </div>
@@ -492,7 +492,7 @@
                                 <h4>
                                     Address
                                     Image: </h4>
-                                <img class="img-fluid display_proof_of_address previewImg3 w-50 h-50"
+                                <img class="img-fluid display_proof_of_address previewImg3 avatar-xl rounded"
                                     id="address_picture_summary" src="#" alt="your image" style="display:none" /><span
                                     class="font-weight-semibold mr-3">
                                     &nbsp</span>
