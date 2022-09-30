@@ -2,14 +2,14 @@
     <div class=" site-card p-1 mb-1">
         <h6 class="pl-3 pt-2">Quick Links</h6>
         <div class="d-flex w-100">
-            <a href='/payments'
+            <a href='payments'
                 class="site-card-body px-2 d-flex align-items-center justify-content-around grad-blue-pink  w-100 border-0  grad "
                 style="min-height: 75px">
 
                 <div class=""><i class="fas font-24 fa-money-check-alt"></i> </div>
                 <div class="font-weight-bold ml-2 font-12">&nbsp;MAKE PAYMENT</div>
             </a>
-            <a href="/qr-payment"
+            <a href="qr-payment"
                 class="site-card-body d-flex align-items-center justify-content-center  border-0  grad-gray-blue grad "
                 style="min-height: 75px; min-width: 100px;">
                 <div class=""><i class="fas font-24 fa-qrcode"></i> </div>
@@ -18,14 +18,14 @@
 
         </div>
         <div class="d-flex w-100">
-            <a href="/own-account"
+            <a href="own-account"
                 class="site-card-body px-2 d-flex align-items-center justify-content-center grad-blue-pink  w-100 border-0  grad-gray-blue red-orange grad "
                 style="min-height: 75px">
                 <div class=""><i class="fas font-18 fa-sync"></i> </div>
 
                 <div class=" font-weight-bold ml-2 font-12">MAKE TRANSFER</div>
             </a>
-            <a href="/card-services"
+            <a href="card-services"
                 class="site-card-body px-2 d-flex align-items-center justify-content-center grad-blue-pink  w-100 border-0  grad-gray-blue grad "
                 style="min-height: 75px">
                 <div class=""><i class="fas font-18 fa-credit-card"></i> </div>

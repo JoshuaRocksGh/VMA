@@ -71,7 +71,7 @@
     @include('snippets.script')
 </head>
 
-<body id="body" class="position-relative">
+<body id="body" class="" style="position:relative;">
 
     <!-- Pre-loader -->
     <div id="site_loader" style="z-index: 9999999999999">
@@ -90,7 +90,9 @@
     @endisset
     @empty($isApp)
         <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none;">
-            @include('snippets.nav')
+            <div>
+                @include('snippets.nav')
+            </div>
             <div class="d-flex px-2 w-100">
                 <div class="offcanvas-collapse px-2 d-md-block mt-2 w-100" style="max-width: 250px; min-width: 250px;">
                     @include('snippets.side-bar')

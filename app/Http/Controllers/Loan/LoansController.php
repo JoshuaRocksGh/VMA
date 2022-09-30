@@ -153,7 +153,13 @@ class LoansController extends Controller
             "token" => $authToken,
         ];
 
-        $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "loans/getLoans", $data);
+        // $res = retry(3, function ($api_headers, $data) {
+        //     $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "loans/getLoans", $data);
+        //     $result = new ApiBaseResponse();
+        //     return $result->api_response($response);
+        // });
+
+        $response = Http::retry(20, 300)->withHeaders($api_headers)->post(env('API_BASE_URL') . "loans/getLoans", $data);
 
         $result = new ApiBaseResponse();
         return $result->api_response($response);

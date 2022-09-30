@@ -194,7 +194,7 @@ function accountsPieChart({ xValues = [], yValues = [], title }) {
             },
             plugins: {
                 legend: {
-                    position: "right",
+                    position: "top",
                 },
                 title: {
                     position: "top",
@@ -314,12 +314,10 @@ const renderDataTables = (data, tableId) => {
                     display: $.fn.dataTable.Responsive.display.modal({
                         header: function (row) {
                             const data = row.data();
-                            return (
-                                "Details for " +
-                                data["accountNumber"] +
-                                " " +
-                                data["accountDesc"]
-                            );
+                            return "Account Details";
+                            // data["accountNumber"] +
+                            // " " +
+                            // data["accountDesc"]
                         },
                     }),
                 },
@@ -447,8 +445,9 @@ $(() => {
         getData({ url: "fixed-deposit-account-api", name: "investments" }),
         getData({ url: "get-loan-accounts-api", name: "loans" }),
         getData({ url: "get-accounts-api", name: "accounts" }),
-    ]).then(() => {
+    ]).then((values) => {
         // siteLoading("hide");
+        console.log("VALUES ==>", values);
         prepareGraphValues();
         accountsPieChart({
             title: "Accounts",
