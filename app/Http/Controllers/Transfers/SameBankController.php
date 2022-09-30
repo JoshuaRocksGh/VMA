@@ -29,23 +29,25 @@ class SameBankController extends Controller
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
         $client_ip = request()->ip();
+        $api_headers = session()->get('headers');
+        $deviceInfo = session()->get('deviceInfo');
 
 
         $data = [
             "amount" => (float) $req->transferAmount,
             "authToken" => $authToken,
-            "brand" => "string",
+            "brand" => $deviceInfo['deviceBrand'],
             "creditAccount" => $req->beneficiaryAccountNumber,
-            "channel" => "MOB",
-            "country" => "SL",
+            "channel" => "NET",
+            "country" => $deviceInfo['deviceCountry'],
             "currency" => $req->accountCurrency,
             "debitAccount" => $req->accountNumber,
-            "deviceId" => "string",
-            "deviceName" => "string",
+            "deviceId" => $deviceInfo['deviceId'],
+            "deviceName" => $deviceInfo['deviceOs'],
             "deviceIp" => $client_ip,
-            "entrySource" => 'MOB',
+            "entrySource" => 'PIB',
             "expenseType" => $req->transferCategory,
-            "manufacturer" => "string",
+            "manufacturer" => $deviceInfo['deviceManufacturer'],
             "narration" => $req->transferPurpose,
             "secPin" => $req->secPin,
             "userName" => $userID,

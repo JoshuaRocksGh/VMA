@@ -109,7 +109,7 @@ class FunctionsController extends Controller
         ];
 
         try {
-            $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "/account/getAccounts", $data);
+            $response = Http::retry(20, 300)->withHeaders($api_headers)->post(env('API_BASE_URL') . "/account/getAccounts", $data);
             if ($response->ok()) { // API response status code is 200
 
                 $res = json_decode($response->body());

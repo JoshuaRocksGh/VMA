@@ -37,7 +37,8 @@
                 </div>
 
             </div>
-            <div class="bg-primary p-2 " style="
+            <div class="bg-primary p-2 "
+                style="
             background: linear-gradient(90deg, var(--primary) 0%, var(--teal) 87%); ">
                 <div class="justify-content-around d-flex">
                     <div class="col-5 font-weight-bold">
@@ -54,13 +55,16 @@
                         <div class="mx-auto text-center">
                             <span class="fas fa-chart-line"> </span>
                         </div>
-                        <div class="mx-auto my-2" style="height:50px; 
-                    
-                    background-color: #000; width:1px"> </div>
+                        <div class="mx-auto my-2"
+                            style="height:50px;
+
+                    background-color: #000; width:1px">
+                        </div>
                     </div>
                     <div class="col-5 font-weight-bold">
                         <div class="text-center mb-2" id="abbr2"> cur2 </div>
-                        <input type="text" class="form-control mb-2" id="converted_amount" placeholder="Rate" readonly>
+                        <input type="text" class="form-control mb-2" id="converted_amount" placeholder="Rate"
+                            readonly>
                         <div class="text-center">
                             <span class="fas text-white fa-info-circle " data-toggle="tooltip" data-placement="top"
                                 title="The rate is the amount of currency you receive for 1 unit of currency1."></span>
@@ -87,81 +91,108 @@
     }
 </style>
 <script defer>
-    const amountChange = (e)=>{
-        const currency1 = document.getElementById('currency1').value
-        const currency2 = document.getElementById('currency2').value
-        const rate1 = document.getElementById('amount_to_convert').value
-        document.getElementById('converted_amount').value = formatToCurrency(currencyConvertor(pageData.fxRate, rate1, currency1, currency2)?.convertedAmount)
-        
-    }
+    $(() => {
+        (async () => {
+            await Promise.all([getCurrencies(), getFx()])
+            const amountChange = (e) => {
+                const currency1 = document.getElementById('currency1').value
+                const currency2 = document.getElementById('currency2').value
+                const rate1 = document.getElementById('amount_to_convert').value
+                document.getElementById('converted_amount').value = formatToCurrency(
+                    currencyConvertor(pageData
+                        .fxRate,
+                        rate1, currency1, currency2)?.convertedAmount)
 
-    $('#rate_modal').on('show.bs.modal', function (event) {
+            }
 
-    document.getElementById('all_currencies').innerHTML = '';
-    pageData.currencies.forEach(function (currency) {
-        if (currency.isoCode === "SLL") return
-        document.getElementById('all_currencies').innerHTML += `
-        <button data-currency='${currency.isoCode}' class="d-flex w-100 currency-button justify-content-between bg-white  align-items-center p-3 mt-2 rounded-lg ">
-          <div class="d-flex align-items-center">  <img  class="rounded-circle" style="width: 30px; height: 30px;"
+            $('#rate_modal').on('show.bs.modal', function(event) {
+
+                document.getElementById('all_currencies').innerHTML = '';
+                pageData.currencies.forEach(function(currency) {
+                    if (currency.isoCode === "SLL") return
+                    document.getElementById('all_currencies').innerHTML += `
+                <button data-currency='${currency.isoCode}' class="d-flex w-100 currency-button justify-content-between bg-white  align-items-center p-3 mt-2 rounded-lg ">
+                    <div class="d-flex align-items-center">  <img  class="rounded-circle" style="width: 30px; height: 30px;"
           src="assets/images/flags/${currency.isoCode}.png" alt="logo">
-         <span class="font-weight-bold pl-2 text-primary">${currency?.description}</span>
+          <span class="font-weight-bold pl-2 text-primary">${currency?.description}</span>
           </div>
-          <div class=""> 
+          <div class="">
            <div class="font-weight-bold text-right text-primary">
              1 ${currency.isoCode} = SLL ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency.isoCode, 'SLL')?.convertedAmount)}
              </div>
              <div class="text-secondary text-right font-10">updated on => ${new Date(pageData?.fxRate?.find(r=>r.PAIR===(currency.isoCode + '/' + " SLL"))?.POSTING_DATE).toISOString().slice(0,10)} </div>
-             </div>
-            </button>
+            </div>
+        </button>
         `;
-    });  
+                });
 
-    $('.currency-button').on('click', function (e) {
-        const currency = e.currentTarget?.dataset?.currency;
-        console.log(currency)
-        $('#currency2').val(currency).trigger('change');
+                $('.currency-button').on('click', function(e) {
+                    const currency = e.currentTarget?.dataset?.currency;
+                    console.log(currency)
+                    $('#currency2').val(currency).trigger('change');
+                })
+                // do something...
+                console.log(pageData)
+
+
+
+                document.getElementById('amount_to_convert').addEventListener('keyup',
+                    amountChange)
+                $('.rate-select').trigger('change')
+                const keyup = new Event('keyup')
+                document.getElementById('amount_to_convert').dispatchEvent(keyup)
+                document.getElementById('amount_to_convert').focus()
+
+            })
+            $('#rate_modal').on('hidden.bs.modal', function(event) {
+                document.getElementById('amount_to_convert').removeEventListener('keyup',
+                    amountChange)
+                $('.rate-select').off('change')
+            })
+            $('.rate-select').on('change', (e) => {
+                const currency = e.target.value
+                const selected = e.target.id
+                if (currency !== 'SLL') {
+                    const other = ['currency1', 'currency2'].find(e => e !== selected)
+                    $('#' + other).val('SLL').trigger('change')
+                }
+                const currency_abbr = e.target.dataset.abbrTarget
+                const currency_abbr_target = document.getElementById(currency_abbr)
+                currency_abbr_target.innerHTML = pageData?.currencies?.find(e => e.isoCode ===
+                        currency)
+                    .description
+                const currency_img = e.target.dataset.imgTarget
+                const currency_img_target = document.getElementById(currency_img)
+                currency_img_target.src = `assets/images/flags/${currency}.png`
+
+                const conversion1 = document.getElementById('conversion1')
+                const conversion2 = document.getElementById('conversion2')
+                const currency1 = document.getElementById('currency1').value
+                const currency2 = document.getElementById('currency2').value
+                console.log({
+                    currency1,
+                    currency2,
+                    conversion1,
+                    conversion2
+                })
+                conversion1.innerHTML =
+                    `1 ${currency1} = ${currency2} ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency1, currency2)?.convertedAmount)}`
+                conversion2.innerHTML =
+                    `1 ${currency2} = ${currency1} ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency2, currency1)?.convertedAmount)}`
+                const keyup = new Event('keyup')
+                document.getElementById('amount_to_convert').dispatchEvent(keyup)
+                console.log(currencyConvertor(pageData.fxRate, 1.00, currency1, currency2))
+            })
+
+            $(".rate_button").on("click", (e) => {
+                console.log("#rate_button")
+                $("#rate_modal").modal("show");
+                $(".rate-select").select2({
+                    dropdownParent: $("#rate_modal"),
+                    minimumResultsForSearch: Infinity,
+                });
+            })
+        })()
+
     })
-  // do something...
-  console.log(pageData)
-  
-  
-  
-  document.getElementById('amount_to_convert').addEventListener('keyup', amountChange)
-  $('.rate-select').trigger('change')
-  const keyup = new Event('keyup')
- document.getElementById('amount_to_convert').dispatchEvent(keyup)
- document.getElementById('amount_to_convert').focus()
-
-})
-$('#rate_modal').on('hidden.bs.modal', function (event) {
-  document.getElementById('amount_to_convert').removeEventListener('keyup', amountChange)
-  $('.rate-select').off('change')
-})
-  $('.rate-select').on('change', (e)=>{
-      const currency = e.target.value
-      const selected = e.target.id
-    if(currency !== 'SLL'){
-       const other = ['currency1', 'currency2'].find(e=>e !== selected)
-         $('#'+other).val('SLL').trigger('change')
-    }
-    const currency_abbr = e.target.dataset.abbrTarget
-    const currency_abbr_target = document.getElementById(currency_abbr)
-    currency_abbr_target.innerHTML = pageData?.currencies?.find(e => e.isoCode === currency).description
-    const currency_img = e.target.dataset.imgTarget
-    const currency_img_target = document.getElementById(currency_img)
-    currency_img_target.src = `assets/images/flags/${currency}.png`
-    
-    const conversion1 = document.getElementById('conversion1')
-    const conversion2 = document.getElementById('conversion2')
-    const currency1 = document.getElementById('currency1').value
-    const currency2 = document.getElementById('currency2').value
-    console.log({currency1, currency2, conversion1, conversion2})
-    conversion1.innerHTML = `1 ${currency1} = ${currency2} ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency1, currency2)?.convertedAmount)}`
-    conversion2.innerHTML = `1 ${currency2} = ${currency1} ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency2, currency1)?.convertedAmount)}`
-    const keyup = new Event('keyup')
- document.getElementById('amount_to_convert').dispatchEvent(keyup)
-    console.log(currencyConvertor(pageData.fxRate, 1.00, currency1, currency2))
-})
-
-$('#currency2').val('USD')
 </script>

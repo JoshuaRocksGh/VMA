@@ -277,7 +277,7 @@ function handleToAccount(account) {
     $(".display_to_account_no").text(beneficiaryAccountNumber);
 }
 
-$(async () => {
+$(() => {
     let transferInfo = {};
     let fromAccount = {};
     $(".account_currency").text("SLL");
@@ -789,7 +789,8 @@ $(async () => {
         beneData.accountNumber = transferInfo.console.log(beneData);
     });
 
-    $("#rate_button").on("click", (e) => {
+    $(".rate_button").on("click", (e) => {
+        console.log("dafsasdf");
         $("#rate_modal").modal("show");
         $(".rate-select").select2({
             dropdownParent: $("#rate_modal"),

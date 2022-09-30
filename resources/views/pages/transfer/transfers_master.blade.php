@@ -14,7 +14,7 @@
         <hr>
     </div>
 </div>
-@include('snippets.rateCalculator')
+{{--  @include('snippets.rateCalculator')  --}}
 <script>
     pageData = {};
     pageData.transferType = @json($currentPath);

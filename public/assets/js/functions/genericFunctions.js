@@ -109,6 +109,8 @@ function getCurrencies() {
         type: "GET",
         url: "get-currency-list-api",
         datatype: "application/json",
+        tryCount: 0,
+        retryLimit: 5,
         success: function (response) {
             let data = response.data;
             pageData.currencies = data;
@@ -129,8 +131,21 @@ function getCurrencies() {
                 minimumResultsForSearch: Infinity,
             });
         },
-        error: function (xhr, status, error) {
-            console.log(error);
+        error: function (xhr, textStatus, errorThrown) {
+            if (textStatus == "timeout") {
+                this.tryCount++;
+                if (this.tryCount <= this.retryLimit) {
+                    //try again
+                    $.ajax(this);
+                    return;
+                }
+                return;
+            }
+            if (xhr.status == 500) {
+                $.ajax(this);
+            } else {
+                //handle error
+            }
         },
     });
 }
@@ -140,11 +155,27 @@ function getFx() {
         type: "GET",
         url: "get-correct-fx-rate-api",
         datatype: "application/json",
+        tryCount: 0,
+        retryLimit: 5,
         success: function (response) {
             pageData.fxRate = response.data;
+            console.log("data", response.data);
         },
-        error: function (xhr, status, error) {
-            console.log(error);
+        error: function (xhr, textStatus, errorThrown) {
+            if (textStatus == "timeout") {
+                this.tryCount++;
+                if (this.tryCount <= this.retryLimit) {
+                    //try again
+                    $.ajax(this);
+                    return;
+                }
+                return;
+            }
+            if (xhr.status == 500) {
+                $.ajax(this);
+            } else {
+                //handle error
+            }
         },
     });
 }
@@ -154,6 +185,8 @@ function getAccounts(account_data) {
         type: "GET",
         url: "get-accounts-api",
         datatype: "application/json",
+        tryCount: 0,
+        retryLimit: 5,
 
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -172,10 +205,21 @@ function getAccounts(account_data) {
                 // toaster(response.message, "error").then(() => console.log("okay"));
             }
         },
-        error: function (xhr, status, error) {
-            setTimeout(function () {
-                getAccounts(account_data);
-            }, $.ajaxSetup().retryAfter);
+        error: function (xhr, textStatus, errorThrown) {
+            if (textStatus == "timeout") {
+                this.tryCount++;
+                if (this.tryCount <= this.retryLimit) {
+                    //try again
+                    $.ajax(this);
+                    return;
+                }
+                return;
+            }
+            if (xhr.status == 500) {
+                $.ajax(this);
+            } else {
+                //handle error
+            }
         },
     });
 }

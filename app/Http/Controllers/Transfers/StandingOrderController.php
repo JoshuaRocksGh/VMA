@@ -34,6 +34,8 @@ class StandingOrderController extends Controller
         $authToken = session()->get('userToken');
         $api_headers = session()->get('headers');
         $clientIp = request()->ip();
+        $deviceInfo = session()->get('deviceInfo');
+
 
 
         $data =
@@ -48,16 +50,23 @@ class StandingOrderController extends Controller
                 "expiryDate" => $req->soEndDate,
                 "frequency" => $req->soFrequencyCode,
                 "pinCode" => $req->secPin,
-                "transactionDesc" => $req->transferPurpose
+                "transactionDesc" => $req->transferPurpose,
+                "expenseType" => $req->transferCategory,
+                "channel" => "NET",
+                "entrySource" => 'PIB',
+                "country" => $deviceInfo['deviceCountry'],
+                "deviceId" => $deviceInfo['deviceId'],
+                "manufacturer" => $deviceInfo['deviceManufacturer'],
+                "deviceName" => $deviceInfo['deviceOs'],
             ];
 
-        Log::alert($data);
+        // Log::alert($data);
 
         try {
             $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "transfers/standingOrder", $data);
             // return $response;
-            Log::alert("message");
-            Log::alert($response);
+            // Log::alert("message");
+            // Log::alert($response);
             $result = new ApiBaseResponse();
 
             return $result->api_response($response);

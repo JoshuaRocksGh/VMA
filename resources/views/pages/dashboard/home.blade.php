@@ -2,9 +2,9 @@
 
 @section('content')
     @php
-    $pageTitle = 'Dashboard';
-    $basePath = 'Home';
-    $currentPath = 'Dashboard';
+        $pageTitle = 'Dashboard';
+        $basePath = 'Home';
+        $currentPath = 'Dashboard';
     @endphp
     @include('snippets.pageHeader')
 
@@ -14,10 +14,10 @@
             <nav class="dashboard-header ">
                 <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
                     <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                        aria-controls="nav-home" aria-selected="true">Acc. Summary</a>
+                        aria-controls="nav-home" aria-selected="true">Account Summary</a>
 
                     <a class="nav-link" id="nav_acc_history_tab" data-toggle="tab" href="#nav_acc_history" role="tab"
-                        aria-controls="nav_acc_history" aria-selected="false">Acc. History</a>
+                        aria-controls="nav_acc_history" aria-selected="false">Account History</a>
                     @if (config('app.corporate'))
                         <a class="nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                             aria-controls="nav-profile" aria-selected="false">Approvals
@@ -81,10 +81,10 @@
                                         class="table nowrap display  border dt-responsive table-hover rounded mb-0 ">
                                         <thead>
                                             <tr class="bg-primary font-weight-bold  text-white ">
-                                                <td> Account No. </td>
-                                                <td> Account Name </td>
-                                                <td> Account Type </td>
-                                                <td> Cur </td>
+                                                <td class="text-right"> Account Number </td>
+                                                <td class="text-right"> Account Name </td>
+                                                <td class="text-right"> Account Type </td>
+                                                <td class="text-right"> Currreny </td>
                                                 <td class="text-right"> Ledger Bal </td>
                                                 <td class="text-right"> Available Bal </td>
                                                 <td class="text-right"> Over Draft </td>

@@ -29,10 +29,10 @@ class LocalBankController extends Controller
 
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
-
-
-
         $clientIp = request()->ip();
+        $api_headers = session()->get('headers');
+        $deviceInfo = session()->get('deviceInfo');
+
         $mode = $request->transferMode;
         if ($mode == "ACH") {
             $url = 'achBankTransfer';
@@ -48,20 +48,20 @@ class LocalBankController extends Controller
             "bankName" => $request->bankName,
             "beneficiaryAddress" => $request->beneficiaryAddress,
             "beneficiaryName" => $request->beneficiaryName,
-            "brand" => "a",
-            "channel" => "MOB",
-            "country" => "a",
+            "brand" => $deviceInfo['deviceBrand'],
+            "channel" => "NET",
+            "country" => $deviceInfo['deviceCountry'],
             "creditAccount" => $request->beneficiaryAccountNumber,
             "debitAccount" => $request->accountNumber,
-            "deviceId" => "a",
+            "deviceId" => $deviceInfo['deviceId'],
             "deviceIp" => $clientIp,
-            "deviceName" => "a",
-            "entrySource" => 'MOB',
+            "deviceName" => $deviceInfo['deviceOs'],
+            "entrySource" => 'PIB',
             "expenseType" => $request->transferCategory,
-            "manufacturer" => "a",
+            "manufacturer" => $deviceInfo['deviceManufacturer'],
             "secPin" => $request->secPin,
             "transactionDetails" => $request->transferPurpose,
-            "transferCurrency" => "$request->accountCurrencyCode",
+            "transferCurrency" => $request->accountCurrencyCode,
             "userName" => $userID,
             "email" => $request->beneficiaryEmail,
 

@@ -30,7 +30,16 @@ class FixedDepositAccountController extends Controller
         ];
 
         try {
-            $response = Http::get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
+
+            $response = Http::retry(20, 300)->get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
+            // $response = retry(3, function ($customerNumber) {
+            //     return Http::get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
+            //     // $result = new ApiBaseResponse();
+            //     // return $result->api_response($response);
+            // }, 200);
+
+
+            // $response = Http::get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
 
             $result = new ApiBaseResponse();
             return $result->api_response($response);
