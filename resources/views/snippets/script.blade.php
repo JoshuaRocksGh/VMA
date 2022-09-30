@@ -19,7 +19,6 @@
 <script src="{{ asset('assets/plugins/blockui/jquery.blockUI.min.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/select2/select2.min.js') }}" defer></script>
 <script src="{{ asset('assets/js/functions/genericFunctions.js') }}" defer></script>
-
 <script defer>
     const ACCOUNT_NUMBER_LENGTH = 13
 
