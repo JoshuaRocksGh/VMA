@@ -18,10 +18,11 @@
                 <span class='d-block text-primary font-weight-bold'>
                     {{ $account->accountDesc }} </span>
                 <div class='text-dark'>{{ $account->accountNumber }}</div>
+                <div class='font-14 font-weight-bold text-success'><span class='mr-1'>{{ $account->currency }}</span>
+                    <span>{{ number_format($account->availableBalance, 2) }}</span>
+                </div>
             </div>
-            <div class='font-14 text-right font-weight-bold text-success'><span class='mr-1'>{{ $account->currency }}</span>
-                <span>{{ number_format($account->availableBalance, 2) }}</span>
-            </div>
+
         </div>
     </div>
 </div>" data-account-type="{{ $account->accountType }}" data-account-number="{{ $account->accountNumber }}"

@@ -198,9 +198,28 @@
         </li>
 
         <li class="menu-item">
-            <a class="menu-item-header" href="logout" id="sidebar_logout">
+            <a class="menu-item-header" href="#" id="sidebar_logout">
                 <i class="fas fa-sign-out-alt"></i> <span> Logout </span>
             </a>
         </li>
     </ul>
 </div>
+
+
+@section('scripts')
+    {{--  @include('extras.datatables')  --}}
+
+    <script>
+
+
+        {{--  $("#sidebar_logout").click(function(e) {
+            e.preventDefault();
+
+            approve_request();
+            alert('cleic')
+        })  --}}
+
+    </script>
+    <script src="{{ asset('assets/plugins/chartjs/chartjs-v3.7.1.min.js') }}" defer></script>
+    <script src="{{ asset('assets/js/pages/home/home.js') }}"></script>
+@endsection

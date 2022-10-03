@@ -1,3 +1,33 @@
+function approve_request() {
+
+
+
+    Swal.fire({
+        title: 'Do you want to Logout?',
+        icon: 'question',
+        showDenyButton: false,
+        showCancelButton: true,
+        confirmButtonText: `Proceed`,
+        confirmButtonColor: '#18c40d',
+        cancelButtonColor: '#df1919',
+
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            setTimeout(() => {
+                window.location.replace("logout");
+            }, 1000);
+
+        } else if (result.isDenied) {
+            return
+            // toaster('Failed to approve transaction', 'error')
+            // Swal.fire('Failed to approve transaction', '', 'info')
+        }
+    })
+
+
+}
+
 function transactionSuccessToaster(message, timer = 3000) {
     Swal.fire({
         title: "Transaction Successful",
@@ -318,13 +348,15 @@ function decodeString(stringToDecode) {
 
 $("#sidebar_logout").on("click", (e) => {
     e.preventDefault();
-    Swal.fire({
-        title: "Logout successful!",
-        html: "Redirecting ...",
-        icon: "success",
-        showConfirmButton: false,
-    });
-    setTimeout(() => {
-        window.location.replace("logout");
-    }, 1000);
+    // Swal.fire({
+    //     title: "Logout successful!",
+    //     html: "Redirecting ...",
+    //     icon: "success",
+    //     showConfirmButton: false,
+    // });
+    // setTimeout(() => {
+    //     window.location.replace("logout");
+    // }, 1000);
+
+    approve_request();
 });

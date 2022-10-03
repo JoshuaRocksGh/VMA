@@ -57,7 +57,7 @@
         }
 
         body {
-            width: 100vw;
+            width: 100%;
             background-color: white;
         }
     </style>

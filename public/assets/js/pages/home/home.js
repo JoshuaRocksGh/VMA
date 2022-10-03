@@ -2,6 +2,7 @@
 // $("#approval_count").html(4);
 // alert("welcome home");
 
+
 function getCorporateRequests(customerNumber, requestStatus) {
     $.ajax({
         type: "GET",
@@ -134,7 +135,7 @@ function transactionsBarChart(transactions) {
     });
     $("#transactionNoData").hide();
     new Chart("transactionsBarChart", {
-        type: "bar",
+        type: "line",
         data: {
             labels,
             datasets: [
@@ -509,3 +510,5 @@ $(() => {
     });
     $("#chart_account").trigger("change");
 });
+
+
