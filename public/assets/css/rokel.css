@@ -241,7 +241,7 @@
     margin-top: 1rem;
     overflow: hidden;
     border-radius: 1rem;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--danger);
     background-color: var(--white);
     min-height: max(60vh, 600px);
 }
@@ -548,9 +548,9 @@
 .grad-rokel {
     background-image: linear-gradient(
         to right,
-        #61b0f5 0%,
-        #004f74 51%,
-        #5eadf3 100%
+        #fff 0%,
+        #f93131 51%,
+        #fff 100%
     );
 }
 .grad-gray-blue {
@@ -672,8 +672,8 @@
     height: 0;
     margin: 8px;
     box-sizing: border-box;
-    border: 10px solid var(--primary);
-    border-color: var(--primary) transparent var(--primary) transparent;
+    border: 10px solid var(--danger);
+    border-color: var(--danger) transparent var(--danger) transparent;
     animation: lds-hourglass 1.5s infinite;
 }
 

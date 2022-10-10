@@ -2,65 +2,63 @@
 
 
 @section('styles')
-<style>
-    .bg-muted {
-        background-color: #f5f5f5;
-    }
-</style>
+    <style>
+        .bg-muted {
+            background-color: #f5f5f5;
+        }
+    </style>
 @endsection
 
 @section('content')
-
-@include('snippets.top_navbar', ['page_title' => 'LOCATOR'])
-
+    @include('snippets.top_navbar', ['page_title' => 'LOCATOR'])
 
 
 
-<div class="container-xl pt-5">
 
-    <div class="site-card mt-3"
-        style="background-image: url('assets/images/background.png'); background-repeat: no-repeat; background-size: cover;">
-        <div class="row">
-            <div class="col-md-3 pt-md-5">
-                <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link my-md-2 rounded-pill active" id="pills-branch-tab" data-toggle="pill"
-                        href="#pills-branch" role="tab" aria-controls="pills-branch" aria-selected="true">Branch</a>
-                    <a class="nav-link my-md-2 rounded-pill" id="pills-atm-tab" data-toggle="pill" href="#pills-atm"
-                        role="tab" aria-controls="pills-atm" aria-selected="false">Atm</a>
-                    <a class="nav-link my-md-2 rounded-pill" id="pills-agents-tab" data-toggle="pill"
-                        href="#pills-agents" role="tab" aria-controls="pills-agents" aria-selected="false">Agents</a>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="input-group flex-nowrap w-100 rounded-pill my-3 mx-auto " style="max-width: 400px">
-                    <div class="input-group-prepend ">
-                        <span class="input-group-text bg-white text-muted"
-                            style="border-right: none; border-top-left-radius:33px;border-bottom-left-radius:33px; padding-right: 0"
-                            id="addon-wrapping"><i class="fas text-primary fa-search"></i></span>
+    <div class="container-xl pt-5">
+
+        <div class="site-card mt-3"
+            style="background-image: url('assets/images/background.png'); background-repeat: no-repeat; background-size: cover;">
+            <div class="row">
+                <div class="col-md-3 pt-md-5">
+                    <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link my-md-2 rounded-pill active" id="pills-branch-tab" data-toggle="pill"
+                            href="#pills-branch" role="tab" aria-controls="pills-branch" aria-selected="true">Branch</a>
+                        <a class="nav-link my-md-2 rounded-pill" id="pills-atm-tab" data-toggle="pill" href="#pills-atm"
+                            role="tab" aria-controls="pills-atm" aria-selected="false">Atm</a>
+                        <a class="nav-link my-md-2 rounded-pill" id="pills-agents-tab" data-toggle="pill"
+                            href="#pills-agents" role="tab" aria-controls="pills-agents"
+                            aria-selected="false">Agents</a>
                     </div>
-                    <input type="text" class="form-control  "
-                        style="border-left: none; border-top-right-radius:33px;border-bottom-right-radius:33px;"
-                        id="search-box" placeholder="Search ..." />
                 </div>
-                <div class="tab-content " id="pills-tabContent" style="height:700px">
-                    <div class="tab-pane fade show active" id="pills-branch" role="tabpanel"
-                        aria-labelledby="pills-branch-tab">
-                        <div class="mx-auto" style="max-width: 500px">
-                            {{-- branch list comes here --}}
+                <div class="col-md-9">
+                    <div class="input-group flex-nowrap w-100 rounded-pill my-3 mx-auto " style="max-width: 400px">
+                        <div class="input-group-prepend ">
+                            <span class="input-group-text bg-white text-muted"
+                                style="border-right: none; border-top-left-radius:33px;border-bottom-left-radius:33px; padding-right: 0"
+                                id="addon-wrapping"><i class="fas text-primary fa-search"></i></span>
                         </div>
+                        <input type="text" class="form-control  "
+                            style="border-left: none; border-top-right-radius:33px;border-bottom-right-radius:33px;"
+                            id="search-box" placeholder="Search ..." />
                     </div>
-                    <div class="tab-pane fade" id="pills-atm" role="tabpanel" aria-labelledby="pills-atm-tab">
-                        Atm</div>
-                    <div class="tab-pane fade" id="pills-agents" role="tabpanel" aria-labelledby="pills-agents-tab">
-                        Agents</div>
+                    <div class="tab-content " id="pills-tabContent" style="height:700px">
+                        <div class="tab-pane fade show active" id="pills-branch" role="tabpanel"
+                            aria-labelledby="pills-branch-tab">
+                            <div class="mx-auto" style="max-width: 500px">
+                                {{-- branch list comes here --}}
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-atm" role="tabpanel" aria-labelledby="pills-atm-tab">
+                            Atm</div>
+                        <div class="tab-pane fade" id="pills-agents" role="tabpanel" aria-labelledby="pills-agents-tab">
+                            Agents</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- end row -->
-
-
+    <!-- end row -->
 @endsection
 
 
@@ -68,8 +66,8 @@
 
 
 @section('scripts')
-<script>
-    $("#branches_info_display").hide();
+    <script>
+        $("#branches_info_display").hide();
         $("#branches_info_retry_btn").hide();
 
         function get_branches() {
@@ -136,10 +134,10 @@
                 },
                 error: function(xhr, status, error) {
 
-                        setTimeout(function() {
-                            get_branches()
-                        }, $.ajaxSetup().retryAfter)
-                    }
+                    setTimeout(function() {
+                        get_branches()
+                    }, $.ajaxSetup().retryAfter)
+                }
 
             })
         };
@@ -147,9 +145,8 @@
         $(document).ready(function() {
 
             setTimeout(function() {
-                get_branches();
+                {{--  get_branches();  --}}
             }, 2000);
         })
-</script>
-
+    </script>
 @endsection

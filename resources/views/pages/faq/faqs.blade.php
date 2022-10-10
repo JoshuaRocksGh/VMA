@@ -1,5 +1,8 @@
-<div class="dashboard mx-auto mb-0 site-card" style="max-width: 1080px; ">
+<div class=" container dashboard mx-auto mb-0 site-card">
 
+    <a href="{{ url()->previous() }}" type="button" class="btn position-absolute" style="left: 5px"><i
+            class="fe-arrow-left"></i>&nbsp;Go
+        Back</a>
     <div class="dashboard-header text-center">
 
         <h3>Frequently Asked Questions</h3>
@@ -39,7 +42,7 @@
                                 Our internet banking is easy to use. All you need is: <br><br>
                                 > A personal computer that is connected to the internet. <br>
                                 > Any browser of your choice. <br>
-                                > Open your browser and log on to Rokel Commercial Bank Internet Banking.
+                                > Open your browser and log on to Sierra Leone Commercial Bank Internet Banking.
 
                             </p>
                         </div>
@@ -52,7 +55,7 @@
                                 The information you provide is kept strictly confidential. The latest electronic
                                 encryption technology ensures the secure transfer of information over the
                                 internet. As account security is important to us, we have built safety measures
-                                into Rokel Commercial Bank which reflect the importance of this issue.
+                                into Sierra Leone Commercial Bank which reflect the importance of this issue.
 
                             </p>
                         </div>
@@ -138,7 +141,7 @@
                         <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
                             data-parent="#custom-accordion-one">
                             <div class="card-body">
-                                The Rokel Commercial Bank Inter-Account Transfer approval process consists of
+                                The Sierra Leone Commercial Bank Inter-Account Transfer approval process consists of
                                 basic
                                 verification of the information that you provided. The ‘To Account’ of the
                                 beneficiary account will be checked against the database for the validity of the
@@ -165,7 +168,7 @@
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                             data-parent="#accordion">
                             <div class="card-body">
-                                If you are already a customer with Rokel Commercial Bank, click <a
+                                If you are already a customer with Sierra Leone Commercial Bank, click <a
                                     href="{{ url('/') }}">Here</a> to enroll.
 
                             </div>
@@ -182,11 +185,11 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body">
-                                Contact the Rokel Commercial Bank Customer Centre via email:info@rokelbank.sl
+                                Contact the Sierra Leone Commercial Bank Customer Centre via email:slcb@slcb.com
                                 or during normal working hours, Mon-Fri 8:00 A.M to 3:00 PM <br>
                                 call: <br>
-                                +232-22-222-501 EXT.226 <br>
-                                +232-76-22-25-01
+                                (+232) - 22 -2252646 <br>
+                                (+232) - 22-225-292
                             </div>
                         </div>
                     </div>

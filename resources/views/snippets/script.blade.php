@@ -32,7 +32,8 @@
             $('.offcanvas-collapse').toggleClass('open')
             $('.hamburger-menu').toggleClass('open');
         })
-        $("#wrapper").css("background-color", "#ddeefe").show();
+        //$("#wrapper").css("background-color", "#ddeefe").show();
+        $("#wrapper").css("background-color", "#fedddd").show();
         $('.password-eye').on('click', function() {
             var $this = $(this),
                 $passwordInput = $this.prev(),
