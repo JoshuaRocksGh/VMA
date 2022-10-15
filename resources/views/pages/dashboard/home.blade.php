@@ -26,7 +26,7 @@
                     @endif
                 </div>
             </nav>
-            <div class="tab-content dashboard-body border-primary border " id="nav-tabContent">
+            <div class="tab-content dashboard-body border-danger border " id="nav-tabContent">
                 <div class="tab-pane fade h-100 show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row ">
                         <nav class="d-flex col-sm-2 col-md-auto  align-self-center no-after dashboard-header h-100 align-items-center"
@@ -80,7 +80,7 @@
                                     <table id="accounts_table" width="100%"
                                         class="table nowrap display  border dt-responsive table-hover rounded mb-0 ">
                                         <thead>
-                                            <tr class="bg-primary font-weight-bold  text-white ">
+                                            <tr class="bg-dark font-weight-bold  text-white ">
                                                 <td class="text-right"> Account Number </td>
                                                 <td class="text-right"> Account Name </td>
                                                 <td class="text-right"> Account Type </td>
@@ -100,7 +100,7 @@
                                     <table id="loans_table" width="100%"
                                         class="table nowrap display  border rounded mb-0 ">
                                         <thead>
-                                            <tr class="bg-primary text-white ">
+                                            <tr class="bg-dark text-white ">
                                                 <td> Facility No. </td>
                                                 <td> Description </td>
                                                 <td> Cur </td>
@@ -121,7 +121,7 @@
                                     <table id="investments_table" width="100%"
                                         class="table nowrap display border rounded  mb-0 ">
                                         <thead>
-                                            <tr class="bg-primary text-white ">
+                                            <tr class="bg-dark text-white ">
                                                 <td> Account No. </td>
                                                 <td> Deal Amount </td>
                                                 <td> Tunure </td>

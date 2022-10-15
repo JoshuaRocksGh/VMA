@@ -12,7 +12,7 @@
                         style="border-radius: 0.5rem; height: 50px; font-size: 70px; border: 2px solid var(--primary);"
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
-                <div class="pt-2"><button class="btn py-3 font-15 btn-block rounded-0 btn-primary shadow-none"
+                <div class="pt-2"><button class="btn py-3 font-15 btn-block rounded-0 btn-success shadow-none"
                         type="submit" id="transfer_pin" data-dismiss="modal">Submit</button>
                 </div>
             </form>

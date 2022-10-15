@@ -225,7 +225,7 @@
 
                             <div class="form-group mb-0 text-center">
                                 <br>
-                                <button class="btn btn-primary btn-block" type="button" id="user_id_next_btn">
+                                <button class="btn btn-danger btn-block" type="button" id="user_id_next_btn">
                                     <span class="user_id_next_btn_text">Next</span>
                                     <span class="spinner-border spinner-border-sm mr-1 spinner-text-next"
                                         style="display: none" role="status" aria-hidden="true"></span>
@@ -238,7 +238,7 @@
                                         id="submit_spinner" style="display: none"></span>
                                 </button>
                             </div>
-                            <div class="mt-4 text-center"> <button type="button" class=" text-primary  mx-auto"
+                            <div class="mt-4 text-center"> <button type="button" class=" text-dark  mx-auto"
                                     id="reset_password_back_button">Back to Login
                                 </button>
                             </div>
@@ -352,7 +352,8 @@
 
                         <div class="col-6 py-2">
                             <a href="{{ url('account-creation') }}" class="btn btn-outline-primary w-100 btn-rounded"> <i
-                                    class="fas fa-book-open"></i> Open Account</a>
+                                    class="fas fa-book-open"></i> Open
+                                Account</a>
                         </div>
                         <div class="col-6 py-2">
 

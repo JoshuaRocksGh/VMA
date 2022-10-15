@@ -2,9 +2,9 @@
 
 @section('content')
     @php
-    $basePath = 'Transfer';
-    $currentPath = 'Standing Order Status';
-    $pageTitle = ' STANDING ORDER STATUS';
+        $basePath = 'Transfer';
+        $currentPath = 'Standing Order Status';
+        $pageTitle = ' STANDING ORDER STATUS';
     @endphp
     @include('snippets.pageHeader')
 
@@ -50,7 +50,7 @@
     <div class="dashboard site-card">
         <div class="tab-content dashboard-body border-primary border p-4">
             <div>
-                <label class="d-block mb-1 text-primary"> Select Account</label>
+                <label class="d-block mb-1 text-dark"> Select Account</label>
                 <select data-style="" class="form-control accounts-select" id="from_account" required>
                     @include('snippets.accounts')
                 </select>
@@ -59,7 +59,7 @@
             <table class="table table-striped table-bordered display responsive nowrap w-100"
                 id="standing_order_display_area">
                 <thead>
-                    <tr class="bg-primary text-white ">
+                    <tr class="bg-dark text-white ">
                         <th class="all"> Account No </th>
                         <th class="all"> Beneficiary Account </th>
                         <th class="all"> Amount (SLL) </th>

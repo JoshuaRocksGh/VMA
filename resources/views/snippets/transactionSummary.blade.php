@@ -16,7 +16,7 @@
                             <span class="text-success font-13 text-bold " id="success-message"></span>
                         </td>
                     </tr>
-                    <tr class=" show-on-success" style="display: none">
+                    {{--  <tr class=" show-on-success" style="display: none">
                         <td class="text-center bg-white" colspan="2">
                             <div class="row" style="place-content: space-evenly">
                                 <button class="btn my-1 btn-primary" onclick="location.reload()"> make another
@@ -30,13 +30,13 @@
                                 @endif
                             </div>
                         </td>
-                    </tr>
+                    </tr>  --}}
                     <tr>
                         <td>Sender Details:</td>
                         <td>
-                            <span class="d-block font-13 text-primary text-bold display_from_account_name"
+                            <span class="d-block font-13 text-primary h3 display_from_account_name"
                                 id="display_from_account_name"> </span>
-                            <span class="d-block font-13 text-primary text-bold display_from_account_no"
+                            <span class="d-block font-13 text-primary h3 display_from_account_no"
                                 id="display_from_account_no"></span>
                             <span class="font-13 text-primary h3 account_currency" id="display_from_account_currency">
                             </span>
@@ -49,18 +49,18 @@
                     <tr>
                         <td>Receiver Details:</td>
                         <td>
-                            <span class="d-block font-13 text-primary text-bold display_to_account_name"
+                            <span class="d-block font-13 text-primary h3 display_to_account_name"
                                 id="display_to_account_name"> </span>
 
-                            <span class="d-block font-13 text-primary text-bold display_to_account_no"
+                            <span class="d-block font-13 text-primary h3 display_to_account_no"
                                 id="display_to_account_no"> </span>
                             @if ($currentPath !== 'International Bank' && $currentPath !== 'Local Bank')
                                 <span class="d-block font-13 text-primary text-bold display_to_account_currency"
                                     id="display_to_account_currency"></span>
                             @endif
                             @if ($currentPath === 'Local Bank')
-                                <span class="d-block font-13 text-primary text-bold display_to_bank_name"> </span>
-                                <span class="d-block font-13 text-primary text-bold display_to_account_address">
+                                <span class="d-block font-13 h3 text-bold display_to_bank_name"> </span>
+                                <span class="d-block font-13 h3 text-bold display_to_account_address">
                                 </span>
                             @endif
                         </td>
@@ -148,7 +148,7 @@
                                 id="display_posted_by">{{ session()->get('userAlias') }}</span>
                         </td>
                     </tr>
-                    <tr class="hide-on-success bg-primary  text-white">
+                    <tr class="hide-on-success bg-danger  text-white">
                         <td colspan="2">
                             <div class="custom-control d-flex custom-checkbox ">
                                 <input type="checkbox" class="custom-control-input d-block" name="terms_and_conditions"
@@ -173,7 +173,7 @@
                 &nbsp; </span>
             <span>
                 &nbsp;
-                <button class="btn btn-primary btn-rounded " type="button" id="confirm_transfer_button">
+                <button class="btn btn-dark btn-rounded " type="button" id="confirm_transfer_button">
                     <span id="confirm_transfer">Confirm
                         Transfer</span>
                     <span class="spinner-border spinner-border-sm mr-1" role="status" id="spinner" aria-hidden="true"

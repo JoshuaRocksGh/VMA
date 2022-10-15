@@ -1,6 +1,6 @@
 <!-- ========== Left Sidebar Start ========== -->
 
-<div id="sidebar-menu" class=" overflow-hidden p-0 text-xs  bg-primary site-card text-white">
+<div id="sidebar-menu" class=" overflow-hidden p-0 text-xs  bg-danger site-card text-white">
     <ul id="side-menu" class="accordion ">
         <li class="menu-item">
             <a class="menu-item-header" href="{{ url('home') }}">
@@ -210,15 +210,12 @@
     {{--  @include('extras.datatables')  --}}
 
     <script>
-
-
         {{--  $("#sidebar_logout").click(function(e) {
             e.preventDefault();
 
             approve_request();
             alert('cleic')
         })  --}}
-
     </script>
     <script src="{{ asset('assets/plugins/chartjs/chartjs-v3.7.1.min.js') }}" defer></script>
     <script src="{{ asset('assets/js/pages/home/home.js') }}"></script>

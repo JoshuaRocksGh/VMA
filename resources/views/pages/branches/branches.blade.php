@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    @include('snippets.top_navbar', ['page_title' => 'LOCATOR'])
+    @include('snippets.top_navbar', ['page_title' => 'BRANCH LOCATOR'])
 
 
 

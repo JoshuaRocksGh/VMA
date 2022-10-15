@@ -51,7 +51,7 @@
             <div class="d-flex align-items-center justify-content-around">
                 <div class="w-100" style="max-width: 600px">
                     <div class="form-group  ">
-                        <label class=" text-primary align-self-center"> Select Account :</label>
+                        <label class=" text-dark align-self-center"> Select Account :</label>
                         <select class="form-control accounts-select " id="from_account" required>
                             @include('snippets.accounts')
                         </select>
@@ -59,40 +59,30 @@
 
                     <div class="form-group d-flex justify-content-around align-items-end">
                         <div class=" pr-4 w-100">
-                            <label class="  text-primary align-self-center">Start Date :</label>
+                            <label class="  text-dark align-self-center">Start Date :</label>
                             <input type="date" id="startDate" class=" text-input  form-control ">
                         </div>
                         <div class=" pr-0 w-100">
-                            <label class=" text-primary align-self-center">End Date :</label>
+                            <label class=" text-dark align-self-center">End Date :</label>
                             <input type="date" id="endDate" class="text-input  form-control ">
                         </div>
                     </div>
                     <div class="form-group text-right">
-                        <button class="btn btn-primary mt-1 waves-effect waves-light"
-                            id="search_transaction">Search</button>
+                        <button class="btn btn-dark mt-1 waves-effect waves-light" id="search_transaction">Search</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class=" tab-content dashboard-body border-primary border" id="transaction_summary" style="min-height: 0px;">
+        <div class="tab-content dashboard-body border-danger border" id="transaction_summary" style="min-height: 0px;">
+
+
+
             {{-- <div class="dashboard-body p-4"> --}}
             <div class="accordion-arrow  p-3 rounded alert-secondary w-100" id="account_balance_info_display"
                 role="alert">
                 <div class="row">
 
-                    <div class="col-md-6 row">
-                        {{--  <h5 class="col-5">Account Number:
-                        </h5>
-                        <h5 class="col-7" id="display_account_number"></h5>
-                        <h5 class="col-5"> Start Date:
-                        </h5>
-                        <h5 class="col-7" id="display_search_start_date"></h5>
-                        <h5 class="col-5"> End Date:
-                        </h5>
-                        <h5 class="col-7" id="display_search_end_date"></h5>  --}}
-                    </div>
-
-                    <div class="col-9 col-md-4">
+                    <div class="col-3 ">
                         <select class="form-control col-md-8" id="filter" required>
 
                             <option value="all" selected> ALL</option>
@@ -100,8 +90,9 @@
                             <option value="debit"> DEBIT </option>
                         </select>
                     </div>
+                    <div class="col-6"></div>
 
-                    <div class="col-3 col-md-2">
+                    <div class="col-3">
                         <span style="float: right">
                             &nbsp;&nbsp;
                             <a id="pdf_print" style="display: none" class="download"
@@ -125,17 +116,18 @@
 
                 <table role="table" class="table mb-0  font-12  w-100 table-bordered table-striped table-centered"
                     id="account_transaction_display_table" style="">
+
                     <thead>
 
-                        <tr class="bg-primary text-white ">
+                        <tr class="bg-dark text-white ">
                             <th data-priority="1" scope="col">Date</th>
                             <th scope="col">Amount <span class="currency_display"></span></th>
-                            //<th scope="col">Contra Account</th>
+
                             <th scope="col">Purpose of Transfer <span class="account_currency_display_"></span>
                             </th>
                             <th scope="col">Balance<span class="currency_display"></span>
                             </th>
-                            //<th scope="col">Document Ref</th>
+
                             <th scope="col">Attachment</th>
                             <th data-priority="2" scope="col">Details</th>
                         </tr>

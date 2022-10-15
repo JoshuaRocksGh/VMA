@@ -29,8 +29,7 @@
     <div id="site_loader">
         <div>
             <img class="pulse mx-auto" style="width: 100px;" src="{{ asset('assets/images/logoSLCB.png') }}" />
-            <div class="mt-2  text-danger d-flex tw-relative"><span
-                    class="lds-hourglass tw-absolute text-danger"></span> <span
+            <div class="mt-2  text-danger d-flex tw-relative"><span class="lds-hourglass tw-absolute"></span> <span
                     class="text-semibold align-self-center mx-2 font-weight-bold">
                     Loading</span></div>
         </div>

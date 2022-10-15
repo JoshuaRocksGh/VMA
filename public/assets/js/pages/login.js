@@ -1,7 +1,9 @@
-var deviceType = getDeviceType();
-var deviceOS = getDeviceOS();
-var deviceID = getGPU();
+const deviceType = getDeviceType();
+const deviceOS = getDeviceOS();
+const deviceID = getGPU();
 function login(email, password) {
+    // console.log(email, password);
+    // return false;
     $.ajax({
         type: "POST",
         url: "login-api",

@@ -44,9 +44,9 @@ class LoginController extends Controller
     public function login()
     {
 
-        if (session()->get('userToken')) {
-            return redirect('/home');
-        }
+        // if (session()->get('userToken')) {
+        //     return redirect('/home');
+        // }
 
         return view('pages.authentication.login');
     }
@@ -82,7 +82,7 @@ class LoginController extends Controller
             "channel" => env('APP_CHANNEL')
 
         ];
-        // return $data;
+        return $data;
 
         try {
             $response = Http::post(env('API_BASE_URL') . "/user/login", $data);

@@ -1,31 +1,24 @@
 function approve_request() {
-
-
-
     Swal.fire({
-        title: 'Do you want to Logout?',
-        icon: 'question',
+        title: "Do you want to Logout?",
+        icon: "question",
         showDenyButton: false,
         showCancelButton: true,
         confirmButtonText: `Proceed`,
-        confirmButtonColor: '#18c40d',
-        cancelButtonColor: '#df1919',
-
+        confirmButtonColor: "#18c40d",
+        cancelButtonColor: "#df1919",
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             setTimeout(() => {
                 window.location.replace("logout");
             }, 1000);
-
         } else if (result.isDenied) {
-            return
+            return;
             // toaster('Failed to approve transaction', 'error')
             // Swal.fire('Failed to approve transaction', '', 'info')
         }
-    })
-
-
+    });
 }
 
 function transactionSuccessToaster(message, timer = 3000) {
@@ -288,7 +281,7 @@ ${accountDesc} || ${accountNumber} || ${currency} ${availableBalance}
 
 function siteLoading(state) {
     if (state === "show") {
-        $("#site_loader").css("background-color", "#4fc6e17a");
+        $("#site_loader").css("background-color", "#f7eeee");
         $("#site_loader").fadeIn(500, "linear");
         return;
     }
@@ -301,13 +294,13 @@ function blockUi(data) {
         block: "#body",
         message: "Please Wait",
         size: "75px",
-        bgColor: "#4fc6e1",
+        bgColor: "#f7eeee",
         opacity: "0.3",
     };
     data = Object.assign(defaults, data);
     const { block, message, size, bgColor, opacity } = data;
     $(block).block({
-        message: `<div><img class="pulse " style="width: ${size};" src="assets/images/logoRKB.png" />
+        message: `<div><img class="pulse " style="width: ${size};" src="assets/images/logoSLCB.png" />
             <div class="mt-2 row tw-relative"><span class="text-semibold align-self-center mx-2 font-weight-bold">
                 ${message}</span><span class="lds-hourglass tw-absolute"></span> </div>`,
         overlayCSS: {

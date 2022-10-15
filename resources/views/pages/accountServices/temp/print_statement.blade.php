@@ -9,7 +9,6 @@
         table tr td {
             padding: 5px;
         }
-
     </style>
 @endsection
 @section('content')
@@ -54,8 +53,7 @@
                         </th>
                         <th colspan="2" style="height: 150px" class="py-2">
                             <span class="h3"> <b>Statement Details</b> </span><br>
-                            <span class="h5"><span class="details-label">From: </span><b
-                                    id="start_date"></b></span><br>
+                            <span class="h5"><span class="details-label">From: </span><b id="start_date"></b></span><br>
                             <span class="h5"><span class="details-label">To: </span><b id="end_date"></b>
                             </span><br>
                             <span class="h5"><span class="details-label">Requested On: </span><b
@@ -129,7 +127,7 @@
                 </tr> --}}
 
 
-                    <tr bgColor="#4fc6e1" style="height: 20px" class="bg-info text-center text-dark ">
+                    <tr bgColor="#f7eeee" style="height: 20px" class="bg-info text-center text-dark ">
                         <th style="width: 140px">Value Date</th>
                         <th style="width: 180px">Amount (<span class="account_currency">SLL</span>)<span
                                 class="account_number_display_"></span>

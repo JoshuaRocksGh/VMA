@@ -20,7 +20,7 @@ class BranchesController extends Controller
     public function branches()
     {
         $response = Http::get(env('API_BASE_URL') . "/utilities/getBranches");
-        return $response["data"];
+        // return $response["data"];
         return view('pages.branches.branches');
     }
 }

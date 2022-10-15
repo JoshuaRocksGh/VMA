@@ -42,8 +42,7 @@
     <div class="site-card p-1 my-2" style="min-height: auto !important">
         <div class="site-card-body  p-0 border-0" style="min-height: auto !important">
             <button
-                class=" rate_button
-         p-2 border-0 grad-rokel w-100 grad  d-flex align-items-center justify-content-center"
+                class=" rate_button p-2 border-0 grad-rokel w-100 grad d-flex align-items-center justify-content-center  grad-blue-pink"
                 style="min-height: 25px">
                 <div class=""><i class="fas font-24 fa-money-check-alt"></i> </div>
                 <div class="font-weight-bold ml-2 font-12">&nbsp;Currency Rates</div>
@@ -52,17 +51,16 @@
     </div>
 
     <div class=" site-card p-1">
-        <div class="site-card-body py-2 bg-primary" style="min-height: 10px !important;">
+        <div class="site-card-body py-2 bg-danger" style="min-height: 10px !important;">
             <h6 class="text-center mb-0 text-white">Account Agent</h6>
         </div>
         <div class="site-card-body">
-            <div class="mb-2 font-13"> <i class="mr-1 fas fa-user text-primary"></i><span class="font-weight-bold">Name
+            <div class="mb-2 font-13"> <i class="mr-1 fas fa-user text-danger"></i><span class="font-weight-bold">Name
                     :
                 </span><span>Akakpo Gilbert Laud</span> </div>
-            <div class="mb-2 font-13"> <i class="mr-1 fas fa-phone text-primary"></i><span
-                    class="font-weight-bold">Phone
+            <div class="mb-2 font-13"> <i class="mr-1 fas fa-phone text-danger"></i><span class="font-weight-bold">Phone
                     :</span> <span>23350997763</span> </div>
-            <div class="mb-2 font-13"> <i class="mr-1 fas fa-envelope text-primary"></i><span
+            <div class="mb-2 font-13"> <i class="mr-1 fas fa-envelope text-danger"></i><span
                     class="font-weight-bold">Email
                     :</span> <span>Laud@rokel.com</span> </div>
 

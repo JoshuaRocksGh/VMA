@@ -29,12 +29,13 @@
 <div class="modal fade" id="edit_modal" data-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header bg-primary" id="beneficiary_form_header">
+            <div class="modal-header bg-danger" id="beneficiary_form_header">
                 <h5 class="modal-title font-18 py-1 text-center text-white text-capitalize font-weight-bold"
                     id="beneficiary_form_title">
                     Beneficiary Form</h5>
-                <button type="button" class="close align-self-center" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="close align-self-center text-white" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">x</span>
                 </button>
             </div>
             {{-- <div id="edit_modal_content"> --}}
@@ -138,10 +139,10 @@
 
             </div>
             <div class="modal-footer px-3 pb-3 pt-0 justify-content-between">
-                <button type="submit" class="btn btn-danger" id="delete_btn"><i
+                <button type="submit" class="btn btn-secondary" id="delete_btn"><i
                         class="fas fa-trash-alt mr-1"></i>Delete</button>
 
-                <button type="button" class="btn btn-primary action-button" id="save_btn"> <i
+                <button type="button" class="btn btn-dark action-button" id="save_btn"> <i
                         class="fas mr-1 fa-save"></i>
                     Save</button>
 
