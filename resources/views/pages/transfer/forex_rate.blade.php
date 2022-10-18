@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('styles')
-
     <style>
         @media print {
             .hide_on_print {
@@ -16,15 +15,10 @@
             font-weight: 400;
             src: url(https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf);
         }
-
     </style>
-
-
 @endsection
 
 @section('content')
-
-
     <div class="container-fluid">
         <br>
         <!-- start page title -->
@@ -198,14 +192,18 @@
                                                                     {{-- <th scope="row">3</th> --}}
                                                                     <td>Amount</td>
                                                                     {{--  <td></td>  --}}
-                                                                    <td><strong>(<span class="receipt_currency"></span>)<span id="amount_receipt"></span></strong>
+                                                                    <td><strong>(<span
+                                                                                class="receipt_currency"></span>)<span
+                                                                                id="amount_receipt"></span></strong>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     {{-- <th scope="row">3</th> --}}
                                                                     <td>Transaction Fee </td>
                                                                     {{--  <td></td>  --}}
-                                                                    <td><strong>(<span class="receipt_currency"></span>)15.00</strong></td>
+                                                                    <td><strong>(<span
+                                                                                class="receipt_currency"></span>)15.00</strong>
+                                                                    </td>
                                                                 </tr>
                                                                 {{--  <tr>
                                                                     <th scope="row">3</th>
@@ -235,7 +233,8 @@
                                                     <div class="row">
                                                         <div class="col-md-5"></div>
                                                         <div class="col-md-2">
-                                                              <button class="btn btn-light btn-rounded hide_on_print text-center"
+                                                            <button
+                                                                class="btn btn-light btn-rounded hide_on_print text-center"
                                                                 type="button" onclick="window.print()">Print
                                                                 Receipt
                                                             </button>
@@ -368,7 +367,8 @@
                                                                     <div class="alert alert-info form-control col-md-12"
                                                                         role="alert">
                                                                         <div class="custom-control custom-checkbox">
-                                                                            <input type="checkbox" class="custom-control-input"
+                                                                            <input type="checkbox"
+                                                                                class="custom-control-input"
                                                                                 name="terms_and_conditions"
                                                                                 name="terms_and_conditions"
                                                                                 id="terms_and_conditions">
@@ -402,7 +402,7 @@
                                                     <div class="modal-dialog modal-dialog-centered">
                                                         <div class="modal-content">
                                                             <div class="modal-header text-center ">
-                                                                    <h3 class="modal-title text-primary"
+                                                                <h3 class="modal-title text-primary"
                                                                     id="myCenterModalLabel ">ENTER TRANSACTION PIN</h3>
 
                                                                 {{--  <button type="button" class="close" data-dismiss="modal"
@@ -416,7 +416,8 @@
                                                                     <div class="col-md-9  text-center">
                                                                         <form action="#" autocomplete="off"
                                                                             aria-autocomplete="off">
-                                                                            <input type="text" name="user_pin" maxlength="4"
+                                                                            <input type="text" name="user_pin"
+                                                                                maxlength="4"
                                                                                 class="form-control key hide_on_print"
                                                                                 id="user_pin"
                                                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
@@ -445,21 +446,24 @@
                                                 <div class="form-group text-center">
 
                                                     <span> <button class="btn btn-secondary btn-rounded" type="button"
-                                                            id="back_button"> <i class="fe-arrow-left"></i>&nbsp;Back</button> &nbsp; </span>
+                                                            id="back_button"> <i
+                                                                class="fe-arrow-left"></i>&nbsp;Back</button> &nbsp;
+                                                    </span>
                                                     <span>
                                                         &nbsp;
                                                         <button class="btn btn-primary btn-rounded " type="button"
                                                             id="confirm_modal_button" data-toggle="modal"
                                                             data-target="#centermodal">
                                                             <span id="confirm_transfer">Confirm Transfer</span>
-                                                            <span class="spinner-border spinner-border-sm mr-1" role="status"
-                                                                id="spinner" aria-hidden="true"></span>
+                                                            <span class="spinner-border spinner-border-sm mr-1"
+                                                                role="status" id="spinner" aria-hidden="true"></span>
                                                             <span id="spinner-text">Loading...</span>
                                                         </button>
                                                     </span>
 
                                                     <span>&nbsp; <button class="btn btn-light btn-rounded hide_on_print"
-                                                            type="button" id="print_receipt" onclick="window.print()">Print
+                                                            type="button" id="print_receipt"
+                                                            onclick="window.print()">Print
                                                             Receipt
                                                         </button></span>
                                                 </div>
@@ -489,11 +493,12 @@
                                                         <div class="col-md-10">
 
                                                             <div class="form-group row ">
-                                                                <b class="col-md-12 text-primary mb-1">Account from which the money will
+                                                                <b class="col-md-12 text-primary mb-1">Account from which
+                                                                    the money will
                                                                     be tansfered
                                                                     &nbsp; <span class="text-danger">*</span> </b>
-                                                                <select class="form-control col-md-12 mb-2" id="from_account"
-                                                                    required>
+                                                                <select class="form-control col-md-12 mb-2"
+                                                                    id="from_account" required>
                                                                     <option value="">Select Account</option>
 
                                                                     {{-- <option value="Saving Account~kwabeane Ampah~001023468976001~GHS~2000">
@@ -506,9 +511,11 @@
                                                             <legend></legend>
 
                                                             <div class="form-group row">
-                                                                <b class="col-md-12"><b class="text-primary">Account which will receive the money
+                                                                <b class="col-md-12"><b class="text-primary">Account which
+                                                                        will receive the money
                                                                         &nbsp;</b><span class="text-danger">*</span></b>
-                                                                <select class="form-control col-md-12 mb-2" id="to_account" required>
+                                                                <select class="form-control col-md-12 mb-2"
+                                                                    id="to_account" required>
                                                                     <option value="">Select Account</option>
 
                                                                 </select>
@@ -523,29 +530,36 @@
                                                                 <b class="col-md-4 text-primary">Actual Amount &nbsp; <span
                                                                         class="text-danger">*</span></b>
 
-                                                                        <div class="input-group mb-3 col-8" style="padding: 0px;">
-                                                                            <div class="input-group-prepend">
-                                                                                <input type="text" class="input-group-text select_currency" id="select_currency" style="width: 80px;" readonly>
-                                                                                {{-- <select name="" class="input-group-text select_currency" id="select_currency">
+                                                                <div class="input-group mb-3 col-8" style="padding: 0px;">
+                                                                    <div class="input-group-prepend">
+                                                                        <input type="text"
+                                                                            class="input-group-text select_currency"
+                                                                            id="select_currency" style="width: 80px;"
+                                                                            readonly>
+                                                                        {{-- <select name="" class="input-group-text select_currency" id="select_currency">
                                                                                  </select> --}}
-                                                                            </div>
+                                                                    </div>
 
-                                                                              &nbsp;&nbsp;
-                                                                              <input type="text" class="form-control " id="amount" placeholder="Enter Amount"
-                                                                              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
-                                                                              required >
-                                                                          </div>
+                                                                    &nbsp;&nbsp;
+                                                                    <input type="text" class="form-control "
+                                                                        id="amount" placeholder="Enter Amount"
+                                                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
+                                                                        required>
+                                                                </div>
 
 
                                                             </div>
 
                                                             <div class="form-group row">
 
-                                                                <b class="col-4 text-primary"> Cur / Rate / Converted Amount</b>
+                                                                <b class="col-4 text-primary"> Cur / Rate / Converted
+                                                                    Amount</b>
 
                                                                 <div class="input-group mb-3 col-8" style="padding: 0px;">
                                                                     <div class="input-group-prepend">
-                                                                        <select name="" class="input-group-text select_currency" id="select_currency__">
+                                                                        <select name=""
+                                                                            class="input-group-text select_currency"
+                                                                            id="select_currency__">
                                                                             {{-- <option value="SLL" selected>SLL</option>
                                                                             <option value="EUR">EURO</option>
                                                                             <option value="USD">USD</option> --}}
@@ -553,11 +567,18 @@
                                                                     </div>
                                                                     &nbsp;&nbsp;
                                                                     <div class="input-group-prepend">
-                                                                        <input type="text" class="form-control readOnly " id="convertor_rate" placeholder="0.00" style="width: 100px;">
-                                                                      </div>
-                                                                      &nbsp;&nbsp;
-                                                                    <input type="text" class="form-control" id="converted_amount" placeholder="Converted Amount" aria-label="Converted Amount" aria-describedby="basic-addon1">
-                                                                  </div>
+                                                                        <input type="text"
+                                                                            class="form-control readOnly "
+                                                                            id="convertor_rate" placeholder="0.00"
+                                                                            style="width: 100px;">
+                                                                    </div>
+                                                                    &nbsp;&nbsp;
+                                                                    <input type="text" class="form-control"
+                                                                        id="converted_amount"
+                                                                        placeholder="Converted Amount"
+                                                                        aria-label="Converted Amount"
+                                                                        aria-describedby="basic-addon1">
+                                                                </div>
 
 
                                                             </div>
@@ -565,7 +586,8 @@
                                                             <div class="form-group text-right m-2">
                                                                 <button class="btn btn-primary btn-rounded" type="submit"
                                                                     id="next_button">
-                                                                    &nbsp; Next &nbsp;<i class="fe-arrow-right"></i> </button>
+                                                                    &nbsp; Next &nbsp;<i class="fe-arrow-right"></i>
+                                                                </button>
                                                             </div>
                                                         </div>
 
@@ -585,7 +607,7 @@
                                     </div>
 
                                     <div class="col-md-4 m-2 d-none d-sm-block" id="related_information_display"
-                                    style="background-image: linear-gradient(to bottom right, white, rgb(201, 223, 230));">
+                                        style="background-image: linear-gradient(to bottom right, white, rgb(201, 223, 230));">
                                         <br><br>
 
                                         <div class="col-md-12 card card-body rtgs_transfer_summary">
@@ -626,7 +648,8 @@
                                                 <h4 class="text-danger text-bold col-md-7 ">
                                                     <span class="display_from_account_currency"></span>
                                                     &nbsp;
-                                                    <b style="font-style: 16px"><span class="display_transfer_amount"></span></b>
+                                                    <b style="font-style: 16px"><span
+                                                            class="display_transfer_amount"></span></b>
                                                 </h4>
                                             </div>
                                             <div class="row">
@@ -923,10 +946,12 @@
 
                                         From: <span class="font-13 text-primary" id="display_from_account"> &nbsp
                                         </span><br><br>
-                                        To: <span class="font-13 text-muted" id="display_to_account"> &nbsp </span><br><br>
+                                        To: <span class="font-13 text-muted" id="display_to_account"> &nbsp
+                                        </span><br><br>
                                         Schedule Payments: <span class="font-13 text-muted" id="display_payments"> &nbsp
                                         </span><br><br>
-                                        Amount: <span class="font-13 text-muted" id="display_amount"> &nbsp </span><br><br>
+                                        Amount: <span class="font-13 text-muted" id="display_amount"> &nbsp
+                                        </span><br><br>
                                         Naration: <span class="font-13 text-muted" id="display_naration"> &nbsp
                                         </span><br><br>
                                         Transaction fee: <span class="font-13 text-muted" id="display_trasaction_fee">
@@ -935,8 +960,8 @@
 
                                         <div class="form-group">
                                             <label class="font-16 purple-color">Enter Pin</label>
-                                            <input type="text" class="form-control" id="pin" data-toggle="input-mask"
-                                                placeholder="enter pin" required
+                                            <input type="text" class="form-control" id="pin"
+                                                data-toggle="input-mask" placeholder="enter pin" required
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')">
 
                                         </div>
@@ -946,8 +971,9 @@
 
 
                                     <div class="modal-footer">
-                                        <button type="send" id="send" class="btn btn-primary" data-target="#multiple-two"
-                                            data-toggle="modal" data-dismiss="modal">Send</button>
+                                        <button type="send" id="send" class="btn btn-primary"
+                                            data-target="#multiple-two" data-toggle="modal"
+                                            data-dismiss="modal">Send</button>
                                     </div>
                                 </form>
                             </div><!-- /.modal-content -->
@@ -966,8 +992,8 @@
         </div>
 
 
-        <script src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -976,7 +1002,7 @@
             function from_account() {
                 $.ajax({
                     type: 'GET',
-                    url:  'get-my-account',
+                    url: 'get-my-account',
                     datatype: "application/json",
                     success: function(response) {
                         console.log(response.data);
@@ -989,7 +1015,8 @@
                                     data[index].currency + '~' + data[index]
                                     .availableBalance
                             }).text(data[index].accountNumber +
-                                '~' + data[index].currency + ' ~ ' + formatToCurrency(parseFloat(data[index].availableBalance))
+                                '~' + data[index].currency + ' ~ ' + formatToCurrency(parseFloat(
+                                    data[index].availableBalance))
                             ));
                             $('#to_account').append($('<option>', {
                                 value: data[index].accountType + ' ~ ' + data[index]
@@ -997,7 +1024,8 @@
                                     .accountNumber + '~' + data[index].currency + '~' +
                                     data[index].availableBalance
                             }).text(data[index].accountNumber +
-                                '~' + data[index].currency + '~' + formatToCurrency(parseFloat(data[index].availableBalance))
+                                '~' + data[index].currency + '~' + formatToCurrency(parseFloat(data[
+                                    index].availableBalance))
                             ));
 
                         });
@@ -1077,7 +1105,7 @@
 
                 $.ajax({
                     type: 'GET',
-                    url:  'get-correct-fx-rate-api',
+                    url: 'get-correct-fx-rate-api',
                     datatype: "application/json",
                     success: function(response) {
                         console.log(response.data);
@@ -1107,8 +1135,8 @@
                 $("#transaction_summary").hide();
                 $(".success_gif").hide();
                 $('#spinner').hide(),
-                $('#spinner-text').hide(),
-                $('#print_receipt').hide();
+                    $('#spinner-text').hide(),
+                    $('#print_receipt').hide();
                 $(".receipt").hide();
 
 
@@ -1271,74 +1299,83 @@
 
 
 
-                    function currency_convertor(forex_rate){
-                        let amount = $("#amount").val()
-                        let convert_amount_currency = $('#select_currency__').val()
-                        let converted_amount = ''
+                function currency_convertor(forex_rate) {
+                    let amount = $("#amount").val()
+                    let convert_amount_currency = $('#select_currency__').val()
+                    let converted_amount = ''
 
-                        cur_1 = $('#select_currency').val()
-                        cur_2 = $('#select_currency__').val()
+                    cur_1 = $('#select_currency').val()
+                    cur_2 = $('#select_currency__').val()
 
-                        if(cur_1 == "SLL"){
+                    if (cur_1 == "SLL") {
 
-                        }else{
+                    } else {
 
-                        }
-
-                        let currency_pair_1 = cur_1 + '/ ' + cur_2
-                        let currency_pair_2 = cur_2 + '/ ' + cur_1
-
-                        let to_local_currency = cur_1 + '/ SLL'
-                        let local_currency = ''
-
-
-                        console.log(currency_pair_1)
-                        console.log(currency_pair_2)
-                        console.log(forex_rate)
-
-                        $('#converted_amount').val('')
-                        $('#convertor_rate').val('')
-
-
-                        if(forex_rate.length > 0){
-                            $.each(forex_rate, function(index) {
-
-                                if(String(forex_rate[index].PAIR.trim()) == String(to_local_currency.trim())){
-                                    local_currency = parseFloat(amount) / parseFloat(forex_rate[index].MIDRATE)
-
-                                }
-
-
-
-                                if(String(forex_rate[index].PAIR.trim()) == String(currency_pair_1.trim())){
-
-                                    converted_amount = parseFloat(amount) * parseFloat(forex_rate[index].MIDRATE)
-                                    $('#convertor_rate').val(formatToCurrency(parseFloat(forex_rate[index].MIDRATE.toFixed(2))))
-                                    $('.display_midrate').text(currency_pair_1.trim() + ' => ' + formatToCurrency(parseFloat(forex_rate[index].MIDRATE.toFixed(2))))
-                                    $('#converted_amount').val(formatToCurrency(parseFloat(converted_amount.toFixed(2))))
-                                    $('.display_converted_amount').text(convert_amount_currency + ' ' + formatToCurrency(parseFloat(converted_amount.toFixed(2))))
-                                    console.log(`match 1 => ${converted_amount}`)
-                                    console.log(parseFloat(forex_rate[index].MIDRATE))
-
-                                }else if(String(forex_rate[index].PAIR.trim()) == String(currency_pair_2.trim())){
-
-                                    $('#convertor_rate').val(formatToCurrency(parseFloat(forex_rate[index].MIDRATE.toFixed(2))))
-                                    $('.display_midrate').text(currency_pair_2.trim() + ' => ' + formatToCurrency(parseFloat(forex_rate[index].MIDRATE.toFixed(2))))
-                                    converted_amount = parseFloat(amount) / parseFloat(forex_rate[index].MIDRATE)
-                                    $('#converted_amount').val(formatToCurrency(parseFloat(converted_amount.toFixed(2))))
-                                    $('.display_converted_amount').text(convert_amount_currency + ' ' + formatToCurrency(parseFloat(converted_amount.toFixed(2))))
-                                    console.log(`match 2 => ${converted_amount}`)
-                                    console.log(parseFloat(forex_rate[index].MIDRATE))
-
-                                }else{
-
-                                }
-                            })
-                        }
                     }
 
-                    $("#select_currency__").change(function() {
-                        {{-- let select_cur_1 = $(this).val()
+                    let currency_pair_1 = cur_1 + '/ ' + cur_2
+                    let currency_pair_2 = cur_2 + '/ ' + cur_1
+
+                    let to_local_currency = cur_1 + '/ SLL'
+                    let local_currency = ''
+
+
+                    console.log(currency_pair_1)
+                    console.log(currency_pair_2)
+                    console.log(forex_rate)
+
+                    $('#converted_amount').val('')
+                    $('#convertor_rate').val('')
+
+
+                    if (forex_rate.length > 0) {
+                        $.each(forex_rate, function(index) {
+
+                            if (String(forex_rate[index].PAIR.trim()) == String(to_local_currency.trim())) {
+                                local_currency = parseFloat(amount) / parseFloat(forex_rate[index].MIDRATE)
+
+                            }
+
+
+
+                            if (String(forex_rate[index].PAIR.trim()) == String(currency_pair_1.trim())) {
+
+                                converted_amount = parseFloat(amount) * parseFloat(forex_rate[index].MIDRATE)
+                                $('#convertor_rate').val(formatToCurrency(parseFloat(forex_rate[index].MIDRATE
+                                    .toFixed(2))))
+                                $('.display_midrate').text(currency_pair_1.trim() + ' => ' + formatToCurrency(
+                                    parseFloat(forex_rate[index].MIDRATE.toFixed(2))))
+                                $('#converted_amount').val(formatToCurrency(parseFloat(converted_amount.toFixed(
+                                    2))))
+                                $('.display_converted_amount').text(convert_amount_currency + ' ' +
+                                    formatToCurrency(parseFloat(converted_amount.toFixed(2))))
+                                console.log(`match 1 => ${converted_amount}`)
+                                console.log(parseFloat(forex_rate[index].MIDRATE))
+
+                            } else if (String(forex_rate[index].PAIR.trim()) == String(currency_pair_2
+                            .trim())) {
+
+                                $('#convertor_rate').val(formatToCurrency(parseFloat(forex_rate[index].MIDRATE
+                                    .toFixed(2))))
+                                $('.display_midrate').text(currency_pair_2.trim() + ' => ' + formatToCurrency(
+                                    parseFloat(forex_rate[index].MIDRATE.toFixed(2))))
+                                converted_amount = parseFloat(amount) / parseFloat(forex_rate[index].MIDRATE)
+                                $('#converted_amount').val(formatToCurrency(parseFloat(converted_amount.toFixed(
+                                    2))))
+                                $('.display_converted_amount').text(convert_amount_currency + ' ' +
+                                    formatToCurrency(parseFloat(converted_amount.toFixed(2))))
+                                console.log(`match 2 => ${converted_amount}`)
+                                console.log(parseFloat(forex_rate[index].MIDRATE))
+
+                            } else {
+
+                            }
+                        })
+                    }
+                }
+
+                $("#select_currency__").change(function() {
+                    {{-- let select_cur_1 = $(this).val()
                         alert(select_cur_1)
 
                         get_cur_1 = _cur_
@@ -1370,12 +1407,12 @@
 
                         return false; --}}
 
-                        currency_convertor(forex_rate)
-                    })
+                    currency_convertor(forex_rate)
+                })
 
-                    $("#select_currency__").change(function() {
-                        currency_convertor(forex_rate)
-                    })
+                $("#select_currency__").change(function() {
+                    currency_convertor(forex_rate)
+                })
 
 
 
@@ -1619,7 +1656,8 @@
                             // $("#display_purpose").text(purpose);
                             // $("#purpose_receipt").text(purpose);
 
-                            var schedule_payment_contraint_input = $('#schedule_payment_contraint_input').val();
+                            var schedule_payment_contraint_input = $(
+                                '#schedule_payment_contraint_input').val();
 
 
 
@@ -1634,7 +1672,7 @@
                             $.ajax({
 
                                 type: 'POST',
-                                url:  'own-account-api',
+                                url: 'own-account-api',
                                 datatype: "application/json",
                                 data: {
                                     'from_account': from_account,
@@ -1709,6 +1747,5 @@
 
                 })
             });
-
         </script>
     @endsection

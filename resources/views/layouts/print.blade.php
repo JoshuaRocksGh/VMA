@@ -5,9 +5,9 @@
 
 
     <meta charset="utf-8" />
-    <title>RC BANKING</title>
+    <title>SLCB BANKING</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Internet Banking Application" name="Internet Banking Portal for Rokel Commercial Bank." />
+    <meta content="Internet Banking Application" name="Internet Banking Portal for Sierra Leone Commerical Bank Ltd." />
     <meta content="Banking Application" name="Union Systems Global" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />

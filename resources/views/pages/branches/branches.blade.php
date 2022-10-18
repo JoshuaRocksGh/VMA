@@ -3,56 +3,61 @@
 
 @section('styles')
     <style>
-        .bg-muted {
-            background-color: #f5f5f5;
+        .nodata {
+            text-align: center !important
+        }
+
+        #no_data_available_img {
+            max-width: 150px !important;
+        }
+
+        .knav.active {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+            background-color: var(--red) !important;
+            border-color: var(--red) !important;
+            color: white !important;
         }
     </style>
 @endsection
 
 @section('content')
-    @include('snippets.top_navbar', ['page_title' => 'BRANCH LOCATOR'])
+    @include('snippets.top_navbar', ['page_title' => 'LOCATOR'])
 
 
 
 
-    <div class="container-xl pt-5">
+    <div class="dashboard site-card container">
 
-        <div class="site-card mt-3"
-            style="background-image: url('assets/images/background.png'); background-repeat: no-repeat; background-size: cover;">
-            <div class="row">
-                <div class="col-md-3 pt-md-5">
-                    <div class="nav flex-column nav-pills" id="pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link my-md-2 rounded-pill active" id="pills-branch-tab" data-toggle="pill"
-                            href="#pills-branch" role="tab" aria-controls="pills-branch" aria-selected="true">Branch</a>
-                        <a class="nav-link my-md-2 rounded-pill" id="pills-atm-tab" data-toggle="pill" href="#pills-atm"
-                            role="tab" aria-controls="pills-atm" aria-selected="false">Atm</a>
-                        <a class="nav-link my-md-2 rounded-pill" id="pills-agents-tab" data-toggle="pill"
-                            href="#pills-agents" role="tab" aria-controls="pills-agents"
-                            aria-selected="false">Agents</a>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="input-group flex-nowrap w-100 rounded-pill my-3 mx-auto " style="max-width: 400px">
-                        <div class="input-group-prepend ">
-                            <span class="input-group-text bg-white text-muted"
-                                style="border-right: none; border-top-left-radius:33px;border-bottom-left-radius:33px; padding-right: 0"
-                                id="addon-wrapping"><i class="fas text-primary fa-search"></i></span>
+        <a href="{{ url()->previous() }}" type="button" class="btn position-absolute" style="left: 5px"><i
+                class="fe-arrow-left"></i>&nbsp;Go
+            Back</a>
+
+        <h4 class="text-red  mb-0 text-center">Branch, ATM, Agent Locator</h4>
+        <div class=" dashboard-body p-4 row pt-md-5 mx-auto">
+            <nav id="card_services_tabs" class="col-md-4  nav nav-pills align-items-between flex-column mx-auto mb-3 flex-row"
+                style="max-width: 350px" role="tablist">
+                <span class="font-weight-bold font-14 text-center mb-2">Select: </span>
+                <button data-toggle="pill"
+                    class=" transition-all py-md-2 active   font-weight-bold mb-2 bg-white rounded-pill border text-danger border-danger knav nav-link"
+                    href="#tab_card_request">Branch</button>
+                <button data-toggle="pill"
+                    class=" transition-all py-md-2   font-weight-bold  mb-2 bg-white rounded-pill border text-danger border-danger knav nav-link "
+                    href="#tab_block_card">ATM</button>
+                <button data-toggle="pill"
+                    class=" transition-all py-md-2   font-weight-bold  mb-2 bg-white rounded-pill border text-danger border-danger knav nav-link "
+                    href="#tab_block_card">Agent</button>
+            </nav>
+            <div class="col-md-8 px-0 mr-auto" style="max-width: 800px">
+                <div class="tab-content pt-0" id="tabContent_card_services">
+                    <div class="tab-pane fade show active " id="tab_card_request" role="tabpanel">
+                        <div class="savings_product_list row">
                         </div>
-                        <input type="text" class="form-control  "
-                            style="border-left: none; border-top-right-radius:33px;border-bottom-right-radius:33px;"
-                            id="search-box" placeholder="Search ..." />
                     </div>
-                    <div class="tab-content " id="pills-tabContent" style="height:700px">
-                        <div class="tab-pane fade show active" id="pills-branch" role="tabpanel"
-                            aria-labelledby="pills-branch-tab">
-                            <div class="mx-auto" style="max-width: 500px">
-                                {{-- branch list comes here --}}
-                            </div>
+                    <div class="tab-pane fade" id="tab_block_card" role="tabpanel">
+                        <div class="current_product_list row ">
                         </div>
-                        <div class="tab-pane fade" id="pills-atm" role="tabpanel" aria-labelledby="pills-atm-tab">
-                            Atm</div>
-                        <div class="tab-pane fade" id="pills-agents" role="tabpanel" aria-labelledby="pills-agents-tab">
-                            Agents</div>
                     </div>
                 </div>
             </div>

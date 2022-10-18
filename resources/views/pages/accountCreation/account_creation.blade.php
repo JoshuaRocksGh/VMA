@@ -1,7 +1,7 @@
-@php
+{{--  @php
 $isApp = true;
-@endphp
-@extends('layouts.master')
+@endphp  --}}
+@extends('layouts.app')
 @section('styles')
     <style>
         .nodata {

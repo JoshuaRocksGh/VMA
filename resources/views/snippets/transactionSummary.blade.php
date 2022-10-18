@@ -52,17 +52,18 @@
                             <span class="d-block font-13 text-primary h3 display_to_account_name"
                                 id="display_to_account_name"> </span>
 
+                            @if ($currentPath === 'Local Bank' || $currentPath === 'International Bank' || $currentPath === 'Standing Order')
+                                <span class="d-block font-13 h3 text-bold text-primary display_to_bank_name"> </span>
+                                {{--  <span class="d-block font-13 h3 text-bold text-primary display_to_account_address">  --}}
+                                </span>
+                            @endif
                             <span class="d-block font-13 text-primary h3 display_to_account_no"
                                 id="display_to_account_no"> </span>
-                            @if ($currentPath !== 'International Bank' && $currentPath !== 'Local Bank')
+                            @if ($currentPath !== 'International Bank' && $currentPath !== 'Local Bank' && $currentPath !== 'Standing Order')
                                 <span class="d-block font-13 text-primary text-bold display_to_account_currency"
                                     id="display_to_account_currency"></span>
                             @endif
-                            @if ($currentPath === 'Local Bank')
-                                <span class="d-block font-13 h3 text-bold display_to_bank_name"> </span>
-                                <span class="d-block font-13 h3 text-bold display_to_account_address">
-                                </span>
-                            @endif
+
                         </td>
                     </tr>
 

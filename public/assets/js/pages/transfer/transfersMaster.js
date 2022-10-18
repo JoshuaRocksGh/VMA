@@ -266,15 +266,16 @@ function getAccountDescription(account) {
 }
 
 function handleToAccount(account) {
-    let {
-        beneficiaryName,
-        beneficiaryAccountCurrency,
-        beneficiaryAccountNumber,
-    } = account;
-    $(".onetime_beneficiary_name").text(beneficiaryName);
-    $(".display_to_account_name").val(beneficiaryName);
-    $(".display_to_account_currency").text(beneficiaryAccountCurrency);
-    $(".display_to_account_no").text(beneficiaryAccountNumber);
+    // let {
+    //     beneficiaryName,
+    //     beneficiaryAccountCurrency,
+    //     beneficiaryAccountNumber,
+    // } = account;
+    // console.log("handleToAccount ==>", account.beneficiaryAccountName);
+    $(".onetime_beneficiary_name").val(account.beneficiaryAccountName);
+    $(".display_to_account_name").text(account.beneficiaryAccountName);
+    $(".display_to_account_currency").text(account.beneficiaryAccountCurrency);
+    $(".display_to_account_no").text(account.beneficiaryAccountNumber);
 }
 
 $(() => {
@@ -412,16 +413,18 @@ $(() => {
 
     $("#to_account").on("change", function () {
         const beneficiaryInfo = $(this).val();
+        // console.log("beneficiaryInfo =>", beneficiaryInfo);
         if (!beneficiaryInfo) {
             $(".display_to_account").val("").text("");
             return false;
         }
         let target = $("#to_account option:selected");
+        //to account selected
         console.log(target);
         let accountData = beneficiaryInfo.split("~");
         let beneficiaryType = target.attr("data-account-type");
-
         let beneficiaryName = target.attr("data-account-description");
+        let beneficiaryBankName = target.attr("data-bank-name");
 
         let beneficiaryAccountNumber = target.attr("data-account-number");
         let beneficiaryAccountCurrency = target.attr("data-account-currency");
@@ -432,9 +435,26 @@ $(() => {
             bankCountryCode;
         if (transferType !== "Own Account") {
             beneficiaryEmail = target.attr("data-account-email");
-            $(".display_to_receiver_email")
-                .val(beneficiaryEmail)
-                .text(beneficiaryEmail);
+
+            if (
+                beneficiaryEmail === "null" ||
+                beneficiaryEmail === "" ||
+                beneficiaryEmail === null
+            ) {
+                // console.log("Isnull ==>", beneficiaryEmail);
+
+                $(".display_to_receiver_email").val("").text("");
+            } else {
+                // console.log("isNotNull ==>", beneficiaryEmail);
+
+                $(".display_to_receiver_email")
+                    .val(beneficiaryEmail)
+                    .text(beneficiaryEmail);
+            }
+
+            $("#beneficiary_bank_name")
+                .val(beneficiaryBankName)
+                .text(beneficiaryBankName);
         }
         // set summary values for display
         $(".display_to_account_type")
@@ -451,7 +471,8 @@ $(() => {
 
         if (
             transferType === "Local Bank" ||
-            transferType === "International Bank"
+            transferType === "International Bank" ||
+            transferType === "Standing Order"
         ) {
             bankName = target.attr("data-bank-name");
             bankCode = target.attr("data-bank-swift-code");

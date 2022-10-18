@@ -268,7 +268,7 @@ function validateFormInputs() {
     const accountName = $("#account_name").val();
     //same bank beneficiary checks
     if (type === "SAB") {
-        bankName = "ROKEL COMMERCIAL BANK";
+        bankName = "SIERRA LEONE COMMERCIAL BANK";
         if (!accountName) {
             toaster("Invalid Account Information", "warning");
             return false;

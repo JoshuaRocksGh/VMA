@@ -386,7 +386,7 @@
 
                         <div class="d-flex justify-content-around w-100 mx-auto">
                             <div class=" my-auto">
-                                <h1 class="font-weight-bold text-white font-28">
+                                <h1 class="font-weight-bold text-danger font-28">
                                     . . . Do more with<br>
                                     <span class="pl-5 font-28"> BestMobile App </span>
                                 </h1>
@@ -411,18 +411,18 @@
 
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="{{ asset('assets/images/mobile-login.png') }}" alt="image"
+                                            <img src="{{ asset('assets/images/login-mobile-new.png') }}" alt="image"
                                                 class=" rounded" style="width:200px !important;max-height:380px;" />
                                         </div>
                                         <div class="carousel-item">
                                             <img class=" rounded" alt="image"
                                                 style="width:200px !important;max-height:380px;"
-                                                src="{{ asset('assets/images/mobile-home.png') }}">
+                                                src="{{ asset('assets/images/mobile-home-new.png') }}">
                                         </div>
                                         <div class="carousel-item">
                                             <img class=" rounded" alt="image"
                                                 style="width:200px !important;max-height:380px;"
-                                                src="{{ asset('assets/images/home-summary.png') }}">
+                                                src="{{ asset('assets/images/mobile-history-new.png') }}">
                                         </div>
                                     </div>
                                     <a class="carousel-control-prev" href="#login_carousel" role="button"

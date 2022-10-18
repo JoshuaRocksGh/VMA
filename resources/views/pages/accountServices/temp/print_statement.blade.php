@@ -17,13 +17,14 @@
             <table class="table table-centered table-striped" id="test">
                 <thead>
                     <tr>
-                        <th colspan="3" style="height: 150px"> <img src="{{ asset('assets/images/rokel_logo.png') }}">
+                        <th colspan="3" style="height: 150px"> <img src="{{ asset('assets/images/logoSLCB.png') }}">
                         </th>
-                        <th><span class="h3">ROKEL COMMERCIAL BANK</span><br>
-                            <span class="h5"> 25-27 Siaka Stevens Street</span><br>
+                        <th><span class="h3">Sierra Leone Commerical Bank Ltd</span><br>
+                            <span class="h5"> Christian Smith Building</span><br>
+                            <span class="h5"> 29/31 Siaka Stevens Street</span><br>
                             <span class="h5"> Freetown, Sierra Leone</span><br>
-                            <span class="h5"> rokelsl@rokelbank.sl</span><br>
-                            <span class="h5"> (+232)-76-22-25-01</span>
+                            <span class="h5"> slcb@slcb.com</span><br>
+                            <span class="h5"> (+232) - 22 -225264</span>
                         </th>
                     </tr>
                     <tr bgcolor='#87AFC6' style="background-color: #dce0e1!important;">

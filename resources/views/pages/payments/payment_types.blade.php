@@ -3,9 +3,9 @@
 @endsection
 @section('content')
     @php
-    $pageTitle = 'payment type';
-    $basePath = 'Payment';
-    $currentPath = 'Make Payment';
+        $pageTitle = 'payment type';
+        $basePath = 'Payment';
+        $currentPath = 'Make Payment';
     @endphp
 
     @include('snippets.pageHeader')
@@ -15,7 +15,7 @@
         <div class=" mb-1 p-3 py-4 row mx-auto dashboard-body" style="max-width: 80rem">
             {{-- SELECT PAYMENT TYPE --}}
             <div class=" col-lg-4">
-                <label class="mb-2 d-block f-18 text-center font-weight-bold text-primary">Select Payment
+                <label class="mb-2 d-block f-18 text-center font-weight-bold text-dark">Select Payment
                     Type</label>
                 <div class="payments-carousel mx-auto" style="max-width: 20rem">
                 </div>
@@ -25,7 +25,7 @@
             <div class=" col-lg-8">
                 {{-- Select Account --}}
                 <div class="mx-auto" style="max-width: 50rem">
-                    <label class="d-block text-center f-18 font-weight-bold mb-1 text-primary"> Select Account To
+                    <label class="d-block text-center f-18 font-weight-bold mb-1 text-dark"> Select Account To
                         Transfer
                         From</label>
 
@@ -60,7 +60,7 @@
                         <div class="p-0 tab-pane fade  show active" id="beneficiary_view" role="tabpanel"
                             aria-labelledby="beneficiary_tab">
                             <div class="form-group d-flex">
-                                <label class="text-primary  col-4 col-form-label bene_details">Select Beneficiary
+                                <label class="text-dark  col-4 col-form-label bene_details">Select Beneficiary
                                 </label>
                                 <select class="form-control accounts-select text-capitalize bene_details" id="to_account"
                                     required>
@@ -74,7 +74,7 @@
                         {{-- ============================================= --}}
                         <div class="p-0 tab-pane fade" id="onetime_view" role="tabpanel" aria-labelledby="onetime_tab">
                             <div class="form-group d-flex text-capitalize" id="subtype_div" style="display: none">
-                                <label class="text-primary col-4 col-form-label text-capitalize" id="subtype_label">
+                                <label class="text-dark col-4 col-form-label text-capitalize" id="subtype_label">
                                 </label>
                                 <select class="form-control accounts-select " id="subtype_select" required>
                                 </select>
@@ -89,14 +89,14 @@
                             </div>
                         </div>
                         <div class="form-group d-flex">
-                            <label class="col-4 text-capitalize col-form-label text-primary">Enter Amount</label>
+                            <label class="col-4 text-capitalize col-form-label text-dark">Enter Amount</label>
                             <input type="number" class="col-8 form-control text-capitalize  " id="amount"
                                 placeholder="Enter Amount">
                             {{-- oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> --}}
                         </div>
                     </div>
                     <div class="text-right mt-4">
-                        <button class="btn font-weight-bold  font-11 btn-primary next-button btn-rounded" id="next_button">
+                        <button class="btn font-weight-bold  font-11 btn-dark next-button btn-rounded" id="next_button">
                             &nbsp; Proceed &nbsp; <i class="fe-arrow-right"></i></button>
                     </div>
                 </div>

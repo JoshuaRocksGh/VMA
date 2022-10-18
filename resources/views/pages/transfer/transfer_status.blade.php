@@ -3,21 +3,20 @@
 
 @section('content')
     @php
-    $pageTitle = ' TRANSFER STATUS';
-    $basePath = 'Transfer';
-    $currentPath = 'Tansfer Status';
+        $pageTitle = ' TRANSFER STATUS';
+        $basePath = 'Transfer';
+        $currentPath = 'Tansfer Status';
     @endphp
     <!-- start page title -->
     @include('snippets.pageHeader')
     {{-- </div> --}}
     <div class="dashboard site-card" id="transaction_summary">
 
-        <div class="table-responsive p-4 dashboard-body p-2">
+        <div class="table-responsive dashboard-body p-2">
 
-            <table class="table table-bordered mt-5 table-striped display responsive nowrap w-100"
-                id="transfer_status_table">
+            <table class="table table-bordered mt-5 table-striped display responsive nowrap w-100" id="transfer_status_table">
                 <thead>
-                    <tr class="bg-primary  text-white ">
+                    <tr class="bg-dark  text-white ">
                         <th class="all"> Date </th>
                         <th class="all"> Beneficiary Name </th>
                         <th class="all"> Amount </th>

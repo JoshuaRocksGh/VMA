@@ -112,23 +112,23 @@
     </style>
 
     @php
-    if (!config('app.corporate')) {
-        $TYPE = 'Personal';
-    } else {
-        $TYPE = 'Corporate';
-    }
+        if (!config('app.corporate')) {
+            $TYPE = 'Personal';
+        } else {
+            $TYPE = 'Corporate';
+        }
     @endphp
 
 
     <div class="overflow-hidden d-flex" style="height: 100vh">
         <div class="auth-card h-100 px-3 py-5 "
-            style="background-image: url({{ asset('assets/images/login-bg.jpg') }});background-repeat: no-repeat;background-size: cover; min-width:400 ">
+            style="background-image: url({{ asset('assets/images/vectorBCK.jpeg') }});background-repeat: no-repeat;background-size: cover; min-width:400 ">
             <div>
                 <div class="text-center">
                     <a class="d-inline-block mb-4" href="{{ url('/') }}">
-                        <img src="{{ asset('assets/images/rokel_logo.png') }} " alt="company logo" height="50">
+                        <img src="{{ asset('assets/images/slcb-bg-logo.png') }} " alt="company logo" height="50">
                     </a>
-                    <h1 class="text-primary page-header font-weight-bold font-20"> {{ $TYPE }} Internet Banking
+                    <h1 class="text-red page-header font-weight-bold font-20"> {{ $TYPE }} Internet Banking
                     </h1>
                 </div>
                 <div class="card-body mt-5 mx-auto" style="max-width: 500px">
@@ -202,7 +202,7 @@
 
 
                         <div class="form-group mb-0 text-center">
-                            <button class="btn btn-primary btn-block" type="submit" id="submit"><span
+                            <button class="btn btn-danger btn-block" type="submit" id="submit"><span
                                     id="set_password">Change
                                     Password</span>
                                 <span class="spinner-border spinner-border-sm mr-1" role="status" id="spinner"
@@ -237,13 +237,13 @@
 
                         <div class="d-flex justify-content-around w-100 mx-auto">
                             <div class=" my-auto">
-                                <h1 class="font-weight-bold text-white font-28">
+                                <h1 class="font-weight-bold text-danger font-28">
                                     . . . Do more with<br>
                                     <span class="pl-5 font-28"> BestMobile App </span>
                                 </h1>
 
                                 <div class="demo  mt-5 font-28">
-                                    <span class="mr-3 font-24 text-primary">BestMobile App</span>
+                                    <span class="mr-3 font-24 text-white">BestMobile App</span>
                                     <span class="font-24 word-wrap">
                                         <span class="word font-weight-bold font-24 wisteria">anywhere...</span>
                                         <span class="word font-weight-bold font-24 belize">anytime...</span>
@@ -261,18 +261,18 @@
 
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="{{ asset('assets/images/mobile-login.png') }}" alt="image"
+                                            <img src="{{ asset('assets/images/login-mobile-new.png') }}" alt="image"
                                                 class=" rounded" style="width:200px !important;max-height:380px;" />
                                         </div>
                                         <div class="carousel-item">
                                             <img class=" rounded" alt="image"
                                                 style="width:200px !important;max-height:380px;"
-                                                src="{{ asset('assets/images/mobile-home.png') }}">
+                                                src="{{ asset('assets/images/mobile-home-new.png') }}">
                                         </div>
                                         <div class="carousel-item">
                                             <img class=" rounded" alt="image"
                                                 style="width:200px !important;max-height:380px;"
-                                                src="{{ asset('assets/images/home-summary.png') }}">
+                                                src="{{ asset('assets/images/mobile-history-new.png') }}">
                                         </div>
                                     </div>
                                     <a class="carousel-control-prev" href="#login_carousel" role="button"
@@ -292,33 +292,32 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col-md-3">
-                                <a class="text-center d-block bg-white rounded p-4"
-                                    href="{{ url('account-creation') }}">
-                                    <i class="fas fa-book-open text-primary font-20"></i>
-                                    <h4 class="mt-3 font-14 text-primary"> Open Account
+                                <a class="text-center d-block bg-white rounded p-4" href="{{ url('account-creation') }}">
+                                    <i class="fas fa-book-open text-danger font-20"></i>
+                                    <h4 class="mt-3 font-14 text-danger"> Open Account
                                     </h4>
                                 </a>
                             </div>
                             <div class="col-md-3">
                                 <a class="text-center d-block bg-white rounded p-4" href="{{ url('branches') }}">
-                                    <i class=" fas fa-map-marked-alt  text-primary font-20"></i>
-                                    <h4 class="mt-3 font-14  text-primary">Branches</h4>
+                                    <i class=" fas fa-map-marked-alt  text-danger font-20"></i>
+                                    <h4 class="mt-3 font-14  text-danger">Branches</h4>
                                 </a>
                             </div> <!-- end .padding -->
 
 
                             <div class="col-md-3">
                                 <a class="text-center d-block bg-white rounded p-4" href="{{ url('enquiry') }}">
-                                    <i class=" fas fa-desktop  text-primary font-20"></i>
-                                    <h4 class="mt-3 font-14  text-primary">Enquiries
+                                    <i class=" fas fa-desktop  text-danger font-20"></i>
+                                    <h4 class="mt-3 font-14  text-danger">Enquiries
                                     </h4>
                                 </a>
                             </div>
                             <div class="col-md-3">
                                 <a class="text-center d-block bg-white rounded p-4" href="{{ url('faq') }}">
-                                    <i class="fas fa-headset  text-primary font-20"></i>
+                                    <i class="fas fa-headset  text-danger font-20"></i>
 
-                                    <h4 class="mt-3 font-14 text-primary">FAQ</h4>
+                                    <h4 class="mt-3 font-14 text-danger">FAQ</h4>
                                 </a>
                             </div>
 

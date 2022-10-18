@@ -7,8 +7,8 @@
         </div>
 
         <span class="d-none d-sm-block font-12 font-weight-medium ">
-            <span class="text-dark "> {{ $basePath }} </span> &nbsp; > &nbsp; <span
-                class="text-danger">{{ $currentPath }}</span>
+            <span class="text-dark "> {{ $basePath }} </span> &nbsp; > &nbsp; <span class="text-bold"
+                style="color:#998f38">{{ $currentPath }}</span>
         </span>
 
     </div>

@@ -1,3 +1,5 @@
+$("#print_qr").hide();
+
 $(() => {
     $("#receive_payment_tab").on("click", () => {
         $("#amount_view").show(500);
@@ -27,7 +29,7 @@ $(() => {
         if (isCashIn) delete qrData.amount;
 
         $("#qrcode").empty();
-
+        $("#print_qr").show();
         blockUi({ block: "#qrcode" });
         setTimeout(() => {
             console.log(qrData);
@@ -35,7 +37,7 @@ $(() => {
         }, 500);
         let qrCode = new QRCode(document.getElementById("qrcode"), {
             text: JSON.stringify(qrData),
-            logo: "assets/images/rokel_logo.png",
+            logo: "assets/images/logoSLCB.png",
             logoWidth: 80,
             logoHeight: 80,
             width: 200,

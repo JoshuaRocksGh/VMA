@@ -147,7 +147,7 @@
                     $currentPath === 'Same Bank' ||
                     $currentPath ===
                         'International
-                                                                                                                                                                                                                                                                                Bank')
+                                                                                                                                                                                                                                                                                                Bank')
                     <div class="tab-pane py-3 px-0 fade" id="onetime_view" role="tabpanel"
                         aria-labelledby="onetime_tab">
                         <div class="col-12">
@@ -195,7 +195,8 @@
                             @else
                                 <div class="form-group align-items-center row">
                                     <label class="col-md-4 text-dark"> Beneficiary A/C Name</label>
-                                    <input type="text" class="form-control  text-input col-md-8"
+                                    <input type="text"
+                                        class="form-control  text-input col-md-8 onetime_beneficiary_name"
                                         placeholder="Enter Beneficiary Name" id="onetime_beneficiary_name">
                                 </div>
                             @endif

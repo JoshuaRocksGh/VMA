@@ -202,14 +202,15 @@
     border: 2px solid transparent;
     font-size: 12px;
     font-weight: bold;
-    color: var(--red);
+    /* color: var(--red); */
+    color: black;
     position: relative;
 }
 .dashboard .dashboard-header .nav-link.active::after {
     content: "";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    color: var(--danger);
+    color: var(--brand);
     position: absolute;
     bottom: 0;
     right: 50%;
@@ -222,12 +223,12 @@
     display: none !important;
 }
 .dashboard .dashboard-header .nav-link:hover {
-    border-color: var(--red);
+    border-color: var(--brand);
 }
 .dashboard .dashboard-header .nav-link.active {
-    background-color: var(--danger);
+    background-color: var(--brand);
     color: var(--white);
-    border-color: var(--danger);
+    border-color: var(--brand);
 }
 
 .dashboard.site-card {
@@ -739,14 +740,14 @@
 }
 
 .knav-primary {
-    color: var(--primary);
+    color: var(--black);
     background-color: var(--white);
-    border-color: var(--primary);
+    border-color: var(--gray);
 }
 .knav-primary.active {
-    background-color: var(--primary);
+    background-color: var(--brand);
     color: var(--white);
-    border-color: var(--primary);
+    border-color: var(--gray);
 }
 .knav-success.active {
     color: var(--white);

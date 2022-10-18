@@ -2,7 +2,6 @@
 // $("#approval_count").html(4);
 // alert("welcome home");
 
-
 function getCorporateRequests(customerNumber, requestStatus) {
     $.ajax({
         type: "GET",
@@ -109,6 +108,8 @@ pageData.barColors = [
 ];
 function transactionsBarChart(transactions) {
     // check if transactions is an array
+    // console.log("transactions =>", transactions);
+    // return false;
     if (transactions?.length <= 0) {
         $("#transactionNoData").show();
         return;
@@ -503,6 +504,7 @@ $(() => {
                 transLimit,
             },
         }).then((data) => {
+            // $("account-transaction-history", data);
             unblockUi("#acc_history");
             transactionsBarChart(pageData.transactions);
             console.log("trans", pageData);
@@ -510,5 +512,3 @@ $(() => {
     });
     $("#chart_account").trigger("change");
 });
-
-
