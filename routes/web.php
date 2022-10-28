@@ -159,7 +159,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('airtime-payment', [paymentController::class, 'airtime_payment'])->name('airtime-payment');
     Route::get('/bulk-korpor', [KorporController::class, 'bulk_korpor'])->name('bulk-korpor');
     Route::get('/utility-payment', [paymentController::class, 'utilities'])->name('utility-payment');
-    Route::get('e-korpor', [paymentController::class, 'e_korpor'])->name('e-korpor');
+    Route::get('salone-link', [paymentController::class, 'e_korpor'])->name('salone-link');
     Route::get('bulk-upload-payment', [paymentController::class, 'bulk_upload_payment'])->name('bulk-upload-payment');
     Route::get('payment-beneficiary', [paymentController::class, 'payment_beneficiary_list'])->name('payment-beneficiary');
     Route::get('payment-beneficiary-list', [paymentController::class, 'beneficiary_list'])->name('payment-beneficiary-list');
@@ -350,6 +350,7 @@ Route::get('validate-kyc-api', [KycController::class, 'validateKyc']);
 
 //route for atm card
 Route::post('atm-card-request-api', [AtmCardRequestController::class, 'atm_card_request'])->name('atm-card-request-api');
+Route::post('corporate-atm-card-request-api', [AtmCardRequestController::class, 'corporate_atm_card_request'])->name('corporate-atm-card-request-api');
 
 //Activate  Card
 Route::post('activate-card-request-api', [AtmCardRequestController::class, 'activate_card_request'])->name('activate-card-request-api');

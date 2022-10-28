@@ -1,10 +1,10 @@
 <div class="modal fade" id="enquiry_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document" style="wid">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-primary font-18 font-weight-bold">Enquiry</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white font-18 font-weight-bold">Enquiry</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
                 </button>
             </div>
             <div class="modal-body pb-4">
@@ -36,8 +36,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button"
-                    class="btn btn-primary btn-rounded waves-effect waves-light disappear-after-success"
+                <button type="button" class="btn btn-dark btn-rounded waves-effect waves-light disappear-after-success"
                     id="proceed_button">
                     Submit
                 </button>
@@ -48,73 +47,78 @@
 
 <script>
     function getServiceType() {
-    return $.ajax({
-        type: "get",
-        url: "get-service-type-api",
-        datatype: "application/json",
-    })
-        .done(({ data }) => {
-            if (!data) {
-                toaster("Couldn't get service type", "warning");
-            }
-            const select = document.getElementById("service_type");
-            data.forEach((service) => {
-                const option = document.createElement("option");
-                option.text = service.description;
-                option.value = service.actualCode;
-                select.appendChild(option);
-            });
-        })
-        .fail((err) => console.log(err.message));
-}
+        return $.ajax({
+                type: "get",
+                url: "get-service-type-api",
+                datatype: "application/json",
+            })
+            .done(({
+                data
+            }) => {
+                if (!data) {
+                    toaster("Couldn't get service type", "warning");
+                }
+                const select = document.getElementById("service_type");
+                data.forEach((service) => {
+                    const option = document.createElement("option");
+                    option.text = service.description;
+                    option.value = service.actualCode;
+                    select.appendChild(option);
+                });
+            })
+            .fail((err) => console.log(err.message));
+    }
 
-function submitComplaint(accountNumber, serviceType, description) {
-    return $.ajax({
-        type: "POST",
-        url: "complaint-api",
-        datatype: "application/json",
-        data: {
-            accountNumber,
-            serviceType,
-            description,
-        },
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-    })
-        .done((res) => console.log(res))
-        .fail((err) => console.log(err.message));
-}
+    function submitComplaint(accountNumber, serviceType, description) {
+        return $.ajax({
+                type: "POST",
+                url: "complaint-api",
+                datatype: "application/json",
+                data: {
+                    accountNumber,
+                    serviceType,
+                    description,
+                },
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            })
+            .done((res) => console.log(res))
+            .fail((err) => console.log(err.message));
+    }
 
-$(function () {
-    siteLoading("show");
-    getServiceType().always(siteLoading("hide"));
-    $(".accounts-select").select2({
-        minimumResultsForSearch: Infinity,
-        templateResult: accountTemplate,
-        templateSelection: accountTemplate,
-    });
-    $("#service_type").select2({
-        minimumResultsForSearch: Infinity,
-    });
-
-    $("#proceed_button").on("click", () => {
-        let accountNumber = $("#from_account option:selected").attr(
-            "data-account-number"
-        );
-        let serviceType = $("#service_type").val();
-        let description = $("#description").val();
-        console.log({ accountNumber, serviceType, description });
-        //validate to ensure fields are not empty
-        if (!accountNumber || !serviceType || !description) {
-            toaster("Fields must not be empty", "warning");
-            return false;
-        }
+    $(function() {
         siteLoading("show");
-        submitComplaint(accountNumber, serviceType, description).always(
-            siteLoading("hide")
-        );
-    });
-});
+        getServiceType().always(siteLoading("hide"));
+        $(".accounts-select").select2({
+            minimumResultsForSearch: Infinity,
+            templateResult: accountTemplate,
+            templateSelection: accountTemplate,
+        });
+        $("#service_type").select2({
+            minimumResultsForSearch: Infinity,
+        });
 
+        $("#proceed_button").on("click", () => {
+            let accountNumber = $("#from_account option:selected").attr(
+                "data-account-number"
+            );
+            let serviceType = $("#service_type").val();
+            let description = $("#description").val();
+            console.log({
+                accountNumber,
+                serviceType,
+                description
+            });
+            //validate to ensure fields are not empty
+            if (!accountNumber || !serviceType || !description) {
+                toaster("Fields must not be empty", "warning");
+                return false;
+            }
+            siteLoading("show");
+            submitComplaint(accountNumber, serviceType, description).always(
+                siteLoading("hide")
+            );
+        });
+    });
 </script>

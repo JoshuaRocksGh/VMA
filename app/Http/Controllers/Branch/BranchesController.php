@@ -21,6 +21,7 @@ class BranchesController extends Controller
     {
         $response = Http::get(env('API_BASE_URL') . "/utilities/getBranches");
         // return $response["data"];
-        return view('pages.branches.branches');
+        $Branches = $response["data"];
+        return view('pages.branches.branches', ["Branches" => $Branches]);
     }
 }

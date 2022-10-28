@@ -242,7 +242,8 @@ function submitSecurityQuestion(userData) {
                 $("#submit_spinner").hide();
                 $("#security_question_submit_text").show();
                 setTimeout(function () {
-                    window.location.replace("/");
+                    // window.location.replace("/");
+                    location.reload();
                 }, 2000);
             } else {
                 error_alert(response.message, "#error_alert");

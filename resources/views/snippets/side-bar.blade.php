@@ -86,7 +86,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ url('e-korpor') }}">E-Korpor</a>
+                        <a href="{{ url('salone-link') }}">Salone-Link</a>
                     </li>
 
                     <li>
@@ -100,7 +100,7 @@
 
                     @if (config('app.corporate'))
                         <li>
-                            <a href="{{ url('bulk-korpor') }}">Bulk E-Korpor</a>
+                            <a href="{{ url('bulk-korpor') }}">Bulk Salone-link</a>
                         </li>
                     @endif
 
@@ -153,14 +153,14 @@
                 </ul>
             </div>
         </li>
-        @if (!config('app.corporate'))
-            <li class="menu-item">
-                <a class="menu-item-header" href="{{ url('card-services') }}">
-                    <i class="fas fa-credit-card"></i>
-                    <span> Card Services </span>
-                </a>
-            </li>
-        @endif
+        {{--  @if (!config('app.corporate'))  --}}
+        <li class="menu-item">
+            <a class="menu-item-header" href="{{ url('card-services') }}">
+                <i class="fas fa-credit-card"></i>
+                <span> Card Services </span>
+            </a>
+        </li>
+        {{--  @endif  --}}
 
         @if (config('app.corporate'))
             <li class="menu-item">

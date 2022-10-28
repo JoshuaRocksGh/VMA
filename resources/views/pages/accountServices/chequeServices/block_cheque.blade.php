@@ -2,30 +2,33 @@
     @csrf
     <div class="container mx-auto" style="max-width: 550px">
         <div class="form-group ">
-            <label class=" text-primary"> Card Display Name</label>
-            <input class="form-control text-input" placeholder="Card Display Name" type="text" />
+            <label class="text-dark"> Beneficiary Name</label>
+            <input class="form-control text-input" placeholder="Name Of Beneficiary" id="beneficiaryName"
+                type="text" />
         </div>
-        <div class="form-group row align-items-end ">
-            <div class="col-6"><label class="text-primary">From Cheque No.</label>
-                <input class="form-control text-input" placeholder="Start Cheque No." type="text" />
-            </div>
-            <div class="col-6">
-                <label class="text-primary">To Cheque No</label>
-                <input class="form-control text-input" placeholder="End Cheque No." type="text" />
-            </div>
+        <div class="form-group ">
+            <label class=" text-dark"> Cheque Amount</label>
+            <input class="form-control text-input" placeholder="Cheque Amount" type="text" id="chequeAmount" />
         </div>
         <div class="form-group  mb-3" id="pay_from_account">
 
-            <label class=" text-primary">Number of Leaflets</label>
+            <label class=" text-dark">Date Issued</label>
 
-            <input class="form-control text-input" type="date" />
+            <input class="form-control text-input" type="date" id="issueDate" />
         </div>
-        <div class="form-group ">
-            <label class="text-primary"> Beneficiary Name</label>
-            <input class="form-control text-input" placeholder="Name Of Beneficiary" type="text" />
+        <div class="form-group row align-items-end ">
+            <div class="col-6"><label class="text-dark">Start Cheque No.</label>
+                <input class="form-control text-input" placeholder="Start Cheque No." type="text" id="startCheque" />
+            </div>
+            <div class="col-6">
+                <label class="text-dark">End Cheque No</label>
+                <input class="form-control text-input" placeholder="End Cheque No." type="text" id="endCheque" />
+            </div>
         </div>
+
+
         <div class="form-group text-right mt-4">
-            <button type="button" class="btn btn-primary waves-effect waves-light" id="btn_submit_request_statement">
+            <button type="button" class="btn btn-dark waves-effect waves-light" id="btn_submit_cheque_block">
                 Submit
             </button>
         </div>

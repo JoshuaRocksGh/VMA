@@ -1,7 +1,7 @@
 @php
-$pageTitle = 'E-Korpor Payment';
-$basePath = 'Payment';
-$currentPath = 'E-Korpor';
-$currentType = 'korpor';
+    $pageTitle = 'Salone-Link Payment';
+    $basePath = 'Payment';
+    $currentPath = 'Salone';
+    $currentType = 'korpor';
 @endphp
 @include('pages.payments.payment_master')

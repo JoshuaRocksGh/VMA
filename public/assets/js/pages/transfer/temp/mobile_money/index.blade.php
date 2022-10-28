@@ -2,7 +2,6 @@
 
 
 @section('styles')
-
     <style>
         @media print {
             .hide_on_print {
@@ -29,10 +28,7 @@
             overflow-y: hidden;
 
         }
-
     </style>
-
-
 @endsection
 
 @section('content')
@@ -45,7 +41,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h4 class="text-primary">
-                        <img src="{{ asset('assets/images/logoRKB.png') }}" alt="logo" style="zoom: 0.05">&emsp;
+                        <img src="{{ asset('assets/images/logoSLCB.png') }}" alt="logo" style="zoom: 0.05">&emsp;
                         MOBILE MONEY
                     </h4>
                 </div>
@@ -82,7 +78,8 @@
                                     style="background-image: linear-gradient(to bottom right, white, rgb(223, 225, 226));">
                                     <br><br><br>
 
-                                    <form action="#" id="payment_details_form" autocomplete="off" aria-autocomplete="none">
+                                    <form action="#" id="payment_details_form" autocomplete="off"
+                                        aria-autocomplete="none">
                                         @csrf
                                         <div class="row container">
                                             <div class="col-md-1"></div>
@@ -123,7 +120,8 @@
                                                                 &nbsp;<span class="text-danger">*</span></b>
                                                             <select class="form-control col-md-8 bene_details"
                                                                 id="to_account" required>
-                                                                <option value=""><b>-- Select Beneficiary --</b> </option>
+                                                                <option value=""><b>-- Select Beneficiary --</b>
+                                                                </option>
 
                                                             </select>
                                                         </div>
@@ -137,19 +135,22 @@
 
                                                     <div class="row mb-2">
                                                         <b class="text-primary col-md-4">Name </b>
-                                                        <input type="text" class="form-control col-md-8" id="beneficiary_name" readonly>
+                                                        <input type="text" class="form-control col-md-8"
+                                                            id="beneficiary_name" readonly>
 
                                                     </div>
 
                                                     <div class="row mb-2">
                                                         <b class="text-primary col-md-4">Recipient Mobile Number </b>
-                                                        <input type="text" class="form-control col-md-8" id="beneficiary_number" readonly>
+                                                        <input type="text" class="form-control col-md-8"
+                                                            id="beneficiary_number" readonly>
 
                                                     </div>
 
                                                     <div class="row mb-2">
                                                         <b class="text-primary col-md-4">Recipient Network</b>
-                                                        <input type="text" class="form-control col-md-8" id="beneficiary_network" readonly>
+                                                        <input type="text" class="form-control col-md-8"
+                                                            id="beneficiary_network" readonly>
 
                                                     </div>
                                                     <hr>
@@ -204,20 +205,29 @@
                                                 <div id="onetime_beneficiary_form">
 
                                                     <div class="row mb-2">
-                                                        <b class="text-primary col-md-4" >Name &nbsp;<span class="text-danger">*</span></b>
-                                                        <input type="text" class="form-control col-md-8" id="Onetime_beneficiary_name" placeholder="Enter Beneficiary Name">
+                                                        <b class="text-primary col-md-4">Name &nbsp;<span
+                                                                class="text-danger">*</span></b>
+                                                        <input type="text" class="form-control col-md-8"
+                                                            id="Onetime_beneficiary_name"
+                                                            placeholder="Enter Beneficiary Name">
 
                                                     </div>
 
                                                     <div class="row mb-2">
-                                                        <b class="text-primary col-md-4" >Recipient Mobile Number &nbsp;<span class="text-danger">*</span></b>
-                                                        <input type="text" class="form-control col-md-8" id="onetime_beneficiary_number" placeholder="Enter Beneficiary Telephone">
+                                                        <b class="text-primary col-md-4">Recipient Mobile Number
+                                                            &nbsp;<span class="text-danger">*</span></b>
+                                                        <input type="text" class="form-control col-md-8"
+                                                            id="onetime_beneficiary_number"
+                                                            placeholder="Enter Beneficiary Telephone">
 
                                                     </div>
 
                                                     <div class="row mb-2">
-                                                        <b class="text-primary col-md-4" >Recipient Network &nbsp;<span class="text-danger">*</span></b>
-                                                        <input type="text" class="form-control col-md-8" id="onetime_beneficiary_network" placeholder="Enter Beneficiary Network">
+                                                        <b class="text-primary col-md-4">Recipient Network &nbsp;<span
+                                                                class="text-danger">*</span></b>
+                                                        <input type="text" class="form-control col-md-8"
+                                                            id="onetime_beneficiary_network"
+                                                            placeholder="Enter Beneficiary Network">
 
                                                     </div>
                                                     <hr>
@@ -229,7 +239,8 @@
 
                                                         <div class="col-2">
                                                             <div class="input-group mb-2">
-                                                                <div class="input-group-prepend" style="margin-right:-1px;">
+                                                                <div class="input-group-prepend"
+                                                                    style="margin-right:-1px;">
                                                                     <div
                                                                         class="input-group-text display_from_account_currency">
                                                                         SLL</div>
@@ -237,7 +248,8 @@
                                                             </div>
                                                         </div>
 
-                                                        <input type="text" class="form-control col-6" id="onetime_amount" placeholder="Amount 0.00"
+                                                        <input type="text" class="form-control col-6"
+                                                            id="onetime_amount" placeholder="Amount 0.00"
                                                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                                             required>
 
@@ -249,7 +261,8 @@
                                                                 class="text-danger">*</span></b>
 
 
-                                                        <select class="form-control col-md-8" id="onetime_category" required>
+                                                        <select class="form-control col-md-8" id="onetime_category"
+                                                            required>
                                                             <option value="">---Not Selected---</option>
 
                                                         </select>
@@ -261,7 +274,8 @@
                                                         <b class="col-md-4 text-primary ">Purpose of Transfer &nbsp;
                                                             <span class="text-danger">*</span></b>
 
-                                                        <input type="text" class="form-control col-md-8" id="onetime_purpose"
+                                                        <input type="text" class="form-control col-md-8"
+                                                            id="onetime_purpose"
                                                             placeholder="Enter purpose of transaction" required>
 
                                                     </div>
@@ -271,7 +285,8 @@
 
 
                                                 <div class="form-group text-right">
-                                                    <button class="btn btn-primary btn-rounded" type="submit" id="next_button">
+                                                    <button class="btn btn-primary btn-rounded" type="submit"
+                                                        id="next_button">
                                                         &nbsp; Next &nbsp; <i class="fe-arrow-right"></i></button>
                                                 </div>
 
@@ -451,8 +466,8 @@
                                                 <div class="col-6">
 
                                                     <div class="form-group">
-                                                        <label class="" for=""> Select Receipient Network Type:<span
-                                                                class="text-danger">*</span></label>
+                                                        <label class="" for=""> Select Receipient Network
+                                                            Type:<span class="text-danger">*</span></label>
                                                         <select class="custom-select" id="onetime_network_type">
                                                             <option value="">Select Network Type</option>
                                                             <option value="MTN">MTN</option>
@@ -732,8 +747,8 @@
                                                             <td>Enter Pin: </td>
                                                             <td>
                                                                 <div class="form-group">
-                                                                    <input type="text" name="user_pin" class="form-control"
-                                                                        id="user_pin"
+                                                                    <input type="text" name="user_pin"
+                                                                        class="form-control" id="user_pin"
                                                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                                                                 </div>
                                                             </td>
@@ -866,15 +881,15 @@
         </div>
 
 
-        <script src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
         <script>
             function from_account() {
                 $.ajax({
                     type: 'GET',
-                    url:  'get-my-account',
+                    url: 'get-my-account',
                     datatype: "application/json",
                     success: function(response) {
                         console.log(response.data);
@@ -936,15 +951,15 @@
                     }
                 })
                 $("#checkmeout0").click(function() {
-                    if ($(this).is(":checked")){
+                    if ($(this).is(":checked")) {
                         {{--  alert("Checked!");  --}}
-                    $("#onetime_beneficiary_form").toggle(500);
-                    $("#saved_beneficiary_form").hide();
-                    $(".bene_details").hide();
+                        $("#onetime_beneficiary_form").toggle(500);
+                        $("#saved_beneficiary_form").hide();
+                        $(".bene_details").hide();
 
 
 
-                    }else{
+                    } else {
                         $("#saved_beneficiary_form").toggle(500);
                         $(".bene_details").toggle(500);
                         $("#onetime_beneficiary_form").hide();
@@ -1243,6 +1258,5 @@
                 })
 
             });
-
         </script>
     @endsection

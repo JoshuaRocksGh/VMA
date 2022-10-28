@@ -8,7 +8,7 @@
         </div> --}}
         <div class="form-group  mb-3">
 
-            <label class=" text-primary">Number of Leaflets</label>
+            <label class=" text-dark">Number of Leaflets</label>
 
             <select class="form-control " required name="noOfLeaflets" id="no_of_leaflets" required>
                 <option disabled selected value="">Select number of leaflets</option>
@@ -18,14 +18,14 @@
             </select>
         </div>
         <div class="form-group ">
-            <label class="text-primary"> Pick Up Branch</label>
+            <label class="text-dark"> Pick Up Branch</label>
             <select class="form-control" required name="pickUpBranch" id="pick_up_branch"
                 placeholder="Select Pick Up Branch" required>
                 <option disabled selected value="">Select Pick Up Branch</option>
             </select>
         </div>
         <div class="form-group text-right mt-4">
-            <button type="submit" class="btn btn-primary waves-effect waves-light" id="btn_submit_cheque_request">
+            <button type="submit" class="btn btn-dark waves-effect waves-light" id="btn_submit_cheque_request">
                 Submit
             </button>
         </div>

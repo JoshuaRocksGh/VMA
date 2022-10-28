@@ -56,11 +56,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     let settingsHtml = "";
     settingsList.forEach((e) => {
         const { title, bgClass, icon, dataTarget } = e;
-        settingsHtml += `   <button data-toggle="modal" data-target="${dataTarget}" class="card d-sm-block mx-auto d-flex  p-1  w-100 ${bgClass} pt-2 px-2 pt-sm-4 grad m-3" style="max-width: 300px;">
-       <div class=" d-flex  card-img  w-100 justify-content-sm-center" >
+        settingsHtml += `   <button data-toggle="modal" data-target="${dataTarget}" class="card d-sm-block mx-auto d-flex  p-1   ${bgClass} pt-2 px-2 pt-sm-4 grad m-3 col-md-4" style="max-width: 180px;">
+       <div class=" d-flex  card-img  w-20 h-20 justify-content-sm-center" >
         <i class="fas  fa-${icon}"></i>
         </div>
-        <span class="sm-4 mt-2 mt-sm-4 d-sm-block  font-weight-bold font-12">${title}</span>
+        <span class="sm-4 mt-2 mt-sm-4 d-sm-block font-weight-bold font-12">${title}</span>
 <div class="text"> </div>
     </button>`;
     });
