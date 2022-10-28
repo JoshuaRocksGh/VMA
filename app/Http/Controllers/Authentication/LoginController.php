@@ -91,6 +91,8 @@ class LoginController extends Controller
                 return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
             }
             $result = json_decode($response->body());
+            // return $result;
+
             if ($result->responseCode !== '000') {
                 return $base_response->api_response($result->responseCode, $result->message,  $result->data); // return API BASERESPONSE
             } // API responseCode is 000
@@ -147,6 +149,7 @@ class LoginController extends Controller
             //     'message' => NULL
 
             // ]);
+
 
             return  $base_response->api_response($result->responseCode, $result->message,  $result->data); // return API BASERESPONSE
         } catch (\Exception $error) {

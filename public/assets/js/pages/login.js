@@ -21,11 +21,15 @@ function login(email, password) {
 
         success: function (response) {
             console.log("login response =>", response);
+            console.log(
+                "login response.responseCode =>",
+                response.responseCode
+            );
             // return false;
             $("#submit").attr("disabled", false);
 
             if (response.responseCode == "000") {
-                // console.log("login response =>", response.responseCode);
+                console.log("login response =>", response.responseCode);
 
                 if (response.data.firstTimeLogin == true) {
                     window.location = "change-password";

@@ -111,7 +111,7 @@
             </div>
         </li>
 
-        <li class="menu-item">
+        {{--  <li class="menu-item">
 
             <a class="menu-item-header" href="{{ url('loan-request') }}">
                 <i class="fas fa-balance-scale-right"></i>
@@ -120,9 +120,9 @@
 
             </a>
 
-        </li>
+        </li>  --}}
 
-        <li class="menu-item">
+        {{--  <li class="menu-item">
             <a class="menu-item-header" href="#sidebarAccountServices" data-toggle="collapse">
                 <i class="fas fa-business-time"></i>
                 <span> Account Services </span>
@@ -184,18 +184,18 @@
                 </div>
             </li>
         @endif
-        <li class="menu-item">
+        {{--  <li class="menu-item">
             <a class="menu-item-header" href="{{ url('settings') }}">
                 <i class="fas fa-user-cog"></i> <span> Settings </span>
             </a>
 
 
-        </li>
-        <li class="menu-item">
+        </li>  --}}
+        {{--  <li class="menu-item">
             <a class="menu-item-header" href="{{ url('branch-locator') }}">
                 <i class="fas fa-search-location"></i> <span> Branch Locator </span>
             </a>
-        </li>
+        </li>  --}}
 
         <li class="menu-item">
             <a class="menu-item-header" href="#" id="sidebar_logout">
