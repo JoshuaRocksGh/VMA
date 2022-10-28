@@ -153,13 +153,14 @@
             <div class="modal-content p-0">
                 <div id="accordion">
                     <div class="card mb-0">
-                        <div class="card-header bg-primary" id="headingOne">
+                        <div class="card-header bg-danger" id="headingOne">
                             <h5 class="m-0">
                                 <a href="#collapseOne" class="text-white" data-toggle="collapse" aria-expanded="true"
                                     aria-controls="collapseOne">
                                     <b>Transaction Details</b>
                                 </a>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <button type="button" class="close text-white" data-dismiss="modal"
+                                    aria-hidden="true">x</button>
                             </h5>
                         </div>
 
@@ -172,42 +173,42 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">Transaction Date</th>
-                                                <td class="text-danger transaction_date"></td>
+                                                <td class="text-primary transaction_date"></td>
 
                                             </tr>
                                             <tr>
                                                 <th scope="row">Value Date</th>
-                                                <td class="text-danger value_date"></td>
+                                                <td class="text-primary value_date"></td>
 
                                             </tr>
                                             <tr>
                                                 <th scope="row">Transaction No.</th>
-                                                <td class="text-danger transaction_number"></td>
+                                                <td class="text-primary transaction_number"></td>
 
                                             </tr>
                                             <tr>
                                                 <th scope="row">Narration</th>
-                                                <td class="text-danger narration"></td>
+                                                <td class="text-primary narration"></td>
 
                                             </tr>
                                             <tr>
                                                 <th scope="row">Amount</th>
-                                                <td class="text-danger amount"></td>
+                                                <td class="text-primary amount"></td>
 
                                             </tr>
 
                                             <tr>
                                                 <th scope="row">Contra Account</th>
-                                                <td class="text-danger contra-account"></td>
+                                                <td class="text-primary contra-account"></td>
 
                                             </tr>
                                             <tr>
                                                 <th scope="row">Branch</th>
-                                                <td class="text-danger branch"></td>
+                                                <td class="text-primary branch"></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Channel</th>
-                                                <td class="text-danger channel"></td>
+                                                <td class="text-primary channel"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -227,7 +228,7 @@
                 <div class="modal-header bg-info">
                     <h5 class="modal-title text-white font-weight-bold" id="attachment_modal_title">Attachments</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">X</span>
                     </button>
                 </div>
                 <div class="modal-body">

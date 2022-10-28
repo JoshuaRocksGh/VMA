@@ -219,7 +219,7 @@ function populateBeneficiariesSelect(type) {
             let content = `<div class='d-flex text-capitalize px-2 align-items-center' style='line-height: 1.5 !important'>
             <div class='text-right mr-2'><img style='width: 50px;' src='${logo}' class='img-fluid'/></div>
             <div class='font-14  '>
-                 <div class='text-primary font-weight-bold'>${NICKNAME}</div>
+                 <div class='text-dark font-weight-bold'>${NICKNAME}</div>
                  <div >${ACCOUNT}</div>
             </div> </div>`;
             let option = `<option data-content="${content}" data-type='${PAYEE_NAME}' value='${ACCOUNT}'> </option> `;

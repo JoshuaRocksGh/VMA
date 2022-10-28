@@ -229,13 +229,13 @@ $(function () {
                     render: (data, type, row) =>
                         data === 0
                             ? (attachment = `<a href="#" data-value='${row.transactionNumber}' class="attachment-icon" >
-                <i class="fe-file-text d-block text-center text-success"></a>`)
+                <i class="fe-file-text d-block text-center text-gray"></a>`)
                             : "N/A",
                 },
                 {
                     data: "transactionNumber",
                     render: (data, type, row) => {
-                        return `<button type="button" class="btn  btn-outline-primary more-details" data-toggle="modal" data-target="#accordion-modal" batch-no="${row.batchNumber}"
+                        return `<button type="button" class="btn  btn-outline-dark more-details" data-toggle="modal" data-target="#accordion-modal" batch-no="${row.batchNumber}"
                                 posting-date="${row.postingSysDate}" trans-number="${row.transactionNumber}" value-date="${row.valueDate}" branch="${row.branch}"
                                 narration="${row.narration}" amount="${row.amount}" contra-account="${row.contraAccount}" channel="${row.channel}">Details</button>`;
                     },

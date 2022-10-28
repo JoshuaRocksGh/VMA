@@ -2,12 +2,12 @@
 <style>
     .detail-card {
         border-radius: 15px;
-        border: 1px var(--primary) solid;
+        border: 1px var(--danger) solid;
         /* box-shadow: 2px 2px 1px #d3d3d3; */
     }
 
     .total {
-        box-shadow: 2px 2px 1px var(--primary);
+        /* box-shadow: 2px 2px 1px var(--primary); */
         border: none;
     }
 
@@ -26,14 +26,14 @@
     aria-labelledby="payment_verification_modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="max-width: 900px;">
-            <div class="modal-header">
+            <div class="modal-header bg-danger">
                 <div class="close mx-0">
                     <span aria-hidden="true"></span>
                 </div>
-                <h5 class="modal-title mx-auto font-weight-bold font-15 text-primary text-uppercase">Payment summary
+                <h5 class="modal-title mx-auto font-weight-bold font-15 text-white text-uppercase">Payment summary
                 </h5>
                 <button type="button" class="close mx-0" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true" class="text-white">X</span>
                 </button>
             </div>
             <div class="modal-body font-14 p-3">
@@ -73,7 +73,7 @@
                     </div>
 
                 </div>
-                <div class='mx-3 px-3 py-1 detail-card total bg-primary'>
+                <div class='mx-3 px-3 py-1 detail-card total bg-success'>
                     <div class="d-item text-white my-1 font-weight-bold">
                         <span> TOTAL</span><span id="details_total_amount">SLL xxx</span>
 
@@ -85,7 +85,7 @@
                 </div>
                 <div class='mx-3'>
                     <button type="button" data-dismiss="modal" id="confirm_transfer_button"
-                        class="btn btn-primary font-weight-bold btn-block btn-rounded py-2 mb-4">PROCEED</button>
+                        class="btn btn-dark font-weight-bold btn-block btn-rounded py-2 mb-4">PROCEED</button>
                 </div>
 
             </div>

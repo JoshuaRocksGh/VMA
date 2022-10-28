@@ -149,7 +149,9 @@
                             <div class="d-flex justify-content-between align-items-end">
                                 <label for="password">Password</label>
                                 @if (!config('app.corporate'))
-                                    <button type="button" class="text-muted text-right font-12" id="forgot_password">Forgot
+                                    <button type="button" class="text-muted text-right font-12" id="forgot_password"
+                                        onmouseover='this.style.textDecoration="underline"'
+                                        onmouseout='this.style.textDecoration="none"'>Forgot
                                         your
                                         password?</button>
                                 @endif
@@ -207,7 +209,7 @@
                             </div>
 
                             <div class="form-group" id="security_question_form" style="display: none">
-                                <div class=" text-12">Security Question</div>
+                                <div class=" text-12 text-danger">Security Question</div>
                                 <label for="security_question_answer" id="security_question">Security Question</label>
                                 <input type="text" id="security_question_answer" name="security_question_answer"
                                     class="form-control" autocomplete="off" aria-autocomplete="off">
@@ -231,15 +233,16 @@
                                         style="display: none" role="status" aria-hidden="true"></span>
                                     <span class="spinner-text-next" style="display: none">Loading</span>
                                 </button>
-                                <button class="btn btn-primary btn-block" style="display: none" type="button"
+                                <button class="btn btn-danger btn-block" style="display: none" type="button"
                                     id="security_question_submit">
                                     <span id="security_question_submit_text">Submit</span>
                                     <span class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
                                         id="submit_spinner" style="display: none"></span>
                                 </button>
                             </div>
-                            <div class="mt-4 text-center"> <button type="button" class=" text-dark  mx-auto"
-                                    id="reset_password_back_button">Back to Login
+                            <div class="mt-4 text-center"> <button type="button"
+                                    class=" font-weight-bold text-red  mx-auto" id="reset_password_back_button">Back to
+                                    Login
                                 </button>
                             </div>
                         </form>

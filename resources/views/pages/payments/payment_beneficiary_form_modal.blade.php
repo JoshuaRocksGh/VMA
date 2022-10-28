@@ -18,11 +18,11 @@
 <div class="modal fade" id="edit_modal" data-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header bg-primary" id="beneficiary_form_header">
+            <div class="modal-header bg-danger" id="beneficiary_form_header">
                 <h5 class="modal-title text-white text-capitalize font-weight-bold" id="beneficiary_form_title">
                     Beneficiary Form</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true" class="text-white">X</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -60,12 +60,11 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="delete_btn">Delete</button>
+                <button type="button" class="btn btn-secondary" id="delete_btn">Delete</button>
 
-                <button type="button" class="btn btn-primary mx-2" id="save_btn">Save</button>
+                <button type="button" class="btn btn-dark mx-2" id="save_btn">Save</button>
             </div>
         </div>
     </div>
 </div>
-<script src="assets/js/pages/payments/paymentBeneficiaryForm.js">
-</script>
+<script src="assets/js/pages/payments/paymentBeneficiaryForm.js"></script>
