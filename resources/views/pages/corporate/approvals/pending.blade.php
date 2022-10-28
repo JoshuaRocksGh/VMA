@@ -41,9 +41,9 @@
         </div>
     </div> --}}
     @php
-    $currentPath = 'Pending ';
-    $basePath = 'Approvals';
-    $pageTitle = 'Pending Approval';
+        $currentPath = 'Pending ';
+        $basePath = 'Approvals';
+        $pageTitle = 'Pending Approval';
     @endphp
     @include('snippets.pageHeader')
 
@@ -66,7 +66,7 @@
                 <table id=""
                     class="table   table-bordered table-striped display responsive nowrap w-100  pending_transaction_request ">
                     <thead>
-                        <tr class="bg-info text-white">
+                        <tr class="bg-dark text-white">
                             <th>Rquest Id</th>
                             <th class="all">Req-Type</th>
                             <th class="all">Account No</th>
@@ -81,7 +81,7 @@
                         <tr>
                             <td colspan="8">
                                 <div class="d-flex justify-content-center">
-                                    <div class="spinner-border avatar-lg text-primary  m-2 canvas_spinner" role="status">
+                                    <div class="spinner-border avatar-lg text-danger  m-2 canvas_spinner" role="status">
                                     </div>
                                 </div>
                             </td>

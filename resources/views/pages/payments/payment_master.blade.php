@@ -33,24 +33,24 @@
         }
 
         #redeemed_history.active {
-            background-color: var(--success) !important;
+            background-color: var(--brand) !important;
             color: white !important;
-            border-color: var(--success) !important;
+            border-color: var(--gray) !important;
 
         }
 
 
         #pending_history.active {
-            background-color: var(--primary-alt) !important;
+            background-color: var(--brand) !important;
             color: white !important;
-            border-color: var(--primary-alt) !important;
+            border-color: var(--gray) !important;
 
         }
 
         #cancelled_history.active {
-            background-color: var(--red) !important;
+            background-color: var(--brand) !important;
             color: white !important;
-            border-color: var(--red) !important;
+            border-color: var(--gray) !important;
 
         }
     </style>
@@ -272,7 +272,7 @@
                                 </div>
                                 <div class="col-md-12 {{ $currentType }}_details" style="display: none">
                                     <div class="form-group row ">
-                                        <b class="col-md-12 text-primary">Select Account To Redeem Into
+                                        <b class="col-md-12 text-dark">Select Account To Redeem Into
                                             &nbsp;
                                             <span class="text-danger"></span> </b>
                                         <select class="form-control col-md-12 accounts-select" id="redeem_account"
@@ -355,7 +355,7 @@
                         <div class="form-group mb-3 justify-content-center d-md-flex mx-md-auto" style="max-width: 750px">
 
                             <div class=" align-self-center" style="min-width: 100px"> <label
-                                    class="d-block f-18 font-weight-bold mb-1 text-primary">
+                                    class="d-block f-18 font-weight-bold mb-1 text-dark">
                                     Select
                                     Account</label></div>
                             <div class="pl-md-3 w-100">
@@ -372,14 +372,14 @@
                             <nav class="col-md-4  nav nav-pills flex-column mx-auto mb-3 flex-row"
                                 style="max-width: 350px">
                                 <button id="pending_history" data-value="unredeemed"
-                                    class=" transition-all py-md-2 active  text-sm-center mb-1 mb-md-2   font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                                    class=" transition-all py-md-2 active  text-sm-center mb-1 mb-md-2   font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
                                     href="#">Pending</button>
                                 <button data-value="redeemed"
-                                    class=" transition-all py-md-2  text-sm-center mb-1 mb-md-2   font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link "
+                                    class=" transition-all py-md-2  text-sm-center mb-1 mb-md-2   font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link "
                                     id="redeemed_history" href="#">Redeemed</button>
 
                                 <button id="cancelled_history" data-value="reversed"
-                                    class="  transition-all py-md-2 text-sm-center mtb1  mb-md-2  font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                                    class="  transition-all py-md-2 text-sm-center mtb1  mb-md-2  font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
                                     href="#">Cancelled</button>
                             </nav>
                             <div class="col-md-8" id="{{ $currentType }}_history_display" style="max-width: 650px;">

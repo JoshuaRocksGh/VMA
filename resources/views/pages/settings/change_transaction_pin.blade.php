@@ -2,10 +2,10 @@
 <div class="modal fade" id="change_transaction_pin_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-primary font-18 font-weight-bold">Change Transaction Pin</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white font-18 font-weight-bold">Change Transaction Pin</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">X</span>
                 </button>
             </div>
             <div class="modal-body pb-4">
@@ -40,7 +40,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id='proceed_button' class="btn pin-change btn-primary">Proceed</button>
+                <button type="button" id='proceed_button' class="btn pin-change btn-dark">Proceed</button>
                 <button style="display: none" type="button" id='confirm_change'
                     class="btn otp-display btn-primary">Change Pin</button>
             </div>
@@ -49,69 +49,79 @@
 </div>
 
 <script>
-    const changePin = ({ oldPin, newPin, confirmPin }) => {
-return $.ajax({
-    type: "POST",
-    url: "change-pin-api",
-    datatype: "application/json",
-    data: {
+    const changePin = ({
         oldPin,
         newPin,
-        confirmPin,
-    },
-    headers: {
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    },
-}).done((response) => {
-    console.log(response);
-    if (response.responseCode == "000") {
-        toaster(response.message, "success");
-    } else {
-        toaster(response.message, "error");
-    }
-});
-};
-$("#change_transaction_pin_modal").on('hidden.bs.modal',() =>{
-    $(".pincode-input").pincodeInput().data('plugin_pincodeInput').clear();
-    $(".pin-change").show()
-    $(".otp-display").hide()
+        confirmPin
+    }) => {
+        return $.ajax({
+            type: "POST",
+            url: "change-pin-api",
+            datatype: "application/json",
+            data: {
+                oldPin,
+                newPin,
+                confirmPin,
+            },
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        }).done((response) => {
+            console.log(response);
+            if (response.responseCode == "000") {
+                toaster(response.message, "success");
+            } else {
+                toaster(response.message, "error");
+            }
+        });
+    };
+    $("#change_transaction_pin_modal").on('hidden.bs.modal', () => {
+        $(".pincode-input").pincodeInput().data('plugin_pincodeInput').clear();
+        $(".pin-change").show()
+        $(".otp-display").hide()
 
-})
-    $("#change_transaction_pin_modal").on('show.bs.modal',() =>{
-    $('proceed_button').attr('data-current', 'pin');
-    $(".pincode-input").pincodeInput({ inputs: 4 });
+    })
+    $("#change_transaction_pin_modal").on('show.bs.modal', () => {
+        $('proceed_button').attr('data-current', 'pin');
+        $(".pincode-input").pincodeInput({
+            inputs: 4
+        });
 
         $("#proceed_button").on("click", () => {
-          
-        const oldPin = $("#old_pin").val();
-        const newPin = $("#new_pin").val();
-        const confirmPin = $("#confirm_new_pin").val();
 
-        console.log({ oldPin, newPin, confirmPin });
-        if (!oldPin || !newPin || !confirmPin) {
-            toaster("Please enter all fields", "warning");
-            return false;
-        }
-        if (newPin !== confirmPin) {
-            toaster("New pin and confirm pin do not match", "warning");
-            return false;
-        }
-        if (newPin.length !== 4) {
-            toaster("Please enter a valid pin code", "warning");
-            return false;
-        }
-        $(".pin-change").hide()
-        $(".otp-display").show()
-    });
-    
-    // siteLoading("show");
-    // changePin({
-    //     oldPin,
-    //     newPin,
-    //     confirmPin,
-    // }).then(() => {
-    //     siteLoading("hide");
-    // });
+            const oldPin = $("#old_pin").val();
+            const newPin = $("#new_pin").val();
+            const confirmPin = $("#confirm_new_pin").val();
+
+            console.log({
+                oldPin,
+                newPin,
+                confirmPin
+            });
+            if (!oldPin || !newPin || !confirmPin) {
+                toaster("Please enter all fields", "warning");
+                return false;
+            }
+            if (newPin !== confirmPin) {
+                toaster("New pin and confirm pin do not match", "warning");
+                return false;
+            }
+            if (newPin.length !== 4) {
+                toaster("Please enter a valid pin code", "warning");
+                return false;
+            }
+            $(".pin-change").hide()
+            $(".otp-display").show()
+        });
+
+        // siteLoading("show");
+        // changePin({
+        //     oldPin,
+        //     newPin,
+        //     confirmPin,
+        // }).then(() => {
+        //     siteLoading("hide");
+        // });
 
     })
 </script>

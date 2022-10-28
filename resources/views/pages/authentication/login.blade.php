@@ -391,11 +391,11 @@
                             <div class=" my-auto">
                                 <h1 class="font-weight-bold text-danger font-28">
                                     . . . Do more with<br>
-                                    <span class="pl-5 font-28"> BestMobile App </span>
+                                    <span class="pl-5 font-28"> Mi YONE App </span>
                                 </h1>
 
                                 <div class="demo  mt-5 font-28">
-                                    <span class="mr-3 font-24 text-white">BestMobile App</span>
+                                    <span class="mr-3 font-24 text-white">Mi Yone App</span>
                                     <span class="font-24 word-wrap">
                                         <span class="word font-weight-bold font-24 wisteria">anywhere...</span>
                                         <span class="word font-weight-bold font-24 belize">anytime...</span>

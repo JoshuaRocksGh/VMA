@@ -15,8 +15,8 @@
             margin-left: 0 !important;
             margin-right: 0 !important;
             box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
-            background-color: var(--red) !important;
-            border-color: var(--red) !important;
+            background-color: var(--brand) !important;
+            border-color: var(--gray) !important;
             color: white !important;
         }
     </style>
@@ -40,23 +40,58 @@
                 style="max-width: 350px" role="tablist">
                 <span class="font-weight-bold font-14 text-center mb-2">Select: </span>
                 <button data-toggle="pill"
-                    class=" transition-all py-md-2 active   font-weight-bold mb-2 bg-white rounded-pill border text-danger border-danger knav nav-link"
+                    class=" transition-all py-md-2 active   font-weight-bold mb-2 bg-white rounded-pill border text-dark border-gray knav nav-link"
                     href="#tab_card_request">Branch</button>
                 <button data-toggle="pill"
-                    class=" transition-all py-md-2   font-weight-bold  mb-2 bg-white rounded-pill border text-danger border-danger knav nav-link "
+                    class=" transition-all py-md-2   font-weight-bold  mb-2 bg-white rounded-pill border text-dark border-gray knav nav-link "
                     href="#tab_block_card">ATM</button>
                 <button data-toggle="pill"
-                    class=" transition-all py-md-2   font-weight-bold  mb-2 bg-white rounded-pill border text-danger border-danger knav nav-link "
+                    class=" transition-all py-md-2   font-weight-bold  mb-2 bg-white rounded-pill border text-dark border-gray knav nav-link "
                     href="#tab_block_card">Agent</button>
             </nav>
             <div class="col-md-8 px-0 mr-auto" style="max-width: 800px">
                 <div class="tab-content pt-0" id="tabContent_card_services">
                     <div class="tab-pane fade show active " id="tab_card_request" role="tabpanel">
                         <div class="savings_product_list row">
+
+                            @foreach ($Branches as $branch)
+                                <div class="col-md-4 p-2">
+                                    <div class="card" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                                        <div class="card-body p-2">
+                                            <img src="{{ asset('assets/images/bank.png') }}" align="left" width="40px"
+                                                height="40px" />
+                                            <div align="right">
+                                                <h3 class="p-0">{{ $branch['branchDescription'] }}</h3>
+                                                <small class="p-0">08:00 - 16:00 (Mon - Fri)</small> <br>
+                                                <small class=" p-0"><i
+                                                        class="mr-1 fas fa-phone text-danger"></i>23350997763</small>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+
                         </div>
                     </div>
                     <div class="tab-pane fade" id="tab_block_card" role="tabpanel">
                         <div class="current_product_list row ">
+                            <div class="col-md-4 p-2">
+                                <div class="card" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                                    <div class="card-body p-2">
+                                        <img src="{{ asset('assets/images/atm.png') }}" align="left" width="40px"
+                                            height="40px" />
+                                        <div align="right">
+                                            <h3 class="p-0">BO</h3>
+                                            <small class="p-0">24 Hrs (Mon - Sun)</small> <br>
+                                            {{--  <small class=" p-0"><i
+                                                    class="mr-1 fas fa-phone text-danger"></i>23350997763</small>  --}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

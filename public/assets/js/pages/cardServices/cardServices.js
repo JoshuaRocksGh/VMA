@@ -20,6 +20,38 @@ function getBranches() {
     });
 }
 
+function corporateCardRequest({
+    accountDetails,
+    cardType,
+    cardTypeName,
+    pickUpBranch,
+    pickUpBranchName,
+}) {
+    siteLoading("show");
+    return $.ajax({
+        type: "POST",
+        url: "corporate-atm-card-request-api",
+        datatype: "application/json",
+        data: {
+            accountDetails,
+            cardType,
+            cardTypeName,
+            pickUpBranch,
+            pickUpBranchName,
+        },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    }).done((response) => {
+        console.log(response);
+        if (response.responseCode == "000") {
+            toaster(response.message, "success");
+        } else {
+            toaster(response.message, "error");
+        }
+    });
+}
+
 function requestCard({ accountNumber, cardType, pickUpBranch, pinCode }) {
     return $.ajax({
         type: "POST",
@@ -88,11 +120,27 @@ $(function () {
         const accountNumber = $("#from_account option:selected").attr(
             "data-account-number"
         );
+        const accountDetails = $("#from_account option:selected").val();
         const cardType = $("#card_type").val();
+        const cardTypeName = $("#card_type option:selected").html();
         let pickUpBranch = $("#pick_up_branch").val();
+        const pickUpBranchName = $("#pick_up_branch option:selected").html();
+        // console.log("pickUpBranchName ==>", pickUpBranchName);
         if (!accountNumber || !cardType || !pickUpBranch) {
             toaster("Please complete all fields", "warning");
             return false;
+        }
+        if (ISCORPORATE) {
+            corporateCardRequest({
+                accountDetails,
+                cardType,
+                cardTypeName,
+                pickUpBranch,
+                pickUpBranchName,
+            }).then(() => {
+                siteLoading("hide");
+            });
+            return;
         }
         $("#pin_code_modal").modal("show");
 

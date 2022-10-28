@@ -55,7 +55,7 @@
                             <div class="col-md-8">
 
                                 <div class="dashboard site-card">
-                                    <div class=" tab-content dashboard-body border-primary border table-responsive p-4">
+                                    <div class=" tab-content dashboard-body border-danger border table-responsive p-4">
 
                                         <div class="">
                                             <div class="">
@@ -167,8 +167,8 @@
 
 
                                 <div class="site-card p-1">
-                                    <div class="site-card-body py-2 bg-primary" style="min-height: 10px !important;">
-                                        <h6 class="text-center mb-0 text-white">Approvers</h6>
+                                    <div class="site-card-body py-2 bg-danger" style="min-height: 10px !important;">
+                                        <h6 class="text-center mb-0 text-white text-bold">Approvers</h6>
                                     </div>
                                     <div class="site-card-body">
 

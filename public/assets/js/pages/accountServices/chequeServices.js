@@ -63,6 +63,8 @@ function submitChequeRequest(data) {
         });
 }
 
+function submitChequeBlock(data) {}
+
 $(function () {
     siteLoading("show");
     Promise.all([getBranches()])
@@ -102,6 +104,41 @@ $(function () {
             accountMandate,
             branchName,
         };
+        if (!ISCORPORATE) {
+            $("#pin_code_modal").modal("show");
+        } else {
+            submitChequeRequest(PageData.chequeRequestData);
+        }
+    });
+
+    $("#btn_submit_cheque_block").on("click", (e) => {
+        e.preventDefault();
+        // alert("herrrrrr");
+
+        const accountNumber = $("#from_account option:selected").attr(
+            "data-account-number"
+        );
+        let accountMandate = $("#from_account option:selected").attr(
+            "data-account-mandate"
+        );
+
+        const beneficiaryName = $("#beneficiaryName").val();
+        const chequeAmount = $("#chequeAmount").val();
+        const issueDate = $("#issueDate").val();
+        const startCheque = $("#startCheque").val();
+        const endCheque = $("#endCheque").val();
+
+        if (
+            !beneficiaryName ||
+            !chequeAmount ||
+            !issueDate ||
+            !startCheque ||
+            !endCheque
+        ) {
+            toaster("Please fill all the fields", "warning");
+            return;
+        }
+
         if (!ISCORPORATE) {
             $("#pin_code_modal").modal("show");
         } else {

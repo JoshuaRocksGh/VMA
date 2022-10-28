@@ -151,4 +151,51 @@ class AtmCardRequestController extends Controller
 
         }
     }
+
+    // CORPORATE CARD REQEST
+    public function corporate_atm_card_request(Request $request)
+    {
+        $base_response = new BaseResponse();
+        // return $request;
+        $authToken = session()->get('userToken');
+        $userID = session()->get('userId');
+        $userAlias = session()->get('userAlias');
+        $customerPhone = session()->get('customerPhone');
+        $customerNumber = session()->get('customerNumber');
+        $userMandate = session()->get('userMandate');
+
+        $getAccount = $request->accountDetails;
+        $allAccDetails = explode("~", $getAccount);
+        // return $allAccDetails;
+        $accountType = $allAccDetails[0];
+        $accountName = $allAccDetails[1];
+        $accountNumber = $allAccDetails[2];
+        $accountCurrency = $allAccDetails[3];
+        $accountCurrencyIsoCode = $allAccDetails[5];
+        $accountMandate = $allAccDetails[6];
+
+        $data = [
+            "accountType" => $accountType,
+            "accountName" => $accountName,
+            "accountNumber" => $accountNumber,
+            "accountCurrency" => $accountCurrency,
+            "accountCurrencyIsoCode" => $accountCurrencyIsoCode,
+            "accountCurrencyIsoCode" => $accountCurrencyIsoCode,
+            "authToken" => $authToken,
+            "userID" => $userID,
+            "userAlias" => $userAlias,
+            "customerPhone" => $customerPhone,
+            "customerNumber" => $customerNumber,
+            "userMandate" => $userMandate,
+        ];
+
+        // return $data;
+        try {
+            $response = Http::post(env('CIB_API_BASE_URL') . "card-request-gone-for-pending", $data);
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
+            return $base_response->api_response('500', $e->getMessage(),  NULL); // return API BASERESPONSE
+        }
+    }
 }

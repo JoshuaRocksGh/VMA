@@ -4,8 +4,8 @@
     <!-- third party css -->
     <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
         type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
-        rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet"
+        type="text/css" />
     <link href="{{ asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('assets/libs/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}" rel="stylesheet"
@@ -51,9 +51,9 @@
         </div>
     </div> --}}
     @php
-    $currentPath = 'Approved ';
-    $basePath = 'Approvals';
-    $pageTitle = 'Approved Approvals';
+        $currentPath = 'Approved ';
+        $basePath = 'Approvals';
+        $pageTitle = 'Approved Approvals';
     @endphp
     @include('snippets.pageHeader')
 
@@ -71,12 +71,12 @@
         <div class="dashboard site-card">
 
 
-            <div class="tab-content dashboard-body border-primary border table-responsive p-4">
+            <div class="tab-content dashboard-body border-danger border table-responsive p-4">
 
                 <table id="datatable-buttons"
                     class="table dt-responsive  table-bordered table-striped display responsive nowrap w-100 pending_transaction_request ">
                     <thead>
-                        <tr class="bg-info text-white">
+                        <tr class="bg-dark text-white">
                             <th class="all">Rquest Id</th>
                             <th class="all">Req-Type</th>
                             <th class="all">Account No</th>
