@@ -144,7 +144,7 @@
                         <table id=""
                             class="table table-bordered  table-centered table-condensed nowrap table-nowrap   w-100 pending_transaction_request ">
                             <thead>
-                                <tr class="bg-primary  border-primary text-white">
+                                <tr class="bg-dark  border-dark text-white">
                                     <th>Rquest Id</th>
                                     <th>Req-Type</th>
                                     <th>Account No</th>
