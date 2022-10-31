@@ -44,7 +44,7 @@ function submitChequeRequest(data) {
             console.log(response);
             if (response?.data) {
                 const { data } = response;
-                if (data.status === "success") {
+                if (data.responseCode === "000") {
                     toaster(data.message, "success");
                     $("#cheque_request_form")[0].reset();
                 } else {
@@ -63,7 +63,51 @@ function submitChequeRequest(data) {
         });
 }
 
-function submitChequeBlock(data) {}
+function submitChequeBlock(data) {
+    // console.log(data);
+
+    if (ISCORPORATE) {
+        var url = "corporate-chequebook-block";
+    } else {
+        var url = "cheque-book-block-api";
+    }
+    // var url = "cheque-book-block-api";
+
+    return $.ajax({
+        type: "POST",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        dataType: "application/json",
+        url: url,
+        data,
+        beforeSend: (xhr) => {
+            siteLoading("show");
+        },
+    })
+        .always((e) => siteLoading("hide"))
+        .done((response) => {
+            console.log(response);
+            if (response?.data) {
+                const { data } = response;
+                if (data.status === "success") {
+                    toaster(data.message, "success");
+                    $("#cheque_request_form")[0].reset();
+                } else {
+                    toaster(data.message, "error");
+                }
+            }
+        })
+        .fail((e) => {
+            console.log(e.responseText);
+            const res = JSON.parse(e.responseText);
+            if (res?.message) {
+                toaster(res.message, "error");
+                return;
+            }
+            toaster("Something went wrong", "error");
+        });
+}
 
 $(function () {
     siteLoading("show");
@@ -92,6 +136,8 @@ $(function () {
         const leaflets = $("#no_of_leaflets").val();
         const branchCode = $("#pick_up_branch").val();
         const branchName = $("#pick_up_branch option:selected").html();
+        const chequeRequestType = "Request";
+
         console.log({ leaflets, branchCode, accountNumber });
         if (!accountNumber || !leaflets || !branchCode) {
             toaster("Please fill all the fields", "warning");
@@ -103,6 +149,7 @@ $(function () {
             branchCode,
             accountMandate,
             branchName,
+            chequeRequestType,
         };
         if (!ISCORPORATE) {
             $("#pin_code_modal").modal("show");
@@ -121,12 +168,26 @@ $(function () {
         let accountMandate = $("#from_account option:selected").attr(
             "data-account-mandate"
         );
+        let accountDetails = $("#from_account option:selected").val();
 
         const beneficiaryName = $("#beneficiaryName").val();
         const chequeAmount = $("#chequeAmount").val();
         const issueDate = $("#issueDate").val();
         const startCheque = $("#startCheque").val();
         const endCheque = $("#endCheque").val();
+        const chequeRequestType = "Block";
+
+        PageData.chequeBlockData = {
+            accountNumber,
+            beneficiaryName,
+            chequeAmount,
+            accountMandate,
+            issueDate,
+            startCheque,
+            endCheque,
+            chequeRequestType,
+            accountDetails,
+        };
 
         if (
             !beneficiaryName ||
@@ -139,10 +200,13 @@ $(function () {
             return;
         }
 
-        if (!ISCORPORATE) {
-            $("#pin_code_modal").modal("show");
+        if (ISCORPORATE) {
+            submitChequeBlock(PageData.chequeBlockData);
+
+            // $("#pin_code_modal").modal("show");
         } else {
-            submitChequeRequest(PageData.chequeRequestData);
+            // submitChequeBlock(PageData.chequeBlockData);
+            $("#pin_code_modal").modal("show");
         }
     });
 
@@ -157,8 +221,28 @@ $(function () {
             toaster("Pin code must be 4 digits", "warning");
             return;
         }
-        PageData.chequeRequestData.pinCode = pinCode;
-        submitChequeRequest(PageData.chequeRequestData);
-        $("#user_pin").val("");
+        // console.log(PageData);
+        // console.log(PageData.chequeBlockData);
+        // console.log(pinCode);
+
+        // PageData.chequeRequestData.pinCode = pinCode;
+
+        // return false;
+
+        if (PageData.chequeRequestData) {
+            PageData.chequeRequestData.pinCode = $("#user_pin").val();
+            console.log(PageData.chequeRequestData);
+            // return false;
+            submitChequeRequest(PageData.chequeRequestData);
+            $("#user_pin").val("");
+        } else if (PageData.chequeBlockData) {
+            PageData.chequeBlockData.pinCode = $("#user_pin").val();
+            console.log(PageData.chequeBlockData);
+            // return false;
+            submitChequeBlock(PageData.chequeBlockData);
+            $("#user_pin").val("");
+        } else {
+            return;
+        }
     });
 });

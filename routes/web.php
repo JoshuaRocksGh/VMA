@@ -337,11 +337,13 @@ Route::post('make-payment-api', [PaymentsController::class, 'makePayment']);
 
 //route for cheque book request api
 Route::post('cheque-book-request-api', [AccountServicesChequeBookRequestController::class, 'cheque_book_request']);
+Route::post('cheque-book-block-api', [AccountServicesChequeBookRequestController::class, 'cheque_book_block']);
 Route::post('submit-cheque-book-request', [AccountServicesChequeBookRequestController::class, 'cheque_book_request'])->name('submit-cheque-book-request');
 Route::post('submit-stop-cheque-book-request', [StopChequeController::class, 'submit_stop_cheque_book_request'])->name('submit-stop-cheque-book-request');
 
 // Corporate chequebook request
 Route::post('corporate-chequebook-request', [AccountServicesChequeBookRequestController::class, 'corporate_cheque_book_request'])->name('corporate-chequebook-request');
+Route::post('corporate-chequebook-block', [AccountServicesChequeBookRequestController::class, 'corporate_cheque_book_block'])->name('corporate-chequebook-block');
 
 
 // KYC EDIT

@@ -354,24 +354,24 @@
 
 
                         <div class="col-6 py-2">
-                            <a href="{{ url('account-creation') }}" class="btn btn-outline-primary w-100 btn-rounded"> <i
-                                    class="fas fa-book-open"></i> Open
+                            <a href="{{ url('account-creation') }}" class="btn btn-outline-danger w-100 btn-rounded"> <i
+                                    class="fas fa-book-open text-danger"></i> Open
                                 Account</a>
                         </div>
                         <div class="col-6 py-2">
 
-                            <a href="{{ url('enquiry') }}" class="btn btn-outline-primary w-100 btn-rounded"> <i
-                                    class="fas fa-desktop"></i> Make Enquiry</a>
+                            <a href="{{ url('enquiry') }}" class="btn btn-outline-danger w-100 btn-rounded"> <i
+                                    class="fas fa-desktop text-danger"></i> Make Enquiry</a>
                         </div>
 
                         <div class="col-6 py-2">
-                            <a href="{{ url('branches') }}" class="btn btn-outline-primary w-100 btn-rounded"> <i
-                                    class="fas fa-map-marked-alt"></i> Branches</a>
+                            <a href="{{ url('branches') }}" class="btn btn-outline-danger w-100 btn-rounded"> <i
+                                    class="fas fa-map-marked-alt text-danger"></i> Branches</a>
                         </div>
                         <div class="col-6 py-2">
 
-                            <a href="{{ url('faq') }}" class="btn btn-outline-primary w-100 btn-rounded"> <i
-                                    class="fas fa-headset"></i> FAQs</a>
+                            <a href="{{ url('faq') }}" class="btn btn-outline-danger w-100 btn-rounded"> <i
+                                    class="fas fa-headset text-danger"></i> FAQs</a>
                         </div>
 
                     </div>

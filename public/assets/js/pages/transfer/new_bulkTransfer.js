@@ -65,41 +65,41 @@ function bulk_upload_list(fileBatch, upload_response) {
 
             if (response.responseCode == "000") {
                 // NO ERRORS IN FILE UPLOAD
-                let data = response.data.uploadData;
-                let uploadData = response.data.uploadData;
-                let uploadDetails = response.data.uploadDetails;
-                let uploadDetails_date = uploadDetails.valueDate;
-                var uploadDetails_date_split = uploadDetails_date.split("T");
-                let value_date = uploadDetails_date_split[0];
-                let total_upload = data.length;
+                // let data = response.data.uploadData;
+                // let uploadData = response.data.uploadData;
+                // let uploadDetails = response.data.uploadDetails;
+                // let uploadDetails_date = uploadDetails.valueDate;
+                // var uploadDetails_date_split = uploadDetails_date.split("T");
+                // let value_date = uploadDetails_date_split[0];
+                // let total_upload = data.length;
 
-                let valid_uploads = 0;
-                let valid_uploads_count = 1;
-                let invalid_uploads = 0;
-                let invalid_uploads_count = 1;
+                // let valid_uploads = 0;
+                // let valid_uploads_count = 1;
+                // let invalid_uploads = 0;
+                // let invalid_uploads_count = 1;
 
-                let all_valid_uploads = $(
-                    "#all_successful_uploads_table"
-                ).DataTable();
+                // let all_valid_uploads = $(
+                //     "#all_successful_uploads_table"
+                // ).DataTable();
                 // var nodes = all_valid_uploads.rows().nodes();
                 // $(".successful_uploads tr").remove();
                 // $(".failed_uploads tr").remove();
 
-                let all_failed_uploads = $(
-                    "#all_failed_uploads_table"
-                ).DataTable({
-                    columnDefs: [
-                        {
-                            targets: "all",
-                            render: (data) => {
-                                if (!data) {
-                                    return "n/a";
-                                }
-                                return data;
-                            },
-                        },
-                    ],
-                });
+                // let all_failed_uploads = $(
+                //     "#all_failed_uploads_table"
+                // ).DataTable({
+                //     columnDefs: [
+                //         {
+                //             targets: "all",
+                //             render: (data) => {
+                //                 if (!data) {
+                //                     return "n/a";
+                //                 }
+                //                 return data;
+                //             },
+                //         },
+                //     ],
+                // });
 
                 // $(".failed_uploads tr").remove();
 
@@ -167,7 +167,7 @@ function bulk_upload_list(fileBatch, upload_response) {
             </a>`;
                 } else {
                     var action_button = `<a href="delete-bulk-transfer?batch_no=${fileBatch}"  type="button" class="btn btn-danger btn-sm waves-effect waves-light text-center delete_bulk_transfer_upload" batch_no="${fileBatch}">
-                <i class="mdi mdi-close-circle-outline"></i>&nbsp;<b>Delete</b>
+                <i class="mdi mdi-close-circle-outline"></i>&nbsp;<b>Delete & Upload</b>
             </a>`;
                 }
                 total_bulk_upload.row
@@ -181,7 +181,7 @@ function bulk_upload_list(fileBatch, upload_response) {
                         `<b>${value_date}</b>`,
                         // `<b class="text-success">${uploadAcctValid}</b>`,
                         `<td><button type="button" class="btn btn-sm btn-primary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>${total_upload}</b>&emsp;</button></td>`,
-                        `<td><button type="button" class="btn btn-sm btn-danger waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>${invalid.length}</b>&emsp;</button></td>`,
+                        `<td><button type="button" class="btn btn-sm btn-secondary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>${invalid.length}</b>&emsp;</button></td>`,
                         ` <td>${action_button}</td>`,
                     ])
                     .draw(false);
@@ -212,7 +212,7 @@ function bulk_upload_list(fileBatch, upload_response) {
                 //     });
                 // });
 
-                console.log(group);
+                // console.log(group);
                 //     $.each(uploadData, function (index) {
                 //     // console.log(uploadData[index]);
                 //     console.log(uploadData[index].valid);
@@ -605,21 +605,186 @@ $(document).ready(function () {
                 success: function (response) {
                     console.log(response);
                     siteLoading("hide");
-                    //return false;
+                    // return false;
                     let data = response?.data;
 
                     if (response.responseCode == "000") {
-                        let fileBatch = data.fileBatch;
+                        let fileBatch = response.data.fileBatch;
                         // $("#submit_cheque_request").text("Submit File");
 
                         document.getElementById("bulk_upload_form").reset();
+                        let data = response.data.uploadInfo.uploadData;
+                        let uploadData = response.data.uploadInfo.uploadData;
+                        let uploadDetails =
+                            response.data.uploadInfo.uploadDetails;
+                        let uploadDetails_date = uploadDetails.valueDate;
+                        var uploadDetails_date_split =
+                            uploadDetails_date.split("T");
+                        let value_date = uploadDetails_date_split[0];
+                        let total_upload =
+                            response.data.uploadInfo.uploadData.length;
 
-                        setTimeout(function () {
-                            bulk_upload_list(fileBatch, response.message);
-                        }, 200);
+                        // setTimeout(function () {
+                        //     bulk_upload_list(fileBatch, response.message);
+                        // }, 200);
+
+                        let valid_uploads = 0;
+                        let valid_uploads_count = 1;
+                        let invalid_uploads = 0;
+                        let invalid_uploads_count = 1;
+
+                        let all_valid_uploads = $(
+                            "#all_successful_uploads_table"
+                        ).DataTable();
+
+                        let all_failed_uploads = $(
+                            "#all_failed_uploads_table"
+                        ).DataTable({
+                            columnDefs: [
+                                {
+                                    targets: "all",
+                                    render: (data) => {
+                                        if (!data) {
+                                            return "n/a";
+                                        }
+                                        return data;
+                                    },
+                                },
+                            ],
+                        });
+
+                        const group = { valid: [], invalid: [] };
+                        uploadData.forEach((e) => {
+                            const {
+                                name,
+                                accountNumber,
+                                amount,
+                                refNumber,
+                                acctValid,
+                                valid,
+                            } = e;
+                            // console.log("e=>", e);
+                            // return false;
+                            if (e.valid === "Y") {
+                                group.valid.push(e);
+                                console.log("name => ", acctValid);
+                                all_valid_uploads.row
+                                    .add([
+                                        // `<b>${valid_uploads_count}</b>`,
+                                        `<b>${name}</b>`,
+                                        `<b>${accountNumber}</b>`,
+                                        `<b>${amount}</b>`,
+                                        `<b>${refNumber}</b>`,
+                                        `<b class="text-success">${acctValid}</b>`,
+                                    ])
+                                    .draw(false);
+                                return;
+                            }
+                            group.invalid.push(e);
+                            all_failed_uploads.row
+                                .add([
+                                    // `<b>${valid_uploads_count}</b>`,
+                                    `<b>${name}</b>`,
+                                    `<b>${accountNumber}</b>`,
+                                    `<b>${amount}</b>`,
+                                    `<b>${refNumber}</b>`,
+                                    `<b class="text-danger">${acctValid}</b>`,
+                                ])
+                                .draw(false);
+                            return;
+                        });
+
+                        const { valid, invalid } = group;
+                        if (invalid.length < 1) {
+                            var action_button = `<a href="view-bulk-transfer?batch_no=${fileBatch}" type="button" class="btn btn-success btn-sm waves-effect waves-light text-center">
+                <i class="mdi mdi-check-all"></i>&nbsp;<b>Upload</b>
+            </a>`;
+                        } else {
+                            var action_button = `<a href="delete-bulk-transfer?batch_no=${fileBatch}"  type="button" class="btn btn-danger btn-sm waves-effect waves-light text-center delete_bulk_transfer_upload" batch_no="${fileBatch}">
+                <i class="mdi mdi-close-circle-outline"></i>&nbsp;<b>Delete</b>
+            </a>`;
+                        }
+                        total_bulk_upload.row
+                            .add([
+                                // `<b>${valid_uploads_count}</b>`,
+                                `<b>${uploadDetails.referenceNumber}</b>`,
+                                `<b>${uploadDetails.debitAccount}</b>`,
+                                `<b>${formatToCurrency(
+                                    parseFloat(uploadDetails.totalAmount)
+                                )}</b>`,
+                                `<b>${value_date}</b>`,
+                                // `<b class="text-success">${uploadAcctValid}</b>`,
+                                `<td><button type="button" class="btn btn-sm btn-primary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>${total_upload}</b>&emsp;</button></td>`,
+                                `<td><button type="button" class="btn btn-sm btn-secondary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>${invalid.length}</b>&emsp;</button></td>`,
+                                ` <td>${action_button}</td>`,
+                            ])
+                            .draw(false);
+
+                        let editButtons = document.querySelectorAll(
+                            ".edit_record_uploaded"
+                        );
+
+                        editButtons.forEach((button) => {
+                            button.addEventListener("click", (e) => {
+                                const editButton = e.currentTarget;
+                                console.log(editButton);
+
+                                const recordDetail = data.find(
+                                    (e) =>
+                                        e.recordId ===
+                                        $(editButton).attr("recordid")
+                                );
+                                // console.log("recordDetail =>", recordDetail);
+
+                                $(".upload_recordID").val(
+                                    recordDetail.recordId
+                                );
+                                $(".upload_name").val(recordDetail.name);
+                                $(".upload_accountNumber").text(
+                                    recordDetail.accountNumber
+                                );
+                                $(".upload_amount").val(recordDetail.amount);
+                                $(".upload_description").val(
+                                    recordDetail.transDescription
+                                );
+                                $(".upload_bank").val(recordDetail.bank);
+                                $(".upload_referenceNumber").val(
+                                    recordDetail.refNumber
+                                );
+                                $(".upload_batch").val(
+                                    recordDetail.uploadBatch
+                                );
+
+                                // $("#full-width-modal").hide();
+                                // $("#full-width-modal").remove();
+                                // $("#full-width-modal").removeAttr("class");
+                                $(".edit_record_uploaded").click(function () {
+                                    $(".all_upload_details").hide();
+                                    $(".record_details_display").show();
+                                });
+
+                                $(".edit_record_close").click(function () {
+                                    $(".all_upload_details").hide();
+                                    $(".record_details_display").show();
+                                });
+
+                                // $(".edit_record_close").click(function(){
+
+                                // });
+                            });
+                        });
+
+                        console.log(
+                            "valid_uploads_count=>",
+                            valid_uploads_count
+                        );
+
+                        console.log("invalid_uploads_count=>", invalid_uploads);
+
                         // siteLoading("hide");
-                        // toaster(response.message, "success", 3000);
+                        toaster(response.message, "success", 3000);
                     } else {
+                        // USE THE BATCH GENERATE TO DELETE === WRITE A JAVASCRIPT API CALL
                         // $("#submit_cheque_request").text("Submit File");
                         let errorMessage = response.message;
 

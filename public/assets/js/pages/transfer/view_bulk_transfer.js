@@ -103,8 +103,9 @@ function submit_upload(batch_no) {
     });
 }
 
-function reject_upload(customer_no) {
-    const ipAPI = "reject-bulk-transaction-api?customer_no=" + customer_no;
+function reject_upload(batch_no) {
+    // const ipAPI = "reject-bulk-transaction-api?customer_no=" + customer_no;
+    const ipAPI = "delete-bulk-transfer?batch_no=" + batch_no;
 
     Swal.fire([
         {

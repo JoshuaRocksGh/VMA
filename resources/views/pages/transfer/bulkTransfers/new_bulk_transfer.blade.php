@@ -14,12 +14,12 @@
     <div class="dashboard site-card overflow-hidden">
         <p class="text-muted font-14 m-r-20 m-b-20">
             <span> <i class="fa fa-info-circle  text-red"></i> <b style="color:red;">Please Note:&nbsp;&nbsp;</b>
-            </span> Download template for upload (<span class="text-danger"><a href="{{ url('download_same_bank_file') }}"
+            </span> Download template for upload
+            {{--  (<span class="text-danger"><a href="{{ url('download_same_bank_file') }}"
                     class="text-danger"> Click Here for Same Bank
-                </a></span>)
-            / (<span class="text-danger"><a href="{{ url('download_other_bank_file') }}" class="text-danger"> Click
-                    Here for Other
-                    Bank </a></span>)
+                </a></span>)  --}} (<span class="text-danger"><a href="{{ url('download_other_bank_file') }}"
+                    class="text-danger"> Click
+                    Here to Download </a></span>)
 
 
         </p>
@@ -51,15 +51,14 @@
                         {{-- <h4 for="" class="col-12 col-form-label text-primary"><b>Transfer Details</b></h4> --}}
 
 
-                        <div class="col-md-4 form-group ">
+                        {{--  <div class="col-md-4 form-group ">
                             <label for="inputEmail3" class="text-dark">Bank Type<span class="text-danger">
                                     *</span></label>
                             <select class="custom-select " name="bank_type" id="bank_type" required>
-                                {{-- <option value=""> ---Select Type --</option> --}}
                                 <option value="SAB" selected> Same Bank </option>
                                 <option value="OTB"> Other Bank </option>
                             </select>
-                        </div>
+                        </div>  --}}
 
 
 
@@ -221,7 +220,7 @@
                                     class="table table-bordered table-striped dt-responsive nowrap w-100 all_successful_uploads_table"
                                     style="zoom: 0.9">
                                     <thead>
-                                        <tr class="bg-success  text-white">
+                                        <tr class="bg-dark  text-white">
                                             {{-- <th><b>Record ID</b></th> --}}
                                             <th><b>Name</b></th>
                                             <th><b>Account No.</b></th>
@@ -243,7 +242,7 @@
                                     class="table table-bordered table-striped dt-responsive nowrap w-100 all_failed_uploads_table"
                                     style="zoom: 0.9">
                                     <thead>
-                                        <tr class="bg-danger  text-white">
+                                        <tr class="bg-dark  text-white">
                                             {{-- //<th><b>Record ID</b></th> --}}
                                             <th><b>Name</b></th>
                                             <th><b>Account No.</b></th>

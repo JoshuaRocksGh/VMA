@@ -262,7 +262,7 @@ class BulkUploadsController extends Controller
 
         $data = [
             'debitAccount' => $account_no,
-            'bankType' => $bank_code,
+            // 'bankType' => $bank_code,
             'bulkAmount' => $total_amount,
             'referenceNumber' => $trans_ref_no,
             'valueDate' => $value_date,
@@ -281,7 +281,7 @@ class BulkUploadsController extends Controller
                 'file',
                 file_get_contents($path),
                 $filename
-            )->post(env('API_BASE_URL') . "corporate/uploadBulk", $data);
+            )->post(env('API_BASE_URL') . "corporate/uploadBulkNew", $data);
             // return $response;
             // dd($response);
 

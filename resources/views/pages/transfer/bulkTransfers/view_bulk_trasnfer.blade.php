@@ -3,9 +3,9 @@
 
 @section('content')
     @php
-    $pageTitle = 'DETAIL OF BULK UPLOAD';
-    $basePath = 'Bulk Transfer';
-    $currentPath = 'Detail of Bulk Transfer';
+        $pageTitle = 'DETAIL OF BULK UPLOAD';
+        $basePath = 'Bulk Transfer';
+        $currentPath = 'Detail of Bulk Transfer';
     @endphp
     @include('snippets.pageHeader')
 
@@ -29,12 +29,12 @@
 
 
                         <div class="col-md-3">
-                            <h6 class="mb-2 text-primary">Account Number <br>
+                            <h6 class="mb-2 text-dark">Account Number <br>
                                 <p class="text-danger display_debit_account_no ">{{ $uploadDetails['debitAccount'] }}</p>
                             </h6>
                         </div>
                         <div class="col-md-3">
-                            <h6 class="mb-2 text-primary">Bulk Amount <br>
+                            <h6 class="mb-2 text-dark">Bulk Amount <br>
                                 <p class="text-danger display_total_amount ">
                                     {{ number_format($uploadDetails['totalAmount'], 2) }}</p>
                             </h6>
@@ -44,12 +44,12 @@
 
 
                         <div class="col-md-3 ">
-                            <h6 class="mb-2 text-primary">Narration <br>
+                            <h6 class="mb-2 text-dark">Narration <br>
                                 <p class="text-danger display_narrations">{{ $uploadData[0]['transDescription'] }}</p>
                             </h6>
                         </div>
                         <div class="col-md-3 ">
-                            <h6 class="mb-2 text-primary">Batch Number <br>
+                            <h6 class="mb-2 text-dark">Batch Number <br>
                                 <p class="text-danger display_batch_no ">{{ $uploadData[0]['uploadBatch'] }}</p>
                             </h6>
 
@@ -71,14 +71,14 @@
 
                                 <div class="col-md-4">
                                     <button type="button"
-                                        class="btn btn-danger btn-sm  waves-effect waves-light disappear-after-success"
+                                        class="btn btn-secondary btn-sm  waves-effect waves-light disappear-after-success"
                                         id="reject_upload_btn">
                                         Reject Upload
                                     </button>
                                 </div>
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4 float-right">
-                                    <button type="button" class="btn btn-primary btn-sm  waves-effect waves-light"
+                                    <button type="button" class="btn btn-dark btn-sm  waves-effect waves-light"
                                         id="approve_upload_btn">
                                         Submit for Approval
                                     </button>
@@ -110,7 +110,7 @@
                         class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list">
 
                         <thead>
-                            <tr class="bg-info text-white">
+                            <tr class="bg-dark text-white">
                                 <th>No</th>
                                 <th>Credit Acc</th>
                                 <th>Name</th>
