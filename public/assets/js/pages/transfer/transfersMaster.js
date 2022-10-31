@@ -18,7 +18,7 @@ function makeTransfer(url, data) {
                     icon: "success",
                     showConfirmButton: "false",
                 });
-                getAccounts();
+                // getAccounts();
                 $("#success-message").text(response.message);
                 $("#spinner").hide();
                 $("#spinner-text").hide();

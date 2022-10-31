@@ -181,6 +181,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/view-bulk-korpor-transfer', [BulkUploadBulkUploadsController::class, 'view_bulk_korpor_transfer'])->name('view-bulk-korpor-transfer');
     Route::get('/view-bulk-transfer', [BulkUploadBulkUploadsController::class, 'view_bulk_transfer'])->name('view-bulk-transfer');
     Route::get('/delete-bulk-transfer', [BulkUploadBulkUploadsController::class, 'delete_bulk_transfer'])->name('delete-bulk-transfer');
+    Route::get('/delete-bulk-upload-file', [BulkUploadBulkUploadsController::class, 'delete_bulk_upload_file'])->name('delete-bulk-upload-file');
     Route::get('/view-bulk-transfer-korpor', [BulkUploadBulkUploadsController::class, 'view_bulk_transfer_korpor'])->name('view-bulk-transfer-korpor');
     Route::get('/view-error-bulk-transfer', [BulkUploadBulkUploadsController::class, 'view_error_bulk_transfer'])->name('view-error-bulk-transfer');
     Route::get('/bulk-korpor-error-transfer', [BulkUploadBulkUploadsController::class, 'bulk_korpor_error_transfer'])->name('bulk-korpor-error-transfer');
@@ -366,6 +367,7 @@ Route::post('savings-account-creation-api', [SavingsAccountCreationController::c
 
 // FIXED DEPOSIT ACCOUNT
 Route::get('fixed-deposit-account-api', [FixedDepositAccountController::class, 'fixed_deposit_account'])->name('fixed-deposit-account-api');
+Route::get('fixed-deposit', [FixedDepositAccountController::class, 'fixed_deposit'])->name('fixed-deposit');
 
 //route for statement request
 Route::post('statement-request-api', [StatementRequestController::class, 'statement_request'])->name('statement-request-api');

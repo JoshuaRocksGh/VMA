@@ -180,8 +180,8 @@ function bulk_upload_list(fileBatch, upload_response) {
                         )}</b>`,
                         `<b>${value_date}</b>`,
                         // `<b class="text-success">${uploadAcctValid}</b>`,
-                        `<td><button type="button" class="btn btn-sm btn-primary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>${total_upload}</b>&emsp;</button></td>`,
-                        `<td><button type="button" class="btn btn-sm btn-secondary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>${invalid.length}</b>&emsp;</button></td>`,
+                        `<td><button type="button" class="btn btn-sm btn-primary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>View (${total_upload})</b>&emsp;</button></td>`,
+                        `<td><button type="button" class="btn btn-sm btn-secondary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>View (${invalid.length})</b>&emsp;</button></td>`,
                         ` <td>${action_button}</td>`,
                     ])
                     .draw(false);
@@ -714,8 +714,8 @@ $(document).ready(function () {
                                 )}</b>`,
                                 `<b>${value_date}</b>`,
                                 // `<b class="text-success">${uploadAcctValid}</b>`,
-                                `<td><button type="button" class="btn btn-sm btn-primary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>${total_upload}</b>&emsp;</button></td>`,
-                                `<td><button type="button" class="btn btn-sm btn-secondary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>${invalid.length}</b>&emsp;</button></td>`,
+                                `<td><button type="button" class="btn btn-sm btn-primary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>View (${total_upload})</b>&emsp;</button></td>`,
+                                `<td><button type="button" class="btn btn-sm btn-secondary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>View (${invalid.length})</b>&emsp;</button></td>`,
                                 ` <td>${action_button}</td>`,
                             ])
                             .draw(false);
@@ -724,55 +724,55 @@ $(document).ready(function () {
                             ".edit_record_uploaded"
                         );
 
-                        editButtons.forEach((button) => {
-                            button.addEventListener("click", (e) => {
-                                const editButton = e.currentTarget;
-                                console.log(editButton);
+                        // editButtons.forEach((button) => {
+                        //     button.addEventListener("click", (e) => {
+                        //         const editButton = e.currentTarget;
+                        //         console.log(editButton);
 
-                                const recordDetail = data.find(
-                                    (e) =>
-                                        e.recordId ===
-                                        $(editButton).attr("recordid")
-                                );
-                                // console.log("recordDetail =>", recordDetail);
+                        //         const recordDetail = data.find(
+                        //             (e) =>
+                        //                 e.recordId ===
+                        //                 $(editButton).attr("recordid")
+                        //         );
+                        //         // console.log("recordDetail =>", recordDetail);
 
-                                $(".upload_recordID").val(
-                                    recordDetail.recordId
-                                );
-                                $(".upload_name").val(recordDetail.name);
-                                $(".upload_accountNumber").text(
-                                    recordDetail.accountNumber
-                                );
-                                $(".upload_amount").val(recordDetail.amount);
-                                $(".upload_description").val(
-                                    recordDetail.transDescription
-                                );
-                                $(".upload_bank").val(recordDetail.bank);
-                                $(".upload_referenceNumber").val(
-                                    recordDetail.refNumber
-                                );
-                                $(".upload_batch").val(
-                                    recordDetail.uploadBatch
-                                );
+                        //         $(".upload_recordID").val(
+                        //             recordDetail.recordId
+                        //         );
+                        //         $(".upload_name").val(recordDetail.name);
+                        //         $(".upload_accountNumber").text(
+                        //             recordDetail.accountNumber
+                        //         );
+                        //         $(".upload_amount").val(recordDetail.amount);
+                        //         $(".upload_description").val(
+                        //             recordDetail.transDescription
+                        //         );
+                        //         $(".upload_bank").val(recordDetail.bank);
+                        //         $(".upload_referenceNumber").val(
+                        //             recordDetail.refNumber
+                        //         );
+                        //         $(".upload_batch").val(
+                        //             recordDetail.uploadBatch
+                        //         );
 
-                                // $("#full-width-modal").hide();
-                                // $("#full-width-modal").remove();
-                                // $("#full-width-modal").removeAttr("class");
-                                $(".edit_record_uploaded").click(function () {
-                                    $(".all_upload_details").hide();
-                                    $(".record_details_display").show();
-                                });
+                        //         // $("#full-width-modal").hide();
+                        //         // $("#full-width-modal").remove();
+                        //         // $("#full-width-modal").removeAttr("class");
+                        //         $(".edit_record_uploaded").click(function () {
+                        //             $(".all_upload_details").hide();
+                        //             $(".record_details_display").show();
+                        //         });
 
-                                $(".edit_record_close").click(function () {
-                                    $(".all_upload_details").hide();
-                                    $(".record_details_display").show();
-                                });
+                        //         $(".edit_record_close").click(function () {
+                        //             $(".all_upload_details").hide();
+                        //             $(".record_details_display").show();
+                        //         });
 
-                                // $(".edit_record_close").click(function(){
+                        //         // $(".edit_record_close").click(function(){
 
-                                // });
-                            });
-                        });
+                        //         // });
+                        //     });
+                        // });
 
                         console.log(
                             "valid_uploads_count=>",

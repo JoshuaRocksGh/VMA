@@ -25,6 +25,11 @@ function getBranches() {
     });
 }
 
+$(".coming-soon").on("click", (e) => {
+    e.preventDefault();
+    comingSoonToast("Stay tuned for more features");
+});
+
 function submitChequeRequest(data) {
     // console.log(data);
     return $.ajax({

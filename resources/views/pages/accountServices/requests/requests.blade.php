@@ -65,14 +65,13 @@
         .date-select:disabled:hover {
             box-shadow: none !important;
         }
-
     </style>
 @endsection
 @section('content')
     @php
-    $pageTitle = 'Requests';
-    $basePath = 'Account Services';
-    $currentPath = 'Requests';
+        $pageTitle = 'Requests';
+        $basePath = 'Account Services';
+        $currentPath = 'Requests';
     @endphp
     @include('snippets.pageHeader')
 

@@ -2,6 +2,57 @@
 // return;
 // siteLoading("show");
 
+function reject_file_upload(batch_no) {
+    url = "delete-bulk-upload-file?batch_no=" + `${batch_no}`;
+    $.ajax({
+        type: "GET",
+        url: url,
+        datatype: "application/json",
+        // data: {
+        //     'narration': narration,
+        //     'request_id': request_id,
+        //     'customer_no': customer_no
+        // },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            console.log(response);
+            if (response.responseCode == "000") {
+                siteLoading("hide");
+
+                swal.fire({
+                    // title: "Transfer successful!",
+                    html: response.message,
+                    icon: "success",
+                    showConfirmButton: "false",
+                });
+
+                setTimeout(function () {
+                    // window.location = "approvals-pending";
+                    window.location = "bulk-transfer";
+                    window.opener.location.reload();
+                    window.close();
+                }, 5000);
+            } else {
+                siteLoading("hide");
+                swal.fire({
+                    // title: "Transfer successful!",
+                    html: response.message,
+                    icon: "error",
+                    showConfirmButton: "false",
+                });
+            }
+
+            // $("#reject_transaction").html(`Reject <i class="mdi mdi-cancel">`);
+        },
+        error: function (xhr, status, error) {
+            // $("#reject_transaction").html(`Reject <i class="mdi mdi-cancel">`);
+            // Swal.showValidationMessage(`Request failed: ${error}`);
+        },
+    });
+}
+
 function get_bulk_list(batch_no) {
     siteLoading("show");
     // alert(batch_no);
@@ -107,45 +158,60 @@ function reject_upload(batch_no) {
     // const ipAPI = "reject-bulk-transaction-api?customer_no=" + customer_no;
     const ipAPI = "delete-bulk-transfer?batch_no=" + batch_no;
 
-    Swal.fire([
-        {
-            title: "Are you sure you want to reject",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Yes, Reject!",
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                return fetch(ipAPI)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data.responseCode == "000") {
-                            Swal.fire({
-                                icon: "success",
-                                title: data.message,
-                            });
+    // Swal.fire([
+    //     {
+    //         title: "Are you sure you want to reject",
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#d33",
+    //         cancelButtonColor: "#3085d6",
+    //         confirmButtonText: "Yes, Reject!",
+    //         showLoaderOnConfirm: true,
+    //         preConfirm: () => {
+    //             return fetch(ipAPI)
+    //                 .then((response) => response.json())
+    //                 .then((data) => {
+    //                     if (data.responseCode == "000") {
+    //                         Swal.fire({
+    //                             icon: "success",
+    //                             title: data.message,
+    //                         });
 
-                            setTimeout(function () {
-                                window.location = "{{ url('bulk-transfer') }}";
-                            }, 2000);
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: data.message,
-                            });
-                        }
-                        //  Swal.fire(data.ip)
-                    })
-                    .catch(() => {
-                        Swal.fire({
-                            icon: "error",
-                            title: "API SERVER ERROR",
-                        });
-                    });
-            },
-        },
-    ]);
+    //                         setTimeout(function () {
+    //                             window.location = "{{ url('bulk-transfer') }}";
+    //                         }, 2000);
+    //                     } else {
+    //                         Swal.fire({
+    //                             icon: "error",
+    //                             title: data.message,
+    //                         });
+    //                     }
+    //                 })
+    //                 .catch(() => {
+    //                     Swal.fire({
+    //                         icon: "error",
+    //                         title: "API SERVER ERROR",
+    //                     });
+    //                 });
+    //         },
+    //     },
+    // ]);
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Reject",
+    }).then((result) => {
+        reject_file_upload(batch_no);
+        // return fetch(ipAPI);
+        // if (result.isConfirmed) {
+        //     Swal.fire("", "File Rejected SUccesfully", "success");
+        // }
+    });
 }
 
 $(document).ready(function () {

@@ -98,6 +98,12 @@
                     <button id="card_limits" {{-- data-toggle="pill" data-value="reversed" --}}
                         class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
                         href="#tab_card_limit">Card Limits</button>
+                    <button id="card_limits" {{-- data-toggle="pill" data-value="reversed" --}}
+                        class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
+                        href="#tab_card_limit">Change Card Pin</button>
+                    <button id="card_limits" {{-- data-toggle="pill" data-value="reversed" --}}
+                        class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
+                        href="#tab_card_limit">Report Stolen Crad</button>
                 </nav>
                 <div class="col-md-8 px-0" style="max-width: 650px;">
                     <div class="tab-content pt-0" id="tabContent_card_services">

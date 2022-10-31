@@ -565,7 +565,7 @@ class BulkUploadsController extends Controller
         $fileBatch = $request->query('batch_no');
         $base_response = new BaseResponse();
 
-        // return $fileBatch;
+        return $fileBatch;
 
         try {
             $response = Http::delete(env('API_BASE_URL') . "corporate/deleteFileRecord/$fileBatch");
@@ -577,6 +577,26 @@ class BulkUploadsController extends Controller
             Alert::error('', 'Failed To Delete Record');
             return back();
             // return $base_response->api_response($result->responseCode, $result->message,  NULL);
+        }
+    }
+
+    public function delete_bulk_upload_file(Request $request)
+    {
+        $fileBatch = $request->query('batch_no');
+        $base_response = new BaseResponse();
+
+        // return $fileBatch;
+
+        try {
+            $response = Http::delete(env('API_BASE_URL') . "corporate/deleteFileRecord/$fileBatch");
+            $result = new ApiBaseResponse();
+            // Alert::success('', 'Record Deleted Successfully');
+            // return back();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
+            // Alert::error('', 'Failed To Delete Record');
+            // return back();
+            return $base_response->api_response($result->responseCode, $result->message,  NULL);
         }
     }
 

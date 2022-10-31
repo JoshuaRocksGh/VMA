@@ -31,7 +31,7 @@ class FixedDepositAccountController extends Controller
 
         try {
 
-            $response = Http::retry(20, 300)->get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
+            // $response = Http::retry(20, 300)->get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
             // $response = retry(3, function ($customerNumber) {
             //     return Http::get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
             //     // $result = new ApiBaseResponse();
@@ -39,7 +39,7 @@ class FixedDepositAccountController extends Controller
             // }, 200);
 
 
-            // $response = Http::get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
+            $response = Http::get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
 
             $result = new ApiBaseResponse();
             return $result->api_response($response);
@@ -47,5 +47,10 @@ class FixedDepositAccountController extends Controller
             Log::alert($error);
             return $base_response->api_response('500', $error,  NULL); // return API BASERESPONSE
         }
+    }
+
+    public function fixed_deposit()
+    {
+        return view('pages.accountServices.fixedDeposit.fixed_deposit_services');
     }
 }

@@ -130,6 +130,9 @@
             </a>
             <div class="collapse menu-item-body" id="sidebarAccountServices">
                 <ul class="nav-second-level">
+                    <li>
+                        <a href="{{ url('fixed-deposit') }}">Fixed Deposit</a>
+                    </li>
 
                     <li>
                         <a href="{{ url('cheque-services') }}">Cheque Services</a>
@@ -143,6 +146,12 @@
 
                     <li>
                         <a href="{{ url('open-additional-account') }}">Open additional account</a>
+                    </li>
+                    <li>
+                        <a href="#">Close Account</a>
+                    </li>
+                    <li>
+                        <a href="#">Update Account Signatuer</a>
                     </li>
                     <li>
                         <a href="{{ url('complaint') }}">
