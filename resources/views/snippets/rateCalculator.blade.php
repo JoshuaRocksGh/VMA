@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="align-self-end mb-2 col-2">
-                    <i class="fas bg-primary font-14 rounded-circle p-1 text-white fa-sync"></i>
+                    <i class="fas bg-danger font-14 rounded-circle p-1 text-white fa-sync"></i>
                 </div>
                 <div class="text-center col-5  font-14">
                     To
@@ -39,7 +39,7 @@
             </div>
             {{--  style="
             background: linear-gradient(90deg, var(--primary) 0%, var(--teal) 87%); "  --}}
-            <div class="bg-primary p-2 ">
+            <div class="bg-danger p-2 ">
                 <div class="justify-content-around d-flex">
                     <div class="col-5 font-weight-bold">
                         <div class="text-center mb-2" id="abbr1"> cur1 </div>

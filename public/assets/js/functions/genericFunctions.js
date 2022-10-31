@@ -215,16 +215,18 @@ function getAccounts(account_data) {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
+            console.log("getAccounts called ==>", response);
+
             if (response.responseCode !== "000") {
-                Swal.fire({
-                    html: `<span class="font-16 ">${response.message}</span>`,
-                    icon: "error",
-                    confirmButtonColor: "red",
-                    width: 400,
-                    didDestroy: () => {
-                        window.location = "logout";
-                    },
-                });
+                // Swal.fire({
+                //     html: `<span class="font-16 ">${response.message}</span>`,
+                //     icon: "error",
+                //     confirmButtonColor: "red",
+                //     width: 400,
+                //     didDestroy: () => {
+                //         window.location = "logout";
+                //     },
+                // });
                 // toaster(response.message, "error").then(() => console.log("okay"));
             }
         },

@@ -42,7 +42,7 @@
     <div class="site-card p-1 my-2" style="min-height: auto !important">
         <div class="site-card-body  p-0 border-0" style="min-height: auto !important">
             <button
-                class=" rate_button p-2 border-0 grad-rokel w-100 grad d-flex align-items-center justify-content-center  grad-blue-pink"
+                class="rate_button p-2 border-0 grad-rokel w-100 grad d-flex align-items-center justify-content-center  grad-blue-pink"
                 style="min-height: 25px">
                 <div class=""><i class="fas font-24 fa-money-check-alt"></i> </div>
                 <div class="font-weight-bold ml-2 font-12">&nbsp;Currency Rates</div>
