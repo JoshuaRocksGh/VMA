@@ -32,8 +32,8 @@
         }
 
         #card_request.active {
-            background-color: var(--brand) !important;
-            border-color: var(--brand) !important;
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
             color: white !important;
         }
 
@@ -45,8 +45,8 @@
         }
 
         #activate_card.active {
-            background-color: var(--success) !important;
-            border-color: var(--success) !important;
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
             color: white !important;
         }
 
