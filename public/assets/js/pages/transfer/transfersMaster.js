@@ -16,7 +16,8 @@ function makeTransfer(url, data) {
                     // title: "Transfer successful!",
                     html: response.message,
                     icon: "success",
-                    showConfirmButton: "false",
+                    // showConfirmButton: "false",
+                    confirmButtonColor: "green",
                 });
                 getAccounts();
                 $("#success-message").text(response.message);

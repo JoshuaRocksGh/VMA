@@ -6,15 +6,14 @@
             <input class="form-control text-input" placeholder="Card Display Name" type="text" />
         </div>
         <div class="form-group" id="pay_from_account">
-
             <label class="text-dark">Card Type</label>
-            <select class="form-control select" id="card_type" required>
+            <select class="form-control select2" id="card_type" required>
                 <option disabled selected value="">Select Type of Card</option>
             </select>
         </div>
-        <div class="form-group ">
+        <div class="form-group">
             <label class="text-dark"> Pick Up Branch</label>
-            <select class="form-control select" id="pick_up_branch" placeholder="Select Pick Up Branch" required>
+            <select class="form-control select2" id="pick_up_branch" placeholder="Select Pick Up Branch" required>
                 <option disabled selected value="">Select Pick Up Branch</option>
             </select>
         </div>

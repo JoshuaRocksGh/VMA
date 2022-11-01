@@ -54,9 +54,6 @@
             </div>
             {{-- <div class=" form-group mb-3 justify-content-center d-md-flex mx-md-auto"
                 style="max-width: 750px; min-height: 70px;">
-
-
-
             </div> --}}
             <div class="col-lg-8 " style="max-width: 50rem">
                 <div class=" align-self-center" style="min-width: 100px">

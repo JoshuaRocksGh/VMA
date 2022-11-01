@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/pagination/pagination.css') }}" />
     <style>
         .history-card {
             cursor: pointer;
@@ -59,30 +60,17 @@
 @section('content')
     @php
         $pageTitle = 'Card Services';
-        $basePath = 'CardServices';
-        $currentPath = 'CardServices';
+        $basePath = 'Card Services';
+        $currentPath = 'Card Services';
     @endphp
     @include('snippets.pageHeader')
 
-    <div class="tab-pane dashboard site-card p-2 p-sm-3 p-md-4">
-        <div class=" mt-lg-0 dashboard-body rounded">
-            <div class="form-group  p-3 justify-content-center d-md-flex mx-md-auto"
-                style="max-width: 750px; min-height: 70px;">
+    <div class="dashboard site-card">
+        <div class="dashboard-body mb-1 p-3 row py-4 mx-auto" style="max-width: 80rem">
+            <div class="col-lg-4">
+                <label class="mb-2 d-block f-18 text-center font-weight-bold text-dark">Select Request Type
+                </label>
 
-                <div class=" align-self-center" style="min-width: 100px"> <label
-                        class="d-block f-18 font-weight-bold mb-1 text-dark">
-                        Select
-                        Account</label></div>
-                <div class="pl-md-3 w-100">
-                    <select class="form-control unredeemed accounts-select" id="from_account" required>
-                        <option disabled selected value="">Select
-                            Account Number</option>
-                        @include('snippets.accounts')
-                    </select>
-                </div>
-
-            </div>
-            <div class="container row pt-md-4 mx-auto">
                 <nav id="card_services_tabs" class="col-md-4  nav nav-pills flex-column mx-auto mb-3 flex-row"
                     style="max-width: 350px" role="tablist">
                     <button id="card_request" data-toggle="pill" data-value="unredeemed"
@@ -103,8 +91,26 @@
                         href="#tab_card_limit">Change Card Pin</button>
                     <button id="card_limits" {{-- data-toggle="pill" data-value="reversed" --}}
                         class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
-                        href="#tab_card_limit">Report Stolen Crad</button>
+                        href="#tab_card_limit">Report Stolen Card</button>
                 </nav>
+                <hr>
+            </div>
+            {{--  =======  --}}
+            <div class="col-lg-8" style="max-width: 50rem">
+                <div class=" align-self-center" style="min-width: 100px"> <label
+                        class="d-block f-18 font-weight-bold mb-1 text-dark">
+                        Select
+                        Account</label></div>
+
+
+                <select class="form-control unredeemed accounts-select" id="from_account" required>
+                    <option disabled selected value="">Select
+                        Account Number</option>
+                    @include('snippets.accounts')
+                </select>
+                <hr class="">
+
+
                 <div class="col-md-8 px-0" style="max-width: 650px;">
                     <div class="tab-content pt-0" id="tabContent_card_services">
                         <div class="tab-pane fade show active bg-white" id="tab_card_request" role="tabpanel">
@@ -117,7 +123,10 @@
                         <div class="tab-pane fade" id="tab_card_limit" role="tabpanel">.x..</div>
                     </div>
                 </div>
+
             </div>
+
+
         </div>
     </div>
     @include('snippets.pinCodeModal')
