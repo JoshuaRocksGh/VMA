@@ -71,7 +71,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 <button type="button"
                     onclick="window.open('approvals-pending-transfer-details/${requestId}/${customerNo}'),
                         '_blank', 'location=yes,height=670,width=1200,scrollbars=yes,status=yes'"
-                    class=" btn btn-xs btn-outline-primary font-10"
+                    class=" btn btn-xs btn-outline-success font-10"
                 >
                     Details
                 </button>
