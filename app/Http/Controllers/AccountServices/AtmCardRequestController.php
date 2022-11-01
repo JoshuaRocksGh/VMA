@@ -22,7 +22,7 @@ class AtmCardRequestController extends Controller
             "branch" => $request->pickUpBranch,
             "cardNumber" => null,
             "channel" => 'NET',
-            "entrySource" => "I",
+            "entrySource" => "PIB",
             "pinCode" => $request->pinCode,
             "tokenID" => $authToken,
             "secondaryAccounts" => [""]

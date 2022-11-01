@@ -10,11 +10,20 @@ function getBranches() {
         if (response?.data) {
             const { data } = response;
             const select = document.getElementById("pick_up_branch");
+            const select2 = document.getElementById("card_branch");
             data.forEach((e) => {
                 const option = document.createElement("option");
                 option.text = e.branchDescription;
                 option.value = e.branchCode;
                 select.appendChild(option);
+                // select2.appendChild(option);
+            });
+            data.forEach((e) => {
+                const option = document.createElement("option");
+                option.text = e.branchDescription;
+                option.value = e.branchCode;
+                // select.appendChild(option);
+                select2.appendChild(option);
             });
         }
     });
@@ -85,11 +94,20 @@ function getCardTypes() {
         if (response?.data) {
             const { data } = response;
             const select = document.getElementById("card_type");
+            const select2 = document.getElementById("card_type_select");
             data.forEach((e) => {
                 const option = document.createElement("option");
                 option.text = e.description;
                 option.value = e.actualCode;
                 select.appendChild(option);
+                // select2.appendChild(option);
+            });
+            data.forEach((e) => {
+                const option = document.createElement("option");
+                option.text = e.description;
+                option.value = e.actualCode;
+                // select.appendChild(option);
+                select2.appendChild(option);
             });
         }
     });
@@ -143,23 +161,32 @@ $(function () {
             return;
         }
         $("#pin_code_modal").modal("show");
+    });
 
-        $("#transfer_pin").on("click", () => {
-            const pinCode = $("#user_pin").val();
-            console.log(pinCode);
-            if (!pinCode || pinCode.length !== 4) {
-                toaster("Please enter a valid pin code", "warning");
-                return false;
-            }
-            siteLoading("show");
-            requestCard({
-                accountNumber,
-                cardType,
-                pickUpBranch,
-                pinCode,
-            }).then(() => {
-                siteLoading("hide");
-            });
+    // block card requestCard
+    $("#btn_submit_block_card").on("Click", (e) => {
+        e.preventDefault();
+        const accountNumber = $("#from_account option:selected").attr(
+            "data-account-number"
+        );
+        const accountDetails = $("#from_account option:selected").val();
+    });
+
+    $("#transfer_pin").on("click", () => {
+        const pinCode = $("#user_pin").val();
+        console.log(pinCode);
+        if (!pinCode || pinCode.length !== 4) {
+            toaster("Please enter a valid pin code", "warning");
+            return false;
+        }
+        siteLoading("show");
+        requestCard({
+            accountNumber,
+            cardType,
+            pickUpBranch,
+            pinCode,
+        }).then(() => {
+            siteLoading("hide");
         });
     });
 });
