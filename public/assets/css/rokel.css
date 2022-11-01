@@ -168,7 +168,7 @@
     background-color: var(--danger);
 }
 #side-menu a[aria-expanded="true"] {
-    border-left: solid 5px var(--brand);
+    border-left: solid 5px var(--white);
     padding-left: 15px;
     background-color: var(--danger);
 }
@@ -186,7 +186,8 @@
 }
 
 #side-menu a.current-page {
-    background-color: var(--brand);
+    background-color: var(--white);
+    color: red;
 }
 /* #side-menu .menu-item-header.current-menu-header {
     border-left: solid 5px var(--brand);

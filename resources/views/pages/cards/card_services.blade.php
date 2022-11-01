@@ -114,7 +114,8 @@
                 <div class="col-md-8 px-0" style="max-width: 650px;">
                     <div class="tab-content pt-0" id="tabContent_card_services">
                         <div class="tab-pane fade show active bg-white" id="tab_card_request" role="tabpanel">
-                            @include('pages.cards.card_request')</div>
+                            @include('pages.cards.card_request')
+                        </div>
                         <div class="tab-pane fade" id="tab_block_card" role="tabpanel">
                             @include('pages.cards.block_card')
 
