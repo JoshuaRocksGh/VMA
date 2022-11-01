@@ -9,18 +9,18 @@
         <div class="form-group" id="pay_from_account">
 
             <label class=" text-dark">Card Type</label>
-            <select class="form-control select card_type" id="card_type_select" required>
+            <select class="form-control select card_type" id="activate_card_type" required>
                 <option disabled selected value="">Select Type of Card</option>
             </select>
         </div>
         <div class="form-group ">
             <label class="text-dark">Card Branch </label>
-            <select class="form-control select" id="card_branch" placeholder="Select Card Branch " required>
+            <select class="form-control select" id="activate_card_branch" placeholder="Select Card Branch " required>
                 <option disabled selected value="">Select Pick Up Branch</option>
             </select>
         </div>
         <div class="form-group text-right mt-4">
-            <button type="button" class="btn btn-dark waves-effect waves-light" id="btn_submit_block_card">
+            <button type="button" class="btn btn-dark waves-effect waves-light" id="btn_submit_activate_card">
                 Submit
             </button>
         </div>

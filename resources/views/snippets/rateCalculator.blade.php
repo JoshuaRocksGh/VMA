@@ -44,6 +44,7 @@
                     <div class="col-5 font-weight-bold">
                         <div class="text-center mb-2" id="abbr1"> cur1 </div>
                         <input type="text" class="form-control mb-2" value="1" id="amount_to_convert"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                             placeholder="Enter Amount to Convert">
                         <div class="text-center">
                             <span class="fas fa-info-circle text-white" data-toggle="tooltip" data-placement="top"

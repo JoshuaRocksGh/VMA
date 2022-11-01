@@ -1,5 +1,5 @@
 // TODO : Test the request Card method. especially the API response
-
+const PageData = {};
 function getBranches() {
     $.ajax({
         type: "GET",
@@ -11,6 +11,8 @@ function getBranches() {
             const { data } = response;
             const select = document.getElementById("pick_up_branch");
             const select2 = document.getElementById("card_branch");
+            const select3 = document.getElementById("activate_card_branch");
+
             data.forEach((e) => {
                 const option = document.createElement("option");
                 option.text = e.branchDescription;
@@ -25,9 +27,18 @@ function getBranches() {
                 // select.appendChild(option);
                 select2.appendChild(option);
             });
+            data.forEach((e) => {
+                const option = document.createElement("option");
+                option.text = e.branchDescription;
+                option.value = e.branchCode;
+                // select.appendChild(option);
+                select3.appendChild(option);
+            });
         }
     });
 }
+
+// ===== CIB REQUEST ====
 
 function corporateCardRequest({
     accountDetails,
@@ -61,6 +72,9 @@ function corporateCardRequest({
     });
 }
 
+// ====== END OF CIB REQUEST====
+
+// ======= PIB REQUEST ==========
 function requestCard({ accountNumber, cardType, pickUpBranch, pinCode }) {
     return $.ajax({
         type: "POST",
@@ -85,6 +99,27 @@ function requestCard({ accountNumber, cardType, pickUpBranch, pinCode }) {
     });
 }
 
+function blockCard(data) {
+    return $.ajax({
+        type: "POST",
+        url: "atm-card-block-api",
+        datatype: "application/json",
+        data,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    }).done((response) => {
+        console.log(response);
+        if (response.responseCode == "000") {
+            toaster(response.message, "success");
+        } else {
+            toaster(response.message, "error");
+        }
+    });
+}
+
+// ====== END OF PIB REQUEST ====
+
 function getCardTypes() {
     return $.ajax({
         type: "GET",
@@ -95,6 +130,7 @@ function getCardTypes() {
             const { data } = response;
             const select = document.getElementById("card_type");
             const select2 = document.getElementById("card_type_select");
+            const select3 = document.getElementById("activate_card_type");
             data.forEach((e) => {
                 const option = document.createElement("option");
                 option.text = e.description;
@@ -108,6 +144,13 @@ function getCardTypes() {
                 option.value = e.actualCode;
                 // select.appendChild(option);
                 select2.appendChild(option);
+            });
+            data.forEach((e) => {
+                const option = document.createElement("option");
+                option.text = e.description;
+                option.value = e.actualCode;
+                // select.appendChild(option);
+                select3.appendChild(option);
             });
         }
     });
@@ -133,7 +176,7 @@ $(function () {
         comingSoonToast("");
     });
     // make card request
-    $("#btn_submit_request_statement").on("click", (e) => {
+    $("#btn_card_request").on("click", (e) => {
         e.preventDefault();
         const accountNumber = $("#from_account option:selected").attr(
             "data-account-number"
@@ -141,13 +184,22 @@ $(function () {
         const accountDetails = $("#from_account option:selected").val();
         const cardType = $("#card_type").val();
         const cardTypeName = $("#card_type option:selected").html();
-        let pickUpBranch = $("#pick_up_branch").val();
+        const pickUpBranch = $("#pick_up_branch").val();
         const pickUpBranchName = $("#pick_up_branch option:selected").html();
+        const requestType = "Card Request";
         // console.log("pickUpBranchName ==>", pickUpBranchName);
         if (!accountNumber || !cardType || !pickUpBranch) {
             toaster("Please complete all fields", "warning");
             return false;
         }
+        PageData.cardRequest = {
+            requestType,
+            accountNumber,
+            cardType,
+            pickUpBranch,
+            // pinCode,
+        };
+
         if (ISCORPORATE) {
             corporateCardRequest({
                 accountDetails,
@@ -164,12 +216,43 @@ $(function () {
     });
 
     // block card requestCard
-    $("#btn_submit_block_card").on("Click", (e) => {
+    $("#btn_submit_block_card").on("click", (e) => {
+        // alert("clicked");
+        // return false;
         e.preventDefault();
         const accountNumber = $("#from_account option:selected").attr(
             "data-account-number"
         );
         const accountDetails = $("#from_account option:selected").val();
+        const cardType = $("#card_type_select").val();
+        const cardNumber = $("#card_number").val();
+        const cardBranch = $("#card_branch").val();
+        const cardBranchName = $("#card_branch option:selected").val();
+
+        if (!accountNumber || !cardType || !cardNumber || !cardBranch) {
+            toaster("Please complete all fields", "warning");
+            return false;
+        }
+        PageData.cardBlock = {
+            accountNumber,
+            cardType,
+            cardNumber,
+            cardBranch,
+        };
+
+        if (ISCORPORATE) {
+            corporateCardBlock({
+                accountDetails,
+                cardType,
+                cardTypeName,
+                pickUpBranch,
+                pickUpBranchName,
+            }).then(() => {
+                siteLoading("hide");
+            });
+            return;
+        }
+        $("#pin_code_modal").modal("show");
     });
 
     $("#transfer_pin").on("click", () => {
@@ -180,13 +263,23 @@ $(function () {
             return false;
         }
         siteLoading("show");
-        requestCard({
-            accountNumber,
-            cardType,
-            pickUpBranch,
-            pinCode,
-        }).then(() => {
+        if (PageData.cardRequest) {
+            requestCard({
+                accountNumber,
+                cardType,
+                pickUpBranch,
+                pinCode,
+            }).then(() => {
+                siteLoading("hide");
+            });
+        } else if (PageData.cardBlock) {
+            (PageData.cardBlock.pinCode = pinCode),
+                blockCard(PageData.cardBlock).then(() => {
+                    siteLoading("hide");
+                });
+        } else {
+            // alert("card block");
             siteLoading("hide");
-        });
+        }
     });
 });

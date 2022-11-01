@@ -18,7 +18,7 @@
             </select>
         </div>
         <div class="form-group text-right mt-4">
-            <button type="button" class="btn btn-dark waves-effect waves-light" id="btn_submit_request_statement">
+            <button type="button" class="btn btn-dark waves-effect waves-light" id="btn_card_request">
                 Submit
             </button>
         </div>

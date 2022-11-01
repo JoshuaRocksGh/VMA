@@ -32,6 +32,28 @@ class AtmCardRequestController extends Controller
         return  $result->api_response($response);
     }
 
+    // PIB card Block
+    public function atm_card_block(Request $request)
+    {
+        // return $request;
+        $authToken = session()->get('userToken');
+        $data = [
+            "accountNumber" => $request->accountNumber,
+            "branch" => $request->cardBranch,
+            "cardNumber" => $request->cardNumber,
+            "channel" => 'NET',
+            "entrySource" => "PIB",
+            "pinCode" => $request->pinCode,
+            "tokenID" => $authToken,
+            "secondaryAccounts" => [""]
+        ];
+        $response = Http::post(env('API_BASE_URL') . "request/blockCard", $data);
+        $result = new ApiBaseResponse();
+        return  $result->api_response($response);
+    }
+
+
+
     public function activate_card_request(Request $request)
     {
         $validator = Validator::make($request->all(), [

@@ -40,8 +40,8 @@
 
         #block_card.active {
             color: white !important;
-            background-color: var(--red) !important;
-            border-color: var(--red) !important;
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
         }
 
         #activate_card.active {
@@ -80,8 +80,8 @@
                         class=" transition-all py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link "
                         id="block_card" href="#tab_block_card">Block Card</button>
 
-                    <button id="activate_card" {{-- data-toggle="pill" data-value="reversed" --}}
-                        class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
+                    <button id="activate_card" data-toggle="pill" {{-- data-toggle="pill" data-value="reversed" --}}
+                        class="  transition-all py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
                         href="#tab_activate_card">Activate Card</button>
                     <button id="card_limits" {{-- data-toggle="pill" data-value="reversed" --}}
                         class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
@@ -120,7 +120,9 @@
                             @include('pages.cards.block_card')
 
                         </div>
-                        <div class="tab-pane fade" id="tab_activate_card" role="tabpanel">...b</div>
+                        <div class="tab-pane fade" id="tab_activate_card" role="tabpanel">
+                            @include('pages.cards.activate_card')
+                        </div>
                         <div class="tab-pane fade" id="tab_card_limit" role="tabpanel">.x..</div>
                     </div>
                 </div>
