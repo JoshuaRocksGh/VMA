@@ -171,6 +171,7 @@
     border-left: solid 5px var(--white);
     padding-left: 15px;
     background-color: var(--danger);
+    /* border-left: 1px solid var(--white); */
 }
 
 .menu-arrow {
@@ -188,6 +189,7 @@
 #side-menu a.current-page {
     background-color: var(--white);
     color: red;
+    border-left: 5px solid var(--danger);
 }
 /* #side-menu .menu-item-header.current-menu-header {
     border-left: solid 5px var(--brand);
