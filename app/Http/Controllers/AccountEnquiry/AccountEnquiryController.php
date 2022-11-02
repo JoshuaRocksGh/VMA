@@ -59,6 +59,8 @@ class AccountEnquiryController extends Controller
 
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
 
 
         $data = [
@@ -67,9 +69,10 @@ class AccountEnquiryController extends Controller
             "accountNumber" => $accountNumber,
             "authToken" =>  $authToken,
             "endDate" => $endDate,
-            "entrySource" => "A",
+            "entrySource" => $entrySource,
             "startDate" => $startDate,
-            "transLimit" => $transLimit
+            "transLimit" => $transLimit,
+            "channel" => $channel
 
 
         ];

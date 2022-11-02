@@ -19,6 +19,8 @@ class PaymentBeneficiaryController extends Controller
 
         $base_response = new BaseResponse();
         $userID = session()->get('userId');
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
 
         $data = [
             "account" => $request->account,
@@ -32,7 +34,8 @@ class PaymentBeneficiaryController extends Controller
                 "approvedDateTime" => date('Y-m-d'),
                 "createdBy" => $userID,
                 "createdDateTime" => date('Y-m-d'),
-                "entrySource" => "NET",
+                "entrySource" => $entrySource,
+                "channel" => $channel,
                 "modifyBy" => $request->modifyBy,
                 "modifyDateTime" => date('Y-m-d')
 

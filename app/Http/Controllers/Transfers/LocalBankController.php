@@ -42,6 +42,9 @@ class LocalBankController extends Controller
             return $base_response->api_response('500', "Invalid Transaction Type",  NULL); // return API BASERESPONSE
         }
 
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
+
         $data = [
             "amount" => (float)$request->transferAmount,
             "authToken" => $authToken,
@@ -49,14 +52,14 @@ class LocalBankController extends Controller
             "beneficiaryAddress" => $request->beneficiaryAddress,
             "beneficiaryName" => $request->beneficiaryName,
             "brand" => $deviceInfo['deviceBrand'],
-            "channel" => "NET",
+            "channel" => $channel,
             "country" => $deviceInfo['deviceCountry'],
             "creditAccount" => $request->beneficiaryAccountNumber,
             "debitAccount" => $request->accountNumber,
             "deviceId" => $deviceInfo['deviceId'],
             "deviceIp" => $clientIp,
             "deviceName" => $deviceInfo['deviceOs'],
-            "entrySource" => 'PIB',
+            "entrySource" => $entrySource,
             "expenseType" => $request->transferCategory,
             "manufacturer" => $deviceInfo['deviceManufacturer'],
             "secPin" => $request->secPin,

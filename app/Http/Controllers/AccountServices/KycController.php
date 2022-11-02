@@ -102,6 +102,8 @@ class KycController extends Controller
         //return $user;
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
 
         // return $userID ;
         // $firstname = $request->firstname;
@@ -111,6 +113,7 @@ class KycController extends Controller
             "authToken" => $authToken,
             "buildingName" => $request->building_name,
             "contactMethod" => null,
+            "channel" => $channel,
             "customerNumber" => $request->customer_number,
             "dateOfBirth" => $request->date_of_birth,
             "department" => $request->department,
@@ -119,7 +122,7 @@ class KycController extends Controller
             "employmentCode" => $request->employee_code,
             "employmentNumber" => $request->employee_number,
             "employmentType" => $request->employment_type,
-            "entrySource" => null,
+            "entrySource" => $entrySource,
             "firstName" => $request->firstname,
             "gender" => $request->gender,
             "gps" => null,

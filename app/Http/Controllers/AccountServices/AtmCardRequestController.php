@@ -17,12 +17,16 @@ class AtmCardRequestController extends Controller
     {
 
         $authToken = session()->get('userToken');
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
+
+
         $data = [
             "accountNumber" => $request->accountNumber,
             "branch" => $request->pickUpBranch,
             "cardNumber" => null,
-            "channel" => 'NET',
-            "entrySource" => "PIB",
+            "channel" => $channel,
+            "entrySource" => $entrySource,
             "pinCode" => $request->pinCode,
             "tokenID" => $authToken,
             "secondaryAccounts" => [""]
@@ -37,12 +41,16 @@ class AtmCardRequestController extends Controller
     {
         // return $request;
         $authToken = session()->get('userToken');
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
+
+
         $data = [
             "accountNumber" => $request->accountNumber,
             "branch" => $request->cardBranch,
             "cardNumber" => $request->cardNumber,
-            "channel" => 'NET',
-            "entrySource" => "PIB",
+            "channel" => $channel,
+            "entrySource" => $entrySource,
             "pinCode" => $request->pinCode,
             "tokenID" => $authToken,
             "secondaryAccounts" => [""]
@@ -81,13 +89,16 @@ class AtmCardRequestController extends Controller
         $accountNumber = $request->account_no;
         $pin_code = $request->pin;
         $card_number = $request->card_number;
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
+
 
         $data = [
             "accountNumber" => $accountNumber,
             "branch" => null,
             "cardNumber" => $card_number,
-            "channel" => "NET",
-            "entrySource" => "I",
+            "channel" => $channel,
+            "entrySource" => $entrySource,
             "pinCode" => $pin_code,
             "tokenID" => $authToken
         ];
@@ -142,12 +153,15 @@ class AtmCardRequestController extends Controller
         $pin_code = $request->pin;
         $card_number = $request->card_number;
 
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
+
         $data = [
             "accountNumber" => $accountNumber,
             "branch" => null,
             "cardNumber" => $card_number,
-            "channel" => "NET",
-            "entrySource" => "I",
+            "channel" => $channel,
+            "entrySource" => $entrySource,
             "pinCode" => $pin_code,
             "tokenID" => $authToken
         ];

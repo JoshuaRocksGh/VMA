@@ -21,6 +21,9 @@ class LoansController extends Controller
 
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
+
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
         // return $authToken;
 
         // $base_response = new BaseResponse();
@@ -37,7 +40,8 @@ class LoansController extends Controller
             "amount" => $loanAmount,
             "authToken" => $authToken,
             "deviceIp" => "A",
-            "entrySource" => "I",
+            "entrySource" => $entrySource,
+            "channel" =>  $channel,
             "interestRepayFrequency" => $interestRepayFrequency,
             "interestType" => $interestRateType,
             "loanProduct" => $loanProduct,
@@ -54,15 +58,19 @@ class LoansController extends Controller
 
     public function postLoanOrigination(Request $request)
     {
-        Log::alert("request");
+        // Log::alert("request");
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
+
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
         $data = [
 
             "amount" => $request->loanAmount,
             "authToken" => $authToken,
             "customerNumber" => session()->get("customerNumber"),
-            "entrySource" => "i",
+            "entrySource" => $entrySource,
+            "channel" => $channel,
             "introSource" => "MOB",
             "otherPurpose" => "other",
             "pBranch" => $request->productBranchCode,
@@ -196,6 +204,10 @@ class LoansController extends Controller
 
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
+        $deviceIp = request()->ip();
+
         // return $authToken;
 
         // $base_response = new BaseResponse();
@@ -213,8 +225,9 @@ class LoansController extends Controller
 
             "amount" => $loanAmount,
             "authToken" => $authToken,
-            "deviceIp" => "A",
-            "entrySource" => "I",
+            "deviceIp" => $deviceIp,
+            "entrySource" => $entrySource,
+            "channel" => $channel,
             "interestRepayFrequency" => $interest_repay_freq,
             "interestType" => $interest_rate_type,
             "loanProduct" => $loanProduct,

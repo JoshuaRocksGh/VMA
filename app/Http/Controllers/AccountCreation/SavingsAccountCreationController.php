@@ -61,7 +61,8 @@ class SavingsAccountCreationController extends Controller
         $userID = session()->get('userId');
 
         // return $request;
-
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
 
 
         $passport_picture_ = $request->passport_picture;
@@ -113,7 +114,8 @@ class SavingsAccountCreationController extends Controller
             "docRef" => "400",
             "domicileCountry" =>
             $request->country,
-            "entrySource" => "M",
+            "entrySource" => $entrySource,
+            "channel" => $channel,
             "fingerPrint" => "sng",
             "kycDoc" => "mobile",
             "mandate" => "self to sign",

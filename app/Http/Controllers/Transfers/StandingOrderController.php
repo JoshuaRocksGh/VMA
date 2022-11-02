@@ -35,7 +35,8 @@ class StandingOrderController extends Controller
         $api_headers = session()->get('headers');
         $clientIp = request()->ip();
         $deviceInfo = session()->get('deviceInfo');
-
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
 
 
         $data =
@@ -52,8 +53,8 @@ class StandingOrderController extends Controller
                 "pinCode" => $req->secPin,
                 "transactionDesc" => $req->transferPurpose,
                 "expenseType" => $req->transferCategory,
-                "channel" => "NET",
-                "entrySource" => 'PIB',
+                "channel" => $channel,
+                "entrySource" => $entrySource,
                 "country" => $deviceInfo['deviceCountry'],
                 "deviceId" => $deviceInfo['deviceId'],
                 "manufacturer" => $deviceInfo['deviceManufacturer'],

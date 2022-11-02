@@ -565,7 +565,7 @@ class BulkUploadsController extends Controller
         $fileBatch = $request->query('batch_no');
         $base_response = new BaseResponse();
 
-        return $fileBatch;
+        // return $fileBatch;
 
         try {
             $response = Http::delete(env('API_BASE_URL') . "corporate/deleteFileRecord/$fileBatch");

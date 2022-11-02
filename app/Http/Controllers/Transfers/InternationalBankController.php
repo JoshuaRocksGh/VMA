@@ -22,6 +22,10 @@ class InternationalBankController extends Controller
         $client_ip = request()->ip();
         $api_headers = session()->get('headers');
         $deviceInfo = session()->get('deviceInfo');
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
+
+
         $data = [
             "amount" => $req->transferAmount,
             "authToken" => $authToken,
@@ -32,16 +36,16 @@ class InternationalBankController extends Controller
             "beneficiaryAddress3" => "string",
             "beneficiaryName" => $req->beneficiaryName,
             "brand" => $deviceInfo['deviceBrand'],
-            "channel" => "NET",
+            "channel" => $channel,
             "chargeAccount" => $req->accountNumber,
             "country" => $req->bankCountryCode,
             "debitAccount" => $req->accountNumber,
             "deviceId" => $deviceInfo['deviceId'],
             "deviceIp" => $client_ip,
             "deviceName" => $deviceInfo['deviceOs'],
-            "entrySource" => "PIB",
+            "entrySource" => $entrySource,
             "expenseType" => $req->transferCategory,
-            "isoCode" => "USD",
+            "isoCode" => "",
             "manufacturer" => $deviceInfo['deviceManufacturer'],
             "pinCode" => $req->secPin,
             "remitInfo1" => $req->transferPurpose,

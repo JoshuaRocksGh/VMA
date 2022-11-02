@@ -170,18 +170,24 @@ class KorporController extends Controller
         $base_response = new BaseResponse();
         $userID = session()->get('userId');
         $api_headers = session()->get("headers");
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
+        $deviceInfo = session()->get('deviceInfo');
+
+
         $data = [
             "beneficiaryMobileNo" => $request->beneficiaryMobileNo,
             "customberNumber" => session()->get('customerNumber'),
             "pinCode" => $request->pinCode,
             "postedBy" => $userID,
             "referenceNo" => $request->referenceNo,
-            "brand" => "string",
-            "country" => "string",
-            "deviceId" => "string",
-            "deviceName" => "string",
-            "entrySource" => "string",
-            "manufacturer" => "string",
+            "brand" => $deviceInfo['deviceBrand'],
+            "country" => $deviceInfo['deviceCountry'],
+            "deviceId" => $deviceInfo['deviceId'],
+            "deviceName" => $deviceInfo['deviceBrand'],
+            "entrySource" => $entrySource,
+            "channel" => $channel,
+            "manufacturer" => $deviceInfo['deviceManufacturer'],
             "userName" => $userID
         ];
         try {

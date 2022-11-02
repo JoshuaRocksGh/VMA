@@ -16,12 +16,15 @@ class LoanOrigination extends Controller
 
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
 
         $data = [
             "amount" => $req->loanAmount,
             "authToken" => $authToken,
             "customerNumber" => session()->get("customerNumber"),
-            "entrySource" => "MOB",
+            "entrySource" => $entrySource,
+            "channel" => $channel,
             "facilityType" => "string",
             "introSource" => "string",
             "otherPurpose" => "string",

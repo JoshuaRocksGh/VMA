@@ -49,22 +49,24 @@ class StatementRequestController extends Controller
         $accountNumber = $request->account_no;
         $branchCode = $request->pick_up_branch;
         $deviceIP = $request->deviceIP;
-        $entrySource = $request->entrySource;
+        // $entrySource = $request->entrySource;
         $pincode = $request->pin;
         $startDate = $request->transStartDate;
         $endDate = $request->transEndDate;
         $statementType = $request->type_of_statement;
         $medium = $request->medium;
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
 
         $data = [
 
             "accountNumber" => $accountNumber,
             // "medium" => $medium,
-            "channel" => "NET",
+            "channel" => $channel,
             "branch" => $branchCode,
             "deviceIP" => $deviceIp,
             "endDate" => $endDate,
-            "entrySource" => "I",
+            "entrySource" => $entrySource,
             "pinCode" => $pincode,
             "startDate" => $startDate,
             "statementType" => $statementType,

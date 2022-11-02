@@ -22,6 +22,8 @@ class PaymentsController extends Controller
     {
         // return $req;
         $base_response = new BaseResponse();
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
 
 
         $data = [
@@ -30,7 +32,9 @@ class PaymentsController extends Controller
             'customerName' => session()->get('userId'),
             'customerNumber' => session()->get('customerNumber'),
             'customerPhone' => session()->get('customerPhone'),
-            'entrySource' => "MOM",
+            // 'entrySource' => "MOM",
+            'entrySource' => $entrySource,
+            'channel' => $channel,
             'naration' => $req->paymentDescription,
             'payeeName' => $req->payeeName,
             'payeeNumber' => $req->paymentAccount,

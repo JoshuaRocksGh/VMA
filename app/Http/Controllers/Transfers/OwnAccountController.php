@@ -51,18 +51,20 @@ class OwnAccountController extends Controller
         $api_headers = session()->get('headers');
         $deviceInfo = session()->get('deviceInfo');
         // return $deviceInfo;
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
 
         $data = [
             "amount" => $req->transferAmount,
             "authToken" => $authToken,
             "brand" => $deviceInfo['deviceBrand'],
             // "channel" => env('APP_CHANNEL'),
-            "channel" => "NET",
+            "channel" => $channel,
             "creditAccount" => $req->beneficiaryAccountNumber,
             "currency" => $req->accountCurrency,
             "debitAccount" => $req->accountNumber,
             "deviceIp" => $client_ip,
-            "entrySource" => 'PIB',
+            "entrySource" => $entrySource,
             "expenseType" => $req->transferCategory,
             "country" => $deviceInfo['deviceCountry'],
             "deviceId" => $deviceInfo['deviceId'],
