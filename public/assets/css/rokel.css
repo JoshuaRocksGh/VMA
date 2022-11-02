@@ -748,9 +748,10 @@
     border-color: var(--gray);
 }
 .knav-primary.active {
-    background-color: var(--brand);
+    background-color: #dc3545;
+    /* background-color: var(--brand); */
     color: var(--white);
-    border-color: var(--gray);
+    border-color: #dc3545;
 }
 .knav-success.active {
     color: var(--white);
