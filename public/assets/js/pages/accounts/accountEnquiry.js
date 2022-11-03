@@ -35,13 +35,13 @@ function getAccountTransactions(accountNumber, startDate, endDate) {
 const pdfHeader = () => {
     return `<div>
     <div class="d-flex justify-content-between px-3 items-center">
-        <div style="height: 150px"> <img src='assets/images/rokel_logo.png'>
+        <div style="height: 150px"> <img src='assets/images/slcb-bg-logo.png'>
         </div>
-        <div class="font-14 font-weight-bold"> ROKEL COMMERCIAL BANK<br>
-            25-27 Siaka Stevens Street<br>
+        <div class="font-14 font-weight-bold"> SIERRA LEONE COMMERCIAL BANK<br>
+            9/31 Siaka Stevens Street<br>
             Freetown, Sierra Leone<br>
-            rokelsl@rokelbank.sl<br>
-            (+232)-76-22-25-01
+            slcb@slcb.com<br>
+            (+232) - 22 -225264
         </div>
     </div>
     <div class="d-flex justify-content-around">
@@ -235,7 +235,7 @@ $(function () {
                 {
                     data: "transactionNumber",
                     render: (data, type, row) => {
-                        return `<button type="button" class="btn  btn-outline-dark more-details" data-toggle="modal" data-target="#accordion-modal" batch-no="${row.batchNumber}"
+                        return `<button type="button" class="btn btn-outline-info more-details" data-toggle="modal" data-target="#accordion-modal" batch-no="${row.batchNumber}"
                                 posting-date="${row.postingSysDate}" trans-number="${row.transactionNumber}" value-date="${row.valueDate}" branch="${row.branch}"
                                 narration="${row.narration}" amount="${row.amount}" contra-account="${row.contraAccount}" channel="${row.channel}">Details</button>`;
                     },

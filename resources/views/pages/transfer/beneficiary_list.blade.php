@@ -8,9 +8,9 @@
         }
 
         /* td,
-            th {
-                white-space: nowrap
-            } */
+                    th {
+                        white-space: nowrap
+                    } */
         .bg-same-bank {
             background-color: #dc3545 !important;
         }
@@ -107,7 +107,7 @@
                                 class=" font-14">Same
                                 Bank
                             </span><span class=" font-14">Beneficiaries</span></h3>
-                        <button type="button" class="btn px-3 btn-sm font-14 font-weight-bold btn-dark btn-rounded"
+                        <button type="button" class="btn px-3 btn-sm font-14 font-weight-bold btn-rounded form-button "
                             id="add_beneficiary"><i class="pr-2 fa fa-user-plus"></i>Add</button>
                     </div>
 
@@ -115,7 +115,7 @@
                         <table id="beneficiary_list"
                             class="table table-bordered table-centered table-striped  dt-responsive w-100 mb-0 beneficiary_list_display">
                             <thead>
-                                <tr class="bg-dark text-white">
+                                <tr class="table-background">
                                     <th> <b> Alias </b> </th>
                                     <th> <b> Account Name </b> </th>
                                     <th> <b> Account Number </b> </th>

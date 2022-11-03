@@ -213,7 +213,7 @@
     content: "";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    color: var(--brand);
+    color: #dc3545;
     position: absolute;
     bottom: 0;
     right: 50%;
@@ -226,12 +226,13 @@
     display: none !important;
 }
 .dashboard .dashboard-header .nav-link:hover {
-    border-color: var(--brand);
+    /* border-color: var(--brand); #dc3545 */
+    border-color: #dc3545;
 }
 .dashboard .dashboard-header .nav-link.active {
-    background-color: var(--brand);
+    background-color: #dc3545;
     color: var(--white);
-    border-color: var(--brand);
+    border-color: #dc3545;
 }
 
 .dashboard.site-card {
@@ -500,7 +501,7 @@
 }
 
 .switch.active {
-    background-color: var(--gray-dark) !important;
+    background-color: #dc3545 !important;
     color: white;
 }
 
@@ -785,3 +786,21 @@
 }
 
 /*  transition-all py-md-2   text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link */
+
+/* TABLE BACKGROUND COLOUR */
+.table-background {
+    background-color: #17a2b8;
+    color: white;
+    font-weight: normal;
+}
+
+/* FORM BUTTON COLOR */
+.form-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.back-form-button {
+    background-color: #838383;
+    color: white;
+}

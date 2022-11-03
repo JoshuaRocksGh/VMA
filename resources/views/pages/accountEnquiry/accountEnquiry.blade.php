@@ -68,7 +68,8 @@
                         </div>
                     </div>
                     <div class="form-group text-right">
-                        <button class="btn btn-dark mt-1 waves-effect waves-light" id="search_transaction">Search</button>
+                        <button class="btn  mt-1 waves-effect waves-light form-button"
+                            id="search_transaction">Search</button>
                     </div>
                 </div>
             </div>
@@ -119,7 +120,7 @@
 
                     <thead>
 
-                        <tr class="bg-dark text-white ">
+                        <tr class="table-background ">
                             <th data-priority="1" scope="col">Date</th>
                             <th scope="col">Amount <span class="currency_display"></span></th>
 

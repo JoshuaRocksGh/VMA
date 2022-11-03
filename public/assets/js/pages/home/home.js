@@ -71,7 +71,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 <button type="button"
                     onclick="window.open('approvals-pending-transfer-details/${requestId}/${customerNo}'),
                         '_blank', 'location=yes,height=670,width=1200,scrollbars=yes,status=yes'"
-                    class=" btn btn-xs btn-outline-success font-10"
+                    class=" btn btn-xs btn-outline-info font-10"
                 >
                     Details
                 </button>
@@ -443,13 +443,15 @@ $(() => {
         templateSelection: accountTemplate,
     });
     blockUi({ block: "#nav-tabContent" });
+    // return;
     Promise.all([
         getData({ url: "fixed-deposit-account-api", name: "investments" }),
         getData({ url: "get-loan-accounts-api", name: "loans" }),
         getData({ url: "get-accounts-api", name: "accounts" }),
-    ]).then((values) => {
+    ]).then((value) => {
         // siteLoading("hide");
-        console.log("VALUES ==>", values);
+        console.log("VALUES ==>", value);
+
         prepareGraphValues();
         accountsPieChart({
             title: "Accounts",

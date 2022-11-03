@@ -147,7 +147,7 @@
                     $currentPath === 'Same Bank' ||
                     $currentPath ===
                         'International
-                                                                                                                                                                                                                                                                                                Bank')
+                                                                                                                                                                                                                                                                                                                                                                Bank')
                     <div class="tab-pane py-3 px-0 fade" id="onetime_view" role="tabpanel"
                         aria-labelledby="onetime_tab">
                         <div class="col-12">
@@ -248,7 +248,7 @@
                             placeholder="Enter Amount To Transfer" id="amount"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                             required>
-                        <button type="button" class="btn btn-brand  ml-2 btn-sm"><span
+                        <button type="button" class="btn btn-danger  ml-2 btn-sm"><span
                                 class="mr-1 rate_button">Rate</span><i class="fas fa-calculator"></i></button>
                     </div>
                 </div>
@@ -306,7 +306,7 @@
                 </div>
             </div>
             <div class="form-group text-right yes_beneficiary">
-                <button class="btn btn-dark next-button btn-rounded" type="button" id="next_button">
+                <button class="btn next-button btn-rounded form-button" type="button" id="next_button">
                     &nbsp; Next &nbsp;<i class="fe-arrow-right"></i></button>
             </div>
 

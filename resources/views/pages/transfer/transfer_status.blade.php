@@ -16,7 +16,7 @@
 
             <table class="table table-bordered mt-5 table-striped display responsive nowrap w-100" id="transfer_status_table">
                 <thead>
-                    <tr class="bg-dark  text-white ">
+                    <tr class="table-background ">
                         <th class="all"> Date </th>
                         <th class="all"> Beneficiary Name </th>
                         <th class="all"> Amount </th>

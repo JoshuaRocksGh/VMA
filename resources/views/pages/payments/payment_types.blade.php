@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="text-right mt-4">
-                        <button class="btn font-weight-bold  font-11 btn-dark next-button btn-rounded" id="next_button">
+                        <button class="btn font-weight-bold form-button  font-11 next-button btn-rounded" id="next_button">
                             &nbsp; Proceed &nbsp; <i class="fe-arrow-right"></i></button>
                     </div>
                 </div>

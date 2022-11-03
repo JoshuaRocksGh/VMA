@@ -73,7 +73,7 @@
                     </div>
 
                 </div>
-                <div class='mx-3 px-3 py-1 detail-card total bg-success'>
+                <div class='mx-3 px-3 py-1 detail-card total bg-info'>
                     <div class="d-item text-white my-1 font-weight-bold">
                         <span> TOTAL</span><span id="details_total_amount">SLL xxx</span>
 
@@ -85,7 +85,7 @@
                 </div>
                 <div class='mx-3'>
                     <button type="button" data-dismiss="modal" id="confirm_transfer_button"
-                        class="btn btn-dark font-weight-bold btn-block btn-rounded py-2 mb-4">PROCEED</button>
+                        class="btn font-weight-bold btn-block btn-rounded py-2 mb-4 form-button">PROCEED</button>
                 </div>
 
             </div>

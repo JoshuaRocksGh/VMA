@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4 float-right">
-                                    <button type="button" class="btn btn-dark btn-sm  waves-effect waves-light"
+                                    <button type="button" class="btn btn-success btn-sm  waves-effect waves-light"
                                         id="approve_upload_btn">
                                         Submit for Approval
                                     </button>
@@ -110,7 +110,7 @@
                         class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list">
 
                         <thead>
-                            <tr class="bg-dark text-white">
+                            <tr class="table-background">
                                 <th>No</th>
                                 <th>Credit Acc</th>
                                 <th>Name</th>

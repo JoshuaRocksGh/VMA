@@ -59,10 +59,10 @@
             <table class="table table-striped table-bordered display responsive nowrap w-100"
                 id="standing_order_display_area">
                 <thead>
-                    <tr class="bg-dark text-white ">
+                    <tr class="table-background ">
                         <th class="all"> Account No </th>
                         <th class="all"> Beneficiary Account </th>
-                        <th class="all"> Amount (SLL) </th>
+                        <th class="all"> Amount </th>
                         <th class="all"> Order Date </th>
                         <th class="all"> End Date </th>
                         <th class="all"> Frequency </th>

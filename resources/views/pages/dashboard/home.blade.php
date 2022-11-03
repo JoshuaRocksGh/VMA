@@ -21,7 +21,7 @@
                     @if (config('app.corporate'))
                         <a class="nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                             aria-controls="nav-profile" aria-selected="false">Approvals
-                            <span id="approval_count" class="badge badge-danger badge-pill font-10 ml-1"></span>
+                            <span id="approval_count" class="badge badge-success badge-pill font-10 ml-1"></span>
                         </a>
                     @endif
                 </div>
@@ -80,7 +80,7 @@
                                     <table id="accounts_table" width="100%"
                                         class="table nowrap display  border dt-responsive table-hover rounded mb-0 ">
                                         <thead>
-                                            <tr class="bg-dark font-weight-bold  text-white ">
+                                            <tr class=" table-background ">
                                                 <td class="text-right"> Account Number </td>
                                                 <td class="text-right"> Account Name </td>
                                                 <td class="text-right"> Account Type </td>
@@ -100,7 +100,7 @@
                                     <table id="loans_table" width="100%"
                                         class="table nowrap display  border rounded mb-0 ">
                                         <thead>
-                                            <tr class="bg-dark text-white ">
+                                            <tr class="table-background">
                                                 <td> Facility No. </td>
                                                 <td> Description </td>
                                                 <td> Cur </td>
@@ -121,7 +121,7 @@
                                     <table id="investments_table" width="100%"
                                         class="table nowrap display border rounded  mb-0 ">
                                         <thead>
-                                            <tr class="bg-dark text-white ">
+                                            <tr class="table-background ">
                                                 <td> Account No. </td>
                                                 <td> Deal Amount </td>
                                                 <td> Tunure </td>
@@ -144,7 +144,7 @@
                         <table id=""
                             class="table table-bordered  table-centered table-condensed nowrap table-nowrap   w-100 pending_transaction_request ">
                             <thead>
-                                <tr class="bg-info  border-dark text-white">
+                                <tr class="table-background">
                                     <th>Rquest Id</th>
                                     <th>Req-Type</th>
                                     <th>Account No</th>

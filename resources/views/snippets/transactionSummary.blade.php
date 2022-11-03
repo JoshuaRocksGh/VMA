@@ -169,12 +169,12 @@
         <br>
         <div class="form-group text-center hide-on-success">
 
-            <span> <button class="btn btn-secondary btn-rounded" type="button" id="back_button"> <i
+            <span> <button class="btn btn-rounded back-form-button" type="button" id="back_button"> <i
                         class="mdi mdi-reply-all-outline"></i>&nbsp;Back</button>
                 &nbsp; </span>
             <span>
                 &nbsp;
-                <button class="btn btn-dark btn-rounded " type="button" id="confirm_transfer_button">
+                <button class="btn  btn-rounded form-button" type="button" id="confirm_transfer_button">
                     <span id="confirm_transfer">Confirm
                         Transfer</span>
                     <span class="spinner-border spinner-border-sm mr-1" role="status" id="spinner" aria-hidden="true"

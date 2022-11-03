@@ -120,7 +120,7 @@
                             <div class="form-group row">
                                 <div class="col-8 offset-4 text-right">
                                     <button type="submit"
-                                        class="btn btn-dark next-button btn-rounded disappear-after-success"
+                                        class="btn next-button btn-rounded disappear-after-success form-button"
                                         id="submit_cheque_request">
                                         Upload & Validate
                                     </button>
@@ -150,7 +150,7 @@
                     style="zoom: 0.9;">
 
                     <thead>
-                        <tr class="bg-dark text-white">
+                        <tr class="table-background">
                             {{-- <th> <b> Batch </b> </th> --}}
                             <th class="all"> Reference </th>
                             <th class="all"> Debit Account </th>
@@ -220,7 +220,7 @@
                                     class="table table-bordered table-striped dt-responsive nowrap w-100 all_successful_uploads_table"
                                     style="zoom: 0.9">
                                     <thead>
-                                        <tr class="bg-dark  text-white">
+                                        <tr class="table-background">
                                             {{-- <th><b>Record ID</b></th> --}}
                                             <th><b>Name</b></th>
                                             <th><b>Account No.</b></th>
@@ -242,7 +242,7 @@
                                     class="table table-bordered table-striped dt-responsive nowrap w-100 all_failed_uploads_table"
                                     style="zoom: 0.9">
                                     <thead>
-                                        <tr class="bg-dark  text-white">
+                                        <tr class="table-background">
                                             {{-- //<th><b>Record ID</b></th> --}}
                                             <th><b>Name</b></th>
                                             <th><b>Account No.</b></th>
