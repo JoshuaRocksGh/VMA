@@ -33,24 +33,24 @@
         }
 
         #redeemed_history.active {
-            background-color: var(--brand) !important;
+            background-color: #dc3545 !important;
             color: white !important;
-            border-color: var(--gray) !important;
+            border-color: #dc3545 !important;
 
         }
 
 
         #pending_history.active {
-            background-color: var(--brand) !important;
+            background-color: #dc3545 !important;
             color: white !important;
-            border-color: var(--gray) !important;
+            border-color: #dc3545 !important;
 
         }
 
         #cancelled_history.active {
-            background-color: var(--brand) !important;
+            background-color: #dc3545 !important;
             color: white !important;
-            border-color: var(--gray) !important;
+            border-color: #dc3545 !important;
 
         }
     </style>
@@ -62,18 +62,17 @@
             <nav class="dashboard-header">
                 <div class="nav nav-tabs justify-content-center border-0" id="nav-tab" role="tablist">
                     <a href="#send_{{ $currentType }}_page" data-toggle="tab" aria-expanded="true"
-                        class="nav-link w-100 text-center mb-2 active send_{{ $currentType }}_tab"
-                        style="max-width: 175px">
+                        class="nav-link w-100 text-center active send_{{ $currentType }}_tab" style="max-width: 175px">
                         Send {{ $currentPath }}
                     </a>
                     <a href="#{{ $currentType }}_history_page" id="{{ $currentType }}_history_tab" data-toggle="tab"
-                        aria-expanded="false" class="nav-link w-100 text-center mb-2 {{ $currentType }}_trans_tab"
+                        aria-expanded="false" class="nav-link w-100 text-center {{ $currentType }}_trans_tab"
                         style="max-width: 175px">
                         {{ $currentPath }} History
                     </a>
 
                     <a href="#redeem_{{ $currentType }}_page" data-toggle="tab" aria-expanded="false"
-                        class="nav-link w-100 mb-2 text-center redeem_{{ $currentType }}_tab" style="max-width: 175px">
+                        class="nav-link w-100 text-center redeem_{{ $currentType }}_tab" style="max-width: 175px">
                         Redeem {{ $currentPath }}
                     </a>
                 </div>
@@ -205,7 +204,7 @@
 
                             <div class="form-group text-right mt-2">
                                 <button type="button"
-                                    class="btn btn-dark btn-rounded waves-effect waves-light disappear-after-success "
+                                    class="btn  btn-rounded waves-effect waves-light disappear-after-success form-button"
                                     id="confirm_next_button">
                                     <span class="submit-text">&nbsp; Next
                                         &nbsp;<i class="fe-arrow-right"></i></span>
@@ -219,7 +218,7 @@
                 </div>
                 <div class="tab-pane" id="redeem_{{ $currentType }}_page">
 
-                    <div class="  pt-5 px-4 mx-auto " id="request_form_div" style="max-width: 650px">
+                    <div class="mx-auto " id="request_form_div" style="max-width: 650px">
 
                         <form action="#" class="select_beneficiary"
                             id="redeem_{{ $currentType }}_payment_details_form" autocomplete="off"
@@ -240,7 +239,7 @@
 
                                     <div class="form-group row">
 
-                                        <b class="col-md-5 text-primary"> Mobile Number &nbsp; <span
+                                        <b class="col-md-5 text-dark"> Mobile Number &nbsp; <span
                                                 class="text-danger">*</span></b>
 
 
@@ -250,7 +249,7 @@
 
                                     <div class=" form-group row">
 
-                                        <b class="col-md-5 text-primary"> Remittance Number:
+                                        <b class="col-md-5 text-dark"> Remittance Number:
                                             &nbsp; <span class="text-danger">*</span></b>
 
                                         <input type="text" class="form-control col-md-7" id="remittance_no"
@@ -262,9 +261,9 @@
 
                                     <div class="form-group text-right ">
                                         <button type="button"
-                                            class="btn btn-primary btn-rounded mt-2 waves-effect waves-light disappear-after-success "
+                                            class="btn btn-rounded mt-2 waves-effect waves-light disappear-after-success form-button"
                                             id="proceed_to_redeem_button">
-                                            <span id="next-text">Proceed</span> &nbsp;<i class="fe-arrow-right"></i>
+                                            <span id="next-text">Next</span> &nbsp;<i class="fe-arrow-right"></i>
                                         </button>
                                     </div>
 
@@ -350,25 +349,11 @@
                 </div>
                 <div class="tab-pane site-card p-2 p-sm-3 p-md-4" id="{{ $currentType }}_history_page">
 
-                    <div class="px-md-3 mt-lg-0 rounded">
-                        <br>
-                        <div class="form-group mb-3 justify-content-center d-md-flex mx-md-auto" style="max-width: 750px">
+                    <div class="px-md-3 mt-lg-0 rounded row">
+                        <div class="col-lg-4">
+                            <label class="mb-2 d-block f-18 text-center font-weight-bold text-dark">Select
+                            </label>
 
-                            <div class=" align-self-center" style="min-width: 100px"> <label
-                                    class="d-block f-18 font-weight-bold mb-1 text-dark">
-                                    Select
-                                    Account</label></div>
-                            <div class="pl-md-3 w-100">
-                                <select class="form-control unredeemed accounts-select"
-                                    id="{{ $currentType }}_history_accounts" required>
-                                    <option disabled selected value="">Select
-                                        Account Number</option>
-                                    @include('snippets.accounts')
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="row pt-md-4 mx-auto" style="max-width: 1250px">
                             <nav class="col-md-4  nav nav-pills flex-column mx-auto mb-3 flex-row"
                                 style="max-width: 350px">
                                 <button id="pending_history" data-value="unredeemed"
@@ -382,14 +367,42 @@
                                     class="  transition-all py-md-2 text-sm-center mtb1  mb-md-2  font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
                                     href="#">Cancelled</button>
                             </nav>
-                            <div class="col-md-8" id="{{ $currentType }}_history_display" style="max-width: 650px;">
-                                <div id="{{ $currentType }}_history_container" style="min-height: 350px; "
-                                    class="mb-3">
-                                    <div class="text-center" {!! $noDataAvailable !!}>
+                            <hr>
+
+                        </div>
+
+
+                        <div class="col-lg-8" style="max-width: 50rem">
+                            <div class=" align-self-center" style="min-width: 100px"> <label
+                                    class="d-block f-18 font-weight-bold mb-1 text-dark">
+                                    Select
+                                    Account</label></div>
+
+                            <select class="form-control unredeemed accounts-select"
+                                id="{{ $currentType }}_history_accounts" required>
+                                <option disabled selected value="">Select
+                                    Account Number</option>
+                                @include('snippets.accounts')
+                            </select>
+                            <hr class="">
+
+                            <div class="row pt-md-4 mx-auto" style="max-width: 650px">
+
+                                <div class="col-md-8" id="{{ $currentType }}_history_display"
+                                    style="max-width: 650px;">
+                                    <div id="{{ $currentType }}_history_container" style="min-height: 350px; "
+                                        class="mb-3">
+                                        <div class="text-center" {!! $noDataAvailable !!}>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
+                        {{--    --}}
+
+
                     </div>
 
                 </div>

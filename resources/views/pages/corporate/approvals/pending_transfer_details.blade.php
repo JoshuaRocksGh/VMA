@@ -387,7 +387,8 @@
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
 
                         } else if (request_type == 'KORP') {
-                            let request_type = 'E-Korpor Transaction'
+                            //let request_type = 'E-Korpor Transaction'
+                            let request_type = 'Salone-Link Transaction'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
                         } else if (request_type == 'CARD') {
                             let request_type = 'Cardless Transaction'
