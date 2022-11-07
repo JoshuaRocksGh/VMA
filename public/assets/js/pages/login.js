@@ -1,4 +1,5 @@
-const deviceType = getDeviceType();
+// const deviceType = getDeviceType();
+const deviceType = "";
 const deviceOS = getDeviceOS();
 const deviceID = getGPU();
 function login(email, password) {
