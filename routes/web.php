@@ -157,7 +157,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('qr-payment', [paymentController::class, 'qr_payment']);
     Route::get('cardless-payment', [paymentController::class, 'cardless_payment']);
     Route::get('airtime-payment', [paymentController::class, 'airtime_payment'])->name('airtime-payment');
-    Route::get('/bulk-korpor', [KorporController::class, 'bulk_korpor'])->name('bulk-korpor');
+    Route::get('/bulk-salone-link', [KorporController::class, 'bulk_korpor'])->name('bulk-salone-link');
     Route::get('/utility-payment', [paymentController::class, 'utilities'])->name('utility-payment');
     Route::get('salone-link', [paymentController::class, 'e_korpor'])->name('salone-link');
     Route::get('bulk-upload-payment', [paymentController::class, 'bulk_upload_payment'])->name('bulk-upload-payment');

@@ -2,9 +2,9 @@
 
 @section('content')
     @php
-        $pageTitle = 'payment BENEFICIARY';
-        $basePath = 'payment';
-        $currentPath = 'payment Beneficiary';
+        $pageTitle = 'Payment Beneficiary';
+        $basePath = 'Payment';
+        $currentPath = 'Payment Beneficiary';
     @endphp
     @include('snippets.pageHeader')
 
@@ -16,7 +16,7 @@
                         Money
                     </span>Beneficiaries
                 </h3>
-                <button type="button" class="btn px-3  btn-sm font-12 font-weight-bold btn-dark btn-rounded"
+                <button type="button" class="btn px-3  btn-sm font-12 font-weight-bold  btn-rounded form-button"
                     id="add_beneficiary"><i class="pr-2 fa fa-user-plus"></i>Add</button>
             </div>
             <div class="row mx-auto" style="max-width: 80rem;">

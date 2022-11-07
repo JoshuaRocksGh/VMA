@@ -4,9 +4,9 @@
 
 @section('content')
     @php
-    $pageTitle = 'BULK E-KORPOR PAYMENTS';
-    $basePath = 'Payments';
-    $currentPath = 'Bulk E-Korpor';
+        $pageTitle = 'BULK SALONE-LINK ';
+        $basePath = 'Payments';
+        $currentPath = 'Bulk Salone-link';
     @endphp
 
     @include('snippets.pageHeader')
@@ -15,8 +15,8 @@
         <p class="text-muted font-14 m-r-20 m-b-20">
             <span> <i class="fa fa-info-circle  text-red"></i> <b style="color:red;">Please Note:&nbsp;&nbsp;</b> <span
                     class="">You can download template for upload (<span class=" text-danger"><a
-                            href="{{ url('korpor_file_download') }}" class="text-danger"> Bulk
-                            E-korpor</a></span>)</span> </span>
+                            href="{{ url('korpor_file_download') }}" class="text-danger"> Click Here to
+                            Download</a></span> )</span> </span>
 
         </p>
 
@@ -29,8 +29,7 @@
 
                 <div class="card-box col-md-12">
 
-                    <label class=" text-primary"> Account to transfer from<span class="text-danger">
-                            *</span></label>
+                    <label class=" text-dark"> Account to transfer from</label>
                     <div class="form-group">
                         <select class="accounts-select" name="my_account" id="my_account" required>
                             <option disabled selected value=""> --- Select Source Account --- </option>
@@ -39,46 +38,46 @@
                         </select>
                     </div>
                     <hr class="mt-0">
-
                 </div>
                 <div class="card-box col-md-12">
+                    <label class="text-danger">Transfer Details</label>
+                    <br>
 
                     <div class="row">
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-4 form-group">
 
-                            <label for="inputEmail3" class=" text-primary">Total
-                                Amount<span class="text-danger"> *</span></label>
+                            <label for="inputEmail3" class=" text-dark">Total
+                                Amount</label>
                             <input type="text" name="bulk_amount" id="bulk_amount"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                 class="form-control input-sm" required>
 
                         </div>
 
+                        <div class="col-md-4 form-group ">
 
-                        <div class="col-md-6 form-group ">
-
-                            <label for="inputEmail3" class=" text-primary">Value
-                                Date<span class="text-danger"> *</span></label>
-                            <input type="date" name="value_date" id="value_date" class="form-control" required>
-
-
-                        </div>
-
-
-                        <div class="col-md-6 form-group ">
-
-                            <label for="" class=" text-primary">Reference
-                                Number<span class="text-danger"> *</span></label>
+                            <label for="" class=" text-dark">Reference
+                                Number</label>
                             <input type="text" name="reference_no" id="reference_no" class="form-control input-sm"
                                 required>
 
                         </div>
 
 
+                        <div class="col-md-4 form-group ">
 
-                        <div class="col-md-6 form-group ">
+                            <label for="inputEmail3" class=" text-dark">Value
+                                Date</label>
+                            <input type="date" name="value_date" id="value_date" class="form-control" required>
 
-                            <label for="" class=" text-primary">File<span class="text-danger">
+
+                        </div>
+
+
+
+                        <div class="col-md-4 form-group ">
+
+                            <label for="" class=" text-dark">File<span class="text-danger">
                                     *</span></label>
                             <br>
                             <input type="file" name="excel_file" id="excel_file" class=" input-sm" required>
@@ -90,7 +89,7 @@
                             <div class="form-group row">
                                 <div class="col-8 offset-4 text-right">
                                     <button type="submit"
-                                        class="btn btn-primary btn-sm waves-effect waves-light disappear-after-success"
+                                        class="btn  waves-effect waves-light disappear-after-success form-button"
                                         id="submit_cheque_request">
                                         Upload & Validate
                                     </button>
@@ -105,17 +104,11 @@
                 </div>
 
 
-
-
-
-
-
-
             </div>
             <hr>
 
             <div class="breakpoint">
-                <label class="text-primary">Payment Summary</label>
+                <label class="text-danger">Payment Summary</label>
                 <br>
 
                 <table id="beneficiary_table"

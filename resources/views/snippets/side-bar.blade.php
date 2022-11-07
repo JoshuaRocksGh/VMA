@@ -100,7 +100,7 @@
 
                     @if (config('app.corporate'))
                         <li>
-                            <a href="{{ url('bulk-korpor') }}">Bulk Salone-link</a>
+                            <a href="{{ url('bulk-salone-Link') }}">Bulk Salone-link</a>
                         </li>
                     @endif
 

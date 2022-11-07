@@ -19,7 +19,7 @@
 
         .subHeader {
             font-weight: 600;
-            background-color: #998f38;
+            background-color: #17a2b8;
             color: white;
             margin-bottom: 2rem;
             border-radius: 0.5rem;
@@ -40,7 +40,7 @@
     <div class="dashboard site-card ">
         <div class="dashboard-body p-4 row">
             <div class="col-md-7" id="qr_form">
-                <h2 class="rounded-lg text-center text-white mb-4 p-2" style="background-color: #998f38">QR Content</h2>
+                <h2 class="rounded-lg text-center text-white mb-4 p-2" style="background-color: #17a2b8">QR Content</h2>
                 <form role="form" class="container">
                     <div class="mb-3">
                         <ul class="nav w-100 active nav-fill nav-pills" id="qr_type_switch" role="tablist">
@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="form-group row float-right mt-2">
-                        <button type="button" class="btn btn-dark btn-rounded" id="generate_qr">
+                        <button type="button" class="btn btn-rounded form-button" id="generate_qr">
                             Generate QR Photo
                         </button>
                     </div>
@@ -84,7 +84,7 @@
             </div>
 
             <div class="col-md-5 text-center" id="qr_image_div">
-                <h2 class="rounded-lg text-white mb-4 p-2" style="background-color: #998f38">QR Image</h2>
+                <h2 class="rounded-lg text-white mb-4 p-2" style="background-color: #17a2b8">QR Image</h2>
                 <p id="qrcode"> </p>
                 <div class="form-group row float-right mt-2">
                     <button type="button" class="btn btn-dark btn-rounded" id="print_qr" onclick='window.print()'>
