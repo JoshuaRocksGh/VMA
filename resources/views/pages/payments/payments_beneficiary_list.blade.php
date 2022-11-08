@@ -36,7 +36,7 @@
                         <table id="beneficiary_list" style="min-height: 200px"
                             class="table table-hover table-centered w-100 mb-0 beneficiary_list_display">
                             <thead>
-                                <tr class="bg-dark text-white">
+                                <tr class="table-background">
                                     <th> <b> Name </b> </th>
                                     <th> <b> Account </b> </th>
                                     <th> <b> Sub Type </b> </th>

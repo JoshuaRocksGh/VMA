@@ -36,7 +36,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark btn-rounded waves-effect waves-light disappear-after-success"
+                <button type="button"
+                    class="btn form-button btn-rounded waves-effect waves-light disappear-after-success"
                     id="proceed_button">
                     Submit
                 </button>

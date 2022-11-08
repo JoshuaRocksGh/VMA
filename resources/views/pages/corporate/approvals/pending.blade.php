@@ -66,7 +66,7 @@
                 <table id=""
                     class="table   table-bordered table-striped display responsive nowrap w-100  pending_transaction_request ">
                     <thead>
-                        <tr class="bg-dark text-white">
+                        <tr class="table-background">
                             <th>Rquest Id</th>
                             <th class="all">Req-Type</th>
                             <th class="all">Account No</th>

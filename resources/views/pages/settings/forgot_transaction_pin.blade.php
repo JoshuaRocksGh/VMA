@@ -50,7 +50,7 @@
                         role="status" aria-hidden="true"></span>
                     <span class="spinner-text-next" style="display: none">Loading</span>
                 </button>
-                <button class="btn btn-primary " style="display: none" type="button" id="security_question_submit">
+                <button class="btn form-button " style="display: none" type="button" id="security_question_submit">
                     <span id="security_question_submit_text">Submit</span>
                     <span class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
                         id="submit_spinner" style="display: none"></span>

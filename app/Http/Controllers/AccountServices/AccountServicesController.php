@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AccountServices;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AccountServicesController extends Controller
 {
@@ -24,6 +25,28 @@ class AccountServicesController extends Controller
     // {
     //     return view('pages.accountServices.chequeBookRequest');
     // }
+
+    //method to return salary advance request screen
+    public function salary_advance()
+    {
+
+        $authToken = session()->get('userToken');
+        $userID = session()->get('userId');
+
+        $data = [
+            "authToken" => $authToken,
+            'userId' => $userID
+        ];
+        // return $data;
+
+        $response = Http::post(env('API_BASE_URL') . "/account/saladAccount/", $data);
+        // $result = json_decode($response);
+        // return response()->json($result);
+        // return $result;
+        // return view('pages.accountServices.salary_advance');
+
+        return view('pages.accountServices.salary_advance', ["result" => $response]);
+    }
 
     //method to return confirm cheque
     public function chequeServices()

@@ -130,7 +130,7 @@
                         <tr>
                             <td>Frequency: </td>
                             <td>
-                                <span class="font-13 text-primary h3 display_frequency_so""></span>
+                                <span class="font-13 text-primary h3 display_frequency_so"></span>
                             </td>
                         </tr>
                     @endif

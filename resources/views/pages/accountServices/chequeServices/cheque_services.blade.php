@@ -11,7 +11,7 @@
         }
 
         #cheque_book_request.active {
-            background-color: var(--brand) !important;
+            background-color: #dc3545 !important;
             border-color: var(--gray) !important;
             color: white !important;
         }
@@ -19,7 +19,7 @@
 
         #block_cheque.active {
             color: white !important;
-            background-color: var(--brand) !important;
+            background-color: #dc3545 !important;
             border-color: var(--gray) !important;
         }
     </style>

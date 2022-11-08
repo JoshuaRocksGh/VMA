@@ -20,7 +20,7 @@
             </select>
         </div>
         <div class="form-group text-right mt-4">
-            <button type="button" class="btn btn-dark waves-effect waves-light" id="btn_submit_block_card">
+            <button type="button" class="btn form-button waves-effect waves-light" id="btn_submit_block_card">
                 Submit
             </button>
         </div>

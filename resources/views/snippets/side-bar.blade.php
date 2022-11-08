@@ -133,6 +133,12 @@
                     <li>
                         <a href="{{ url('fixed-deposit') }}">Fixed Deposit</a>
                     </li>
+                    @if (!config('app.corporate'))
+                        <li>
+                            <a href="{{ url('salary-advance') }}">Salary Advance</a>
+                        </li>
+                    @endif
+
 
                     <li>
                         <a href="{{ url('cheque-services') }}">Cheque Services</a>
@@ -151,7 +157,7 @@
                         <a href="#">Close Account</a>
                     </li>
                     <li>
-                        <a href="#">Update Account Signatuer</a>
+                        <a href="#">Update Account Signature</a>
                     </li>
                     <li>
                         <a href="{{ url('complaint') }}">

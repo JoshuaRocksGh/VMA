@@ -161,7 +161,7 @@
                                     <b>Transaction Details</b>
                                 </a>
                                 <button type="button" class="close text-white" data-dismiss="modal"
-                                    aria-hidden="true">x</button>
+                                    aria-hidden="true">X</button>
                             </h5>
                         </div>
 

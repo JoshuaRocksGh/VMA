@@ -3,9 +3,9 @@
 
 @section('content')
     @php
-    $currentPath = 'Update KYC';
-    $basePath = 'Account Services';
-    $pageTitle = 'Update KYC';
+        $currentPath = 'Update KYC';
+        $basePath = 'Account Services';
+        $pageTitle = 'Update KYC';
     @endphp
     @include('snippets.pageHeader')
 
@@ -26,7 +26,7 @@
                 </div>
             </nav>
 
-            <div class="tab-content dashboard-body border-primary border " id="nav-tabContent">
+            <div class="tab-content dashboard-body border-danger border " id="nav-tabContent">
                 {{-- Basic Information Tab Pane --}}
                 <div class="tab-pane fade h-100 show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     {{-- <p>Basic Information</p> --}}
@@ -35,13 +35,13 @@
                         <div class="row">
 
                             <div class="col-md-6">
-                                <label class="text-primary">Customer Number</label>
+                                <label class="text-dark">Customer Number</label>
                                 <input type="text" class="form-control" id="customer_number" readonly required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Title<span class="text-danger">*</span></label>
+                                <label class="text-dark">Title<span class="text-danger">*</span></label>
                                 <input type="hidden" value="" id="title_">
 
                                 {{-- <input type="text" class="form-control" id="title"  required> --}}
@@ -57,44 +57,44 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class=" text-primary">Firstname<span class="text-danger">*</span></label>
+                                <label class=" text-dark">Firstname<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="firstname" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Surname<span class="text-danger">*</span></label>
+                                <label class="text-dark">Surname<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="surname" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Othername<span class="text-danger">*</span></label>
+                                <label class="text-dark">Othername<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="Othername" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Telephone Number<span class="text-danger">*</span></label>
+                                <label class="text-dark">Telephone Number<span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" id="telephone_number" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Email Address<span class="text-danger">*</span></label>
+                                <label class="text-dark">Email Address<span class="text-danger">*</span></label>
                                 <input type="email" class="form-control" id="email_address" required>
                                 <br>
                             </div>
 
 
                             <div class="col-md-6">
-                                <label class="text-primary">Date of Birth<span class="text-danger">*</span></label>
+                                <label class="text-dark">Date of Birth<span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" id="date_of_birth" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Select Gender<span class="text-danger">*</span></label>
+                                <label class="text-dark">Select Gender<span class="text-danger">*</span></label>
                                 <div class="form-group">
 
                                     <div class="form-check form-check-inline">
@@ -113,7 +113,7 @@
                                 <br>
                             </div>
                             <div class="col-md-6">
-                                <label class="text-primary">Proof of Address<span class="text-danger">*</span></label>
+                                <label class="text-dark">Proof of Address<span class="text-danger">*</span></label>
                                 <input type="hidden" id="proof_of_address_">
                                 <input type="file" class="form-control-file" id="proof_of_address" required><br>
                                 {{-- <img class="img-fluid display_selected_id_image" id="display_selected_id_image"
@@ -131,7 +131,7 @@
                             </div>
 
                         </div> <!-- end row -->
-                        <button class="btn btn-primary btn-rounded waves-effect waves-light float-right" type="submit"
+                        <button class="btn form-button btn-rounded waves-effect waves-light float-right" type="submit"
                             id="basic_information_next_btn">Next<i class="fe-arrow-right"></i> </button>
 
                     </form>
@@ -144,7 +144,7 @@
 
 
                             <div class="col-md-6">
-                                <label class="text-primary">Marital Status<span class="text-danger">*</span></label>
+                                <label class="text-dark">Marital Status<span class="text-danger">*</span></label>
                                 {{-- <input type="text" class="form-control" id="marital_status"  required> --}}
                                 <select class="custom-select " id="marital_status" required>
                                     <option selected>Select Marital Status</option>
@@ -158,18 +158,18 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Number of Children<span class="text-danger">*</span></label>
+                                <label class="text-dark">Number of Children<span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" id="number_of_children" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Number of Dependents<span class="text-danger">*</span></label>
+                                <label class="text-dark">Number of Dependents<span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" id="number_of_dependents" required>
                                 <br>
                             </div>
                             <div class="col-md-6">
-                                <label class="text-primary">Nationality<span class="text-danger">*</span></label>
+                                <label class="text-dark">Nationality<span class="text-danger">*</span></label>
                                 {{-- <input type="text" class="form-control" id="nationality"  required> --}}
                                 <select class="custom-select " id="nationality" required>
                                     <option selected>Nationality</option>
@@ -183,7 +183,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">ID Type<span class="text-danger">*</span></label>
+                                <label class="text-dark">ID Type<span class="text-danger">*</span></label>
                                 <select class="custom-select " id="id_type" required>
                                     <option selected>ID Type</option>
                                     {{-- <option value="Single">Single</option>
@@ -197,25 +197,25 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">ID Number<span class="text-danger">*</span></label>
+                                <label class="text-dark">ID Number<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="id_number" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Date of Issue<span class="text-danger">*</span></label>
+                                <label class="text-dark">Date of Issue<span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" id="date_of_issue" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Date of Expiry<span class="text-danger">*</span></label>
+                                <label class="text-dark">Date of Expiry<span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" id="date_of_expiry" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Mother Maiden Name<span class="text-danger">*</span></label>
+                                <label class="text-dark">Mother Maiden Name<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="mother_maiden_name" required>
                                 <br>
                             </div>
@@ -225,20 +225,19 @@
                             </div> --}}
 
                             <div class="col-md-6">
-                                <label class="text-primary">Next of Kin Name<span class="text-danger">*</span></label>
+                                <label class="text-dark">Next of Kin Name<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="next_of_kin_name" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Next of Kin Address<span class="text-danger">*</span></label>
+                                <label class="text-dark">Next of Kin Address<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="next_of_kin_address" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Next of Kin Telephone<span
-                                        class="text-danger">*</span></label>
+                                <label class="text-dark">Next of Kin Telephone<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="next_of_kin_telephone" required>
                                 <br>
                             </div>
@@ -252,7 +251,7 @@
                                     id="personal_details_back_btn">Back</button></li>
 
                             <li class="list-inline-item float-right"><button
-                                    class="btn btn-primary btn-rounded waves-effect waves-light"
+                                    class="btn form-button btn-rounded waves-effect waves-light"
                                     id="personal_details_next_btn" type="submit">Next<i
                                         class="fe-arrow-right"></i></button></li>
                         </ul>
@@ -267,7 +266,7 @@
 
 
                             <div class="col-md-6">
-                                <label class="text-primary">Country of Residence<span class="text-danger">*</span></label>
+                                <label class="text-dark">Country of Residence<span class="text-danger">*</span></label>
                                 <select class="custom-select " id="country_of_residence" required>
                                     <option selected>Select Country</option>
                                     {{-- <option value="Single">Single</option>
@@ -281,32 +280,32 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Number of years at
+                                <label class="text-dark">Number of years at
                                     residence<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="years_at_residence" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Building Name<span class="text-danger">*</span></label>
+                                <label class="text-dark">Building Name<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="building_name" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Town<span class="text-danger">*</span></label>
+                                <label class="text-dark">Town<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="town" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Residential Address<span class="text-danger">*</span></label>
+                                <label class="text-dark">Residential Address<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="residential_address" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Postal Address<span class="text-danger">*</span></label>
+                                <label class="text-dark">Postal Address<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="postal_address" required>
                                 <br>
                             </div>
@@ -319,7 +318,7 @@
                             </li>
 
                             <li class="list-inline-item float-right"><button
-                                    class="btn btn-primary btn-rounded waves-effect waves-light"
+                                    class="btn form-button btn-rounded waves-effect waves-light"
                                     id="residential_details_next_btn" type="submit">Next<i
                                         class="fe-arrow-right"></i></button></li>
                         </ul>
@@ -333,7 +332,7 @@
                         <div class="row">
 
                             <div class="col-md-6">
-                                <label class="text-primary">Employment Type<span class="text-danger">*</span></label>
+                                <label class="text-dark">Employment Type<span class="text-danger">*</span></label>
                                 <select class="custom-select " id="employment_type" required>
                                     <option selected>Select Employment Type</option>
                                     {{-- <option value="Single">Single</option>
@@ -347,25 +346,25 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Employee Number</label>
+                                <label class="text-dark">Employee Number</label>
                                 <input type="number" class="form-control" id="employee_number" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Employee Code</label>
+                                <label class="text-dark">Employee Code</label>
                                 <input type="text" class="form-control" id="employee_code" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Department</label>
+                                <label class="text-dark">Department</label>
                                 <input type="text" class="form-control" id="department" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Date of Employement</label>
+                                <label class="text-dark">Date of Employement</label>
                                 <input type="date" class="form-control" id="date_of_employment" required>
                                 <br>
                             </div>
@@ -382,7 +381,7 @@
                                     id="employment_details_back_btn">Back</button></li>
 
                             <li class="list-inline-item float-right"><button
-                                    class="btn btn-primary btn-rounded waves-effect waves-light"
+                                    class="btn form-button btn-rounded waves-effect waves-light"
                                     id="employment_details_next_btn" type="submit">Next<i
                                         class="fe-arrow-right"></i></button></li>
                         </ul>
@@ -398,14 +397,14 @@
 
 
                             <div class="col-md-6">
-                                <label class="text-primary">Tax Identification
+                                <label class="text-dark">Tax Identification
                                     Number</label>
                                 <input type="text" class="form-control" id="tax_identification_number" required>
                                 <br>
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">Last Update Date</label>
+                                <label class="text-dark">Last Update Date</label>
                                 <input type="Date" class="form-control" id="last_update_date" required>
                                 <br>
                             </div>
@@ -413,7 +412,7 @@
 
 
                             <div class="col-md-6">
-                                <label class="text-primary">Are you a citizen of US?<span
+                                <label class="text-dark">Are you a citizen of US?<span
                                         class="text-danger">*</span></label>
                                 {{-- <input type="text" class="form-control" id="city"  required> --}}
                                 <div class="form-group">
@@ -434,7 +433,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="text-primary">US Resident<span class="text-danger">*</span></label>
+                                <label class="text-dark">US Resident<span class="text-danger">*</span></label>
                                 {{-- <input type="text" class="form-control" id="town"  required> --}}
                                 <div class="form-group">
 
@@ -462,7 +461,7 @@
 
                             <li class="list-inline-item float-right">
                                 {{-- <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#bs-example-modal-lg" type="submit" id="tax_information_next_btn">Submit</button> --}}
-                                <button class="btn btn-primary btn-rounded waves-effect waves-light" data-toggle="modal"
+                                <button class="btn form-button btn-rounded waves-effect waves-light" data-toggle="modal"
                                     data-target="#full-width-modal" type="submit"
                                     id="tax_information_next_btn">Submit</button>
 
@@ -470,7 +469,7 @@
 
                                 {{-- <button  type="button" class="btn btn-secondary" data-toggle="modal" data-target="#scrollable-modal" type="submit" id="tax_information_next_btn">Submit</button> --}}
 
-                                {{-- <button class="btn btn-primary btn-rounded waves-effect waves-light" id="tax_information_next_btn" type="submit">Next</button> --}}
+                                {{-- <button class="btn form-button btn-rounded waves-effect waves-light" id="tax_information_next_btn" type="submit">Next</button> --}}
                             </li>
 
                         </ul>
@@ -720,7 +719,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light"
+                            <button type="submit" class="btn form-button btn-rounded waves-effect waves-light"
                                 data-dismiss="modal" id="kyc_confirm_btn">Confirm</button>
 
                         </div>

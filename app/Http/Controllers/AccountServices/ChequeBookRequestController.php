@@ -199,6 +199,8 @@ class ChequeBookRequestController extends Controller
         $deviceIP = $request->ip();
         $accountDetails = $request->accountDetails;
         $getAccountDetails = explode("~", $accountDetails);
+        // return $getAccountDetails;
+        $accountName = $getAccountDetails[2];
         $accountCurrency = $getAccountDetails[3];
         $accountCurrencyIsoCode = $getAccountDetails[5];
         $accountMandate = $request->accountMandate;
@@ -214,14 +216,15 @@ class ChequeBookRequestController extends Controller
             "user_id" => $userID,
             "user_name" => $userAlias,
             "customer_no" => $customerNumber,
+            "account_name" => $accountName,
             "account_mandate" => $accountMandate,
             "account_no" => $accountNumber,
             "account_currency" => $accountCurrency,
             "currency_isoCode" => $accountCurrencyIsoCode,
             "cheque_beneficiary" => $beneficiaryName,
             "cheque_amount" => $chequeAmount,
-            "end_cheque_number" => $endChequeNumber,
-            "start_cheque_number" => $startChequeNumber,
+            "cheque_end_number" => $endChequeNumber,
+            "cheque_start_number" => $startChequeNumber,
             "cheque_issue_date" => $chequeIssueDate
         ];
 

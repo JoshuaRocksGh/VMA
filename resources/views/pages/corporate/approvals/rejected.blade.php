@@ -39,7 +39,7 @@
                 <table id="datatable-buttons"
                     class="table dt-responsive  table-bordered table-striped display responsive nowrap w-100 pending_transaction_request ">
                     <thead>
-                        <tr class="bg-dark text-white">
+                        <tr class="table-background">
                             <th class="all">Rquest Id</th>
                             <th class="all">Req-Type</th>
                             <th class="all">Account No</th>

@@ -112,7 +112,7 @@ function get_corporate_requests(customerNumber, requestStatus) {
                             dd + "/" + mm + "/" + yyyy,
                             data[index].postedby,
                             `<a onclick="window.open('approvals-pending-transfer-details/${request_id}/${customer_no}'), '_blank', 'location=yes,height=670,width=1200,scrollbars=yes,status=yes'">
-                                        <button type="button" class=" btn btn-xs btn-outline-dark waves-effect waves-light"> View Details</button>
+                                        <button type="button" class=" btn btn-xs btn-outline-info waves-effect waves-light"> View Details</button>
                                     </a>
                                     `,
                         ])

@@ -42,7 +42,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" id='proceed_button' class="btn pin-change btn-dark">Proceed</button>
                 <button style="display: none" type="button" id='confirm_change'
-                    class="btn otp-display btn-primary">Change Pin</button>
+                    class="btn otp-display form-button">Change Pin</button>
             </div>
         </div>
     </div>

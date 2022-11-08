@@ -787,7 +787,7 @@ $(document).ready(function () {
             success: function (response) {
                 siteLoading("hide");
                 console.log(response);
-                return false;
+                // return false;
                 if (response.responseCode == "000") {
                     toaster(response.message, "success", 10000);
                 } else {

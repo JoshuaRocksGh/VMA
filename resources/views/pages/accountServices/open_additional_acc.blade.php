@@ -1,25 +1,14 @@
 @extends('layouts.master')
 
 @section('content')
+    @php
+        $currentPath = 'Additional Account';
+        $basePath = 'Account Services';
+        $pageTitle = 'Additional Account';
+    @endphp
+    @include('snippets.pageHeader')
 
-<div class="row">
-    <div class="col-12">
-        <div class="card card-background-image">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2"></div>
-
-                     {{-- page title --}}
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="text-primary">Open Additional Account</h4>
-                                    <hr>
-                            </div>
-                        </div>
-                </div>
-            </div>
-        </div>
+    <div class="dashboard site-card overflow-hidden">
+        <div class="tab-content dashboard-body border-danger border "></div>
     </div>
-</div>
-
 @endsection

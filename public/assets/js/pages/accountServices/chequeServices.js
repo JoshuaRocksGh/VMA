@@ -46,7 +46,7 @@ function submitChequeRequest(data) {
     })
         .always((e) => siteLoading("hide"))
         .done((response) => {
-            console.log(response);
+            console.log("success=>", response);
             if (response?.data) {
                 const { data } = response;
                 if (data.responseCode === "000") {
@@ -58,7 +58,7 @@ function submitChequeRequest(data) {
             }
         })
         .fail((e) => {
-            console.log(e.responseText);
+            console.log("fail =>", e.responseText);
             const res = JSON.parse(e.responseText);
             if (res?.message) {
                 toaster(res.message, "error");
@@ -156,10 +156,10 @@ $(function () {
             branchName,
             chequeRequestType,
         };
-        if (!ISCORPORATE) {
-            $("#pin_code_modal").modal("show");
-        } else {
+        if (ISCORPORATE) {
             submitChequeRequest(PageData.chequeRequestData);
+        } else {
+            $("#pin_code_modal").modal("show");
         }
     });
 

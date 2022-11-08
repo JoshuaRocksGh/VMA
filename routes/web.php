@@ -14,6 +14,7 @@ use App\Http\Controllers\AccountServices\StatementRequestController;
 use App\Http\Controllers\AccountServices\StopChequeController;
 use App\Http\Controllers\Authentication\ForgotPasswordController;
 use App\Http\Controllers\AccountServices\KycController;
+use App\Http\Controllers\AccountServices\SalaryAdvanceController;
 use App\Http\Controllers\Authentication\LoginController as AuthenticationLoginController;
 use App\Http\Controllers\Authentication\ResetPasswordController;
 use App\Http\Controllers\Payments\Beneficiary\PaymentBeneficiaryController;
@@ -210,7 +211,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('lc-origination', [TradeFinanceController::class, 'lc_origination'])->name('lc-origination');
     Route::get('cheque-services', [AccountServicesController::class, 'chequeServices']);
     Route::get('activate-cheque-book', [AccountServicesController::class, 'activate_cheque_book'])->name('activate-cheque-book');
-    // Route::get('cheque-approvals-pending', [ChequesPendingController::class, 'pending_cheques'])->name('cheque-approvals-pending');
+    Route::get('salary-advance', [AccountServicesController::class, 'salary_advance'])->name('salary-advance');
     // Route::get('cheque-approvals-approved', [ChequesApprovedController::class, 'cheques_approved'])->name('cheque-approval-approved');
     // Route::get('cheque-approvals-rejected', [ChequesRejectedController::class, 'cheques_rejected'])->name('cheques-approvals-rejected');
     Route::get('stop-cheque', [AccountServicesController::class, 'stop_cheque'])->name('stop-cheque');
@@ -362,6 +363,13 @@ Route::post('activate-card-request-api', [AtmCardRequestController::class, 'acti
 //Block Card
 Route::post('block-card-request-api', [AtmCardRequestController::class, 'block_card_request'])->name('block-card-request-api');
 
+//SALARY ADVANCE
+Route::post('get-salary-advance-fee', [SalaryAdvanceController::class, 'salary_advance_fee'])->name('get-salary-advance-fee');
+Route::post('salary-advance', [SalaryAdvanceController::class, 'salary_advance'])->name('salary-advance');
+Route::get('corportate-salary-advance', [SalaryAdvanceController::class, 'salary_advance_deposit'])->name('corportate-salary-advance');
+
+
+
 
 // ROUTE FOR ACCOUNT CREATION
 Route::post('savings-account-creation-api', [SavingsAccountCreationController::class, 'savings_account_creation'])->name('savings-account-creation-api');
@@ -369,6 +377,7 @@ Route::post('savings-account-creation-api', [SavingsAccountCreationController::c
 // FIXED DEPOSIT ACCOUNT
 Route::get('fixed-deposit-account-api', [FixedDepositAccountController::class, 'fixed_deposit_account'])->name('fixed-deposit-account-api');
 Route::get('fixed-deposit', [FixedDepositAccountController::class, 'fixed_deposit'])->name('fixed-deposit');
+
 
 //route for statement request
 Route::post('statement-request-api', [StatementRequestController::class, 'statement_request'])->name('statement-request-api');

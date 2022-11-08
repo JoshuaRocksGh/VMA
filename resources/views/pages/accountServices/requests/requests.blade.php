@@ -9,34 +9,34 @@
         }
 
         #request_statement.active {
-            background-color: var(--primary-alt) !important;
-            border-color: var(--primary-alt) !important;
+            background-color: #dc3545 !important;
+            border-color: var(--gray) !important;
             color: white !important;
         }
 
 
         #request_letter.active {
             color: white !important;
-            background-color: var(--teal) !important;
-            border-color: var(--teal) !important;
+            background-color: #dc3545 !important;
+            border-color: var(--gray) !important;
         }
 
         #request_bank_draft.active {
-            background-color: var(--success) !important;
-            border-color: var(--success) !important;
+            background-color: #dc3545 !important;
+            border-color: var(--gray) !important;
             color: white !important;
         }
 
         .date-select {
             height: 100%;
-            max-width: 200px;
+            max-width: 100px;
             border-radius: 0;
             border: none;
             background-color: transparent;
-            color: var(--primary);
+            color: #dc3545;
             font-weight: 500;
-            font-size: 13px;
-            border: 1px solid var(--primary);
+            font-size: 6px;
+            border: 1px solid var(--gray);
             border-radius: 33px;
             padding: 0.5rem 1rem;
             outline: none;
@@ -52,14 +52,14 @@
         }
 
         .date-select.selected {
-            background-color: var(--primary);
+            background-color: #dc3545;
             color: white;
         }
 
         .date-select:disabled {
             background: #eef0f2 !important;
             color: var(--secondary) !important;
-            border-color: #d9d9d9 !important;
+            border-color: var(--gray) !important;
         }
 
         .date-select:disabled:hover {
@@ -78,19 +78,19 @@
     <div class="dashboard site-card">
         <div class=" dashboard-body  mb-1 p-3 row py-4 mx-auto" style="max-width: 80rem">
             <div class="col-lg-4">
-                <label class="mb-2 d-block f-18 text-center font-weight-bold text-primary">Select Request
+                <label class="mb-2 d-block f-18 text-center font-weight-bold text-dark">Select Request
                     Type</label>
                 <nav id="requests_tabs" class="col-md-4  nav nav-pills flex-column mx-auto mb-3 flex-row"
                     style="max-width: 350px" role="tablist">
                     <button id="request_statement" data-toggle="pill"
-                        class=" transition-all py-md-2 active  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                        class=" transition-all py-md-2 active  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
                         href="#tab_request_statement">Statement Request</button>
                     <button {{-- data-toggle="pill" --}}
-                        class=" transition-all coming-soon py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link "
+                        class=" transition-all coming-soon py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link "
                         id="request_letter" href="#tab_request_letter">Request For Letter</button>
 
                     <button id="request_bank_draft" {{-- data-toggle="pill" --}}
-                        class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-primary border-primary knav nav-link"
+                        class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
                         href="#tab_request_bank_draft">Request Bank Draft</button>
 
                 </nav>
@@ -99,7 +99,7 @@
             <div class=" col-lg-8 px-0" style="max-width: 650px">
 
                 <div class=" align-self-center" style="min-width: 100px"> <label
-                        class="d-block f-18 font-weight-bold mb-1 text-primary">
+                        class="d-block f-18 font-weight-bold mb-1 text-dark">
                         Select
                         Account</label></div>
 

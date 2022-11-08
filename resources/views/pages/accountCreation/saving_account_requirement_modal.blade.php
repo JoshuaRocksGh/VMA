@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h4 class="modal-title text-primary" id="myCenterModalLabel">Acquiring a Savings
                     Account</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-hidden="true">X</button>
             </div>
             <div class="modal-body">
                 <div class=" ">
