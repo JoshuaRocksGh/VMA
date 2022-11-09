@@ -415,3 +415,6 @@ Route::get("get-loan-types-api", [LoansController::class, 'getLoanTypes']);
 
 //route to return standing order frequencies
 Route::get('get-standing-order-frequencies-api', [FunctionsController::class, 'get_standing_order_frequencies'])->name('get-standing-order-frequencies-api');
+
+// transaction receipt
+Route::get('transaction-receipt', [AccountEnquiryController::class, 'transaction_receipt']);

@@ -200,7 +200,7 @@ class ChequeBookRequestController extends Controller
         $accountDetails = $request->accountDetails;
         $getAccountDetails = explode("~", $accountDetails);
         // return $getAccountDetails;
-        $accountName = $getAccountDetails[2];
+        $accountName = $getAccountDetails[1];
         $accountCurrency = $getAccountDetails[3];
         $accountCurrencyIsoCode = $getAccountDetails[5];
         $accountMandate = $request->accountMandate;
@@ -225,7 +225,9 @@ class ChequeBookRequestController extends Controller
             "cheque_amount" => $chequeAmount,
             "cheque_end_number" => $endChequeNumber,
             "cheque_start_number" => $startChequeNumber,
-            "cheque_issue_date" => $chequeIssueDate
+            "cheque_issue_date" => $chequeIssueDate,
+            "postedBy" => $userID,
+            "tranBy" => $userAlias,
         ];
 
         // return $data;
@@ -234,7 +236,7 @@ class ChequeBookRequestController extends Controller
 
             // dd((env('CIB_API_BASE_URL') . "chequebook-request"));
 
-            $response = Http::post(env('CIB_API_BASE_URL') . "chequebook-block", $data);
+            $response = Http::post(env('CIB_API_BASE_URL') . "stop-chequebook", $data);
             // return $response;
 
             $result = new ApiBaseResponse();

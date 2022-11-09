@@ -121,16 +121,16 @@
                     <thead>
 
                         <tr class="table-background ">
-                            <th data-priority="1" scope="col">Date</th>
-                            <th scope="col">Amount <span class="currency_display"></span></th>
+                            <th class="all">Date</th>
+                            <th class="all">Amount <span class="currency_display"></span></th>
 
-                            <th scope="col">Purpose of Transfer <span class="account_currency_display_"></span>
+                            <th class="all">Purpose of Transfer <span class="account_currency_display_"></span>
                             </th>
-                            <th scope="col">Balance<span class="currency_display"></span>
+                            <th class="all">Balance<span class="currency_display"></span>
                             </th>
 
-                            <th scope="col">Attachment</th>
-                            <th data-priority="2" scope="col">Details</th>
+                            <th class="none">Attachment</th>
+                            <th class="none">Details</th>
                         </tr>
                     </thead>
 
@@ -165,8 +165,7 @@
                             </h5>
                         </div>
 
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                            data-parent="#accordion">
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped mb-0">

@@ -74,6 +74,8 @@ function get_corporate_requests(customerNumber, requestStatus) {
                         request_type = "Bulk Transfer";
                     } else if (data[index].request_type == "INTB") {
                         request_type = "International Bank Transfer";
+                    } else if (data[index].request_type == "CHQS") {
+                        request_type = "Stop Cheque";
                     } else if (data[index].request_type == "CHQR") {
                         request_type = "Cheque Book Request";
                     } else if (data[index].request_type == "KORP") {

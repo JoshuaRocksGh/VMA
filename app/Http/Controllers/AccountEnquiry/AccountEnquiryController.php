@@ -151,4 +151,10 @@ class AccountEnquiryController extends Controller
 
         return $result->api_response($response);
     }
+
+    function transaction_receipt(Request $request)
+    {
+        // return $request;
+        return view('pages.accountEnquiry.transaction_receipt');
+    }
 }

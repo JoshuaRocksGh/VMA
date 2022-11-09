@@ -372,6 +372,9 @@
                             let request_type = 'Complaints'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
 
+                        } else if (request_type == 'CHQS') {
+                            let request_type = 'Stop Cheque Request'
+                            request_type != null ? append_approval_details("Request Type", request_type) : '';
                         } else if (request_type == 'CHQR') {
                             let request_type = 'Cheque Book Request'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
@@ -834,6 +837,8 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
+                        siteLoading('hide')
+
                         console.log(response)
                         let res = JSON.parse(response);
                         if (res.responseCode == '000') {
@@ -843,7 +848,9 @@
                                 // title: "Transfer successful!",
                                 html: res.message,
                                 icon: "success",
-                                showConfirmButton: "false",
+                                //showConfirmButton: "false",
+                                confirmButtonColor: "green",
+
                             });
 
                             {{-- getAccounts(); --}}
@@ -869,7 +876,9 @@
                                 // title: "Transfer successful!",
                                 html: res.message,
                                 icon: "error",
-                                showConfirmButton: "false",
+                                //showConfirmButton: "false",
+                                confirmButtonColor: "red",
+
                             });
 
                         }
