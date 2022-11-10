@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Receipt</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <style type="text/css">
         .main-body {
             display: flex;
@@ -58,22 +60,33 @@
             margin: 5px;
             border-radius: 10px
         }
+
+        .transaction-details {
+            display: flex;
+        }
+
+        .transaction-section {
+            padding: 10px;
+            width: 70%;
+        }
     </style>
+
+
 </head>
 
-<body>
+<body style="zoom:0.8">
     <div class="main-body">
         <div class="side"></div>
         <div class="main-section">
             <div class="reciept-header">
                 <div>
                     <br>
-                    <h6 class="address-title">SIERRA LEONE COMMERCIAL BANK</h6>
+                    <h5 class="address-title">SIERRA LEONE COMMERCIAL BANK</h5>
                     <div class="address">
                         <small>9/31 Siaka Stevens Street</small><br>
                         <small>Freetown, Sierra Leone</small><br>
                         <small>(+232) - 22 -225264</small><br>
-                        <small>slcb@slcb.com</small><br>
+                        <small>www.slcb.com</small><br>
                     </div>
 
                 </div>
@@ -81,7 +94,7 @@
                 <img class="" src="{{ asset('assets/images/slcb_logo.png') }}" alt=""
                     style="zoom:0.3; margin-left:auto">
             </div>
-            <br>
+            {{--  <br>  --}}
             <div class="transaction-receipt">
                 <div class="side-2"></div>
                 <div class="transaction-header">
@@ -93,13 +106,85 @@
 
             </div>
             <br>
-            <div class="table-responsive mb-0  rounded ">
+            <div></div>
+            <div class="transaction-details">
+                <div class="side-2"></div>
+                <div class="transaction-section">
+                    <div class="table-responsive mb-0  rounded " id="table-data">
+                        <table role="table"
+                            class="table table-bordered  table-striped display responsive nowrap   w-100 pending_transaction_request ">
+                            <tbody>
+                                <tr>
+                                    <td class="text-dark">Transaction Type</td>
+                                    <td class="text-bold">{{ $batchNo }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-dark">Transaction Date</td>
+                                    <td class="text-bold">{{ $postingDate }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-dark">Transaction Number</td>
+                                    <td class="text-bold">{{ $transNumber }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-dark">Transferred From</td>
+                                    <td class="text-bold"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-dark">Transferred To</td>
+                                    <td class="text-bold"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-dark">Narration</td>
+                                    <td class="text-bold">{{ $narration }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-dark">Amount</td>
+                                    <td class="text-bold">{{ $amount }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-dark">Channel</td>
+                                    <td class="text-bold">{{ $channel }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-dark">Branch</td>
+                                    <td class="text-bold"></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+
+                <div class="side-2"></div>
 
             </div>
+
 
         </div>
         <div class="side"></div>
     </div>
+    <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
+
+
+    <script src="jquery-3.6.0.min.js">
+        alert('calleds')
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+
+
+        });
+    </script>
 </body>
 
 </html>

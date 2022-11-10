@@ -240,6 +240,13 @@ $(function () {
                                 narration="${row.narration}" amount="${row.amount}" contra-account="${row.contraAccount}" channel="${row.channel}">Details</button>`;
                     },
                 },
+                {
+                    data: "transactionNumber",
+                    render: (data, type, row) => {
+                        return `<a href="/transaction-receipt?batchNo=${row.batchNumber}&postingDate=${row.postingSysDate}&transNumber=${row.transactionNumber}&valueDate=${row.valueDate}&branch=${row.branch}
+                        &narration=${row.narration}&amount=${row.amount}&contraAccount=${row.contraAccount}&channel=${row.channel}" type="button" class="btn btn-outline-success">Print</a>`;
+                    },
+                },
             ],
             columnDefs: [
                 {

@@ -154,7 +154,31 @@ class AccountEnquiryController extends Controller
 
     function transaction_receipt(Request $request)
     {
+        // $data = $request->query('data');
         // return $request;
-        return view('pages.accountEnquiry.transaction_receipt');
+
+        $batchNo = $request->query('batchNo');
+        $postingDate = $request->query('postingDate');
+        $transNumber = $request->query('transNumber');
+        $valueDate = $request->query('valueDate');
+        $branch = $request->query('branch');
+        $narration = $request->query('narration');
+        $amount = $request->query('amount');
+        $contraAccount = $request->query('contraAccount');
+        $channel = $request->query('channel');
+
+
+        // return json_decode($request);
+        return view('pages.accountEnquiry.transaction_receipt', [
+            "batchNo" => $batchNo,
+            "postingDate" => $postingDate,
+            "transNumber" => $transNumber,
+            "valueDate" => $valueDate,
+            "branch" => $branch,
+            "narration" => $narration,
+            "amount" => $amount,
+            "contraAccount" => $contraAccount,
+            "channel" => $channel,
+        ]);
     }
 }
