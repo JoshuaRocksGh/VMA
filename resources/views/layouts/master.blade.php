@@ -89,18 +89,23 @@
         </div>
     @endisset
     @empty($isApp)
-        <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none;">
-            <div>
-                @include('snippets.nav')
-            </div>
-            <div class="d-flex px-2 w-100">
-                <div class="offcanvas-collapse px-2 d-md-block mt-2 w-100" style="max-width: 250px; min-width: 250px;">
+        <div id="wrapper" class="w-100 overflow-hidden" style="height:100vh; display: none;">
+            @include('snippets.nav')
+            <div class="d-flex px-2 pt-4 w-100">
+                <div class="offcanvas-collapse  overflow-auto scrollbar-hidden px-2 d-md-block mt-2 w-100"
+                    style="max-width: 250px; min-width: 250px;
+                    max-height: calc(100vh - var(--navbar-height));
+                    ">
                     @include('snippets.side-bar')
                 </div>
-                <div class="content w-100 px-2">
+                <div style="max-height: calc(100vh - var(--navbar-height));"
+                    class="content scrollbar-hidden w-100 overflow-auto px-2">
                     @yield('content')
                 </div>
-                <div class=" d-none d-xl-block px-2 mt-2 " style="width:500px !important">
+                <div class=" d-none scrollbar-hidden  overflow-auto d-xl-block px-2 mt-2 "
+                    style="width:500px !important;
+                    max-height: calc(100vh - var(--navbar-height));
+                    ">
                     @include('pages.dashboard.right_aside')
                 </div>
             </div>

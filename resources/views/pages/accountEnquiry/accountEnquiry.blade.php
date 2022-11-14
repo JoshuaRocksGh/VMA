@@ -133,9 +133,27 @@
                             {{--  <th class="none">Details</th>  --}}
                             <th class="none">Details</th>
                         </tr>
+                        {{--  <tr>
+                            <td>145</td>
+                            <td>145</td>
+                            <td>145</td>
+                            <td>145</td>
+                            <td>145</td>
+                            <td>145</td>
+                        </tr>  --}}
+
                     </thead>
 
-                    <tbody role="rowgroup" id="table-body-display">
+
+                    <tbody role="rowgroup" id="table_body_display">
+                        {{--  <tr id="display_opening_balance">
+                            <td>25/15/2022</td>
+                            <td></td>
+                            <td>Opening Balance</td>
+                            <td>518,833</td>
+                            <td></td>
+                            <td></td>
+                        </tr>  --}}
                         <td colspan="100%" class="text-center">
                             {!! $noDataAvailable !!}
                         </td>

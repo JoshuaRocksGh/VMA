@@ -143,11 +143,7 @@
                 {{-- onetime view --}}
                 {{-- =============================================================== --}}
 
-                @if ($currentPath === 'Local Bank' ||
-                    $currentPath === 'Same Bank' ||
-                    $currentPath ===
-                        'International
-                                                                                                                                                                                                                                                                                                                                                                Bank')
+                @if ($currentPath === 'Local Bank' || $currentPath === 'Same Bank' || $currentPath === 'International Bank')
                     <div class="tab-pane py-3 px-0 fade" id="onetime_view" role="tabpanel"
                         aria-labelledby="onetime_tab">
                         <div class="col-12">

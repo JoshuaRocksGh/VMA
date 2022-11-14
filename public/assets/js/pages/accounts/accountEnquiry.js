@@ -191,6 +191,16 @@ $(function () {
     function drawTransactionsTable() {
         $("#account_transaction_display_table tbody").empty();
         $(".download").show();
+        $("#table_body_display").append(`
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+        `);
         let transactionTableOptions = {
             dom: "Bfrtip",
             responsive: true,
@@ -211,6 +221,7 @@ $(function () {
                 )}`,
             },
             data: PageData.transaction,
+            // row: [{ data: "amount" }],
             columns: [
                 {
                     data: "postingSysDate",
@@ -265,9 +276,11 @@ $(function () {
                 },
             ],
         };
+
         $("#account_transaction_display_table").DataTable(
             transactionTableOptions
         );
+
         $(".attachment-icon").on("click", function (e) {
             e.preventDefault();
             const docId = $(this).attr("data-value");

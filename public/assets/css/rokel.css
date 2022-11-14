@@ -1,4 +1,9 @@
 @import url("bootstrap-rokel.css");
+/* Variables */
+:root {
+    --navbar-height: 50px;
+}
+
 /* -------------- preloader -------------- */
 #site_loader {
     position: fixed;
@@ -16,6 +21,11 @@
     z-index: 100;
     /* background-color: white; */
     transition: all 0.5s ease-in-out;
+}
+
+/* ----------------  NavBar ------------------------ */
+#top-nav-bar {
+    height: var(--navbar-height);
 }
 
 /* ---------------- hamburger menu ---------------- */

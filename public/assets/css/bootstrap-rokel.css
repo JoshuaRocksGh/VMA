@@ -316,6 +316,17 @@ a:hover {
     border-color: var(--primary);
 }
 
-.col-form-label{
+.col-form-label {
     align-self: center;
+}
+
+/* Hide scrollbar for chrome */
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hidden {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
