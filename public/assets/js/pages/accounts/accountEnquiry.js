@@ -232,19 +232,19 @@ $(function () {
                 <i class="fe-file-text d-block text-center text-gray"></a>`)
                             : "N/A",
                 },
-                {
-                    data: "transactionNumber",
-                    render: (data, type, row) => {
-                        return `<button type="button" class="btn btn-outline-info more-details" data-toggle="modal" data-target="#accordion-modal" batch-no="${row.batchNumber}"
-                                posting-date="${row.postingSysDate}" trans-number="${row.transactionNumber}" value-date="${row.valueDate}" branch="${row.branch}"
-                                narration="${row.narration}" amount="${row.amount}" contra-account="${row.contraAccount}" channel="${row.channel}">Details</button>`;
-                    },
-                },
+                // {
+                //     data: "transactionNumber",
+                //     render: (data, type, row) => {
+                //         return `<button type="button" class="btn btn-outline-info more-details" data-toggle="modal" data-target="#accordion-modal" batch-no="${row.batchNumber}"
+                //                 posting-date="${row.postingSysDate}" trans-number="${row.transactionNumber}" value-date="${row.valueDate}" branch="${row.branch}"
+                //                 narration="${row.narration}" amount="${row.amount}" contra-account="${row.contraAccount}" channel="${row.channel}">Details</button>`;
+                //     },
+                // },
                 {
                     data: "transactionNumber",
                     render: (data, type, row) => {
                         return `<a href="/transaction-receipt?batchNo=${row.batchNumber}&postingDate=${row.postingSysDate}&transNumber=${row.transactionNumber}&valueDate=${row.valueDate}&branch=${row.branch}
-                        &narration=${row.narration}&amount=${row.amount}&contraAccount=${row.contraAccount}&channel=${row.channel}" type="button" class="btn btn-outline-success">Print</a>`;
+                        &narration=${row.narration}&amount=${row.amount}&contraAccount=${row.contraAccount}&channel=${row.channel}" type="button" class="btn btn-outline-info">Details</a>`;
                     },
                 },
             ],

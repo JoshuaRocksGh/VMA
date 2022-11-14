@@ -145,7 +145,7 @@
 
                                 <tr>
                                     <td class="text-dark">Amount</td>
-                                    <td class="text-bold">{{ $amount }}</td>
+                                    <td class="text-bold display_transfer_amount">{{ number_format($amount, 2) }}</td>
                                 </tr>
 
                                 <tr>
@@ -153,10 +153,10 @@
                                     <td class="text-bold">{{ $channel }}</td>
                                 </tr>
 
-                                <tr>
+                                {{--  <tr>
                                     <td class="text-dark">Branch</td>
                                     <td class="text-bold"></td>
-                                </tr>
+                                </tr>  --}}
                             </tbody>
 
                         </table>
@@ -175,12 +175,17 @@
     <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
 
 
-    <script src="jquery-3.6.0.min.js">
+    {{--  <script src="jquery-3.6.0.min.js">
         alert('calleds')
-    </script>
+    </script>  --}}
     <script type="text/javascript">
+        function formatToCurrency(amount) {
+            return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+        };
         $(document).ready(function() {
-
+            $(".display_transfer_amount").val(formatToCurrency())
+            // alert('calleds')
+            window.print();
 
 
         });

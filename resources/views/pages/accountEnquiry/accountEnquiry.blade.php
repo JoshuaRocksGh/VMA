@@ -130,8 +130,8 @@
                             </th>
 
                             <th class="none">Attachment</th>
+                            {{--  <th class="none">Details</th>  --}}
                             <th class="none">Details</th>
-                            <th class="none">Print</th>
                         </tr>
                     </thead>
 
@@ -166,8 +166,7 @@
                             </h5>
                         </div>
 
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                            data-parent="#accordion">
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped mb-0">
