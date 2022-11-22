@@ -43,6 +43,9 @@
                         <a href="{{ url('international-bank') }}">International Bank</a>
                     </li>
                     <li>
+                        <a href="{{ url('bollore-link') }}">Bollore Link</a>
+                    </li>
+                    <li>
                         <a href="{{ url('standing-order') }}">Create Standing Order</a>
                     </li>
                     <li>

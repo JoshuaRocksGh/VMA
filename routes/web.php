@@ -62,6 +62,8 @@ use App\Http\Controllers\Transfers\SchedulePayment\SchedulePaymentController;
 use App\Http\Controllers\Transfers\StandingOrderController;
 use App\Http\Controllers\Transfers\TransferStatusController;
 use App\Http\Controllers\SelfEnrollController;
+use App\Http\Controllers\Transfers\BollorieController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -146,6 +148,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/same-bank', [SameBankController::class, 'same_bank']);
     Route::get('/local-bank', [LocalBankController::class, 'local_bank']);
     Route::get('/own-account', [OwnAccountController::class, 'own_account']);
+    Route::get('bollore-link', [BollorieController::class, 'view_bollorie']);
     Route::get('/standing-order', [StandingOrderController::class, 'display_standing_order']);
     Route::get('/standing-order-status', [StandingOrderController::class, 'display_standing_order_status']);
     Route::get('/bulk-transfer', [BulkUploadBulkUploadsController::class, 'index']);

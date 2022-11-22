@@ -111,7 +111,16 @@
                             </a>
                         </span>
                     </div>
-                </div>
+
+                </div><br>
+                {{--  <div class="row">
+                    <div class="col-md-5">
+                        <span>Start Date:<p>12/12/2022</p></span>
+                        <span>Opening Balance:<p>SLE 14,000</p></span>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5"></div>
+                </div>  --}}
             </div>
             <div class="table-responsive mb-0  rounded ">
 
