@@ -54,13 +54,13 @@
 
                         <div class="form-group row">
 
-                            <b class="col-md-4 text-dark"> Reciever
+                            <b class="col-md-4 text-dark"> Receiver
                                 Name
                                 &nbsp; <span class="text-danger">*</span></b>
 
 
                             <input type="text" class="form-control col-md-8 " id="reciever_name"
-                                placeholder="Enter Reciever Name" autocomplete="off" required>
+                                placeholder="Enter Receiver Name" autocomplete="off" required>
                             <br>
 
                         </div>
@@ -139,7 +139,7 @@
 
 
                             <input type="text" class="form-control col-md-8 " id="telephone_number"
-                                placeholder="Enter Beneficiary Address" autocomplete="off"
+                                placeholder="Enter Receiver Telephone" autocomplete="off"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                 required>
                             <br>
@@ -159,13 +159,13 @@
                     </form>
                 </div>
 
-                <div class=" " style="">
+                <div class="" id="transaction_summary" style="display:none">
 
                     <div class="table-responsive p-4 mx-auto table_over_flow" style="max-width: 650px">
                         <table class="table mb-0 table-striped p-4 mx-auto">
 
                             <tbody>
-                                <tr class="success_gif show-on-success" style="display: none">
+                                {{--  <tr class="success_gif show-on-success" style="display: none">
                                     <td class="text-center bg-white" colspan="2">
                                         <img src="{{ asset('land_asset/images/statement_success.gif') }}"
                                             style="zoom: 0.5" alt="">
@@ -175,22 +175,8 @@
                                     <td class="text-center bg-white" colspan="2">
                                         <span class="text-success font-13 text-bold " id="success-message"></span>
                                     </td>
-                                </tr>
-                                {{--  <tr class=" show-on-success" style="display: none">
-                        <td class="text-center bg-white" colspan="2">
-                            <div class="row" style="place-content: space-evenly">
-                                <button class="btn my-1 btn-primary" onclick="location.reload()"> make another
-                                    transfer
-                                </button>
-                                <button class="btn my-1 btn-primary" id="save_as_beneficiary" style="display: none">
-                                    save as beneficiary
-                                </button>
-                                @if ($currentPath === 'Same Bank')
-                                    <button class="btn my-1 btn-primary"> make reccuring </button>
-                                @endif
-                            </div>
-                        </td>
-                    </tr>  --}}
+                                </tr>  --}}
+
                                 <tr>
                                     <td>Sender Details:</td>
                                     <td>
@@ -206,26 +192,41 @@
                                             id="display_from_account_balance"></span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>Beneficiary Details:</td>
+                                    <td>
+                                        <span class="d-block font-13 text-primary h3 display_beneficiary_name"
+                                            id="display_beneficiary_name"> </span>
+                                        <span class="d-block font-13 text-primary h3 display_beneficiary_address"
+                                            id="display_beneficiary_address"> </span>
+                                    </td>
+                                </tr>
 
                                 <tr>
                                     <td>Receiver Details:</td>
                                     <td>
-                                        <span class="d-block font-13 text-primary h3 display_to_account_name"
-                                            id="display_to_account_name"> </span>
+                                        <span class="d-block font-13 text-primary h3 display_to_receiver_name"
+                                            id="display_to_receiver_name"> </span>
+                                        <span class="d-block font-13 text-primary h3 display_to_receiver_id_type"
+                                            id="display_to_receiver_id_type"> </span>
+                                        <span class="d-block font-13 text-primary h3 display_to_receiver_id_number"
+                                            id="display_to_receiver_id_number"> </span>
+                                        <span class="d-block font-13 text-primary h3 display_to_receiver_telephone"
+                                            id="display_to_receiver_telephone"> </span>
 
-                                        @if ($currentPath === 'Local Bank' || $currentPath === 'International Bank' || $currentPath === 'Standing Order')
+                                        {{--  @if ($currentPath === 'Local Bank' || $currentPath === 'International Bank' || $currentPath === 'Standing Order')
                                             <span class="d-block font-13 h3 text-bold text-primary display_to_bank_name">
                                             </span>
-                                            {{--  <span class="d-block font-13 h3 text-bold text-primary display_to_account_address">  --}}
+                                            <span class="d-block font-13 h3 text-bold text-primary display_to_account_address">
                                             </span>
-                                        @endif
-                                        <span class="d-block font-13 text-primary h3 display_to_account_no"
+                                        @endif  --}}
+                                        {{--  <span class="d-block font-13 text-primary h3 display_to_account_no"
                                             id="display_to_account_no"> </span>
                                         @if ($currentPath !== 'International Bank' && $currentPath !== 'Local Bank' && $currentPath !== 'Standing Order')
                                             <span
                                                 class="d-block font-13 text-primary text-bold display_to_account_currency"
                                                 id="display_to_account_currency"></span>
-                                        @endif
+                                        @endif  --}}
 
                                     </td>
                                 </tr>
@@ -241,7 +242,7 @@
 
                                     </td>
                                 </tr>
-                                @if ($currentPath === 'Local Bank')
+                                {{--  @if ($currentPath === 'Local Bank')
                                     <tr>
                                         <td>Transfer Type:</td>
                                         <td>
@@ -250,8 +251,8 @@
 
                                         </td>
                                     </tr>
-                                @endif
-                                <tr>
+                                @endif  --}}
+                                {{--  <tr>
                                     <td>Transfer Fee</td>
                                     <td>
                                         <span class="font-13 text-danger h3 account_currency" id="display_currency">
@@ -261,7 +262,7 @@
                                             id="display_transfer_fee">0.00</span>
 
                                     </td>
-                                </tr>
+                                </tr>  --}}
 
                                 <tr>
                                     <td>Purpose:</td>
@@ -270,14 +271,14 @@
                                     </td>
                                 </tr>
 
-                                <tr>
+                                {{--  <tr>
                                     <td>Category:</td>
                                     <td>
                                         <span class="font-13 text-primary h3 display_category"
                                             id="display_category"></span>
 
                                     </td>
-                                </tr>
+                                </tr>  --}}
                                 @if ($currentPath === 'Standing Order')
                                     <tr>
                                         <td>Start Date: </td>

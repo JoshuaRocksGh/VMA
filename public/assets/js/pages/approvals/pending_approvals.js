@@ -61,6 +61,8 @@ function get_corporate_requests(customerNumber, requestStatus) {
                         request_type = "ACH Transfer";
                     } else if (data[index].request_type == "RTGS") {
                         request_type = "RTGS Transfer";
+                    } else if (data[index].request_type == "BOL") {
+                        request_type = "Bollore Transfer";
                     } else if (data[index].request_type == "SO") {
                         request_type = "Standing Order";
                     } else if (data[index].request_type == "BULK") {
@@ -91,6 +93,8 @@ function get_corporate_requests(customerNumber, requestStatus) {
                                 parseFloat(data[index].total_amount)
                             );
                         request_type = "Bulk E-Korpor";
+                    } else if (data[index].request_type == "BOL") {
+                        request_type = "Bollore Transfer";
                     } else if (data[index].request_type == "UTL") {
                         request_type = "Utility";
                     } else if (data[index].request_type == "AIR") {

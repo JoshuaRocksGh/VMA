@@ -1,3 +1,39 @@
+function makeTransfer(data) {
+    siteLoading("show");
+    $.ajax({
+        type: "POST",
+        url: "bollore-tranfer",
+        datatype: "application/json",
+        data: data,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            siteLoading("hide");
+            console.log(response);
+            if (response.responseCode == "000") {
+                swal.fire({
+                    // title: "Transfer successful!",
+                    html: response.message,
+                    icon: "success",
+                    // showConfirmButton: "false",
+                    confirmButtonColor: "green",
+                });
+
+                getAccounts();
+
+                $(".hide-on-success").hide();
+            } else {
+                toaster(response.message, "error", 3000);
+            }
+        },
+        error: function (error) {
+            siteLoading("hide");
+            toaster(error.statusText, error);
+        },
+    });
+}
+
 $(document).ready(function () {
     // alert("bollore");
     const bolloreInfo = new Object();
@@ -10,6 +46,11 @@ $(document).ready(function () {
         var getValues = details.split("~");
         $("#select_currency").val(getValues[3]);
         // console.log(getValues);
+        $("#display_from_account_name").text(getValues[1]);
+        $("#display_from_account_no").text(getValues[2]);
+        $("#display_from_account_currency").text(getValues[3]);
+        $("#display_currency").text(getValues[3]);
+        $("#display_from_account_balance").text(getValues[4]);
     });
 
     $("#confirm_next_button").click(function (e) {
@@ -40,5 +81,46 @@ $(document).ready(function () {
             toaster("All Fields are required", "warning");
             return;
         }
+
+        $("#display_beneficiary_name").text(bolloreInfo.beneficiaryName);
+        $("#display_beneficiary_address").text(bolloreInfo.beneficiaryAddress);
+        $("#display_to_receiver_name").text(bolloreInfo.receiverName);
+        $("#display_to_receiver_id_type").text(bolloreInfo.idType);
+        $("#display_to_receiver_id_number").text(bolloreInfo.idNumber);
+        $("#display_to_receiver_telephone").text(bolloreInfo.receiverTelephone);
+        $("#display_transfer_amount").text(bolloreInfo.transferAmount);
+        $("#display_purpose").text(bolloreInfo.transferPurpose);
+
+        $("#transaction_summary").show();
+        $("#bollore_request").hide();
+    });
+
+    $("#back_button").click(function (e) {
+        e.preventDefault();
+
+        $("#transaction_summary").hide();
+        $("#bollore_request").show();
+    });
+
+    $("#confirm_transfer_button").on("click", (e) => {
+        e.preventDefault();
+        console.log(bolloreInfo);
+
+        if (!$("#terms_and_conditions").is(":checked")) {
+            toaster("Accept Terms & Conditions to continue", "warning");
+            return false;
+        }
+
+        makeTransfer(bolloreInfo);
+        // if (!validationsCompleted) {
+        //     somethingWentWrongHandler();
+        //     return false;
+        // }
+        // confirmationCompleted = true;
+        // if (ISCORPORATE) {
+        //     corporateSpecific(transferInfo);
+        //     return;
+        // }
+        // $("#pin_code_modal").modal("show");
     });
 });

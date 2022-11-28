@@ -153,6 +153,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/standing-order-status', [StandingOrderController::class, 'display_standing_order_status']);
     Route::get('/bulk-transfer', [BulkUploadBulkUploadsController::class, 'index']);
     Route::post('/update-upload', [BulkUploadBulkUploadsController::class, 'update_upload']);
+    Route::post('bollore-tranfer', [BollorieController::class, 'bollore_transfer']);
 
 
     // --- PAYMENTS
