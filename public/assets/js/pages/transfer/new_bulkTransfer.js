@@ -65,6 +65,7 @@ function bulk_upload_list(fileBatch, upload_response) {
 
             if (response.responseCode == "000") {
                 // NO ERRORS IN FILE UPLOAD
+                console.log(response);
                 // let data = response.data.uploadData;
                 // let uploadData = response.data.uploadData;
                 // let uploadDetails = response.data.uploadDetails;
@@ -121,7 +122,11 @@ function bulk_upload_list(fileBatch, upload_response) {
                     } = e;
                     // console.log("e=>", e);
                     // return false;
-                    if (e.valid === "Y") {
+                    if (
+                        e.valid === "Y" &&
+                        e.amountValid === "Y" &&
+                        e.refValid === "Valid Ref"
+                    ) {
                         group.valid.push(e);
                         console.log("name => ", acctValid);
                         all_valid_uploads.row
@@ -662,12 +667,21 @@ $(document).ready(function () {
                                 refNumber,
                                 acctValid,
                                 valid,
+                                bank,
+                                refValid,
+                                transDescription,
                             } = e;
                             // console.log("e=>", e);
                             // return false;
-                            if (e.valid === "Y") {
+                            if (
+                                e.valid === "Y" &&
+                                e.name !== null &&
+                                e.refValid === "Valid Ref" &&
+                                e.transDescription !== null &&
+                                e.amountValid === "Y"
+                            ) {
                                 group.valid.push(e);
-                                console.log("name => ", acctValid);
+                                console.log("acctValid => ", acctValid);
                                 all_valid_uploads.row
                                     .add([
                                         // `<b>${valid_uploads_count}</b>`,
@@ -681,6 +695,7 @@ $(document).ready(function () {
                                 return;
                             }
                             group.invalid.push(e);
+
                             all_failed_uploads.row
                                 .add([
                                     // `<b>${valid_uploads_count}</b>`,
@@ -688,11 +703,12 @@ $(document).ready(function () {
                                     `<b>${accountNumber}</b>`,
                                     `<b>${amount}</b>`,
                                     `<b>${refNumber}</b>`,
-                                    `<b class="text-danger">${acctValid}</b>`,
+                                    `<b class="text-danger">${acctValid} <br> Name is ${name} <br> Transaction description is ${transDescription} <br> Amount is ${amount} <br> ${refValid}</b>`,
                                 ])
                                 .draw(false);
                             return;
                         });
+                        // console.log("invalid => ", invalid);
 
                         const { valid, invalid } = group;
                         if (invalid.length < 1) {
@@ -723,6 +739,10 @@ $(document).ready(function () {
                         let editButtons = document.querySelectorAll(
                             ".edit_record_uploaded"
                         );
+
+                        // console.log("valid => ", valid);
+
+                        // console.log("invalid => ", invalid);
 
                         // editButtons.forEach((button) => {
                         //     button.addEventListener("click", (e) => {

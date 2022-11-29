@@ -48,6 +48,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 UTL: "Utility Payment",
                 AIR: "Airtime Payment",
                 MOM: "Mobile Money Payment",
+                BOL: "Bollore Transfer",
             };
             data.forEach((data) => {
                 const {

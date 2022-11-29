@@ -62,7 +62,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="delete_btn">Delete</button>
 
-                <button type="button" class="btn btn-dark mx-2" id="save_btn">Save</button>
+                <button type="button" class="btn form-button mx-2" id="save_btn">Save</button>
             </div>
         </div>
     </div>

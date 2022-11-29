@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
     <!-- Start Content-->
     <div class="container-fluid">
         <legend></legend>
@@ -17,16 +16,17 @@
 
                         <div class="col-md-12">
                             <a href="{{ url('payment-add-beneficiary') }}">
-                                <h3 class="text-primary"> <i class="mdi mdi-arrow-left-thick "></i>&nbsp;  Add Mobile Money Beneficiary</h4>
+                                <h3 class="text-primary"> <i class="mdi mdi-arrow-left-thick "></i>&nbsp; Add Mobile Money
+                                    Beneficiary</h4>
                             </a>
                             <hr>
                         </div>
 
-                     
+
 
                         <div class="row">
                             <div class="col-md-6">
-                                <form action="#"  autocomplete="off" aria-autocomplete="off">
+                                <form action="#" autocomplete="off" aria-autocomplete="off">
                                     <div class="form-group">
                                         <label class="purple-color"> Beneficiary Network Details</label>
                                         {{-- <input type="text" class="form-control" data-toggle="input-mask" data-mask-format="00/00/0000" placeholder="Account Number"> --}}
@@ -39,8 +39,8 @@
 
                                         <select class="custom-select ">
                                             <option selected>Select Network</option>
-                                            <option value="1"><img src="{{ asset('assets/images/mtn.png') }}" alt="image"
-                                                    class="img-fluid avatar-xs rounded"> MTN</option>
+                                            <option value="1"><img src="{{ asset('assets/images/mtn.png') }}"
+                                                    alt="image" class="img-fluid avatar-xs rounded"> MTN</option>
                                             <option value="2">Vodafone</option>
                                             <option value="3">AirteTigo</option>
                                             {{-- <img src="{{ asset('assets/images/mtn.png') }}" alt="mtn" class="img-fluid"> --}}
@@ -113,7 +113,7 @@
                                     </div>
 
 
-                                    <button class="btn btn-primary" type="submit">Save Beneficiary</button>
+                                    <button class="btn form-button" type="submit">Save Beneficiary</button>
                                 </form>
                             </div> <!-- end col -->
 
@@ -134,8 +134,4 @@
             <div class="col-md-1"></div>
 
         </div> <!-- end row -->
-
-
-
-
     @endsection
