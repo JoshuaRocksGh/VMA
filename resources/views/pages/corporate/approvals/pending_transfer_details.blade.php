@@ -330,6 +330,9 @@
                         } else if (request_type == 'OWN') {
                             let request_type = 'Own Account Transfer'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
+                        } else if (request_type == 'BOL') {
+                            let request_type = 'Bollore Transfer'
+                            request_type != null ? append_approval_details("Request Type", request_type) : '';
                         } else if (request_type == 'ACH') {
                             let request_type = 'ACH Transfer'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
@@ -460,6 +463,11 @@
                         beneficiary_telephone != null ? append_approval_details("Beneficiary Telephone",
                             beneficiary_telephone) : "";
 
+                        let id_type = pending_request.id_type;
+                        id_type != null ? append_approval_details("ID Type", id_type) : '';
+
+                        let id_number = pending_request.id_number;
+                        id_number != null ? append_approval_details("ID Number", id_number) : '';
 
 
                         let narration = pending_request.narration;
@@ -502,6 +510,8 @@
 
                         let utility_id = pending_request.utility_id;
                         utility_id != null ? append_approval_details("Utility Id", utility_id) : '';
+
+
 
                         let posted_by = pending_request.postedby;
                         posted_by != null ? append_approval_details("Posted By", posted_by) : '';

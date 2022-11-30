@@ -1,57 +1,110 @@
 document.addEventListener("DOMContentLoaded", function (event) {
-    console.log("dong");
-
-    const settingsList = [
-        {
-            title: "change transaction pin",
-            icon: "unlock-alt",
-            bgClass: "grad-gray-blue",
-            dataTarget: "#change_transaction_pin_modal",
-        },
-        {
-            title: "change password",
-            icon: "user-lock",
-            bgClass: "grad-blue-pink",
-        },
-        {
-            title: "forgot transaction pin",
-            icon: "window-close",
-            bgClass: "green-yellow",
-            dataTarget: "#forgot_pin_modal",
-        },
-        {
-            title: "Enquiry",
-            icon: "comments",
-            bgClass: "pink-cyan",
-            dataTarget: "#enquiry_modal",
-        },
-        {
-            title: "Tarrif List",
-            icon: "chart-bar",
-            bgClass: "cyan-green",
-        },
-        {
-            title: "Agent List",
-            icon: "users",
-            bgClass: "yellow-yellow",
-        },
-        {
-            title: "Help (FAQs)",
-            icon: "question-circle",
-            bgClass: "blue-blue",
-            dataTarget: "#faq_modal",
-        },
-        {
-            title: "Terms and Conditions",
-            icon: "file-contract",
-            bgClass: "red-orange",
-        },
-        {
-            title: "Contact Us",
-            icon: "address-card",
-            bgClass: "black-black",
-        },
-    ];
+    // console.log("dong");
+    if (ISCORPORATE) {
+        var settingsList = [
+            // {
+            //     title: "change transaction pin",
+            //     icon: "unlock-alt",
+            //     bgClass: "grad-gray-blue",
+            //     dataTarget: "#change_transaction_pin_modal",
+            // },
+            {
+                title: "change password",
+                icon: "user-lock",
+                bgClass: "grad-blue-pink",
+            },
+            // {
+            //     title: "forgot transaction pin",
+            //     icon: "window-close",
+            //     bgClass: "green-yellow",
+            //     dataTarget: "#forgot_pin_modal",
+            // },
+            {
+                title: "Enquiry",
+                icon: "comments",
+                bgClass: "pink-cyan",
+                dataTarget: "#enquiry_modal",
+            },
+            {
+                title: "Tarrif List",
+                icon: "chart-bar",
+                bgClass: "cyan-green",
+            },
+            {
+                title: "Agent List",
+                icon: "users",
+                bgClass: "yellow-yellow",
+            },
+            {
+                title: "Help (FAQs)",
+                icon: "question-circle",
+                bgClass: "blue-blue",
+                dataTarget: "#faq_modal",
+            },
+            {
+                title: "Terms and Conditions",
+                icon: "file-contract",
+                bgClass: "red-orange",
+            },
+            {
+                title: "Contact Us",
+                icon: "address-card",
+                bgClass: "black-black",
+            },
+        ];
+    } else {
+        var settingsList = [
+            {
+                title: "change transaction pin",
+                icon: "unlock-alt",
+                bgClass: "grad-gray-blue",
+                dataTarget: "#change_transaction_pin_modal",
+            },
+            {
+                title: "change password",
+                icon: "user-lock",
+                bgClass: "grad-blue-pink",
+            },
+            {
+                title: "forgot transaction pin",
+                icon: "window-close",
+                bgClass: "green-yellow",
+                dataTarget: "#forgot_pin_modal",
+            },
+            {
+                title: "Enquiry",
+                icon: "comments",
+                bgClass: "pink-cyan",
+                dataTarget: "#enquiry_modal",
+            },
+            {
+                title: "Tarrif List",
+                icon: "chart-bar",
+                bgClass: "cyan-green",
+            },
+            {
+                title: "Agent List",
+                icon: "users",
+                bgClass: "yellow-yellow",
+            },
+            {
+                title: "Help (FAQs)",
+                icon: "question-circle",
+                bgClass: "blue-blue",
+                dataTarget: "#faq_modal",
+            },
+            {
+                title: "Terms and Conditions",
+                icon: "file-contract",
+                bgClass: "red-orange",
+            },
+            {
+                title: "Contact Us",
+                icon: "address-card",
+                bgClass: "black-black",
+            },
+        ];
+    }
 
     let settingsHtml = "";
     settingsList.forEach((e) => {

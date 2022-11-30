@@ -25,7 +25,7 @@
             </select>
         </div>
         <div class="form-group text-right mt-4">
-            <button type="submit" class="btn btn-dark waves-effect waves-light" id="btn_submit_cheque_request">
+            <button type="submit" class="btn form-button waves-effect waves-light" id="btn_submit_cheque_request">
                 Submit
             </button>
         </div>
