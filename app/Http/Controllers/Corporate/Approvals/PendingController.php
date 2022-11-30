@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Corporate\Approvals;
 use App\Http\classes\API\BaseResponse;
 use App\Http\classes\WEB\ApiBaseResponse;
 use App\Http\Controllers\Controller;
+use Exception;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,22 @@ class PendingController extends Controller
     public function approvals_pending_transfer_details($request_id, $customer_no)
     {
 
+        $base_response = new BaseResponse();
+
+
+        $userID = session()->get('userId');
         // return $customer_no;
+        try {
+            $response = Http::post(env('CIB_API_BASE_URL') . "check-mandate/$customer_no/$userID");
+            // dd(env('CIB_API_BASE_URL') . "check-mandate/$customer_no/$userID");
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
+            return $base_response->api_response('500', "Internal Server Error",  NuLL); // return API BASERESPONSE
+
+        }
+        die();
+
 
         $mandate = session()->get('userMandate');
         if ($mandate == "A") {
