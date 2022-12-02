@@ -57,7 +57,7 @@
         <div class="site-card-body">
             <div class="mb-2 font-13"> <i class="mr-1 fas fa-user text-danger"></i><span class="font-weight-bold">Name
                     :
-                </span><span>Sierra Leone Commerical Bank Ltd</span> </div>
+                </span><span>Sierra Leone Commerical Bank</span> </div>
             <div class="mb-2 font-13"> <i class="mr-1 fas fa-phone text-danger"></i><span class="font-weight-bold">Phone
                     :</span> <span>(+232) - 22 -225264</span> </div>
             <div class="mb-2 font-13"> <i class="mr-1 fas fa-envelope text-danger"></i><span
