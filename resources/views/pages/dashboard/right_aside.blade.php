@@ -52,7 +52,7 @@
 
     <div class=" site-card p-1">
         <div class="site-card-body py-2 bg-danger" style="min-height: 10px !important;">
-            <h6 class="text-center mb-0 text-white">Account Agent</h6>
+            <h6 class="text-center mb-0 text-white">Bank Contact</h6>
         </div>
         <div class="site-card-body">
             <div class="mb-2 font-13"> <i class="mr-1 fas fa-user text-danger"></i><span class="font-weight-bold">Name
