@@ -34,12 +34,23 @@ class PendingController extends Controller
 
 
         $userID = session()->get('userId');
+        $mandate = session()->get('userMandate');
+
         // return $customer_no;
         try {
             $response = Http::post(env('CIB_API_BASE_URL') . "check-mandate/$customer_no/$userID");
             // dd(env('CIB_API_BASE_URL') . "check-mandate/$customer_no/$userID");
-            $result = new ApiBaseResponse();
-            return $result->api_response($response);
+            $result = json_decode($response);
+
+            // return $result->responseCode;
+            if ($result->responseCode === '000') {
+                return view('pages.corporate.approvals.pending_transfer_details', ['request_id' => $request_id, 'customer_no' => $customer_no, 'mandate' => $mandate]);
+            } else {
+                Alert::error('', $result->message);
+                return back();
+            }
+            // $result = new ApiBaseResponse();
+            // return $result->api_response($response);
         } catch (\Exception $e) {
             return $base_response->api_response('500', "Internal Server Error",  NuLL); // return API BASERESPONSE
 
@@ -47,10 +58,7 @@ class PendingController extends Controller
         die();
 
 
-        $mandate = session()->get('userMandate');
         if ($mandate == "A") {
-
-            return view('pages.corporate.approvals.pending_transfer_details', ['request_id' => $request_id, 'customer_no' => $customer_no, 'mandate' => $mandate]);
         } else {
             Alert::error('', 'Not Authorized To Approve Pending Request');
             return back();
@@ -58,42 +66,42 @@ class PendingController extends Controller
 
         die();
         // $mandate = '2B';
-        $customerAccounts = session()->get('customerAccounts');
-        $accountMandate = $customerAccounts[0]->accountMandate;
-        $getMandate = explode(' ', $accountMandate);
+        // $customerAccounts = session()->get('customerAccounts');
+        // $accountMandate = $customerAccounts[0]->accountMandate;
+        // $getMandate = explode(' ', $accountMandate);
 
 
-        if (in_array("AND", $getMandate) || in_array("OR", $getMandate)) {
-            $firstMandate = $getMandate[0];
-            $secondMandate = $getMandate[2];
+        // if (in_array("AND", $getMandate) || in_array("OR", $getMandate)) {
+        //     $firstMandate = $getMandate[0];
+        //     $secondMandate = $getMandate[2];
 
-            $getSecondMandate =
-                str_split($secondMandate);
-            $getfirstMandate = str_split($firstMandate);
-            $mandateType1 = $getfirstMandate[1];
-            $mandateType2 = $getSecondMandate[1];
+        //     $getSecondMandate =
+        //         str_split($secondMandate);
+        //     $getfirstMandate = str_split($firstMandate);
+        //     $mandateType1 = $getfirstMandate[1];
+        //     $mandateType2 = $getSecondMandate[1];
 
-            if ($mandate == $mandateType1 || $mandate == $mandateType2) {
+        //     if ($mandate == $mandateType1 || $mandate == $mandateType2) {
 
-                return view('pages.corporate.approvals.pending_transfer_details', ['request_id' => $request_id, 'customer_no' => $customer_no, 'mandate' => $mandate]);
-            } else {
-                Alert::error('', 'Not Authorized To Approve Pending Request');
-                return back();
-            }
-            // return $getMandate;
-            // echo json_encode('AND');
-        } else {
-            $getMandate =
-                str_split($accountMandate);
-            $mandateType = $getMandate[1];
-            if ($mandate == $mandateType) {
+        //         return view('pages.corporate.approvals.pending_transfer_details', ['request_id' => $request_id, 'customer_no' => $customer_no, 'mandate' => $mandate]);
+        //     } else {
+        //         Alert::error('', 'Not Authorized To Approve Pending Request');
+        //         return back();
+        //     }
+        //     // return $getMandate;
+        //     // echo json_encode('AND');
+        // } else {
+        //     $getMandate =
+        //         str_split($accountMandate);
+        //     $mandateType = $getMandate[1];
+        //     if ($mandate == $mandateType) {
 
-                return view('pages.corporate.approvals.pending_transfer_details', ['request_id' => $request_id, 'customer_no' => $customer_no, 'mandate' => $mandate]);
-            } else {
-                Alert::error('', 'Not Authorized To Approve Pending Request');
-                return back();
-            }
-        }
+        //         return view('pages.corporate.approvals.pending_transfer_details', ['request_id' => $request_id, 'customer_no' => $customer_no, 'mandate' => $mandate]);
+        //     } else {
+        //         Alert::error('', 'Not Authorized To Approve Pending Request');
+        //         return back();
+        //     }
+        // }
 
         // if (strpos($accountMandate, 'AND' !== false)) {
         //     return $accountMandate;
