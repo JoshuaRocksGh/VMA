@@ -1,4 +1,11 @@
+const pdfData = new Object();
+
 function getAccountTransactions(accountNumber, startDate, endDate) {
+    // pdfData.details = {
+    //     accountNumber,
+    //     startDate,
+    //     endDate,
+    // };
     return $.ajax({
         type: "POST",
         url: "account-transaction-history",
@@ -32,7 +39,8 @@ function getAccountTransactions(accountNumber, startDate, endDate) {
     });
 }
 
-const pdfHeader = () => {
+const pdfHeader = (pdfData) => {
+    console.log("before getting acc==>", pdfData);
     return `<div>
     <div class="d-flex justify-content-between px-3 items-center">
         <div style="height: 150px"> <img src='assets/images/slcb-bg-logo.png'>
@@ -48,7 +56,9 @@ const pdfHeader = () => {
         <div>
             <div class="font-weight-bold font-14"> Account Details</div>
             <div class="details-label">Account Name: <span id="account_description"> </span></div>
-            <div class="details-label">Account Number: <span id="account_number"></span> </div>
+            <div class="details-label">Account Number: <span id="account_number">${
+                pdfData?.details?.accountNumber
+            }</span> </div>
             <div class="details-label">Account Product: <span id="account_product"> </span></div>
         </div>
         <div>
@@ -77,6 +87,7 @@ const pdfHeader = () => {
 };
 
 $(function () {
+    // console.log("pageData ==>", pageData);
     $("#filter").select2({
         minimumResultsForSearch: Infinity,
     });
@@ -116,6 +127,8 @@ $(function () {
             accountNumber,
             accountBalance,
         };
+        // pdfData.accountNumber;
+        // console.log("pdfData ====>", pdfData);
     });
 
     $("#search_transaction").on("click", async function () {
@@ -134,11 +147,38 @@ $(function () {
         const accountNumber = $("#from_account option:selected").attr(
             "data-account-number"
         );
+        const pdfAccountNumber = $("#from_account option:selected").attr(
+            "data-account-number"
+        );
+        const pdfAccountName = $("#from_account option:selected").attr(
+            "data-account-description"
+        );
+        const pdfAccountType = $("#from_account option:selected").attr(
+            "data-account-type"
+        );
+        const pdfAccountCurrency = $("#from_account option:selected").attr(
+            "data-account-currency"
+        );
+        const pdfAccountBalance = $("#from_account option:selected").attr(
+            "data-account-balance"
+        );
         if (!from_account) {
             toaster("please select an account", "warning");
             return false;
         }
         siteLoading("show");
+        // pdfHeader(accountNumber);
+        pdfData.details = {
+            pdfAccountNumber,
+            pdfAccountName,
+            pdfAccountType,
+            pdfAccountCurrency,
+            pdfAccountBalance,
+            startDate,
+            endDate,
+        };
+
+        // pdfHeader(pdfData);
         await getAccountTransactions(accountNumber, startDate, endDate);
         siteLoading("hide");
 
@@ -148,6 +188,7 @@ $(function () {
 
         $("#pdf_print").on("click", (e) => {
             e.preventDefault();
+
             $(".buttons-print").trigger("click");
         });
 
@@ -166,11 +207,12 @@ $(function () {
             .prop("selected", true)
             .trigger("change");
     }
+    // on page load it gets accunt details
     $("#search_transaction").trigger("click");
 
     $("#filter").on("change", (e) => {
         e.preventDefault();
-        drawTransactionsTable();
+        drawTransactionsTable(pdfData);
     });
 
     // filter
@@ -188,7 +230,9 @@ $(function () {
         }
     });
 
-    function drawTransactionsTable() {
+    function drawTransactionsTable(pdfData) {
+        console.log("drawTransactionsTable ==>", pdfData);
+        // pdfHeader(pdfData);
         $("#account_transaction_display_table tbody").empty();
         $(".download").show();
         $("#table_body_display").append(`
@@ -208,8 +252,65 @@ $(function () {
                 "excel",
                 {
                     extend: "print",
-                    autoPrint: false,
-                    messageTop: pdfHeader(),
+                    autoPrint: true,
+                    // messageTop: pdfHeader(),
+                    messageTop: `<div>
+                        <div class="d-flex justify-content-between px-3 items-center">
+                            <div style="height: 150px"> <img src='assets/images/slcb-bg-logo.png'>
+                            </div>
+                            <div class="font-14 font-weight-bold"> SIERRA LEONE COMMERCIAL BANK<br>
+                                9/31 Siaka Stevens Street<br>
+                                Freetown, Sierra Leone<br>
+                                slcb@slcb.com<br>
+                                (+232) - 22 -225264
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-around">
+                            <div>
+                                <div class="font-weight-bold font-14"> Account Details</div>
+                                <div class="details-label">Account Name: <span id="account_description">${
+                                    pdfData?.details?.pdfAccountName
+                                } </span></div>
+                                <div class="details-label">Account Number: <span id="account_number">${
+                                    pdfData?.details?.pdfAccountNumber
+                                }</span> </div>
+                                <div class="details-label">Account Product: <span id="account_product">${
+                                    pdfData?.details?.pdfAccountType
+                                }  </span></div>
+                            </div>
+                            <div>
+                                <div class="font-weight-bold font-14"> Balance Details</div>
+                                <div class="details-label">Account Currency : <span class="account_currency">${
+                                    pdfData?.details?.pdfAccountCurrency
+                                }</span> </div>
+                                <div class="details-label">Book Balance : <span id="account_legder_balance">${
+                                    pdfData?.details?.pdfAccountBalance
+                                }</span> </div>
+                                <div class="details-label">Cleared Balance : <span id="account_available_balance">${
+                                    pdfData?.details?.pdfAccountBalance
+                                }</span> </div>
+                            </div>
+                            <div>
+                                <div class="font-weight-bold font-14"> Statement Details </div>
+                                <div class="details-label">From: <span id="start_date">${
+                                    pdfData?.details?.startDate
+                                }</span></div>
+                                <div class="details-label">To: <span id="end_date">${
+                                    pdfData?.details?.endDate
+                                }</span></div>
+
+                                <div class="details-label">Requested On: <span id="request_date">${new Date().toLocaleString(
+                                    "en",
+                                    {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                    }
+                                )}</span></div>
+
+                            </div>
+                        </div>
+                    </div>`,
                 },
             ],
             destroy: true,
