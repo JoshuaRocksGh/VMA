@@ -15,7 +15,6 @@
     <link href="https://unpkg.com/intro.js/minified/introjs.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs-rtl.css"
-        integrity="sha512-TA0DocpzpN5NseaPd0eZUsBB5SO1GoAN/hkjX4IzOoKcxJr7vMSVwdags8aHwOz6sNGuKOyjhz0J7kPJZ+14gA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @include('snippets.style')
@@ -119,9 +118,8 @@
         </div>
     @endempty
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js"
-        integrity="sha512-i3JuyB+yXgX08haAnY9OnbCuv+a0aB6eLeKh970IOC3XOeWVnOtZlcla55VztDzqCHbl2zn9gpeNu2VBNdvmdQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
     <script>
         introJs().start();
     </script>
