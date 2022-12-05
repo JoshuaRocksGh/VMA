@@ -31,7 +31,7 @@
 
         .reciept-header {
             display: grid;
-            grid-template-columns: 40% 20% 40%;
+            grid-template-columns: 15% 70% 15%;
         }
 
         .address-title {
@@ -79,20 +79,25 @@
         <div class="side"></div>
         <div class="main-section">
             <div class="reciept-header">
+                <div></div>
                 <div>
-                    <br>
-                    <h5 class="address-title">SIERRA LEONE COMMERCIAL BANK</h5>
-                    <div class="address">
-                        <small>9/31 Siaka Stevens Street</small><br>
-                        <small>Freetown, Sierra Leone</small><br>
-                        <small>(+232) - 22 -225264</small><br>
-                        <small>www.slcb.com</small><br>
-                    </div>
+                    <div class="float-left">
+                        <br>
+                        <h5 class="address-title">SIERRA LEONE COMMERCIAL BANK</h5>
+                        <div class="address">
+                            <small>9/31 Siaka Stevens Street</small><br>
+                            <small>Freetown, Sierra Leone</small><br>
+                            <small>(+232) - 22 -225264</small><br>
+                            <small>www.slcb.com</small><br>
+                        </div>
 
+                    </div>
+                    <div></div>
+                    <img class="float-right" src="{{ asset('assets/images/slcb_logo.png') }}" alt=""
+                        style="zoom:0.3; margin-left:auto">
                 </div>
                 <div></div>
-                <img class="" src="{{ asset('assets/images/slcb_logo.png') }}" alt=""
-                    style="zoom:0.3; margin-left:auto">
+
             </div>
             {{--  <br>  --}}
             <div class="transaction-receipt">
@@ -135,7 +140,7 @@
 
                                 <tr>
                                     <td class="text-dark">Transferred To</td>
-                                    <td class="text-bold"></td>
+                                    <td class="text-bold">{{ $contraAccount }}</td>
                                 </tr>
 
                                 <tr>
@@ -162,6 +167,9 @@
                         </table>
 
                     </div>
+                    <button type="button" class="btn btn-primary"id="print_button"
+                        onclick="window.print()">click</button>
+
                 </div>
 
                 <div class="side-2"></div>
@@ -178,14 +186,19 @@
     {{--  <script src="jquery-3.6.0.min.js">
         alert('calleds')
     </script>  --}}
-    <script type="text/javascript">
+    <script>
         function formatToCurrency(amount) {
             return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
         };
         $(document).ready(function() {
+            {{--  alert('ready')  --}}
+            window.print();
+
+
             $(".display_transfer_amount").val(formatToCurrency())
             // alert('calleds')
-            window.print();
+
+            $("#print_button").trigger("click");
 
 
         });
