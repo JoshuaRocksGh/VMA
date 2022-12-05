@@ -19,6 +19,12 @@
 <script src="{{ asset('assets/plugins/blockui/jquery.blockUI.min.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/select2/select2.min.js') }}" defer></script>
 <script src="{{ asset('assets/js/functions/genericFunctions.js') }}" defer></script>
+{{--  tour cdn  --}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js"
+    integrity="sha512-i3JuyB+yXgX08haAnY9OnbCuv+a0aB6eLeKh970IOC3XOeWVnOtZlcla55VztDzqCHbl2zn9gpeNu2VBNdvmdQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
 <script defer>
     const ACCOUNT_NUMBER_LENGTH = 13
 
@@ -54,6 +60,10 @@
             templateSelection: accountTemplate,
         });
     })
+
+    {{--  alert("introJs().start()")  --}}
+    //CALL INTRO.JS
+    introJs().start();
 </script>
 {{-- Get Device Type --}}
 <script>

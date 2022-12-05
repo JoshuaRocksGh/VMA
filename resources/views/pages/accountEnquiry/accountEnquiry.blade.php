@@ -47,7 +47,8 @@
     @include('snippets.pageHeader')
 
     <div class=" dashboard site-card" id="transaction_form">
-        <div class="dashboard-body p-4" style="min-height: 0px;">
+        <div class="dashboard-body p-4" style="min-height: 0px;" data-title="Transaction Enquiry"
+            data-intro="Complete the following fields and click search">
             <div class="d-flex align-items-center justify-content-around">
                 <div class="w-100" style="max-width: 600px">
                     <div class="form-group  ">
@@ -93,7 +94,8 @@
                     </div>
                     <div class="col-6"></div>
 
-                    <div class="col-3">
+                    <div class="col-3" data-title="Downloadable Format"
+                        data-intro="Click to download in excel or pdf format">
                         <span style="float: right">
                             &nbsp;&nbsp;
                             <a id="pdf_print" style="display: none" class="download"
@@ -193,7 +195,8 @@
                             </h5>
                         </div>
 
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                            data-parent="#accordion">
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped mb-0">

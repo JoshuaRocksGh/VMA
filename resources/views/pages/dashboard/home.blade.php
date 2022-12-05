@@ -11,7 +11,7 @@
     {{-- dashboard layout --}}
     <div class="">
         <div class="dashboard site-card overflow-hidden">
-            <nav class="dashboard-header ">
+            <nav class="dashboard-header " data-title="Dashbord Tabs" data-intro="Click to view">
                 <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
                     <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                         aria-controls="nav-home" aria-selected="true">Account Summary</a>
@@ -30,7 +30,7 @@
                 <div class="tab-pane fade h-100 show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row ">
                         <nav class="d-flex col-sm-2 col-md-auto  align-self-center no-after dashboard-header h-100 align-items-center"
-                            style="height: 100%">
+                            style="height: 100%" data-title="Account Tabs" data-intro="Click to view">
                             <div class="nav nav-tabs flex-column  border-0" id="nav-tab" role="tablist">
                                 <a href="#canvas_total" data-toggle="tab" data-target="totalsPie" aria-expanded="false"
                                     class="nav-link canvas-tab  mb-2 font-10 active">
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="  overflow-hidden">
-                        <nav class="mb-2 dashboard-header">
+                        <nav class="mb-2 dashboard-header" data-title="Account Description" data-intro="Click to view">
                             <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
 
                                 <a href="#accounts" data-toggle="tab" aria-expanded="false" class="nav-link active">

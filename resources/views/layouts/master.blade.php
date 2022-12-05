@@ -12,6 +12,11 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <link href="https://unpkg.com/intro.js/minified/introjs.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/introjs-rtl.css"
+        integrity="sha512-TA0DocpzpN5NseaPd0eZUsBB5SO1GoAN/hkjX4IzOoKcxJr7vMSVwdags8aHwOz6sNGuKOyjhz0J7kPJZ+14gA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @include('snippets.style')
     <style type="text/css">
@@ -95,7 +100,8 @@
                 <div class="offcanvas-collapse  overflow-auto scrollbar-hidden px-2 d-md-block mt-2 w-100"
                     style="max-width: 250px; min-width: 250px;
                     max-height: calc(100vh - var(--navbar-height));
-                    ">
+                    "
+                    data-title="Menu Bar" data-intro="Click to perform a transaction">
                     @include('snippets.side-bar')
                 </div>
                 <div style="max-height: calc(100vh - var(--navbar-height));"
@@ -105,12 +111,20 @@
                 <div class=" d-none scrollbar-hidden  overflow-auto d-xl-block px-2 mt-2 "
                     style="width:500px !important;
                     max-height: calc(100vh - var(--navbar-height));
-                    ">
+                    "
+                    data-title="Quick Links" data-intro="Click to perform a quick transaction">
                     @include('pages.dashboard.right_aside')
                 </div>
             </div>
         </div>
     @endempty
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js"
+        integrity="sha512-i3JuyB+yXgX08haAnY9OnbCuv+a0aB6eLeKh970IOC3XOeWVnOtZlcla55VztDzqCHbl2zn9gpeNu2VBNdvmdQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        introJs().start();
+    </script>
 
     @yield('scripts')
 
