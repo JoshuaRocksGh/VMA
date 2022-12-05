@@ -13,7 +13,8 @@
 
 
 <div class=" dashboard site-card " id="transaction_form"> <br>
-    <div class=" dashboard-body mt-0 p-4 ">
+    <div class=" dashboard-body mt-0 p-4 " data-title="Transfer Form"
+        data-intro="Complete the fields below to perform trnsaction">
         <form action="#" class="mx-auto" style="max-width: 650px" id="payment_details_form" autocomplete="off"
             aria-autocomplete="none">
             @csrf
@@ -244,7 +245,8 @@
                             placeholder="Enter Amount To Transfer" id="amount"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                             required>
-                        <button type="button" class="btn btn-danger  ml-2 btn-sm"><span
+                        <button type="button" class="btn btn-danger  ml-2 btn-sm" data-title="Rate Calculator"
+                            data-intro="Click to find and calculate FX Rate"><span
                                 class="mr-1 rate_button">Rate</span><i class="fas fa-calculator"></i></button>
                     </div>
                 </div>
