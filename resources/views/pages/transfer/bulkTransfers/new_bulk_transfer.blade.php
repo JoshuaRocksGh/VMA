@@ -12,7 +12,7 @@
 
 
     <div class="dashboard site-card overflow-hidden">
-        <p class="text-muted font-14 m-r-20 m-b-20">
+        <p class="text-muted font-14 m-r-20 m-b-20" data-title="Excel File" data-intro="Click to download template for upload">
             <span> <i class="fa fa-info-circle  text-red"></i> <b style="color:red;">Please Note:&nbsp;&nbsp;</b>
             </span> Download template for upload
             {{--  (<span class="text-danger"><a href="{{ url('download_same_bank_file') }}"
@@ -30,7 +30,7 @@
                 <div class="col-md-12">
                     <label class="text-dark">Account to transfer from</label>
 
-                    <div class="form-group">
+                    <div class="form-group" data-title="Account Tab" data-intro="Click to select account">
 
                         <select class="accounts-select " name="my_account" id="my_account" required>
                             <option disabled selected value=""> --- Select Source Account --- </option>
@@ -62,7 +62,7 @@
 
 
 
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-4 form-group" data-title="Bulk Amount" data-intro="Enter total amount">
                             <label for="inputEmail3" class="text-dark">Bulk
                                 Amount<span class="text-danger"> *</span></label>
                             <input type="text" name="bulk_amount" id="bulk_amount" pattern="([0-9]{1,3}).([0-9]{1,3})"
@@ -74,9 +74,10 @@
 
 
 
-                        <div class="col-md-4 form-group">
-                            <label for="inputEmail3" class="text-dark">Reference
-                                Number<span class="text-danger"> *</span></label>
+                        <div class="col-md-4 form-group" data-title="Reference"
+                            data-intro="Enter reference same on upload file">
+                            <label for="inputEmail3" class="text-dark">Upload Reference
+                                <span class="text-danger"> *</span></label>
                             <input type="text" name="reference_no" id="reference_no" class="form-control input-sm"
                                 required>
 
@@ -84,7 +85,7 @@
 
 
 
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-4 form-group" data-title="Vaue Date" data-intro="Select date">
                             <label for="inputEmail3" class="text-dark">Value Date<span class="text-danger">
                                     *</span></label>
                             <input type="date" id="value_date" name="value_date" placeholder="Enter value date"
@@ -96,7 +97,7 @@
 
 
 
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-4 form-group" data-title="Upload File" data-intro="Click to choose file">
                             <label for="inputEmail3" class="col-12 col-form-label text-dark">Choose File<span
                                     class="text-danger"> *</span></label>
                             <input type="file" name="excel_file" id="excel_file" class=" input-sm" required>
@@ -116,7 +117,7 @@
                         <!-- Large modal -->
                         {{-- <button type="button" class="btn btn-info" data-toggle="modal"
                             data-target="#bs-example-modal-lg">Large Modal</button> --}}
-                        <div class="col-md-12">
+                        <div class="col-md-12" data-title="Upload Button" data-intro="Click to upload">
                             <div class="form-group row">
                                 <div class="col-8 offset-4 text-right">
                                     <button type="submit"
@@ -139,7 +140,7 @@
 
             <hr>
 
-            <div class="breakpoint">
+            <div class="breakpoint" data-title="Upload Summary" data-intro="View Upload Summary">
                 <label class="text-danger">Transfer Summary</label>
                 <br>
 
