@@ -36,12 +36,12 @@ class PendingController extends Controller
         $userID = session()->get('userId');
         $mandate = session()->get('userMandate');
 
-        // return $customer_no;
+        // return $userID;
         try {
             $response = Http::post(env('CIB_API_BASE_URL') . "check-mandate/$customer_no/$userID");
             // dd(env('CIB_API_BASE_URL') . "check-mandate/$customer_no/$userID");
             $result = json_decode($response);
-
+            // return $response;
             // return $result->responseCode;
             if ($result->responseCode === '000') {
                 return view('pages.corporate.approvals.pending_transfer_details', ['request_id' => $request_id, 'customer_no' => $customer_no, 'mandate' => $mandate]);

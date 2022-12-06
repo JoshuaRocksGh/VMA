@@ -954,11 +954,20 @@
                         if (response.responseCode == '000') {
                             siteLoading('hide')
 
+                            // swal.fire({
+                            //     // title: "Transfer successful!",
+                            //     html: response.message,
+                            //     icon: "success",
+                            //     showConfirmButton: "false",
+                            // });
+
                             swal.fire({
                                 // title: "Transfer successful!",
                                 html: response.message,
                                 icon: "success",
-                                showConfirmButton: "false",
+                                //showConfirmButton: "false",
+                                confirmButtonColor: "green",
+
                             });
 
 
@@ -977,7 +986,7 @@
                                 // title: "Transfer successful!",
                                 html: response.message,
                                 icon: "error",
-                                showConfirmButton: "false",
+                                confirmButtonColor: "red",
                             });
 
                         }

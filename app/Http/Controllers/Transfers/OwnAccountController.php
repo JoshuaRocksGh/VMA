@@ -91,7 +91,7 @@ class OwnAccountController extends Controller
         try {
 
             $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "transfers/sameBank", $data);
-
+            // return $response;
             $result = new ApiBaseResponse();
             // Log::alert($response);
             return $result->api_response($response);
@@ -168,7 +168,7 @@ class OwnAccountController extends Controller
             // dd((env('CIB_API_BASE_URL') . "own-account-gone-for-pending"));
 
             $response = Http::post(env('CIB_API_BASE_URL') . "own-account-gone-for-pending", $data);
-
+            // return $response;
             $result = new ApiBaseResponse();
             return $result->api_response($response);
             // return json_decode($response->body();

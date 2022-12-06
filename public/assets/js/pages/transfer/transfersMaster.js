@@ -132,6 +132,7 @@ function getInternationalBanks(countryCode) {
         },
         datatype: "application/json",
         success: function (response) {
+            // console.log("get-international-bank-list-api =>", response)
             let data = response.data;
             if (data.length > 1) {
                 $("#onetime_select_bank").empty();

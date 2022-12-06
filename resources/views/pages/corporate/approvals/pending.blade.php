@@ -61,7 +61,7 @@
         <div class="dashboard site-card">
 
 
-            <div class="tab-content dashboard-body border-primary border table-responsive p-4">
+            <div class="tab-content dashboard-body border-danger border table-responsive p-4">
 
                 <table id=""
                     class="table   table-bordered table-striped display responsive nowrap w-100  pending_transaction_request ">

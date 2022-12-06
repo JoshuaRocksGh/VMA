@@ -36,7 +36,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 SAB: "Same Account transfer",
                 ACH: "ACH transfer",
                 RTGS: "RTGS transfer",
-                Storage: "Standing Order",
+                SO: "Standing Order",
                 BULK: "Bulk transfer",
                 INTB: "International Transfer",
                 CHQR: "Cheque Book Request",
