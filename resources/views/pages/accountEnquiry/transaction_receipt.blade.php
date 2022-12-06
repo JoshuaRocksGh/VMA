@@ -167,8 +167,8 @@
                         </table>
 
                     </div>
-                    <button type="button" class="btn btn-primary"id="print_button"
-                        onclick="window.print()">click</button>
+                    {{--  <button type="button" class="btn btn-primary"id="print_button"
+                        onclick="window.print()">click</button>  --}}
 
                 </div>
 

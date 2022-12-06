@@ -167,7 +167,9 @@ class LoansController extends Controller
         //     return $result->api_response($response);
         // });
 
-        $response = Http::retry(20, 300)->withHeaders($api_headers)->post(env('API_BASE_URL') . "loans/getLoans", $data);
+        // $response = Http::get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
+
+        $response = Http::post(env('API_BASE_URL') . "loans/getLoans", $data);
 
         $result = new ApiBaseResponse();
         return $result->api_response($response);

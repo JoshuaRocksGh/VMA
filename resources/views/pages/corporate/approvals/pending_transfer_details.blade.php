@@ -55,7 +55,7 @@
                             <div class="col-md-8">
 
                                 <div class="dashboard site-card">
-                                    <div class=" tab-content dashboard-body border-danger border table-responsive p-4">
+                                    <div class=" tab-content dashboard-body border-danger border table-responsive p-8">
 
                                         <div class="">
                                             <div class="">
@@ -851,7 +851,7 @@
 
                         console.log(response)
                         let res = JSON.parse(response);
-                        if (res.responseCode == '000') {
+                        if (res.responseCode == '000' || res.responseCode == '200') {
                             siteLoading('hide')
 
                             swal.fire({

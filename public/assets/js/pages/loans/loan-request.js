@@ -7,7 +7,7 @@ function getOptions(optionUrl, optionId, incomingData) {
         success: (response) => {
             let data = response.data;
             pageData[`${optionId.slice(1)}`] = data;
-            data.forEach((e) => {
+            data?.forEach((e) => {
                 if (!e.code || !e.name) return;
                 $(optionId).append(
                     $("<option>", {
@@ -451,7 +451,7 @@ $(function () {
         getOptions("get-loan-types-api", "#loan_product").then((res) => {
             console.log("data", res);
             const data = res.data;
-            data.forEach((e) => {
+            data?.forEach((e) => {
                 $("#loan_product").append(
                     $("<option>", {
                         value: e.PROD_CODE,
@@ -477,7 +477,7 @@ $(function () {
     // getBranches();
 
     $("#loan_product").on("change", (e) => {
-        pageData.currentLoanProduct = pageData["loan_product"].find(
+        pageData?.currentLoanProduct = pageData["loan_product"].find(
             (f) => f.PROD_CODE === e.currentTarget.value
         );
         if (!pageData.currentLoanProduct) return;
