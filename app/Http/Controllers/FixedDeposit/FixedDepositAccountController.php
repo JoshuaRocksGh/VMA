@@ -44,7 +44,7 @@ class FixedDepositAccountController extends Controller
             $result = new ApiBaseResponse();
             return $result->api_response($response);
         } catch (\Exception $error) {
-            Log::alert($error);
+            // Log::alert($error);
             return $base_response->api_response('500', $error,  NULL); // return API BASERESPONSE
         }
     }

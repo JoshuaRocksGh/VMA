@@ -73,6 +73,8 @@ class TransferBeneficiaryController extends Controller
             // "telephone" => $req->number
 
         ];
+        // return response()->json($data)
+        // dd($data);
         return $data;
     }
 
