@@ -16,7 +16,17 @@
                 </div>
             </div>
         </div>
-        <br>
+        <div class="form-group  mb-3">
+
+            <label class=" text-dark">Statement Type</label>
+
+            <select class="form-control " required name="noOfLeaflets" id="no_of_leaflets" required>
+                <option disabled selected value="">Select number of leaflets</option>
+                <option value="ORDINARY">ORDINARY Statement</option>
+                <option value="VISA">VISA Statement</option>
+                <option value="ELECTRONIC">ELECTRONIC Statement</option>select
+            </select>
+        </div>
         <div class="form-group ">
             <label class="text-dark">Select Branch </label>
             <select class="form-control select pick_up_branch" id="pick_up_branch" placeholder="Select Card Branch "

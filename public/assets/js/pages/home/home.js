@@ -275,7 +275,7 @@ function prepareGraphValues() {
         String(investment.sourceAccount)
     );
     let investmentsTotal = 0;
-    investmentsPie.yValues = pageData.investments.map((investment) => {
+    investmentsPie.yValues = pageData?.investments?.map((investment) => {
         const amount = parseFloat(investment.currentBalance) || 0.0;
         investmentsTotal += amount;
         return amount;
