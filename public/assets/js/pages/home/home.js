@@ -230,7 +230,8 @@ function getData({ url, name, data, method }) {
             pageData[name] = data;
         },
         error: function (xhr, status, error) {
-            console.log(error);
+            console.log(xhr.status);
+            console.log(xhr.responseText);
         },
     });
 }
@@ -244,6 +245,7 @@ function prepareGraphValues() {
     accountsPie.xValues = pageData?.accounts?.map((account) =>
         String(account.accountNumber)
     );
+    console.log("prepareGraphValue===>",pageData)
 
     //accounts
     let accountsTotal = 0;
@@ -261,9 +263,9 @@ function prepareGraphValues() {
 
     //loans
     const loansPie = {};
-    loansPie.xValues = pageData.loans.map((loan) => String(loan.facilityNo));
+    loansPie.xValues = pageData?.loans?.map((loan) => String(loan.facilityNo));
     let loansTotal = 0;
-    loansPie.yValues = pageData.loans.map((loan) => {
+    loansPie.yValues = pageData?.loans?.map((loan) => {
         const amount = parseFloat(loan.loanBalance) || 0.0;
         loansTotal += amount;
         return amount;
@@ -450,7 +452,7 @@ $(() => {
     });
     blockUi({ block: "#nav-tabContent" });
     // return;
-    Promise.all([
+    Promise.allSettled([
         getData({ url: "fixed-deposit-account-api", name: "investments" }),
         getData({ url: "get-loan-accounts-api", name: "loans" }),
         getData({ url: "get-accounts-api", name: "accounts" }),
@@ -458,6 +460,8 @@ $(() => {
         .then((value) => {
             // siteLoading("hide");
             console.log("VALUES ==>", value);
+            console.log("promise.AllSetteled ==>", pageData)
+            // return false
 
             prepareGraphValues();
             accountsPieChart({
@@ -469,7 +473,7 @@ $(() => {
         })
         .catch(function (err) {
             // dispatch a failure and throw error
-            console.log("error==>", err);
+            console.log("error==>", err.responseText);
         });
 
     $(".canvas-tab").on("click", (e) => {
