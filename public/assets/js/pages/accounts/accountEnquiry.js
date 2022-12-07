@@ -355,8 +355,8 @@ $(function () {
                 {
                     data: "transactionNumber",
                     render: (data, type, row) => {
-                        return `<a href="transaction-receipt?batchNo=${row.batchNumber}&postingDate=${row.postingSysDate}&transNumber=${row.transactionNumber}&valueDate=${row.valueDate}&branch=${row.branch}
-                        &narration=${row.narration}&amount=${row.amount}&contraAccount=${row.contraAccount}&channel=${row.channel}" type="button" class="btn btn-outline-info">Details</a>`;
+                        return `<a href="transaction-receipt?debitAccount=${pdfData?.details?.pdfAccountNumber}&batchNo=${row.batchNumber}&postingDate=${row.postingSysDate}&transNumber=${row.transactionNumber}&valueDate=${row.valueDate}&branch=${row.branch}
+                        &narration=${row.narration}&amount=${row.amount}&contraAccount=${row.contraAccount}&channel=${row.channel}" target='_blank' type="button" class="btn btn-outline-info">Details</a>`;
                     },
                 },
             ],

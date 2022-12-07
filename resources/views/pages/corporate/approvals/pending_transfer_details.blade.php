@@ -38,6 +38,7 @@
 
 @section('content')
     <div class="container-fluid">
+        <br>
 
         @php
             $currentPath = ' Approval Form';
@@ -65,6 +66,7 @@
 
                                                         <div class="  text-center">
                                                             <div class="col-md-12">
+                                                                <br>
                                                                 <div id="approval_details"></div>
 
                                                                 <br><br>

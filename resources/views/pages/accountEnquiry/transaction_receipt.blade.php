@@ -135,7 +135,7 @@
 
                                 <tr>
                                     <td class="text-dark">Transferred From</td>
-                                    <td class="text-bold"></td>
+                                    <td class="text-bold">{{ $debitAccount }}</td>
                                 </tr>
 
                                 <tr>
