@@ -26,7 +26,7 @@
                     <div class="d-flex pt-1 align-items-center">
                         <i class="fas fa-caret-down"></i>
                         <div class="px-2" style="width: 120px;">
-                            <select id="currency2" value='SLO' data-abbr-target="abbr2" data-img-target="curr_img2"
+                            <select id="currency2" value='SLL' data-abbr-target="abbr2" data-img-target="curr_img2"
                                 class="select2-no-search no-select-border  rate-select currency_select" required>
                             </select>
                         </div>
@@ -93,6 +93,8 @@
 </style>
 <script defer>
     $(() => {
+        console.log("pageData ==>", pageData);
+
         (async () => {
             await Promise.all([getCurrencies(), getFx()])
             const amountChange = (e) => {
@@ -110,7 +112,10 @@
 
                 document.getElementById('all_currencies').innerHTML = '';
                 pageData.currencies.forEach(function(currency) {
-                    if (currency.isoCode === "SLL") return
+                    console.log("ccc", currency, new Date(pageData?.fxRate?.find(r => r
+                            .PAIR === (currency.isoCode + '/' + " SLE"))
+                        ?.POSTING_DATE))
+                    if (currency.isoCode === "SLE") return
                     document.getElementById('all_currencies').innerHTML += `
                 <button data-currency='${currency.isoCode}' class="d-flex w-100 currency-button justify-content-between bg-white  align-items-center p-3 mt-2 rounded-lg ">
                     <div class="d-flex align-items-center">  <img  class="rounded-circle" style="width: 30px; height: 30px;"
@@ -119,10 +124,10 @@
           </div>
           <div class="">
            <div class="font-weight-bold text-right text-primary">
-             1 ${currency.isoCode} = SLL ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency.isoCode, 'SLL')?.convertedAmount)}
+             1 ${currency.isoCode} = SLE ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency.isoCode, 'SLE')?.convertedAmount)}
              </div>
-             <div class="text-secondary text-right font-10">updated on => ${new Date(pageData?.fxRate?.find(r=>r.PAIR===(currency.isoCode + '/' + " SLL"))?.POSTING_DATE).toISOString().slice(0,10)} </div>
-            </div>
+             {{--  <div class="text-secondary text-right font-10">updated on => ${new Date(pageData?.fxRate?.find(r=>r.PAIR===(currency.isoCode + '/' + " SLE"))?.POSTING_DATE)?.toISOString()?.slice(0,10)} </div>
+            </div>  --}}
         </button>
         `;
                 });
@@ -153,9 +158,9 @@
             $('.rate-select').on('change', (e) => {
                 const currency = e.target.value
                 const selected = e.target.id
-                if (currency !== 'SLL') {
+                if (currency !== 'SLE') {
                     const other = ['currency1', 'currency2'].find(e => e !== selected)
-                    $('#' + other).val('SLL').trigger('change')
+                    $('#' + other).val('SLE').trigger('change')
                 }
                 const currency_abbr = e.target.dataset.abbrTarget
                 const currency_abbr_target = document.getElementById(currency_abbr)
