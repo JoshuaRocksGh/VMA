@@ -73,10 +73,16 @@ class FunctionsController extends Controller
             "rateType" => $rateType
         ];
 
-        $response = Http::post(env('API_BASE_URL') . "utilities/getFxRates", $data);
+        try{
+            $response = Http::post(env('API_BASE_URL') . "utilities/getFxRates", $data);
 
         $result = new ApiBaseResponse();
         return $result->api_response($response);
+        }catch(\Exception $e){
+            return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
+        }
+
+
     }
 
 
@@ -84,10 +90,15 @@ class FunctionsController extends Controller
     public function get_correct_fx_rate()
     {
 
-        $response = Http::get(env('API_BASE_URL') . "utilities/getCorrectFxRates");
+        try{
+            $response = Http::get(env('API_BASE_URL') . "utilities/getCorrectFxRates");
 
         $result = new ApiBaseResponse();
         return $result->api_response($response);
+        }catch(\Exception $e){
+            return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
+        }
+
     }
 
 
@@ -122,7 +133,7 @@ class FunctionsController extends Controller
             $result = new ApiBaseResponse();
             return $result->api_response($response);
         } catch (\Exception $error) {
-            Log::alert($error);
+            // Log::alert($error);
             return $base_response->api_response('500', $error,  NULL); // return API BASERESPONSE
         }
     }
@@ -141,13 +152,19 @@ class FunctionsController extends Controller
             "userId"    => $userID
         ];
 
-        $response = Http::get(env('API_BASE_URL') . "/utilities/getCurrencies");
+        try {
+            $response = Http::get(env('API_BASE_URL') . "/utilities/getCurrencies");
 
         //return $response;
         // return $response->status();
 
         $result = new ApiBaseResponse();
         return $result->api_response($response);
+        }catch(\Exception $e){
+            return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
+        }
+
+
     }
 
 
@@ -165,12 +182,18 @@ class FunctionsController extends Controller
             "userId"    => $userID
         ];
 
-        $response = Http::get(env('API_BASE_URL') . "/utilities/getSecQuestions");
+        try {
+            $response = Http::get(env('API_BASE_URL') . "/utilities/getSecQuestions");
 
         //return $response;
         // return $response->status();
         $result = new ApiBaseResponse();
         return $result->api_response($response);
+        }catch(\Exception $e){
+            return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
+        }
+
+
     }
 
 
@@ -205,13 +228,16 @@ class FunctionsController extends Controller
         ];
 
         // return $data;
-
-        $response = Http::post(env('API_BASE_URL') . "/account/validateBBAN", $data);
+        try{
+            $response = Http::post(env('API_BASE_URL') . "/account/validateBBAN", $data);
 
         // return $response->body();
 
         $result = new ApiBaseResponse();
         return $result->api_response($response);
+        } catch(\Exception $e){
+            return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
+        }
     }
 
 
@@ -253,28 +279,39 @@ class FunctionsController extends Controller
     public function bank_list()
     {
 
-        $response = Http::get(env('API_BASE_URL') . "/utilities/getBanks");
 
         //return $response;
         // return $response->status();
-        $result = new ApiBaseResponse();
+        try{
+        $response = Http::get(env('API_BASE_URL') . "/utilities/getBanks");
+
+            $result = new ApiBaseResponse();
         return $result->api_response($response);
+        }catch(\Exception $e){
+            return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
+        }
+
     }
     public function international_bank_list(Request $req)
     {
-        $response = Http::get(env('API_BASE_URL') . "/utilities/getInternationalBanks/$req->countryCode");
-        Log::alert($response);
 
-        //return $response;
-        // return $response->status();
-        $result = new ApiBaseResponse();
-        return $result->api_response($response);
+        try{
+            $response = Http::get(env('API_BASE_URL') . "/utilities/getInternationalBanks/$req->countryCode");
+            // Log::alert($response);
+
+            //return $response;
+            // return $response->status();
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        }catch(\Exception $e){
+            return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
+        }
     }
 
     public function lovs_list()
     {
 
-        Log::critical("message");
+        // Log::critical("message");
         $response = Http::get(env('API_BASE_URL') . "account/lovs");
         $base_response = new BaseResponse();
 

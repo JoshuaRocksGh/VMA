@@ -120,6 +120,11 @@ function getCountries() {
                 toaster(response.message);
             }
         },
+        error: function (xhr, status, error) {
+            setTimeout(function () {
+                getCountries();
+            }, $.ajaxSetup().retryAfter);
+        },
     });
 }
 
@@ -149,6 +154,11 @@ function getInternationalBanks(countryCode) {
                 toaster(response.message);
             }
         },
+        error: function (xhr, status, error) {
+            setTimeout(function () {
+                getInternationalBanks(countryCode)
+            }, $.ajaxSetup().retryAfter);
+        },
     });
 }
 
@@ -173,6 +183,11 @@ function getLocalBanks() {
             } else {
                 toaster(response.message);
             }
+        },
+        error: function (xhr, status, error) {
+            setTimeout(function () {
+                getLocalBanks()
+            }, $.ajaxSetup().retryAfter);
         },
     });
 }
@@ -263,6 +278,11 @@ function getAccountDescription(account) {
                 handleToAccount(account);
             }
             $("#onetime_beneficiary_name_loader").hide();
+        },
+        error: function (xhr, status, error) {
+            setTimeout(function () {
+                getAccountDescription(account)
+            }, $.ajaxSetup().retryAfter);
         },
     });
 }
@@ -637,6 +657,7 @@ $(() => {
         });
         $("#standing_other_type").on("change", () => {
             const standingOrderType = $("#standing_other_type").val();
+            console.log('standingOrderType ==>', standingOrderType)
             switch (standingOrderType) {
                 case "own account":
                     $(".email-div").hide(500);

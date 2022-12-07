@@ -43,9 +43,9 @@ class transferController extends Controller
     public function transferBeneficiaryList()
     {
 
-        // $authToken = session()->get('userToken');
+        $customerNumber = session()->get('customerNumber');
         $userID = session()->get('userId');
-        $response = Http::get(env('API_BASE_URL') . "/beneficiary/getTransferBeneficiaries/$userID");
+        $response = Http::get(env('API_BASE_URL') . "/beneficiary/getTransferBeneficiaries/$customerNumber");
 
         $result = new ApiBaseResponse();
         return $result->api_response($response);

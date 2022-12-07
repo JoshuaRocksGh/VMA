@@ -21,6 +21,7 @@ class PaymentBeneficiaryController extends Controller
         $userID = session()->get('userId');
         $entrySource = env('APP_ENTRYSOURCE');
         $channel = env('APP_CHANNEL');
+        $customerNumber = session()->get('customerNumber');
 
         $data = [
             "account" => $request->account,
@@ -32,7 +33,7 @@ class PaymentBeneficiaryController extends Controller
             [
                 "approvedBy" => $request->approvedBy,
                 "approvedDateTime" => date('Y-m-d'),
-                "createdBy" => $userID,
+                "createdBy" => $customerNumber,
                 "createdDateTime" => date('Y-m-d'),
                 "entrySource" => $entrySource,
                 "channel" => $channel,
@@ -40,9 +41,9 @@ class PaymentBeneficiaryController extends Controller
                 "modifyDateTime" => date('Y-m-d')
 
             ],
-            "userID" => $userID
+            "userID" => $customerNumber
         ];
-        Log::alert($data);
+        // Log::alert($data);
         // return $data ;
         // dd(env('API_BASE_URL') . "beneficiary/addPaymentBeneficiary");
 

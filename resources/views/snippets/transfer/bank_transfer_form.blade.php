@@ -96,7 +96,8 @@
                                     class="form-control select_beneficiary" id="to_account" required>
                                     <option disabled selected value=""> -- Select
                                         {{ $destination }} --</option>
-                                    @if ($currentPath === 'Own Account' || $currentPath === 'Standing Order')
+                                    {{-- @if ($currentPath === 'Own Account' || $currentPath === 'Standing Order') --}}
+                                    @if ($currentPath === 'Own Account' )
                                         @include('snippets.accounts')
                                     @endif
                                 </select></div>
