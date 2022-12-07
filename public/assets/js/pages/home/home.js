@@ -230,7 +230,8 @@ function getData({ url, name, data, method }) {
             pageData[name] = data;
         },
         error: function (xhr, status, error) {
-            console.log(error);
+            console.log(xhr.status);
+            console.log(xhr.responseText);
         },
     });
 }
