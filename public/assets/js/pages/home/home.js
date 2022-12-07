@@ -120,7 +120,7 @@ function transactionsBarChart(transactions) {
     } //trim transactions to 30
     console.log("transactions ===>", transactions);
 
-    transactions = transactions.slice(0, 10).reverse();
+    transactions = transactions?.slice(0, 10).reverse();
     // check for previous chart and destroy it if any
     let chartStatus = Chart.getChart("transactionsBarChart");
     if (chartStatus != undefined) {
