@@ -101,11 +101,11 @@
                         </a>
                     </li>
 
-                    @if (config('app.corporate'))
+                    {{--  @if (config('app.corporate'))
                         <li>
                             <a href="{{ url('bulk-salone-Link') }}">Bulk Salone-link</a>
                         </li>
-                    @endif
+                    @endif  --}}
 
                     <li>
                         <a href="{{ url('payment-beneficiary-list') }}">Beneficiaries</a>

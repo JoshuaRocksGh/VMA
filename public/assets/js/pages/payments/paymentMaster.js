@@ -359,6 +359,7 @@ $(function () {
         console.log("self");
         const { userAlias, userPhone, userEmail } = customerInfo;
         $(".hide-if-self-transfer").hide(500);
+        $("#receiver_address").val("Self");
         $("#receiver_name")
             .val(userAlias)
             .attr("disabled", true)
