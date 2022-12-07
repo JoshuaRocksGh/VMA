@@ -67,7 +67,14 @@
                                                         <div class="  text-center">
                                                             <div class="col-md-12">
                                                                 <br>
-                                                                <div id="approval_details"></div>
+                                                                <div id="approval_details">
+                                                                    <div
+                                                                        class="d-flex justify-content-center canvas_loader">
+                                                                        <div class="spinner-border avatar-lg text-danger  m-2 canvas_spinner"
+                                                                            role="status">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
                                                                 <br><br>
                                                                 <div class="mt-3">
@@ -299,6 +306,7 @@
                     console.log("pending request detail=>", response);
 
                     if (response.responseCode == '000') {
+                        $("#approval_details").empty()
 
                         let pending_request = response.data[0];
                         let approvers_mandate = response.data[1]
