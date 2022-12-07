@@ -241,13 +241,13 @@ function prepareGraphValues() {
         xValues: ["Deposits", "Loans", "Investments"],
         yValues: [],
     };
-    accountsPie.xValues = pageData.accounts.map((account) =>
+    accountsPie.xValues = pageData?.accounts?.map((account) =>
         String(account.accountNumber)
     );
 
     //accounts
     let accountsTotal = 0;
-    accountsPie.yValues = pageData.accounts.map((account) => {
+    accountsPie.yValues = pageData?.accounts?.map((account) => {
         const amount =
             parseFloat(
                 String(account.localEquivalentAvailableBalance).replace(
@@ -271,7 +271,7 @@ function prepareGraphValues() {
 
     //investments
     const investmentsPie = {};
-    investmentsPie.xValues = pageData.investments.map((investment) =>
+    investmentsPie.xValues = pageData?.investments?.map((investment) =>
         String(investment.sourceAccount)
     );
     let investmentsTotal = 0;
@@ -454,18 +454,23 @@ $(() => {
         getData({ url: "fixed-deposit-account-api", name: "investments" }),
         getData({ url: "get-loan-accounts-api", name: "loans" }),
         getData({ url: "get-accounts-api", name: "accounts" }),
-    ]).then((value) => {
-        // siteLoading("hide");
-        console.log("VALUES ==>", value);
+    ])
+        .then((value) => {
+            // siteLoading("hide");
+            console.log("VALUES ==>", value);
 
-        prepareGraphValues();
-        accountsPieChart({
-            title: "Accounts",
-            ...pageData.pieValues.totalsPie,
+            prepareGraphValues();
+            accountsPieChart({
+                title: "Accounts",
+                ...pageData.pieValues.totalsPie,
+            });
+            unblockUi("#nav-tabContent");
+            renderDataTables();
+        })
+        .catch(function (err) {
+            // dispatch a failure and throw error
+            console.log("error==>", err);
         });
-        unblockUi("#nav-tabContent");
-        renderDataTables();
-    });
 
     $(".canvas-tab").on("click", (e) => {
         const selectedTab = $(e.currentTarget).attr("data-target");

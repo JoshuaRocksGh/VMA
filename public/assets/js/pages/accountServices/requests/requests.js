@@ -6,10 +6,10 @@ function getBranches() {
         url: "get-branches-api",
         datatype: "application/json",
     }).done((response) => {
-        console.log(response);
+        console.log("getBranches ==>", response);
         if (response?.data) {
             const { data } = response;
-            const select = document.getElementById("pick_up_branch");
+            const select = document.getElementByClass("pick_up_branch");
             data.forEach((e) => {
                 const option = document.createElement("option");
                 option.text = e.branchDescription;
@@ -65,7 +65,7 @@ function getCardTypes() {
 
 $(function () {
     // siteLoading("show");
-
+    getBranches();
     $("select").select2();
     $(".accounts-select").select2({
         minimumResultsForSearch: Infinity,
@@ -114,7 +114,7 @@ $(function () {
         );
         const cardType = $("#card_type").val();
         let pickUpBranch = $("#pick_up_branch").val();
-        if (!accountNumber || !cardType || !pickUpBranch) {
+        if (!accountNumber || !pickUpBranch) {
             toaster("Please complete all fields", "warning");
             return false;
         }
