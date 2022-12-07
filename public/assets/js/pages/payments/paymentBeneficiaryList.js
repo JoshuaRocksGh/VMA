@@ -4,6 +4,7 @@ function getBeneficiaryList() {
         url: "payment-beneficiary-list-api",
         datatype: "application/json",
         success: function (response) {
+            console.log("paymentBeneficiaryList==>", response)
             if (response.responseCode == "000") {
                 const data = response.data;
 
@@ -18,6 +19,10 @@ function getBeneficiaryList() {
                     return;
                 }
                 siteLoading("hide");
+            }else{
+                setTimeout(function () {
+                    getBeneficiaryList();
+                }, $.ajaxSetup().retryAfter);
             }
         },
         error: function (xhr, status, error) {
@@ -34,6 +39,7 @@ function getPaymentTypes() {
         url: "get-payment-types-api",
         datatype: "application/json",
         success: function (response) {
+            console.log("paymentTypesAPi==>", response)
             if (response.responseCode == "000") {
                 const data = response.data;
                 pageData.payTypes = [];
@@ -53,8 +59,13 @@ function getPaymentTypes() {
                     $(".payment-tabs").append(paymentCard);
                 });
                 initPaymentTabs();
-            }
             getBeneficiaryList();
+
+            }else{
+                setTimeout(function () {
+                    getPaymentTypes();
+                }, $.ajaxSetup().retryAfter);
+            }
         },
         error: function (xhr, status, error) {
             setTimeout(function () {

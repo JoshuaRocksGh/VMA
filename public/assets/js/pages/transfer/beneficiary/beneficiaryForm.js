@@ -13,7 +13,7 @@ function getLocalBanks() {
                 );
                 $.each(data, (i) => {
                     let { bankCode, bankDescription, bankSwiftCode } = data[i];
-                    option = `<option value="${bankCode}" data-bank-swift-code="${bankSwiftCode}">${bankDescription}</option>`;
+                    option = `<option value="${bankCode}" swift-code="${bankSwiftCode}">${bankDescription}</option>`;
                     $("#select_bank").append(option);
                 });
                 // $("#select_bank").append("refresh");
@@ -58,6 +58,7 @@ function getInternationalBanks(countryCode) {
         },
         datatype: "application/json",
         success: function (response) {
+            // console.log("international ==>", response)
             let data = response.data;
             $("#select_bank").empty();
             $("#select_bank").append(
@@ -125,19 +126,19 @@ function getAccountDescription(accountNumber) {
             const { data, message, responseCode } = res;
             const { accountCurrencyIso, accountDescription } = data;
             if (responseCode === "000") {
-                console.log(res);
+                // console.log(res);
                 $("#account_name").val(accountDescription);
                 $("#account_currency").val(accountCurrencyIso);
                 !accountDescription && toaster("Account Not Found", "warning");
             } else {
                 $("#account_name").val("");
-                console.log("Ac");
+                // console.log("Ac");
                 $("#account_currency").val("");
                 toaster(message, "error");
             }
         },
         error: (xhr, error, status) => {
-            console.log("Acv");
+            // console.log("Acv");
             $("#account_name").val("");
             toaster(status, "error");
         },
@@ -152,7 +153,7 @@ async function addBankBeneficiary(currentType) {
     $("#edit_modal").modal("show");
 }
 async function prepareBeneficiaryForm(currentType, mode) {
-    console.log(currentType, mode);
+    // console.log(currentType, mode);
     $("#edit_modal").attr("data-mode", mode);
     $("#edit_modal").attr("data-type", currentType);
     if (currentType === "SAB") {
@@ -198,7 +199,7 @@ async function prepareBeneficiaryForm(currentType, mode) {
 
 //editting beneficiary
 async function editBankBeneficiary(data, type) {
-    console.table(data);
+    // console.table(data);
     await prepareBeneficiaryForm(type, "Edit");
     if (data.BENEF_TYPE === "OTB") {
         $(".other-bank-form").show();
@@ -219,7 +220,7 @@ async function editBankBeneficiary(data, type) {
     $("#beneficiary_address").val(data.ADDRESS_1);
     $("#beneficiary_name").val(data.NICKNAME);
     if (data.SEND_MAIL && data.SEND_MAIL.toUpperCase() !== "N") {
-        console.log("A");
+        // console.log("A");
         $("#send_email_check").prop("checked", true);
     }
     beneficiaryDetails.beneficiaryId = data.BENE_ID;
@@ -233,7 +234,8 @@ function initBeneficiaryForm() {
         if (!validateFormInputs()) {
             return false;
         }
-        console.log(beneficiaryDetails);
+        // console.log(beneficiaryDetails);
+        // return;
         saveBeneficiary(beneficiaryDetails);
     });
 
@@ -260,13 +262,15 @@ function validateFormInputs() {
 
     const accountNumber = $("#account_number").val();
     let bankName = $("#select_bank option:selected").text();
-    const bankCode = $("#select_bank").val();
+    // const bankCode = $("#select_bank").val();
+    const bankCode = $("#select_bank option:selected").attr("swift-code")
     const bankCountry = $("#select_country option:selected").val();
     const beneficiaryName = $("#beneficiary_name").val();
     const beneficiaryEmail = $("#beneficiary_email").val();
     const beneficiaryAddress = $("#beneficiary_address").val();
     const accountName = $("#account_name").val();
     //same bank beneficiary checks
+
     if (type === "SAB") {
         bankName = "SIERRA LEONE COMMERCIAL BANK";
         if (!accountName) {
@@ -312,10 +316,10 @@ function validateFormInputs() {
         mode,
         bankCountry,
     };
-    console.log(beneficiaryDetails);
+    // console.log(beneficiaryDetails);
 
     beneficiaryDetails = Object.assign(beneficiaryDetails, bD);
-    console.log(beneficiaryDetails);
+    // console.log(beneficiaryDetails);
 
     return true;
 }
