@@ -232,6 +232,7 @@ function getData({ url, name, data, method }) {
         error: function (xhr, status, error) {
             console.log(xhr.status);
             console.log(xhr.responseText);
+            return;
         },
     });
 }
