@@ -14,11 +14,11 @@ class StopChequeController extends Controller
     {
         // return $request;
 
-        return [
-            'responseCode' => '000',
-            'message' => 'Request sent for stop cheque',
-            'data' => null
-        ];
+        // return [
+        //     'responseCode' => '000',
+        //     'message' => 'Request sent for stop cheque',
+        //     'data' => null
+        // ];
 
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');

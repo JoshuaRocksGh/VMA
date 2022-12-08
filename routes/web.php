@@ -385,6 +385,7 @@ Route::get('fixed-deposit', [FixedDepositAccountController::class, 'fixed_deposi
 
 //route for statement request
 Route::post('statement-request-api', [StatementRequestController::class, 'statement_request'])->name('statement-request-api');
+Route::post('corporate-statement-request-api', [StatementRequestController::class, 'corporate_statement_request'])->name('corporate-statement-request-api');
 
 //route for change-pin-api
 Route::post('change-pin-api', [ChangePinController::class, 'change_pin'])->name('change-pin-api');
