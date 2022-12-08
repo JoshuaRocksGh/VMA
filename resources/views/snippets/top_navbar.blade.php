@@ -1,4 +1,4 @@
-<div class="d-flex align-items-center grad-rokel justify-content-between py-2 px-2 px-sm-5 mb-4  site-shadow ">
+<div class="d-flex align-items-center bg-white justify-content-between py-2 px-2 px-sm-5 mb-4   ">
 
     <a href="{{ url('home') }}" class="d-none d-md-block">
         <img src="{{ asset('assets/images/slcb-bg-logo.png') }}" height="40" alt="company logo">

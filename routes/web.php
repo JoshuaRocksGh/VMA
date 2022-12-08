@@ -63,6 +63,7 @@ use App\Http\Controllers\Transfers\StandingOrderController;
 use App\Http\Controllers\Transfers\TransferStatusController;
 use App\Http\Controllers\SelfEnrollController;
 use App\Http\Controllers\Transfers\BollorieController;
+use App\Http\Controllers\Transfers\SwiftMT101Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -154,6 +155,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/bulk-transfer', [BulkUploadBulkUploadsController::class, 'index']);
     Route::post('/update-upload', [BulkUploadBulkUploadsController::class, 'update_upload']);
     Route::post('bollore-tranfer', [BollorieController::class, 'bollore_transfer']);
+    Route::get('/swift_mt101', [SwiftMT101Controller::class, 'view_swift'])->name('swift_mt101');
 
 
     // --- PAYMENTS
