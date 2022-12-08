@@ -126,13 +126,13 @@ function transactionsBarChart(transactions) {
     if (chartStatus != undefined) {
         chartStatus.destroy();
     }
-    const transactionAmount = transactions.map(
+    const transactionAmount = transactions?.map(
         (transaction) => transaction.amount
     );
-    const runningBalance = transactions.map(
+    const runningBalance = transactions?.map(
         (transaction) => transaction.runningBalance
     );
-    const labels = transactions.map((transaction) => {
+    const labels = transactions?.map((transaction) => {
         const date = new Date(transaction.postingSysDate).toLocaleString("en", {
             year: "numeric",
             month: "short",
@@ -230,9 +230,8 @@ function getData({ url, name, data, method }) {
             pageData[name] = data;
         },
         error: function (xhr, status, error) {
-            console.log(xhr.status);
-            console.log(xhr.responseText);
-            return;
+            // console.log(xhr.status);
+            // console.log(xhr.responseText);
         },
     });
 }

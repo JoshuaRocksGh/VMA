@@ -228,7 +228,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title text-info" id="myLargeModalLabel"> BULK TRANSACTION DETAILS</h3>
+                        <h3 class="modal-title text-dark" id="myLargeModalLabel"> BULK TRANSACTION DETAILS</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
@@ -655,27 +655,28 @@
                 success: function(response) {
                     console.log(response)
                     if (response.responseCode == '000') {
-                        let details = response.data.bulk_details
+                        let details = response.data.uploadData
+
 
                         table.clear().draw()
                         let count = 1
 
                         $.each(details, function(index) {
 
-                            $('.bulk_upload_list_body').append(`
-                                    <tr class="">
-                                        <th>${count}</th>
-                                        <th>${details[index].bban}</th>
-                                        <th>${formatToCurrency(parseFloat(details[index].amount))}</th>
-                                        <th>${details[index].name}</th>
-                                    </tr>
-                                `)
+                            // $('.bulk_upload_list_body').append(`
+                            //         <tr class="">
+                            //             <th>${count}</th>
+                            //             <th>${details[index].accountNumber}</th>
+                            //             <th>${formatToCurrency(parseFloat(details[index].amount))}</th>
+                            //             <th>${details[index].name}</th>
+                            //         </tr>
+                            //     `)
 
                             table.row.add([
                                 count,
-                                details[index].bban,
-                                details[index].name,
-                                details[index].amount
+                                details[index].accountNumber,
+                                formatToCurrency(parseFloat(details[index].amount)),
+                                details[index].name
 
                             ]).draw(false)
 
