@@ -201,12 +201,12 @@ class PendingController extends Controller
         try {
 
 
-            $url = \config('bulk_url.url');
+            // $url = \config('bulk_url.url');
             // return $url;
-            // dd($url . "get-bulk-upload-detail-list-api?batch_no=$batch_no");
-            $response = Http::get($url . "get-bulk-upload-detail-list-api?batch_no=$batch_no");
+            // dd(env('API_BASE_URL') . "corporate/getBulkUploadData/$batch_no");
+            $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadData/$batch_no");
 
-            // return response()->json($response);
+            // return $response;
 
             $result = new ApiBaseResponse();
 
