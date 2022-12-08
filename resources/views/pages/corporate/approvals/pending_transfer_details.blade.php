@@ -447,6 +447,8 @@
                             parseFloat(total_amount))) : '';
 
 
+                            let type = pending_request.type;
+                            type != null ? append_approval_details("Request Type", type) : '';
 
                         let bank_name = pending_request.bank_name;
                         bank_name != null ? append_approval_details("Bank Name", bank_name) : '';
@@ -503,6 +505,9 @@
 
                         let end_date = pending_request.trans_end;
                         end_date != null ? append_approval_details("End Date", end_date) : '';
+
+                        let branch_name = pending_request.branch_name;
+                        branch_name != null ? append_approval_details("Pick Up Branch", branch_name) : '';
 
                         let frequency = pending_request.frequency;
                         frequency != null ? append_approval_details("Frequency", frequency) : '';

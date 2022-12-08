@@ -302,7 +302,7 @@ $(function () {
             toaster("Please complete all fields", "warning");
             return false;
         }
-        if (ISCORPORATE) {
+        if (!ISCORPORATE) {
             $("#pin_code_modal").modal("show");
         } else {
             corporateRequestStatement(statementData);

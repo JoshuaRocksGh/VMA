@@ -42,7 +42,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 CHQR: "Cheque Book Request",
                 CHQS: "Stop Cheque",
                 CARD: "ATM Card Request",
-                // KORP: "E-Korpor",
+                STR: "Statement Request",
                 KORP: "Salone-Link",
                 BKORP: "Bulk E-Korpor",
                 UTL: "Utility Payment",
