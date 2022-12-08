@@ -7,6 +7,8 @@ use App\Http\classes\WEB\ApiBaseResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use App\Http\classes\API\BaseResponse;
+
 
 class LoansController extends Controller
 {
@@ -152,6 +154,8 @@ class LoansController extends Controller
     }
     public function get_my_loans_accounts()
     {
+        $base_response = new BaseResponse();
+
 
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
@@ -169,7 +173,7 @@ class LoansController extends Controller
 
         // $response = Http::get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
         try{
-            $response = Http::post(env('API_BASE_URL') . "loans/getLoans", $data);
+            $response = Http::retry(20, 100)->post(env('API_BASE_URL') . "loans/getLoans", $data);
 
         $result = new ApiBaseResponse();
         return $result->api_response($response);

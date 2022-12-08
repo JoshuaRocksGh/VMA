@@ -114,11 +114,12 @@ class LoginController extends Controller
             }
 
 
+            // dd(env('API_BASE_URL') . "account/accountFD/$userDetail->customerNumber");
             // $investmentResponse = Http::get(env('API_BASE_URL') . "account/accountFD/$userDetail->customerNumber");
             // $userInvestment = $base_response->api_response($investmentResponse->responseCode, $investmentResponse->message,  $investmentResponse->data);
             // return $userInvestment;
 
-
+            // dd(env('API_BASE_URL') . "loans/getLoans", $userDetail->userTokens);
             // $loanResponse = Http::post(env('API_BASE_URL') . "loans/getLoans", $userDetail->userToken);
             // dd(env('API_BASE_URL') . "loans/getLoans", $userDetail->userToken);
             // return $loanResponse;
