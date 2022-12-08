@@ -42,7 +42,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 CHQR: "Cheque Book Request",
                 CHQS: "Stop Cheque",
                 CARD: "ATM Card Request",
-                // KORP: "E-Korpor",
+                STR: "Statement Request",
                 KORP: "Salone-Link",
                 BKORP: "Bulk E-Korpor",
                 UTL: "Utility Payment",
@@ -120,7 +120,7 @@ function transactionsBarChart(transactions) {
     } //trim transactions to 30
     console.log("transactions ===>", transactions);
 
-    transactions = transactions.slice(0, 10).reverse();
+    transactions = transactions?.slice(0, 10).reverse();
     // check for previous chart and destroy it if any
     let chartStatus = Chart.getChart("transactionsBarChart");
     if (chartStatus != undefined) {
