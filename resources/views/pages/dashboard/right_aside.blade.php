@@ -57,12 +57,17 @@
         <div class="site-card-body">
             <div class="mb-2 font-13"> <i class="mr-1 fas fa-user text-danger"></i><span class="font-weight-bold">Name
                     :
-                </span><span>Sierra Leone Commerical Bank</span> </div>
+                </span><span>SIERRA LEONE COMMERCIAL BANK</span> </div>
             <div class="mb-2 font-13"> <i class="mr-1 fas fa-phone text-danger"></i><span class="font-weight-bold">Phone
-                    :</span> <span>(+232) - 22 -225264</span> </div>
+                </span> <span>+232 88 225225</span>
+                <br>
+                <span class="text-center">+232 79 211121</span>
+                <br>
+                </span> <span>+232 31 464541</span>
+            </div>
             <div class="mb-2 font-13"> <i class="mr-1 fas fa-envelope text-danger"></i><span
                     class="font-weight-bold">Email
-                    :</span> <span> slcb@slcb.com</span> </div>
+                    :</span> <span> customercare@slcb.com</span> </div>
 
         </div>
     </div>
