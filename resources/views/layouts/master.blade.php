@@ -121,6 +121,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js" crossorigin="anonymous"
         referrerpolicy="no-referrer"></script>
     <script>
+        const customerName = @json(session()->get('userId'));
+        console.log("cookie customerName ==> ", customerName)
+        document.cookie = `username=${customerName}: expires=Thu, 01 Jan 2030 00:00:00 UTC; path=/;`
+
+        // get cookies from
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    console.log("found")
+                    //return c.substring(name.length, c.length);
+                }
+            }
+            console.log("not found")
+
+            //return introJs().start();;
+        }
+
+        getCookie(customerName)
         introJs().start();
     </script>
 
