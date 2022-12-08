@@ -89,6 +89,8 @@ class FunctionsController extends Controller
 
     public function get_correct_fx_rate()
     {
+        $base_response = new BaseResponse();
+
 
         try{
             $response = Http::get(env('API_BASE_URL') . "utilities/getCorrectFxRates");
@@ -120,7 +122,7 @@ class FunctionsController extends Controller
         ];
 
         try {
-            $response = Http::post(env('API_BASE_URL') . "/account/getAccounts", $data);
+            $response = Http::retry(20, 100)->post(env('API_BASE_URL') . "/account/getAccounts", $data);
             if ($response->ok()) { // API response status code is 200
 
                 $res = json_decode($response->body());
