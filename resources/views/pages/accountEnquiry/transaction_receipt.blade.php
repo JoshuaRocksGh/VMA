@@ -85,10 +85,12 @@
                         <br>
                         <h5 class="address-title">SIERRA LEONE COMMERCIAL BANK</h5>
                         <div class="address">
-                            <small>9/31 Siaka Stevens Street</small><br>
-                            <small>Freetown, Sierra Leone</small><br>
-                            <small>(+232) - 22 -225264</small><br>
-                            <small>www.slcb.com</small><br>
+                            {{--  <small>9/31 Siaka Stevens Street</small><br>  --}}
+                            {{--  <small>Freetown, Sierra Leone</small><br>  --}}
+                            <small>+232 88 225225</small><br>
+                            <small>+232 79 211121</small><br>
+                            <small>+232 31 464541</small><br>
+                            <small>customercare@slcb.com</small><br>
                         </div>
 
                     </div>
