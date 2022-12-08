@@ -34,8 +34,64 @@ function makeTransfer(data) {
     });
 }
 
+function lovs_list() {
+    $.ajax({
+        type: "GET",
+        url: "get-lovs-list-api",
+        datatype: "application/json",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            siteLoading("hide");
+            if (response.responseCode == "000") {
+                const { data } = response;
+                // console.log("get-lovs-list-api", data);
+                const select = document.getElementById("id_type");
+                data.documentTypeList.forEach((e) => {
+                    const option = document.createElement("option");
+                    option.text = e.description;
+                    option.value = e.actualCode;
+                    select.appendChild(option);
+                });
+            } else {
+                setTimeout(function () {
+                    lovs_list();
+                }, $.ajaxSetup().retryAfter);
+            }
+        },
+        error: function (xhr, status, error) {
+            siteLoading("hide");
+
+            // console.log(xhr.status);
+            // console.log(xhr.responseText);
+            setTimeout(function () {
+                lovs_list();
+            }, $.ajaxSetup().retryAfter);
+        },
+    });
+    // return $.ajax({
+    //     type: "GET",
+    //     url: "get-lovs-list-api",
+    //     datatype: "application/json",
+    // }).done((response) => {
+    //     console.log(response);
+    //     if (response?.data) {
+    //         const { data } = response;
+    //         const select = document.getElementById("card_type");
+    //         data.forEach((e) => {
+    //             const option = document.createElement("option");
+    //             option.text = e.description;
+    //             option.value = e.actualCode;
+    //             select.appendChild(option);
+    //         });
+    //     }
+    // });
+}
+
 $(document).ready(function () {
     // alert("bollore");
+    lovs_list();
     const bolloreInfo = new Object();
     // $("#confirm_next_button").click(function () {
     //     alert("clicked");
