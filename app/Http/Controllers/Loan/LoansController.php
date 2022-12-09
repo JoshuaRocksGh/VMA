@@ -172,17 +172,16 @@ class LoansController extends Controller
         // });
 
         // $response = Http::get(env('API_BASE_URL') . "/account/accountFD/$customerNumber");
-        try{
-            $response = Http::retry(20, 100)->post(env('API_BASE_URL') . "loans/getLoans", $data);
+        try {
+            // $response = Http::retry(20, 100)->post(env('API_BASE_URL') . "loans/getLoans", $data);
+            $response = Http::post(env('API_BASE_URL') . "loans/getLoans", $data);
 
-        $result = new ApiBaseResponse();
-        return $result->api_response($response);
-        }catch (\Exception $error) {
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $error) {
             // Log::alert($error);
             return $base_response->api_response('500', $error,  NULL); // return API BASERESPONSE
         }
-
-
     }
 
     public function get_Loan_products()
