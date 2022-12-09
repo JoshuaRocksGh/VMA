@@ -73,16 +73,14 @@ class FunctionsController extends Controller
             "rateType" => $rateType
         ];
 
-        try{
+        try {
             $response = Http::post(env('API_BASE_URL') . "utilities/getFxRates", $data);
 
-        $result = new ApiBaseResponse();
-        return $result->api_response($response);
-        }catch(\Exception $e){
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
             return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
         }
-
-
     }
 
 
@@ -92,15 +90,14 @@ class FunctionsController extends Controller
         $base_response = new BaseResponse();
 
 
-        try{
+        try {
             $response = Http::get(env('API_BASE_URL') . "utilities/getCorrectFxRates");
 
-        $result = new ApiBaseResponse();
-        return $result->api_response($response);
-        }catch(\Exception $e){
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
             return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
         }
-
     }
 
 
@@ -122,7 +119,7 @@ class FunctionsController extends Controller
         ];
 
         try {
-            $response = Http::retry(20, 100)->post(env('API_BASE_URL') . "/account/getAccounts", $data);
+            $response = Http::post(env('API_BASE_URL') . "/account/getAccounts", $data);
             if ($response->ok()) { // API response status code is 200
 
                 $res = json_decode($response->body());
@@ -157,16 +154,14 @@ class FunctionsController extends Controller
         try {
             $response = Http::get(env('API_BASE_URL') . "/utilities/getCurrencies");
 
-        //return $response;
-        // return $response->status();
+            //return $response;
+            // return $response->status();
 
-        $result = new ApiBaseResponse();
-        return $result->api_response($response);
-        }catch(\Exception $e){
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
             return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
         }
-
-
     }
 
 
@@ -187,15 +182,13 @@ class FunctionsController extends Controller
         try {
             $response = Http::get(env('API_BASE_URL') . "/utilities/getSecQuestions");
 
-        //return $response;
-        // return $response->status();
-        $result = new ApiBaseResponse();
-        return $result->api_response($response);
-        }catch(\Exception $e){
+            //return $response;
+            // return $response->status();
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
             return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
         }
-
-
     }
 
 
@@ -230,14 +223,14 @@ class FunctionsController extends Controller
         ];
 
         // return $data;
-        try{
+        try {
             $response = Http::post(env('API_BASE_URL') . "/account/validateBBAN", $data);
 
-        // return $response->body();
+            // return $response->body();
 
-        $result = new ApiBaseResponse();
-        return $result->api_response($response);
-        } catch(\Exception $e){
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
             return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
         }
     }
@@ -284,20 +277,19 @@ class FunctionsController extends Controller
 
         //return $response;
         // return $response->status();
-        try{
-        $response = Http::get(env('API_BASE_URL') . "/utilities/getBanks");
+        try {
+            $response = Http::get(env('API_BASE_URL') . "/utilities/getBanks");
 
             $result = new ApiBaseResponse();
-        return $result->api_response($response);
-        }catch(\Exception $e){
+            return $result->api_response($response);
+        } catch (\Exception $e) {
             return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
         }
-
     }
     public function international_bank_list(Request $req)
     {
 
-        try{
+        try {
             $response = Http::get(env('API_BASE_URL') . "/utilities/getInternationalBanks/$req->countryCode");
             // Log::alert($response);
 
@@ -305,7 +297,7 @@ class FunctionsController extends Controller
             // return $response->status();
             $result = new ApiBaseResponse();
             return $result->api_response($response);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
         }
     }

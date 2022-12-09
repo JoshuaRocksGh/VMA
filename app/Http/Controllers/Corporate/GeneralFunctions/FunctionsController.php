@@ -34,7 +34,7 @@ class FunctionsController extends Controller
 
         // dd((env('CIB_API_BASE_URL') . "pending-request-api?customerNumber=$customerNumber&requestStatus=$requestStatus"));
 
-        $response = Http::get(env('CIB_API_BASE_URL') . "pending-request-api?customerNumber=$customerNumber&requestStatus=$requestStatus");
+        $response = Http::retry(20, 100)->get(env('CIB_API_BASE_URL') . "pending-request-api?customerNumber=$customerNumber&requestStatus=$requestStatus");
 
         // dd($response);
         // return $response;

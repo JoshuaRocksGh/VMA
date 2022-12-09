@@ -105,12 +105,12 @@ class LoginController extends Controller
                 return  $base_response->api_response('900', 'Personal account, use Personal Internet Banking platform',  NULL);
             }
 
-            if($userDetail->customerType == "C"){
+            if ($userDetail->customerType == "C") {
                 $mandateRes = Http::post(env('CIB_API_BASE_URL') . "get-mandate/$user_id");
-            // return $mandateRes['data'][0]['panel'];
-            $userMandate = $mandateRes['data'][0]['panel'];
-            }else{
-                $userMandate ="";
+                // return $mandateRes['data'][0]['panel'];
+                $userMandate = $mandateRes['data'][0]['panel'];
+            } else {
+                $userMandate = "";
             }
 
 

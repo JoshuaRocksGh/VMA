@@ -245,7 +245,7 @@ function prepareGraphValues() {
     accountsPie.xValues = pageData?.accounts?.map((account) =>
         String(account.accountNumber)
     );
-    console.log("prepareGraphValue===>",pageData)
+    console.log("prepareGraphValue===>", pageData);
 
     //accounts
     let accountsTotal = 0;
@@ -455,12 +455,13 @@ $(() => {
     Promise.allSettled([
         getData({ url: "fixed-deposit-account-api", name: "investments" }),
         getData({ url: "get-loan-accounts-api", name: "loans" }),
-        getData({ url: "get-accounts-api", name: "accounts" }),
+        // getData({ url: "get-accounts-api", name: "accounts" }),
     ])
         .then((value) => {
             // siteLoading("hide");
+            // pageData.accounts = @json(session()->get('userId'));
             console.log("VALUES ==>", value);
-            console.log("promise.AllSetteled ==>", pageData)
+            console.log("promise.AllSetteled ==>", pageData);
             // return false
 
             prepareGraphValues();
