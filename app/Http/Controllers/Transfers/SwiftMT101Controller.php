@@ -83,7 +83,7 @@ class SwiftMT101Controller extends Controller
                 'file',
                 file_get_contents($path),
                 $filename
-            )->post(env('CIB_API_BASE_URL') . "upload_mt101", $data);
+            )->post(env('CIB_API_BASE_URL') . "upload-mt101", $data);
             // return $response;
             // dd($response);
 
