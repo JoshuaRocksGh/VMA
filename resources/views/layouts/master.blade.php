@@ -67,6 +67,8 @@
     </style>
     @yield('styles')
     <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
     {{-- <script src="https://theapicompany.com/deviceAPI.js">
         let DeviceType = deviceAPI.deviceType;
         console.log("DeviceType", DeviceType);
@@ -122,13 +124,22 @@
         referrerpolicy="no-referrer"></script>
     <script>
         const customerName = @json(session()->get('userId'));
-        console.log("cookie customerName ==> ", customerName)
-        document.cookie = `username=${customerName}: expires=Thu, 01 Jan 2030 00:00:00 UTC; path=/;`
+
+        Cookies.set("customerName", customerName)
+        const getCookieName = Cookies.get("customerName")
+        if (getCookieName) {
+            console.log("get cookie==>", Cookies.get("customerName"))
+
+            //return;
+        } else {
+            introJs().start();
+
+        }
 
         // get cookies from
 
         // getCookie(customerName)
-        introJs().start();
+        //introJs().start();
     </script>
 
     @yield('scripts')

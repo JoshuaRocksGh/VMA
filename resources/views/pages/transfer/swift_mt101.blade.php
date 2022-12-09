@@ -20,7 +20,7 @@
             </div>
             <div class="tab-content dashboard-body p-4">
                 <div class="mx-auto  h-100 " style="max-width: 650px" id="swift_request">
-                    <form id="upload_swift_form" class="" action="#" enctype="multipart/form-data">
+                    <form id="upload_swift_form" class="" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
@@ -44,22 +44,29 @@
                                 <br>
                                 <div class="row">
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pb-2">
                                         <label for="inputEmail3" class="text-dark">Account Name</label>
                                         <input type="text" name="account_name" id="account_name"
                                             class="form-control input-sm" readonly="readonly">
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pb-2">
                                         <label for="inputEmail3" class="text-dark">Account Balance</label>
                                         <input type="text" name="account_balance" id="account_balance"
                                             class="form-control input-sm" readonly="readonly">
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pb-2">
                                         <label for="inputEmail3" class="text-dark">Account Currency</label>
                                         <input type="text" name="account_currency" id="account_currency"
                                             class="form-control input-sm" readonly="readonly">
+                                    </div>
+
+                                    <div class="col-md-4 form-group pb-2" data-title="Upload File"
+                                        data-intro="Click to choose file">
+                                        <label for="inputEmail3" class="col-12 col-form-label text-dark">Choose File<span
+                                                class="text-danger"> *</span></label>
+                                        <input type="file" name="excel_file" id="excel_file" class=" input-sm" required>
                                     </div>
 
                                     <div class="col-md-12 pt-4">

@@ -548,7 +548,7 @@ $(document).ready(function () {
             if (jQuery.inArray(file_extension, ["xls", "xlsx"]) == -1) {
                 toaster("Invalid Document Type!", "error", 3000).then(
                     function () {
-                        document.getElementById("file").value = "";
+                        document.getElementById("excel_file").value = "";
                     }
                 );
                 return false;
