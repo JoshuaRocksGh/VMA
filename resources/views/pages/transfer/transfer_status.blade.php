@@ -13,7 +13,7 @@
     <div class="dashboard site-card" id="transaction_summary">
 
         <div class="table-responsive dashboard-body p-2">
-
+            <br><br>
             <table class="table table-bordered mt-5 table-striped display responsive nowrap w-100" id="transfer_status_table">
                 <thead>
                     <tr class="table-background ">
@@ -43,10 +43,14 @@
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header bg-info">
-                    <h3 class="modal-title modal-title font-18 font-weight-bold text-white" id="transfer_status_title">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title modal-title font-18 font-weight-bold text-white" id="transfer_status_title">
                         Transfer
-                        Details</h3>
+                        Details</h5>
+                    <button type="button" class="close align-self-center text-white" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <h4 class="text-primary text-center">Sender Info</h4>

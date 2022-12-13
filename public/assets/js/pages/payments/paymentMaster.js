@@ -207,7 +207,7 @@ function getPaymentHistory(type, accountNumber) {
         },
         success: function (response) {
             const data = response.data;
-            // console.log(renderedHistoryItems);
+            console.log("renderedHistoryItems ==>", renderedHistoryItems);
             $(`#${paymentType}_history_display`).pagination({
                 dataSource: data,
                 pageSize: 5,

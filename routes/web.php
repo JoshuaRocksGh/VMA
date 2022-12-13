@@ -420,6 +420,7 @@ Route::post('loan-origination-api', [LoansController::class, 'postLoanOriginatio
 Route::get('get-loan-accounts-api', [LoansController::class, 'get_my_loans_accounts']);
 Route::get("get-loan-details-api", [LoansController::class, 'getLoanDetails']);
 Route::get("get-loan-types-api", [LoansController::class, 'getLoanTypes']);
+Route::get("get-loan-tracking-api", [LoansController::class, 'getLoanTracking']);
 
 //route to return standing order frequencies
 Route::get('get-standing-order-frequencies-api', [FunctionsController::class, 'get_standing_order_frequencies'])->name('get-standing-order-frequencies-api');

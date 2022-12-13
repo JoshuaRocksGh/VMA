@@ -162,7 +162,26 @@
                     </form>
                 </div>
                 <div class="tab-pane " id="Tracking_Pill" role="tab-panel">
-                    <p>Tracking</p>
+                    {{--  <p>Tracking</p>  --}}
+                    <div id="loan_tracking_no_data" class=" justify-content-center align-items-center"
+                        style="display: flex;">
+                        {!! $noDataAvailable !!}
+                    </div>
+                    <div id="loan_tracking" class="table-responsive" style="display: none">
+                        <table id="loan_tracking_table"
+                            class="table table-sm table-striped table-hover table-centered table-bordered">
+                            <thead class="bg-primary text-white font-weight-bold">
+                                <tr class="text-center">
+                                    <th>Loan Description</th>
+                                    <th>Amount Granted</th>
+                                    <th>Loan Balance</th>
+                                    <th> View Details </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

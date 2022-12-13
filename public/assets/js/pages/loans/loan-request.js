@@ -30,6 +30,7 @@ function validateKyc() {
         datatype: "application/json",
     })
         .done((res) => {
+            // console.log("validate-kyc-api ==>", res);
             if (res.responseCode !== "000") {
                 $("#payment_details_form").hide();
                 $("#kyc_incomplete").show();
@@ -330,6 +331,32 @@ function getLoanQuotationDetails(loanData) {
 //     });
 // })
 
+function getLoantracking() {
+    return $.ajax({
+        type: "GET",
+        url: "get-loan-tracking-api",
+        datatype: "application/json",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    }).done((response) => {
+        console.log("get-loan-tracking-api", response);
+        if (response.responseCode !== "000") {
+            $("#loan_tracking").hide();
+            $("#loan_tracking_no_data")
+                .show()
+                .html(
+                    noDataAvailable.replace(
+                        "No Data Available",
+                        response.message
+                    )
+                );
+            // toaster(res.message, "warning");
+            return;
+        }
+    });
+}
+
 function getLoans() {
     return $.ajax({
         type: "GET",
@@ -340,6 +367,7 @@ function getLoans() {
         },
     })
         .done((res) => {
+            console.log("loan res==>", res);
             if (res.responseCode !== "000") {
                 $("#loan_balances").hide();
                 $("#loan_balances_no_data")
@@ -443,6 +471,7 @@ $(function () {
     // TODO : check out opacity of select2 hover
     getAccounts();
     // $("#loan_quotation_modal").modal("show");
+    getLoantracking();
     const initData = [
         validateKyc(),
         getLoans(),
@@ -477,7 +506,7 @@ $(function () {
     // getBranches();
 
     $("#loan_product").on("change", (e) => {
-        pageData?.currentLoanProduct = pageData["loan_product"].find(
+        pageData.currentLoanProduct = pageData["loan_product"].find(
             (f) => f.PROD_CODE === e.currentTarget.value
         );
         if (!pageData.currentLoanProduct) return;
