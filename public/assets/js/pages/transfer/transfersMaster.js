@@ -156,7 +156,7 @@ function getInternationalBanks(countryCode) {
         },
         error: function (xhr, status, error) {
             setTimeout(function () {
-                getInternationalBanks(countryCode)
+                getInternationalBanks(countryCode);
             }, $.ajaxSetup().retryAfter);
         },
     });
@@ -186,7 +186,7 @@ function getLocalBanks() {
         },
         error: function (xhr, status, error) {
             setTimeout(function () {
-                getLocalBanks()
+                getLocalBanks();
             }, $.ajaxSetup().retryAfter);
         },
     });
@@ -281,7 +281,7 @@ function getAccountDescription(account) {
         },
         error: function (xhr, status, error) {
             setTimeout(function () {
-                getAccountDescription(account)
+                getAccountDescription(account);
             }, $.ajaxSetup().retryAfter);
         },
     });
@@ -657,7 +657,7 @@ $(() => {
         });
         $("#standing_other_type").on("change", () => {
             const standingOrderType = $("#standing_other_type").val();
-            console.log('standingOrderType ==>', standingOrderType)
+            console.log("standingOrderType ==>", standingOrderType);
             switch (standingOrderType) {
                 case "own account":
                     $(".email-div").hide(500);

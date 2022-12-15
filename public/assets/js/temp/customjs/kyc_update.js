@@ -169,7 +169,7 @@ function accounts() {
             });
         },
         error: function (xhr, status, error) {
-            alert("API SERVER ERROR ");
+            // alert("API SERVER ERROR ");
         },
     });
 }

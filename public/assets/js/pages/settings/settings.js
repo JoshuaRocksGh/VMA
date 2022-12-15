@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 title: "change password",
                 icon: "user-lock",
                 bgClass: "grad-blue-pink",
+                dataTarget: "#change_password_modal",
             },
             // {
             //     title: "forgot transaction pin",
@@ -45,11 +46,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 title: "Terms and Conditions",
                 icon: "file-contract",
                 bgClass: "red-orange",
+                dataTarget: "#terms_condition_modal",
             },
             {
                 title: "Contact Us",
                 icon: "address-card",
                 bgClass: "black-black",
+                dataTarget: "#contact_us_modal",
             },
         ];
     } else {
@@ -64,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 title: "change password",
                 icon: "user-lock",
                 bgClass: "grad-blue-pink",
+                dataTarget: "#change_password_modal",
             },
             {
                 title: "forgot transaction pin",
@@ -97,11 +101,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 title: "Terms and Conditions",
                 icon: "file-contract",
                 bgClass: "red-orange",
+                dataTarget: "#terms_condition_modal",
             },
             {
                 title: "Contact Us",
                 icon: "address-card",
                 bgClass: "black-black",
+                dataTarget: "#contact_us_modal",
             },
         ];
     }

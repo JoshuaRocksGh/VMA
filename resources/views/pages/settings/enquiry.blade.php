@@ -4,7 +4,7 @@
             <div class="modal-header bg-danger">
                 <h5 class="modal-title text-white font-18 font-weight-bold">Enquiry</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">X</span>
+                    <span aria-hidden="true">x</span>
                 </button>
             </div>
             <div class="modal-body pb-4">
@@ -14,7 +14,7 @@
                     @csrf
 
                     <div class="form-group  mb-4">
-                        <label class=" text-primary">Select Account</label>
+                        <label class=" text-dark">Select Account</label>
                         <select class="form-control accounts-select " id="from_account" required>
                             <option selected disabled value=""> -- Select Account --</option>
                             @include('snippets.accounts')
@@ -22,13 +22,13 @@
 
                     </div>
                     <div class="form-group mb-4">
-                        <label class=" text-primary"> Select Service Type</label>
+                        <label class=" text-dark"> Select Service Type</label>
                         <select name="" id="service_type" class="form-control">
                             <option disabled value="">---- select a service type ----</option>
                         </select>
                     </div>
                     <div class="form-group mb-1">
-                        <label class=" text-primary" for="description"> Description</label>
+                        <label class=" text-dark" for="description"> Description</label>
                         <textarea name="" id="description" class="form-control "></textarea>
                     </div>
                 </form>
@@ -71,21 +71,33 @@
     }
 
     function submitComplaint(accountNumber, serviceType, description) {
-        return $.ajax({
-                type: "POST",
-                url: "complaint-api",
-                datatype: "application/json",
-                data: {
-                    accountNumber,
-                    serviceType,
-                    description,
-                },
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-            })
-            .done((res) => console.log(res))
-            .fail((err) => console.log(err.message));
+        $.ajax({
+            type: "POST",
+            url: "complaint-api",
+            datatype: "application/json",
+            data: {
+                accountNumber,
+                serviceType,
+                description,
+            },
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function(response) {
+                siteLoading("hide")
+
+                console.log(response)
+                if (response.responseCode == "000") {
+                    toaster(response.message, "success");
+                } else {
+                    toaster(response.message, "error");
+                }
+            },
+            error: function() {
+                siteLoading("hide")
+
+            }
+        })
     }
 
     $(function() {
@@ -117,9 +129,7 @@
                 return false;
             }
             siteLoading("show");
-            submitComplaint(accountNumber, serviceType, description).always(
-                siteLoading("hide")
-            );
+            submitComplaint(accountNumber, serviceType, description)
         });
     });
 </script>

@@ -19,9 +19,9 @@ class ChangePasswordController extends Controller
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
 
-        $new_password = $request->new_password;
-        $old_password = $request->old_password;
-        $security_answer = $request->security_answer;
+        $new_password = $request->newPassword;
+        $old_password = $request->oldPassword;
+        $security_answer = $request->securityAnswer;
 
         $data = [
 

@@ -263,10 +263,10 @@ function prepareGraphValues() {
 
     //loans
     const loansPie = {};
-    loansPie.xValues = pageData?.loans?.map((loan) => String(loan.facilityNo));
+    loansPie.xValues = pageData?.loans?.map((loan) => String(loan.FACILITY_NO));
     let loansTotal = 0;
     loansPie.yValues = pageData?.loans?.map((loan) => {
-        const amount = parseFloat(loan.loanBalance) || 0.0;
+        const amount = parseFloat(loan.LOAN_BALANCE) || 0.0;
         loansTotal += amount;
         return amount;
     });
@@ -426,16 +426,16 @@ const renderDataTables = (data, tableId) => {
             data: pageData.loans,
             columns: [
                 {
-                    data: "facilityNo",
+                    data: "FACILITY_NO",
                 },
-                { data: "description" },
-                { data: "isoCode" },
+                { data: "DESCRIPTION" },
+                { data: "ISO_CODE" },
                 {
-                    data: "amountGranted",
+                    data: "AMOUNT_GRANTED",
                     render: (data, type, row) => renderCurrency(data, row),
                 },
                 {
-                    data: "loanBalance",
+                    data: "LOAN_BALANCE",
                     render: (data, type, row) => renderCurrency(data, row),
                 },
             ],
@@ -454,7 +454,7 @@ $(() => {
     // return;
     Promise.allSettled([
         getData({ url: "fixed-deposit-account-api", name: "investments" }),
-        getData({ url: "get-loan-accounts-api", name: "loans" }),
+        // getData({ url: "get-loan-accounts-api", name: "loans" }),
         // getData({ url: "get-accounts-api", name: "accounts" }),
     ])
         .then((value) => {

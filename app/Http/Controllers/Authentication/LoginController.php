@@ -142,6 +142,7 @@ class LoginController extends Controller
                 "checkerMaker" => $userDetail->checkerMaker,
                 "accountDescription" => $userDetail->accountsList[0]->accountDesc,
                 "customerAccounts" => $userDetail->accountsList,
+                "customerLoans" => $userDetail->loansList,
                 // "userMandate" => 'A',
                 "userMandate" => $userMandate,
 

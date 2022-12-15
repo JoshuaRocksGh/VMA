@@ -427,7 +427,7 @@ class FunctionsController extends Controller
     public function reset_security_question($user_id)
     {
         $user_id = $user_id;
-        $response = Http::get(env('API_BASE_URL') . "/user/question/{$user_id}");
+        $response = Http::retry(10, 100)->get(env('API_BASE_URL') . "/user/question/{$user_id}");
         $result = new ApiBaseResponse();
         return $result->api_response($response);
     }

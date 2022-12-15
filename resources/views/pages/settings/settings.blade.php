@@ -60,6 +60,9 @@
     @include('pages.settings.forgot_transaction_pin')
     @include('pages.settings.change_transaction_pin')
     @include('pages.settings.faq')
+    @include('pages.settings.contact_us')
+    @include('pages.settings.terms_condition')
+    @include('pages.settings.change_password')
 @endsection
 @section('scripts')
     <script src="{{ asset('assets/js/pages/settings/settings.js') }}"></script>
