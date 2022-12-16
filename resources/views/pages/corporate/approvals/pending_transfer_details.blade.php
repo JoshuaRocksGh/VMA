@@ -406,6 +406,12 @@
                             //let request_type = 'E-Korpor Transaction'
                             let request_type = 'Salone-Link Transaction'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
+                        } else if (request_type == 'CARDR') {
+                            let request_type = 'Card Request'
+                            request_type != null ? append_approval_details("Request Type", request_type) : '';
+                        } else if (request_type == 'CARDB') {
+                            let request_type = 'Card Block'
+                            request_type != null ? append_approval_details("Request Type", request_type) : '';
                         } else if (request_type == 'CARD') {
                             let request_type = 'Cardless Transaction'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
@@ -447,8 +453,11 @@
                             parseFloat(total_amount))) : '';
 
 
-                            let type = pending_request.type;
-                            type != null ? append_approval_details("Request Type", type) : '';
+                        let type = pending_request.type;
+                        type != null ? append_approval_details("Request Type", type) : '';
+
+                        let card_number = pending_request.card_number;
+                        card_number != null ? append_approval_details("Card Number", card_number) : '';
 
                         let bank_name = pending_request.bank_name;
                         bank_name != null ? append_approval_details("Bank Name", bank_name) : '';
@@ -486,7 +495,7 @@
                         narration != null ? append_approval_details("Narration", narration) : '';
 
                         let category = pending_request.category;
-                        category != null ? append_approval_details("Cartegory", category) : '';
+                        category != null ? append_approval_details("Category", category) : '';
 
                         let batch_number = pending_request.batch;
                         batch_number != null ? append_approval_details("Batch Number", batch_number) : '';
@@ -664,13 +673,13 @@
                         $.each(details, function(index) {
 
                             // $('.bulk_upload_list_body').append(`
-                            //         <tr class="">
-                            //             <th>${count}</th>
-                            //             <th>${details[index].accountNumber}</th>
-                            //             <th>${formatToCurrency(parseFloat(details[index].amount))}</th>
-                            //             <th>${details[index].name}</th>
-                            //         </tr>
-                            //     `)
+                        //         <tr class="">
+                        //             <th>${count}</th>
+                        //             <th>${details[index].accountNumber}</th>
+                        //             <th>${formatToCurrency(parseFloat(details[index].amount))}</th>
+                        //             <th>${details[index].name}</th>
+                        //         </tr>
+                        //     `)
 
                             table.row.add([
                                 count,

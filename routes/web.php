@@ -363,7 +363,7 @@ Route::get('validate-kyc-api', [KycController::class, 'validateKyc']);
 Route::post('atm-card-request-api', [AtmCardRequestController::class, 'atm_card_request'])->name('atm-card-request-api');
 Route::post('atm-card-block-api', [AtmCardRequestController::class, 'atm_card_block'])->name('atm-card-block-api');
 Route::post('corporate-atm-card-request-api', [AtmCardRequestController::class, 'corporate_atm_card_request'])->name('corporate-atm-card-request-api');
-
+Route::post('corporate-block-card-request-api', [AtmCardRequestController::class, 'corporate_bloack_card_request'])->name('corporate-block-card-request-api');
 //Activate  Card
 Route::post('activate-card-request-api', [AtmCardRequestController::class, 'activate_card_request'])->name('activate-card-request-api');
 

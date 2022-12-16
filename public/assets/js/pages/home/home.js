@@ -19,7 +19,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 return;
             }
             $(".request_table tr").remove();
-            console.log("data length =>", data.length);
+            console.log("data length =>", data);
             $("#approval_count").text(data.length > 0 ? data.length : 0);
             // $("#approval_count").text(data.length);
             // $("#approval_count").text("1");
@@ -41,7 +41,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 INTB: "International Transfer",
                 CHQR: "Cheque Book Request",
                 CHQS: "Stop Cheque",
-                CARD: "ATM Card Request",
+                CARD: "Cardless Transfer",
                 STR: "Statement Request",
                 KORP: "Salone-Link",
                 BKORP: "Bulk E-Korpor",
@@ -49,6 +49,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 AIR: "Airtime Payment",
                 MOM: "Mobile Money Payment",
                 BOL: "Bollore Transfer",
+                CARDR: "ATM Card Request",
             };
             data.forEach((data) => {
                 const {

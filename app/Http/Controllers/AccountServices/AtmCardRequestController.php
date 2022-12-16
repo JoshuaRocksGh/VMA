@@ -209,6 +209,10 @@ class AtmCardRequestController extends Controller
         $accountCurrency = $allAccDetails[3];
         $accountCurrencyIsoCode = $allAccDetails[5];
         $accountMandate = $allAccDetails[6];
+        $cardType = $request->cardType;
+        $cardTypeName = $request->cardTypeName;
+        $pickUpBranch = $request->pickUpBranch;
+        $pickUpBranchName = $request->pickUpBranchName;
 
         $data = [
             "accountType" => $accountType,
@@ -216,18 +220,81 @@ class AtmCardRequestController extends Controller
             "accountNumber" => $accountNumber,
             "accountCurrency" => $accountCurrency,
             "accountCurrencyIsoCode" => $accountCurrencyIsoCode,
-            "accountCurrencyIsoCode" => $accountCurrencyIsoCode,
+            "accountMandate" => $accountMandate,
             "authToken" => $authToken,
             "userID" => $userID,
             "userAlias" => $userAlias,
             "customerPhone" => $customerPhone,
             "customerNumber" => $customerNumber,
             "userMandate" => $userMandate,
+            "cardType" => $cardType,
+            "cardTypeName" => $cardTypeName,
+            "pickUpBranch" => $pickUpBranch,
+            "pickUpBranchName" => $pickUpBranchName,
         ];
 
         // return $data;
         try {
             $response = Http::post(env('CIB_API_BASE_URL') . "card-request-gone-for-pending", $data);
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
+            return $base_response->api_response('500', $e->getMessage(),  NULL); // return API BASERESPONSE
+        }
+    }
+
+    // CORPORATE CARD BLOCK
+    public function corporate_bloack_card_request(Request $request)
+    {
+        // return $request;
+
+        $base_response = new BaseResponse();
+
+        $authToken = session()->get('userToken');
+        $userID = session()->get('userId');
+        $userAlias = session()->get('userAlias');
+        $customerPhone = session()->get('customerPhone');
+        $customerNumber = session()->get('customerNumber');
+        $userMandate = session()->get('userMandate');
+
+        $getAccount = $request->accountDetails;
+        $allAccDetails = explode("~", $getAccount);
+
+        $accountType = $allAccDetails[0];
+        $accountName = $allAccDetails[1];
+        $accountNumber = $allAccDetails[2];
+        $accountCurrency = $allAccDetails[3];
+        $accountCurrencyIsoCode = $allAccDetails[5];
+        $accountMandate = $allAccDetails[6];
+        $cardBranch = $request->cardBranch;
+        $cardBranchName = $request->cardBranchName;
+        $cardNumber = $request->cardNumber;
+        $cardType = $request->cardType;
+        $cardTypeName = $request->cardTypeName;
+
+        $data = [
+            "accountType" => $accountType,
+            "accountName" => $accountName,
+            "accountNumber" => $accountNumber,
+            "accountCurrency" => $accountCurrency,
+            "accountCurrencyIsoCode" => $accountCurrencyIsoCode,
+            "accountMandate" => $accountMandate,
+            "authToken" => $authToken,
+            "userID" => $userID,
+            "userAlias" => $userAlias,
+            "customerPhone" => $customerPhone,
+            "customerNumber" => $customerNumber,
+            "userMandate" => $userMandate,
+            "cardType" => $cardType,
+            "cardTypeName" => $cardTypeName,
+            "cardBranch" => $cardBranch,
+            "cardBranchName" => $cardBranchName,
+            "cardNumber" => $cardNumber,
+        ];
+
+        // return $data;
+        try {
+            $response = Http::post(env('CIB_API_BASE_URL') . "card-block-gone-for-pending", $data);
             $result = new ApiBaseResponse();
             return $result->api_response($response);
         } catch (\Exception $e) {

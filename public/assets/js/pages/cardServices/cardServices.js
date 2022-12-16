@@ -72,6 +72,40 @@ function corporateCardRequest({
     });
 }
 
+function corporateCardBlock({
+    accountDetails,
+    cardType,
+    cardTypeName,
+    cardBranch,
+    cardBranchName,
+    cardNumber,
+}) {
+    siteLoading("show");
+    return $.ajax({
+        type: "POST",
+        url: "corporate-block-card-request-api",
+        datatype: "application/json",
+        data: {
+            accountDetails,
+            cardType,
+            cardTypeName,
+            cardBranch,
+            cardBranchName,
+            cardNumber,
+        },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    }).done((response) => {
+        console.log(response);
+        if (response.responseCode == "000") {
+            toaster(response.message, "success");
+        } else {
+            toaster(response.message, "error");
+        }
+    });
+}
+
 // ====== END OF CIB REQUEST====
 
 // ======= PIB REQUEST ==========
@@ -223,11 +257,12 @@ $(function () {
         const accountNumber = $("#from_account option:selected").attr(
             "data-account-number"
         );
-        const accountDetails = $("#from_account option:selected").val();
-        const cardType = $("#card_type_select").val();
-        const cardNumber = $("#card_number").val();
-        const cardBranch = $("#card_branch").val();
-        const cardBranchName = $("#card_branch option:selected").val();
+        var accountDetails = $("#from_account option:selected").val();
+        var cardType = $("#card_type_select").val();
+        var cardNumber = $("#card_number").val();
+        var cardBranch = $("#card_branch").val();
+        var cardBranchName = $("#card_branch option:selected").html();
+        var cardTypeName = $("#card_type_select option:selected").html();
 
         if (!accountNumber || !cardType || !cardNumber || !cardBranch) {
             toaster("Please complete all fields", "warning");
@@ -245,8 +280,9 @@ $(function () {
                 accountDetails,
                 cardType,
                 cardTypeName,
-                pickUpBranch,
-                pickUpBranchName,
+                cardBranch,
+                cardBranchName,
+                cardNumber,
             }).then(() => {
                 siteLoading("hide");
             });

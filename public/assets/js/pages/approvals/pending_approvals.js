@@ -83,6 +83,10 @@ function get_corporate_requests(customerNumber, requestStatus) {
                     } else if (data[index].request_type == "KORP") {
                         // request_type = "E-Korpor";
                         request_type = "Salone Link";
+                    } else if (data[index].request_type == "CARDR") {
+                        request_type = "Card Request";
+                    } else if (data[index].request_type == "CARDB") {
+                        request_type = "Card Block";
                     } else if (data[index].request_type == "CARD") {
                         request_type = "Cardless";
                     } else if (data[index].request_type == "BKORP") {
