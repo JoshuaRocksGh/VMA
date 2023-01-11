@@ -190,6 +190,20 @@ $(function () {
             e.preventDefault();
 
             $(".buttons-print").trigger("click");
+
+            // var doc = new jsPDF();
+            // var specialElementHandlers = {
+            //     "#editor": function (element, renderer) {
+            //         return true;
+            //     },
+            // };
+            // $(this).click(function () {
+            //     doc.fromHTML($("#content").html(), 15, 15, {
+            //         width: 170,
+            //         elementHandlers: specialElementHandlers,
+            //     });
+            //     doc.save("account-enquiry.pdf");
+            // });
         });
 
         $("#excel_print").on("click", (e) => {
@@ -262,7 +276,7 @@ $(function () {
                                 9/31 Siaka Stevens Street<br>
                                 Freetown, Sierra Leone<br>
                                 slcb@slcb.com<br>
-                                (+232) - 22 -225264
+                                +232 88 225225 &nbsp; +232 79 211121 &nbsp; +232 31 464541
                             </div>
                         </div>
                         <div class="d-flex justify-content-around">
@@ -355,8 +369,8 @@ $(function () {
                 {
                     data: "transactionNumber",
                     render: (data, type, row) => {
-                        return `<a href="transaction-receipt?batchNo=${row.batchNumber}&postingDate=${row.postingSysDate}&transNumber=${row.transactionNumber}&valueDate=${row.valueDate}&branch=${row.branch}
-                        &narration=${row.narration}&amount=${row.amount}&contraAccount=${row.contraAccount}&channel=${row.channel}" type="button" class="btn btn-outline-info">Details</a>`;
+                        return `<a href="transaction-receipt?debitAccount=${pdfData?.details?.pdfAccountNumber}&batchNo=${row.batchNumber}&postingDate=${row.postingSysDate}&transNumber=${row.transactionNumber}&valueDate=${row.valueDate}&branch=${row.branch}
+                        &narration=${row.narration}&amount=${row.amount}&contraAccount=${row.contraAccount}&channel=${row.channel}" target='_blank' type="button" class="btn btn-outline-info">Details</a>`;
                     },
                 },
             ],

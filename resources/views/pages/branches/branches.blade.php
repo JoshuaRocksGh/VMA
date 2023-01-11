@@ -15,7 +15,7 @@
             margin-left: 0 !important;
             margin-right: 0 !important;
             box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
-            background-color: var(--brand) !important;
+            background-color: #dc3545 !important;
             border-color: var(--gray) !important;
             color: white !important;
         }
@@ -58,8 +58,8 @@
                                 <div class="col-md-4 p-2">
                                     <div class="card" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                                         <div class="card-body p-2">
-                                            <img src="{{ asset('assets/images/bank.png') }}" align="left" width="40px"
-                                                height="40px" />
+                                            <img class="text-dark" src="{{ asset('assets/images/bank.png') }}"
+                                                align="left" width="40px" height="40px" />
                                             <div align="right">
                                                 <h3 class="p-0">{{ $branch['branchDescription'] }}</h3>
                                                 <small class="p-0">08:00 - 16:00 (Mon - Fri)</small> <br>

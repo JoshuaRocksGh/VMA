@@ -12,17 +12,26 @@
 
 
     <div class="dashboard site-card overflow-hidden">
-        <p class="text-muted font-14 m-r-20 m-b-20" data-title="Excel File" data-intro="Click to download template for upload">
+        <ul class="list-unstyled text-blue">
+            <li><i class="fa fa-info-circle text-red"></i>
+                <i> <b style="color:red;">Please Note: </b> Download template for upload
+                    (<span class="text-danger"><a href="{{ url('download_other_bank_file') }}" class="text-danger"> Click
+                            Here to Download </a></span>)
+                    <ol>
+                        <li>Template can be used for single upload of same bank and other banks.</li>
+                        <li>If an error is found in file uploaded, please delete and re-upload.</li>
+                    </ol>
+                </i>
+            </li>
+        </ul>
+        {{--  <p class="text-muted font-14 m-r-20 m-b-20" data-title="Excel File" data-intro="Click to download template for upload">
             <span> <i class="fa fa-info-circle  text-red"></i> <b style="color:red;">Please Note:&nbsp;&nbsp;</b>
-            </span> Download template for upload
-            {{--  (<span class="text-danger"><a href="{{ url('download_same_bank_file') }}"
-                    class="text-danger"> Click Here for Same Bank
-                </a></span>)  --}} (<span class="text-danger"><a href="{{ url('download_other_bank_file') }}"
+            </span> Download template for upload (<span class="text-danger"><a href="{{ url('download_other_bank_file') }}"
                     class="text-danger"> Click
                     Here to Download </a></span>)
 
 
-        </p>
+        </p>  --}}
         <form id="bulk_upload_form" class="dashboard-body p-4" action="#" enctype="multipart/form-data">
             @csrf
 
@@ -143,6 +152,7 @@
             <div class="breakpoint" data-title="Upload Summary" data-intro="View Upload Summary">
                 <label class="text-danger">Transfer Summary</label>
                 <br>
+
 
 
 

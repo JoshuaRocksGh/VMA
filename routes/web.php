@@ -63,6 +63,7 @@ use App\Http\Controllers\Transfers\StandingOrderController;
 use App\Http\Controllers\Transfers\TransferStatusController;
 use App\Http\Controllers\SelfEnrollController;
 use App\Http\Controllers\Transfers\BollorieController;
+use App\Http\Controllers\Transfers\SwiftMT101Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -154,6 +155,8 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/bulk-transfer', [BulkUploadBulkUploadsController::class, 'index']);
     Route::post('/update-upload', [BulkUploadBulkUploadsController::class, 'update_upload']);
     Route::post('bollore-tranfer', [BollorieController::class, 'bollore_transfer']);
+    Route::get('/swift_mt101', [SwiftMT101Controller::class, 'view_swift'])->name('swift_mt101');
+    Route::post('/swift_mt101', [SwiftMT101Controller::class, 'upload_mt101'])->name('swift_mt101');
 
 
     // --- PAYMENTS
@@ -360,7 +363,7 @@ Route::get('validate-kyc-api', [KycController::class, 'validateKyc']);
 Route::post('atm-card-request-api', [AtmCardRequestController::class, 'atm_card_request'])->name('atm-card-request-api');
 Route::post('atm-card-block-api', [AtmCardRequestController::class, 'atm_card_block'])->name('atm-card-block-api');
 Route::post('corporate-atm-card-request-api', [AtmCardRequestController::class, 'corporate_atm_card_request'])->name('corporate-atm-card-request-api');
-
+Route::post('corporate-block-card-request-api', [AtmCardRequestController::class, 'corporate_bloack_card_request'])->name('corporate-block-card-request-api');
 //Activate  Card
 Route::post('activate-card-request-api', [AtmCardRequestController::class, 'activate_card_request'])->name('activate-card-request-api');
 
@@ -385,6 +388,7 @@ Route::get('fixed-deposit', [FixedDepositAccountController::class, 'fixed_deposi
 
 //route for statement request
 Route::post('statement-request-api', [StatementRequestController::class, 'statement_request'])->name('statement-request-api');
+Route::post('corporate-statement-request-api', [StatementRequestController::class, 'corporate_statement_request'])->name('corporate-statement-request-api');
 
 //route for change-pin-api
 Route::post('change-pin-api', [ChangePinController::class, 'change_pin'])->name('change-pin-api');
@@ -416,6 +420,7 @@ Route::post('loan-origination-api', [LoansController::class, 'postLoanOriginatio
 Route::get('get-loan-accounts-api', [LoansController::class, 'get_my_loans_accounts']);
 Route::get("get-loan-details-api", [LoansController::class, 'getLoanDetails']);
 Route::get("get-loan-types-api", [LoansController::class, 'getLoanTypes']);
+Route::get("get-loan-tracking-api", [LoansController::class, 'getLoanTracking']);
 
 //route to return standing order frequencies
 Route::get('get-standing-order-frequencies-api', [FunctionsController::class, 'get_standing_order_frequencies'])->name('get-standing-order-frequencies-api');

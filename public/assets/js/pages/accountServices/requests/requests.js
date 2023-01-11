@@ -1,46 +1,123 @@
 // TODO : Test the request Card method. especially the API response
 
-function getBranches() {
-    $.ajax({
-        type: "GET",
-        url: "get-branches-api",
-        datatype: "application/json",
-    }).done((response) => {
-        console.log(response);
-        if (response?.data) {
-            const { data } = response;
-            const select = document.getElementById("pick_up_branch");
-            data.forEach((e) => {
-                const option = document.createElement("option");
-                option.text = e.branchDescription;
-                option.value = e.branchCode;
-                select.appendChild(option);
-            });
-        }
-    });
-}
+const statementData = new Object();
+// function getBranches() {
+//     $.ajax({
+//         type: "GET",
+//         url: "get-branches-api",
+//         datatype: "application/json",
+//     }).done((response) => {
+//         console.log("getBranches ==>", response);
+//         if (response?.data) {
+//             const { data } = response;
+//             const select = document.getElementById("pick_up_branch");
+//             data.forEach((e) => {
+//                 const option = document.createElement("option");
+//                 option.text = e.branchDescription;
+//                 option.value = e.branchCode;
+//                 select.appendChild(option);
+//             });
+//         }
+//     });
+// }
 
-function requestCard({ accountNumber, cardType, pickUpBranch, pinCode }) {
-    return $.ajax({
+function corporateRequestStatement(statementData) {
+    $.ajax({
         type: "POST",
-        url: "atm-card-request-api",
+        url: "corporate-statement-request-api",
         datatype: "application/json",
-        data: {
-            accountNumber,
-            cardType,
-            pickUpBranch,
-            pinCode,
-        },
+        data: statementData,
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-    }).done((response) => {
-        console.log(response);
-        if (response.responseCode == "000") {
-            toaster(response.message, "success");
-        } else {
-            toaster(response.message, "error");
-        }
+        success: function (response) {
+            siteLoading("hide");
+            if (response.responseCode == "000") {
+                // console.log(response);
+                swal.fire({
+                    // title: "Transfer successful!",
+                    html: response.message,
+                    icon: "success",
+                    // showConfirmButton: "false",
+                    confirmButtonColor: "green",
+                });
+            } else {
+                swal.fire({
+                    // title: "Transfer successful!",
+                    html: response.message,
+                    icon: "error",
+                    // showConfirmButton: "false",
+                    confirmButtonColor: "red",
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            siteLoading("hide");
+
+            swal.fire({
+                // title: "Transfer successful!",
+                html: xhr.responseText,
+                icon: "error",
+                // showConfirmButton: "false",
+                confirmButtonColor: "green",
+            });
+
+            // console.log(xhr.status);
+            // console.log(xhr.responseText);
+            // setTimeout(function () {
+            //     getBranches();
+            // }, $.ajaxSetup().retryAfter);
+        },
+    });
+}
+
+function requestStatement(statementData) {
+    $.ajax({
+        type: "POST",
+        url: "statement-request-api",
+        datatype: "application/json",
+        data: statementData,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            siteLoading("hide");
+            if (response.responseCode == "000") {
+                // console.log(response);
+                swal.fire({
+                    // title: "Transfer successful!",
+                    html: response.message,
+                    icon: "success",
+                    // showConfirmButton: "false",
+                    confirmButtonColor: "green",
+                });
+            } else {
+                swal.fire({
+                    // title: "Transfer successful!",
+                    html: response.message,
+                    icon: "error",
+                    // showConfirmButton: "false",
+                    confirmButtonColor: "red",
+                });
+            }
+        },
+        error: function (xhr, status, error) {
+            siteLoading("hide");
+
+            swal.fire({
+                // title: "Transfer successful!",
+                html: xhr.responseText,
+                icon: "error",
+                // showConfirmButton: "false",
+                confirmButtonColor: "green",
+            });
+
+            // console.log(xhr.status);
+            // console.log(xhr.responseText);
+            // setTimeout(function () {
+            //     getBranches();
+            // }, $.ajaxSetup().retryAfter);
+        },
     });
 }
 
@@ -63,9 +140,44 @@ function getCardTypes() {
     });
 }
 
+function getBranches() {
+    $.ajax({
+        type: "GET",
+        url: "get-branches-api",
+        datatype: "application/json",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            console.log("response ==>", response);
+            if (response.responseCode == "000") {
+                const { data } = response;
+                const select = document.getElementById("pick_up_branch");
+                data.forEach((e) => {
+                    const option = document.createElement("option");
+                    option.text = e.branchDescription;
+                    option.value = e.branchCode;
+                    select.appendChild(option);
+                });
+            } else {
+                setTimeout(function () {
+                    getBranches();
+                }, $.ajaxSetup().retryAfter);
+            }
+        },
+
+        error: function (xhr, status, error) {
+            setTimeout(function () {
+                getBranches();
+            }, $.ajaxSetup().retryAfter);
+        },
+    });
+}
+
 $(function () {
     // siteLoading("show");
-
+    getBranches();
+    // branch();
     $("select").select2();
     $(".accounts-select").select2({
         minimumResultsForSearch: Infinity,
@@ -106,36 +218,105 @@ $(function () {
         e.preventDefault();
         comingSoonToast("Stay tuned for more features");
     });
+
+    $(".period").click(function () {
+        // alert("clicked");
+
+        var getMonth = $(this).attr("data-value");
+        // console.log(getMonth);
+        var today = new Date().toISOString().slice(0, 10);
+        switch (getMonth) {
+            case "1":
+                var d = new Date();
+                var monthNumber = d.getMonth();
+                var year = d.getFullYear();
+                var actualNum = monthNumber;
+                // begining of the month
+                var lastMonthBegining = year + "-" + actualNum + "-" + "01";
+
+                $("#to_date").val(today);
+                $("#from_date").val(lastMonthBegining);
+                break;
+            case "3":
+                var d = new Date();
+                var monthNumber = d.getMonth();
+                var year = d.getFullYear();
+                var actualNum = monthNumber - 2;
+                var result = actualNum.toString().padStart(2, "0");
+                // begining of the month
+                var lastMonthBegining = year + "-" + result + "-" + "01";
+
+                $("#to_date").val(today);
+                $("#from_date").val(lastMonthBegining);
+                console.log(lastMonthBegining);
+                break;
+            case "6":
+                // console.log("6 month");
+                var d = new Date();
+                var monthNumber = d.getMonth();
+                var year = d.getFullYear();
+                var actualNum = monthNumber - 5;
+                var result = actualNum.toString().padStart(2, "0");
+                // begining of the month
+                var lastMonthBegining = year + "-" + result + "-" + "01";
+
+                $("#to_date").val(today);
+                $("#from_date").val(lastMonthBegining);
+                console.log(lastMonthBegining);
+                break;
+            default: //January is 0!
+                var d = new Date();
+                var monthNumber = d.getMonth();
+                var year = d.getFullYear();
+                var actualNum = monthNumber + 1;
+                // begining of the month
+                var monthBeining = year + "-" + actualNum + "-" + "01";
+                $("#to_date").val(today);
+                $("#from_date").val(monthBeining);
+
+                // console.log(today);
+                console.log(monthBeining);
+        }
+    });
     // make card request
     $("#btn_submit_request_statement").on("click", (e) => {
         e.preventDefault();
-        const accountNumber = $("#from_account option:selected").attr(
+        statementData.accountNumber = $("#from_account option:selected").attr(
             "data-account-number"
         );
-        const cardType = $("#card_type").val();
-        let pickUpBranch = $("#pick_up_branch").val();
-        if (!accountNumber || !cardType || !pickUpBranch) {
+        statementData.accountDetails = $("#from_account option:selected").val();
+        statementData.statementType = $("#statement_type").val();
+        statementData.branch = $("#pick_up_branch").val();
+        statementData.branchName = $("#pick_up_branch option:selected").text();
+        statementData.startDate = $("#from_date").val();
+        statementData.endDate = $("#to_date").val();
+
+        // let pickUpBranch = $("#pick_up_branch").val();
+        if (
+            !statementData.accountNumber ||
+            !statementData.statementType ||
+            !statementData.branch ||
+            !statementData.startDate ||
+            !statementData.endDate
+        ) {
             toaster("Please complete all fields", "warning");
             return false;
         }
-        $("#pin_code_modal").modal("show");
+        if (!ISCORPORATE) {
+            $("#pin_code_modal").modal("show");
+        } else {
+            corporateRequestStatement(statementData);
+        }
+    });
+    $("#transfer_pin").on("click", () => {
+        statementData.pinCode = $("#user_pin").val();
+        // console.log(pinCode);
+        if (!statementData.pinCode || statementData.pinCode.length !== 4) {
+            toaster("Please enter a valid pin code", "warning");
+            return false;
+        }
+        siteLoading("show");
 
-        $("#transfer_pin").on("click", () => {
-            const pinCode = $("#user_pin").val();
-            console.log(pinCode);
-            if (!pinCode || pinCode.length !== 4) {
-                toaster("Please enter a valid pin code", "warning");
-                return false;
-            }
-            siteLoading("show");
-            requestCard({
-                accountNumber,
-                cardType,
-                pickUpBranch,
-                pinCode,
-            }).then(() => {
-                siteLoading("hide");
-            });
-        });
+        requestStatement(statementData);
     });
 });

@@ -105,15 +105,21 @@ class LoginController extends Controller
                 return  $base_response->api_response('900', 'Personal account, use Personal Internet Banking platform',  NULL);
             }
 
-            // $mandateRes = Http::post(env('CIB_API_BASE_URL') . "get-mandate/$user_id");
-            // return $mandateRes['data'][0]['panel'];
-            // $userMandate = $mandateRes['data'][0]['panel'];
+            if ($userDetail->customerType == "C") {
+                $mandateRes = Http::post(env('CIB_API_BASE_URL') . "get-mandate/$user_id");
+                // return $mandateRes['data'][0]['panel'];
+                $userMandate = $mandateRes['data'][0]['panel'];
+            } else {
+                $userMandate = "";
+            }
 
+
+            // dd(env('API_BASE_URL') . "account/accountFD/$userDetail->customerNumber");
             // $investmentResponse = Http::get(env('API_BASE_URL') . "account/accountFD/$userDetail->customerNumber");
             // $userInvestment = $base_response->api_response($investmentResponse->responseCode, $investmentResponse->message,  $investmentResponse->data);
             // return $userInvestment;
 
-
+            // dd(env('API_BASE_URL') . "loans/getLoans", $userDetail->userTokens);
             // $loanResponse = Http::post(env('API_BASE_URL') . "loans/getLoans", $userDetail->userToken);
             // dd(env('API_BASE_URL') . "loans/getLoans", $userDetail->userToken);
             // return $loanResponse;
@@ -136,8 +142,9 @@ class LoginController extends Controller
                 "checkerMaker" => $userDetail->checkerMaker,
                 "accountDescription" => $userDetail->accountsList[0]->accountDesc,
                 "customerAccounts" => $userDetail->accountsList,
+                "customerLoans" => $userDetail->loansList,
                 // "userMandate" => 'A',
-                // "userMandate" => $userMandate,
+                "userMandate" => $userMandate,
 
                 "deviceInfo" => [
                     "appVersion" => "Web",

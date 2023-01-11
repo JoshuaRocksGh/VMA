@@ -14,7 +14,7 @@
     <div class="site-card  dashboard">
         <div class=" mb-1 p-3 py-4 row mx-auto dashboard-body" style="max-width: 80rem">
             {{-- SELECT PAYMENT TYPE --}}
-            <div class=" col-lg-4">
+            <div class=" col-lg-4" data-title="Payment Tabs" data-intro="Click to select payment option">
                 <label class="mb-2 d-block f-18 text-center font-weight-bold text-dark">Select Payment
                     Type</label>
                 <div class="payments-carousel mx-auto" style="max-width: 20rem">
@@ -22,7 +22,7 @@
                 <hr class="col-md-8">
 
             </div>
-            <div class=" col-lg-8">
+            <div class=" col-lg-8" data-title="Payment Form" data-intro="Complete form to perform transaction">
                 {{-- Select Account --}}
                 <div class="mx-auto" style="max-width: 50rem">
                     <label class="d-block text-center f-18 font-weight-bold mb-1 text-dark"> Select Account To

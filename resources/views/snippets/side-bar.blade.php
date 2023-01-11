@@ -66,6 +66,10 @@
                             <a href="{{ url('bulk-transfer') }}">Bulk Transfer </a>
                         </li>
                     @endif
+
+                    <li>
+                        <a href="{{ url('swift_mt101') }}">MT101 </a>
+                    </li>
                     <li>
                         <a href="{{ url('transfer-status') }}">Transfer Status</a>
                     </li>
@@ -101,11 +105,11 @@
                         </a>
                     </li>
 
-                    @if (config('app.corporate'))
+                    {{--  @if (config('app.corporate'))
                         <li>
                             <a href="{{ url('bulk-salone-Link') }}">Bulk Salone-link</a>
                         </li>
-                    @endif
+                    @endif  --}}
 
                     <li>
                         <a href="{{ url('payment-beneficiary-list') }}">Beneficiaries</a>

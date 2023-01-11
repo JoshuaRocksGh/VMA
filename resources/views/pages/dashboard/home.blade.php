@@ -198,6 +198,8 @@
         let noDataAvailable = {!! json_encode($noDataAvailable) !!};
         let customer_no = @json(session()->get('customerNumber'));
         const pageData = {}
+        pageData.accounts = @json(session()->get('customerAccounts'));
+        pageData.loans = @json(session()->get('customerLoans'));
     </script>
     <script src="{{ asset('assets/plugins/chartjs/chartjs-v3.7.1.min.js') }}" defer></script>
     <script src="{{ asset('assets/js/pages/home/home.js') }}"></script>

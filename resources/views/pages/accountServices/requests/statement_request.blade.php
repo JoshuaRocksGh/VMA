@@ -1,8 +1,8 @@
 <form action="#" id="statement_request_form" autocomplete="off" aria-autocomplete="none">
     @csrf
     <div class="container mx-auto" style="max-width: 750px">
-        <label class="font-14 text-dark font-weight-bold"> Statement Type </label>
-        <div class="card">
+        <label class=" text-dark " hidden> Statement Type </label>
+        <div class="card" hidden>
             <div class="card-body  d-flex justify-content-around" style="max-width: 700px">
                 <div class="d-flex align-items-center ">
                     <input class=" mr-1 statement-type" checked type="radio" name="statement_type"
@@ -16,8 +16,26 @@
                 </div>
             </div>
         </div>
+        <div class="form-group  mb-3">
+
+            <label class=" text-dark">Statement Type</label>
+
+            <select class="form-control " required name="statement_type" id="statement_type" required>
+                <option disabled selected value="">Select number of leaflets</option>
+                <option value="ORDINARY">ORDINARY Statement</option>
+                <option value="VISA">VISA Statement</option>
+                <option value="ELECTRONIC">ELECTRONIC Statement</option>select
+            </select>
+        </div>
+        <div class="form-group ">
+            <label class="text-dark">Select Branch </label>
+            <select class="form-control select pick_up_branch" id="pick_up_branch" placeholder="Select Pick Up Branch "
+                required>
+                <option disabled selected value="">Select Pick Up Branch</option>
+            </select>
+        </div>
         <br>
-        <label class="font-14 text-dark font-weight-bold"> Period </label>
+        <label class=" text-dark "> Period </label>
         <div class="card">
             <div class="card-body " style="max-width: 800px">
                 <div class=" d-flex  justify-content-around">
@@ -57,7 +75,7 @@
         <div class="form-group text-center mt-4">
             <button type="button" class="btn px-5 py-2 rounded-pill form-button waves-effect waves-light"
                 id="btn_submit_request_statement">
-                Download
+                Request
             </button>
         </div>
     </div>

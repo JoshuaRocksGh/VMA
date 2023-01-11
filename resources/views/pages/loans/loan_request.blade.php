@@ -79,14 +79,14 @@
                         style="max-width: 650px;">
                         @csrf
                         <div class="mb-3 form-group ">
-                            <label class="text-primary mb-1 font-weight-bold font-12" for="loan_product">Select Loan
+                            <label class="text-dark mb-1 font-weight-bold font-12" for="loan_product">Select Loan
                                 Product</label>
                             <select class="form-control" id="loan_product" required>
                                 <option value="" disabled selected>Select Loan Product
                                 </option>
                             </select>
                             <div class="card mt-1" style="border-radius: 2px">
-                                <span href="#product_info_toggle" class="text-primary repayment" data-toggle="collapse">
+                                <span href="#product_info_toggle" class="text-dark repayment" data-toggle="collapse">
                                     <div class=" d-flex justify-content-between pl-3 py-1 font-12 font-weight-bold">
                                         <span> Product Detail</span>
                                         <span class="menu-arrow"></span>
@@ -123,17 +123,17 @@
                         </div>
                         <div class="mb-3 form-group ">
 
-                            <label class="text-primary mb-1 font-weight-bold font-12" for="loan_amount">Enter Amount</label>
+                            <label class="text-dark mb-1 font-weight-bold font-12" for="loan_amount">Enter Amount</label>
                             <div class="input-group">
 
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="loan_currency">SLL</span>
+                                    <span class="input-group-text" id="loan_currency">SLE</span>
                                 </div>
                                 <input type="number" placeholder="0.00" id="loan_amount" class="form-control">
                             </div>
                         </div>
                         <div class="mb-3 form-group ">
-                            <label class="text-primary mb-1 font-weight-bold font-12" for="principal_repay_frequency">Select
+                            <label class="text-dark mb-1 font-weight-bold font-12" for="principal_repay_frequency">Select
                                 Principal Frequency Type</label>
                             <select class="form-control" id="principal_repay_frequency" required>
                                 {{-- <option value="" disabled selected>Select Principal Frequency Type
@@ -141,8 +141,7 @@
                             </select>
                         </div>
                         <div class="mb-3 form-group ">
-                            <label class="text-primary mb-1 font-weight-bold font-12"
-                                for="interest_repay_frequency">Select
+                            <label class="text-dark mb-1 font-weight-bold font-12" for="interest_repay_frequency">Select
                                 Interest
                                 Frequency Type</label>
                             <select class="form-control" id="interest_repay_frequency" required>
@@ -152,18 +151,37 @@
                         </div>
                         <div class="mb-3 form-group  form-check">
                             <input type="checkbox" class="form-check-input" id="terms_checkbox">
-                            <label class="text-primary mb-1 font-weight-bold font-12" class="form-check-label"
+                            <label class="text-dark mb-1 font-weight-bold font-12" class="form-check-label"
                                 for="terms_checkbox">I
                                 agree to the Terms and Conditions</label>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <button type="submit" id="loan_request_btn" class="btn btn-primary">Submit</button>
+                            <button type="submit" id="loan_request_btn" class="btn form-button">Submit</button>
                         </div>
 
                     </form>
                 </div>
                 <div class="tab-pane " id="Tracking_Pill" role="tab-panel">
-                    <p>Tracking</p>
+                    {{--  <p>Tracking</p>  --}}
+                    <div id="loan_tracking_no_data" class=" justify-content-center align-items-center"
+                        style="display: flex;">
+                        {!! $noDataAvailable !!}
+                    </div>
+                    <div id="loan_tracking" class="table-responsive" style="display: none">
+                        <table id="loan_tracking_table"
+                            class="table table-sm table-striped table-hover table-centered table-bordered">
+                            <thead class="bg-primary text-white font-weight-bold">
+                                <tr class="text-center">
+                                    <th>Loan Description</th>
+                                    <th>Amount Granted</th>
+                                    <th>Loan Balance</th>
+                                    <th> View Details </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -19,7 +19,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 return;
             }
             $(".request_table tr").remove();
-            console.log("data length =>", data.length);
+            console.log("data length =>", data);
             $("#approval_count").text(data.length > 0 ? data.length : 0);
             // $("#approval_count").text(data.length);
             // $("#approval_count").text("1");
@@ -36,19 +36,20 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 SAB: "Same Account transfer",
                 ACH: "ACH transfer",
                 RTGS: "RTGS transfer",
-                Storage: "Standing Order",
+                SO: "Standing Order",
                 BULK: "Bulk transfer",
                 INTB: "International Transfer",
                 CHQR: "Cheque Book Request",
                 CHQS: "Stop Cheque",
-                CARD: "ATM Card Request",
-                // KORP: "E-Korpor",
+                CARD: "Cardless Transfer",
+                STR: "Statement Request",
                 KORP: "Salone-Link",
                 BKORP: "Bulk E-Korpor",
                 UTL: "Utility Payment",
                 AIR: "Airtime Payment",
                 MOM: "Mobile Money Payment",
                 BOL: "Bollore Transfer",
+                CARDR: "ATM Card Request",
             };
             data.forEach((data) => {
                 const {
@@ -120,19 +121,19 @@ function transactionsBarChart(transactions) {
     } //trim transactions to 30
     console.log("transactions ===>", transactions);
 
-    transactions = transactions.slice(0, 10).reverse();
+    transactions = transactions?.slice(0, 10).reverse();
     // check for previous chart and destroy it if any
     let chartStatus = Chart.getChart("transactionsBarChart");
     if (chartStatus != undefined) {
         chartStatus.destroy();
     }
-    const transactionAmount = transactions.map(
+    const transactionAmount = transactions?.map(
         (transaction) => transaction.amount
     );
-    const runningBalance = transactions.map(
+    const runningBalance = transactions?.map(
         (transaction) => transaction.runningBalance
     );
-    const labels = transactions.map((transaction) => {
+    const labels = transactions?.map((transaction) => {
         const date = new Date(transaction.postingSysDate).toLocaleString("en", {
             year: "numeric",
             month: "short",
@@ -230,7 +231,8 @@ function getData({ url, name, data, method }) {
             pageData[name] = data;
         },
         error: function (xhr, status, error) {
-            console.log(error);
+            // console.log(xhr.status);
+            // console.log(xhr.responseText);
         },
     });
 }
@@ -241,13 +243,14 @@ function prepareGraphValues() {
         xValues: ["Deposits", "Loans", "Investments"],
         yValues: [],
     };
-    accountsPie.xValues = pageData.accounts.map((account) =>
+    accountsPie.xValues = pageData?.accounts?.map((account) =>
         String(account.accountNumber)
     );
+    console.log("prepareGraphValue===>", pageData);
 
     //accounts
     let accountsTotal = 0;
-    accountsPie.yValues = pageData.accounts.map((account) => {
+    accountsPie.yValues = pageData?.accounts?.map((account) => {
         const amount =
             parseFloat(
                 String(account.localEquivalentAvailableBalance).replace(
@@ -261,21 +264,21 @@ function prepareGraphValues() {
 
     //loans
     const loansPie = {};
-    loansPie.xValues = pageData.loans.map((loan) => String(loan.facilityNo));
+    loansPie.xValues = pageData?.loans?.map((loan) => String(loan.FACILITY_NO));
     let loansTotal = 0;
-    loansPie.yValues = pageData.loans.map((loan) => {
-        const amount = parseFloat(loan.loanBalance) || 0.0;
+    loansPie.yValues = pageData?.loans?.map((loan) => {
+        const amount = parseFloat(loan.LOAN_BALANCE) || 0.0;
         loansTotal += amount;
         return amount;
     });
 
     //investments
     const investmentsPie = {};
-    investmentsPie.xValues = pageData.investments.map((investment) =>
+    investmentsPie.xValues = pageData?.investments?.map((investment) =>
         String(investment.sourceAccount)
     );
     let investmentsTotal = 0;
-    investmentsPie.yValues = pageData.investments.map((investment) => {
+    investmentsPie.yValues = pageData?.investments?.map((investment) => {
         const amount = parseFloat(investment.currentBalance) || 0.0;
         investmentsTotal += amount;
         return amount;
@@ -424,16 +427,16 @@ const renderDataTables = (data, tableId) => {
             data: pageData.loans,
             columns: [
                 {
-                    data: "facilityNo",
+                    data: "FACILITY_NO",
                 },
-                { data: "description" },
-                { data: "isoCode" },
+                { data: "DESCRIPTION" },
+                { data: "ISO_CODE" },
                 {
-                    data: "amountGranted",
+                    data: "AMOUNT_GRANTED",
                     render: (data, type, row) => renderCurrency(data, row),
                 },
                 {
-                    data: "loanBalance",
+                    data: "LOAN_BALANCE",
                     render: (data, type, row) => renderCurrency(data, row),
                 },
             ],
@@ -450,22 +453,30 @@ $(() => {
     });
     blockUi({ block: "#nav-tabContent" });
     // return;
-    Promise.all([
+    Promise.allSettled([
         getData({ url: "fixed-deposit-account-api", name: "investments" }),
-        getData({ url: "get-loan-accounts-api", name: "loans" }),
-        getData({ url: "get-accounts-api", name: "accounts" }),
-    ]).then((value) => {
-        // siteLoading("hide");
-        console.log("VALUES ==>", value);
+        // getData({ url: "get-loan-accounts-api", name: "loans" }),
+        // getData({ url: "get-accounts-api", name: "accounts" }),
+    ])
+        .then((value) => {
+            // siteLoading("hide");
+            // pageData.accounts = @json(session()->get('userId'));
+            console.log("VALUES ==>", value);
+            console.log("promise.AllSetteled ==>", pageData);
+            // return false
 
-        prepareGraphValues();
-        accountsPieChart({
-            title: "Accounts",
-            ...pageData.pieValues.totalsPie,
+            prepareGraphValues();
+            accountsPieChart({
+                title: "Accounts",
+                ...pageData.pieValues.totalsPie,
+            });
+            unblockUi("#nav-tabContent");
+            renderDataTables();
+        })
+        .catch(function (err) {
+            // dispatch a failure and throw error
+            console.log("error==>", err.responseText);
         });
-        unblockUi("#nav-tabContent");
-        renderDataTables();
-    });
 
     $(".canvas-tab").on("click", (e) => {
         const selectedTab = $(e.currentTarget).attr("data-target");

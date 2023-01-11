@@ -5,16 +5,23 @@ function getPaymentBeneficiaries() {
         url: "payment-beneficiary-list-api",
         datatype: "application/json",
         success: function (response) {
+            console.log("paymentBeneficiary==>", response);
             let data = response.data;
-            if (data.length > 0) {
-                $.each(pageData.payTypes, async (i) => {
-                    const type = pageData.payTypes[i];
-                    pageData["bene_" + type] = data.filter(
-                        (e) => e.PAYMENT_TYPE === type
-                    );
-                });
+            if (response.responseCode == "000") {
+                if (data.length > 0) {
+                    $.each(pageData.payTypes, async (i) => {
+                        const type = pageData.payTypes[i];
+                        pageData["bene_" + type] = data.filter(
+                            (e) => e.PAYMENT_TYPE === type
+                        );
+                    });
+                }
+                initPaymentsCarousel();
+            } else {
+                setTimeout(function () {
+                    getPaymentBeneficiaries();
+                }, $.ajaxSetup().retryAfter);
             }
-            initPaymentsCarousel();
         },
         error: function (xhr, status, error) {
             $("#loader").show();
@@ -32,6 +39,7 @@ function paymentType() {
         url: "get-payment-types-api",
         datatype: "application/json",
         success: function (response) {
+            // console.log("getPaymentTypesApi ==>", response)
             $("#loader").hide();
             let data = response.data;
             if (response.responseCode == "000") {
@@ -56,7 +64,10 @@ function paymentType() {
                     return false;
                 }
             } else {
-                toaster("Failed", "error");
+                // toaster("Failed", "error");
+                setTimeout(function () {
+                    paymentType();
+                }, $.ajaxSetup().retryAfter);
             }
         },
         error: function (xhr, status, error) {
@@ -68,6 +79,7 @@ function paymentType() {
         },
     });
 }
+
 function makePayment() {
     siteLoading("show");
     $.ajax({
@@ -201,14 +213,14 @@ function populateBeneficiariesSelect(type) {
     const beneData = pageData["bene_" + type];
 
     $("#to_account").empty();
-    if (beneData.length < 1) {
+    if (beneData?.length < 1) {
         $("#to_account").append(noSavedBeneficiariesOption);
     } else {
         $("#to_account").append(
             `<option selected disabled> --- Select Beneficiary --- </option>`
         );
         console.log(beneData);
-        beneData.forEach((bene, i) => {
+        beneData?.forEach((bene, i) => {
             let { ACCOUNT, NICKNAME, PAYEE_NAME } = bene;
             const paymentLogo = pageData["pay_" + type].paySubTypes.find(
                 (e) => e.paymentCode === PAYEE_NAME

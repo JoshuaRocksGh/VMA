@@ -40,10 +40,10 @@
                 <nav id="cheque_services_tabs" class="col-md-4  nav nav-pills flex-column mx-auto mb-3 flex-row"
                     style="max-width: 350px" role="tablist">
                     <button id="cheque_book_request" data-toggle="pill"
-                        class=" transition-all py-md-2 active  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav-primary nav-link"
+                        class=" transition-all coming-soon py-md-2 active  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav-primary nav-link"
                         href="#tab_cheque_book_request">Create Fixed Deposit</button>
                     <button data-toggle="pill"
-                        class=" transition-all py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link "
+                        class=" transition-all coming-soon py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link "
                         id="block_cheque" href="#tab_block_cheque">Stop Fixed Deposit</button>
                     {{--  <button data-toggle="pill"
                         class=" transition-all coming-soon py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link "
@@ -90,6 +90,6 @@
 @endsection
 
 @section('scripts')
-    {{--  <script src="{{ asset('assets/js/pages/accountServices/chequeServices.js') }}"></script>  --}}
-    {{--  <script src="{{ asset('assets/js/functions/comingSoon.js') }}"></script>  --}}
+    <script src="{{ asset('assets/js/pages/accountServices/fixedDeposits.js') }}"></script>
+    <script src="{{ asset('assets/js/functions/comingSoon.js') }}"></script>
 @endsection

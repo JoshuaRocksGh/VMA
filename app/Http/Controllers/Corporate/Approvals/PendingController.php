@@ -36,12 +36,12 @@ class PendingController extends Controller
         $userID = session()->get('userId');
         $mandate = session()->get('userMandate');
 
-        // return $customer_no;
+        // return $userID;
         try {
             $response = Http::post(env('CIB_API_BASE_URL') . "check-mandate/$customer_no/$userID");
             // dd(env('CIB_API_BASE_URL') . "check-mandate/$customer_no/$userID");
             $result = json_decode($response);
-
+            // return $response;
             // return $result->responseCode;
             if ($result->responseCode === '000') {
                 return view('pages.corporate.approvals.pending_transfer_details', ['request_id' => $request_id, 'customer_no' => $customer_no, 'mandate' => $mandate]);
@@ -201,12 +201,12 @@ class PendingController extends Controller
         try {
 
 
-            $url = \config('bulk_url.url');
+            // $url = \config('bulk_url.url');
             // return $url;
-            // dd($url . "get-bulk-upload-detail-list-api?batch_no=$batch_no");
-            $response = Http::get($url . "get-bulk-upload-detail-list-api?batch_no=$batch_no");
+            // dd(env('API_BASE_URL') . "corporate/getBulkUploadData/$batch_no");
+            $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadData/$batch_no");
 
-            // return response()->json($response);
+            // return $response;
 
             $result = new ApiBaseResponse();
 

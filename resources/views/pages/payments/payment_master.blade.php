@@ -59,7 +59,7 @@
     @include('snippets.pageHeader')
     <div class="px-2">
         <div class="dashboard site-card overflow-hidden">
-            <nav class="dashboard-header">
+            <nav class="dashboard-header" data-title="Salone Tabs" data-intro="Click to view form">
                 <div class="nav nav-tabs justify-content-center border-0" id="nav-tab" role="tablist">
                     <a href="#send_{{ $currentType }}_page" data-toggle="tab" aria-expanded="true"
                         class="nav-link w-100 text-center active send_{{ $currentType }}_tab" style="max-width: 175px">
@@ -77,7 +77,8 @@
                     </a>
                 </div>
             </nav>
-            <div class="tab-content dashboard-body">
+            <div class="tab-content dashboard-body" data-title="Salone Link Form"
+                data-intro="Complete fields to perform transaction">
                 <div class="tab-pane show active" id="send_{{ $currentType }}_page">
                     <div class="mx-auto  h-100 " style="max-width: 650px" id="request_form_div">
                         <form action="#" class="select_beneficiary" id="send_{{ $currentType }}_payment_details_form"

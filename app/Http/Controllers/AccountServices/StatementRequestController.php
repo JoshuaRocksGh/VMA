@@ -8,7 +8,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Validator;
+
+// use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\Http;
+// use Illuminate\Support\Facades\Validator;
 
 class StatementRequestController extends Controller
 {
@@ -16,26 +19,21 @@ class StatementRequestController extends Controller
     public function statement_request(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'account_no' => 'required',
-            'type_of_statement' => 'required',
-            // 'pick_up_branch' => 'required',
-            'transStartDate' => 'required',
-            'transEndDate' => 'required',
-            'medium' => 'required',
-            'pin' => 'required'
-        ]);
+        // return $request->accountDetails;
+        // $validator = Validator::make($request->all(), [
+        //     'account_no' => 'required',
+        //     'type_of_statement' => 'required',
+        //     // 'pick_up_branch' => 'required',
+        //     'transStartDate' => 'required',
+        //     'transEndDate' => 'required',
+        //     'medium' => 'required',
+        //     'pin' => 'required'
+        // ]);
         // return $request;
 
 
 
         $base_response = new BaseResponse();
-
-        // VALIDATION
-        if ($validator->fails()) {
-
-            return $base_response->api_response('500', $validator->errors(), NULL);
-        };
 
 
         $authToken = session()->get('userToken');
@@ -46,14 +44,14 @@ class StatementRequestController extends Controller
         // $base_response = new BaseResponse();
         $deviceIp = request()->ip();
 
-        $accountNumber = $request->account_no;
-        $branchCode = $request->pick_up_branch;
+        $accountNumber = $request->accountNumber;
+        $branchCode = $request->branch;
         $deviceIP = $request->deviceIP;
         // $entrySource = $request->entrySource;
-        $pincode = $request->pin;
-        $startDate = $request->transStartDate;
-        $endDate = $request->transEndDate;
-        $statementType = $request->type_of_statement;
+        $pincode = $request->pinCode;
+        $startDate = $request->startDate;
+        $endDate = $request->endDate;
+        $statementType = $request->statementType;
         $medium = $request->medium;
         $entrySource = env('APP_ENTRYSOURCE');
         $channel = env('APP_CHANNEL');
@@ -66,7 +64,7 @@ class StatementRequestController extends Controller
             "branch" => $branchCode,
             "deviceIP" => $deviceIp,
             "endDate" => $endDate,
-            "entrySource" => $entrySource,
+            // "entrySource" => $entrySource,
             "pinCode" => $pincode,
             "startDate" => $startDate,
             "statementType" => $statementType,
@@ -78,9 +76,12 @@ class StatementRequestController extends Controller
 
         // return $data;
 
+        // dd(env('API_BASE_URL') . "request/statment", $data);
+
 
         try {
-            $response = Http::post(env('API_BASE_URL') . "/request/statment", $data);
+
+            $response = Http::post(env('API_BASE_URL') . "request/statement", $data);
 
             // dd($response);
             // return $response;
@@ -96,6 +97,80 @@ class StatementRequestController extends Controller
             ]);
             return $base_response->api_response('500', "Internal Server Error",  NULL); // return API BASERESPONSE
 
+        }
+    }
+
+    // corporate statement request();
+    public function corporate_statement_request(Request $request)
+    {
+
+        // return $request;
+
+
+        $base_response = new BaseResponse();
+
+
+
+        $authToken = session()->get('userToken');
+        $userID = session()->get('userId');
+        $userAlias = session()->get('userAlias');
+        $customerPhone = session()->get('customerPhone');
+        $customerNumber = session()->get('customerNumber');
+        $userMandate = session()->get('userMandate');
+
+        $getAccount = $request->accountDetails;
+        $allAccDetails = explode("~", $getAccount);
+        // return $allAccDetails;
+        $accountType = $allAccDetails[0];
+        $accountName = $allAccDetails[1];
+        $accountNumber = $allAccDetails[2];
+        $accountCurrency = $allAccDetails[3];
+        $accountCurrencyIsoCode = $allAccDetails[5];
+        $accountMandate = $allAccDetails[6];
+
+        $accountNumber = $request->accountNumber;
+        $branchCode = $request->branch;
+        $branchName = $request->branchName;
+        $deviceIP = $request->deviceIP;
+        // $entrySource = $request->entrySource;
+        $pincode = $request->pinCode;
+        $startDate = $request->startDate;
+        $endDate = $request->endDate;
+        $statementType = $request->statementType;
+        $medium = $request->medium;
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
+
+        $data = [
+            "accountType" => $accountType,
+            "accountName" => $accountName,
+            "accountNumber" => $accountNumber,
+            "accountMandate" => $accountMandate,
+            "accountCurrency" => $accountCurrency,
+            "accountCurrencyIsoCode" => $accountCurrencyIsoCode,
+            "accountCurrencyIsoCode" => $accountCurrencyIsoCode,
+            "authToken" => $authToken,
+            "userID" => $userID,
+            "userAlias" => $userAlias,
+            "customerPhone" => $customerPhone,
+            "customerNumber" => $customerNumber,
+            "userMandate" => $userMandate,
+            "postedBy" => $userID,
+            "branchCode" => $branchCode,
+            "branchName" => $branchName,
+            "startDate" => $startDate,
+            "endDate" => $endDate,
+            "statementType" => $statementType,
+        ];
+
+        // return $data;
+
+        try {
+            $response = Http::post(env('CIB_API_BASE_URL') . "statement-request-gone-for-pending", $data);
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
+            return $base_response->api_response('500', $e->getMessage(),  NULL); // return API BASERESPONSE
         }
     }
 }

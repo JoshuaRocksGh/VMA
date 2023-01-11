@@ -38,6 +38,7 @@
 
 @section('content')
     <div class="container-fluid">
+        <br>
 
         @php
             $currentPath = ' Approval Form';
@@ -65,7 +66,15 @@
 
                                                         <div class="  text-center">
                                                             <div class="col-md-12">
-                                                                <div id="approval_details"></div>
+                                                                <br>
+                                                                <div id="approval_details">
+                                                                    <div
+                                                                        class="d-flex justify-content-center canvas_loader">
+                                                                        <div class="spinner-border avatar-lg text-danger  m-2 canvas_spinner"
+                                                                            role="status">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
                                                                 <br><br>
                                                                 <div class="mt-3">
@@ -219,7 +228,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title text-info" id="myLargeModalLabel"> BULK TRANSACTION DETAILS</h3>
+                        <h3 class="modal-title text-dark" id="myLargeModalLabel"> BULK TRANSACTION DETAILS</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
@@ -297,6 +306,7 @@
                     console.log("pending request detail=>", response);
 
                     if (response.responseCode == '000') {
+                        $("#approval_details").empty()
 
                         let pending_request = response.data[0];
                         let approvers_mandate = response.data[1]
@@ -396,6 +406,12 @@
                             //let request_type = 'E-Korpor Transaction'
                             let request_type = 'Salone-Link Transaction'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
+                        } else if (request_type == 'CARDR') {
+                            let request_type = 'Card Request'
+                            request_type != null ? append_approval_details("Request Type", request_type) : '';
+                        } else if (request_type == 'CARDB') {
+                            let request_type = 'Card Block'
+                            request_type != null ? append_approval_details("Request Type", request_type) : '';
                         } else if (request_type == 'CARD') {
                             let request_type = 'Cardless Transaction'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
@@ -437,6 +453,11 @@
                             parseFloat(total_amount))) : '';
 
 
+                        let type = pending_request.type;
+                        type != null ? append_approval_details("Request Type", type) : '';
+
+                        let card_number = pending_request.card_number;
+                        card_number != null ? append_approval_details("Card Number", card_number) : '';
 
                         let bank_name = pending_request.bank_name;
                         bank_name != null ? append_approval_details("Bank Name", bank_name) : '';
@@ -474,7 +495,7 @@
                         narration != null ? append_approval_details("Narration", narration) : '';
 
                         let category = pending_request.category;
-                        category != null ? append_approval_details("Cartegory", category) : '';
+                        category != null ? append_approval_details("Category", category) : '';
 
                         let batch_number = pending_request.batch;
                         batch_number != null ? append_approval_details("Batch Number", batch_number) : '';
@@ -493,6 +514,9 @@
 
                         let end_date = pending_request.trans_end;
                         end_date != null ? append_approval_details("End Date", end_date) : '';
+
+                        let branch_name = pending_request.branch_name;
+                        branch_name != null ? append_approval_details("Pick Up Branch", branch_name) : '';
 
                         let frequency = pending_request.frequency;
                         frequency != null ? append_approval_details("Frequency", frequency) : '';
@@ -640,27 +664,28 @@
                 success: function(response) {
                     console.log(response)
                     if (response.responseCode == '000') {
-                        let details = response.data.bulk_details
+                        let details = response.data.uploadData
+
 
                         table.clear().draw()
                         let count = 1
 
                         $.each(details, function(index) {
 
-                            $('.bulk_upload_list_body').append(`
-                                    <tr class="">
-                                        <th>${count}</th>
-                                        <th>${details[index].bban}</th>
-                                        <th>${formatToCurrency(parseFloat(details[index].amount))}</th>
-                                        <th>${details[index].name}</th>
-                                    </tr>
-                                `)
+                            // $('.bulk_upload_list_body').append(`
+                        //         <tr class="">
+                        //             <th>${count}</th>
+                        //             <th>${details[index].accountNumber}</th>
+                        //             <th>${formatToCurrency(parseFloat(details[index].amount))}</th>
+                        //             <th>${details[index].name}</th>
+                        //         </tr>
+                        //     `)
 
                             table.row.add([
                                 count,
-                                details[index].bban,
-                                details[index].name,
-                                details[index].amount
+                                details[index].accountNumber,
+                                formatToCurrency(parseFloat(details[index].amount)),
+                                details[index].name
 
                             ]).draw(false)
 
@@ -954,11 +979,20 @@
                         if (response.responseCode == '000') {
                             siteLoading('hide')
 
+                            // swal.fire({
+                            //     // title: "Transfer successful!",
+                            //     html: response.message,
+                            //     icon: "success",
+                            //     showConfirmButton: "false",
+                            // });
+
                             swal.fire({
                                 // title: "Transfer successful!",
                                 html: response.message,
                                 icon: "success",
-                                showConfirmButton: "false",
+                                //showConfirmButton: "false",
+                                confirmButtonColor: "green",
+
                             });
 
 
@@ -977,7 +1011,7 @@
                                 // title: "Transfer successful!",
                                 html: response.message,
                                 icon: "error",
-                                showConfirmButton: "false",
+                                confirmButtonColor: "red",
                             });
 
                         }

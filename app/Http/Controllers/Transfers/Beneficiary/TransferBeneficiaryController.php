@@ -19,6 +19,7 @@ class TransferBeneficiaryController extends Controller
     {
 
         $userID = session()->get('userId');
+        $customerNumber = session()->get('customerNumber');
         $data = [
             "accountDetails" => [
                 "beneficiaryAccount" => $req->accountNumber,
@@ -58,20 +59,22 @@ class TransferBeneficiaryController extends Controller
             "beneficiaryType" => $req->type,
 
             "securityDetails" => [
-                "approvedBy" => null,
+                "approvedBy" => $customerNumber,
                 "approvedDateTime" => date('Y-m-d'),
-                "createdBy" => null,
+                "createdBy" => $customerNumber,
                 "createdDateTime" =>  date('Y-m-d'),
                 "entrySource" => null,
-                "modifyBy" => null,
+                "modifyBy" => $customerNumber,
                 "modifyDateTime" =>  date('Y-m-d')
             ],
 
             "transactionType" => null,
-            "userID" => $userID,
+            "userID" => $customerNumber,
             // "telephone" => $req->number
 
         ];
+        // return response()->json($data)
+        // dd($data);
         return $data;
     }
 

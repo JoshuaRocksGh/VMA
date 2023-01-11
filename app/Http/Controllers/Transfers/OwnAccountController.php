@@ -91,7 +91,7 @@ class OwnAccountController extends Controller
         try {
 
             $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "transfers/sameBank", $data);
-
+            // return $response;
             $result = new ApiBaseResponse();
             // Log::alert($response);
             return $result->api_response($response);

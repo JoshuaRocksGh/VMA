@@ -45,9 +45,9 @@
                     <button data-toggle="pill"
                         class=" transition-all py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link "
                         id="block_cheque" href="#tab_block_cheque">Stop Cheque</button>
-                    <button data-toggle="pill"
+                    {{--  <button data-toggle="pill"
                         class=" transition-all coming-soon py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link "
-                        id="block_cheque" href="#tab_confirm_cheque">Confirm A Cheque</button>
+                        id="block_cheque" href="#tab_confirm_cheque">Confirm A Cheque</button>  --}}
 
                 </nav>
                 <hr>

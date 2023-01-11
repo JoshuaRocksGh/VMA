@@ -207,7 +207,7 @@ function getPaymentHistory(type, accountNumber) {
         },
         success: function (response) {
             const data = response.data;
-            // console.log(renderedHistoryItems);
+            console.log("renderedHistoryItems ==>", renderedHistoryItems);
             $(`#${paymentType}_history_display`).pagination({
                 dataSource: data,
                 pageSize: 5,
@@ -359,6 +359,7 @@ $(function () {
         console.log("self");
         const { userAlias, userPhone, userEmail } = customerInfo;
         $(".hide-if-self-transfer").hide(500);
+        $("#receiver_address").val("Self");
         $("#receiver_name")
             .val(userAlias)
             .attr("disabled", true)

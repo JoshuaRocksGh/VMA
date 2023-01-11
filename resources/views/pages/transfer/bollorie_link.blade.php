@@ -103,11 +103,11 @@
                         <div class="form-group align-items-center row">
                             <b class="text-dark col-md-4"> Select ID Type </b>
                             <div class="col-md-8 px-0"> <select class="form-control  " id="id_type" required>
-                                    <option disabled value=""> -- Select
+                                    <option disabled value="" selected> -- Select
                                         Type --</option>
-                                    <option selected value="passport"> Passport</option>
+                                    {{--  <option selected value="passport"> Passport</option>
                                     <option value="National_id"> National ID</option>
-                                    <option value="Voter_id">Voter ID</option>
+                                    <option value="Voter_id">Voter ID</option>  --}}
                                 </select></div>
                         </div>
                         <div class="form-group row">

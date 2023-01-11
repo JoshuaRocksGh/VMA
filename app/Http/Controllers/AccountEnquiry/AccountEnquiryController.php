@@ -157,6 +157,7 @@ class AccountEnquiryController extends Controller
         // $data = $request->query('data');
         // return $request;
 
+        $debitAccount = $request->query('debitAccount');
         $batchNo = $request->query('batchNo');
         $postingDate = $request->query('postingDate');
         $transNumber = $request->query('transNumber');
@@ -170,6 +171,7 @@ class AccountEnquiryController extends Controller
 
         // return json_decode($request);
         return view('pages.accountEnquiry.transaction_receipt', [
+            "debitAccount" => $debitAccount,
             "batchNo" => $batchNo,
             "postingDate" => $postingDate,
             "transNumber" => $transNumber,

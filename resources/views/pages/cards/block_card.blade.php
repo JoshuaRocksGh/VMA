@@ -16,7 +16,7 @@
         <div class="form-group ">
             <label class="text-dark">Card Branch </label>
             <select class="form-control select" id="card_branch" placeholder="Select Card Branch " required>
-                <option disabled selected value="">Select Pick Up Branch</option>
+                <option disabled selected value="">Select Card Branch</option>
             </select>
         </div>
         <div class="form-group text-right mt-4">
