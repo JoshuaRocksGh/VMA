@@ -61,6 +61,7 @@ function getToAccount(endPoint) {
         url: endPoint,
         datatype: "application/json",
         success: function (response) {
+            console.log('getToAccount ==>',response)
             let data = response.data;
             if (response.data.length > 0) {
                 $(".no_beneficiary").hide();

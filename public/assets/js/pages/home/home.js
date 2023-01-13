@@ -453,7 +453,7 @@ $(() => {
     });
     blockUi({ block: "#nav-tabContent" });
     // return;
-    Promise.allSettled([
+    Promise.all([
         getData({ url: "fixed-deposit-account-api", name: "investments" }),
         // getData({ url: "get-loan-accounts-api", name: "loans" }),
         // getData({ url: "get-accounts-api", name: "accounts" }),
