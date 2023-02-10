@@ -156,7 +156,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::post('/update-upload', [BulkUploadBulkUploadsController::class, 'update_upload']);
     Route::post('bollore-tranfer', [BollorieController::class, 'bollore_transfer']);
     Route::get('/swift_mt101', [SwiftMT101Controller::class, 'view_swift'])->name('swift_mt101');
-    Route::post('/swift_mt101', [SwiftMT101Controller::class, 'upload_mt101'])->name('swift_mt101');
+    // Route::post('/swift_mt101', [SwiftMT101Controller::class, 'upload_mt101'])->name('swift_mt101');
 
 
     // --- PAYMENTS
@@ -218,7 +218,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('lc-origination', [TradeFinanceController::class, 'lc_origination'])->name('lc-origination');
     Route::get('cheque-services', [AccountServicesController::class, 'chequeServices']);
     Route::get('activate-cheque-book', [AccountServicesController::class, 'activate_cheque_book'])->name('activate-cheque-book');
-    Route::get('salary-advance', [AccountServicesController::class, 'salary_advance'])->name('salary-advance');
+    // Route::get('salary-advance', [AccountServicesController::class, 'salary_advance'])->name('salary-advance');
     // Route::get('cheque-approvals-approved', [ChequesApprovedController::class, 'cheques_approved'])->name('cheque-approval-approved');
     // Route::get('cheque-approvals-rejected', [ChequesRejectedController::class, 'cheques_rejected'])->name('cheques-approvals-rejected');
     Route::get('stop-cheque', [AccountServicesController::class, 'stop_cheque'])->name('stop-cheque');
