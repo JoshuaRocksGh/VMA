@@ -34,7 +34,7 @@
                             <div class="nav nav-tabs flex-column  border-0" id="nav-tab" role="tablist">
                                 <a href="#canvas_total" data-toggle="tab" data-target="totalsPie" aria-expanded="false"
                                     class="nav-link canvas-tab  mb-2 font-10 active">
-                                    <b>Total</b>
+                                    <b>All</b>
                                 </a>
                                 <a href="#canvas_account" data-toggle="tab" data-target="accountsPie" aria-expanded="false"
                                     class="nav-link mb-2 canvas-tab font-10 ">

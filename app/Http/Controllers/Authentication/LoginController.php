@@ -105,28 +105,23 @@ class LoginController extends Controller
                 return  $base_response->api_response('900', 'Personal account, use Personal Internet Banking platform',  NULL);
             }
 
+            // return $userDetail->customerType;
+            // dd(env('CIB_API_BASE_URL') . "get-mandate/$user_id");
+            // $mandateRes = Http::post(env('CIB_API_BASE_URL') . "get-mandate/$user_id");
+            // return $mandateRes;
+
             if ($userDetail->customerType == "C") {
                 $mandateRes = Http::post(env('CIB_API_BASE_URL') . "get-mandate/$user_id");
                 // return $mandateRes['data'][0]['panel'];
+                // return $mandateRes;
                 $userMandate = $mandateRes['data'][0]['panel'];
             } else {
                 $userMandate = "";
             }
 
 
-            // dd(env('API_BASE_URL') . "account/accountFD/$userDetail->customerNumber");
-            // $investmentResponse = Http::get(env('API_BASE_URL') . "account/accountFD/$userDetail->customerNumber");
-            // $userInvestment = $base_response->api_response($investmentResponse->responseCode, $investmentResponse->message,  $investmentResponse->data);
-            // return $userInvestment;
 
-            // dd(env('API_BASE_URL') . "loans/getLoans", $userDetail->userTokens);
-            // $loanResponse = Http::post(env('API_BASE_URL') . "loans/getLoans", $userDetail->userToken);
-            // dd(env('API_BASE_URL') . "loans/getLoans", $userDetail->userToken);
-            // return $loanResponse;
-
-
-
-
+            // return $userMandate;
             session([
                 "userId" => $userDetail->userId,
                 "userAlias" => $userDetail->userAlias,
