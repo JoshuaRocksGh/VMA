@@ -6,17 +6,34 @@ use App\Http\classes\API\BaseResponse;
 use App\Http\classes\WEB\ApiBaseResponse;
 use App\Http\Controllers\Controller;
 use Exception;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class SwiftMT101Controller extends Controller
 {
     //
-    public function view_swift()
+    public function view_swift(Request $request)
     {
-        return view('pages.transfer.swift_mt101');
+        // return view('pages.transfer.swift_mt101');
+        // path = storage/app/public
+        $directory = "public";
+        // $files = Storage::disk($directory);
+        $files = Storage::allfiles($directory);
+        foreach ($files as $file) {
+            // $get_contents = File::fread((storage_path($file), filesize($file)));
+            // $handle = fopen($path, 'r');
+            $content = Storage::get($file);
+            $slice = preg_split("/\\r\\n|\\r|\\n/", $content);
+            dd($slice);
+        }
+
+        // $get_contents = File::get(storage_path);
+
+        dd($files);
     }
 
     public function upload_mt101(Request $request)

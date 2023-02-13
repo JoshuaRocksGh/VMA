@@ -55,6 +55,7 @@ class LoginController extends Controller
 
     public function loginApi(Request $req)
     {
+        return $req;
         // Get Location
         $res = Http::get('http://ip-api.com/json');
         $base_response = new BaseResponse();
@@ -82,7 +83,7 @@ class LoginController extends Controller
             "channel" => env('APP_CHANNEL')
 
         ];
-        // return $data;
+        return $data;
 
         try {
             $response = Http::post(env('API_BASE_URL') . "/user/login", $data);
@@ -115,6 +116,7 @@ class LoginController extends Controller
                 // return $mandateRes['data'][0]['panel'];
                 // return $mandateRes;
                 $userMandate = $mandateRes['data'][0]['panel'];
+                // $userMandate = "A";
             } else {
                 $userMandate = "";
             }
