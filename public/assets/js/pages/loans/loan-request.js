@@ -30,7 +30,7 @@ function validateKyc() {
         datatype: "application/json",
     })
         .done((res) => {
-            // console.log("validate-kyc-api ==>", res);
+            console.log("validate-kyc-api ==>", res);
             if (res.responseCode !== "000") {
                 $("#payment_details_form").hide();
                 $("#kyc_incomplete").show();
@@ -367,7 +367,7 @@ function getLoans() {
         },
     })
         .done((res) => {
-            console.log("loan res==>", res);
+            console.log("loan get-loan-accounts-api==>", res);
             if (res.responseCode !== "000") {
                 $("#loan_balances").hide();
                 $("#loan_balances_no_data")
