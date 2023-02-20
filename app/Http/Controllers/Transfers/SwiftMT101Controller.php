@@ -194,11 +194,16 @@ class SwiftMT101Controller extends Controller
 
         $base_response = new BaseResponse();
         $userID = session()->get('userId');
+        $userAlias = session()->get('userAlias');
         $batchNo = $request->data[0]['batch_no'];
+        $customerNumber = session()->get('customerNumber');
+        // $accountMandate = $request->
         // return $batchNo;
         $data = [
             'batchNo' => $batchNo,
             "user_id" => $userID,
+            'user_alias' => $userAlias,
+            "customer_number" => $customerNumber,
         ];
         // WHEN ITS SUBMITTED FOR APPROVAL, UPDATE FLAG TO P
 
@@ -212,7 +217,7 @@ class SwiftMT101Controller extends Controller
             return $result->api_response($response);
             // return json_decode($response->body();
 
-        }catch (\Exception $error) {
+        } catch (\Exception $error) {
             // DB::table('tb_error_logs')->insert([
             //     'platform' => 'ONLINE_INTERNET_BANKING',
             //     'user_id' => 'AUTH',
@@ -221,7 +226,5 @@ class SwiftMT101Controller extends Controller
 
             return $base_response->api_response('500', $error->getMessage(),  NULL); // return API BASERESPONSE
         }
-
-
     }
 }

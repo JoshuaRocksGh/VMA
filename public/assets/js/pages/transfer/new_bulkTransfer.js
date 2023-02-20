@@ -487,6 +487,20 @@ $(document).ready(function () {
     //     buttons: ["colvis"],
     // });
 
+    $(".accounts-select").change(function () {
+        console.log("chnaged");
+    });
+
+    // $("#my_account").change(function (e) {
+    //     e.preventDefault();
+    //     var data = $(this).val();
+    //     var details = data.split("~");
+    //     console.log(details);
+    //     $(".account-desc-name").text(details[1]);
+    //     $(".account-desc-number").text(details[2]);
+    //     $(".account-desc-balance").text(details[3] + "" + details[4], 2);
+    // });
+
     $(".accounts-select").select2({
         minimumResultsForSearch: Infinity,
         templateResult: accountTemplate,
@@ -713,11 +727,11 @@ $(document).ready(function () {
                         const { valid, invalid } = group;
                         if (invalid.length < 1) {
                             var action_button = `<a href="view-bulk-transfer?batch_no=${fileBatch}" type="button" class="btn btn-success btn-sm waves-effect waves-light text-center">
-                <i class="mdi mdi-check-all"></i>&nbsp;<b>Upload</b>
+                <i class="mdi mdi-check-all"></i>&nbsp;<b>Upload File</b>
             </a>`;
                         } else {
                             var action_button = `<a href="delete-bulk-transfer?batch_no=${fileBatch}"  type="button" class="btn btn-danger btn-sm waves-effect waves-light text-center delete_bulk_transfer_upload" batch_no="${fileBatch}">
-                <i class="mdi mdi-close-circle-outline"></i>&nbsp;<b>Delete</b>
+                <i class="mdi mdi-close-circle-outline"></i>&nbsp;<b>Delete File</b>
             </a>`;
                         }
                         total_bulk_upload.row
@@ -735,6 +749,27 @@ $(document).ready(function () {
                                 ` <td>${action_button}</td>`,
                             ])
                             .draw(false);
+
+                        $(".upload_reference").text(
+                            uploadDetails.referenceNumber
+                        );
+                        $(".upload_debit_account").text(
+                            uploadDetails.debitAccount
+                        );
+                        $(".upload_total_amount").text(
+                            formatToCurrency(
+                                parseFloat(uploadDetails.totalAmount)
+                            )
+                        );
+                        $(".upload_total").text(total_upload);
+                        $(".upload_successful").append(
+                            `<button type="button" class="btn btn-sm btn-primary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>View (${total_upload})</b>&emsp;</button>`
+                        );
+                        $(".upload_failed").append(
+                            `<button type="button" class="btn btn-sm btn-secondary waves-effect waves-light error_modal_data" data-toggle="modal" data-target="#bs-example-modal-lg" >&emsp;<b>View (${invalid.length})</b>&emsp;</button>`
+                        );
+
+                        $(".upload_action").append(action_button);
 
                         let editButtons = document.querySelectorAll(
                             ".edit_record_uploaded"

@@ -17,10 +17,10 @@
                 <i> <b style="color:red;">Please Note: </b> Download template for upload
                     (<span class="text-danger"><a href="{{ url('download_other_bank_file') }}" class="text-danger"> Click
                             Here to Download </a></span>)
-                    <ol>
+                    {{--  <ol>
                         <li>Template can be used for single upload of same bank and other banks.</li>
                         <li>If an error is found in file uploaded, please delete and re-upload.</li>
-                    </ol>
+                    </ol>  --}}
                 </i>
             </li>
         </ul>
@@ -36,6 +36,7 @@
             @csrf
 
             <div class="row ">
+
                 <div class="col-md-12">
                     <label class="text-dark">Account to transfer from</label>
 
@@ -51,10 +52,21 @@
                     <hr class="mt-0">
 
                 </div>
+                {{--  <div class="col-md-7">
+                    <div class="col-md-12">
+                        <br>
+                        <label for="">Account Name: <span class="account-desc-name"></span></label><br>
+                        <label for="">Account Number: <span class="account-desc-number"></span></label><br>
+                        <label for="">Account Balance: <span class="account-desc-balance"></span></label>
+                    </div>
+
+
+                </div>  --}}
+
 
 
                 <div class="card-box col-md-12">
-                    <label class="text-danger">Transfer Details</label>
+                    <label class="font-weight-bold text-danger">Transfer Details</label>
                     <br>
                     <div class="row">
                         {{-- <h4 for="" class="col-12 col-form-label text-primary"><b>Transfer Details</b></h4> --}}
@@ -71,45 +83,64 @@
 
 
 
-                        <div class="col-md-4 form-group" data-title="Bulk Amount" data-intro="Enter total amount">
+                        <div class="col-md-2 form-group" data-title="Bulk Amount" data-intro="Enter total amount">
                             <label for="inputEmail3" class="text-dark">Bulk
                                 Amount<span class="text-danger"> *</span></label>
                             <input type="text" name="bulk_amount" id="bulk_amount" pattern="([0-9]{1,3}).([0-9]{1,3})"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
-                                class="form-control input-sm" required>
+                                class="form-control input-sm" autocomplete="off" required>
                         </div>
 
 
 
 
 
-                        <div class="col-md-4 form-group" data-title="Reference"
+                        <div class="col-md-5 form-group" data-title="Reference"
                             data-intro="Enter reference same on upload file">
                             <label for="inputEmail3" class="text-dark">Upload Reference
                                 <span class="text-danger"> *</span></label>
                             <input type="text" name="reference_no" id="reference_no" class="form-control input-sm"
-                                required>
+                                autocomplete="off" required>
 
                         </div>
 
 
 
-                        <div class="col-md-4 form-group" data-title="Vaue Date" data-intro="Select date">
+
+
+
+                        <div class="col-md-5 form-group" data-title="Reference"
+                            data-intro="Enter reference same on upload file">
+                            <label for="inputEmail3" class="text-dark">Transfer Narration
+                                <span class="text-danger"> *</span></label>
+                            <input type="text" name="transfer_narration" id="transfer_narration" autocomplete="off"
+                                class="form-control input-sm" autocomplete="off" required>
+
+                        </div>
+                        <div class="col-md-2 form-group" data-title="Vaue Date" data-intro="Select date">
                             <label for="inputEmail3" class="text-dark">Value Date<span class="text-danger">
                                     *</span></label>
                             <input type="date" id="value_date" name="value_date" placeholder="Enter value date"
-                                class="form-control" required>
+                                autocomplete="off" class="form-control" required>
                             {{-- parsley-trigger="change" autocomzplete="none" --}}
                             {{-- data-provide="datepicker" data-date-autoclose="true" --}}
                         </div>
 
 
+                        <div class="col-md-5 form-group" data-title="Upload File" data-intro="Click to choose file">
+                            <label for="inputEmail3" class="text-dark">Choose Upload File<span class="text-danger">
+                                    *</span></label>
+                            <input class="p-2" type="file" name="excel_file" id="excel_file" class=" input-sm"
+                                autocomplete="off" required>
+                        </div>
 
 
-                        <div class="col-md-4 form-group" data-title="Upload File" data-intro="Click to choose file">
-                            <label for="inputEmail3" class="col-12 col-form-label text-dark">Choose File<span
-                                    class="text-danger"> *</span></label>
-                            <input type="file" name="excel_file" id="excel_file" class=" input-sm" required>
+
+                        <div class="col-md-5 form-group" data-title="Upload File" data-intro="Click to choose file">
+                            <label for="inputEmail3" class=" text-dark">Transaction Invoice<span class="text-danger">
+                                    *</span></label>
+                            <input class="p-2" type="file" name="transaction_voucher" id="transaction_voucher"
+                                autocomplete="off" class="input-sm " required>
                         </div>
 
 
@@ -121,18 +152,22 @@
 
 
 
-
                         <br>
+
+
+
                         <!-- Large modal -->
                         {{-- <button type="button" class="btn btn-info" data-toggle="modal"
                             data-target="#bs-example-modal-lg">Large Modal</button> --}}
+                        <br>
+                        <hr>
                         <div class="col-md-12" data-title="Upload Button" data-intro="Click to upload">
                             <div class="form-group row">
                                 <div class="col-8 offset-4 text-right">
                                     <button type="submit"
-                                        class="btn next-button btn-rounded disappear-after-success form-button"
+                                        class="btn next-button btn-rounded disappear-after-success form-button "
                                         id="submit_cheque_request">
-                                        Upload & Validate
+                                        Validate File
                                     </button>
                                     {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
                                                     data-target="#full-width-modal">Full width Modal</button></b> --}}
@@ -150,28 +185,25 @@
             <hr>
 
             <div class="breakpoint" data-title="Upload Summary" data-intro="View Upload Summary">
-                <label class="text-danger">Transfer Summary</label>
+                <label class="font-weight-bold text-danger">Transfer Summary</label>
                 <br>
 
 
 
 
-                <table id="bulk_upload_list"
+                {{--  <table id="bulk_upload_list"
                     class="table table-bordered table-striped display responsive nowrap w-100 bulk_upload_list"
                     style="zoom: 0.9;">
 
                     <thead>
                         <tr class="table-background">
-                            {{-- <th> <b> Batch </b> </th> --}}
                             <th class="all"> Reference </th>
                             <th class="all"> Debit Account </th>
                             <th class="all"> Total Upload Amount </th>
                             <th class="all"> Value date </th>
                             <th class="none"> Total Upload </th>
-                            {{-- <th> Successful </th> --}}
                             <th class="none"> Failed </th>
                             <th class="none"> Action </th>
-                            {{-- <th class="text-center"> <b>Actions </b> </th> --}}
 
                         </tr>
                     </thead>
@@ -181,7 +213,67 @@
                     </tbody>
 
 
-                </table>
+                </table>  --}}
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 pb-2">
+                                <p class=" mb-2  text-danger">Reference</p>
+                                <h4 class="upload_reference"></h4>
+                            </div>
+                            {{--    --}}
+                            <div class="col-md-4 pb-2">
+                                <p class="mb-2  text-danger">
+                                    Debit Account
+                                </p>
+                                <h4 class="upload_debit_account"></h4>
+                            </div>
+                            {{--    --}}
+                            <div class="col-md-4 pb-2">
+                                <p class="mb-2  text-danger">
+                                    Total Upload Amount
+                                </p>
+                                <h4 class="upload_total_amount"></h4>
+
+                            </div>
+                            {{--    --}}
+                            <div class="col-md-4 pb-2">
+                                <p class="mb-2 text-danger">
+                                    Total Upload</p>
+                                <h4 class="upload_total"></h4>
+
+                            </div>
+                            {{--    --}}
+                            <div class="col-md-4 pb-2">
+                                <p class="mb-2  text-danger">
+                                    Successful Upload</p>
+                                <span class="upload_successful"></span>
+
+                            </div>
+                            {{--    --}}
+                            <div class="col-md-4 pb-2">
+                                <p class="mb-2  text-danger">
+                                    Failed Upload</p>
+                                <span class="upload_failed"></span>
+
+                            </div>
+                            <br><br><br>
+                            {{--    --}}
+                            <div class="col-md-4"></div>
+                            <br><br>
+
+                            {{--    --}}
+                            <div class="pt-4 col-md-4 upload_action"></div>
+                            <br><br>
+
+                            {{--    --}}
+                            <div class="col-md-4"></div>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </form>
 
