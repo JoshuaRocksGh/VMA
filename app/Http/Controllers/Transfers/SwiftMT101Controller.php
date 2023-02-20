@@ -188,4 +188,40 @@ class SwiftMT101Controller extends Controller
             return $base_response->api_response('500', "Internal Server Error",  NULL); // return API BASERESPONSE
         }
     }
+
+    public function submit_swift_for_approval(Request $request)
+    {
+
+        $base_response = new BaseResponse();
+        $userID = session()->get('userId');
+        $batchNo = $request->data[0]['batch_no'];
+        // return $batchNo;
+        $data = [
+            'batchNo' => $batchNo,
+            "user_id" => $userID,
+        ];
+        // WHEN ITS SUBMITTED FOR APPROVAL, UPDATE FLAG TO P
+
+        try {
+
+            $response = Http::post(env('CIB_API_BASE_URL') . "update-swift-batch", $data);
+            // dd($response);
+            // return $response;
+
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+            // return json_decode($response->body();
+
+        }catch (\Exception $error) {
+            // DB::table('tb_error_logs')->insert([
+            //     'platform' => 'ONLINE_INTERNET_BANKING',
+            //     'user_id' => 'AUTH',
+            //     'message' => (string) $error->getMessage()
+            // ]);
+
+            return $base_response->api_response('500', $error->getMessage(),  NULL); // return API BASERESPONSE
+        }
+
+
+    }
 }
