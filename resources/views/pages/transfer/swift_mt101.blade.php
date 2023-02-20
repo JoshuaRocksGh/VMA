@@ -149,7 +149,7 @@
                                     <div class="col-md-12 pt-4">
                                         <div class="form-group float-right">
                                             <button typ="button" class="btn btn-secondary">Cancel</button>&nbsp;&nbsp;
-                                            <button type="submit" class="btn form-button">Submit MT101</button>
+                                            <button type="submit" class="btn form-button" id="submit_swift">Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -171,7 +171,7 @@
                     <div class="modal-header bg-danger">
                         <h5 class="modal-title text-white font-18 font-weight-bold">Swift Detail</h5>
                         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">X</span>
                         </button>
                     </div>
                     <div class="modal-body pb-4">
@@ -186,20 +186,49 @@
                                         <td>Batch No.</td>
                                         <td class='batch_no'></td>
                                     </tr>
+                                    <tr>
+                                        <td>Sender Reference</td>
+                                        <td class='sender_ref'></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Debit Account</td>
+                                        <td class='debit_account'></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount </td>
+                                        <td class='amount'></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Beneficiary Name</td>
+                                        <td class='beneficiary_name'></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Beneficiary Account</td>
+                                        <td class='beneficiary_account'></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Beneficiary Address</td>
+                                        <td class='beneficiary_address'></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Transaction Reference</td>
+                                        <td class='transaction_ref'></td>
+                                    </tr>
+
                                 </tbody>
                             </table>
 
                         </form>
 
                     </div>
-                    <div class="modal-footer">
+                    {{--  <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button"
                             class="btn form-button btn-rounded waves-effect waves-light disappear-after-success"
                             id="proceed_button">
                             Submit
                         </button>
-                    </div>
+                    </div>  --}}
                 </div>
             </div>
         </div>
@@ -245,7 +274,47 @@
                 console.log($(this).attr('data-swift'))
                 let swiftDataDispaly = JSON.parse($(this).attr('data-swift'))
                 $(".batch_no").text(swiftDataDispaly.batch_no)
-                console.log(swiftDataDispaly.batch_no)
+                $(".sender_ref").text(swiftDataDispaly.sender_reference)
+                $(".debit_account").text(swiftDataDispaly.creditor_account_no)
+                $(".amount").text(swiftDataDispaly.currency + " " + swiftDataDispaly.transaction_amount)
+                $(".beneficiary_name").text(swiftDataDispaly.beneficiary_name_and_address_1)
+                $(".beneficiary_account").text(swiftDataDispaly.beneficiary_account)
+                $(".beneficiary_address").text(swiftDataDispaly.beneficiary_name_and_address_2 + " ," + swiftDataDispaly.beneficiary_name_and_address_3 )
+                $(".transaction_ref").text(swiftDataDispaly.transaction_reference)
+
+                //console.log(swiftDataDispaly.batch_no)
+            })
+
+            $("#submit_swift").click(function(e){
+                e.preventDefault()
+                let submitSwiftData = @json($swiftData);
+                //console.log(submitSwiftData)
+                $.ajax({
+                    type: 'POST',
+                    url: "submit-swift-approval",
+                    datatype: "application/json",
+                    data: {'data' :submitSwiftData},
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response){
+                        //console.log(response)
+                        if(response.responseCode == '000'){
+
+                        toaster(response.message, "success")
+
+                        //Redirectuser to landing page
+
+                        }else{
+                        toaster(response.message, "error")
+
+                        }
+                    },
+                    error: function(xhr, status, error){
+                        console.log("submission failed")
+                    }
+
+                })
             })
         })
     </script>
