@@ -545,6 +545,7 @@ class BulkUploadsController extends Controller
             // dd($response['data']);
             $uploadData = $response['data']['uploadData'];
             $uploadDetails = $response['data']['uploadDetails'];
+            // dd($uploadDetails);
             return view('pages.transfer.bulkTransfers.view_bulk_trasnfer', [
                 'uploadData' => $uploadData,
                 'uploadDetails' => $uploadDetails,

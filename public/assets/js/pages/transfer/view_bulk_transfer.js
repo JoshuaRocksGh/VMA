@@ -119,7 +119,8 @@ function submit_upload(batch_no) {
                     // title: "Transfer successful!",
                     html: response.message,
                     icon: "success",
-                    showConfirmButton: "false",
+                    // showConfirmButton: "false",
+                    confirmButtonColor: "green",
                 }).then(() => {
                     // window.location.reload();
                     setTimeout(function () {
@@ -131,7 +132,8 @@ function submit_upload(batch_no) {
                     // title: "Transfer successful!",
                     html: response.message,
                     icon: "error",
-                    showConfirmButton: "false",
+                    // showConfirmButton: "false",
+                    confirmButtonColor: "red",
                 }).then(() => {
                     // window.location.reload();
                     setTimeout(function () {

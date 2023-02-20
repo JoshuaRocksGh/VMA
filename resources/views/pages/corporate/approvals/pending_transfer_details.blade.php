@@ -241,7 +241,7 @@
                                         class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list">
 
                                         <thead>
-                                            <tr class="bg-secondary text-white">
+                                            <tr class="table-background text-white">
                                                 <th>No</th>
                                                 <th>
                                                     <span id="bulk_header">Credit Acc</span>
@@ -254,7 +254,15 @@
                                         </thead>
 
                                         <tbody class="bulk_upload_list_body">
-
+                                            {{--  <tr>
+                                                <td colspan="4">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="spinner-border avatar-lg text-danger  m-2 canvas_spinner"
+                                                            role="status">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>  --}}
                                         </tbody>
 
 
@@ -662,11 +670,12 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    console.log(response)
+                    console.log("get-bulk-detail-list-for-approval==>", response)
                     if (response.responseCode == '000') {
                         let details = response.data.uploadData
 
 
+                        // $(".bulk_upload_list tr").remove();
                         table.clear().draw()
                         let count = 1
 
