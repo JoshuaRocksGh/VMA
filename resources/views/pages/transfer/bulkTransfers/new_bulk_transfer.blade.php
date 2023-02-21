@@ -83,7 +83,7 @@
 
 
 
-                        <div class="col-md-2 form-group" data-title="Bulk Amount" data-intro="Enter total amount">
+                        <div class="col-md-4 form-group" data-title="Bulk Amount" data-intro="Enter total amount">
                             <label for="inputEmail3" class="text-dark">Bulk
                                 Amount<span class="text-danger"> *</span></label>
                             <input type="text" name="bulk_amount" id="bulk_amount" pattern="([0-9]{1,3}).([0-9]{1,3})"
@@ -95,7 +95,7 @@
 
 
 
-                        <div class="col-md-5 form-group" data-title="Reference"
+                        <div class="col-md-4 form-group" data-title="Reference"
                             data-intro="Enter reference same on upload file">
                             <label for="inputEmail3" class="text-dark">Upload Reference
                                 <span class="text-danger"> *</span></label>
@@ -109,7 +109,7 @@
 
 
 
-                        <div class="col-md-5 form-group" data-title="Reference"
+                        <div class="col-md-4 form-group" data-title="Reference"
                             data-intro="Enter reference same on upload file">
                             <label for="inputEmail3" class="text-dark">Transfer Narration
                                 <span class="text-danger"> *</span></label>
@@ -117,7 +117,7 @@
                                 class="form-control input-sm" autocomplete="off" required>
 
                         </div>
-                        <div class="col-md-2 form-group" data-title="Vaue Date" data-intro="Select date">
+                        <div class="col-md-4 form-group" data-title="Vaue Date" data-intro="Select date">
                             <label for="inputEmail3" class="text-dark">Value Date<span class="text-danger">
                                     *</span></label>
                             <input type="date" id="value_date" name="value_date" placeholder="Enter value date"
@@ -127,7 +127,7 @@
                         </div>
 
 
-                        <div class="col-md-5 form-group" data-title="Upload File" data-intro="Click to choose file">
+                        <div class="col-md-4 form-group" data-title="Upload File" data-intro="Click to choose file">
                             <label for="inputEmail3" class="text-dark">Choose Upload File<span class="text-danger">
                                     *</span></label>
                             <input class="p-2" type="file" name="excel_file" id="excel_file" class=" input-sm"
@@ -136,7 +136,7 @@
 
 
 
-                        <div class="col-md-5 form-group" data-title="Upload File" data-intro="Click to choose file">
+                        <div class="col-md-4 form-group" data-title="Upload File" data-intro="Click to choose file">
                             <label for="inputEmail3" class=" text-dark">Transaction Invoice<span class="text-danger">
                                     *</span></label>
                             <input class="p-2" type="file" name="transaction_voucher" id="transaction_voucher"
@@ -215,50 +215,59 @@
 
                 </table>  --}}
 
-                <div class="card">
+                <div class="card" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;border-radius: 10px;">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4 pb-2">
-                                <p class=" mb-2  text-danger">Reference</p>
-                                <h4 class="upload_reference"></h4>
-                            </div>
-                            {{--    --}}
-                            <div class="col-md-4 pb-2">
-                                <p class="mb-2  text-danger">
-                                    Debit Account
-                                </p>
-                                <h4 class="upload_debit_account"></h4>
-                            </div>
-                            {{--    --}}
-                            <div class="col-md-4 pb-2">
-                                <p class="mb-2  text-danger">
-                                    Total Upload Amount
-                                </p>
-                                <h4 class="upload_total_amount"></h4>
+                            <div class="col-md-6">
+                                <div class="col-md-12 ">
+                                    <p class="text-danger">Reference:</p>
+                                    <h4 class="upload_reference"></h4>
+                                <hr>
+                                </div>
+                                {{--    --}}
+                                <div class="col-md-12">
+                                    <p class="  text-danger">
+                                        Debit Account:
+                                    </p>
+                                    <h4 class="upload_debit_account"></h4>
+                                <hr>
+                                </div>
+                                {{--    --}}
+                                <div class="col-md-12 ">
+                                    <p class="text-danger">
+                                        Total Upload Amount:
+                                    </p>
+                                    <h4 class="upload_total_amount"></h4>
 
+                                </div>
+                                {{--  <hr>  --}}
+                                {{--    --}}
                             </div>
                             {{--    --}}
-                            <div class="col-md-4 pb-2">
-                                <p class="mb-2 text-danger">
-                                    Total Upload</p>
-                                <h4 class="upload_total"></h4>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <p class="mb-2 text-danger">
+                                        Total Upload</p>
+                                    <h4 class="upload_total"></h4>
 
-                            </div>
-                            {{--    --}}
-                            <div class="col-md-4 pb-2">
-                                <p class="mb-2  text-danger">
-                                    Successful Upload</p>
-                                <span class="upload_successful"></span>
+                                <hr>
+                                </div>
+                                {{--    --}}
+                                <div class="">
+                                    <p class="  text-danger">
+                                        Successful Upload</p>
+                                    <span class="upload_successful"></span>
+                                <hr>
+                                </div>
+                                {{--    --}}
+                                <div class="">
+                                    <p class="  text-danger">
+                                        Failed Upload</p>
+                                    <span class="upload_failed"></span>
 
+                                </div>
                             </div>
-                            {{--    --}}
-                            <div class="col-md-4 pb-2">
-                                <p class="mb-2  text-danger">
-                                    Failed Upload</p>
-                                <span class="upload_failed"></span>
 
-                            </div>
-                            <br><br><br>
                             {{--    --}}
                             <div class="col-md-4"></div>
                             <br><br>
