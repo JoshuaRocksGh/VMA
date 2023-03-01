@@ -157,7 +157,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::post('bollore-tranfer', [BollorieController::class, 'bollore_transfer']);
     Route::get('/swift_mt101', [SwiftMT101Controller::class, 'view_swift'])->name('swift_mt101');
     Route::post('/submit-swift-approval', [SwiftMT101Controller::class, 'submit_swift_for_approval'])->name('submit-swift-approval');
-
+    Route::post('/get-swift-rutile-detail-list-for-approval', [SwiftMT101Controller::class, 'get_swift_details'])->name('get-swift-rutile-detail-list-for-approval');
 
     // --- PAYMENTS
     Route::get('/payments', [PaymentsController::class, 'paymentTypes'])->name('payment-type');

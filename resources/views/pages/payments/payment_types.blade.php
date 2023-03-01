@@ -88,6 +88,16 @@
                             </div>
                         </div>
                         <div class="form-group d-flex">
+                            <label class="col-4 text-capitalize col-form-label text-dark">Payment Invoice</label>
+                            <div class="input-group ">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="transaction_voucher"
+                                        id="transaction_voucher" autocomplete="off">
+                                    <label class="custom-file-label" for="transaction_voucher">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group d-flex">
                             <label class="col-4 text-capitalize col-form-label text-dark">Enter Amount</label>
                             <input type="number" class="col-8 form-control text-capitalize  " id="amount"
                                 placeholder="Enter Amount">

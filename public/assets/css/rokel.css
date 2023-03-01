@@ -125,6 +125,7 @@
         padding-right: 1rem;
         padding-left: 1rem;
         overflow-y: auto;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         visibility: hidden;
         transition: visibility 0.3s ease-in-out,
             -webkit-transform 0.3s ease-in-out;

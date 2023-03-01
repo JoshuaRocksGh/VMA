@@ -232,7 +232,7 @@ class BulkUploadsController extends Controller
         $batch_no = $documentRef;
         $account_no = $request->my_account;
         $bank_code = $request->bank_type;
-        $trans_ref_no = $request->reference_no;
+        $trans_ref_no = strtoupper($request->reference_no);
         $total_amount = $request->bulk_amount;
         $value_date = $request->value_date;
         $file_upload = $request->excel_file;
@@ -540,12 +540,12 @@ class BulkUploadsController extends Controller
 
         try {
             $response = Http::retry(20, 100)->get(env('API_BASE_URL') . "corporate/getBulkUploadData/$fileBatch");
+            // return json_decode($response);
             // $result = new ApiBaseResponse();
 
             // dd($response['data']);
             $uploadData = $response['data']['uploadData'];
             $uploadDetails = $response['data']['uploadDetails'];
-            // dd($uploadDetails);
             return view('pages.transfer.bulkTransfers.view_bulk_trasnfer', [
                 'uploadData' => $uploadData,
                 'uploadDetails' => $uploadDetails,
@@ -745,7 +745,7 @@ class BulkUploadsController extends Controller
 
 
         try {
-            $batch = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadData/$fileBatch");
+            $batch = Http::retry(20, 100)->get(env('API_BASE_URL') . "corporate/getBulkUploadData/$fileBatch");
             // $result = new ApiBaseResponse();
             $bulk_details = $batch['data'];
             $uploadDetails = $bulk_details['uploadDetails'];
@@ -780,49 +780,6 @@ class BulkUploadsController extends Controller
         }
 
         die();
-
-        if ($response->ok()) {    // API response status code is 200
-
-            // return $response->body();
-            $result = json_decode($response->body());
-            // return $result->responseCode;
-
-            // return $result;
-
-
-            if ($result->responseCode == '000') {
-                $result_1 = DB::table('tb_corp_bank_import_excel')->where('batch_no', $batch_no)->delete();
-                $result_2 = DB::table('tb_bulk_error_logs')->where('batch_no', $batch_no)->delete();
-                $result_3 = DB::table('tb_corp_bank_bulk_ref')->where('batch_no', $batch_no)->delete();
-
-                // $update_db = DB::table('tb_corp_bank_import_excel')
-                //     ->where('batch_no', $batch_no)
-                //     ->update([
-                //         'status' => 'A'
-                //     ]);
-
-
-
-                return $base_response->api_response($result->responseCode, $result->message,  $result->data); // return API BASERESPONSE
-
-            } else {   // API responseCode is not 000
-
-                return $base_response->api_response($result->responseCode, $result->message,  $result->data); // return API BASERESPONSE
-
-            }
-        } else { // API response status code not 200
-
-            return $response->body();
-            DB::table('tb_error_logs')->insert([
-                'platform' => 'ONLINE_INTERNET_BANKING',
-                'user_id' => 'AUTH',
-                'code' => $response->status(),
-                'message' => $response->body()
-            ]);
-
-            return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
-
-        }
     }
 
     public function post_bulk_korpor_transactions(Request $request)

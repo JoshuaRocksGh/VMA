@@ -37,13 +37,14 @@
             $('.offcanvas-collapse').toggleClass('open')
             $('.hamburger-menu').toggleClass('open');
         })
-        //var imageUrl = "{{asset('assets/images/simple-shiny.png')}}";
-        var imageUrl = "{{asset('assets/images/simple-shiny2.png')}}";
+        //var imageUrl = "{{ asset('assets/images/simple-shiny.png') }}";
+        //var imageUrl = "{{ asset('assets/images/simple-shiny2.png') }}";
+        var imageUrl = "{{ asset('assets/images/layered-bg4.png') }}";
         $("#wrapper").css("background-image", "url(" + imageUrl + ")");
         $("#wrapper").css("background-color", "#f1f1f1").show();
         $('#wrapper').css('background-repeat', 'no-repeat');
-        //$('#wrapper').css('background-size', 'cover');
-        $('#wrapper').css('height', '100%');
+        $('#wrapper').css('background-size', 'cover');
+        //$('#wrapper').css('height', '100%');
         //$("#wrapper").css("background-image", "#fedddd").show();
         $('.password-eye').on('click', function() {
             var $this = $(this),

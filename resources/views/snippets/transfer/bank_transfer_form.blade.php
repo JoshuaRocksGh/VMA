@@ -97,7 +97,7 @@
                                     <option disabled selected value=""> -- Select
                                         {{ $destination }} --</option>
                                     {{-- @if ($currentPath === 'Own Account' || $currentPath === 'Standing Order') --}}
-                                    @if ($currentPath === 'Own Account' )
+                                    @if ($currentPath === 'Own Account')
                                         @include('snippets.accounts')
                                     @endif
                                 </select></div>
@@ -215,8 +215,27 @@
                 @endif
             </div>
 
+            {{-- =============================================================== --}}
+            {{-- Invoice Transaction --}}
+            {{-- =============================================================== --}}
+            @if ($currentPath !== 'Own Account')
+                <div class="col-12">
+                    <div class="form-group align-items-center row">
+                        <label class="col-md-4 text-dark">Transfer Invoice </label>
+                        <div class="input-group mb-1 col-md-8" style="padding: 0px;">
 
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="form-control custom-file-input"
+                                        id="inputGroupFile04">
+                                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
+            @endif
             {{-- =============================================================== --}}
             {{-- Rest of the Form --}}
             {{-- =============================================================== --}}

@@ -44,6 +44,7 @@ class SwiftMT101Controller extends Controller
             $getBatchNo = Http::get(env('CIB_API_BASE_URL') . "get-batch-number");
 
             $batchNumber =  $getBatchNo['data'][0]['get_batchno'];
+            // return $batchNumber;
 
             foreach ($files as $file) {
 
@@ -55,8 +56,12 @@ class SwiftMT101Controller extends Controller
                 // $get_contents = File::fread((storage_path($file), filesize($file)));
                 // $handle = fopen($path, 'r');
                 $content = Storage::get($file);
-                // dd($content);
+                $new_content = str_replace(' ', "\n", $content);
+                $slice = preg_split("/\\r\\n|\\r|\\n/", $content);
 
+
+                // return $content;
+                // dd($content);
                 // $file_Content = Storage::getfile_get_contents($file, false);
                 // $content = Storage::get($file);
                 $data = [
@@ -66,9 +71,13 @@ class SwiftMT101Controller extends Controller
                 ];
                 // return $data;
                 $slice = preg_split("/\\r\\n|\\r|\\n/", $content);
-                // dd($slice);
-                // $response = Http::post(env('BASE_URL') . "swift/mt101/toJson", $data);
-                $response = Http::post("http://192.168.1.225:8680/swift/mt101/toJson", $data);
+                $new_content = str_replace(' ', "\n", $content);
+                // return $new_content;
+                // dd(env('BASE_URL') . "swift/mt101/toJson");
+
+                $response = Http::post(env('BASE_URL') . "swift/mt101/toJson", $data);
+                // $response = Http::post("http://192.168.1.225:8680/swift/mt101/toJson", $data);
+                // return $response;
 
                 // if ($response['code'] == '000') {
                 //     // MOVE SUUCESSFULE FILE READ TO ANOTEHR FOLDER
@@ -84,6 +93,7 @@ class SwiftMT101Controller extends Controller
 
 
             $getFileDetails = Http::post(env('CIB_API_BASE_URL') . "swift-file-details/$batchNumber");
+            // return $getFileDetails;
 
             if ($getFileDetails['responseCode'] == '000') {
                 $swiftData = $getFileDetails['data'];
@@ -225,6 +235,43 @@ class SwiftMT101Controller extends Controller
             // ]);
 
             return $base_response->api_response('500', $error->getMessage(),  NULL); // return API BASERESPONSE
+        }
+    }
+
+    public function get_swift_details(Request $request)
+    {
+
+        // return $request;
+        $batch_no = $request->batch_no;
+        $base_response = new BaseResponse();
+
+        try {
+
+
+            $url = \config('rutile_swift.url');
+            // return $url;
+            // dd($url . "corporate/getBulkUploadData/$batch_no");
+
+            $response = Http::post($url . "swift-file-details/$batch_no");
+
+            return $response;
+
+            // $result = new ApiBaseResponse();
+
+            // return $result->api_response($response);
+        } catch (\Exception $e) {
+
+            DB::table('tb_error_logs')->insert([
+                'platform' => 'ONLINE_INTERNET_BANKING',
+                'user_id' => 'AUTH',
+                'message' => (string) $e->getMessage()
+            ]);
+
+            // return $result->api_response($response);
+
+            return $base_response->api_response('500', "Internal Server Error",  $e->getMessage()); // return API BASERESPONSE
+
+
         }
     }
 }

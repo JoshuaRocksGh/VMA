@@ -768,5 +768,6 @@
     <script>
         let noDataAvailable = {!! json_encode($noDataAvailable) !!}
         const pageData = new Object()
+        pageData.myLoans = @json(session()->get('customerLoans'));
     </script>
 @endsection

@@ -1,6 +1,8 @@
 <!-- ========== Left Sidebar Start ========== -->
 
-<div id="sidebar-menu" class=" overflow-hidden p-0 text-xs  bg-danger site-card text-white">
+<div id="sidebar-menu" class=" overflow-hidden p-0 text-xs  bg-danger site-card text-white"
+    style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
+
     <ul id="side-menu" class="accordion ">
         <li class="menu-item">
             <a class="menu-item-header" href="{{ url('home') }}">
