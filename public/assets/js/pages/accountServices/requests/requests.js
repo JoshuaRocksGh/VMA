@@ -223,7 +223,7 @@ $(function () {
         // alert("clicked");
 
         var getMonth = $(this).attr("data-value");
-        // console.log(getMonth);
+        // console.log("getMonth value ==>", getMonth);
         var today = new Date().toISOString().slice(0, 10);
         switch (getMonth) {
             case "1":
@@ -270,12 +270,23 @@ $(function () {
                 var year = d.getFullYear();
                 var actualNum = monthNumber + 1;
                 // begining of the month
-                var monthBeining = year + "-" + actualNum + "-" + "01";
+                console.log(
+                    " monthBeining ==>",
+                    actualNum.toString().padStart(2, "0")
+                );
+
+                if (actualNum.length < 1) {
+                    var actualMonth = actualNum.toString().padStart(2, "0");
+                } else {
+                    var actualMonth = actualNum;
+                }
+                var monthBeining = year + "-" + actualMonth + "-" + "01";
+                console.log("monthBeining===>", monthBeining);
                 $("#to_date").val(today);
                 $("#from_date").val(monthBeining);
 
-                // console.log(today);
-                console.log(monthBeining);
+            // console.log(today);
+            // console.log(monthBeining);
         }
     });
     // make card request
@@ -292,6 +303,8 @@ $(function () {
         statementData.endDate = $("#to_date").val();
 
         // let pickUpBranch = $("#pick_up_branch").val();
+        // console.log("statementData ==>", statementData);
+        // return;
         if (
             !statementData.accountNumber ||
             !statementData.statementType ||
