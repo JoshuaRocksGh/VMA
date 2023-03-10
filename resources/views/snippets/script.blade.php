@@ -133,6 +133,9 @@
 </script>
 
 <script>
+    const deviceType = getDeviceType();
+    const deviceOS = getDeviceOS();
+    const deviceID = getGPU();
     // Set timeout variables.
     //var timoutWarning = 840000; // Display warning in 14 Mins.
     var timoutWarning = 30000; // Display warning in 14 Mins.
@@ -172,4 +175,47 @@
 
     //StartWarningTimer()
     //IdleWarning()
+
+    function getOTP(transType) {
+        //console.log("get otp called");
+        //return "here"
+        return $.ajax({
+            type: "POST",
+            url: "get-otp-api",
+            datatype: "application/json",
+            data: {
+                deviceOS: deviceOS,
+                deviceType: deviceType,
+                deviceID: deviceID,
+                //userID: userID,
+                transType: transType,
+            },
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+
+        })
+
+        //return getOtpResponse;
+    }
+
+    function validateOTP(otp, transType) {
+        return $.ajax({
+            type: "POST",
+            url: "verify-otp-api",
+            datatype: "application/json",
+            data: {
+                deviceOS: deviceOS,
+                deviceType: deviceType,
+                deviceID: deviceID,
+                //userID: userID,
+                transType: transType,
+                otp: otp,
+            },
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+
+        })
+    }
 </script>

@@ -4,6 +4,7 @@ function getBeneficiaryList() {
         url: "transfer-beneficiary-list",
         datatype: "application/json",
         success: function (response) {
+            console.log("transfer-beneficiary-list ==>", response);
             if (response.responseCode == "000") {
                 const data = response.data;
                 pageData.allBeneficiaries = data;
@@ -107,8 +108,16 @@ function drawBeneficiaryTable() {
 
 $(() => {
     getBeneficiaryList();
+
     $("#add_beneficiary").on("click", () => {
-        addBankBeneficiary($(".current-type").attr("data-bene-type"));
+        getOTP(501).then((data) => {
+            // console.log(data);
+            if (data.responseCode == "000") {
+                addBankBeneficiary($(".current-type").attr("data-bene-type"));
+            } else {
+                toaster(data.message, "warning");
+            }
+        });
     });
 
     let beneficiaryTypes = document.querySelectorAll(".beneficiary-type");

@@ -1,6 +1,6 @@
-const deviceType = getDeviceType();
-const deviceOS = getDeviceOS();
-const deviceID = getGPU();
+// var deviceType = getDeviceType();
+// var deviceOS = getDeviceOS();
+// var deviceID = getGPU();
 function login(email, password) {
     // console.log(email, password);
     // return false;
@@ -20,11 +20,11 @@ function login(email, password) {
         },
 
         success: function (response) {
-            console.log("login response =>", response);
-            console.log(
-                "login response.responseCode =>",
-                response.responseCode
-            );
+            // console.log("login response =>", response);
+            // console.log(
+            //     "login response.responseCode =>",
+            //     response.responseCode
+            // );
             // return false;
             $("#submit").attr("disabled", false);
 
@@ -35,7 +35,24 @@ function login(email, password) {
                     window.location = "change-password";
                     $("#submit").attr("disabled", true);
                 } else {
-                    console.log("login response => home");
+                    getOTP(103).then((data) => {
+                        console.log("cget otp==>", data);
+                        if (data.responseCode == "000") {
+                            $("#login_form").hide(500);
+                            $("#enter_otp").show(500);
+                        } else {
+                            $("#spinner").hide();
+                            $("#spinner-text").hide();
+                            $("#log_in").show();
+                            error_alert(data.message, "#failed_login");
+                        }
+                        return;
+                    });
+
+                    // console.log("get OTP ==>", OtpData);
+
+                    // console.log("login response => home");
+                    return;
 
                     window.location = "home";
                     $("#submit").attr("disabled", true);
@@ -276,13 +293,58 @@ $(document).ready(function () {
             $("#log_in").hide();
             $("#submit").attr("disabled", true);
 
+            // if its not co
+            // return;
             login(email, password);
         }
     });
+
     $("#forgot_password").on("click", (e) => {
         e.preventDefault();
         $("#login_form").hide(500);
         $("#password_reset_area").show(500);
+    });
+
+    $("#verify_otp_button").click(function (e) {
+        e.preventDefault();
+        var otp = $("#enter_otp_input").val();
+
+        if (!otp) {
+            error_alert("Please enter otp", "#display_otp_error");
+            return;
+        }
+
+        $(".submit_otp_button").hide();
+        $(".spinner-text-next").show();
+        $("#verify_otp_button").attr("disabled", true);
+
+        validateOTP(otp, 103).then((data) => {
+            console.log("verifyOTP==>", data);
+            if (data.responseCode == "000") {
+                window.location = "home";
+                $("#verify_otp_button").attr("disabled", true);
+
+                // $("#submit").attr("disabled", true);
+            } else {
+                $(".submit_otp_button").show();
+                $(".spinner-text-next").hide();
+                $("#verify_otp_button").attr("disabled", false);
+
+                // $(".submit_otp_button").show();
+                // $(".spinner-text-next").hide();
+                // $("#log_in").show();
+                error_alert(data.message, "#display_otp_error");
+            }
+            return;
+        });
+
+        // console.log("get OTP ==>", OtpData);
+
+        // console.log("login response => home");
+        return;
+
+        // window.location = "home";
+        // $("#submit").attr("disabled", true);
     });
 
     $("#user_id_next_btn").on("click", (e) => {

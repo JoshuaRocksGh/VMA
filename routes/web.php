@@ -80,6 +80,8 @@ use App\Http\Controllers\Transfers\SwiftMT101Controller;
 Route::get('/', [AuthenticationLoginController::class, 'login']);
 Route::post('/login-api', [AuthenticationLoginController::class, 'loginApi']);
 Route::get('/login', [AuthenticationLoginController::class, 'login']);
+Route::post('/get-otp-api', [AuthenticationLoginController::class, 'get_otp']);
+Route::post('/verify-otp-api', [AuthenticationLoginController::class, 'verify_otp']);
 Route::post('/validate-customer', [SelfEnrollController::class, 'validateCustomer']);
 Route::post('/confirm-customer', [SelfEnrollController::class, 'confirmCustomer']);
 Route::post('/register-customer', [SelfEnrollController::class, 'registerCustomer']);

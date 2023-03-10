@@ -149,6 +149,18 @@
                                 id="display_posted_by">{{ session()->get('userAlias') }}</span>
                         </td>
                     </tr>
+                    {{--  ====== ENTER OTP =======  --}}
+                    {{--  @if (config('app.corporate'))  --}}
+                    <tr>
+                        <td>
+                            <h4 class="text-danger">Enter OTP</h4>
+                        </td>
+                        <td><input type="text" class="form-control text-input  " placeholder="Enter Otp"
+                                id="transfer_otp"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
+                                required></td>
+                    </tr>
+                    {{--  @endif  --}}
                     <tr class="hide-on-success bg-danger  text-white">
                         <td colspan="2">
                             <div class="custom-control d-flex custom-checkbox ">

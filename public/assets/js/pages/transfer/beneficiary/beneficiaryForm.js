@@ -123,8 +123,10 @@ function getAccountDescription(accountNumber) {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: (res) => {
+            // console.log("getAccountDescription ==>", res);
             const { data, message, responseCode } = res;
             const { accountCurrencyIso, accountDescription } = data;
+            // const { accountDescription } = data;
             if (responseCode === "000") {
                 // console.log(res);
                 $("#account_name").val(accountDescription);
@@ -199,7 +201,7 @@ async function prepareBeneficiaryForm(currentType, mode) {
 
 //editting beneficiary
 async function editBankBeneficiary(data, type) {
-    // console.table(data);
+    console.table("editBankBeneficiary ==>", data);
     await prepareBeneficiaryForm(type, "Edit");
     if (data.BENEF_TYPE === "OTB") {
         $(".other-bank-form").show();
@@ -263,12 +265,13 @@ function validateFormInputs() {
     const accountNumber = $("#account_number").val();
     let bankName = $("#select_bank option:selected").text();
     // const bankCode = $("#select_bank").val();
-    const bankCode = $("#select_bank option:selected").attr("swift-code")
+    const bankCode = $("#select_bank option:selected").attr("swift-code");
     const bankCountry = $("#select_country option:selected").val();
     const beneficiaryName = $("#beneficiary_name").val();
     const beneficiaryEmail = $("#beneficiary_email").val();
     const beneficiaryAddress = $("#beneficiary_address").val();
     const accountName = $("#account_name").val();
+    const beneficiaryOTP = $("#beneficiary_otp").val();
     //same bank beneficiary checks
 
     if (type === "SAB") {
@@ -288,7 +291,8 @@ function validateFormInputs() {
             !bankName ||
             !beneficiaryAddress ||
             !beneficiaryName ||
-            !beneficiaryEmail
+            !beneficiaryEmail ||
+            !beneficiaryOTP
         ) {
             toaster("all fields required", "warning");
             return false;

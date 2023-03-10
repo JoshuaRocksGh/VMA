@@ -73,7 +73,7 @@ class GetAccountDescription extends Controller
         ];
 
         // return $data;
-        $response = Http::post(env('API_BASE_URL') . "account/getAccountDescription", $data);
+        $response = Http::post(\config('base_urls.api_base_url') . "account/getAccountDescription", $data);
         $result = new ApiBaseResponse();
         return $result->api_response($response);
     }
