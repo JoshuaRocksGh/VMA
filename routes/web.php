@@ -40,6 +40,7 @@ use App\Http\Controllers\Loan\LoanRequestController;
 use App\Http\Controllers\Loan\LoansController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MaileController;
+use App\Http\Controllers\MobileMoneyController;
 use App\Http\Controllers\Payments\Bulk\BulkKorporController;
 use App\Http\Controllers\Payments\BulkUpload\BulkUploadsController;
 use App\Http\Controllers\Payments\BulkUpload\CorporateKorporController as BulkUploadCorporateKorporController;
@@ -329,7 +330,7 @@ Route::post('cancel-standing-order-api', [StandingOrderController::class, 'cance
 Route::post('/corporate-own-account-transfer-api', [OwnAccountController::class, 'corporate_own_account_transfer']);
 Route::post('/corporate-same-bank-transfer-api', [SameBankController::class, 'corporate_same_bank']);
 Route::post('/corporate-local-bank-transfer-api', [LocalBankController::class, 'corporateLocalBankTransfer']);
-Route::post('/corporate-onetime-local-bank-transfer-api', [APITransferLocalBankController::class, 'corporate_onetime_beneficiary']);
+// Route::post('/corporate-onetime-local-bank-transfer-api', [APITransferLocalBankController::class, 'corporate_onetime_beneficiary']);
 Route::post('corporate-standing-order-transfer-api', [StandingOrderController::class, 'corporate_standing_order_request']);
 // Transfers Add Beneficiary
 Route::post('save-transfer-beneficiary-api', [TransferBeneficiaryController::class, 'saveBeneficiary']);
