@@ -72,7 +72,7 @@ class LoginController extends Controller
             "brand" => $deviceType,
             "channel" => env('APP_CHANNEL'),
             "country" => $res['country'],
-            // "deviceId" => Browser::browserName(),
+            "entrySource" => env('APP_ENTRYSOURCE'),
             // "deviceId" => Browser::browserName(),
             "deviceId" => $deviceID,
             "deviceIp" => request()->ip(),

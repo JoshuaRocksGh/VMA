@@ -86,6 +86,33 @@ function getInternationalBanks(countryCode) {
         },
     });
 }
+function saveBeneficiary(data) {
+    // console.log("saveBeneficiary ==>", data);
+    // return;
+    siteLoading("show");
+    $.ajax({
+        type: "POST",
+        url: "save-transfer-beneficiary-api",
+        datatype: "application/json",
+        data,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: (res) => {
+            console.log("save-transfer-beneficiary-api ==>", res);
+            siteLoading("hide");
+            if (res.responseCode === "000") {
+                beneficiarySaved();
+            } else {
+                toaster(res.message, "error");
+            }
+        },
+        error: (err) => {
+            siteLoading("hide");
+            toaster(err.statusText, "error");
+        },
+    });
+}
 
 function deleteBeneficiary(beneficiaryId) {
     $.ajax({
@@ -112,6 +139,7 @@ function deleteBeneficiary(beneficiaryId) {
 
 //validate same bank account number
 function getAccountDescription(accountNumber) {
+    // console.log("Account description ==>", accountNumber);
     return $.ajax({
         type: "POST",
         url: "get-account-description",
@@ -123,7 +151,8 @@ function getAccountDescription(accountNumber) {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: (res) => {
-            // console.log("getAccountDescription ==>", res);
+            console.log("getAccountDescription ==>", res);
+            // return;
             const { data, message, responseCode } = res;
             const { accountCurrencyIso, accountDescription } = data;
             // const { accountDescription } = data;
@@ -156,6 +185,9 @@ async function addBankBeneficiary(currentType) {
 }
 async function prepareBeneficiaryForm(currentType, mode) {
     // console.log(currentType, mode);
+    // console.log("prepareBeneficiaryForm currentType ==>", currentType);
+    // console.log("prepareBeneficiaryForm mode ==>", mode);
+    // return;
     $("#edit_modal").attr("data-mode", mode);
     $("#edit_modal").attr("data-type", currentType);
     if (currentType === "SAB") {
@@ -201,7 +233,9 @@ async function prepareBeneficiaryForm(currentType, mode) {
 
 //editting beneficiary
 async function editBankBeneficiary(data, type) {
-    console.table("editBankBeneficiary ==>", data);
+    console.table("editBankBeneficiary data ==>", data);
+    console.table("editBankBeneficiary type ==>", type);
+    // return;
     await prepareBeneficiaryForm(type, "Edit");
     if (data.BENEF_TYPE === "OTB") {
         $(".other-bank-form").show();
@@ -236,12 +270,36 @@ function initBeneficiaryForm() {
         if (!validateFormInputs()) {
             return false;
         }
-        // console.log(beneficiaryDetails);
+
+        if (!beneficiaryDetails.beneficiaryOTP) {
+            toaster("Enter OTP to continue", "warning");
+            return false;
+        }
+        // console.log("beneficiaryDetails ==>", beneficiaryDetails);
         // return;
-        saveBeneficiary(beneficiaryDetails);
+
+        validateOTP(beneficiaryDetails.beneficiaryOTP, 504).then((data) => {
+            console.log("verifyOTP==>", data);
+            if (data.responseCode == "000") {
+                // $("#pin_code_modal").modal("show");
+                saveBeneficiary(beneficiaryDetails);
+            } else {
+                toaster(data.message, "error");
+            }
+            return;
+        });
     });
 
     $("#delete_btn").on("click", () => {
+        // getOTP(505).then((data) => {
+        //     console.log("delete_btn ==>", data);
+        //     return;
+        //     if (data.responseCode == "000") {
+
+        //     } else {
+        //         toaster(data.message, "warning");
+        //     }
+        // });
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -319,6 +377,7 @@ function validateFormInputs() {
         type,
         mode,
         bankCountry,
+        beneficiaryOTP,
     };
     // console.log(beneficiaryDetails);
 
