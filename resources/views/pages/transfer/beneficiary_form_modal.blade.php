@@ -118,7 +118,7 @@
                                         placeholder="Enter Beneficiary Address" minlength="3" maxlength="30">
                                 </div>
                             </div>
-                            <div class="form-group row other-bank-form ">
+                            <div class="form-group row  ">
                                 <h4 class="col-4 text-danger">Enter Otp:</h4>
                                 <div class="col-8">
                                     <input type="text" class="form-control" id="beneficiary_otp"
