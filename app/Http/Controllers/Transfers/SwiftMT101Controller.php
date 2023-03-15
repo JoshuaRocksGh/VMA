@@ -20,15 +20,16 @@ class SwiftMT101Controller extends Controller
     {
         // return view('pages.transfer.swift_mt101');
         // path = storage/app/public
-        $directory = "public";
-        // $files = Storage::disk($directory);
+        $directory = "storage/app";
+        $files = Storage::disk($directory);
+        dd($directory);
         $files = Storage::allfiles($directory);
         foreach ($files as $file) {
             // $get_contents = File::fread((storage_path($file), filesize($file)));
             // $handle = fopen($path, 'r');
             $content = Storage::get($file);
             $slice = preg_split("/\\r\\n|\\r|\\n/", $content);
-            dd($slice);
+            // dd($slice);
         }
 
         // $get_contents = File::get(storage_path);
