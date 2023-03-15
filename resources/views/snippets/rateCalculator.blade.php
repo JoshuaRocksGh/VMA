@@ -39,7 +39,7 @@
             </div>
             {{--  style="
             background: linear-gradient(90deg, var(--primary) 0%, var(--teal) 87%); "  --}}
-            <div class="bg-danger p-2 ">
+            <div class="bg-light p-2 ">
                 <div class="justify-content-around d-flex">
                     <div class="col-5 font-weight-bold">
                         <div class="text-center mb-2" id="abbr1"> cur1 </div>

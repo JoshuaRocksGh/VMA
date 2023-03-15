@@ -337,7 +337,7 @@
                                 <br />
                                 <label for="date_of_birth_input"> Date of birth<span class="text-danger">*</span></label>
 
-                                <input type="text" id="date_of_birth_input" placeholder="Enter your date of birth"
+                                <input type="date" id="date_of_birth_input" placeholder="Enter your date of birth"
                                     class="form-control mb-0" parsley-trigger="change" autocomplete="none"
                                     data-provide="datepicker" data-date-autoclose="true">
 
@@ -345,7 +345,7 @@
 
 
                                 <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-primary btn-block" id="b_next2" type="submit"><span
+                                    <button class="btn btn-danger btn-block" id="b_next2" type="submit"><span
                                             id="s_next2">Next</span>
                                         <span id="s_loading2">
                                             <span class="spinner-border spinner-border-sm mr-1" role="status"
@@ -369,7 +369,7 @@
                                     <br />
                                 </div>
                                 <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-primary btn-block" id="b_next3" type="submit"><span
+                                    <button class="btn btn-danger btn-block" id="b_next3" type="submit"><span
                                             id="s_next3">Register</span>
                                         <span id="s_loading3">
                                             <span class="spinner-border spinner-border-sm mr-1" role="status"

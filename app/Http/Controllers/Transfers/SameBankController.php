@@ -82,6 +82,11 @@ class SameBankController extends Controller
         $customerNumber = session()->get('customerNumber');
         $userMandate = session()->get('userMandate');
         // return $request;
+        $getVoucher = $request->voucher;
+        // $voucher = explode(",", $getVoucher);
+        // $trans_voucher = $voucher[1];
+
+        // return $voucher;
         $data = [
             "account_no" => $request->accountNumber,
             "account_name" => $request->accountName,
@@ -95,7 +100,7 @@ class SameBankController extends Controller
             "amount" => $request->transferAmount,
             "narration" => $request->transferPurpose,
             "postBy" => $userID,
-            // "appBy" => '';
+            "transaction_voucher" => $getVoucher,
             "customerTel" => $customerPhone,
             "transBy" => $userAlias,
             "customer_no" => $customerNumber,
@@ -105,6 +110,7 @@ class SameBankController extends Controller
             "documentRef" => strtoupper(substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 2) . time()),
         ];
         // return $data;
+        // die();
         try {
             $response = Http::post(env('CIB_API_BASE_URL') . "same-bank-gone-for-pending", $data);
             $result = new ApiBaseResponse();

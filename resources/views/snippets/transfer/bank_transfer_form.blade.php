@@ -218,17 +218,35 @@
             {{-- =============================================================== --}}
             {{-- Invoice Transaction --}}
             {{-- =============================================================== --}}
-            @if ($currentPath !== 'Own Account')
+            @if ($currentPath === 'Local Bank' || $currentPath === 'Same Bank' || $currentPath === 'International Bank')
                 <div class="col-12">
                     <div class="form-group align-items-center row">
-                        <label class="col-md-4 text-dark">Transfer Invoice </label>
+                        <label class="col-md-4 text-dark">Transfer Type </label>
+                        <div class="col-md-8">
+                            <div class="radio radio-info form-check-inline">
+                                <input type="radio" id="inlineRadio1" value="normal" name="trans_type" checked>
+                                <label for="inlineRadio1 mt-1"> Normal </label>
+                            </div>
+                            <div class="radio form-check-inline">
+                                <input type="radio" id="inlineRadio2" value="invoice" name="trans_type">
+                                <label for="inlineRadio2"> Invoice Transaction </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 display_upload_input" style="display: none">
+                    <div class="form-group align-items-center row">
+                        <label class="col-md-4 text-dark">Attach Invoice </label>
                         <div class="input-group mb-1 col-md-8" style="padding: 0px;">
 
-                            <div class="input-group">
+                            <div class="input-group" onclick="get_file_name('invoice_file','invoice_file_name')">
+
                                 <div class="custom-file">
-                                    <input type="file" class="form-control custom-file-input"
-                                        id="inputGroupFile04">
-                                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                    <input type="file" class="form-control custom-file-input" id="invoice_file">
+                                    <label class="custom-file-label" for="invoice_file_name"
+                                        id="invoice_file_name">Choose file</label>
                                 </div>
                             </div>
                         </div>

@@ -301,7 +301,21 @@ function handleToAccount(account) {
     $(".display_to_account_no").text(account.beneficiaryAccountNumber);
 }
 
+function getTransType() {
+    var transType = $("input[name='trans_type']:checked").val();
+    console.log(transType);
+}
+
 $(() => {
+    // CONVERT TO BASE 64
+    const toBase64 = (file) =>
+        new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
+
     let transferInfo = {};
     let fromAccount = {};
     $(".account_currency").text("SLL");
@@ -318,6 +332,31 @@ $(() => {
         minimumResultsForSearch: Infinity,
         templateResult: accountTemplate,
         templateSelection: accountTemplate,
+    });
+
+    // NORMAL OR INVOICE PAYMENT
+    // getTransType();
+
+    $("input[name='trans_type']").click(function () {
+        // $("input[name='trans_type']:checked").val();
+        var transType = $("input[name='trans_type']:checked").val();
+        // console.log(transType);
+
+        if (transType == "invoice") {
+            console.log("invoice===");
+            $(".display_upload_input").toggle(500);
+            $("#display_voucher_attachment").text("Yes");
+
+            return;
+        }
+        if (transType == "normal") {
+            console.log("===normal");
+
+            $(".display_upload_input").hide();
+            $("#display_voucher_attachment").text("No");
+
+            return;
+        }
     });
 
     function renderOwnAccounts() {
@@ -692,6 +731,25 @@ $(() => {
             $(".display_frequency_so").text(standing_order[1]);
         });
     }
+
+    // adding invoice file
+    $("#invoice_file").change(function () {
+        var file = document.getElementById("invoice_file").files[0];
+
+        console.log(file);
+        console.log("return==>", $(this).val());
+
+        // file.arrayBuffer().then((arrayBuffer) => {
+        //     const blob = new Blob([new Uint8Array(arrayBuffer)], {
+        //         type: file.type,
+        //     });
+        //     console.log(blob);
+        //     transferInfo.voucher = blob.size;
+        // });
+        // if (file) {
+        //     toBase64(file).then((data) => (transferInfo.voucher = data));
+        // }
+    });
 
     //  {{-- ---------------- --}}
     // conclusions

@@ -26,7 +26,7 @@ function login(email, password) {
             //     response.responseCode
             // );
             // return false;
-            $("#submit").attr("disabled", false);
+            // $("#submit").attr("disabled", false);
 
             if (response.responseCode == "000") {
                 console.log("login response =>", response.responseCode);
@@ -158,9 +158,11 @@ function confirmCustomer(userData) {
 }
 
 function registerCustomer(userData) {
+    // console.log("b_next3 ==>", userData);
+    // return;
     $.ajax({
         type: "POST",
-        url: "../register-customer",
+        url: "register-customer",
         datatype: "application/json",
         data: userData,
         headers: {
@@ -438,8 +440,10 @@ $(document).ready(function () {
             error_alert("Please enter date of birth", "#self_enroll_message");
             return false;
         }
-        dob = $("#date_of_birth_input").val().split("/");
-        userData.dateOfBirth = `${dob[2]}-${dob[0]}-${dob[1]}`;
+        dob = $("#date_of_birth_input").val();
+        // dob = $("#date_of_birth_input").val().split("/");
+        // userData.dateOfBirth = `${dob[2]}-${dob[0]}-${dob[1]}`;
+        userData.dateOfBirth = dob;
         userData.idNumber = $("#id_number_input").val();
         userData.phoneNumber = $("#phone_number_input").val();
 
