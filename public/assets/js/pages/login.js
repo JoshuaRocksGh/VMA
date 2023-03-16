@@ -1,9 +1,9 @@
-const deviceType = getDeviceType();
-const deviceOS = getDeviceOS();
-const deviceID = getGPU();
+// var deviceType = getDeviceType();
+// var deviceOS = getDeviceOS();
+// var deviceID = getGPU();
 function login(email, password) {
-    console.log(email, password);
-    return false;
+    // console.log(email, password);
+    // return false;
     $.ajax({
         type: "POST",
         url: "login-api",
@@ -20,13 +20,13 @@ function login(email, password) {
         },
 
         success: function (response) {
-            console.log("login response =>", response);
-            console.log(
-                "login response.responseCode =>",
-                response.responseCode
-            );
+            // console.log("login response =>", response);
+            // console.log(
+            //     "login response.responseCode =>",
+            //     response.responseCode
+            // );
             // return false;
-            $("#submit").attr("disabled", false);
+            // $("#submit").attr("disabled", false);
 
             if (response.responseCode == "000") {
                 console.log("login response =>", response.responseCode);
@@ -35,7 +35,24 @@ function login(email, password) {
                     window.location = "change-password";
                     $("#submit").attr("disabled", true);
                 } else {
-                    console.log("login response => home");
+                    // getOTP(103).then((data) => {
+                    //     console.log("cget otp==>", data);
+                    //     if (data.responseCode == "000") {
+                    //         $("#login_form").hide(500);
+                    //         $("#enter_otp").show(500);
+                    //     } else {
+                    //         $("#spinner").hide();
+                    //         $("#spinner-text").hide();
+                    //         $("#log_in").show();
+                    //         error_alert(data.message, "#failed_login");
+                    //     }
+                    //     return;
+                    // });
+
+                    // console.log("get OTP ==>", OtpData);
+
+                    // console.log("login response => home");
+                    // return;
 
                     window.location = "home";
                     $("#submit").attr("disabled", true);
@@ -67,6 +84,14 @@ function error_alert(message, targetId) {
     }, 3000);
 }
 
+function success_alert(message, targetId) {
+    $(targetId).text(message);
+    $(targetId).show(200);
+    setTimeout(() => {
+        $(targetId).hide(200);
+    }, 3000);
+}
+
 function validateCustomer(userData) {
     $.ajax({
         type: "POST",
@@ -81,15 +106,18 @@ function validateCustomer(userData) {
     })
         .done((response) => {
             if (response.responseCode === "000") {
-                $("#self_enroll_form1").hide();
-                $("#self_enroll_form2").toggle("500");
+                success_alert(response.message, "#successful_self_enroll");
+                setTimeout(() => {
+                    $("#self_enroll_form1").hide();
+                    $("#self_enroll_form2").toggle("500");
+                }, 3000);
 
                 $("#id_number_input").attr(
                     "placeholder",
                     `Enter your ID number: ${response.data.idType}`
                 );
 
-                console.log(response);
+                // console.log(response);
                 userData.authToken = response.data.authToken;
             } else {
                 error_alert(response.message, "#self_enroll_message");
@@ -119,11 +147,14 @@ function confirmCustomer(userData) {
     })
         .done((response) => {
             if (response.responseCode === "000") {
-                console.log("confirmation successful");
-                console.log(response);
-                $("#self_enroll_form2").hide();
-                $("#s_loading2").toggle();
-                $("#self_enroll_form3").toggle(500);
+                // console.log("confirmation successful");
+                // console.log(response);
+                success_alert(response.message, "#successful_self_enroll");
+                setTimeout(() => {
+                    $("#self_enroll_form2").hide();
+                    $("#s_loading2").toggle();
+                    $("#self_enroll_form3").toggle(500);
+                }, 3000);
             } else {
                 error_alert(response.message, "#self_enroll_message");
                 $("#s_loading2").toggle();
@@ -141,9 +172,11 @@ function confirmCustomer(userData) {
 }
 
 function registerCustomer(userData) {
+    // console.log("b_next3 ==>", userData);
+    // return;
     $.ajax({
         type: "POST",
-        url: "../register-customer",
+        url: "register-customer",
         datatype: "application/json",
         data: userData,
         headers: {
@@ -276,13 +309,58 @@ $(document).ready(function () {
             $("#log_in").hide();
             $("#submit").attr("disabled", true);
 
+            // if its not co
+            // return;
             login(email, password);
         }
     });
+
     $("#forgot_password").on("click", (e) => {
         e.preventDefault();
         $("#login_form").hide(500);
         $("#password_reset_area").show(500);
+    });
+
+    $("#verify_otp_button").click(function (e) {
+        e.preventDefault();
+        var otp = $("#enter_otp_input").val();
+
+        if (!otp) {
+            error_alert("Please enter otp", "#display_otp_error");
+            return;
+        }
+
+        $(".submit_otp_button").hide();
+        $(".spinner-text-next").show();
+        $("#verify_otp_button").attr("disabled", true);
+
+        validateOTP(otp, 103).then((data) => {
+            console.log("verifyOTP==>", data);
+            if (data.responseCode == "000") {
+                window.location = "home";
+                $("#verify_otp_button").attr("disabled", true);
+
+                // $("#submit").attr("disabled", true);
+            } else {
+                $(".submit_otp_button").show();
+                $(".spinner-text-next").hide();
+                $("#verify_otp_button").attr("disabled", false);
+
+                // $(".submit_otp_button").show();
+                // $(".spinner-text-next").hide();
+                // $("#log_in").show();
+                error_alert(data.message, "#display_otp_error");
+            }
+            return;
+        });
+
+        // console.log("get OTP ==>", OtpData);
+
+        // console.log("login response => home");
+        return;
+
+        // window.location = "home";
+        // $("#submit").attr("disabled", true);
     });
 
     $("#user_id_next_btn").on("click", (e) => {
@@ -376,8 +454,10 @@ $(document).ready(function () {
             error_alert("Please enter date of birth", "#self_enroll_message");
             return false;
         }
-        dob = $("#date_of_birth_input").val().split("/");
-        userData.dateOfBirth = `${dob[2]}-${dob[0]}-${dob[1]}`;
+        dob = $("#date_of_birth_input").val();
+        // dob = $("#date_of_birth_input").val().split("/");
+        // userData.dateOfBirth = `${dob[2]}-${dob[0]}-${dob[1]}`;
+        userData.dateOfBirth = dob;
         userData.idNumber = $("#id_number_input").val();
         userData.phoneNumber = $("#phone_number_input").val();
 

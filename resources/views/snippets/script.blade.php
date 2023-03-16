@@ -37,8 +37,15 @@
             $('.offcanvas-collapse').toggleClass('open')
             $('.hamburger-menu').toggleClass('open');
         })
+        //var imageUrl = "{{ asset('assets/images/simple-shiny.png') }}";
+        //var imageUrl = "{{ asset('assets/images/simple-shiny2.png') }}";
+        var imageUrl = "{{ asset('assets/images/layered-bg4.png') }}";
+        $("#wrapper").css("background-image", "url(" + imageUrl + ")");
         $("#wrapper").css("background-color", "#f1f1f1").show();
-        //$("#wrapper").css("background-color", "#fedddd").show();
+        $('#wrapper').css('background-repeat', 'no-repeat');
+        $('#wrapper').css('background-size', 'cover');
+        //$('#wrapper').css('height', '100%');
+        //$("#wrapper").css("background-image", "#fedddd").show();
         $('.password-eye').on('click', function() {
             var $this = $(this),
                 $passwordInput = $this.prev(),
@@ -126,6 +133,9 @@
 </script>
 
 <script>
+    const deviceType = getDeviceType();
+    const deviceOS = getDeviceOS();
+    const deviceID = getGPU();
     // Set timeout variables.
     //var timoutWarning = 840000; // Display warning in 14 Mins.
     var timoutWarning = 30000; // Display warning in 14 Mins.
@@ -165,4 +175,47 @@
 
     //StartWarningTimer()
     //IdleWarning()
+
+    function getOTP(transType) {
+        //console.log("get otp called");
+        //return "here"
+        return $.ajax({
+            type: "POST",
+            url: "get-otp-api",
+            datatype: "application/json",
+            data: {
+                deviceOS: deviceOS,
+                deviceType: deviceType,
+                deviceID: deviceID,
+                //userID: userID,
+                transType: transType,
+            },
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+
+        })
+
+        //return getOtpResponse;
+    }
+
+    function validateOTP(otp, transType) {
+        return $.ajax({
+            type: "POST",
+            url: "verify-otp-api",
+            datatype: "application/json",
+            data: {
+                deviceOS: deviceOS,
+                deviceType: deviceType,
+                deviceID: deviceID,
+                //userID: userID,
+                transType: transType,
+                otp: otp,
+            },
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+
+        })
+    }
 </script>

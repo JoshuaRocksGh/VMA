@@ -78,7 +78,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                         '_blank', 'location=yes,height=670,width=1200,scrollbars=yes,status=yes'"
                     class=" btn btn-xs btn-outline-info font-10"
                 >
-                    Details
+                   View Details
                 </button>
             `;
                 table.row
@@ -87,9 +87,9 @@ function getCorporateRequests(customerNumber, requestStatus) {
                         formattedRequestType,
                         accountNo,
                         formattedAmount,
-                        narration,
+                        // narration,
                         date,
-                        postedby,
+                        // postedby,
                         actionButton,
                     ])
                     .order([0, "desc"])
@@ -240,7 +240,7 @@ function getData({ url, name, data, method }) {
 function prepareGraphValues() {
     const accountsPie = {};
     const totalsPie = {
-        xValues: ["Deposits", "Loans", "Investments"],
+        xValues: ["CASA", "Loans", "Investments"],
         yValues: [],
     };
     accountsPie.xValues = pageData?.accounts?.map((account) =>

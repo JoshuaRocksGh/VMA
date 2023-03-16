@@ -241,7 +241,7 @@
                                         class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list">
 
                                         <thead>
-                                            <tr class="bg-secondary text-white">
+                                            <tr class="table-background text-white">
                                                 <th>No</th>
                                                 <th>
                                                     <span id="bulk_header">Credit Acc</span>
@@ -254,7 +254,72 @@
                                         </thead>
 
                                         <tbody class="bulk_upload_list_body">
+                                            {{--  <tr>
+                                                <td colspan="4">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="spinner-border avatar-lg text-danger  m-2 canvas_spinner"
+                                                            role="status">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>  --}}
+                                        </tbody>
 
+
+                                    </table>
+
+
+                                </div> <!-- end card body-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <!--  Modal content for the Large example -->
+        <div class="modal fade" id="bs-example-modal-lg1" tabindex="-1" role="dialog"
+            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title text-dark" id="myLargeModalLabel"> SWIFT TRANSFER DETAILS</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class=" card-body table-responsive">
+
+                                    <table id="datatable-buttons"
+                                        class="table table-bordered table-striped dt-responsive nowrap w-100 rutile_swift_details">
+
+                                        <thead>
+                                            <tr class="table-background text-white">
+                                                <th>Reference</th>
+                                                <th>Account</th>
+                                                <th>Amount</th>
+                                                <th>Beneficiary Account</th>
+                                                <th>Benficary Name</th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody class="rutile_swift_details_body">
+                                            {{--  <tr>
+                                                <td colspan="4">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="spinner-border avatar-lg text-danger  m-2 canvas_spinner"
+                                                            role="status">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>  --}}
                                         </tbody>
 
 
@@ -361,6 +426,12 @@
                             request_type != null ? append_approval_details_bulk("Request Type", request_type) :
                                 '';
 
+                        } else if (request_type == 'SWIFT') {
+                            let request_type = 'Rutile Swift'
+                            request_type != null ? append_approval_details("Request Type", request_type) : '';
+                            request_type != null ? append_approval_details_rutile("Request Type",
+                                    request_type) :
+                                '';
                         } else if (request_type == 'DTRA') {
                             let request_type = 'Direct Transfer'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
@@ -581,6 +652,10 @@
                             $("#bkorp_header").show();
                             $("#bulk_header").hide();
                             ajax_call_bulk_korpor_details_endpoint(batch_number)
+                        } else if (request_type == 'SWIFT') {
+                            ajax_call_rutile_swift(batch_number)
+                            //console.log("swift ===>", pending_request)
+
                         }
 
                         $.each(approvers_mandate, function(index) {
@@ -629,12 +704,22 @@
                     }
 
                 },
-                error: function(xhr, status, error) {
-
-                    setTimeout(function() {
-                        account_mandate(customer, request)
-                    }, $.ajaxSetup().retryAfter)
-                }
+                error: function(xhr, textStatus, errorThrown) {
+                    if (textStatus == "timeout") {
+                        this.tryCount++;
+                        if (this.tryCount <= this.retryLimit) {
+                            //try again
+                            $.ajax(this);
+                            return;
+                        }
+                        return;
+                    }
+                    if (xhr.status == 500) {
+                        $.ajax(this);
+                    } else {
+                        //handle error
+                    }
+                },
             })
         }
 
@@ -662,24 +747,15 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    console.log(response)
                     if (response.responseCode == '000') {
                         let details = response.data.uploadData
 
 
+                        // $(".bulk_upload_list tr").remove();
                         table.clear().draw()
                         let count = 1
 
                         $.each(details, function(index) {
-
-                            // $('.bulk_upload_list_body').append(`
-                        //         <tr class="">
-                        //             <th>${count}</th>
-                        //             <th>${details[index].accountNumber}</th>
-                        //             <th>${formatToCurrency(parseFloat(details[index].amount))}</th>
-                        //             <th>${details[index].name}</th>
-                        //         </tr>
-                        //     `)
 
                             table.row.add([
                                 count,
@@ -694,6 +770,7 @@
 
                     } else {
 
+                        console.log("get-bulk-detail-list-for-approval==>", response)
 
                     }
 
@@ -773,6 +850,61 @@
 
         }
 
+        function ajax_call_rutile_swift(batch_no) {
+            var table = $('.rutile_swift_details').DataTable({
+                destroy: true
+            });
+            var nodes = table.rows().nodes();
+
+            $.ajax({
+                type: 'POST',
+                url: "../../get-swift-rutile-detail-list-for-approval",
+                datatype: 'application/json',
+                data: {
+                    'batch_no': batch_no
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+
+                    //console.log("get-swift-rutile-detail-list-for-approval ==>", JSON.parse(response));
+                    var res = JSON.parse(response)
+
+                    if (res.responseCode == '000') {
+                        let swift_details = res.data
+
+
+                        console.log("rutile response ==>", swift_details);
+
+                        // $(".bulk_upload_list tr").remove();
+                        table.clear().draw()
+                        {{--  let count = 1  --}}
+
+                        $.each(swift_details, function(index) {
+
+                            table.row.add([
+                                swift_details[index].transaction_reference,
+                                swift_details[index].creditor_account_no,
+
+                                swift_details[index].currency + " " + formatToCurrency(
+                                    parseFloat(swift_details[index]
+                                        .transaction_amount)),
+                                swift_details[index].beneficiary_account,
+                                swift_details[index].beneficiary_name_and_address_1,
+
+                            ]).draw(false)
+                        })
+
+                    } else {
+
+
+
+                    }
+                }
+            })
+        }
+
         function append_approval_details(description, data) {
 
             $('#approval_details').append(`<div class="row ">
@@ -793,6 +925,17 @@
                 </div>
                 <hr class="mt-0">`)
         };
+
+        function append_approval_details_rutile() {
+            $('#approval_details').append(`<div class="row ">
+                    <span class="col-md-6 text-left font-14">Swift Details</span>
+                    <span class="col-md-6 text-right text-primary ">
+                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#bs-example-modal-lg1">View Transaction Details</button>
+
+                    </span>
+                </div>
+                <hr class="mt-0">`)
+        }
 
         $(document).ready(function() {
 

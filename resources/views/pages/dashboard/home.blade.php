@@ -34,7 +34,7 @@
                             <div class="nav nav-tabs flex-column  border-0" id="nav-tab" role="tablist">
                                 <a href="#canvas_total" data-toggle="tab" data-target="totalsPie" aria-expanded="false"
                                     class="nav-link canvas-tab  mb-2 font-10 active">
-                                    <b>Total</b>
+                                    <b>All</b>
                                 </a>
                                 <a href="#canvas_account" data-toggle="tab" data-target="accountsPie" aria-expanded="false"
                                     class="nav-link mb-2 canvas-tab font-10 ">
@@ -145,14 +145,14 @@
                             class="table table-bordered  table-striped display responsive nowrap   w-100 pending_transaction_request ">
                             <thead>
                                 <tr class="table-background">
-                                    <th class="all">Rquest Id</th>
-                                    <th class="all">Req-Type</th>
-                                    <th class="all">Account No</th>
-                                    <th class="all">Amount</th>
-                                    <th class="all">Transfer Purpose</th>
-                                    <th class="all">Posted Date</th>
-                                    <th class="none">Initiated By</th>
-                                    <th class="none">Action</th>
+                                    <th>Rquest Id</th>
+                                    <th>Req-Type</th>
+                                    <th>Account No</th>
+                                    <th>Amount</th>
+                                    {{--  <th >Transfer Purpose</th>  --}}
+                                    <th>Posted Date</th>
+                                    {{--  <th class="none">Initiated By</th>  --}}
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody class="request_table">

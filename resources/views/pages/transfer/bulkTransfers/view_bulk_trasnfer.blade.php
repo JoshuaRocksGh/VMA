@@ -29,29 +29,26 @@
 
 
                         <div class="col-md-3">
-                            <h6 class="mb-2 text-dark">Account Number <br>
-                                <p class="text-danger display_debit_account_no ">{{ $uploadDetails['debitAccount'] }}</p>
-                            </h6>
+                            <p class="mb-2 text-danger">Account Number</p>
+                            <h4 class="text-dark display_debit_account_no ">{{ $uploadDetails['debitAccount'] }}</h4>
+
                         </div>
                         <div class="col-md-3">
-                            <h6 class="mb-2 text-dark">Bulk Amount <br>
-                                <p class="text-danger display_total_amount ">
-                                    {{ number_format($uploadDetails['totalAmount'], 2) }}</p>
-                            </h6>
+                            <p class="mb-2 text-danger">Bulk Amount </p>
+                            <h4 class="text-dark display_total_amount ">
+                                {{ number_format($uploadDetails['totalAmount'], 2) }}</h4>
+
                         </div>
 
-
-
-
                         <div class="col-md-3 ">
-                            <h6 class="mb-2 text-dark">Narration <br>
-                                <p class="text-danger display_narrations">{{ $uploadData[0]['transDescription'] }}</p>
-                            </h6>
+                            <p class="mb-2 text-danger">Narration</p>
+                            <h4 class="text-dark display_narrations">{{ $uploadData[0]['transDescription'] }}</h4>
+
                         </div>
                         <div class="col-md-3 ">
-                            <h6 class="mb-2 text-dark">Batch Number <br>
-                                <p class="text-danger display_batch_no ">{{ $uploadData[0]['uploadBatch'] }}</p>
-                            </h6>
+                            <p class="mb-2 text-danger">Batch Number </p>
+                            <h4 class="text-dark display_batch_no ">{{ $uploadData[0]['uploadBatch'] }}</h4>
+
 
                         </div>
 
@@ -120,7 +117,7 @@
                         </thead>
 
                         <tbody class="">
-                            {{-- @if (isset($uploadData))
+                            @if (isset($uploadData))
                                 @php
                                     $count = 1;
                                 @endphp
@@ -136,7 +133,7 @@
                                         $count = $count + 1;
                                     @endphp
                                 @endforeach
-                            @endif --}}
+                            @endif
                         </tbody>
 
 
@@ -160,7 +157,8 @@
 
     <script type="text/javascript" src="{{ asset('assets/js/pages/transfer/view_bulk_transfer.js') }}"></script>
     <script type="text/javascript">
-        //var table = $(".bulk_upload_list").DataTable()
+        //$("#bulk_upload_list").DataTable();
+
         //var nodes = table.rows().nodes();
         var batch_no = `{{ $batch_no }}`
     </script>

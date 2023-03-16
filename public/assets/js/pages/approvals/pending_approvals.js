@@ -26,7 +26,7 @@ function get_corporate_requests(customerNumber, requestStatus) {
             if (response.responseCode == "000") {
                 $(".rquest_table tr").remove();
                 let data = response.data;
-                //console.log(data);
+                console.log("get-pending-requests =>", data);
                 // $(".pending_transaction_request tbody").empty();
                 var table = $(".pending_transaction_request").DataTable();
                 // .clear();

@@ -80,6 +80,8 @@ use App\Http\Controllers\Transfers\SwiftMT101Controller;
 Route::get('/', [AuthenticationLoginController::class, 'login']);
 Route::post('/login-api', [AuthenticationLoginController::class, 'loginApi']);
 Route::get('/login', [AuthenticationLoginController::class, 'login']);
+Route::post('/get-otp-api', [AuthenticationLoginController::class, 'get_otp']);
+Route::post('/verify-otp-api', [AuthenticationLoginController::class, 'verify_otp']);
 Route::post('/validate-customer', [SelfEnrollController::class, 'validateCustomer']);
 Route::post('/confirm-customer', [SelfEnrollController::class, 'confirmCustomer']);
 Route::post('/register-customer', [SelfEnrollController::class, 'registerCustomer']);
@@ -156,8 +158,8 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::post('/update-upload', [BulkUploadBulkUploadsController::class, 'update_upload']);
     Route::post('bollore-tranfer', [BollorieController::class, 'bollore_transfer']);
     Route::get('/swift_mt101', [SwiftMT101Controller::class, 'view_swift'])->name('swift_mt101');
-    // Route::post('/swift_mt101', [SwiftMT101Controller::class, 'upload_mt101'])->name('swift_mt101');
-
+    Route::post('/submit-swift-approval', [SwiftMT101Controller::class, 'submit_swift_for_approval'])->name('submit-swift-approval');
+    Route::post('/get-swift-rutile-detail-list-for-approval', [SwiftMT101Controller::class, 'get_swift_details'])->name('get-swift-rutile-detail-list-for-approval');
 
     // --- PAYMENTS
     Route::get('/payments', [PaymentsController::class, 'paymentTypes'])->name('payment-type');

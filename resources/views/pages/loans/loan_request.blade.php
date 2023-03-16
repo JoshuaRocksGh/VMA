@@ -191,8 +191,7 @@
     <!-- LOAN DETAIL MODAL -->
     <div id="loan_detail_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="transfer_status"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered
-    ">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div id="loan_details_content" class="loan-details-content">
                     <div class="modal-header bg-danger">
@@ -769,5 +768,6 @@
     <script>
         let noDataAvailable = {!! json_encode($noDataAvailable) !!}
         const pageData = new Object()
+        pageData.myLoans = @json(session()->get('customerLoans'));
     </script>
 @endsection

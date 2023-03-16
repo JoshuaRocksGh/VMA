@@ -74,6 +74,9 @@ class SameBankController extends Controller
     public function corporate_same_bank(Request $request)
     {
         // return $request;
+        // $request->validate([
+        //     'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        // ]);
         $base_response = new BaseResponse();
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
@@ -81,7 +84,16 @@ class SameBankController extends Controller
         $customerPhone = session()->get('customerPhone');
         $customerNumber = session()->get('customerNumber');
         $userMandate = session()->get('userMandate');
-        // return $request;
+        // return $request->voucher;
+        $transVoucher = $request->voucher;
+        $voucher = explode(",", $transVoucher);
+        $getVoucher = $voucher[1];
+        // $imageName = time() . '.' . $request->voucher->extension();
+        // $file = base64_decode($request->voucher);
+
+        // $file = $request->photo;
+
+        // return base64_encode($transVoucher);
         $data = [
             "account_no" => $request->accountNumber,
             "account_name" => $request->accountName,
@@ -95,7 +107,7 @@ class SameBankController extends Controller
             "amount" => $request->transferAmount,
             "narration" => $request->transferPurpose,
             "postBy" => $userID,
-            // "appBy" => '';
+            "transaction_voucher" => $getVoucher,
             "customerTel" => $customerPhone,
             "transBy" => $userAlias,
             "customer_no" => $customerNumber,
@@ -105,6 +117,7 @@ class SameBankController extends Controller
             "documentRef" => strtoupper(substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 2) . time()),
         ];
         // return $data;
+        // die();
         try {
             $response = Http::post(env('CIB_API_BASE_URL') . "same-bank-gone-for-pending", $data);
             $result = new ApiBaseResponse();

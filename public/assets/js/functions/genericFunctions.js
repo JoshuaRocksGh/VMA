@@ -2,6 +2,7 @@ function approve_request() {
     Swal.fire({
         title: "Do you want to Logout?",
         icon: "question",
+        // input: "text",
         showDenyButton: false,
         showCancelButton: true,
         confirmButtonText: `Proceed`,
@@ -9,10 +10,34 @@ function approve_request() {
         cancelButtonColor: "#df1919",
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
+        // console.log("result==>", result);
+
+        // return;
+
         if (result.isConfirmed) {
             setTimeout(() => {
                 window.location.replace("logout");
             }, 1000);
+            // if (!result.value) {
+            //     toaster("Enter Otp", "warning");
+            //     return;
+            // }
+            // validateOTP(result.value, 105).then((data) => {
+            //     // console.log("verifyOTP==>", data);
+            //     if (data.responseCode == "000") {
+            //         setTimeout(() => {
+            //             window.location.replace("logout");
+            //         }, 1000);
+
+            //         // $("#submit").attr("disabled", true);
+            //     } else {
+            //         toaster(data.message, "warning");
+            //         return;
+            //     }
+            //     return;
+            // });
+
+            return;
         } else if (result.isDenied) {
             return;
             // toaster('Failed to approve transaction', 'error')
@@ -353,5 +378,13 @@ $("#sidebar_logout").on("click", (e) => {
     //     window.location.replace("logout");
     // }, 1000);
 
-    approve_request();
+    getOTP(105).then((data) => {
+        console.log("logout otp==>", data);
+        if (data.responseCode == "000") {
+            approve_request();
+        } else {
+            error_alert(data.message, "#failed_login");
+        }
+    });
+    // return;
 });
