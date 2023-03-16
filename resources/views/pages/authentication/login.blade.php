@@ -142,7 +142,7 @@
                         </div>
 
                         <div class="alert alert-success bg-success text-white border-0 " role="alert"
-                            id="successful_login">
+                            id="successful_login" style="display: none">
                         </div>
 
                         <div class="form-group">
