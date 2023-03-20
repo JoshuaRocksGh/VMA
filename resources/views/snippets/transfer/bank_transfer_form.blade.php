@@ -83,7 +83,7 @@
                                         required>
                                         <option disabled value=""> -- Select
                                             Type --</option>
-                                        <option selected value="own account"> Own Account</option>
+                                        <option value="own account"> Own Account</option>
                                         <option value="same bank"> Same Bank</option>
                                         <option value="other bank">Other Bank</option>
                                     </select></div>
@@ -279,13 +279,16 @@
                         </div>
 
                         &nbsp;&nbsp;
-                        <input type="text" class="form-control text-input  "
+                        {{--  <div class="input-group-prepend">  --}}
+                        <input class="form-control  text-input key_transfer_amount" type="text" disabled>
+                        {{--  </div>  --}}
+                        <input type="text" class="form-control text-input  ml-2"
                             placeholder="Enter Amount To Transfer" id="amount"
                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                             required>
-                        <button type="button" class="btn btn-danger  ml-2 btn-sm" data-title="Rate Calculator"
+                        {{--  <button type="button" class="btn btn-danger  ml-2 btn-sm" data-title="Rate Calculator"
                             data-intro="Click to find and calculate FX Rate"><span
-                                class="mr-1 rate_button">Rate</span><i class="fas fa-calculator"></i></button>
+                                class="mr-1 rate_button">Rate</span><i class="fas fa-calculator"></i></button>  --}}
                     </div>
                 </div>
 

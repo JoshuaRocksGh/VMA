@@ -119,9 +119,10 @@ function get_corporate_requests(customerNumber, requestStatus) {
                             data[index].account_no,
                             (amount = null ? " " : amount),
                             data[index].narration,
-                            dd + "/" + mm + "/" + yyyy,
-                            data[index].postedby,
-                            `<a onclick="window.open('approvals-pending-transfer-details/${request_id}/${customer_no}'), '_blank', 'location=yes,height=670,width=1200,scrollbars=yes,status=yes'">
+                            // dd + "/" + mm + "/" + yyyy,
+                            // data[index].postedby,
+                            // `<a onclick="window.open('approvals-pending-transfer-details/${request_id}/${customer_no}'), '_blank', 'location=yes,height=670,width=1200,scrollbars=yes,status=yes'">
+                            `<a href="./approvals-pending-transfer-details/${request_id}/${customer_no}">
                                         <button type="button" class=" btn btn-xs btn-outline-info waves-effect waves-light"> View Details</button>
                                     </a>
                                     `,

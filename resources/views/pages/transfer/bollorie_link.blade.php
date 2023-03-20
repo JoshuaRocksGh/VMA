@@ -77,7 +77,11 @@
                                         id="select_currency" style="width: 80px;" readonly>
                                 </div>
 
-                                &nbsp;&nbsp;
+                                &nbsp;
+                                <input class="form-control  text-input key_transfer_amount" type="text" disabled>
+                                &nbsp;
+
+
                                 <input type="text" class="form-control " id="amount"
                                     placeholder="Enter Amount To Transfer"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"

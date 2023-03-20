@@ -222,7 +222,7 @@ $(function () {
             .trigger("change");
     }
     // on page load it gets accunt details
-    $("#search_transaction").trigger("click");
+    // $("#search_transaction").trigger("click");
 
     $("#filter").on("change", (e) => {
         e.preventDefault();

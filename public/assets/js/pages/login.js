@@ -58,7 +58,7 @@ function login(email, password) {
                     $("#submit").attr("disabled", true);
                 }
             } else {
-                // {{-- $('#submit').attr('disabled', true); --}}
+                $("#submit").attr("disabled", false);
                 $("#spinner").hide();
                 $("#spinner-text").hide();
                 $("#log_in").show();
@@ -66,6 +66,7 @@ function login(email, password) {
             }
         },
         error: function (xhr, status, error) {
+            // $("#submit").attr("disabled", true);
             $("#submit").attr("disabled", false);
             $("#spinner").hide();
             $("#spinner-text").hide();
@@ -185,16 +186,24 @@ function registerCustomer(userData) {
     })
         .done((response) => {
             if (response.responseCode === "000") {
-                console.log(response.message);
-                $("#one_time_input_area").hide(300);
-                $("#self_enroll_message").text(response.message);
-                $("#self_enroll_message").toggleClass(
-                    "alert-danger alert-success bg-danger bg-success"
-                );
-                $("#self_enroll_message").show;
+                // console.log(response.message);
+                success_alert(response.message, "#successful_self_enroll");
                 setTimeout(() => {
+                    $("#one_time_input_area").hide(300);
+
                     window.location = "login";
-                }, 3000);
+
+                    // $("#self_enroll_form2").hide();
+                    // $("#s_loading2").toggle();
+                    // $("#self_enroll_form3").toggle(500);
+                }, 5000);
+                // $("#self_enroll_message").text(response.message);
+                // $("#self_enroll_message").toggleClass(
+                //     "alert-danger alert-success bg-danger bg-success"
+                // );
+                // $("#self_enroll_message").show;
+
+                // setTimeout(() => {}, 3000);
             } else {
                 error_alert(response.message, "#self_enroll_message");
                 $("#s_next3").show();
@@ -235,6 +244,7 @@ function getSecurityQuestion(resetUserId) {
                 );
                 $("#security_question_form").toggle(500);
                 $("#security_question_submit").show();
+                $("#security_question_otp_submit").hide();
                 $("#reset_password_submit_btn").hide();
                 $("#user_id_next_btn").hide();
                 $("#password_verification").hide();
@@ -274,7 +284,15 @@ function submitSecurityQuestion(userData) {
             console.log(response.message);
             response.message;
             if (response.responseCode == 000) {
-                error_alert(response.message, "#reset_success");
+                // $("#security_question_otp_submit").attr("disabled", false);
+                // success_alert(response.message, "#reset_success");
+
+                $("#security_question_form").hide();
+                $("#security_question_otp").show();
+                $("#security_question_otp_submit").show();
+                $("#security_question_submit").hide();
+                return;
+
                 $("#security_question_submit").attr("disabled", false);
                 $("#submit_spinner").hide();
                 $("#security_question_submit_text").show();
@@ -375,6 +393,53 @@ $(document).ready(function () {
         $(".spinner-text-next").show();
         $(".user_id_next_btn_text").hide();
         getSecurityQuestion(resetUserId);
+
+        getOTP(116).then((data) => {
+            // console.log("cget otp==>", data);
+            // return;
+            if (data.responseCode == "000") {
+                $("#security_question_form").toggle(500);
+                $("#security_question_submit").show();
+                $("#security_question_otp_submit").hide();
+                $("#security_question_otp_submit").hide();
+            } else {
+                // $("#spinner").hide();
+                // $("#spinner-text").hide();
+                // $("#log_in").show();
+                $("#user_id_next_btn").attr("disabled", false);
+                $(".spinner-text-next").hide();
+                $(".user_id_next_btn_text").show();
+                error_alert(data.message, "#no_question");
+            }
+            return;
+        });
+    });
+
+    $("#security_question_otp_submit").on("click", (e) => {
+        e.preventDefault();
+        $("#security_question_otp_submit").attr("disabled", true);
+        $("#security_question_otp_submit_text").hide();
+        $(".otp_submit_spinner").show();
+        validateOTP(otp, 116).then((data) => {
+            console.log("verifyOTP==>", data);
+            if (data.responseCode == "000") {
+                getSecurityQuestion(resetUserId);
+                // $("#submit").attr("disabled", true);
+            } else {
+                $("#security_question_otp_submit").attr("disabled", false);
+                $("#security_question_otp_submit_text").show();
+                $(".otp_submit_spinner").hide();
+                // $(".submit_otp_button").show();
+                // $(".spinner-text-next").hide();
+                // $("#verify_otp_button").attr("disabled", false);
+
+                // $(".submit_otp_button").show();
+                // $(".spinner-text-next").hide();
+                // $("#log_in").show();
+                error_alert(data.message, "#display_otp_error");
+            }
+            return;
+        });
     });
 
     $("#security_question_submit").on("click", (e) => {
@@ -395,10 +460,44 @@ $(document).ready(function () {
             error_alert("Passwords do not match", "#no_question");
             return false;
         }
+
+        if (userData.newPassword.search(/[a-z]/i) < 0) {
+            error_alert(
+                "Your password must contain at least one lower case letter.",
+                "#no_question"
+            );
+            return;
+        }
+        if (userData.newPassword.search(/[A-Z]/) < 0) {
+            error_alert(
+                "Your password must contain at least one upper case letter.",
+                "#no_question"
+            );
+            return;
+        }
+        if (userData.newPassword.search(/[0-9]/) < 0) {
+            error_alert(
+                "Your password must contain at least one digit.",
+                "#no_question"
+            );
+            return;
+        }
+        if (userData.newPassword.search(/[!@#\$%\^&\*_]/) < 0) {
+            error_alert(
+                "Your password must contain at least special char from -[ ! @ # $ % ^ & * _ ]",
+                "#no_question"
+            );
+            return;
+        }
+        // if (errors.length > 0) {
+        //     alert(errors.join("\n"));
+        //     return false;
+        // }
+        // return;
         userData.securityQuestionCode = $("#security_question_answer").attr(
             "securityQuestionCode"
         );
-        console.log(userData);
+        // console.log(userData);
         $("#security_question_submit").attr("disabled", true);
         $("#submit_spinner").show();
         $("#security_question_submit_text").hide();

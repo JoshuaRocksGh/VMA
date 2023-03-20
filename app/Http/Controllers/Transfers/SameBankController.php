@@ -85,9 +85,9 @@ class SameBankController extends Controller
         $customerNumber = session()->get('customerNumber');
         $userMandate = session()->get('userMandate');
         // return $request->voucher;
-        $transVoucher = $request->voucher;
-        $voucher = explode(",", $transVoucher);
-        $getVoucher = $voucher[1];
+        $transVoucher = $request->voucher ?? '';
+        // $voucher = explode(",", $transVoucher);
+        // $getVoucher = $voucher[1];
         // $imageName = time() . '.' . $request->voucher->extension();
         // $file = base64_decode($request->voucher);
 
@@ -107,7 +107,7 @@ class SameBankController extends Controller
             "amount" => $request->transferAmount,
             "narration" => $request->transferPurpose,
             "postBy" => $userID,
-            "transaction_voucher" => $getVoucher,
+            "transaction_voucher" => $transVoucher,
             "customerTel" => $customerPhone,
             "transBy" => $userAlias,
             "customer_no" => $customerNumber,

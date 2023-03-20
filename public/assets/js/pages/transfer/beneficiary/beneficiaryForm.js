@@ -7,12 +7,28 @@ function getLocalBanks() {
         success: function (response) {
             let data = response.data;
             if (data.length > 1) {
+                // console.log(data.sort());
+                let myBanksArray = data;
+                myBanksArray.sort(function (a, b) {
+                    let nameA = a.bankDescription.toUpperCase(); // convert name to uppercase
+                    let nameB = b.bankDescription.toUpperCase(); // convert name to uppercase
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+
+                // console.log(myArray);
                 $("#select_bank").empty();
                 $("#select_bank").append(
                     `<option selected disabled value=""> --- Select Bank ---</option>`
                 );
                 $.each(data, (i) => {
-                    let { bankCode, bankDescription, bankSwiftCode } = data[i];
+                    let { bankCode, bankDescription, bankSwiftCode } =
+                        myBanksArray[i];
                     option = `<option value="${bankCode}" swift-code="${bankSwiftCode}">${bankDescription}</option>`;
                     $("#select_bank").append(option);
                 });
@@ -33,12 +49,28 @@ function getCountries() {
         success: function (response) {
             let data = response.data;
             if (data.length > 1) {
+                // console.log("myCountriesArray", data);
+                let myCountriesArray = data;
+                myCountriesArray.sort(function (a, b) {
+                    let nameA = a.description.toUpperCase(); // convert name to uppercase
+                    let nameB = b.description.toUpperCase(); // convert name to uppercase
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+
+                // console.log(myCountriesArray);
                 $("#select_country").empty();
                 $("#select_country").append(
                     `<option selected disabled value=""> --- Select Country ---</option>`
                 );
                 $.each(data, (i) => {
-                    let { actualCode, codeType, description } = data[i];
+                    let { actualCode, codeType, description } =
+                        myCountriesArray[i];
                     option = `<option value="${codeType}"  data-country-code="${actualCode}">${description}</option>`;
                     $("#select_country").append(option);
                 });
@@ -60,15 +92,32 @@ function getInternationalBanks(countryCode) {
         success: function (response) {
             // console.log("international ==>", response)
             let data = response.data;
+
+            // console.log("myInternationalBanks", data);
+            let myInternationalBanks = data;
+            myInternationalBanks.sort(function (a, b) {
+                let nameA = a.BANK_DESC.toUpperCase(); // convert name to uppercase
+                let nameB = b.BANK_DESC.toUpperCase(); // convert name to uppercase
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            // console.log(myInternationalBanks);
             $("#select_bank").empty();
             $("#select_bank").append(
                 `<option selected disabled value=""> --- Select Bank ---</option>`
             );
             if (data && data.length > 1) {
-                data = data.sort((a, b) => a.COUNTRY - b.COUNTRY);
+                // data = data.sort((a, b) => a.COUNTRY - b.COUNTRY);
                 $.each(data, (i) => {
-                    let { BICODE, BANK_DESC, COUNTRY } = data[i];
-                    option = `<option value="${BICODE}" data-bank-country="${COUNTRY}" >${BANK_DESC}</option>`;
+                    let { BICODE, BANK_DESC, COUNTRY } =
+                        myInternationalBanks[i];
+                    option = `<option swift-code="${BICODE}" data-bank-country="${COUNTRY}" >${BANK_DESC}</option>`;
                     $("#select_bank").append(option);
                 });
 
@@ -87,9 +136,9 @@ function getInternationalBanks(countryCode) {
     });
 }
 function saveBeneficiary(data) {
-    // console.log("saveBeneficiary ==>", data);
-    // return;
-    siteLoading("show");
+    console.log("saveBeneficiary ==>", data);
+    return;
+    // siteLoading("show");
     $.ajax({
         type: "POST",
         url: "save-transfer-beneficiary-api",
@@ -279,14 +328,19 @@ function initBeneficiaryForm() {
         // return;
 
         validateOTP(beneficiaryDetails.beneficiaryOTP, 504).then((data) => {
-            console.log("verifyOTP==>", data);
             if (data.responseCode == "000") {
+                console.log("verifyOTP==>", data.responseCode);
+                console.log("saveBeneficiary==>", beneficiaryDetails);
+                // return;);
+
                 // $("#pin_code_modal").modal("show");
                 saveBeneficiary(beneficiaryDetails);
+                // return;
             } else {
                 toaster(data.message, "error");
+                // return;
             }
-            return;
+            // return;
         });
     });
 
@@ -331,7 +385,20 @@ function validateFormInputs() {
     const accountName = $("#account_name").val();
     const beneficiaryOTP = $("#beneficiary_otp").val();
     //same bank beneficiary checks
-
+    // console.log(
+    //     type,
+    //     mode,
+    //     accountNumber,
+    //     bankName,
+    //     bankCode,
+    //     bankCode,
+    //     bankCountry,
+    //     beneficiaryName,
+    //     beneficiaryEmail,
+    //     beneficiaryAddress,
+    //     accountName,
+    //     beneficiaryOTP
+    // );
     if (type === "SAB") {
         bankName = "SIERRA LEONE COMMERCIAL BANK";
         if (!accountName) {

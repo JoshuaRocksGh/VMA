@@ -100,8 +100,9 @@
                             <div class="input-group-prepend ">
                                 <input type="text" placeholder="SLE"
                                     class="col-3 form-control text-input account_currency " style="width: 20px;" disabled>
+                                {{--  <input type="text" class="col-4">  --}}
                                 <input type="text" name="bulk_amount" id="bulk_amount"
-                                    pattern="([0-9]{1,3}).([0-9]{1,3})"
+                                    pattern="([0-9]{1,3}).([0-9]{1,3})" placeholder="Enter bulk amount"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                     class="form-control bulk_amount" autocomplete="off" required>
                             </div>
