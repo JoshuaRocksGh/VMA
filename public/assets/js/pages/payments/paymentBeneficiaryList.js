@@ -189,7 +189,7 @@ $(() => {
     getPaymentTypes();
     $("#add_beneficiary").on("click", () => {
         getOTP(502).then((data) => {
-            // console.log(data);
+            console.log(data.responseCode);
             if (data.responseCode == "000") {
                 // editBankBeneficiary(beneficiaryData, currentType);
                 addPaymentBeneficiary($(".current-type").attr("data-value"));

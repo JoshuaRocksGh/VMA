@@ -575,6 +575,18 @@ $(document).ready(function () {
     //////////////////////////////
     //// BULK EXCEL VALIDATION ////
     ///////////////////////////
+    $("#invoice_file").change(function () {
+        var file = document.getElementById("invoice_file").files[0];
+        console.log("file ==>", file);
+
+        if (file.size > 5000000) {
+            toaster(
+                "The file size is too large. Max file size of 5MB!",
+                "error"
+            );
+            return;
+        }
+    });
 
     $("#bulk_upload_form").submit(function (e) {
         e.preventDefault();
@@ -582,9 +594,22 @@ $(document).ready(function () {
 
         // FILE UPLOAD
         var file = document.getElementById("excel_file").files[0];
-        //console.log(file);
-        //return false;
+        var trans_invoice = document.getElementById("invoice_file").files[0];
+        // if (file.size > 5000000) {
+        //     toaster(
+        //         "The file size is too large. Max file size of 5MB!",
+        //         "error"
+        //     );
+        //     return;
+        // }
+        if (trans_invoice) {
+            var fileUploaded = "Y";
+        } else {
+            var fileUploaded = "";
+        }
         if (file) {
+            //console.log(file);
+            //return false;
             var file_name = file.name;
             var file_extension = file_name.split(".").pop().toLowerCase();
 
@@ -603,8 +628,7 @@ $(document).ready(function () {
                 // check if image size is less than 20MB
                 toaster(
                     "The file size is too large. The max file size 20MB!",
-                    "error",
-                    3000
+                    "error"
                 );
             } else {
                 var form_data = new FormData();
@@ -622,6 +646,8 @@ $(document).ready(function () {
                 form_data.append("bulk_amount", bulk_amount);
                 form_data.append("reference_no", reference_no);
                 form_data.append("value_date", value_date);
+                form_data.append("voucher", trans_invoice);
+                form_data.append("invoiceFileUploaded", fileUploaded);
                 form_data.append("excel_file", file_);
                 form_data.append("file_name", file_name);
                 form_data.append("file_extension", file_extension);
@@ -768,7 +794,7 @@ $(document).ready(function () {
                             return;
                         } else {
                             var action_button = `<a href="delete-bulk-transfer?batch_no=${fileBatch}" class=" waves-effect waves-light text-center delete_bulk_transfer_upload" batch_no="${fileBatch}">
-                <i class="mdi mdi-delete-forever-outline mdi-36px text-dark" style="width:50px; height:80px"></i>
+                <i class="mdi mdi-delete-forever-outline mdi-36px text-danger" style="width:50px; height:80px"></i>
             </a>`;
                         }
                         total_bulk_upload.row
@@ -919,13 +945,17 @@ $(document).ready(function () {
                 },
             });
         } else {
-            swal({
-                text: "Something went wrong. Upload was unsuccessful!",
-                icon: "warning",
-                dangerMode: true,
-            }).then(function () {
+            toaster(
+                "Something went wrong. Upload was unsuccessful!",
+                "warning"
+            ).then(function () {
                 document.getElementById("file").value = "";
             });
+            // swal({
+            //     text: "Something went wrong. Upload was unsuccessful!",
+            //     icon: "warning",
+            //     dangerMode: true,
+            // })
         }
     });
 

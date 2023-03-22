@@ -254,7 +254,8 @@ class SwiftMT101Controller extends Controller
 
             $response = Http::post($url . "swift-file-details/$batch_no");
 
-            return $response;
+
+            return json_encode(array('response' => $response));
 
             // $result = new ApiBaseResponse();
 

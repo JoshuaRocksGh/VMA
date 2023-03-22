@@ -368,6 +368,8 @@ function decodeString(stringToDecode) {
 
 $("#sidebar_logout").on("click", (e) => {
     e.preventDefault();
+    approve_request();
+
     // Swal.fire({
     //     title: "Logout successful!",
     //     html: "Redirecting ...",
@@ -378,13 +380,13 @@ $("#sidebar_logout").on("click", (e) => {
     //     window.location.replace("logout");
     // }, 1000);
 
-    getOTP(105).then((data) => {
-        console.log("logout otp==>", data);
-        if (data.responseCode == "000") {
-            approve_request();
-        } else {
-            error_alert(data.message, "#failed_login");
-        }
-    });
+    // getOTP(105).then((data) => {
+    //     console.log("logout otp==>", data);
+    //     if (data.responseCode == "000") {
+    //         approve_request();
+    //     } else {
+    //         error_alert(data.message, "#failed_login");
+    //     }
+    // });
     // return;
 });

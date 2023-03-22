@@ -267,6 +267,18 @@
                                 name="reset_confirm_password" autocomplete="new-password" class="form-control" />
                         </div>
 
+                        <div class="form-group" id="security_question_otp" style="display: none">
+                            <div class="form-group" id="user_id_view_otp">
+                                <label for="user_id_view_otp">Enter Otp</label>
+                                <div class="input-group input-group-merge ">
+                                    <input type="text" id="reset_user_id_otp" placeholder="Enter otp received"
+                                        name="reset_user_id_otp" class="form-control" autocomplete="off"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
+                                        aria-autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group mb-0 text-center">
                             <br>
                             <button class="btn btn-danger btn-block" type="button" id="user_id_next_btn">
@@ -280,6 +292,14 @@
                                 <span id="security_question_submit_text">Submit</span>
                                 <span class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
                                     id="submit_spinner" style="display: none"></span>
+                            </button>
+                            <button class="btn btn-danger btn-block" style="display: none" type="button"
+                                id="security_question_otp_submit">
+                                <span id="security_question_otp_submit_text">Submit</span>
+                                <span class="spinner-text-next otp_submit_spinner" style="display: none"
+                                    id="">Loading</span>
+                                <span class="spinner-border spinner-border-sm mr-1 otp_submit_spinner" role="status"
+                                    aria-hidden="true" id="" style="display: none"></span>
                             </button>
                         </div>
                         <div class="mt-4 text-center"> <button type="button" class=" font-weight-bold text-red  mx-auto"

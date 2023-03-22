@@ -118,6 +118,7 @@ $(document).ready(function () {
         bolloreInfo.receiverName = $("#reciever_name").val();
         bolloreInfo.transferAmount = $("#amount").val();
         bolloreInfo.idType = $("#id_type").val();
+        bolloreInfo.idTypeName = $("#id_type option:selected").text();
         bolloreInfo.idNumber = $("#id_number").val();
         bolloreInfo.transferPurpose = $("#transfer_purpose").val();
         bolloreInfo.receiverTelephone = $("#telephone_number").val();
@@ -141,7 +142,7 @@ $(document).ready(function () {
         $("#display_beneficiary_name").text(bolloreInfo.beneficiaryName);
         $("#display_beneficiary_address").text(bolloreInfo.beneficiaryAddress);
         $("#display_to_receiver_name").text(bolloreInfo.receiverName);
-        $("#display_to_receiver_id_type").text(bolloreInfo.idType);
+        $("#display_to_receiver_id_type").text(bolloreInfo.idTypeName);
         $("#display_to_receiver_id_number").text(bolloreInfo.idNumber);
         $("#display_to_receiver_telephone").text(bolloreInfo.receiverTelephone);
         $("#display_transfer_amount").text(bolloreInfo.transferAmount);
@@ -156,6 +157,21 @@ $(document).ready(function () {
 
         $("#transaction_summary").hide();
         $("#bollore_request").show();
+    });
+
+    $("#amount").on("keyup", function () {
+        // e.preventDefault();
+        bolloreInfo.transferAmount = $(this).val();
+        console.log(bolloreInfo.transferAmount);
+
+        //
+        $(".display_transfer_amount").text(
+            formatToCurrency(bolloreInfo.transferAmount)
+        );
+
+        $(".key_transfer_amount").val(
+            formatToCurrency(bolloreInfo.transferAmount)
+        );
     });
 
     $("#confirm_transfer_button").on("click", (e) => {
