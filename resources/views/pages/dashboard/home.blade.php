@@ -38,15 +38,15 @@
                                 </a>
                                 <a href="#canvas_account" data-toggle="tab" data-target="accountsPie" aria-expanded="false"
                                     class="nav-link mb-2 canvas-tab font-10 ">
-                                    <b>Accounts</b>
+                                    <b>My Deposits</b>
                                 </a>
                                 <a href="#canvas_loan" data-toggle="tab" data-target="loansPie" aria-expanded="false"
                                     class="mb-2  font-10 canvas-tab nav-link">
-                                    <b>Loans</b>
+                                    <b>My Loans</b>
                                 </a>
                                 <a href="#canvas_investment" data-toggle="tab" data-target="investmentsPie"
                                     aria-expanded="true" class="mb-2 canvas-tab font-10 nav-link ">
-                                    <b>Investments</b>
+                                    <b>My Investments</b>
                                 </a>
                         </nav>
                         <div class="mb-4 w-100 col-md overflow-hidden position-relative">
