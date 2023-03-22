@@ -100,6 +100,13 @@ class StandingOrderController extends Controller
         $customerNumber = session()->get('customerNumber');
         $userMandate = session()->get('userMandate');
 
+        if ($req->fileUploaded == "Y") {
+            $getInvoice = file_get_contents($req->voucher);
+            $transVoucher = base64_encode($getInvoice);
+        } else {
+            $transVoucher = $req->voucher;
+        }
+
         // return ($req);
         $data =
             [
@@ -126,6 +133,8 @@ class StandingOrderController extends Controller
                 "user_mandate" => $userMandate,
                 "beneficiaryName" => $req->beneficiaryName,
                 "documentRef" => strtoupper(substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 2) . time()),
+                "transaction_voucher" => $transVoucher,
+                "file_uploaded" => $req->fileUploaded,
             ];
         // return $data;
         try {

@@ -218,7 +218,11 @@
             {{-- =============================================================== --}}
             {{-- Invoice Transaction --}}
             {{-- =============================================================== --}}
-            @if ($currentPath === 'Local Bank' || $currentPath === 'Same Bank' || $currentPath === 'International Bank')
+            @if (
+                $currentPath === 'Local Bank' ||
+                    $currentPath === 'Same Bank' ||
+                    $currentPath === 'International Bank' ||
+                    $currentPath === 'Standing Order')
                 <div class="col-12">
                     <div class="form-group align-items-center row">
                         <label class="col-md-4 text-dark">Transfer Type </label>

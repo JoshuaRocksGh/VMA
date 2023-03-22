@@ -137,7 +137,7 @@ function getInternationalBanks(countryCode) {
 }
 function saveBeneficiary(data) {
     console.log("saveBeneficiary ==>", data);
-    return;
+    // return;
     // siteLoading("show");
     $.ajax({
         type: "POST",
@@ -327,6 +327,8 @@ function initBeneficiaryForm() {
         // console.log("beneficiaryDetails ==>", beneficiaryDetails);
         // return;
 
+        // siteLoading("show");
+
         validateOTP(beneficiaryDetails.beneficiaryOTP, 504).then((data) => {
             if (data.responseCode == "000") {
                 console.log("verifyOTP==>", data.responseCode);
@@ -334,9 +336,13 @@ function initBeneficiaryForm() {
                 // return;);
 
                 // $("#pin_code_modal").modal("show");
+                // siteLoading("hide");
+
                 saveBeneficiary(beneficiaryDetails);
                 // return;
             } else {
+                // siteLoading("hide");
+
                 toaster(data.message, "error");
                 // return;
             }

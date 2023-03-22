@@ -160,6 +160,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/swift_mt101', [SwiftMT101Controller::class, 'view_swift'])->name('swift_mt101');
     Route::post('/submit-swift-approval', [SwiftMT101Controller::class, 'submit_swift_for_approval'])->name('submit-swift-approval');
     Route::post('/get-swift-rutile-detail-list-for-approval', [SwiftMT101Controller::class, 'get_swift_details'])->name('get-swift-rutile-detail-list-for-approval');
+    Route::post('/get-transaction-invoice-api', [TransferStatusController::class, 'transaction_invoice']);
 
     // --- PAYMENTS
     Route::get('/payments', [PaymentsController::class, 'paymentTypes'])->name('payment-type');
@@ -310,7 +311,6 @@ Route::post('get-transaction-fees', [FunctionsController::class, 'get_transactio
 Route::get('get-fx-rate-api', [FunctionsController::class, 'get_fx_rate'])->name('get-fx-rate-api');
 Route::get('get-correct-fx-rate-api', [FunctionsController::class, 'get_correct_fx_rate'])->name('get-correct-fx-rate-api');
 Route::get('get-lovs-list-api', [FunctionsController::class, 'lovs_list'])->name('get-lovs-list-api');
-Route::post('corporate-international-bank-transfer-api', [InternationalBankController::class, 'corporate_international_bank']);
 
 
 Route::get('/get-my-account', [OwnAccountController::class, 'get_my_accounts']);
@@ -330,6 +330,7 @@ Route::post('/corporate-own-account-transfer-api', [OwnAccountController::class,
 Route::post('/corporate-same-bank-transfer-api', [SameBankController::class, 'corporate_same_bank']);
 Route::post('/corporate-local-bank-transfer-api', [LocalBankController::class, 'corporateLocalBankTransfer']);
 Route::post('/corporate-onetime-local-bank-transfer-api', [APITransferLocalBankController::class, 'corporate_onetime_beneficiary']);
+Route::post('corporate-international-bank-transfer-api', [InternationalBankController::class, 'corporate_international_bank']);
 Route::post('corporate-standing-order-transfer-api', [StandingOrderController::class, 'corporate_standing_order_request']);
 // Transfers Add Beneficiary
 Route::post('save-transfer-beneficiary-api', [TransferBeneficiaryController::class, 'saveBeneficiary']);

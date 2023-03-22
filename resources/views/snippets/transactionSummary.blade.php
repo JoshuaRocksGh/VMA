@@ -149,9 +149,13 @@
                                 id="display_posted_by">{{ session()->get('userAlias') }}</span>
                         </td>
                     </tr>
-                    @if ($currentPath === 'Local Bank' || $currentPath === 'Same Bank' || $currentPath === 'International Bank')
+                    @if (
+                        $currentPath === 'Local Bank' ||
+                            $currentPath === 'Same Bank' ||
+                            $currentPath === 'International Bank' ||
+                            $currentPath === 'Standing Order')
                         <tr>
-                            <td>Voucher Attachment: </td>
+                            <td>Invoice Attachment: </td>
                             <td>
                                 <span class=" font-13 text-primary h3" id="display_voucher_attachment"></span>
                             </td>

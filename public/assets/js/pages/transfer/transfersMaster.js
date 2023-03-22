@@ -1,16 +1,22 @@
+const formData = new FormData();
+
 function makeTransfer(url, data) {
+    // console.log("makeTransfer===>, ", data);
     siteLoading("show");
     $.ajax({
         type: "POST",
         url: url,
         datatype: "application/json",
         data: data,
+        processData: false,
+        contentType: false,
+        // cache: false,
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
             siteLoading("hide");
-            console.log(response);
+            console.log("makeTransfer ==>", response);
             if (response.responseCode == "000") {
                 swal.fire({
                     // title: "Transfer successful!",
@@ -47,6 +53,7 @@ function makeTransfer(url, data) {
 }
 
 function corporateSpecific(transferInfo) {
+    console.log("transferInfo ==>", transferInfo);
     const endPoint =
         "corporate-" +
         transferType.toLowerCase().trim().replace(" ", "-") +
@@ -304,6 +311,8 @@ function handleToAccount(account) {
 function getTransType() {
     var transType = $("input[name='trans_type']:checked").val();
     $("#display_voucher_attachment").text("No");
+    // transferInfo.voucher = null;
+    // transferInfo.fileUploaded = null;
 
     console.log(transType);
 }
@@ -354,6 +363,8 @@ $(() => {
         if (transType == "normal") {
             console.log("===normal");
 
+            transferInfo.voucher = "";
+            transferInfo.fileUploaded = "";
             $(".display_upload_input").hide();
             $("#display_voucher_attachment").text("No");
 
@@ -748,23 +759,43 @@ $(() => {
 
     // adding invoice file
     transferInfo.voucher = "";
+    transferInfo.fileUploaded = "";
+
     $("#invoice_file").change(function () {
         var file = document.getElementById("invoice_file").files[0];
+        console.log("file ==>", file);
 
-        // console.log(toBase64(file));
+        if (file.size > 5000000) {
+            toaster(
+                "The file size is too large. Max file size of 5MB!",
+                "error"
+            );
+            return;
+        }
+        // console.log("ISCORPORATE ==>", );
+        // formData.append(
+        //     "voucher",
+        //     document.getElementById("invoice_file").files[0]
+        // );
+
+        // console.log("===>", document.getElementById("invoice_file").files[0]);
         // console.log("return==>", $(this).val());
-        var filename = $(this)
-            .val()
-            .replace(/C:\\fakepath\\/i, "");
-        console.log(filename);
-        transferInfo.voucher = filename;
+        // var filename = $(this)
+        //     .val()
+        //     .replace(/C:\\fakepath\\/i, "");
+        // var filename = $(this).val();
+        transferInfo.voucher = file;
+        transferInfo.fileUploaded = "Y";
+        // transferInfo.formData = formData;
+        // console.log("filename ==>", formData);
+
         // onetimeToAccount.voucher = filename;
 
         // file.arrayBuffer().then((arrayBuffer) => {
         //     const blob = new Blob([new Uint8Array(arrayBuffer)], {
         //         type: file.type,
         //     });
-        //     console.log(blob);
+        // console.log("invoice_file ==>", transferInfo);
         //     transferInfo.voucher = blob.size;
         // });
         // if (file) {
@@ -948,7 +979,7 @@ $(() => {
 
     $("#confirm_transfer_button").on("click", (e) => {
         e.preventDefault();
-        console.log(transferInfo);
+        console.log("confirm_transfer_button ==>", transferInfo);
 
         if (!$("#terms_and_conditions").is(":checked")) {
             toaster("Accept Terms & Conditions to continue", "warning");
@@ -960,7 +991,21 @@ $(() => {
         }
         confirmationCompleted = true;
         if (ISCORPORATE) {
-            corporateSpecific(transferInfo);
+            // let formdata = new FormData();
+            // formdata.append("transferInfoVou", transferInfo.voucher);
+
+            for (const key in transferInfo) {
+                if (transferInfo.hasOwnProperty(key)) {
+                    formData.append(key, transferInfo[key]);
+                }
+            }
+
+            // formData.append("voucher_file", transferInfo.voucher);
+
+            // console.log("ISCORPORATE ==>", formData);
+
+            // corporateSpecific(formData);
+            corporateSpecific(formData);
             return;
         }
 

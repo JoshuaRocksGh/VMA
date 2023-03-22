@@ -165,13 +165,13 @@
 
 
                         <div class="col-md-4 form-group" data-title="Upload File" data-intro="Click to choose file"
-                            onclick="get_file_name('transaction_voucher','transaction_voucher_file_name')">
-                            <label for="inputEmail3" class=" text-dark"> Attach Document<span class="text-danger">
+                            onclick="get_file_name('invoice_file','transaction_voucher_file_name')">
+                            <label for="inputEmail3" class=" text-dark"> Attach Invoice<span class="text-danger">
                                     *</span></label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="transaction_voucher"
-                                        id="transaction_voucher">
+                                    <input type="file" class="custom-file-input" name="invoice_file"
+                                        id="invoice_file">
                                     <label class="custom-file-label" for="transaction_voucher_file_name"
                                         id="transaction_voucher_file_name">Choose file</label>
                                 </div>

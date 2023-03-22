@@ -222,6 +222,7 @@
 
 
 
+        {{--  bulk transfer modal  --}}
         <!--  Modal content for the Large example -->
         <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
             aria-hidden="true">
@@ -281,6 +282,7 @@
         </div>
         <!-- /.modal -->
 
+        {{--  Swift Rutile modal  --}}
         <!--  Modal content for the Large example -->
         <div class="modal fade" id="bs-example-modal-lg1" tabindex="-1" role="dialog"
             aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -330,6 +332,25 @@
 
                             </div>
                         </div>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <!--  Modal content for the Large example -->
+        <div class="modal fade" id="bs-example-modal-lg2" tabindex="-1" role="dialog"
+            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title text-dark" id="myLargeModalLabel"> Tansaction Invoice</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body display-trans-invoice">
+                        <img class="display-trans-invoice" style="width:700px;height:700px;padding:10px" />
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -533,9 +554,9 @@
                         let bank_name = pending_request.bank_name;
                         bank_name != null ? append_approval_details("Bank Name", bank_name) : '';
 
-                        let beneficiary_name = pending_request.beneficiary_name;
+                        {{--  let beneficiary_name = pending_request.beneficiary_name;
                         beneficiary_name != null ? append_approval_details("Beneficiary Name",
-                            beneficiary_name) : '';
+                            beneficiary_name) : '';  --}}
 
                         let beneficiary_name_ = pending_request.beneficiaryname;
                         beneficiary_name_ != null ? append_approval_details("Beneficiary Name",
@@ -611,6 +632,12 @@
                         let posted_by = pending_request.postedby;
                         posted_by != null ? append_approval_details("Posted By", posted_by) : '';
 
+                        let transaction_invoice = pending_request.trans_invoice;
+                        transaction_invoice != null ? append_transaction_invoice("Transaction Invoice",
+                            transaction_invoice) : '';
+
+                        let transaction_invoice_batch = pending_request.invoice_batch;
+
                         let pending_approvers = pending_request.approvers
                         if (pending_approvers == null || pending_approvers == undefined) {
                             var approvers = 'PENDING APPROVAL'
@@ -657,6 +684,8 @@
                             //console.log("swift ===>", pending_request)
 
                         }
+
+                        ajax_call_transaction_invoice(transaction_invoice_batch)
 
                         $.each(approvers_mandate, function(index) {
 
@@ -905,6 +934,38 @@
             })
         }
 
+        function ajax_call_transaction_invoice(batch_no) {
+            $.ajax({
+                type: "POST",
+                url: '../../get-transaction-invoice-api',
+                {{--  contentType: "application/json; charset=utf-8",  --}}
+                datatype: 'application/json',
+                data: {
+                    'batch_no': batch_no
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    {{--  console.log(response)  --}}
+                    if (response.responseCode == "000") {
+                        {{--  console.log(response.data)  --}}
+                        $(".display-trans-invoice").attr("src", "data:image/jpeg;base64," + response.data)
+                    } else {
+                        setTimeout(function() {
+                            ajax_call_transaction_invoice(batch_no)
+                        }, 1000)
+                    }
+
+                },
+                error: function(xhr, status, error) {
+                    {{--  setTimeout(function() {
+                        ajax_call_bulk_korpor_details_endpoint(batch_no)
+                    }, $.ajaxSetup().retryAfter)  --}}
+                }
+            })
+        }
+
         function append_approval_details(description, data) {
 
             $('#approval_details').append(`<div class="row ">
@@ -931,6 +992,17 @@
                     <span class="col-md-6 text-left font-14">Swift Details</span>
                     <span class="col-md-6 text-right text-primary ">
                         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#bs-example-modal-lg1">View Transaction Details</button>
+
+                    </span>
+                </div>
+                <hr class="mt-0">`)
+        }
+
+        function append_transaction_invoice() {
+            $('#approval_details').append(`<div class="row ">
+                    <span class="col-md-6 text-left font-14">Transaction Invoice</span>
+                    <span class="col-md-6 text-right text-primary ">
+                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#bs-example-modal-lg2">View Transaction Invoice</button>
 
                     </span>
                 </div>

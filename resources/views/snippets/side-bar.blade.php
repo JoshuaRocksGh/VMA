@@ -93,6 +93,9 @@
                     <li>
                         <a href="{{ url('payments') }}">Make Payment</a>
                     </li>
+                    <li>
+                        <a href="{{ url('airport-tax-payment') }}">Airport Tax</a>
+                    </li>
 
                     <li>
                         <a href="{{ url('salone-link') }}">Salone-Link</a>

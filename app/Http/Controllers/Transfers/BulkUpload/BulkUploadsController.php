@@ -260,6 +260,21 @@ class BulkUploadsController extends Controller
 
         // Validate reference number in excel before upload //
 
+        if ($request->invoiceFileUploaded == "Y") {
+            $getInvoice = file_get_contents($request->voucher);
+            $transVoucher = base64_encode($getInvoice);
+            session([
+                'transVoucher' => $transVoucher,
+                'fileUploaded' => 'Y'
+            ]);
+        } else {
+            $transVoucher = $request->voucher;
+            session([
+                'transVoucher' => '',
+                'fileUploaded' => ''
+            ]);
+        }
+
         $data = [
             'debitAccount' => $account_no,
             // 'bankType' => $bank_code,
@@ -739,6 +754,8 @@ class BulkUploadsController extends Controller
         $fileBatch = $request->query('batch_no');
         $customerAccounts = session()->get('customerAccounts');
         $userID = session()->get('userId');
+        $transVoucher = session()->get('transVoucher');
+        $fileUploaded = session()->get('fileUploaded');
 
         $base_response = new BaseResponse();
         // return $customerAccounts;
@@ -757,15 +774,22 @@ class BulkUploadsController extends Controller
                 };
             }
 
+            $transVoucher = session()->get('transVoucher');
+            $fileUploaded = session()->get('fileUploaded');
+
             // return $accountDetails;
+
 
             $data = [
                 'bulk_details' => $bulk_details,
                 'accountDetails' => $accountDetails,
-                'userID' => $userID
+                'userID' => $userID,
+                "transaction_voucher" => $transVoucher,
+                "file_uploaded" => $fileUploaded,
             ];
 
             // return $data;
+            // dd(env('CIB_API_BASE_URL') . "post-bulk-upload-list");
             $response = Http::post(env('CIB_API_BASE_URL') . "post-bulk-upload-list", $data);
             $result = new ApiBaseResponse();
             return $result->api_response($response);
