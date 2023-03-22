@@ -250,6 +250,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     // SETTINGS
     Route::get('/settings', [settingsController::class, 'settings'])->name('settings');
     Route::post('post-change-password', [ChangePasswordController::class, 'post_chnage_password']);
+    Route::post('initial-pin-setup', [ChangePasswordController::class, 'initial_pin_setup']);
 });
 
 // Route::get('/get-expenses', [HomeController::class, 'get_expenses'])->name('get-expenses');
