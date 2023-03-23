@@ -185,7 +185,8 @@
                                     required>  --}}
                             <div class="password-group">
                                 <input type="password" id="new_password" maxlength="50" class="password-input form-control"
-                                    placeholder="Enter New Password" autocomplete="off" aria-autocomplete="off" required>
+                                    placeholder="Enter New Password eg. (Qu@lity$07)" autocomplete="off"
+                                    aria-autocomplete="off" required>
                                 <span class="password-eye"></span>
                             </div>
                             {{--  </div>  --}}
@@ -198,8 +199,8 @@
                                     placeholder="Confirm Password" required>  --}}
                             <div class="password-group">
                                 <input type="password" id="confirm_new_password" maxlength="50"
-                                    class="password-input form-control" placeholder="Enter New Password" autocomplete="off"
-                                    aria-autocomplete="off" required>
+                                    class="password-input form-control" placeholder="Enter New Password eg. (Qu@lity$07)"
+                                    autocomplete="off" aria-autocomplete="off" required>
                                 <span class="password-eye"></span>
                             </div>
                             {{--  </div>  --}}
@@ -236,19 +237,35 @@
 
                         <div class="form-group">
                             <label for="new_password">Enter Transaction Pin</label>
-                            <div class="input-group input-group-merge">
+                            <div class="password-group">
+                                <input type="password" id="transaction_pin" maxlength="4"
+                                    class="password-input form-control" placeholder="Enter transaction pin"
+                                    autocomplete="off" aria-autocomplete="off"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    required>
+                                <span class="password-eye"></span>
+                            </div>
+                            {{--  <div class="input-group input-group-merge">
                                 <input type="text" id="transaction_pin" class="form-control"
                                     placeholder="Enter transaction pin" maxlength="4" required
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                            </div>
+                            </div>  --}}
                         </div>
                         <div class="form-group">
                             <label for="new_password">Confirm Transaction Pin</label>
-                            <div class="input-group input-group-merge">
+                            <div class="password-group">
+                                <input type="password" id="confirm_pin" maxlength="4"
+                                    class="password-input form-control" placeholder="Confirm transaction pin"
+                                    autocomplete="off" aria-autocomplete="off"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    required>
+                                <span class="password-eye"></span>
+                            </div>
+                            {{--  <div class="input-group input-group-merge">
                                 <input type="text" id="confirm_pin" class="form-control"
                                     placeholder="Confirm transaction pin" maxlength="4" required
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                            </div>
+                            </div>  --}}
                         </div>
 
                         <div class="form-group mb-0 text-center">
