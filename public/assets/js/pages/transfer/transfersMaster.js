@@ -674,6 +674,7 @@ $(() => {
                 );
             }
             $("#transfer_currency").on("change", () => {
+                console.log("transfer_currency ==>", $(this).val());
                 transferInfo.transferCurrency = $(
                     "#transfer_currency option:selected"
                 ).val();
