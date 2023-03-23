@@ -18,6 +18,34 @@
         <form action="#" class="mx-auto" style="max-width: 650px" id="payment_details_form" autocomplete="off"
             aria-autocomplete="none">
             @csrf
+            {{-- ======================================================= --}}
+            {{-- TRANSFER TYPE WITH INVOICE --}}
+            {{-- ======================================================= --}}
+
+            @if (
+                $currentPath === 'Local Bank' ||
+                    $currentPath === 'Same Bank' ||
+                    $currentPath === 'International Bank' ||
+                    $currentPath === 'Standing Order')
+                <div class="col-12">
+                    <div class="form-group align-items-center row bg-light p-2" style="border-radius: 5px">
+                        <label class="col-md-6 text-dark">Transfer Type </label>
+                        <div class="col-md-6">
+                            <div class="radio radio-info form-check-inline">
+                                <input type="radio" id="inlineRadio1" value="normal" name="trans_type" checked>
+                                <label for="inlineRadio1 mt-1"> Normal </label>
+                            </div>
+                            <div class="radio form-check-inline">
+                                <input type="radio" id="inlineRadio2" value="invoice" name="trans_type">
+                                <label for="inlineRadio2"> Invoice Transaction </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <hr class="my-3">
+            @endif
 
 
             {{-- ======================================================= --}}
@@ -218,46 +246,24 @@
             {{-- =============================================================== --}}
             {{-- Invoice Transaction --}}
             {{-- =============================================================== --}}
-            @if (
-                $currentPath === 'Local Bank' ||
-                    $currentPath === 'Same Bank' ||
-                    $currentPath === 'International Bank' ||
-                    $currentPath === 'Standing Order')
-                <div class="col-12">
-                    <div class="form-group align-items-center row">
-                        <label class="col-md-4 text-dark">Transfer Type </label>
-                        <div class="col-md-8">
-                            <div class="radio radio-info form-check-inline">
-                                <input type="radio" id="inlineRadio1" value="normal" name="trans_type" checked>
-                                <label for="inlineRadio1 mt-1"> Normal </label>
-                            </div>
-                            <div class="radio form-check-inline">
-                                <input type="radio" id="inlineRadio2" value="invoice" name="trans_type">
-                                <label for="inlineRadio2"> Invoice Transaction </label>
-                            </div>
 
+            <div class="col-12 display_upload_input" style="display: none">
+                <div class="form-group align-items-center row">
+                    <label class="col-md-4 text-dark">Attach Invoice </label>
+                    <div class="input-group mb-1 col-md-8" style="padding: 0px;">
+
+                        <div class="input-group" onclick="get_file_name('invoice_file','invoice_file_name')">
+
+                            <div class="custom-file">
+                                <input type="file" class="form-control custom-file-input" id="invoice_file">
+                                <label class="custom-file-label" for="invoice_file_name"
+                                    id="invoice_file_name">Choose file</label>
+                            </div>
                         </div>
                     </div>
 
                 </div>
-                <div class="col-12 display_upload_input" style="display: none">
-                    <div class="form-group align-items-center row">
-                        <label class="col-md-4 text-dark">Attach Invoice </label>
-                        <div class="input-group mb-1 col-md-8" style="padding: 0px;">
-
-                            <div class="input-group" onclick="get_file_name('invoice_file','invoice_file_name')">
-
-                                <div class="custom-file">
-                                    <input type="file" class="form-control custom-file-input" id="invoice_file">
-                                    <label class="custom-file-label" for="invoice_file_name"
-                                        id="invoice_file_name">Choose file</label>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            @endif
+            </div>
             {{-- =============================================================== --}}
             {{-- Rest of the Form --}}
             {{-- =============================================================== --}}
