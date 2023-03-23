@@ -143,6 +143,9 @@
                         <div class="alert alert-danger bg-danger text-white border-0 " role="alert"
                             id="failed_password_change" style="display: none">
                         </div>
+                        <div class="alert alert-warning text-white bg-warning " role="alert" id="validate_password_change"
+                            style="display: none">
+                        </div>
 
                         <div class="alert alert-success bg-success text-white border-0 " role="alert"
                             id="successful_password_change" style="display: none">
@@ -170,34 +173,36 @@
                         <div class="form-group">
                             <label for="security_answer">New User ID</label>
                             <div class="input-group input-group-merge">
-                                <input type="text" id="user_id" class="form-control" placeholder="User Id" required>
+                                <input type="text" id="user_id" class="form-control" placeholder="User Id"
+                                    utocomplete="off" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="new_pin">New Password</label>
-                            <div class="input-group input-group-merge">
-                                <input type="password" id="new_password" class="form-control" placeholder="New Password"
-                                    required>
-                                <div class="input-group-append" data-password="false">
-                                    <div class="input-group-text">
-                                        <span class="password-eye"></span>
-                                    </div>
-                                </div>
+                            {{--  <div class="input-group input-group-merge">  --}}
+                            {{--  <input type="password" id="new_password" class="form-control" placeholder="New Password"
+                                    required>  --}}
+                            <div class="password-group">
+                                <input type="password" id="new_password" maxlength="50" class="password-input form-control"
+                                    placeholder="Enter New Password" autocomplete="off" aria-autocomplete="off" required>
+                                <span class="password-eye"></span>
                             </div>
+                            {{--  </div>  --}}
                         </div>
 
                         <div class="form-group">
                             <label for="new_pin">Confirm Password</label>
-                            <div class="input-group input-group-merge">
-                                <input type="password" id="confirm_new_password" class="form-control"
-                                    placeholder="Confirm Password" required>
-                                <div class="input-group-append" data-password="false">
-                                    <div class="input-group-text">
-                                        <span class="password-eye"></span>
-                                    </div>
-                                </div>
+                            {{--  <div class="input-group input-group-merge">  --}}
+                            {{--  <input type="password" id="confirm_new_password" class="form-control"
+                                    placeholder="Confirm Password" required>  --}}
+                            <div class="password-group">
+                                <input type="password" id="confirm_new_password" maxlength="50"
+                                    class="password-input form-control" placeholder="Enter New Password" autocomplete="off"
+                                    aria-autocomplete="off" required>
+                                <span class="password-eye"></span>
                             </div>
+                            {{--  </div>  --}}
                         </div>
 
 
@@ -450,15 +455,54 @@
                     var new_password = $('#new_password').val();
                     var confirm_new_password = $('#confirm_new_password').val();
                     var user_id = $("#user_id").val()
-                    $('#spinner').show(),
-                        $('#spinner-text').show(),
 
-                        $('#set_password').hide(),
-                        $('#submit').attr('disabled', true);
 
                     //var show_error = $('#failed_login').show();
 
                     if (new_password == confirm_new_password) {
+                        if (confirm_new_password.length < 8) {
+                            error_alert(
+                                "Password should be at least 8 characters long",
+                                "#validate_password_change"
+                            );
+                            return false;
+                        }
+                        if (confirm_new_password.search(/[a-z]/i) < 0) {
+                            error_alert(
+                                "Password must contain at least one lower case letter.",
+                                "#validate_password_change"
+                            );
+                            return;
+                        }
+                        if (confirm_new_password.search(/[A-Z]/) < 0) {
+                            error_alert(
+                                "Password must contain at least one upper case letter.",
+                                "#validate_password_change"
+                            );
+                            return;
+                        }
+                        if (confirm_new_password.search(/[0-9]/) < 0) {
+                            error_alert(
+                                "Password must contain at least one digit.",
+                                "#validate_password_change"
+                            );
+                            return;
+                        }
+                        if (confirm_new_password.search(/[!@#\$%\^&\*_]/) < 0) {
+                            error_alert(
+                                "password must contain a special character (! @ # $ % ^ & * _ ) ",
+                                "#validate_password_change"
+                            );
+                            return;
+                        }
+
+                        $('#spinner').show(),
+                            $('#spinner-text').show(),
+
+                            $('#set_password').hide(),
+                            $('#submit').attr('disabled', true);
+
+                        //
                         $.ajax({
                             type: "POST",
                             url: "post-change-password",
@@ -508,7 +552,7 @@
                     } else {
 
 
-                        error_alert("Passwords do not match", "#failed_password_change");
+                        error_alert("Passwords do not match", "#validate_password_change");
 
                         $('#spinner').hide(),
                             $('#spinner-text').hide(),
@@ -522,22 +566,28 @@
 
             $("#intial-pin-setup").submit(function(e) {
                 e.preventDefault();
-                console.log("intial-pin-setup")
+                {{--  console.log("intial-pin-setup")  --}}
 
                 var transaction_pin = $("#transaction_pin").val()
                 var confirm_pin = $("#confirm_pin").val()
 
-                $('#set_initial_pin_spinner').show(),
-                    $('#set_initial_pin_spinner_text').show(),
+                if (confirm_pin.length != 4) {
+                    error_alert("Pin is less than 4 characters", "#validate_password_change");
+                    return
+                }
 
-                    $('#set_initial_pin_submit').hide(),
-                    $('#set_initial_pin').attr('disabled', true);
+
                 if (transaction_pin == confirm_pin) {
 
+                    $('#set_initial_pin_spinner').show(),
+                        $('#set_initial_pin_spinner_text').show(),
+
+                        $('#set_initial_pin_submit').hide(),
+                        $('#set_initial_pin').attr('disabled', true);
                     $.ajax({
                         type: 'POST',
                         url: 'initial-pin-setup',
-                        dataType: 'application/json',
+                        datatype: 'application/json',
                         data: {
                             "pin": confirm_pin
                         },
@@ -546,12 +596,15 @@
                         },
                         success: function(response) {
                             console.log("initial-pin-setup ==>", response)
-                            if (response.responseCode === '000') {
+                            {{--  console.log(response.errors);  --}}
+
+                            if (response.responseCode == '000') {
+                                success_alert(response.message,
+                                    "#successful_pin_setup");
                                 setTimeout(function() {
-                                    success_alert(response.message,
-                                        "#successful_pin_setup");
-                                }, 3000)
-                                window.location = 'login';
+                                    window.location = 'login';
+
+                                }, 5000)
 
 
                             } else {
@@ -565,7 +618,7 @@
                     })
 
                 } else {
-                    error_alert("Pins do not match", "#failed_pin_setup");
+                    error_alert("Pins do not match", "#validate_password_change");
                     $('#set_initial_pin_spinner').hide(),
                         $('#set_initial_pin_spinner_text').hide(),
 

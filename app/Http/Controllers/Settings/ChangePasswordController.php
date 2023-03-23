@@ -108,9 +108,7 @@ class ChangePasswordController extends Controller
         // return $request;
 
         $validator = Validator::make($request->all(), [
-
             "pin" => 'required',
-
         ]);
 
         $base_response = new BaseResponse();
@@ -145,11 +143,13 @@ class ChangePasswordController extends Controller
             "userName" => $userID
         ];
         // return $data;
+        // dd(env('API_BASE_URL') . "user/pinSetup");
 
         try {
 
             $response = Http::post(env('API_BASE_URL') . "user/pinSetup", $data);
 
+            // return json_encode($response, true);
             $result = new ApiBaseResponse();
 
             return $result->api_response($response);
