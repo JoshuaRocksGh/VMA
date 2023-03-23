@@ -82,4 +82,27 @@ class paymentController extends Controller
         $result = new ApiBaseResponse();
         return $result->api_response($response);
     }
+
+    public function airport_tax_payment(Request $request)
+    {
+
+        $base_response = new BaseResponse();
+
+        $authToken = session()->get('userToken');
+        $userID = session()->get('userId');
+        $customerNumber = session()->get('customerNumber');
+        $deviceIP = $request->ip();
+        $userAlias = session()->get('userAlias');
+        // return $userAlias;
+
+
+        $accountDetails = $request->accountDetails;
+        $getAccountDetails = explode("~", $accountDetails);
+        // return $getAccountDetails;
+        $accountName = $getAccountDetails[1];
+        $accountNumber = $getAccountDetails[2];
+        $accountCurrency = $getAccountDetails[3];
+        $accountCurrencyIsoCode = $getAccountDetails[5];
+        $accountMandate = $getAccountDetails[6];
+    }
 }

@@ -29,11 +29,12 @@
                     $currentPath === 'Standing Order')
                 <div class="col-12">
                     <div class="form-group align-items-center row bg-light p-2" style="border-radius: 5px">
+
                         <label class="col-md-6 text-dark">Transfer Type </label>
                         <div class="col-md-6">
                             <div class="radio radio-info form-check-inline">
                                 <input type="radio" id="inlineRadio1" value="normal" name="trans_type" checked>
-                                <label for="inlineRadio1 mt-1"> Normal </label>
+                                <label for="inlineRadio1 mt-1">Normal</label>
                             </div>
                             <div class="radio form-check-inline">
                                 <input type="radio" id="inlineRadio2" value="invoice" name="trans_type">
