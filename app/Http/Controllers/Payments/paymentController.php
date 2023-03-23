@@ -27,7 +27,7 @@ class paymentController extends Controller
     }
 
     //method to return the korpone loane payment screen
-    public function e_korpor()
+    public function salone_link()
     {
 
         return view("pages.payments.e_korpor");
@@ -67,6 +67,11 @@ class paymentController extends Controller
     {
 
         return view('pages.payments.payments_beneficiary_list');
+    }
+
+    public function airport_tax()
+    {
+        return view('pages.payments.airport_tax_payment');
     }
 
     public function paymentBeneficiaries()
