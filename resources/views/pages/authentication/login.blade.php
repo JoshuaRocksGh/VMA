@@ -259,12 +259,24 @@
                             <input type="text" id="security_question_code" autocomplete="new-password" hidden>
                             <br>
                             <label for="security_question_answer">New Password</label>
-                            <input type="password" placeholder="Enter New Password" id="reset_password"
-                                name="reset_password" class="form-control" autocomplete="off" aria-autocomplete="off">
+                            <div class="password-group">
+                                <input type="password" id="reset_password" maxlength="50"
+                                    class="password-input form-control" placeholder="Enter New Password"
+                                    autocomplete="off" aria-autocomplete="off">
+                                <span class="password-eye"></span>
+                            </div>
+                            {{--  <input type="password" placeholder="Enter New Password" id="reset_password"
+                                name="reset_password" class="form-control" autocomplete="off" aria-autocomplete="off">  --}}
                             <br>
                             <label for="security_question_answer">Confirm Password</label>
-                            <input type="password" placeholder="Confirm Password" id="reset_confirm_password"
-                                name="reset_confirm_password" autocomplete="new-password" class="form-control" />
+                            <div class="password-group">
+                                <input type="password" id="reset_confirm_password" maxlength="50"
+                                    class="password-input form-control" placeholder="Confirm Password" autocomplete="off"
+                                    aria-autocomplete="off">
+                                <span class="password-eye"></span>
+                            </div>
+                            {{--  <input type="password" placeholder="Confirm Password" id="reset_confirm_password"
+                                name="reset_confirm_password" autocomplete="new-password" class="form-control" />  --}}
                         </div>
 
                         <div class="form-group" id="security_question_otp" style="display: none">
@@ -290,16 +302,20 @@
                             <button class="btn btn-danger btn-block" style="display: none" type="button"
                                 id="security_question_submit">
                                 <span id="security_question_submit_text">Submit</span>
-                                <span class="spinner-border spinner-border-sm mr-1" role="status" aria-hidden="true"
-                                    id="submit_spinner" style="display: none"></span>
+                                <span class="spinner-border spinner-border-sm mr-1 security_question_submit_spinner"
+                                    role="status" aria-hidden="true" id="" style="display: none"></span>
+                                <span class="spinner-text-next security_question_submit_spinner" style="display: none"
+                                    id="">Loading</span>
+
                             </button>
                             <button class="btn btn-danger btn-block" style="display: none" type="button"
                                 id="security_question_otp_submit">
                                 <span id="security_question_otp_submit_text">Submit</span>
-                                <span class="spinner-text-next otp_submit_spinner" style="display: none"
-                                    id="">Loading</span>
                                 <span class="spinner-border spinner-border-sm mr-1 otp_submit_spinner" role="status"
                                     aria-hidden="true" id="" style="display: none"></span>
+                                <span class="spinner-text-next otp_submit_spinner" style="display: none"
+                                    id="">Loading</span>
+
                             </button>
                         </div>
                         <div class="mt-4 text-center"> <button type="button" class=" font-weight-bold text-red  mx-auto"
@@ -356,19 +372,19 @@
 
                                 <input class="form-control mb-0" type="number" id="phone_number_input"
                                     placeholder="Enter register number with bank" parsley-trigger="change"
-                                    autocomplete="none" />
+                                    aria-autocomplete="off" autocomplete="off" />
                                 <br />
                                 <label for="id_number_input"> ID Number<span class="text-danger">*</span></label>
 
                                 <input class="form-control mb-0" type="text" id="id_number_input"
                                     placeholder="Enter id number registered with bank" parsley-trigger="change"
-                                    autocomplete="none" />
+                                    aria-autocomplete="off" autocomplete="off" />
                                 <br />
                                 <label for="date_of_birth_input"> Date of birth<span class="text-danger">*</span></label>
 
                                 <input type="date" id="date_of_birth_input" placeholder="Enter your date of birth"
-                                    class="form-control mb-0" parsley-trigger="change" autocomplete="none"
-                                    data-provide="datepicker" data-date-autoclose="true">
+                                    class="form-control mb-0" parsley-trigger="change" autocomplete="off"
+                                    aria-autocomplete="off" data-provide="datepicker" data-date-autoclose="true">
 
                                 <br />
 
