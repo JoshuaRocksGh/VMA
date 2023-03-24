@@ -178,12 +178,25 @@ function getLocalBanks() {
         success: function (response) {
             let data = response.data;
             if (data.length > 1) {
+                let myBanksArray = data;
+                myBanksArray.sort(function (a, b) {
+                    let nameA = a.bankDescription.toUpperCase(); // convert name to uppercase
+                    let nameB = b.bankDescription.toUpperCase(); // convert name to uppercase
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
                 $("#onetime_select_bank").empty();
                 $("#onetime_select_bank").append(
                     `<option selected disabled value=""> --- Select Bank ---</option>`
                 );
                 $.each(data, (i) => {
-                    let { bankCode, bankDescription, bankSwiftCode } = data[i];
+                    let { bankCode, bankDescription, bankSwiftCode } =
+                        myBanksArray[i];
                     option = `<option value="${bankCode}" data-bank-swift-code="${bankSwiftCode}">${bankDescription}</option>`;
                     $("#onetime_select_bank").append(option);
                 });

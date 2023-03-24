@@ -154,12 +154,14 @@
                             $currentPath === 'Same Bank' ||
                             $currentPath === 'International Bank' ||
                             $currentPath === 'Standing Order')
-                        <tr>
-                            <td>Invoice Attachment: </td>
-                            <td>
-                                <span class=" font-13 text-primary h3" id="display_voucher_attachment"></span>
-                            </td>
-                        </tr>
+                        @if (config('app.corporate'))
+                            <tr>
+                                <td>Invoice Attachment: </td>
+                                <td>
+                                    <span class=" font-13 text-primary h3" id="display_voucher_attachment"></span>
+                                </td>
+                            </tr>
+                        @endif
                     @endif
                     {{--  ====== ENTER OTP =======  --}}
                     @if (!config('app.corporate'))

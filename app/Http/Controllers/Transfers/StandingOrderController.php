@@ -37,6 +37,8 @@ class StandingOrderController extends Controller
         $deviceInfo = session()->get('deviceInfo');
         $entrySource = env('APP_ENTRYSOURCE');
         $channel = env('APP_CHANNEL');
+        $userID = session()->get('userId');
+
 
 
         $data =
@@ -44,24 +46,32 @@ class StandingOrderController extends Controller
                 "amount" => $req->transferAmount,
                 "authToken" => $authToken,
                 "bankCode" => $req->bankCode,
+                "brand" => $deviceInfo['deviceBrand'],
+                "channel" => $channel,
+                // "country" => '',
+                "country" => $deviceInfo['deviceCountry'],
                 "creditAccount" => $req->accountNumber,
                 "debitAccount" => $req->beneficiaryAccountNumber,
+                // "deviceId" => '',
+                "deviceId" => $deviceInfo['deviceId'],
                 "deviceIp" => $clientIp,
+                // "deviceName" => '',
+                "deviceName" => $deviceInfo['deviceOs'],
                 "effectiveDate" => $req->soStartDate,
+                "entrySource" => $entrySource,
                 "expiryDate" => $req->soEndDate,
                 "frequency" => $req->soFrequencyCode,
+                // 'manufacturer' => '',
+                "manufacturer" => $deviceInfo['deviceManufacturer'],
+                'phoneNumber' => '',
                 "pinCode" => $req->secPin,
                 "transactionDesc" => $req->transferPurpose,
+                'userName' => $userID,
                 "expenseType" => $req->transferCategory,
-                "channel" => $channel,
-                "entrySource" => $entrySource,
-                "country" => $deviceInfo['deviceCountry'],
-                "deviceId" => $deviceInfo['deviceId'],
-                "manufacturer" => $deviceInfo['deviceManufacturer'],
-                "deviceName" => $deviceInfo['deviceOs'],
             ];
 
         // Log::alert($data);
+        // return $data;
 
         try {
             $response = Http::withHeaders($api_headers)->post(env('API_BASE_URL') . "transfers/standingOrder", $data);
