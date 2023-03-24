@@ -143,7 +143,7 @@ class LoansController extends Controller
         $base_response = new BaseResponse();
 
         try {
-        $response = Http::get(env('API_BASE_URL') . "/loans/loanFrequencies");
+            $response = Http::get(env('API_BASE_URL') . "/loans/loanFrequencies");
 
             // $response = Http::get(env('API_BASE_URL') . "/loans/loanTypes");
 

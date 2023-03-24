@@ -138,8 +138,9 @@ $(() => {
         getOTP(501).then((data) => {
             // console.log(data);
             if (data.responseCode == "000") {
-                addBankBeneficiary($(".current-type").attr("data-bene-type"));
                 siteLoading("hide");
+
+                addBankBeneficiary($(".current-type").attr("data-bene-type"));
             } else {
                 siteLoading("hide");
 

@@ -101,9 +101,9 @@
                         <a href="{{ url('salone-link') }}">Salone-Link</a>
                     </li>
 
-                    <li>
+                    {{--  <li>
                         <a href="{{ url('cardless-payment') }}">Cardless</a>
-                    </li>
+                    </li>  --}}
                     <li>
                         <a href="{{ url('qr-payment') }}">
                             <span> QR Payment</span>

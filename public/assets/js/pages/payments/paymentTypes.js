@@ -149,6 +149,40 @@ function getRecipientName() {
 }
 
 function paymentVerification() {
+    // console.log("next_button ==>", pageData.paymentInfo);
+    if (!ISCORPORATE) {
+        // IF TYPE IS MOMO
+        if (pageData.paymentInfo.paymentType == "MOM") {
+            // siteLoading("show");
+            getOTP(313).then((data) => {
+                // console.log(data);
+                if (data.responseCode == "000") {
+                } else {
+                    toaster(data.message, "warning");
+                    return;
+                }
+            });
+        } else if (pageData.paymentInfo.paymentType == "AIR") {
+            getOTP(314).then((data) => {
+                // console.log(data);
+                if (data.responseCode == "000") {
+                } else {
+                    toaster(data.message, "warning");
+                    return;
+                }
+            });
+        } else if (pageData.paymentInfo.paymentType == "UTL") {
+            getOTP(315).then((data) => {
+                // console.log(data);
+                if (data.responseCode == "000") {
+                } else {
+                    toaster(data.message, "warning");
+                    return;
+                }
+            });
+        }
+    }
+
     const {
         paymentType,
         account,
@@ -298,7 +332,43 @@ $(() => {
             makePayment();
             return;
         }
-        $("#pin_code_modal").modal("show");
+        // validate otp field
+        var otp = $("#transfer_otp").val();
+        if (!otp) {
+            toaster("Enter Valid OTP", "warning");
+            return;
+        }
+        if (pageData.paymentInfo.paymentType == "MOM") {
+            validateOTP(otp, 313).then((data) => {
+                // console.log("verifyOTP==>", data);
+                if (data.responseCode == "000") {
+                    $("#pin_code_modal").modal("show");
+                } else {
+                    toaster(data.message, "error");
+                }
+                return;
+            });
+        } else if (pageData.paymentInfo.paymentType == "AIR") {
+            validateOTP(otp, 314).then((data) => {
+                // console.log("verifyOTP==>", data);
+                if (data.responseCode == "000") {
+                    $("#pin_code_modal").modal("show");
+                } else {
+                    toaster(data.message, "error");
+                }
+                return;
+            });
+        } else if (pageData.paymentInfo.paymentType == "UTL") {
+            validateOTP(otp, 315).then((data) => {
+                // console.log("verifyOTP==>", data);
+                if (data.responseCode == "000") {
+                    $("#pin_code_modal").modal("show");
+                } else {
+                    toaster(data.message, "error");
+                }
+                return;
+            });
+        }
     });
     $("#next_button").on("click", (e) => {
         e.preventDefault();
@@ -343,8 +413,13 @@ $(() => {
             payeeName,
             paymentType,
         };
+        // if (ISCORPORATE) {
+        //     getRecipientName(pageData.paymentInfo);
+        // }
 
         getRecipientName(pageData.paymentInfo);
+
+        // console.log("next_button ==>", pageData.paymentInfo);
     });
 
     $("#transfer_pin").on("click", (e) => {

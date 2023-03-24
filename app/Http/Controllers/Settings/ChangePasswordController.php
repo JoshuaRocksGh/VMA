@@ -22,7 +22,7 @@ class ChangePasswordController extends Controller
 
         $new_password = $request->newPassword;
         $old_password = $request->oldPassword;
-        $security_answer = $request->securityAnswer;
+        $security_answer = strtoupper($request->securityAnswer);
 
         $data = [
 

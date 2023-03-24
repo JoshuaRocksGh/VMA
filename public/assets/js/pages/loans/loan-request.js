@@ -524,9 +524,14 @@ $(function () {
     const initData = [
         validateKyc(),
         getLoans(),
-        getOptions("get-loan-frequencies-api", "#principal_repay_frequency"),
-        getOptions("get-loan-frequencies-api", "#interest_repay_frequency"),
-        getOptions("get-loan-types-api", "#loan_product").then((res) => {
+        Promise.allSettled([
+            getOptions(
+                "get-loan-frequencies-api",
+                "#principal_repay_frequency"
+            ),
+            getOptions("get-loan-frequencies-api", "#interest_repay_frequency"),
+            getOptions("get-loan-types-api", "#loan_product"),
+        ]).then((res) => {
             console.log("data", res);
             const data = res.data;
             data?.forEach((e) => {
@@ -578,6 +583,7 @@ $(function () {
     // });
 
     $("#view_loan_schedule").on("click", () => {
+        console.log("loans ==>", pageData);
         $("#loan_details_content").hide(500);
         $("#loan_schedule_content").show(500);
     });

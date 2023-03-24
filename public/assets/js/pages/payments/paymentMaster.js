@@ -449,6 +449,7 @@ $(function () {
             toaster("Insufficient Account Balance", "warning");
             return;
         }
+        siteLoading("show");
 
         // console.log("paymentType ==>", paymentType);
         // return;
@@ -458,9 +459,12 @@ $(function () {
                 getOTP(301).then((data) => {
                     // console.log(data);
                     if (data.responseCode == "000") {
+                        siteLoading("hide");
+
                         $("#request_form_div").hide(500);
                         $("#transaction_summary").show(500);
                     } else {
+                        siteLoading("hide");
                         toaster(data.message, "warning");
                     }
                 });
@@ -468,15 +472,18 @@ $(function () {
                 getOTP(310).then((data) => {
                     // console.log(data);
                     if (data.responseCode == "000") {
+                        siteLoading("hide");
                         $("#request_form_div").hide(500);
                         $("#transaction_summary").show(500);
                     } else {
+                        siteLoading("hide");
                         toaster(data.message, "warning");
                     }
                 });
             }
         }
 
+        siteLoading("hide");
         $("#request_form_div").hide(500);
         $("#transaction_summary").show(500);
 
@@ -501,12 +508,14 @@ $(function () {
 
         var otp = $("#transfer_otp").val();
         //
+        siteLoading("show");
 
         if (paymentType == "cardless") {
             validateOTP(otp, 301).then((data) => {
                 console.log("verifyOTP==>", data);
                 if (data.responseCode == "000") {
                     // $("#pin_code_modal").modal("show");
+                    siteLoading("hide");
                     transferInfo.type = "transfer";
                     $("#pin_code_modal").modal("show");
                     $("#transfer_pin").on("click", (e) => {
@@ -529,6 +538,7 @@ $(function () {
                         transferInfo.type = "";
                     });
                 } else {
+                    siteLoading("hide");
                     toaster(data.message, "error");
                 }
                 return;
@@ -538,6 +548,7 @@ $(function () {
                 console.log("verifyOTP==>", data);
                 if (data.responseCode == "000") {
                     // $("#pin_code_modal").modal("show");
+                    siteLoading("hide");
                     transferInfo.type = "transfer";
                     $("#pin_code_modal").modal("show");
                     $("#transfer_pin").on("click", (e) => {
@@ -560,6 +571,7 @@ $(function () {
                         transferInfo.type = "";
                     });
                 } else {
+                    siteLoading("hide");
                     toaster(data.message, "error");
                 }
                 return;

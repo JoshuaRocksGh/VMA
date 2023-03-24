@@ -172,6 +172,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('/utility-payment', [paymentController::class, 'utilities'])->name('utility-payment');
     Route::get('salone-link', [paymentController::class, 'salone_link'])->name('salone-link');
     Route::get('airport-tax', [paymentController::class, 'airport_tax'])->name('airport-tax');
+    Route::post('airport-tax-payment-api', [paymentController::class, 'airport_tax_payment'])->name('airport-tax-payment-api');
     Route::get('bulk-upload-payment', [paymentController::class, 'bulk_upload_payment'])->name('bulk-upload-payment');
     Route::get('payment-beneficiary', [paymentController::class, 'payment_beneficiary_list'])->name('payment-beneficiary');
     Route::get('payment-beneficiary-list', [paymentController::class, 'beneficiary_list'])->name('payment-beneficiary-list');

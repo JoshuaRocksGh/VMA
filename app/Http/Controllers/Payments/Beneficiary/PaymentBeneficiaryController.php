@@ -56,7 +56,8 @@ class PaymentBeneficiaryController extends Controller
                 "modifyDateTime" => date('Y-m-d')
 
             ],
-            "userID" => $customerNumber
+            "userID" => $customerNumber,
+            "userName" => $userID,
         ];
         // Log::alert($data);
         // return $data;

@@ -83,24 +83,26 @@
                             <div class="form-group d-flex">
                                 <label class="col-md-4 col-form-label text-capitalize text-dark" id="payment_label"></label>
                                 <input type="number" class="form-control text-capitalize col-md-8 " id="onetime_to_account"
-                                    placeholder="Enter Account Number">
+                                    autocomplete="off" placeholder="Enter Account Number">
                                 {{-- oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> --}}
                             </div>
                         </div>
-                        <div class="form-group d-flex">
-                            <label class="col-4 text-capitalize col-form-label text-dark">Payment Invoice</label>
-                            <div class="input-group ">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="transaction_voucher"
-                                        id="transaction_voucher" autocomplete="off">
-                                    <label class="custom-file-label" for="transaction_voucher">Choose file</label>
+                        @if (config('app.corporate'))
+                            <div class="form-group d-flex">
+                                <label class="col-4 text-capitalize col-form-label text-dark">Payment Invoice</label>
+                                <div class="input-group ">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="transaction_voucher"
+                                            id="transaction_voucher" autocomplete="off">
+                                        <label class="custom-file-label" for="transaction_voucher">Choose file</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                         <div class="form-group d-flex">
                             <label class="col-4 text-capitalize col-form-label text-dark">Enter Amount</label>
                             <input type="number" class="col-8 form-control text-capitalize  " id="amount"
-                                placeholder="Enter Amount">
+                                autocomplete="off" placeholder="Enter Amount">
                             {{-- oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> --}}
                         </div>
                     </div>

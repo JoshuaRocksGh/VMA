@@ -148,7 +148,7 @@ $(document).ready(function () {
         $("#display_transfer_amount").text(bolloreInfo.transferAmount);
         $("#display_purpose").text(bolloreInfo.transferPurpose);
 
-        $("#transaction_summary").show();
+        $("#transaction_summary").toggle(500);
         $("#bollore_request").hide();
     });
 
@@ -156,7 +156,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         $("#transaction_summary").hide();
-        $("#bollore_request").show();
+        $("#bollore_request").toggle(500);
     });
 
     $("#amount").on("keyup", function () {
