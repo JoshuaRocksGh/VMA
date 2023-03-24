@@ -8,8 +8,8 @@ function makeTransfer(url, data) {
         url: url,
         datatype: "application/json",
         data: data,
-        processData: false,
-        contentType: false,
+        // processData: false,
+        // contentType: false,
         // cache: false,
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -1016,13 +1016,16 @@ $(() => {
         }
 
         // VALIDATE OTP
+        siteLoading("show");
         var otp = $("#transfer_otp").val();
 
         validateOTP(otp, 103).then((data) => {
             console.log("verifyOTP==>", data);
             if (data.responseCode == "000") {
+                siteLoading("hide");
                 $("#pin_code_modal").modal("show");
             } else {
+                siteLoading("hide");
                 toaster(data.message, "error");
             }
             return;

@@ -340,6 +340,8 @@
                         <div id="self_enroll_form1" class="form-group">
                             <form action="POST" id="parent_self_enroll_form_1">
                                 @csrf
+                                <i class="mdi mdi-alert-circle"></i>You must be an account holder of the bank
+
                                 <div class="form-group">
                                     <label class="my-2 " for="customer_number_input"> Customer Number</label>
                                     <input class="form-control " type="number" id="customer_number_input"
@@ -371,8 +373,8 @@
                                 <label for="phone_number_input"> Phone Number<span class="text-danger">*</span></label>
 
                                 <input class="form-control mb-0" type="number" id="phone_number_input"
-                                    placeholder="Enter register number with bank" parsley-trigger="change"
-                                    aria-autocomplete="off" autocomplete="off" />
+                                    placeholder="Enter register number with bank. eg(23225643079)"
+                                    parsley-trigger="change" aria-autocomplete="off" autocomplete="off" />
                                 <br />
                                 <label for="id_number_input"> ID Number<span class="text-danger">*</span></label>
 

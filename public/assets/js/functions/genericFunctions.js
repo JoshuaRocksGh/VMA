@@ -289,6 +289,9 @@ function getAccountOption(account) {
         availableBalance,
         currency,
     } = account;
+
+    var thisAmount = formatToCurrency(availableBalance);
+    // console.log("thisAmount ==>", thisAmount);
     let option = ` <option data-content="<div class='account-card row'>
 <div class='col-2 text-center'><div class='account-icon mx-auto'><span>${accountDesc[0]}</span></div></div>
 <div class='col-10 align-self-center'>
@@ -301,7 +304,7 @@ data-account-currency="${currency}" data-account-balance="${availableBalance}"
 data-account-mandate="${accountMandate}" data-account-description="${accountDesc}"
 data-account-currency-code="${currencyCode}"
 value="${accountType}~${accountDesc}~${accountNumber}~${currency}~${availableBalance}~${currencyCode}~${accountMandate}">
-${accountDesc} || ${accountNumber} || ${currency} ${availableBalance}
+${accountDesc} || ${accountNumber} || ${currency} ${thisAmount}
 </option>`;
     return option;
 }
