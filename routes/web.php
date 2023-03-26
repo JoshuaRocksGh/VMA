@@ -223,7 +223,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('lc-origination', [TradeFinanceController::class, 'lc_origination'])->name('lc-origination');
     Route::get('cheque-services', [AccountServicesController::class, 'chequeServices']);
     Route::get('activate-cheque-book', [AccountServicesController::class, 'activate_cheque_book'])->name('activate-cheque-book');
-    // Route::get('salary-advance', [AccountServicesController::class, 'salary_advance'])->name('salary-advance');
+    Route::get('salary-advance', [AccountServicesController::class, 'salary_advance'])->name('salary-advance');
     // Route::get('cheque-approvals-approved', [ChequesApprovedController::class, 'cheques_approved'])->name('cheque-approval-approved');
     // Route::get('cheque-approvals-rejected', [ChequesRejectedController::class, 'cheques_rejected'])->name('cheques-approvals-rejected');
     Route::get('stop-cheque', [AccountServicesController::class, 'stop_cheque'])->name('stop-cheque');
@@ -378,7 +378,7 @@ Route::post('block-card-request-api', [AtmCardRequestController::class, 'block_c
 
 //SALARY ADVANCE
 Route::post('get-salary-advance-fee', [SalaryAdvanceController::class, 'salary_advance_fee'])->name('get-salary-advance-fee');
-Route::post('salary-advance', [SalaryAdvanceController::class, 'salary_advance'])->name('salary-advance');
+Route::post('salary-advance-api', [SalaryAdvanceController::class, 'salary_advance'])->name('salary-advance-api');
 Route::get('corportate-salary-advance', [SalaryAdvanceController::class, 'salary_advance_deposit'])->name('corportate-salary-advance');
 
 
@@ -427,6 +427,7 @@ Route::get('get-loan-accounts-api', [LoansController::class, 'get_my_loans_accou
 Route::get("get-loan-details-api", [LoansController::class, 'getLoanDetails']);
 Route::get("get-loan-types-api", [LoansController::class, 'getLoanTypes']);
 Route::get("get-loan-tracking-api", [LoansController::class, 'getLoanTracking']);
+Route::get("get-loan-repay-schedule-api", [LoansController::class, 'getLoanRepaySchedule']);
 
 //route to return standing order frequencies
 Route::get('get-standing-order-frequencies-api', [FunctionsController::class, 'get_standing_order_frequencies'])->name('get-standing-order-frequencies-api');

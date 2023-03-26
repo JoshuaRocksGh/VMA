@@ -404,6 +404,8 @@ function getLoans() {
     $(".loan_detail_button").on("click", function (e) {
         siteLoading("show");
         const facilityNo = e.currentTarget.getAttribute("data-value");
+        getLoanRepaySchedule(facilityNo);
+
         getLoanDetails(facilityNo).always(() => {
             siteLoading("hide");
         });
@@ -496,6 +498,7 @@ function getLoanDetails(facilityNo) {
 
             const loan = res.data[0];
             console.log(loan);
+
             $("#principal_account").text(loan.PRINCIPAL_ACCOUNT);
             $("#principal_in_areas").text(
                 formatToCurrency(loan.AMOUNT_IN_AREAS ?? "0")
@@ -511,8 +514,88 @@ function getLoanDetails(facilityNo) {
             );
             $("#next_review_date").text(loan.NEXT_REVIEW_DATE ?? "-");
             $("#loan_detail_modal").modal("show");
+            //
+            $(".display_facility_number").text(loan.FACILITY_NO ?? "-");
+            $(".display_current_balance").text(
+                formatToCurrency(loan.CURRENT_BALANCE ?? "0")
+            );
+            $(".display_current_areas").text(
+                formatToCurrency(loan.AMOUNT_IN_ARREAS ?? "0")
+            );
         })
         .fail((res) => {});
+}
+
+function getLoanRepaySchedule(facilityNumber) {
+    return $.ajax({
+        type: "GET",
+        url: "get-loan-repay-schedule-api",
+        data: { facilityNumber },
+        datatype: "application/json",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        // success: function (response) {
+        //     console.log("getLoanRepaySchedule ==>", response);
+        // },
+    }).done((response) => {
+        res = JSON.parse(response);
+        console.log("getLoanRepaySchedule ==>", res);
+        $(".display_loan_repayment_plan").empty();
+        $.each(res.data, function (index) {
+            $(".display_loan_repayment_plan").append(
+                `<a href="#s" class="repayment" data-toggle="collapse">
+                                    <div class="d-flex justify-content-between pl-3 py-2">
+                                        <span> Repayment ${
+                                            res.data[index]?.sequenceNumber
+                                        }</span>
+                                        <span class="menu-arrow"></span>
+                                    </div>
+                                </a>
+                                <div class="collapse " id="s">
+                                    <div class="d-flex border-top justify-content-between px-3 py-2">
+                                        <span class="text-dark"> Interest Amount</span>
+                                        <span class="text-info">SLE ${formatToCurrency(
+                                            res.data[index]?.interest
+                                        )}</span>
+                                    </div>
+                                    <div class="d-flex border-top justify-content-between px-3 py-2">
+                                        <span class="text-dark"> Prncipal Amount</span>
+                                        <span class="text-info">SLE ${formatToCurrency(
+                                            res.data[index]?.principal
+                                        )}</span>
+                                    </div>
+                                    <div class="d-flex border-top justify-content-between px-3 py-2">
+                                        <span class="text-dark"> Installment Amount</span>
+                                        <span class="text-info">SLE  ${formatToCurrency(
+                                            res.data[index]?.totalInstallment
+                                        )}</span>
+                                    </div>
+                                    <div class="d-flex border-top justify-content-between px-3 py-2">
+                                        <span class="text-dark"> Interest Paid</span>
+                                        <span class="text-info">SLE ${formatToCurrency(
+                                            res.data[index]?.interestPaid
+                                        )}</span>
+                                    </div>
+                                    <div class="d-flex border-top justify-content-between px-3 py-2">
+                                        <span class="text-dark"> Principal Paid</span>
+                                        <span class="text-info">SLE ${formatToCurrency(
+                                            res.data[index]?.principalPaid
+                                        )}</span>
+                                    </div>
+
+                                </div>
+                                <div class="bg-info">
+                                    <div class="d-flex border-top justify-content-between px-3 py-2">
+                                        <span class="text-dark"> Repayment Date</span>
+                                        <span class="text-white">${new Date(
+                                            res.data[index]?.dueData
+                                        ).toLocaleDateString()}</span>
+                                    </div>
+                                </div>`
+            );
+        });
+    });
 }
 
 $(function () {

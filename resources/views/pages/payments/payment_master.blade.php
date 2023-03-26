@@ -65,11 +65,11 @@
                         class="nav-link w-100 text-center active send_{{ $currentType }}_tab" style="max-width: 175px">
                         Send {{ $currentPath }}
                     </a>
-                    {{--  <a href="#{{ $currentType }}_history_page" id="{{ $currentType }}_history_tab" data-toggle="tab"
+                    <a href="#{{ $currentType }}_history_page" id="{{ $currentType }}_history_tab" data-toggle="tab"
                         aria-expanded="false" class="nav-link w-100 text-center {{ $currentType }}_trans_tab"
                         style="max-width: 175px">
                         {{ $currentPath }} History
-                    </a>  --}}
+                    </a>
 
                     <a href="#redeem_{{ $currentType }}_page" data-toggle="tab" aria-expanded="false"
                         class="nav-link w-100 text-center redeem_{{ $currentType }}_tab" style="max-width: 175px">
@@ -465,7 +465,7 @@
 
 
                 </div>
-                {{--  <div class="tab-pane site-card p-2 p-sm-3 p-md-4" id="{{ $currentType }}_history_page">
+                <div class="tab-pane site-card p-2 p-sm-3 p-md-4" id="{{ $currentType }}_history_page">
 
                     <div class="px-md-3 mt-lg-0 rounded row">
                         <div class="col-lg-4">
@@ -518,10 +518,12 @@
 
                         </div>
 
+                        {{--    --}}
+
 
                     </div>
 
-                </div>  --}}
+                </div>
             </div>
         </div>
         @include('snippets.pinCodeModal')

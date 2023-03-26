@@ -15,26 +15,49 @@ class SalaryAdvanceController extends Controller
     public function salary_advance_fee(Request $request)
     {
 
+        // return  $request;
         $base_response = new BaseResponse();
 
         $authToken = session()->get('userToken');
         $userID = session()->get('userId');
 
         $accountDetails = $request->transferAccount;
+        $client_ip = request()->ip();
+        $api_headers = session()->get('headers');
+        $deviceInfo = session()->get('deviceInfo');
+
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
 
 
         $getAccountDetails = explode("~", $accountDetails);
         $getAccountNumber = $getAccountDetails[2];
         $getAmount = $request->transferAmount;
+        $tranferReason = $request->tranferReason;
         // return $getAccountDetails;
         $data = [
             "accountNumber" => $getAccountNumber,
             "amount" => $getAmount,
             "authToken" => $authToken,
             "feeType" => "salad",
+            // "accountNumber" => "string",
+            // "amount" => "string",
+            // "authToken" => "string",
+            "brand" => $deviceInfo['deviceBrand'],
+            "channel" => $channel,
+            "country" => $deviceInfo['deviceCountry'],
+            "deviceId" => $deviceInfo['deviceId'],
+            "deviceIp" => $client_ip,
+            "deviceName" => $deviceInfo['deviceOs'],
+            "entrySource" => $entrySource,
+            "manufacturer" => $deviceInfo['deviceManufacturer'],
+            "phoneNumber" => "",
+            "pinCode" => "",
+            "reason" => $tranferReason,
+            "userName" => $userID
         ];
 
-        // return $data;
+        return $data;
 
         // $response = Http::post(env('API_BASE_URL') . "/saladFees", $data);
         // return $response;

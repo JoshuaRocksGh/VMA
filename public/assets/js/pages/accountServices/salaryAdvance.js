@@ -163,6 +163,11 @@ $(() => {
         // confirmationCompleted = false;
     });
 
+    $("#amount").on("keyup", function () {
+        console.log($(this).val());
+        $(".key_transfer_amount").val(formatToCurrency($(this).val()));
+    });
+
     $("#next_button").click(function () {
         transferInfo.transferAccount = $("#from_account").val();
         transferInfo.transferAmount = $("#amount").val();
@@ -185,10 +190,21 @@ $(() => {
             return false;
         }
 
-        getSaladFees(transferInfo);
-        $("#display_transfer_amount").text(transferInfo.transferAmount);
-        // $("#display_currency").text(transferInfo.transferCurrency);
-        $("#display_purpose").text(transferInfo.tranferReason);
+        siteLoading("show");
+        getOTP(406).then((data) => {
+            // console.log(data);
+            if (data.responseCode == "000") {
+                siteLoading("hide");
+                getSaladFees(transferInfo);
+                $("#display_transfer_amount").text(transferInfo.transferAmount);
+                // $("#display_currency").text(transferInfo.transferCurrency);
+                $("#display_purpose").text(transferInfo.tranferReason);
+            } else {
+                siteLoading("hide");
+
+                toaster(data.message, "warning");
+            }
+        });
     });
 
     $("#back_button").on("click", (e) => {
