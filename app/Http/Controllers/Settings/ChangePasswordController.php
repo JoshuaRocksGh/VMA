@@ -24,17 +24,34 @@ class ChangePasswordController extends Controller
         $old_password = $request->oldPassword;
         $security_answer = strtoupper($request->securityAnswer);
 
+        // $userID = session()->get('userId');
+
+        $client_ip = request()->ip();
+        $deviceInfo = session()->get('deviceInfo');
+        $entrySource = \config('otp.entry_source');
+        $channel = \config('otp.channel');
+
         $data = [
 
             "authToken" => $authToken,
-            "deviceId" => "A",
+            "brand" => $deviceInfo['deviceBrand'],
+            "channel" => $channel,
+            "country" => $deviceInfo['deviceCountry'],
+            "deviceId" => $deviceInfo['deviceId'],
+            "deviceIp" => $client_ip,
+            "deviceName" => $deviceInfo['deviceOs'],
+            "entrySource" => $entrySource,
+            "manufacturer" => $deviceInfo['deviceManufacturer'],
             "newPassword" => $new_password,
             "oldPassword" => $old_password,
-            "securityAnswer" => $security_answer
+            "phoneNumber" => "",
+            "securityAnswer" => $security_answer,
+            "userName" => $userID
+
         ];
         // return $data;
 
-        $response = Http::post(env('API_BASE_URL') . "/user/changePassword", $data);
+        $response = Http::post(\config("base_urls.api_base_url")  . "/user/changePassword", $data);
 
         $result = new ApiBaseResponse();
 

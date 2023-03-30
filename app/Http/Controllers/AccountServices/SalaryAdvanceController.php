@@ -22,6 +22,7 @@ class SalaryAdvanceController extends Controller
         $userID = session()->get('userId');
 
         $accountDetails = $request->transferAccount;
+        $user_pin = $request->secPin;
         $client_ip = request()->ip();
         $api_headers = session()->get('headers');
         $deviceInfo = session()->get('deviceInfo');
@@ -52,12 +53,12 @@ class SalaryAdvanceController extends Controller
             "entrySource" => $entrySource,
             "manufacturer" => $deviceInfo['deviceManufacturer'],
             "phoneNumber" => "",
-            "pinCode" => "",
+            "pinCode" => $user_pin,
             "reason" => $tranferReason,
             "userName" => $userID
         ];
 
-        return $data;
+        // return $data;
 
         // $response = Http::post(env('API_BASE_URL') . "/saladFees", $data);
         // return $response;
@@ -155,19 +156,67 @@ class SalaryAdvanceController extends Controller
         $userID = session()->get('userId');
 
         $accountDetails = $request->transferAccount;
+        $user_pin = $request->secPin;
+        $client_ip = request()->ip();
+        $api_headers = session()->get('headers');
+        $deviceInfo = session()->get('deviceInfo');
+
+        $entrySource = env('APP_ENTRYSOURCE');
+        $channel = env('APP_CHANNEL');
 
 
         $getAccountDetails = explode("~", $accountDetails);
-        // return $getAccountDetails;
-        $getAccountType = $getAccountDetails[0];
-        $getAccountName = $getAccountDetails[1];
         $getAccountNumber = $getAccountDetails[2];
-        $getAccountCurrency = $getAccountDetails[3];
-        $getAccountBalance = $getAccountDetails[4];
-        $getAccountCurIsoCode = $getAccountDetails[5];
-        $getAccountMandate = $getAccountDetails[6];
         $getAmount = $request->transferAmount;
-        $getReason = $request->tranferReason;
-        $getsecPin = $request->secPin;
+        $tranferReason = $request->tranferReason;
+        $getAmount = $request->transferAmount;
+        // $getReason = $request->tranferReason;
+        // $getsecPin = $request->secPin;
+
+        $data = [
+            "accountNumber" => $getAccountNumber,
+            "amount" => $getAmount,
+            "authToken" =>  $authToken,
+            "brand" => $deviceInfo['deviceBrand'],
+            "channel" => $channel,
+            "country" => $deviceInfo['deviceCountry'],
+            "deviceId" => $deviceInfo['deviceId'],
+            "deviceIp" => $client_ip,
+            "deviceName" => $deviceInfo['deviceOs'],
+            "entrySource" => $entrySource,
+            "manufacturer" => $deviceInfo['deviceManufacturer'],
+            "phoneNumber" => "",
+            "pinCode" => $user_pin,
+            "reason" => $tranferReason,
+            "userName" => $userID
+
+
+        ];
+
+        // return $data;
+
+        try {
+
+            // dd((env('API_BASE_URL') . "request/saladFees"));
+
+            $response = Http::post(env('API_BASE_URL') . "request/saladRequest", $data);
+            // return $response;
+
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+            // return json_decode($response->body();
+
+        } catch (\Exception $e) {
+
+            DB::table('tb_error_logs')->insert([
+                'platform' => 'ONLINE_INTERNET_BANKING',
+                'user_id' => 'AUTH',
+                'message' => (string) $e->getMessage()
+            ]);
+
+            return $base_response->api_response('500', $e->getMessage(),  NULL); // return API BASERESPONSE
+
+
+        }
     }
 }

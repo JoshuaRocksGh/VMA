@@ -7,7 +7,7 @@ function getLocalBanks() {
         success: function (response) {
             let data = response.data;
             if (data.length > 1) {
-                // console.log(data.sort());
+                         // console.log(data.sort());
                 let myBanksArray = data;
                 myBanksArray.sort(function (a, b) {
                     let nameA = a.bankDescription.toUpperCase(); // convert name to uppercase
@@ -332,7 +332,7 @@ function initBeneficiaryForm() {
         validateOTP(beneficiaryDetails.beneficiaryOTP, 504).then((data) => {
             if (data.responseCode == "000") {
                 console.log("verifyOTP==>", data.responseCode);
-                console.log("saveBeneficiary==>", beneficiaryDetails);
+                //console.log("saveBeneficiary==>", beneficiaryDetails);
                 // return;);
 
                 // $("#pin_code_modal").modal("show");
@@ -405,29 +405,7 @@ function validateFormInputs() {
     //     accountName,
     //     beneficiaryOTP
     // );
-    if (type === "SAB") {
-        bankName = "SIERRA LEONE COMMERCIAL BANK";
-        if (!accountName) {
-            toaster("Invalid Account Information", "warning");
-            return false;
-        }
-        if (!beneficiaryName) {
-            toaster("all fields required", "warning");
-            return false;
-        }
-    } else {
-        if (
-            !accountNumber ||
-            !bankCode ||
-            !bankName ||
-            !beneficiaryAddress ||
-            !beneficiaryName ||
-            !beneficiaryEmail ||
-            !beneficiaryOTP
-        ) {
-            toaster("all fields required", "warning");
-            return false;
-        }
+  }
         if (!validateEmail(beneficiaryEmail)) {
             toaster("invalid email", "warning");
             return false;

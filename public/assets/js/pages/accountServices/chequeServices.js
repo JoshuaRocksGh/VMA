@@ -10,18 +10,45 @@ function getBranches() {
         type: "GET",
         url: "get-branches-api",
         datatype: "application/json",
-    }).done((response) => {
-        console.log(response);
-        if (response?.data) {
-            const { data } = response;
-            const select = document.getElementById("pick_up_branch");
-            data.forEach((e) => {
-                const option = document.createElement("option");
-                option.text = e.branchDescription;
-                option.value = e.branchCode;
-                select.appendChild(option);
-            });
-        }
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            console.log("response ==>", response);
+            if (response.responseCode == "000") {
+                const { data } = response;
+                let branchesList = data;
+                // console.log("branchesList ==>", branchesList);
+                branchesList.sort(function (a, b) {
+                    let nameA = a.branchDescription.toUpperCase(); // convert name to uppercase
+                    let nameB = b.branchDescription.toUpperCase(); // convert name to uppercase
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
+                const select = document.getElementById("pick_up_branch");
+                branchesList.forEach((e) => {
+                    const option = document.createElement("option");
+                    option.text = e.branchDescription;
+                    option.value = e.branchCode;
+                    select.appendChild(option);
+                });
+            } else {
+                setTimeout(function () {
+                    getBranches();
+                }, $.ajaxSetup().retryAfter);
+            }
+        },
+
+        error: function (xhr, status, error) {
+            setTimeout(function () {
+                getBranches();
+            }, $.ajaxSetup().retryAfter);
+        },
     });
 }
 
@@ -115,12 +142,13 @@ function submitChequeBlock(data) {
 }
 
 $(function () {
-    siteLoading("show");
-    Promise.all([getBranches()])
-        .finally((e) => siteLoading("hide"))
-        .catch((e) => {
-            somethingWentWrongHandler(e);
-        });
+    // siteLoading("hide");
+    getBranches();
+    // Promise.all([])
+    //     .finally((e) => siteLoading("hide"))
+    //     .catch((e) => {
+    //         somethingWentWrongHandler(e);
+    //     });
 
     $("select").select2();
     $(".accounts-select").select2({

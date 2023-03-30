@@ -8,16 +8,16 @@
         $pageTitle = 'Salary Advance';
     @endphp
     @include('snippets.pageHeader')
-    <div class=" px-2">
-        <div class="dashboard site-card">
+    @include('snippets.pinCodeModal')
+
+    <div class=" ">
+        <div class="dashboard site-card overflow-hidden">
             <br>
             <div class="dashboard-body border-danger mt-0 p-4">
-                {{--  {{ $result['responseCode'] }}  --}}
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10">
-                        {{--  form details  --}}
-                        <div id="salary_advance_form">
+                <div class="row" id="salary_advance_form">
+                    {{--  <div class="col-md-1"></div>  --}}
+                    <div class="col-md-8">
+                        <div>
 
                             @if ($result['responseCode'] !== '000')
                                 <div id="kyc_incomplete" class="mx-auto" style="max-width: 350px; padding-top:24px">
@@ -25,9 +25,7 @@
                                     <span class="my-3 d-block text-white font-13 font-weight-bold p-2 rounded-lg"
                                         style="background-color: rgb(0, 0, 0)"><i
                                             class="fas fa-exclamation-circle pr-2"></i>{{ $result['message'] }}</span>
-                                    {{--  <a href="{{ url('kyc-update') }}" class="text-dark font-14 float-right text-right font-weight-bold"><i
-                        class="far fa-edit"></i>
-                    Update KYC</a>  --}}
+
                                 </div>
                             @else
                                 <form action="#" style="max-width: 650px" autocomplete="off" aria-autocomplete="none">
@@ -60,7 +58,7 @@
                                                 disabled>
 
                                             <input type="text" class="form-control text-input  ml-2"
-                                                placeholder="Enter Salary Advance Amount " id="amount"
+                                                placeholder="Enter Amount " id="amount"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                                 required>
                                             {{--  <button type="button" class="btn btn-danger  ml-2 btn-sm"><span
@@ -86,38 +84,63 @@
                             @endif
                         </div>
 
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-unstyled text-blue">
+                            <li><i class="fa fa-info-circle text-red"></i>
+                                <i> <b style="color: rgb(0, 183, 255);">Salary Account Details</b>: </b><br>
+                                    {{--  <ol>
+                                        <li>Template can be used for single upload of same bank and other banks.</li>
+                                        <li>If an error is found in file uploaded, please delete and re-upload.</li>
+                                    </ol>  --}}
+                                </i>
+                            </li>
+                        </ul>
+                        <div class="col-md-12">
+                            <table class="table mb-0 table-striped p-4 mx-auto">
+                                <tr>
+                                    <p>Account Number</p>
+                                    <p class="font-weight-bold" style="margin-top: -15px">
+                                        {{ $result['data'][0]['accountNumber'] }}</p>
+                                </tr>
+                                <tr>
+                                    <p>Monthly Salary</p>
+                                    <p class="font-weight-bold" style="margin-top: -15px">
+                                        {{ $result['data'][0]['salary'] }}</p>
+                                </tr>
+                                <tr>
+                                    <p>Adavance Limit</p>
+                                    <p class="font-weight-bold" style="margin-top: -15px">
+                                        {{ $result['data'][0]['legibleFacility'] }}</p>
+                                </tr>
+                                <tr>
+                                    <p>Advance Taken</p>
+                                    <p class="font-weight-bold" style="margin-top: -15px">
+                                        {{ $result['data'][0]['oldTod'] }}</p>
+                                </tr>
+                                <tr>
+                                    <p>Advance Available</p>
+                                    <p class="font-weight-bold" style="margin-top: -15px">
+                                        {{ $result['data'][0]['availSalad'] }}</p>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" id="salary_advance_summary" style="display:none">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
                         {{--  displsplay summary  --}}
-                        <div id="salary_advance_summary" style="display: none">
+                        <div>
                             <div class="table-responsive p-4 mx-auto table_over_flow" style="max-width: 650px">
                                 <table class="table mb-0 table-striped p-4 mx-auto">
 
                                     <tbody>
-                                        {{--  <tr class="success_gif show-on-success" style="display: none">
-                                        <td class="text-center bg-white" colspan="2">
-                                            <img src="{{ asset('land_asset/images/statement_success.gif') }}"
-                                                style="zoom: 0.5" alt="">
-                                        </td>
-                                    </tr>
-                                    <tr class="show-on-success" style="display: none">
-                                        <td class="text-center bg-white" colspan="2">
-                                            <span class="text-success font-13 text-bold " id="success-message"></span>
-                                        </td>
-                                    </tr>  --}}
-                                        {{--  <tr class=" show-on-success" style="display: none">
-                        <td class="text-center bg-white" colspan="2">
-                            <div class="row" style="place-content: space-evenly">
-                                <button class="btn my-1 btn-primary" onclick="location.reload()"> make another
-                                    transfer
-                                </button>
-                                <button class="btn my-1 btn-primary" id="save_as_beneficiary" style="display: none">
-                                    save as beneficiary
-                                </button>
-                                @if ($currentPath === 'Same Bank')
-                                    <button class="btn my-1 btn-primary"> make reccuring </button>
-                                @endif
-                            </div>
-                        </td>
-                    </tr>  --}}
+
                                         <tr>
                                             <td>Account Details:</td>
                                             <td>
@@ -134,30 +157,6 @@
                                             </td>
                                         </tr>
 
-                                        {{--  <tr>
-                                        <td>Receiver Details:</td>
-                                        <td>
-                                            <span class="d-block font-13 text-primary h3 display_to_account_name"
-                                                id="display_to_account_name"> </span>
-
-                                            @if ($currentPath === 'Local Bank' || $currentPath === 'International Bank' || $currentPath === 'Standing Order')
-                                                <span
-                                                    class="d-block font-13 h3 text-bold text-primary display_to_bank_name">
-                                                </span>
-
-                                                </span>
-                                            @endif
-                                            <span class="d-block font-13 text-primary h3 display_to_account_no"
-                                                id="display_to_account_no"> </span>
-                                            @if ($currentPath !== 'International Bank' && $currentPath !== 'Local Bank' && $currentPath !== 'Standing Order')
-                                                <span
-                                                    class="d-block font-13 text-primary text-bold display_to_account_currency"
-                                                    id="display_to_account_currency"></span>
-                                            @endif
-
-                                        </td>
-                                    </tr>  --}}
-
                                         <tr>
                                             <td>Amount:</td>
                                             <td>
@@ -170,16 +169,6 @@
 
                                             </td>
                                         </tr>
-                                        {{--  @if ($currentPath === 'Local Bank')
-                                        <tr>
-                                            <td>Transfer Type:</td>
-                                            <td>
-
-                                                <span class="font-13 text-primary h3 display_to_transfer_type"></span>
-
-                                            </td>
-                                        </tr>
-                                    @endif  --}}
                                         <tr>
                                             <td>Transfer Fee</td>
                                             <td>
@@ -200,34 +189,6 @@
                                             </td>
                                         </tr>
 
-                                        {{--  <tr>
-                                        <td>Category:</td>
-                                        <td>
-                                            <span class="font-13 text-primary h3 display_category"
-                                                id="display_category"></span>
-
-                                        </td>
-                                    </tr>  --}}
-                                        {{--  @if ($currentPath === 'Standing Order')
-                                        <tr>
-                                            <td>Start Date: </td>
-                                            <td>
-                                                <span class="font-13 text-primary h3 display_so_start_date"></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>End Date: </td>
-                                            <td>
-                                                <span class="font-13 text-primary h3 display_so_end_date"></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Frequency: </td>
-                                            <td>
-                                                <span class="font-13 text-primary h3 display_frequency_so"></span>
-                                            </td>
-                                        </tr>
-                                    @endif  --}}
                                         <tr>
                                             <td> Date: </td>
                                             <td>
@@ -273,8 +234,8 @@
                             <br>
                             <div class="form-group text-center hide-on-success">
 
-                                <span> <button class="btn btn-rounded back-form-button" type="button" id="back_button"> <i
-                                            class="mdi mdi-reply-all-outline"></i>&nbsp;Back</button>
+                                <span> <button class="btn btn-rounded back-form-button" type="button" id="back_button">
+                                        <i class="mdi mdi-reply-all-outline"></i>&nbsp;Back</button>
                                     &nbsp; </span>
                                 <span>
                                     &nbsp;
@@ -294,10 +255,8 @@
                                     </button></span>
                             </div>
                         </div>
-
                     </div>
                     <div class="col-md-1"></div>
-
                 </div>
 
             </div>
