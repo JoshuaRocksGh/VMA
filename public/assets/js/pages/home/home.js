@@ -313,11 +313,11 @@ function prepareGraphValues() {
     //investments
     const investmentsPie = {};
     investmentsPie.xValues = pageData?.investments?.map((investment) =>
-        String(investment.PRINCIPAL_ACC)
+        String(investment.principalAccount)
     );
     let investmentsTotal = 0;
     investmentsPie.yValues = pageData?.investments?.map((investment) => {
-        const amount = parseFloat(investment.ACCRUED_INT) || 0.0;
+        const amount = parseFloat(investment.dealAmount) || 0.0;
         investmentsTotal += amount;
         return amount;
     });
@@ -418,23 +418,23 @@ const renderDataTables = (data, tableId) => {
                     }),
                 },
             },
-            data: pageData.investments,
+            data: pageData?.investments,
             columns: [
                 {
-                    data: "PRINCIPAL_ACC",
+                    data: "principalAccount",
                 },
-                { data: "PRODUCT" },
-                { data: "PRODUCT_CURR" },
+                { data: "product" },
+                { data: "productCurrency" },
                 {
-                    data: "DEAL_AMT",
+                    data: "dealAmount",
                     render: (data, type, row) => renderCurrency(data, row),
                 },
                 {
-                    data: "ACCRUED_INT",
+                    data: "accruedInterest",
                     render: (data, type, row) => renderCurrency(data, row),
                 },
                 {
-                    data: "MATURITY_DATE",
+                    data: "maturityDate",
                     render: (data) =>
                         new Date(data).toLocaleString("en", {
                             year: "numeric",
@@ -500,7 +500,8 @@ $(() => {
     blockUi({ block: "#nav-tabContent" });
     // return;
     Promise.allSettled([
-        getData({ url: "fixed-deposit-account-api", name: "investments" }),
+        // getData({ url: "fixed-deposit-account-api", name: "investments" }),
+        console.log('h')
     ])
         .then((value) => {
             // siteLoading("hide");

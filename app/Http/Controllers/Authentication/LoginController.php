@@ -142,6 +142,7 @@ class LoginController extends Controller
                 "accountDescription" => $userDetail->accountsList[0]->accountDesc,
                 "customerAccounts" => $userDetail->accountsList,
                 "customerLoans" => $userDetail->loansList,
+                "customerInvestments" => $userDetail->investmentList,
                 // "userMandate" => 'A',
                 "userMandate" => $userMandate,
 

@@ -114,48 +114,7 @@
 
 
 
-            <div class="card-box" id="beneficiary_table" style="zoom: 0.8;">
-                <br>
-                <div class="col-md-12">
 
-                    <table id="bulk_upload_list"
-                        class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list">
-
-                        <thead>
-                            <tr class="table-background">
-                                <th>No</th>
-                                <th>Credit Acc</th>
-                                <th>Name</th>
-                                <th>Amount</th>
-                                <th>Ref Number</th>
-                            </tr>
-                        </thead>
-
-                        <tbody class="">
-                            @if (isset($uploadData))
-                                @php
-                                    $count = 1;
-                                @endphp
-                                @foreach ($uploadData as $data)
-                                    <tr>
-                                        <td>{{ $count }}</td>
-                                        <td>{{ $data['accountNumber'] }}</td>
-                                        <td>{{ $data['name'] }}</td>
-                                        <td>{{ $data['amount'] }}</td>
-                                        <td>{{ $data['refNumber'] }}</td>
-                                    </tr>
-                                    @php
-                                        $count = $count + 1;
-                                    @endphp
-                                @endforeach
-                            @endif
-                        </tbody>
-
-
-                    </table>
-                </div>
-
-            </div>
 
 
         </div>
@@ -165,6 +124,65 @@
 
 
     </div>
+
+    <!--  Modal content for the Large example -->
+    <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Bulk Upload Details</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="card-box" id="beneficiary_table" style="zoom: 0.8;">
+                        <br>
+                        <div class="col-md-12">
+
+                            <table id="bulk_upload_list"
+                                class="table table-bordered table-striped dt-responsive nowrap w-100 bulk_upload_list">
+
+                                <thead>
+                                    <tr class="table-background">
+                                        <th>No</th>
+                                        <th>Credit Acc</th>
+                                        <th>Name</th>
+                                        <th>Amount</th>
+                                        <th>Ref Number</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="">
+                                    @if (isset($uploadData))
+                                        @php
+                                            $count = 1;
+                                        @endphp
+                                        @foreach ($uploadData as $data)
+                                            <tr>
+                                                <td>{{ $count }}</td>
+                                                <td>{{ $data['accountNumber'] }}</td>
+                                                <td>{{ $data['name'] }}</td>
+                                                <td>{{ $data['amount'] }}</td>
+                                                <td>{{ $data['refNumber'] }}</td>
+                                            </tr>
+                                            @php
+                                                $count = $count + 1;
+                                            @endphp
+                                        @endforeach
+                                    @endif
+                                </tbody>
+
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
 
 @section('scripts')

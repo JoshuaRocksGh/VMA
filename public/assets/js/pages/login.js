@@ -73,6 +73,8 @@ function login(email, password) {
             $("#log_in").show();
             error_alert("Connection Error", "#failed_login");
             console.log("Ajax request failed...");
+            console.log("Ajax request failed...", xhr.status );
+            console.log("Ajax request failed...", xhr.responseText);
         },
     });
 }
