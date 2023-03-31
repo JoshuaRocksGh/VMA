@@ -63,11 +63,11 @@
                             </ul>
                         </div>
                     </li> --}}
-                    @if (config('app.corporate'))
-                        <li>
-                            <a href="{{ url('bulk-transfer') }}">Bulk Transfer </a>
-                        </li>
-                    @endif
+                    {{--  @if (config('app.corporate'))  --}}
+                    <li>
+                        <a href="{{ url('bulk-transfer') }}">Bulk Transfer </a>
+                    </li>
+                    {{--  @endif  --}}
 
                     <li>
                         <a href="{{ url('swift_mt101') }}">MT101 </a>
@@ -93,14 +93,17 @@
                     <li>
                         <a href="{{ url('payments') }}">Make Payment</a>
                     </li>
+                    <li>
+                        <a href="{{ url('airport-tax') }}">Airport Tax</a>
+                    </li>
 
                     <li>
                         <a href="{{ url('salone-link') }}">Salone-Link</a>
                     </li>
 
-                    <li>
+                    {{--  <li>
                         <a href="{{ url('cardless-payment') }}">Cardless</a>
-                    </li>
+                    </li>  --}}
                     <li>
                         <a href="{{ url('qr-payment') }}">
                             <span> QR Payment</span>
@@ -139,9 +142,9 @@
             </a>
             <div class="collapse menu-item-body" id="sidebarAccountServices">
                 <ul class="nav-second-level">
-                    <li>
+                    {{--  <li>
                         <a href="{{ url('fixed-deposit') }}">Fixed Deposit</a>
-                    </li>
+                    </li>  --}}
                     @if (!config('app.corporate'))
                         <li>
                             <a href="{{ url('salary-advance') }}">Salary Advance</a>
@@ -155,19 +158,19 @@
                     <li>
                         <a href="{{ url('requests') }}">Requests</a>
                     </li>
-                    <li>
+                    {{--  <li>
                         <a href="{{ url('kyc-update') }}">Update KYC</a>
-                    </li>
+                    </li>  --}}
 
-                    <li>
+                    {{--  <li>
                         <a href="{{ url('open-additional-account') }}">Open additional account</a>
-                    </li>
-                    <li>
+                    </li>  --}}
+                    {{--  <li>
                         <a href="#">Close Account</a>
-                    </li>
-                    <li>
+                    </li>  --}}
+                    {{--  <li>
                         <a href="#">Update Account Signature</a>
-                    </li>
+                    </li>  --}}
                     <li>
                         <a href="{{ url('complaint') }}">
                             <span>Make Complaint</span>

@@ -125,6 +125,7 @@ function initBeneficiaryForm() {
             toaster("All fields required", "warning");
             return;
         }
+        siteLoading("show");
         console.log(pageData);
 
         if (pageData.beneficiary.mode == "EDIT") {
@@ -143,14 +144,17 @@ function initBeneficiaryForm() {
                 return;
             });
         }
-        return;
+        // return;
         validateOTP(pageData.beneficiary.otp, 502).then((data) => {
-            console.log("verifyOTP==>", data);
+            // console.log("verifyOTP==>", data);
             if (data.responseCode == "000") {
                 // $("#pin_code_modal").modal("show");
-                // saveBeneficiary(beneficiaryDetails);
+                // saveBeneficiary(beneficiaryDetails)
+                siteLoading("hide");
                 saveBeneficiary(pageData.beneficiary);
             } else {
+                siteLoading("hide");
+
                 toaster(data.message, "error");
             }
             return;

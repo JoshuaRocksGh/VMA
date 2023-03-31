@@ -129,10 +129,42 @@ class TransferBeneficiaryController extends Controller
 
     public function deleteBeneficiary(Request $req)
     {
-        $response = Http::delete(
-            env('API_BASE_URL') . "/beneficiary/deleteTransferBeneficiary/" . $req->beneficiaryId
-        );
-        $result = new ApiBaseResponse();
-        return $result->api_response($response);
+        $base_response = new BaseResponse();
+
+        $deviceInfo = session()->get('deviceInfo');
+        $userId = session()->get('userId');
+        // $deviceInfo = session()->get('deviceInfo');
+        $channel = \config('otp.channel');
+        $entrySource = \config('otp.entry_source');
+
+        $data = [
+            "authToken" => session()->get('userToken'),
+            "beneficiaryID" => $req->beneficiaryId,
+            "brand" => $deviceInfo['deviceBrand'],
+            "channel" => $channel,
+            "country" => $deviceInfo['deviceCountry'],
+            "deviceId" => $deviceInfo['deviceId'],
+            "deviceIp" => $deviceInfo['deviceIp'],
+            "deviceName" => $deviceInfo['deviceBrand'],
+            "entrySource" => $entrySource,
+            "manufacturer" => $deviceInfo['deviceManufacturer'],
+            "phoneNumber" => "",
+            "userName" => $userId
+        ];
+        // return $data;
+        try {
+            $response = Http::post(env('API_BASE_URL') . "/beneficiary/deleteTransferBeneficiary/", $data);
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
+
+            DB::table('tb_error_logs')->insert([
+                'platform' => 'ONLINE_INTERNET_BANKING',
+                'user_id' => 'AUTH',
+                'message' => (string) $e->getMessage()
+            ]);
+            return $base_response->api_response('500', "Internal Server Error",  NULL); // return API BASERESPONSE
+
+        }
     }
 }

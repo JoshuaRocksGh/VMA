@@ -222,7 +222,7 @@ $(function () {
             .trigger("change");
     }
     // on page load it gets accunt details
-    $("#search_transaction").trigger("click");
+    // $("#search_transaction").trigger("click");
 
     $("#filter").on("change", (e) => {
         e.preventDefault();
@@ -351,6 +351,13 @@ $(function () {
                 { data: "narration" },
                 { data: "runningBalance" },
                 {
+                    data: "transactionNumber",
+                    render: (data, type, row) => {
+                        return `<a href="transaction-receipt?debitAccount=${pdfData?.details?.pdfAccountNumber}&batchNo=${row.batchNumber}&postingDate=${row.postingSysDate}&transNumber=${row.transactionNumber}&valueDate=${row.valueDate}&branch=${row.branch}
+                        &narration=${row.narration}&amount=${row.amount}&contraAccount=${row.contraAccount}&channel=${row.channel}" target='_blank' type="button" class="btn btn-outline-info">Details</a>`;
+                    },
+                },
+                {
                     data: "imageCheck",
                     render: (data, type, row) =>
                         data === 0
@@ -366,13 +373,6 @@ $(function () {
                 //                 narration="${row.narration}" amount="${row.amount}" contra-account="${row.contraAccount}" channel="${row.channel}">Details</button>`;
                 //     },
                 // },
-                {
-                    data: "transactionNumber",
-                    render: (data, type, row) => {
-                        return `<a href="transaction-receipt?debitAccount=${pdfData?.details?.pdfAccountNumber}&batchNo=${row.batchNumber}&postingDate=${row.postingSysDate}&transNumber=${row.transactionNumber}&valueDate=${row.valueDate}&branch=${row.branch}
-                        &narration=${row.narration}&amount=${row.amount}&contraAccount=${row.contraAccount}&channel=${row.channel}" target='_blank' type="button" class="btn btn-outline-info">Details</a>`;
-                    },
-                },
             ],
             columnDefs: [
                 {

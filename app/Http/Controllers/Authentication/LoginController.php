@@ -263,7 +263,11 @@ class LoginController extends Controller
         $userAlias = session()->get('userAlias');
         $customerNumber = session()->get('customerNumber');
         $customerPhone = session()->get('customerPhone');
-        $userId = session()->get('userId');
+        if ($request->userID) {
+            $userId = $request->userID;
+        } else {
+            $userId = session()->get('userId');
+        }
 
         $channel = \config('otp.channel');
         $entry_source = \config('otp.entry_source');
@@ -321,7 +325,12 @@ class LoginController extends Controller
         $userAlias = session()->get('userAlias');
         $customerNumber = session()->get('customerNumber');
         $customerPhone = session()->get('customerPhone');
-        $userId = session()->get('userId');
+        if ($request->userID) {
+            $userId = $request->userID;
+        } else {
+            $userId = session()->get('userId');
+        }
+        // $userId = session()->get('userId');
 
         $channel = \config('otp.channel');
         $entry_source = \config('otp.entry_source');

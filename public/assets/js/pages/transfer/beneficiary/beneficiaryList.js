@@ -112,11 +112,16 @@ function drawBeneficiaryTable() {
             const beneficiaryData = beneficiaries.find(
                 (e) => e.BENE_ID === $(editButton).attr("data-bene-id")
             );
+            siteLoading("show");
             getOTP(504).then((data) => {
                 // console.log(data);
                 if (data.responseCode == "000") {
+                    siteLoading("hide");
+
                     editBankBeneficiary(beneficiaryData, currentType);
                 } else {
+                    siteLoading("hide");
+
                     toaster(data.message, "warning");
                 }
             });
@@ -128,11 +133,17 @@ $(() => {
     getBeneficiaryList();
 
     $("#add_beneficiary").on("click", () => {
+        siteLoading("show");
+
         getOTP(501).then((data) => {
             // console.log(data);
             if (data.responseCode == "000") {
+                siteLoading("hide");
+
                 addBankBeneficiary($(".current-type").attr("data-bene-type"));
             } else {
+                siteLoading("hide");
+
                 toaster(data.message, "warning");
             }
         });

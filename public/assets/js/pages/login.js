@@ -26,7 +26,7 @@ function login(email, password) {
             //     response.responseCode
             // );
             // return false;
-            $("#submit").attr("disabled", false);
+            // $("#submit").attr("disabled", false);
 
             if (response.responseCode == "000") {
                 console.log("login response =>", response.responseCode);
@@ -35,30 +35,30 @@ function login(email, password) {
                     window.location = "change-password";
                     $("#submit").attr("disabled", true);
                 } else {
-                    getOTP(103).then((data) => {
-                        console.log("cget otp==>", data);
-                        if (data.responseCode == "000") {
-                            $("#login_form").hide(500);
-                            $("#enter_otp").show(500);
-                        } else {
-                            $("#spinner").hide();
-                            $("#spinner-text").hide();
-                            $("#log_in").show();
-                            error_alert(data.message, "#failed_login");
-                        }
-                        return;
-                    });
+                    // getOTP(103).then((data) => {
+                    //     console.log("cget otp==>", data);
+                    //     if (data.responseCode == "000") {
+                    //         $("#login_form").hide(500);
+                    //         $("#enter_otp").show(500);
+                    //     } else {
+                    //         $("#spinner").hide();
+                    //         $("#spinner-text").hide();
+                    //         $("#log_in").show();
+                    //         error_alert(data.message, "#failed_login");
+                    //     }
+                    //     return;
+                    // });
 
                     // console.log("get OTP ==>", OtpData);
 
                     // console.log("login response => home");
-                    return;
+                    // return;
 
                     window.location = "home";
                     $("#submit").attr("disabled", true);
                 }
             } else {
-                // {{-- $('#submit').attr('disabled', true); --}}
+                $("#submit").attr("disabled", false);
                 $("#spinner").hide();
                 $("#spinner-text").hide();
                 $("#log_in").show();
@@ -66,6 +66,7 @@ function login(email, password) {
             }
         },
         error: function (xhr, status, error) {
+            // $("#submit").attr("disabled", true);
             $("#submit").attr("disabled", false);
             $("#spinner").hide();
             $("#spinner-text").hide();
@@ -77,6 +78,14 @@ function login(email, password) {
 }
 
 function error_alert(message, targetId) {
+    $(targetId).text(message);
+    $(targetId).show(200);
+    setTimeout(() => {
+        $(targetId).hide(200);
+    }, 3000);
+}
+
+function success_alert(message, targetId) {
     $(targetId).text(message);
     $(targetId).show(200);
     setTimeout(() => {
@@ -98,15 +107,18 @@ function validateCustomer(userData) {
     })
         .done((response) => {
             if (response.responseCode === "000") {
-                $("#self_enroll_form1").hide();
-                $("#self_enroll_form2").toggle("500");
+                success_alert(response.message, "#successful_self_enroll");
+                setTimeout(() => {
+                    $("#self_enroll_form1").hide();
+                    $("#self_enroll_form2").toggle("500");
+                }, 3000);
 
                 $("#id_number_input").attr(
                     "placeholder",
                     `Enter your ID number: ${response.data.idType}`
                 );
 
-                console.log(response);
+                // console.log(response);
                 userData.authToken = response.data.authToken;
             } else {
                 error_alert(response.message, "#self_enroll_message");
@@ -136,11 +148,14 @@ function confirmCustomer(userData) {
     })
         .done((response) => {
             if (response.responseCode === "000") {
-                console.log("confirmation successful");
-                console.log(response);
-                $("#self_enroll_form2").hide();
-                $("#s_loading2").toggle();
-                $("#self_enroll_form3").toggle(500);
+                // console.log("confirmation successful");
+                // console.log(response);
+                success_alert(response.message, "#successful_self_enroll");
+                setTimeout(() => {
+                    $("#self_enroll_form2").hide();
+                    $("#s_loading2").toggle();
+                    $("#self_enroll_form3").toggle(500);
+                }, 3000);
             } else {
                 error_alert(response.message, "#self_enroll_message");
                 $("#s_loading2").toggle();
@@ -158,9 +173,11 @@ function confirmCustomer(userData) {
 }
 
 function registerCustomer(userData) {
+    // console.log("b_next3 ==>", userData);
+    // return;
     $.ajax({
         type: "POST",
-        url: "../register-customer",
+        url: "register-customer",
         datatype: "application/json",
         data: userData,
         headers: {
@@ -169,16 +186,24 @@ function registerCustomer(userData) {
     })
         .done((response) => {
             if (response.responseCode === "000") {
-                console.log(response.message);
-                $("#one_time_input_area").hide(300);
-                $("#self_enroll_message").text(response.message);
-                $("#self_enroll_message").toggleClass(
-                    "alert-danger alert-success bg-danger bg-success"
-                );
-                $("#self_enroll_message").show;
+                // console.log(response.message);
+                success_alert(response.message, "#successful_self_enroll");
                 setTimeout(() => {
+                    $("#one_time_input_area").hide(300);
+
                     window.location = "login";
-                }, 3000);
+
+                    // $("#self_enroll_form2").hide();
+                    // $("#s_loading2").toggle();
+                    // $("#self_enroll_form3").toggle(500);
+                }, 5000);
+                // $("#self_enroll_message").text(response.message);
+                // $("#self_enroll_message").toggleClass(
+                //     "alert-danger alert-success bg-danger bg-success"
+                // );
+                // $("#self_enroll_message").show;
+
+                // setTimeout(() => {}, 3000);
             } else {
                 error_alert(response.message, "#self_enroll_message");
                 $("#s_next3").show();
@@ -204,8 +229,11 @@ function getSecurityQuestion(resetUserId) {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            console.log(response);
+            console.log("getSecurityQuestion ==>", response);
+            // return;
             if (response.responseCode == 000) {
+                success_alert(response.message, "#reset_success");
+
                 let securityQuestion = response.data[0].description;
                 let securityQuestionCode = response.data[0].code;
                 $("#security_question").text(securityQuestion);
@@ -217,18 +245,45 @@ function getSecurityQuestion(resetUserId) {
                     "placeholder",
                     securityQuestion
                 );
-                $("#security_question_form").toggle(500);
-                $("#security_question_submit").show();
-                $("#reset_password_submit_btn").hide();
-                $("#user_id_next_btn").hide();
-                $("#password_verification").hide();
-                $("#user_id_view").hide();
-                $("#password_verification").hide();
+                getLoginOTP(116, resetUserId).then((data) => {
+                    console.log("cget otp==>", data);
+                    // return;
+                    if (data.responseCode == "000") {
+                        setTimeout(function () {
+                            // $("#security_question_form").toggle(500);
+                            // $("#security_question_submit").show();
+                            // $(".security_question_submit_spinner").hide();
+                            // $("#security_question_otp_submit").hide();
+                            // $("#reset_password_submit_btn").hide();
+                            // $("#user_id_next_btn").hide();
+                            // $("#password_verification").hide();
+                            // $("#user_id_view").hide();
+                            // $("#password_verification").hide();
+
+                            // CALL GET OP INSTEAD
+                            $("#security_question_otp").toggle();
+                            $("#security_question_otp_submit").toggle();
+                            $(".otp_submit_spinner").hide();
+                            $("#user_id_view").hide();
+                            $("#user_id_next_btn").hide();
+                        }, 3000);
+                    } else {
+                        setTimeout(function () {
+                            error_alert(data.message, "#no_question");
+                        }, 3000);
+
+                        // $("#user_id_next_btn").attr("disabled", false);
+                        // $(".spinner-text-next").hide();
+                        // $(".user_id_next_btn_text").show();
+                    }
+                    return;
+                });
             } else {
                 error_alert(response.message, "#no_question");
                 $("#user_id_next_btn").attr("disabled", false);
                 $(".spinner-text-next").hide();
                 $(".user_id_next_btn_text").show();
+                // $("#user_id_next_btn").hide();
             }
         },
         error: function (xhr, status, error) {
@@ -258,7 +313,20 @@ function submitSecurityQuestion(userData) {
             console.log(response.message);
             response.message;
             if (response.responseCode == 000) {
-                error_alert(response.message, "#reset_success");
+                // $("#security_question_otp_submit").attr("disabled", false);
+                success_alert(response.message, "#reset_success");
+
+                setTimeout(function () {
+                    // $("#security_question_form").hide();
+                    // $("#security_question_otp").show();
+                    // $("#security_question_otp_submit").show();
+                    // $("#security_question_submit").hide();
+                    // $(".otp_submit_spinner").hide();
+                    location.reload();
+                }, 3000);
+
+                return;
+
                 $("#security_question_submit").attr("disabled", false);
                 $("#submit_spinner").hide();
                 $("#security_question_submit_text").show();
@@ -358,7 +426,64 @@ $(document).ready(function () {
         $("#user_id_next_btn").attr("disabled", true);
         $(".spinner-text-next").show();
         $(".user_id_next_btn_text").hide();
+        // return;
         getSecurityQuestion(resetUserId);
+    });
+
+    $("#security_question_otp_submit").on("click", (e) => {
+        e.preventDefault();
+        var userOTP = $("#reset_user_id_otp").val();
+        // console.log(userOTP);
+        if (!userOTP) {
+            error_alert("Enter Valid Otp", "#no_question");
+            return;
+        }
+
+        // return;
+
+        $("#security_question_otp_submit").attr("disabled", true);
+        $(".otp_submit_spinner").show();
+
+        $("#security_question_otp_submit_text").hide();
+
+        validateLoginOTP(userOTP, 116, userData.resetUserId).then((data) => {
+            console.log("verifyOTP==>", data);
+            if (data.responseCode == "000") {
+                success_alert(data.message, "#reset_success");
+
+                // getSecurityQuestion(resetUserId);
+                // $("#submit").attr("disabled", true);
+                // =================================================================
+                //
+                // ============================
+                setTimeout(function () {
+                    $("#security_question_form").toggle(500);
+                    $("#security_question_submit").show();
+                    $(".security_question_submit_spinner").hide();
+                    $("#security_question_otp_submit").hide();
+                    $("#reset_password_submit_btn").hide();
+                    $("#user_id_next_btn").hide();
+                    // $("#password_verification").hide();
+                    $("#user_id_view_otp").hide();
+                    $("#reset_user_id_otp").hide();
+                    $("#security_question_otp").hide();
+                }, 3000);
+                return;
+            } else {
+                $("#security_question_otp_submit").attr("disabled", false);
+                $("#security_question_otp_submit_text").show();
+                $(".otp_submit_spinner").hide();
+                // $(".submit_otp_button").show();
+                // $(".spinner-text-next").hide();
+                // $("#verify_otp_button").attr("disabled", false);
+
+                // $(".submit_otp_button").show();
+                // $(".spinner-text-next").hide();
+                // $("#log_in").show();
+                error_alert(data.message, "#no_question");
+            }
+            return;
+        });
     });
 
     $("#security_question_submit").on("click", (e) => {
@@ -379,12 +504,46 @@ $(document).ready(function () {
             error_alert("Passwords do not match", "#no_question");
             return false;
         }
+
+        if (userData.newPassword.search(/[a-z]/i) < 0) {
+            error_alert(
+                "Password must contain at least one lower case letter.",
+                "#no_question"
+            );
+            return;
+        }
+        if (userData.newPassword.search(/[A-Z]/) < 0) {
+            error_alert(
+                "Password must contain at least one upper case letter.",
+                "#no_question"
+            );
+            return;
+        }
+        if (userData.newPassword.search(/[0-9]/) < 0) {
+            error_alert(
+                "Password must contain at least one digit.",
+                "#no_question"
+            );
+            return;
+        }
+        if (userData.newPassword.search(/[!@#\$%\^&\*_]/) < 0) {
+            error_alert(
+                "password must contain a special character (! @ # $ % ^ & * _ ) ",
+                "#no_question"
+            );
+            return;
+        }
+        // if (errors.length > 0) {
+        //     alert(errors.join("\n"));
+        //     return false;
+        // }
+        // return;
         userData.securityQuestionCode = $("#security_question_answer").attr(
             "securityQuestionCode"
         );
-        console.log(userData);
+        // console.log(userData);
         $("#security_question_submit").attr("disabled", true);
-        $("#submit_spinner").show();
+        $(".security_question_submit_spinner").show();
         $("#security_question_submit_text").hide();
         submitSecurityQuestion(userData);
     });
@@ -438,8 +597,10 @@ $(document).ready(function () {
             error_alert("Please enter date of birth", "#self_enroll_message");
             return false;
         }
-        dob = $("#date_of_birth_input").val().split("/");
-        userData.dateOfBirth = `${dob[2]}-${dob[0]}-${dob[1]}`;
+        dob = $("#date_of_birth_input").val();
+        // dob = $("#date_of_birth_input").val().split("/");
+        // userData.dateOfBirth = `${dob[2]}-${dob[0]}-${dob[1]}`;
+        userData.dateOfBirth = dob;
         userData.idNumber = $("#id_number_input").val();
         userData.phoneNumber = $("#phone_number_input").val();
 
@@ -479,15 +640,18 @@ $(document).ready(function () {
     });
 
     $("#reset_password_back_button").on("click", (e) => {
+        location.reload();
+        return;
+
         $("#security_question_submit").hide();
-        $("#user_id_next_btn").show();
+        // $("#user_id_next_btn").show();
         $("#security_question_form").hide();
-        $("#user_id_view").show();
+        // $("#user_id_view").show();
         $("#password_reset_area").hide(500);
-        $("#login_form").show(500);
-        $("#user_id_next_btn").attr("disabled", false);
+        // $("#login_form").show(500);
+        // $("#user_id_next_btn").attr("disabled", false);
         $(".spinner-text-next").hide();
-        $(".user_id_next_btn_text").show();
+        // $(".user_id_next_btn_text").show();
         document.getElementById("reset_password_form").reset();
     });
 });

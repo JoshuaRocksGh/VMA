@@ -1,17 +1,35 @@
 @extends('layouts.master')
 @section('content')
     @php
-        $pageTitle = 'BOLLORE LINK';
-        $basePath = 'Transfer';
-        $currentPath = 'Bollore Link';
+        $pageTitle = 'AIRPORT TAX';
+        $basePath = 'Payments';
+        $currentPath = 'Airport Tax';
     @endphp
     @include('snippets.pageHeader')
-
+    @include('snippets.pinCodeModal')
     <div class="px-2">
         <div class="dashboard site-card overflow-hidden">
             <div class="tab-content dashboard-body p-4">
-                <div class="mx-auto  h-100 " style="max-width: 650px" id="bollore_request">
-                    <form action="#" autocomplete="off" aria-autocomplete="none" id="bollore_request_form">
+                <div class="mx-auto  h-100 " style="max-width: 650px" id="airport_tax_payment">
+                    <div class="col-12 row">
+
+                        <div class="form-group align-items-center  bg-light p-2 col-md-5" style="border-radius: 5px">
+
+                            <h3 class="text-center font-weight-bold">SLE: 400.00</h3>
+
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="form-group align-items-center bg-light p-2 col-md-5" style="border-radius: 5px">
+
+                            <h3 class="text-center font-weight-bold">USD: 25.00</h3>
+
+
+
+                        </div>
+
+                    </div>
+                    <hr class="my-3" style="padding-top: 0px;marign-top: -5px; padding-bottom: 0px;">
+                    <form action="#" autocomplete="off" aria-autocomplete="none" id="airport_tax_form">
                         <div class="form-group row ">
                             <b class="col-md-12 text-dark">Account to
                                 transfer from &nbsp;
@@ -26,45 +44,7 @@
                             </select>
                         </div>
                         <hr style="padding-top: 0px; padding-bottom: 0px;">
-                        <div class="form-group row">
-
-                            <b class="col-md-4 text-dark"> Beneficiary
-                                Name
-                                &nbsp; <span class="text-danger">*</span></b>
-
-
-                            <input type="text" class="form-control col-md-8 " id="beneficiary_name"
-                                placeholder="Enter Beneficiary Name" autocomplete="off" required>
-                            <br>
-
-                        </div>
-
-                        <div class="form-group row">
-
-                            <b class="col-md-4 text-dark"> Beneficiary
-                                Address
-                                &nbsp; <span class="text-danger">*</span></b>
-
-
-                            <input type="text" class="form-control col-md-8 " id="beneficiary_address"
-                                placeholder="Enter Beneficiary Address" autocomplete="off" required>
-                            <br>
-
-                        </div>
-
-                        <div class="form-group row">
-
-                            <b class="col-md-4 text-dark"> Receiver
-                                Name
-                                &nbsp; <span class="text-danger">*</span></b>
-
-
-                            <input type="text" class="form-control col-md-8 " id="reciever_name"
-                                placeholder="Enter Receiver Name" autocomplete="off" required>
-                            <br>
-
-                        </div>
-
+                        {{--    --}}
                         <div class="form-group row mb-3">
 
                             <b class="col-md-4 text-dark">Amount&nbsp;
@@ -78,74 +58,58 @@
                                 </div>
 
                                 &nbsp;
-                                <input class="form-control  text-input key_transfer_amount" type="text" disabled>
+                                <input class="form-control  text-input key_transfer_amount font-weight-bold" type="text"
+                                    disabled>
                                 &nbsp;
 
 
-                                <input type="text" class="form-control " id="amount"
+                                {{--  <input type="text" class="form-control " id="amount"
                                     placeholder="Enter Amount To Transfer"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
-                                    required>
+                                    required>  --}}
                             </div>
 
 
 
                         </div>
 
-                        {{--  <div class="form-group row">
 
-                            <b class="col-md-4 text-dark"> Beneficiary
-                                Address
-                                &nbsp; <span class="text-danger">*</span></b>
-
-
-                            <input type="text" class="form-control col-md-8 " id="beneficiary_address"
-                                placeholder="Enter Beneficiary Address" autocomplete="off" required>
-                            <br>
-
-                        </div>  --}}
-                        <div class="form-group align-items-center row">
-                            <b class="text-dark col-md-4"> Select ID Type </b>
-                            <div class="col-md-8 px-0"> <select class="form-control  " id="id_type" required>
-                                    <option disabled value="" selected> -- Select
-                                        Type --</option>
-                                    {{--  <option selected value="passport"> Passport</option>
-                                    <option value="National_id"> National ID</option>
-                                    <option value="Voter_id">Voter ID</option>  --}}
-                                </select></div>
-                        </div>
+                        {{--    --}}
                         <div class="form-group row">
 
-                            <b class="col-md-4 text-dark"> ID
-                                Number
+                            <b class="col-md-4 text-dark"> Passport Number
+
                                 &nbsp; <span class="text-danger">*</span></b>
 
 
-                            <input type="text" class="form-control col-md-8 " id="id_number"
-                                placeholder="Enter ID Number" autocomplete="off" required>
+                            <input type="text" class="form-control col-md-8 " id="passport_number"
+                                placeholder="Enter Passport Number" autocomplete="off" required>
                             <br>
 
                         </div>
 
-                        <div class="form-group align-items-center row">
-                            <b class="col-md-4 text-dark">Purpose of Transfer
-                            </b>
-                            <input type="text" value="Bollore Transfer" class="form-control text-input col-md-8"
-                                id="transfer_purpose" placeholder="Enter purpose of transaction"
-                                class="form-group row mb-3">
-                        </div>
-
+                        {{--    --}}
                         <div class="form-group row">
 
-                            <b class="col-md-4 text-dark"> Telephone
-                                Number
+                            <b class="col-md-4 text-dark"> Flight Number
                                 &nbsp; <span class="text-danger">*</span></b>
 
 
-                            <input type="text" class="form-control col-md-8 " id="telephone_number"
-                                placeholder="Enter Receiver Telephone" autocomplete="off"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
-                                required>
+                            <input type="text" class="form-control col-md-8 " id="flight_number"
+                                placeholder="Enter Flight Number" autocomplete="off" required>
+                            <br>
+
+                        </div>
+                        {{--    --}}
+
+                        <div class="form-group row">
+
+                            <b class="col-md-4 text-dark"> Flight Date
+                                &nbsp; <span class="text-danger">*</span></b>
+
+
+                            <input type="date" class="form-control col-md-8 " id="flight_date"
+                                placeholder="Enter Beneficiary Name" autocomplete="off" required>
                             <br>
 
                         </div>
@@ -159,9 +123,10 @@
 
                             </button>
                         </div>
-
                     </form>
+
                 </div>
+
 
                 <div class="" id="transaction_summary" style="display:none">
 
@@ -169,7 +134,7 @@
                         <table class="table mb-0 table-striped p-4 mx-auto">
 
                             <tbody>
-                                <tr class="success_gif show-on-success" style="display: none">
+                                {{--  <tr class="success_gif show-on-success" style="display: none">
                                     <td class="text-center bg-white" colspan="2">
                                         <img src="{{ asset('land_asset/images/statement_success.gif') }}"
                                             style="zoom: 0.5" alt="">
@@ -179,7 +144,7 @@
                                     <td class="text-center bg-white" colspan="2">
                                         <span class="text-success font-13 text-bold " id="success-message"></span>
                                     </td>
-                                </tr>
+                                </tr>  --}}
 
                                 <tr>
                                     <td>Sender Details:</td>
@@ -196,7 +161,7 @@
                                             id="display_from_account_balance"></span>
                                     </td>
                                 </tr>
-                                <tr>
+                                {{--  <tr>
                                     <td>Beneficiary Details:</td>
                                     <td>
                                         <span class="d-block font-13 text-primary h3 display_beneficiary_name"
@@ -204,36 +169,8 @@
                                         <span class="d-block font-13 text-primary h3 display_beneficiary_address"
                                             id="display_beneficiary_address"> </span>
                                     </td>
-                                </tr>
+                                </tr>  --}}
 
-                                <tr>
-                                    <td>Receiver Details:</td>
-                                    <td>
-                                        <span class="d-block font-13 text-primary h3 display_to_receiver_name"
-                                            id="display_to_receiver_name"> </span>
-                                        <span class="d-block font-13 text-primary h3 display_to_receiver_id_type"
-                                            id="display_to_receiver_id_type"> </span>
-                                        <span class="d-block font-13 text-primary h3 display_to_receiver_id_number"
-                                            id="display_to_receiver_id_number"> </span>
-                                        <span class="d-block font-13 text-primary h3 display_to_receiver_telephone"
-                                            id="display_to_receiver_telephone"> </span>
-
-                                        {{--  @if ($currentPath === 'Local Bank' || $currentPath === 'International Bank' || $currentPath === 'Standing Order')
-                                            <span class="d-block font-13 h3 text-bold text-primary display_to_bank_name">
-                                            </span>
-                                            <span class="d-block font-13 h3 text-bold text-primary display_to_account_address">
-                                            </span>
-                                        @endif  --}}
-                                        {{--  <span class="d-block font-13 text-primary h3 display_to_account_no"
-                                            id="display_to_account_no"> </span>
-                                        @if ($currentPath !== 'International Bank' && $currentPath !== 'Local Bank' && $currentPath !== 'Standing Order')
-                                            <span
-                                                class="d-block font-13 text-primary text-bold display_to_account_currency"
-                                                id="display_to_account_currency"></span>
-                                        @endif  --}}
-
-                                    </td>
-                                </tr>
 
                                 <tr>
                                     <td>Amount:</td>
@@ -246,65 +183,36 @@
 
                                     </td>
                                 </tr>
-                                {{--  @if ($currentPath === 'Local Bank')
-                                    <tr>
-                                        <td>Transfer Type:</td>
-                                        <td>
 
-                                            <span class="font-13 text-primary h3 display_to_transfer_type"></span>
-
-                                        </td>
-                                    </tr>
-                                @endif  --}}
-                                {{--  <tr>
-                                    <td>Transfer Fee</td>
-                                    <td>
-                                        <span class="font-13 text-danger h3 account_currency" id="display_currency">
-                                        </span>
-                                        &nbsp;
-                                        <span class="font-13 text-danger h3 display_transfer_fee"
-                                            id="display_transfer_fee">0.00</span>
-
-                                    </td>
-                                </tr>  --}}
 
                                 <tr>
-                                    <td>Purpose:</td>
+                                    <td>Passport Number:</td>
                                     <td>
-                                        <span class="font-13 text-primary h3 display_purpose" id="display_purpose"></span>
+                                        <span class="font-13 text-primary h3 display_passport_number"
+                                            id="display_passport_number"></span>
                                     </td>
                                 </tr>
 
-                                {{--  <tr>
-                                    <td>Category:</td>
-                                    <td>
-                                        <span class="font-13 text-primary h3 display_category"
-                                            id="display_category"></span>
-
-                                    </td>
-                                </tr>  --}}
-                                @if ($currentPath === 'Standing Order')
-                                    <tr>
-                                        <td>Start Date: </td>
-                                        <td>
-                                            <span class="font-13 text-primary h3 display_so_start_date"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>End Date: </td>
-                                        <td>
-                                            <span class="font-13 text-primary h3 display_so_end_date"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Frequency: </td>
-                                        <td>
-                                            <span class="font-13 text-primary h3 display_frequency_so"></span>
-                                        </td>
-                                    </tr>
-                                @endif
                                 <tr>
-                                    <td>Transfer Date: </td>
+                                    <td>Flight Number:</td>
+                                    <td>
+                                        <span class="font-13 text-primary h3 display_flight_number"
+                                            id="display_flight_number"></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Flight Date:</td>
+                                    <td>
+                                        <span class="font-13 text-primary h3 display_flight_date"
+                                            id="display_flight_date"></span>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>Payment Date: </td>
                                     <td>
                                         <span class=" font-13 text-primary h3"
                                             id="display_transfer_date">{{ date('d F, Y') }}</span>
@@ -318,6 +226,18 @@
                                             id="display_posted_by">{{ session()->get('userAlias') }}</span>
                                     </td>
                                 </tr>
+                                {{--  ====== ENTER OTP =======  --}}
+                                @if (!config('app.corporate'))
+                                    <tr>
+                                        <td>
+                                            <h4 class="text-danger">Enter OTP</h4>
+                                        </td>
+                                        <td><input type="text" class="form-control text-input  "
+                                                placeholder="Enter Otp" id="transfer_otp"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
+                                                required></td>
+                                    </tr>
+                                @endif
                                 <tr class="hide-on-success bg-danger  text-white">
                                     <td colspan="2">
                                         <div class="custom-control d-flex custom-checkbox ">
@@ -358,12 +278,11 @@
                             </button></span>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 @endsection
+
 @section('scripts')
-    <script src="{{ asset('assets/js/pages/transfer/bollore.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/payments/airportTaxPayment.js') }}"></script>
 @endsection
