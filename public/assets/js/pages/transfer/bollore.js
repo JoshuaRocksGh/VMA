@@ -21,6 +21,8 @@ function makeTransfer(data) {
                 });
 
                 getAccounts();
+                $(".show-on-success").show();
+                $("#success-message").text(response.message);
 
                 $(".hide-on-success").hide();
             } else {

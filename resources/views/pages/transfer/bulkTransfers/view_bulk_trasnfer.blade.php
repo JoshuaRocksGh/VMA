@@ -18,82 +18,97 @@
                             server.
                             <hr>
                         </p> --}}
+            <div class="card " style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;border-radius: 10px;">
 
-
-            <form class="parsley-examples" id="bulk_upload_form">
-                <div class="card-box col-md-12">
-
-
-                    <div class="row">
-
-
-
-                        <div class="col-md-3">
-                            <p class="mb-2 text-danger">Account Number</p>
-                            <h4 class="text-dark display_debit_account_no ">{{ $uploadDetails['debitAccount'] }}</h4>
-
-                        </div>
-                        <div class="col-md-3">
-                            <p class="mb-2 text-danger">Bulk Amount </p>
-                            <h4 class="text-dark display_total_amount ">
-                                {{ number_format($uploadDetails['totalAmount'], 2) }}</h4>
-
-                        </div>
-
-                        <div class="col-md-3 ">
-                            <p class="mb-2 text-danger">Narration</p>
-                            <h4 class="text-dark display_narrations">{{ $uploadData[0]['transDescription'] }}</h4>
-
-                        </div>
-                        <div class="col-md-3 ">
-                            <p class="mb-2 text-danger">Batch Number </p>
-                            <h4 class="text-dark display_batch_no ">{{ $uploadData[0]['uploadBatch'] }}</h4>
-
-
-                        </div>
+                <div class="card-body">
+                    <form class="parsley-examples" id="bulk_upload_form">
+                        <div class="card-box col-md-12">
 
 
 
-
-                        <!-- end row -->
-
+                            <div class="row">
 
 
-                    </div>
-                    <br><br>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group row">
+                                <div class="col-md-3 text-center">
+                                    <p class="mb-2 text-danger">Account Number</p>
+                                    <h4 class="text-dark display_debit_account_no ">{{ $uploadDetails['debitAccount'] }}
+                                    </h4>
 
-                                <div class="col-md-4">
-                                    <button type="button"
-                                        class="btn btn-secondary btn-sm  waves-effect waves-light disappear-after-success"
-                                        id="reject_upload_btn">
-                                        Reject Upload
-                                    </button>
                                 </div>
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4 float-right">
-                                    <button type="button" class="btn btn-success btn-sm  waves-effect waves-light"
-                                        id="approve_upload_btn">
-                                        Submit for Approval
-                                    </button>
+                                <div class="col-md-3 text-center">
+                                    <p class="mb-2 text-danger">Bulk Amount </p>
+                                    <h4 class="text-dark display_total_amount ">
+                                        {{ number_format($uploadDetails['totalAmount'], 2) }}</h4>
+
+                                </div>
+
+                                <div class="col-md-3 text-center ">
+                                    <p class="mb-2 text-danger">Narration</p>
+                                    <h4 class="text-dark display_narrations">{{ $uploadData[0]['transDescription'] }}</h4>
+
+                                </div>
+                                <div class="col-md-3text-center ">
+                                    <p class="mb-2 text-danger">Batch Number </p>
+                                    <h4 class="text-dark display_batch_no ">{{ $uploadData[0]['uploadBatch'] }}</h4>
+
+
                                 </div>
 
 
+
+
+                                <!-- end row -->
 
 
 
                             </div>
+                            <br><br>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+
+                                        <div class="col-md-4 float-left text-center">
+                                            <button type="button"
+                                                class="btn btn-secondary btn-sm  waves-effect waves-light disappear-after-success"
+                                                id="reject_upload_btn">
+                                                Reject Upload
+                                                <i class="mdi mdi-cancel"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 text-center">
+                                            <button type="button"
+                                                class="btn btn-xs btn-outline-dark waves-effect waves-light error_modal_data "
+                                                data-toggle="modal" data-target="#bs-example-modal-lg">View</button>
+                                        </div>
+                                        <div class="col-md-4 float-right text-center">
+                                            <button type="button" class="btn btn-success btn-sm  waves-effect waves-light"
+                                                id="approve_upload_btn">
+                                                Submit for Approval
+                                                <i class="mdi mdi-check-all"></i>
+                                            </button>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
+                        {{-- <button type="button" class="btn btn-primary hello_clicked">Hello</button> --}}
+
+
+                    </form>
 
                 </div>
-                {{-- <button type="button" class="btn btn-primary hello_clicked">Hello</button> --}}
+            </div>
 
 
-            </form>
+
 
 
 

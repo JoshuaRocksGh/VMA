@@ -101,7 +101,7 @@ class LoginController extends Controller
             } // API responseCode is 000
             $userDetail = $result->data;
             // return response()->json($userDetail->accountsList[0]->accountDesc);
-            return response()->json($userDetail);
+            // return response()->json($userDetail);
             if (!config("app.corporate") && $userDetail->customerType === 'C') {
                 return  $base_response->api_response('900', 'Corporate account, use Corporate Internet Banking platform',  NULL);
             } elseif (config("app.corporate") && $userDetail->customerType !== 'C') {
@@ -263,7 +263,11 @@ class LoginController extends Controller
         $userAlias = session()->get('userAlias');
         $customerNumber = session()->get('customerNumber');
         $customerPhone = session()->get('customerPhone');
-        $userId = session()->get('userId');
+        if ($request->userID) {
+            $userId = $request->userID;
+        } else {
+            $userId = session()->get('userId');
+        }
 
         $channel = \config('otp.channel');
         $entry_source = \config('otp.entry_source');
@@ -321,7 +325,12 @@ class LoginController extends Controller
         $userAlias = session()->get('userAlias');
         $customerNumber = session()->get('customerNumber');
         $customerPhone = session()->get('customerPhone');
-        $userId = session()->get('userId');
+        if ($request->userID) {
+            $userId = $request->userID;
+        } else {
+            $userId = session()->get('userId');
+        }
+        // $userId = session()->get('userId');
 
         $channel = \config('otp.channel');
         $entry_source = \config('otp.entry_source');

@@ -232,6 +232,8 @@ function getSecurityQuestion(resetUserId) {
             console.log("getSecurityQuestion ==>", response);
             // return;
             if (response.responseCode == 000) {
+                success_alert(response.message, "#reset_success");
+
                 let securityQuestion = response.data[0].description;
                 let securityQuestionCode = response.data[0].code;
                 $("#security_question").text(securityQuestion);
@@ -243,25 +245,39 @@ function getSecurityQuestion(resetUserId) {
                     "placeholder",
                     securityQuestion
                 );
-                success_alert(response.message, "#reset_success");
-                setTimeout(function () {
-                    // $("#security_question_form").toggle(500);
-                    // $("#security_question_submit").show();
-                    // $(".security_question_submit_spinner").hide();
-                    // $("#security_question_otp_submit").hide();
-                    // $("#reset_password_submit_btn").hide();
-                    // $("#user_id_next_btn").hide();
-                    // $("#password_verification").hide();
-                    // $("#user_id_view").hide();
-                    // $("#password_verification").hide();
+                getLoginOTP(116, resetUserId).then((data) => {
+                    console.log("cget otp==>", data);
+                    // return;
+                    if (data.responseCode == "000") {
+                        setTimeout(function () {
+                            // $("#security_question_form").toggle(500);
+                            // $("#security_question_submit").show();
+                            // $(".security_question_submit_spinner").hide();
+                            // $("#security_question_otp_submit").hide();
+                            // $("#reset_password_submit_btn").hide();
+                            // $("#user_id_next_btn").hide();
+                            // $("#password_verification").hide();
+                            // $("#user_id_view").hide();
+                            // $("#password_verification").hide();
 
-                    // CALL GET OP INSTEAD
-                    $("#security_question_otp").toggle();
-                    $("#security_question_otp_submit").toggle();
-                    $(".otp_submit_spinner").hide();
-                    $("#user_id_view").hide();
-                    $("#user_id_next_btn").hide();
-                }, 3000);
+                            // CALL GET OP INSTEAD
+                            $("#security_question_otp").toggle();
+                            $("#security_question_otp_submit").toggle();
+                            $(".otp_submit_spinner").hide();
+                            $("#user_id_view").hide();
+                            $("#user_id_next_btn").hide();
+                        }, 3000);
+                    } else {
+                        setTimeout(function () {
+                            error_alert(data.message, "#no_question");
+                        }, 3000);
+
+                        // $("#user_id_next_btn").attr("disabled", false);
+                        // $(".spinner-text-next").hide();
+                        // $(".user_id_next_btn_text").show();
+                    }
+                    return;
+                });
             } else {
                 error_alert(response.message, "#no_question");
                 $("#user_id_next_btn").attr("disabled", false);
@@ -412,35 +428,6 @@ $(document).ready(function () {
         $(".user_id_next_btn_text").hide();
         // return;
         getSecurityQuestion(resetUserId);
-
-        getOTP(116).then((data) => {
-            // console.log("cget otp==>", data);
-            // return;
-            if (data.responseCode == "000") {
-                // success_alert(response.message, "#reset_success");
-                // $("#security_question_otp").toggle();
-                // $("#security_question_otp_submit").toggle();
-                // $(".otp_submit_spinner").hide();
-                // $("#user_id_view").hide();
-                // $("#user_id_next_btn").hide();
-                return;
-
-                // $("#security_question_form").toggle(500);
-                // $("#security_question_submit").show();
-                // $("#security_question_otp_submit").hide();
-                // $("#security_question_otp_submit").hide();
-            } else {
-                // $("#spinner").hide();
-                // $("#spinner-text").hide();
-                // $("#log_in").show();
-                error_alert(data.message, "#no_question");
-
-                $("#user_id_next_btn").attr("disabled", false);
-                $(".spinner-text-next").hide();
-                $(".user_id_next_btn_text").show();
-            }
-            return;
-        });
     });
 
     $("#security_question_otp_submit").on("click", (e) => {
@@ -459,7 +446,7 @@ $(document).ready(function () {
 
         $("#security_question_otp_submit_text").hide();
 
-        validateOTP(userOTP, 116).then((data) => {
+        validateLoginOTP(userOTP, 116, userData.resetUserId).then((data) => {
             console.log("verifyOTP==>", data);
             if (data.responseCode == "000") {
                 success_alert(data.message, "#reset_success");
@@ -476,10 +463,10 @@ $(document).ready(function () {
                     $("#security_question_otp_submit").hide();
                     $("#reset_password_submit_btn").hide();
                     $("#user_id_next_btn").hide();
-                    $("#password_verification").hide();
-                    $("#user_id_view").hide();
-                    $("#password_verification").hide();
-                    // $("#security_question_otp").hide();
+                    // $("#password_verification").hide();
+                    $("#user_id_view_otp").hide();
+                    $("#reset_user_id_otp").hide();
+                    $("#security_question_otp").hide();
                 }, 3000);
                 return;
             } else {
@@ -653,15 +640,18 @@ $(document).ready(function () {
     });
 
     $("#reset_password_back_button").on("click", (e) => {
+        location.reload();
+        return;
+
         $("#security_question_submit").hide();
-        $("#user_id_next_btn").show();
+        // $("#user_id_next_btn").show();
         $("#security_question_form").hide();
-        $("#user_id_view").show();
+        // $("#user_id_view").show();
         $("#password_reset_area").hide(500);
-        $("#login_form").show(500);
-        $("#user_id_next_btn").attr("disabled", false);
+        // $("#login_form").show(500);
+        // $("#user_id_next_btn").attr("disabled", false);
         $(".spinner-text-next").hide();
-        $(".user_id_next_btn_text").show();
+        // $(".user_id_next_btn_text").show();
         document.getElementById("reset_password_form").reset();
     });
 });

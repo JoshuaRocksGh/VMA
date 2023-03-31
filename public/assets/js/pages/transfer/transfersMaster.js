@@ -8,9 +8,9 @@ function makeTransfer(url, data) {
         url: url,
         datatype: "application/json",
         data: data,
-        // processData: false,
-        // contentType: false,
-        // cache: false,
+        processData: false,
+        contentType: false,
+        cache: false,
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
@@ -54,11 +54,15 @@ function makeTransfer(url, data) {
 
 function corporateSpecific(transferInfo) {
     console.log("transferInfo ==>", transferInfo);
-    const endPoint =
+
+    const corporateEndPoint =
         "corporate-" +
         transferType.toLowerCase().trim().replace(" ", "-") +
         "-transfer-api";
-    makeTransfer(endPoint, transferInfo);
+    // console.log("endPoint ==>", corporateEndPoint);
+    // return;
+
+    makeTransfer(corporateEndPoint, transferInfo);
 }
 
 function getToAccount(endPoint) {
@@ -1010,13 +1014,15 @@ $(() => {
 
             for (const key in transferInfo) {
                 if (transferInfo.hasOwnProperty(key)) {
+                    // console.log("key ==>", key);
+
                     formData.append(key, transferInfo[key]);
                 }
             }
 
             // formData.append("voucher_file", transferInfo.voucher);
 
-            // console.log("ISCORPORATE ==>", formData);
+            console.log("ISCORPORATE ==>", formData);
 
             // corporateSpecific(formData);
             corporateSpecific(formData);

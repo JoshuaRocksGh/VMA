@@ -117,7 +117,7 @@ pageData.barColors = [
 ];
 function transactionsBarChart(transactions) {
     // check if transactions is an array
-    // console.log("transactions =>", transactions);
+    console.log("transactions =>", transactions);
     // return false;
     if (transactions?.length <= 0) {
         $("#transactionNoData").show();
@@ -548,7 +548,7 @@ $(() => {
         const target = $("#chart_account option:selected");
         const accountNumber = target.attr("data-account-number");
         const accountCurrency = target.attr("data-account-currency");
-        // console.log("A", { target, accountCurrency, accountNumber });
+        console.log("A", { target, accountCurrency, accountNumber });
         const today = new Date();
         let startDate = new Date(today.setMonth(today.getMonth() - 300))
             .toISOString()
@@ -571,7 +571,7 @@ $(() => {
         ]).then((data) => {
             $("account-transaction-history", data);
             unblockUi("#acc_history");
-            transactionsBarChart(pageData.transactions);
+            transactionsBarChart(pageData?.transactions);
             // console.log("trans", pageData);
         });
         // getData({
@@ -590,6 +590,7 @@ $(() => {
         //     transactionsBarChart(pageData.transactions);
         // });
     });
+
     $("#chart_account").trigger("change");
 
     $(".accountsPie").click(function (e) {

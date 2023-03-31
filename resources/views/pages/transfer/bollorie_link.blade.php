@@ -169,7 +169,7 @@
                         <table class="table mb-0 table-striped p-4 mx-auto">
 
                             <tbody>
-                                {{--  <tr class="success_gif show-on-success" style="display: none">
+                                <tr class="success_gif show-on-success" style="display: none">
                                     <td class="text-center bg-white" colspan="2">
                                         <img src="{{ asset('land_asset/images/statement_success.gif') }}"
                                             style="zoom: 0.5" alt="">
@@ -179,7 +179,7 @@
                                     <td class="text-center bg-white" colspan="2">
                                         <span class="text-success font-13 text-bold " id="success-message"></span>
                                     </td>
-                                </tr>  --}}
+                                </tr>
 
                                 <tr>
                                     <td>Sender Details:</td>
