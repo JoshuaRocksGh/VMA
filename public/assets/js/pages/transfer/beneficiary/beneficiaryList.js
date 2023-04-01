@@ -1,3 +1,5 @@
+// import beneficiaryForm from "./beneficiaryForm";
+
 function getBeneficiaryList() {
     $.ajax({
         tpye: "GET",

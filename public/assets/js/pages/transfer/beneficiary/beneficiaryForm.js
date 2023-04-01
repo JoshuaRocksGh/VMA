@@ -1,4 +1,4 @@
-let beneficiaryDetails;
+// let beneficiaryDetails;
 function getLocalBanks() {
     return $.ajax({
         type: "GET",
@@ -7,7 +7,7 @@ function getLocalBanks() {
         success: function (response) {
             let data = response.data;
             if (data.length > 1) {
-                         // console.log(data.sort());
+                // console.log(data.sort());
                 let myBanksArray = data;
                 myBanksArray.sort(function (a, b) {
                     let nameA = a.bankDescription.toUpperCase(); // convert name to uppercase
@@ -315,7 +315,10 @@ async function editBankBeneficiary(data, type) {
 
 function initBeneficiaryForm() {
     beneficiaryDetails = {};
+
     $("#save_btn").click(function () {
+        console.log("beneficiaryDetails ==>", beneficiaryDetails);
+
         if (!validateFormInputs()) {
             return false;
         }
@@ -324,7 +327,6 @@ function initBeneficiaryForm() {
             toaster("Enter OTP to continue", "warning");
             return false;
         }
-        // console.log("beneficiaryDetails ==>", beneficiaryDetails);
         // return;
 
         // siteLoading("show");
@@ -391,21 +393,30 @@ function validateFormInputs() {
     const accountName = $("#account_name").val();
     const beneficiaryOTP = $("#beneficiary_otp").val();
     //same bank beneficiary checks
-    // console.log(
-    //     type,
-    //     mode,
-    //     accountNumber,
-    //     bankName,
-    //     bankCode,
-    //     bankCode,
-    //     bankCountry,
-    //     beneficiaryName,
-    //     beneficiaryEmail,
-    //     beneficiaryAddress,
-    //     accountName,
-    //     beneficiaryOTP
-    // );
-  }
+
+    console.log("beneficiaryOTP==<", beneficiaryOTP);
+    if (type === "SAB") {
+        bankName = "SIERRA LEONE COMMERCIAL BANK";
+        if (!accountName) {
+            toaster("Invalid Account Information", "warning");
+            return false;
+        }
+        if (!beneficiaryName) {
+            toaster("all fields required", "warning");
+            return false;
+        }
+    } else {
+        if (
+            !accountNumber ||
+            !bankCode ||
+            !bankName ||
+            !beneficiaryAddress ||
+            !beneficiaryName ||
+            !beneficiaryEmail
+        ) {
+            toaster("all fields required", "warning");
+            return false;
+        }
         if (!validateEmail(beneficiaryEmail)) {
             toaster("invalid email", "warning");
             return false;

@@ -26,6 +26,8 @@ class PaymentsController extends Controller
         $channel = env('APP_CHANNEL');
 
 
+
+
         $data = [
             'accountNumber' => $req->account,
             'amount' => $req->amount,
@@ -49,12 +51,20 @@ class PaymentsController extends Controller
             // return $req;
             // return false;
 
+
             $authToken = session()->get('userToken');
             $userID = session()->get('userId');
             $userAlias = session()->get('userAlias');
             $customerPhone = session()->get('customerPhone');
             $customerNumber = session()->get('customerNumber');
             $userMandate = session()->get('userMandate');
+
+            if ($req->fileUploaded == "Y") {
+                $getInvoice = file_get_contents($req->voucher);
+                $transVoucher = base64_encode($getInvoice);
+            } else {
+                $transVoucher = $req->voucher;
+            }
 
             $data = [
                 "account_no" => $req->account,
@@ -78,6 +88,8 @@ class PaymentsController extends Controller
                 'paymentType' => $req->paymentType,
                 'beneficiaryAccount' => $req->beneficiaryAccount,
                 'recipientName' => $req->recipientName,
+                "transaction_voucher" => $transVoucher,
+                "file_uploaded" => $req->fileUploaded,
 
             ];
 

@@ -71,12 +71,15 @@
                     <div class="d-item">
                         <span> Transaction Fee</span><span class="font-weight-bold" id="details_trans_fee"> </span>
                     </div>
-                    <div class="d-item">
-                        {{--  <span class="text-danger"> Enter OTP</span>  --}}
-                        <input type="text" class="form-control text-input" id="transfer_otp" placeholder="Enter OTP"
-                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
-                            required />
-                    </div>
+                    @if (!config('app.corporate'))
+                        <div class="d-item">
+                            {{--  <span class="text-danger"> Enter OTP</span>  --}}
+                            <input type="text" class="form-control text-input" id="transfer_otp"
+                                placeholder="Enter OTP"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
+                                required />
+                        </div>
+                    @endif
 
 
                 </div>

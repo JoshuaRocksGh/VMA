@@ -790,35 +790,9 @@ $(() => {
             );
             return;
         }
-        // console.log("ISCORPORATE ==>", );
-        // formData.append(
-        //     "voucher",
-        //     document.getElementById("invoice_file").files[0]
-        // );
 
-        // console.log("===>", document.getElementById("invoice_file").files[0]);
-        // console.log("return==>", $(this).val());
-        // var filename = $(this)
-        //     .val()
-        //     .replace(/C:\\fakepath\\/i, "");
-        // var filename = $(this).val();
         transferInfo.voucher = file;
         transferInfo.fileUploaded = "Y";
-        // transferInfo.formData = formData;
-        // console.log("filename ==>", formData);
-
-        // onetimeToAccount.voucher = filename;
-
-        // file.arrayBuffer().then((arrayBuffer) => {
-        //     const blob = new Blob([new Uint8Array(arrayBuffer)], {
-        //         type: file.type,
-        //     });
-        // console.log("invoice_file ==>", transferInfo);
-        //     transferInfo.voucher = blob.size;
-        // });
-        // if (file) {
-        //     toBase64(file).then((data) => (transferInfo.voucher = data));
-        // }
     });
 
     //  {{-- ---------------- --}}
@@ -1022,7 +996,7 @@ $(() => {
 
             // formData.append("voucher_file", transferInfo.voucher);
 
-            console.log("ISCORPORATE ==>", formData);
+            // console.log("ISCORPORATE ==>", formData);
 
             // corporateSpecific(formData);
             corporateSpecific(formData);

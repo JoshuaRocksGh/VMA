@@ -444,6 +444,7 @@ class FunctionsController extends Controller
 
     public function recipientNameEnquiry(Request $req)
     {
+        // return $req;
         $data = [
             'payNumber' => $req->beneficiaryAccount,
             'paymentCode' => $req->payeeName,
