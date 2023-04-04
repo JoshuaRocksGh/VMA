@@ -112,9 +112,9 @@
                 <hr>
 
                 <div class="tab-content pt-0" id="tabContent_requests">
-                    <div class="tab-pane fade show active" id="tab_request_statement" role="tabpanel">
+                    <div class="tab-pane fade card show active" id="tab_request_statement" role="tabpanel">
                         @include('pages.accountServices.requests.statement_request')</div>
-                    <div class="tab-pane fade" id="tab_request_letter" role="tabpanel">
+                    <div class="tab-pane fade card" id="tab_request_letter" role="tabpanel">
                         @include('pages.cards.block_card')
 
                     </div>

@@ -154,8 +154,21 @@ function getBranches() {
             console.log("response ==>", response);
             if (response.responseCode == "000") {
                 const { data } = response;
+                let branchesList = data;
+                // console.log("branchesList ==>", branchesList);
+                branchesList.sort(function (a, b) {
+                    let nameA = a.branchDescription.toUpperCase(); // convert name to uppercase
+                    let nameB = b.branchDescription.toUpperCase(); // convert name to uppercase
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
                 const select = document.getElementById("pick_up_branch");
-                data.forEach((e) => {
+                branchesList.forEach((e) => {
                     const option = document.createElement("option");
                     option.text = e.branchDescription;
                     option.value = e.branchCode;
@@ -181,6 +194,7 @@ $(function () {
         return String(num).padStart(totalLength, '0');
       }
     // siteLoading("show");
+    $("#get_first_month_statement").trigger("click");
     getBranches();
     // branch();
     $("select").select2();
@@ -228,9 +242,9 @@ $(function () {
         // alert("clicked");
 
         var getMonth = $(this).attr("data-value");
-        // console.log(getMonth);
-        const today = new Date().toISOString().slice(0, 10);
-        // console.log("todays' date ===>", today)
+        // console.log("getMonth value ==>", getMonth);
+        var today = new Date().toISOString().slice(0, 10);
+        const newToday = new Date();
         switch (getMonth) {
             case "1":
                 var d = new Date();
@@ -242,9 +256,23 @@ $(function () {
                 // begining of the month
                 var lastMonthBegining = year + "-" + actualNum + "-" + "01";
 
+                console.log("month 1 ==>", actualNum);
+
+                // Subtract one month from today's date
+                var pastDate1 = new Date(
+                    newToday.getFullYear(),
+                    newToday.getMonth() - 3,
+                    newToday.getDate()
+                );
+
+                // Format the date as a string
+                var pastDateString1 = pastDate1.toISOString().slice(0, 10);
+
+                console.log("pastDateString ==>", pastDateString1);
+
                 $("#to_date").val(today);
-                $("#from_date").val(getFirstDate.toISOString().slice(0, 10));
-                // console.log("lastMonthBegining ===>", getFirstDate.toISOString().slice(0, 10))
+                $("#from_date").val(pastDateString1);
+
                 break;
             case "3":
                 var d = new Date();
@@ -257,9 +285,20 @@ $(function () {
                 // begining of the month
                 var lastMonthBegining = year + "-" + result + "-" + "01";
 
+                var pastDate3 = new Date(
+                    newToday.getFullYear(),
+                    newToday.getMonth() - 3,
+                    newToday.getDate()
+                );
+
+                // Format the date as a string
+                var pastDateString3 = pastDate3.toISOString().slice(0, 10);
+
+                console.log("pastDateString ==>", pastDateString3);
+
                 $("#to_date").val(today);
-                $("#from_date").val(getPast3Months.toISOString().slice(0, 10));
-                // console.log(getPast3Months.toISOString().slice(0, 10));
+                $("#from_date").val(pastDateString3);
+                console.log(lastMonthBegining);
                 break;
             case "6":
                 // console.log("6 month");
@@ -273,11 +312,24 @@ $(function () {
                 var getPast6Months = new Date(d.getFullYear(), d.getMonth() - 6, 1);
 
 
+                var pastDate6 = new Date(
+                    newToday.getFullYear(),
+                    newToday.getMonth() - 6,
+                    newToday.getDate()
+                );
+
+                // Format the date as a string
+                var pastDateString6 = pastDate6.toISOString().slice(0, 10);
+
+                console.log("pastDateString ==>", pastDateString6);
+
                 $("#to_date").val(today);
-                $("#from_date").val(getPast6Months.toISOString().slice(0, 10));
+                $("#from_date").val(pastDateString6);
                 // console.log(lastMonthBegining);
                 break;
             default: //January is 0!
+                // Outputs the first day of the current month as a string in the format 'YYYY-MM-DD'
+                // Outputs the past date as a string in the format 'YYYY-MM-DD'
                 var d = new Date();
                 var monthNumber = d.getMonth();
                 if( monthNumber < 10){
@@ -293,13 +345,40 @@ $(function () {
                 // console.log("monthNumber ===>", actualNum)
 
                 // begining of the month
-                var monthBeinging = year + "-" + actualNum + "-" + "01";
-                $("#to_date").val(today);
-                $("#from_date").val(monthBeinging);
-                // $("#from_date").val("2023-01-01");
+                console.log(
+                    " monthBeining ==>",
+                    actualNum.toString().padStart(2, "0")
+                );
 
-                // console.log(today);
-                // console.log("This month ===>",monthBeinging);
+                if (actualNum.length < 1) {
+                    var actualMonth = actualNum.toString().padStart(2, "0");
+                } else {
+                    var actualMonth = actualNum;
+                }
+                var monthBeining = year + "-" + actualMonth + "-" + "01";
+                console.log("monthBeining===>", monthBeining);
+
+                // Get today's date
+                // const today = new Date();
+
+                // Get the first day of the current month
+                const firstDayOfMonth = new Date(
+                    newToday.getFullYear(),
+                    newToday.getMonth(),
+                    1
+                );
+
+                // Format the date as a string
+                const firstDayOfMonthString = firstDayOfMonth
+                    .toISOString()
+                    .slice(0, 10);
+
+                // console.log(firstDayOfMonthString);
+                $("#to_date").val(today);
+                $("#from_date").val(firstDayOfMonthString);
+
+            // console.log(today);
+            // console.log(monthBeining);
         }
     });
     // make card request
@@ -316,8 +395,8 @@ $(function () {
         statementData.endDate = $("#to_date").val();
 
         // let pickUpBranch = $("#pick_up_branch").val();
-        // console.log('all statementData ===>' , statementData)
-        // return false;
+        // console.log("statementData ==>", statementData);
+        // return;
         if (
             !statementData.accountNumber ||
             !statementData.statementType ||

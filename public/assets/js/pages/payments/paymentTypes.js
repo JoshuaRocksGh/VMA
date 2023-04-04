@@ -1,4 +1,7 @@
 const pageData = new Object();
+
+const formData = new FormData();
+
 function getPaymentBeneficiaries() {
     $.ajax({
         type: "GET",
@@ -80,13 +83,16 @@ function paymentType() {
     });
 }
 
-function makePayment() {
+function makePayment(data) {
     siteLoading("show");
     $.ajax({
         type: "POST",
         url: "make-payment-api",
         datatype: "application/json",
-        data: pageData.paymentInfo,
+        data: data,
+        processData: false,
+        contentType: false,
+        cache: false,
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
@@ -149,6 +155,40 @@ function getRecipientName() {
 }
 
 function paymentVerification() {
+    // console.log("next_button ==>", pageData.paymentInfo);
+    if (!ISCORPORATE) {
+        // IF TYPE IS MOMO
+        if (pageData.paymentInfo.paymentType == "MOM") {
+            // siteLoading("show");
+            getOTP(313).then((data) => {
+                // console.log(data);
+                if (data.responseCode == "000") {
+                } else {
+                    toaster(data.message, "warning");
+                    return;
+                }
+            });
+        } else if (pageData.paymentInfo.paymentType == "AIR") {
+            getOTP(314).then((data) => {
+                // console.log(data);
+                if (data.responseCode == "000") {
+                } else {
+                    toaster(data.message, "warning");
+                    return;
+                }
+            });
+        } else if (pageData.paymentInfo.paymentType == "UTL") {
+            getOTP(315).then((data) => {
+                // console.log(data);
+                if (data.responseCode == "000") {
+                } else {
+                    toaster(data.message, "warning");
+                    return;
+                }
+            });
+        }
+    }
+
     const {
         paymentType,
         account,
@@ -266,11 +306,20 @@ function populateSubtypesSelect(type) {
         return;
     });
 }
+function getTransType() {
+    var transType = $("input[name='trans_type']:checked").val();
+    $("#display_voucher_attachment").text("No");
+    // transferInfo.voucher = null;
+    // transferInfo.fileUploaded = null;
+
+    console.log(transType);
+}
 
 $(() => {
     let isOnetimePayment = false;
     siteLoading("show");
     paymentType();
+    getTransType();
 
     function updateTransactionType(type) {
         if (type === "onetime") {
@@ -292,16 +341,132 @@ $(() => {
         $("#to_account").trigger("change");
     });
 
+    $("input[name='trans_type']").click(function () {
+        // $("input[name='trans_type']:checked").val();
+        var transType = $("input[name='trans_type']:checked").val();
+        // console.log(transType);
+
+        if (transType == "invoice") {
+            console.log("invoice===");
+            $(".display_upload_input").toggle(500);
+            $("#display_voucher_attachment").text("Yes");
+
+            return;
+        }
+        if (transType == "normal") {
+            console.log("===normal");
+
+            pageData.paymentInfo = {
+                voucher: "",
+                fileUploaded: "",
+            };
+            $(".display_upload_input").hide();
+            $("#display_voucher_attachment").text("No");
+
+            return;
+        }
+    });
+
+    // adding invoice file
+    pageData.paymentInfo = {
+        voucher: "",
+        fileUploaded: "",
+    };
+    // const pageData.paymentInfo.voucher = ""
+    // const pageData.paymentInfo.fileUploaded = ""
+
+    $("#invoice_file").change(function () {
+        var file = document.getElementById("invoice_file").files[0];
+        // console.log("file ==>", file);
+
+        if (file.size > 5000000) {
+            toaster(
+                "The file size is too large. Max file size of 5MB!",
+                "error"
+            );
+            return;
+        }
+
+        // pageData.paymentInfo = {
+        //     voucher: file,
+        //     fileUploaded: "Y",
+        // };
+        // pageData.paymentInfo.;
+    });
+
     $("#confirm_transfer_button").on("click", (e) => {
         e.preventDefault();
         if (ISCORPORATE) {
-            makePayment();
+            var file = document.getElementById("invoice_file").files[0];
+            // pageData.paymentInfo = {
+            //     voucher: file,
+            //     fileUploaded: "Y",
+            // };
+            if (file) {
+                pageData.paymentInfo.voucher = file;
+                pageData.paymentInfo.fileUploaded = "Y";
+            } else {
+                pageData.paymentInfo.voucher = "";
+                pageData.paymentInfo.fileUploaded = "";
+            }
+
+            // console.log("data ==>", pageData.paymentInfo);
+            // return;
+            for (const key in pageData.paymentInfo) {
+                if (pageData.paymentInfo.hasOwnProperty(key)) {
+                    // console.log("key ==>", key);
+
+                    formData.append(key, pageData.paymentInfo[key]);
+                }
+            }
+            console.log("ISCORPORATE ==>", formData);
+            // return;
+
+            makePayment(formData);
             return;
         }
-        $("#pin_code_modal").modal("show");
+        // validate otp field
+        var otp = $("#transfer_otp").val();
+        if (!otp) {
+            toaster("Enter Valid OTP", "warning");
+            return;
+        }
+        if (pageData.paymentInfo.paymentType == "MOM") {
+            validateOTP(otp, 313).then((data) => {
+                // console.log("verifyOTP==>", data);
+                if (data.responseCode == "000") {
+                    $("#pin_code_modal").modal("show");
+                } else {
+                    toaster(data.message, "error");
+                }
+                return;
+            });
+        } else if (pageData.paymentInfo.paymentType == "AIR") {
+            validateOTP(otp, 314).then((data) => {
+                // console.log("verifyOTP==>", data);
+                if (data.responseCode == "000") {
+                    $("#pin_code_modal").modal("show");
+                } else {
+                    toaster(data.message, "error");
+                }
+                return;
+            });
+        } else if (pageData.paymentInfo.paymentType == "UTL") {
+            validateOTP(otp, 315).then((data) => {
+                // console.log("verifyOTP==>", data);
+                if (data.responseCode == "000") {
+                    $("#pin_code_modal").modal("show");
+                } else {
+                    toaster(data.message, "error");
+                }
+                return;
+            });
+        }
     });
+
     $("#next_button").on("click", (e) => {
         e.preventDefault();
+        // alert("called");
         let account = $("#from_account option:selected").attr(
             "data-account-number"
         );
@@ -343,6 +508,12 @@ $(() => {
             payeeName,
             paymentType,
         };
+        // if (ISCORPORATE) {
+        //     getRecipientName(pageData.paymentInfo);
+        // }
+        // console.log("next_button ==>", pageData.paymentInfo);
+
+        // return;
 
         getRecipientName(pageData.paymentInfo);
     });
@@ -355,7 +526,7 @@ $(() => {
             return false;
         }
         pageData.paymentInfo.pinCode = pin;
-        makePayment();
+        makePayment(pageData.paymentInfo);
         $("#user_pin").val("").text("");
     });
 });

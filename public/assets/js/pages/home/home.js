@@ -16,6 +16,8 @@ function getCorporateRequests(customerNumber, requestStatus) {
         },
         success: function ({ responseCode, data }) {
             if (responseCode !== "000" || !data) {
+                console.log("retyr");
+                getCorporateRequests(customerNumber, requestStatus);
                 return;
             }
             $(".request_table tr").remove();
@@ -78,7 +80,7 @@ function getCorporateRequests(customerNumber, requestStatus) {
                         '_blank', 'location=yes,height=670,width=1200,scrollbars=yes,status=yes'"
                     class=" btn btn-xs btn-outline-info font-10"
                 >
-                    Details
+                   View Details
                 </button>
             `;
                 table.row
@@ -87,9 +89,9 @@ function getCorporateRequests(customerNumber, requestStatus) {
                         formattedRequestType,
                         accountNo,
                         formattedAmount,
-                        narration,
+                        // narration,
                         date,
-                        postedby,
+                        // postedby,
                         actionButton,
                     ])
                     .order([0, "desc"])
@@ -97,7 +99,9 @@ function getCorporateRequests(customerNumber, requestStatus) {
                 table.column(0).visible(false);
             });
         },
-        error: function (xhr, status, error) {},
+        error: function (xhr, status, error) {
+            getCorporateRequests(customerNumber, requestStatus);
+        },
     });
 }
 pageData.barColors = [
@@ -113,7 +117,7 @@ pageData.barColors = [
 ];
 function transactionsBarChart(transactions) {
     // check if transactions is an array
-    // console.log("transactions =>", transactions);
+    console.log("transactions =>", transactions);
     // return false;
     if (transactions?.length <= 0) {
         $("#transactionNoData").show();
@@ -143,19 +147,23 @@ function transactionsBarChart(transactions) {
     });
     $("#transactionNoData").hide();
     new Chart("transactionsBarChart", {
-        type: "line",
+        type: "bar",
         data: {
             labels,
             datasets: [
                 {
                     data: transactionAmount,
                     label: "Transaction Amount",
-                    backgroundColor: "#00F5D4",
+                    backgroundColor: "#dc3545",
+
+                    // #28a745
                 },
                 {
                     data: runningBalance,
                     label: "Account Balance",
-                    backgroundColor: "#00BBF9",
+                    backgroundColor: "#28a745",
+
+                    // #dc3545
                 },
             ],
         },
@@ -237,10 +245,40 @@ function getData({ url, name, data, method }) {
     });
 }
 
+function getInvestment() {
+    return $.ajax({
+        type: "GET",
+        url: "fixed-deposit-account-api",
+        // data,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        datatype: "application/json",
+        success: function (response) {
+            if (response.responseCode === "000") {
+                const { data } = response;
+                // if()
+                pageData[name] = data;
+            } else {
+                setTimeout(function () {
+                    getInvestment();
+                }, 1000);
+            }
+        },
+        error: function (xhr, status, error) {
+            setTimeout(function () {
+                getInvestment();
+            }, 1000);
+            // console.log(xhr.status);
+            // console.log(xhr.responseText);
+        },
+    });
+}
+
 function prepareGraphValues() {
     const accountsPie = {};
     const totalsPie = {
-        xValues: ["Deposits", "Loans", "Investments"],
+        xValues: ["My Deposits", "My Loans", "My Investments"],
         yValues: [],
     };
     accountsPie.xValues = pageData?.accounts?.map((account) =>
@@ -275,11 +313,11 @@ function prepareGraphValues() {
     //investments
     const investmentsPie = {};
     investmentsPie.xValues = pageData?.investments?.map((investment) =>
-        String(investment.sourceAccount)
+        String(investment.principalAccount)
     );
     let investmentsTotal = 0;
     investmentsPie.yValues = pageData?.investments?.map((investment) => {
-        const amount = parseFloat(investment.currentBalance) || 0.0;
+        const amount = parseFloat(investment.dealAmount) || 0.0;
         investmentsTotal += amount;
         return amount;
     });
@@ -380,16 +418,21 @@ const renderDataTables = (data, tableId) => {
                     }),
                 },
             },
-            data: pageData.investments,
+            data: pageData?.investments,
             columns: [
                 {
-                    data: "sourceAccount",
+                    data: "principalAccount",
                 },
+                { data: "product" },
+                { data: "productCurrency" },
                 {
                     data: "dealAmount",
                     render: (data, type, row) => renderCurrency(data, row),
                 },
-                { data: "tenure" },
+                {
+                    data: "accruedInterest",
+                    render: (data, type, row) => renderCurrency(data, row),
+                },
                 {
                     data: "maturityDate",
                     render: (data) =>
@@ -399,7 +442,7 @@ const renderDataTables = (data, tableId) => {
                             day: "numeric",
                         }),
                 },
-                { data: "rollover" },
+                // { data: "rollover" },
             ],
         })
         .draw();
@@ -424,10 +467,13 @@ const renderDataTables = (data, tableId) => {
                     }),
                 },
             },
-            data: pageData.loans,
+            data: pageData?.loans,
             columns: [
                 {
                     data: "FACILITY_NO",
+                    render: function (data) {
+                        return `<a href='loan-request'>${data}</a>`;
+                    },
                 },
                 { data: "DESCRIPTION" },
                 { data: "ISO_CODE" },
@@ -453,16 +499,15 @@ $(() => {
     });
     blockUi({ block: "#nav-tabContent" });
     // return;
-    Promise.all([
-        getData({ url: "fixed-deposit-account-api", name: "investments" }),
-        // getData({ url: "get-loan-accounts-api", name: "loans" }),
-        // getData({ url: "get-accounts-api", name: "accounts" }),
+    Promise.allSettled([
+        // getData({ url: "fixed-deposit-account-api", name: "investments" }),
+        console.log('h')
     ])
         .then((value) => {
             // siteLoading("hide");
             // pageData.accounts = @json(session()->get('userId'));
             // console.log("VALUES ==>", value);
-            // console.log("promise.AllSetteled ==>", pageData);
+            console.log("promise.AllSetteled ==>", pageData);
             // return false
 
             prepareGraphValues();
@@ -504,7 +549,7 @@ $(() => {
         const target = $("#chart_account option:selected");
         const accountNumber = target.attr("data-account-number");
         const accountCurrency = target.attr("data-account-currency");
-        // console.log("A", { target, accountCurrency, accountNumber });
+        console.log("A", { target, accountCurrency, accountNumber });
         const today = new Date();
         let startDate = new Date(today.setMonth(today.getMonth() - 300))
             .toISOString()
@@ -512,22 +557,78 @@ $(() => {
         const endDate = new Date().toISOString().split("T")[0];
         const transLimit = "20";
         blockUi({ block: "#acc_history" });
-        getData({
-            url: "account-transaction-history",
-            name: "transactions",
-            method: "POST",
-            data: {
-                accountNumber,
-                startDate,
-                endDate,
-                transLimit,
-            },
-        }).then((data) => {
+        Promise.allSettled([
+            getData({
+                url: "account-transaction-history",
+                name: "transactions",
+                method: "POST",
+                data: {
+                    accountNumber,
+                    startDate,
+                    endDate,
+                    transLimit,
+                },
+            }),
+        ]).then((data) => {
             $("account-transaction-history", data);
             unblockUi("#acc_history");
-            transactionsBarChart(pageData.transactions);
+            transactionsBarChart(pageData?.transactions);
             // console.log("trans", pageData);
         });
+        // getData({
+        //     url: "account-transaction-history",
+        //     name: "transactions",
+        //     method: "POST",
+        //     data: {
+        //         accountNumber,
+        //         startDate,
+        //         endDate,
+        //         transLimit,
+        //     },
+        // }).then((data) => {
+        //     $("account-transaction-history", data);
+        //     unblockUi("#acc_history");
+        //     transactionsBarChart(pageData.transactions);
+        // });
     });
+
     $("#chart_account").trigger("change");
+
+    $(".accountsPie").click(function (e) {
+        e.preventDefault();
+        console.log("accountsPie");
+        $(".accounts_table").addClass("active");
+        $(".loans_table").removeClass("active");
+        $(".investments_table").removeClass("active");
+
+        //
+        $("#accounts").addClass("active show");
+        $("#loans").removeClass("active show");
+        $("#investments").removeClass("active show");
+    });
+    $(".loansPie").click(function (e) {
+        e.preventDefault();
+        console.log("loansPie");
+        $(".loans_table").addClass("active");
+        $(".accounts_table").removeClass("active");
+        $(".investments_table").removeClass("active");
+
+        //
+        $("#loans").addClass("active show");
+        $("#accounts").removeClass("active show");
+        $("#investments").removeClass("active show");
+    });
+
+    $(".investmentsPie").click(function (e) {
+        e.preventDefault();
+        console.log("investmentsPie");
+        $(".investments_table").addClass("active");
+        $(".loans_table").removeClass("active");
+        $(".accounts_table").removeClass("active");
+
+        //
+        $("#investments").addClass("active show");
+        $("#accounts").removeClass("active show");
+        $("#loans").removeClass("active show");
+    });
 });

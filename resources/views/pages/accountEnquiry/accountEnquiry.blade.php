@@ -139,10 +139,9 @@
                             </th>
                             <th class="all">Balance<span class="currency_display"></span>
                             </th>
-
+                            <th class="all">Details</th>
                             <th class="none">Attachment</th>
                             {{--  <th class="none">Details</th>  --}}
-                            <th class="none">Details</th>
                         </tr>
                         {{--  <tr>
                             <td>145</td>
