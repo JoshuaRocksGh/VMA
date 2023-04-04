@@ -72,6 +72,8 @@ function corporateRequestStatement(statementData) {
 }
 
 function requestStatement(statementData) {
+    // console.log("statementData ===>",statementData)
+    // return false;
     $.ajax({
         type: "POST",
         url: "statement-request-api",
@@ -175,6 +177,9 @@ function getBranches() {
 }
 
 $(function () {
+    function padWithLeadingZeros(num, totalLength) {
+        return String(num).padStart(totalLength, '0');
+      }
     // siteLoading("show");
     getBranches();
     // branch();
@@ -224,18 +229,22 @@ $(function () {
 
         var getMonth = $(this).attr("data-value");
         // console.log(getMonth);
-        var today = new Date().toISOString().slice(0, 10);
+        const today = new Date().toISOString().slice(0, 10);
+        // console.log("todays' date ===>", today)
         switch (getMonth) {
             case "1":
                 var d = new Date();
-                var monthNumber = d.getMonth();
+                var monthNumber = d.getMonth() -1;
                 var year = d.getFullYear();
                 var actualNum = monthNumber;
+                var getFirstDate = new Date(d.getFullYear(), d.getMonth() - 1, 1);
+                // console.log(last)
                 // begining of the month
                 var lastMonthBegining = year + "-" + actualNum + "-" + "01";
 
                 $("#to_date").val(today);
-                $("#from_date").val(lastMonthBegining);
+                $("#from_date").val(getFirstDate.toISOString().slice(0, 10));
+                // console.log("lastMonthBegining ===>", getFirstDate.toISOString().slice(0, 10))
                 break;
             case "3":
                 var d = new Date();
@@ -243,12 +252,14 @@ $(function () {
                 var year = d.getFullYear();
                 var actualNum = monthNumber - 2;
                 var result = actualNum.toString().padStart(2, "0");
+                var getPast3Months = new Date(d.getFullYear(), d.getMonth() - 3, 1);
+
                 // begining of the month
                 var lastMonthBegining = year + "-" + result + "-" + "01";
 
                 $("#to_date").val(today);
-                $("#from_date").val(lastMonthBegining);
-                console.log(lastMonthBegining);
+                $("#from_date").val(getPast3Months.toISOString().slice(0, 10));
+                // console.log(getPast3Months.toISOString().slice(0, 10));
                 break;
             case "6":
                 // console.log("6 month");
@@ -259,23 +270,36 @@ $(function () {
                 var result = actualNum.toString().padStart(2, "0");
                 // begining of the month
                 var lastMonthBegining = year + "-" + result + "-" + "01";
+                var getPast6Months = new Date(d.getFullYear(), d.getMonth() - 6, 1);
+
 
                 $("#to_date").val(today);
-                $("#from_date").val(lastMonthBegining);
-                console.log(lastMonthBegining);
+                $("#from_date").val(getPast6Months.toISOString().slice(0, 10));
+                // console.log(lastMonthBegining);
                 break;
             default: //January is 0!
                 var d = new Date();
                 var monthNumber = d.getMonth();
-                var year = d.getFullYear();
+                if( monthNumber < 10){
+                var actualNum_ = monthNumber + 1;
+                var actualNum = padWithLeadingZeros(actualNum_, 2)
+
+                }else{
                 var actualNum = monthNumber + 1;
+
+                }
+
+                var year = d.getFullYear();
+                // console.log("monthNumber ===>", actualNum)
+
                 // begining of the month
-                var monthBeining = year + "-" + actualNum + "-" + "01";
+                var monthBeinging = year + "-" + actualNum + "-" + "01";
                 $("#to_date").val(today);
-                $("#from_date").val(monthBeining);
+                $("#from_date").val(monthBeinging);
+                // $("#from_date").val("2023-01-01");
 
                 // console.log(today);
-                console.log(monthBeining);
+                // console.log("This month ===>",monthBeinging);
         }
     });
     // make card request
@@ -292,18 +316,27 @@ $(function () {
         statementData.endDate = $("#to_date").val();
 
         // let pickUpBranch = $("#pick_up_branch").val();
+        // console.log('all statementData ===>' , statementData)
+        // return false;
         if (
             !statementData.accountNumber ||
             !statementData.statementType ||
-            !statementData.branch ||
+            !statementData.branch||
             !statementData.startDate ||
             !statementData.endDate
         ) {
             toaster("Please complete all fields", "warning");
             return false;
         }
+
+        // $("#pin_code_modal").modal("show");
+
+
+        // corporateRequestStatement(statementData);
+
         if (!ISCORPORATE) {
             $("#pin_code_modal").modal("show");
+
         } else {
             corporateRequestStatement(statementData);
         }

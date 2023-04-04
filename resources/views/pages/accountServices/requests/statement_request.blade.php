@@ -39,7 +39,7 @@
         <div class="card">
             <div class="card-body " style="max-width: 800px">
                 <div class=" d-flex  justify-content-around">
-                    <button type='button' class="date-select period selected" data-value="0">
+                    <button type='button' class="date-select period" data-value="0">
                         <div class="d-block mb-0 " for="this_month">This month</div>
                     </button>
                     <button type='button' class="date-select period" data-value="1">
