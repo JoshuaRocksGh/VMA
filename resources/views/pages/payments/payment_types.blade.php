@@ -31,12 +31,12 @@
                     <label class="col-md-6 text-dark">Payment Type </label>
                     <div class="col-md-6">
                         <div class="radio radio-info form-check-inline">
-                            <input type="radio" id="inlineRadio1" value="normal" name="trans_type" checked>
-                            <label for="inlineRadio1 mt-1">Normal</label>
+                            <input type="radio" id="inlineRadio1" value="normal" name="trans_type" checked>&nbsp;&nbsp;
+                            <label class="pt-1" for="inlineRadio1 mt-1">Normal</label>
                         </div>
                         <div class="radio form-check-inline">
-                            <input type="radio" id="inlineRadio2" value="invoice" name="trans_type">
-                            <label for="inlineRadio2"> Invoice Transaction </label>
+                            <input type="radio" id="inlineRadio2" value="invoice" name="trans_type">&nbsp;&nbsp;
+                            <label class="pt-1" for="inlineRadio2"> Invoice Transaction </label>
                         </div>
 
                     </div>

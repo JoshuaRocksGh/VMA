@@ -182,12 +182,12 @@
                 //     conversion2
                 // })
                 conversion1.innerHTML =
-                    `1 ${currency1} = ${currency2} ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency1, currency2)?.convertedAmount)}`
+                    `1 ${currency1} = ${currency2} ${formatToCurrency(currencyConvertor(pageData?.fxRate, 1.00, currency1, currency2)?.convertedAmount)}`
                 conversion2.innerHTML =
-                    `1 ${currency2} = ${currency1} ${formatToCurrency(currencyConvertor(pageData.fxRate, 1.00, currency2, currency1)?.convertedAmount)}`
+                    `1 ${currency2} = ${currency1} ${formatToCurrency(currencyConvertor(pageData?.fxRate, 1.00, currency2, currency1)?.convertedAmount)}`
                 const keyup = new Event('keyup')
                 document.getElementById('amount_to_convert').dispatchEvent(keyup)
-                console.log(currencyConvertor(pageData.fxRate, 1.00, currency1, currency2))
+                // console.log(currencyConvertor(pageData?.fxRate, 1.00, currency1, currency2))
             })
 
             $(".rate_button").on("click", (e) => {

@@ -63,15 +63,16 @@
                             </ul>
                         </div>
                     </li> --}}
-                    {{--  @if (config('app.corporate'))  --}}
+                     @if (config('app.corporate'))
                     <li>
                         <a href="{{ url('bulk-transfer') }}">Bulk Transfer </a>
                     </li>
-                    {{--  @endif  --}}
 
                     <li>
                         <a href="{{ url('swift_mt101') }}">MT101 </a>
                     </li>
+                    @endif
+
                     <li>
                         <a href="{{ url('transfer-status') }}">Transfer Status</a>
                     </li>
@@ -93,9 +94,12 @@
                     <li>
                         <a href="{{ url('payments') }}">Make Payment</a>
                     </li>
+                    @if (!config('app.corporate'))
+
                     <li>
                         <a href="{{ url('airport-tax') }}">Airport Tax</a>
                     </li>
+                    @endif
 
                     <li>
                         <a href="{{ url('salone-link') }}">Salone-Link</a>

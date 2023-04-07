@@ -284,14 +284,15 @@ function prepareGraphValues() {
     accountsPie.xValues = pageData?.accounts?.map((account) =>
         String(account.accountNumber)
     );
-    // console.log("prepareGraphValue===>", pageData);
+    // console.log("prepareGraphValue===>", accountsPie);
+    // return
 
     //accounts
     let accountsTotal = 0;
     accountsPie.yValues = pageData?.accounts?.map((account) => {
         const amount =
             parseFloat(
-                String(account.localEquivalentAvailableBalance).replace(
+                String(account?.localEquivalentAvailableBalance).replace(
                     /,/g,
                     ""
                 )
@@ -299,6 +300,9 @@ function prepareGraphValues() {
         accountsTotal += amount;
         return amount;
     });
+
+
+
 
     //loans
     const loansPie = {};
@@ -310,6 +314,9 @@ function prepareGraphValues() {
         return amount;
     });
 
+    // check from below here
+
+    // return
     //investments
     const investmentsPie = {};
     investmentsPie.xValues = pageData?.investments?.map((investment) =>
@@ -321,6 +328,9 @@ function prepareGraphValues() {
         investmentsTotal += amount;
         return amount;
     });
+
+    // console.log("investmentsPie===>", investmentsPie);
+    // return
 
     totalsPie.yValues = [accountsTotal, loansTotal, investmentsTotal];
     pageData.pieValues = {

@@ -58,6 +58,7 @@ class LoginController extends Controller
         // return $req;
         // Get Location
         $res = Http::get('http://ip-api.com/json');
+        // return $res;
         $base_response = new BaseResponse();
 
         $user_id = strtoupper($req->user_id);
@@ -111,7 +112,7 @@ class LoginController extends Controller
             // return $userDetail->customerType;
             // dd(env('CIB_API_BASE_URL') . "get-mandate/$user_id");
             // $mandateRes = Http::post(env('CIB_API_BASE_URL') . "get-mandate/$user_id");
-            // return $mandateRes;
+            // return env('CIB_API_BASE_URL') . "get-mandate/$user_id";
 
             if ($userDetail->customerType == "C") {
                 $mandateRes = Http::post(env('CIB_API_BASE_URL') . "get-mandate/$user_id");
@@ -127,34 +128,34 @@ class LoginController extends Controller
 
             // return $userMandate;
             session([
-                "userId" => $userDetail->userId,
-                "userAlias" => $userDetail->userAlias,
-                "setPin" => $userDetail->setPin,
-                "changePassword" => $userDetail->changePassword,
-                "email" => $userDetail->email,
-                "firstTimeLogin" => $userDetail->firstTimeLogin,
-                "userToken" => $userDetail->userToken,
-                "customerNumber" => $userDetail->customerNumber,
-                "customerPhone" => $userDetail->customerPhone,
-                "lastLogin" => $userDetail->lastLogin,
-                "customerType" => $userDetail->customerType,
-                "checkerMaker" => $userDetail->checkerMaker,
-                "accountDescription" => $userDetail->accountsList[0]->accountDesc,
-                "customerAccounts" => $userDetail->accountsList,
-                "customerLoans" => $userDetail->loansList,
-                "customerInvestments" => $userDetail->investmentList,
+                "userId" => $userDetail->userId ?? "",
+                "userAlias" => $userDetail->userAlias ?? "",
+                "setPin" => $userDetail->setPin ?? "",
+                "changePassword" => $userDetail->changePassword ?? "",
+                "email" => $userDetail->email?? "",
+                "firstTimeLogin" => $userDetail->firstTimeLogin ?? "",
+                "userToken" => $userDetail->userToken ?? "",
+                "customerNumber" => $userDetail->customerNumber ?? "",
+                "customerPhone" => $userDetail->customerPhone ?? "",
+                "lastLogin" => $userDetail->lastLogin ?? "",
+                "customerType" => $userDetail->customerType ?? "",
+                "checkerMaker" => $userDetail->checkerMaker ?? "",
+                "accountDescription" => $userDetail->accountsList[0]->accountDesc ?? "",
+                "customerAccounts" => $userDetail->accountsList ?? "",
+                "customerLoans" => $userDetail->loansList ?? "",
+                "customerInvestments" => $userDetail->investmentList ?? "",
                 // "userMandate" => 'A',
-                "userMandate" => $userMandate,
+                "userMandate" => $userMandate ?? "",
 
                 "deviceInfo" => [
                     "appVersion" => "Web",
-                    "deviceBrand" => $deviceType,
-                    "deviceCountry" =>  $res['country'],
-                    "deviceId" => $deviceID,
-                    "deviceIp" => request()->ip(),
-                    "deviceManufacturer" => $deviceOS,
+                    "deviceBrand" => $deviceType ?? "",
+                    "deviceCountry" =>  $res['country'] ?? "",
+                    "deviceId" => $deviceID ?? "",
+                    "deviceIp" => request()->ip() ?? "",
+                    "deviceManufacturer" => $deviceOS?? "",
                     "deviceModel" => Browser::browserName(),
-                    "deviceOs" =>  $deviceOS,
+                    "deviceOs" =>  $deviceOS ?? "",
                 ],
                 "headers" => [
                     "x-api-key" => "123",
@@ -173,6 +174,7 @@ class LoginController extends Controller
 
             // ]);
 
+            // return session()->get('userMandate');
 
             return  $base_response->api_response($result->responseCode, $result->message,  $result->data); // return API BASERESPONSE
         } catch (\Exception $error) {

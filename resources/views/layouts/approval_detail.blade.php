@@ -77,7 +77,7 @@
     </div> <!-- End Preloader--> --}}
 
     <!-- Begin page -->
-    <div id="wrapper">
+    <div id="wrapper1">
         @include('snippets.nav')
 
 

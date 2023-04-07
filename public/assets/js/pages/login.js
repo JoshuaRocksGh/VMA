@@ -152,14 +152,14 @@ function confirmCustomer(userData) {
             if (response.responseCode === "000") {
                 // console.log("confirmation successful");
                 // console.log(response);
-                success_alert(response.message, "#successful_self_enroll");
+                success_alert(response?.message, "#successful_self_enroll");
                 setTimeout(() => {
                     $("#self_enroll_form2").hide();
                     $("#s_loading2").toggle();
                     $("#self_enroll_form3").toggle(500);
                 }, 3000);
             } else {
-                error_alert(response.message, "#self_enroll_message");
+                error_alert(response?.message, "#self_enroll_message");
                 $("#s_loading2").toggle();
                 $("#s_next2").show();
                 $("#b_next2").attr("disabled", false);
@@ -236,8 +236,8 @@ function getSecurityQuestion(resetUserId) {
             if (response.responseCode == 000) {
                 success_alert(response.message, "#reset_success");
 
-                let securityQuestion = response.data[0].description;
-                let securityQuestionCode = response.data[0].code;
+                let securityQuestion = response?.data[0]?.description;
+                let securityQuestionCode = response?.data[0]?.code;
                 $("#security_question").text(securityQuestion);
                 $("#security_question_answer").attr(
                     "securityQuestionCode",

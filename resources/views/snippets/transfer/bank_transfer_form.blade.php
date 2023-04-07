@@ -31,15 +31,15 @@
                     <div class="col-12">
                         <div class="form-group align-items-center row bg-light p-2" style="border-radius: 5px">
 
-                            <label class="col-md-6 text-dark">Transfer Type </label>
-                            <div class="col-md-6">
+                            <label class="col-md-4 text-dark">Transfer Type </label>
+                            <div class="col-md-8">
                                 <div class="radio radio-info form-check-inline">
-                                    <input type="radio" id="inlineRadio1" value="normal" name="trans_type" checked>
-                                    <label for="inlineRadio1 mt-1">Normal</label>
+                                    <input type="radio" id="inlineRadio1" value="normal" name="trans_type" checked>&nbsp;&nbsp;
+                                    <label class="pt-1" for="inlineRadio1 mt-1">Normal</label>
                                 </div>
                                 <div class="radio form-check-inline">
-                                    <input type="radio" id="inlineRadio2" value="invoice" name="trans_type">
-                                    <label for="inlineRadio2"> Invoice Transaction </label>
+                                    <input type="radio" id="inlineRadio2" value="invoice" name="trans_type">&nbsp;&nbsp;
+                                    <label class="pt-1" for="inlineRadio2"> Invoice Transaction </label>
                                 </div>
 
                             </div>

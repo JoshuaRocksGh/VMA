@@ -23,6 +23,7 @@ class SameBankController extends Controller
 
     public function sameBankTransfer(Request $req)
     {
+        // return $req;
 
 
         $base_response = new BaseResponse();
@@ -55,6 +56,9 @@ class SameBankController extends Controller
             "userName" => $userID,
             "beneficiaryEmail" => $req->beneficiaryEmail
         ];
+
+        // return $data;
+
         try {
 
             $response = Http::post(env('API_BASE_URL') . "transfers/sameBank", $data);
