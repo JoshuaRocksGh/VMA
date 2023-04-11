@@ -46,7 +46,7 @@
             $pageTitle = 'Approval Form';
         @endphp
         @include('snippets.pageHeader')
-        <div class="row">
+        <div class="row  ">
             <div class="col-12">
                 <div class="">
                     <div class=" card-body ">

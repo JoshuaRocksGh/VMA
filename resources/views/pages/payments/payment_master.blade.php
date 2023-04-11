@@ -297,6 +297,8 @@
                                             id="display_posted_by">{{ session()->get('userAlias') }}</span>
                                     </td>
                                 </tr>
+                                {{--  ====== ENTER OTP =======  --}}
+                    @if (!config('app.corporate'))
                                 <tr>
                                     <td>
                                         <h4 class="text-danger">Enter OTP</h4>
@@ -306,6 +308,7 @@
                                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                             required></td>
                                 </tr>
+                                @endif
 
                             </table>
 

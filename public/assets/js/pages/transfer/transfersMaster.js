@@ -118,12 +118,25 @@ function getCountries() {
         success: function (response) {
             let data = response.data;
             if (data.length > 1) {
+                let myCOuntriesArray = data;
+                // console.log("getCountries==>",myCOuntriesArray )
+                myCOuntriesArray.sort(function (a, b) {
+                    let nameA = a.description.toUpperCase(); // convert name to uppercase
+                    let nameB = b.description.toUpperCase(); // convert name to uppercase
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
                 $("#onetime_select_country").empty();
                 $("#onetime_select_country").append(
                     `<option selected disabled value=""> --- Select Country ---</option>`
                 );
                 $.each(data, (i) => {
-                    let { actualCode, codeType, description } = data[i];
+                    let { actualCode, codeType, description } = myCOuntriesArray[i];
                     option = `<option value="${codeType}"  data-country-code="${actualCode}">${description}</option>`;
                     $("#onetime_select_country").append(option);
                 });
@@ -152,12 +165,24 @@ function getInternationalBanks(countryCode) {
             // console.log("get-international-bank-list-api =>", response)
             let data = response.data;
             if (data.length > 1) {
+                let myInternationalBanksArray = data;
+                myInternationalBanksArray.sort(function (a, b) {
+                    let nameA = a.BANK_DESC.toUpperCase(); // convert name to uppercase
+                    let nameB = b.BANK_DESC.toUpperCase(); // convert name to uppercase
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0;
+                });
                 $("#onetime_select_bank").empty();
                 $("#onetime_select_bank").append(
                     `<option selected disabled value=""> --- Select Bank ---</option>`
                 );
                 $.each(data, (i) => {
-                    let { BICODE, BANK_DESC, COUNTRY } = data[i];
+                    let { BICODE, BANK_DESC, COUNTRY } = myInternationalBanksArray[i];
                     option = `<option value="${BICODE}" data-bank-country="${COUNTRY}" >${BANK_DESC}</option>`;
                     $("#onetime_select_bank").append(option);
                 });
@@ -706,10 +731,15 @@ $(() => {
                 onetimeToAccount.bankCountryCode = $(
                     "#onetime_select_country"
                 ).val();
+                // console.log(" onetime_select_country=>", onetimeToAccount.bankCountryCode )
                 getInternationalBanks(onetimeToAccount.bankCountryCode);
                 $("#onetime_select_bank").prop("selectedIndex", -1);
             });
+
+
         }
+
+
     }
     // =========================================================
     //Other Checks

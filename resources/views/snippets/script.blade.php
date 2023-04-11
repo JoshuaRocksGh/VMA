@@ -44,8 +44,14 @@
         $("#wrapper").css("background-color", "#f1f1f1").show();
         $('#wrapper').css('background-repeat', 'no-repeat');
         $('#wrapper').css('background-size', 'cover');
-        //$('#wrapper').css('height', '100%');
+        $('#wrapper').css('height', '100%');
         //$("#wrapper").css("background-image", "#fedddd").show();
+        $("#wrapper1").css("background-image", "url(" + imageUrl + ")");
+        $("#wrapper1").css("background-color", "#f1f1f1").show();
+        $('#wrapper1').css('background-repeat', 'no-repeat');
+        $('#wrapper1').css('background-size', 'cover');
+        $('#wrapper1').css('height', '100%');
+        $('#wrapper1').css('padding-bottom', '200px');
         $('.password-eye').on('click', function() {
             var $this = $(this),
                 $passwordInput = $this.prev(),

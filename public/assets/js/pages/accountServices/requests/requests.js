@@ -72,6 +72,8 @@ function corporateRequestStatement(statementData) {
 }
 
 function requestStatement(statementData) {
+    // console.log("statementData ===>",statementData)
+    // return false;
     $.ajax({
         type: "POST",
         url: "statement-request-api",
@@ -188,6 +190,9 @@ function getBranches() {
 }
 
 $(function () {
+    function padWithLeadingZeros(num, totalLength) {
+        return String(num).padStart(totalLength, '0');
+      }
     // siteLoading("show");
     $("#get_first_month_statement").trigger("click");
     getBranches();
@@ -243,9 +248,11 @@ $(function () {
         switch (getMonth) {
             case "1":
                 var d = new Date();
-                var monthNumber = d.getMonth();
+                var monthNumber = d.getMonth() -1;
                 var year = d.getFullYear();
                 var actualNum = monthNumber;
+                var getFirstDate = new Date(d.getFullYear(), d.getMonth() - 1, 1);
+                // console.log(last)
                 // begining of the month
                 var lastMonthBegining = year + "-" + actualNum + "-" + "01";
 
@@ -273,6 +280,8 @@ $(function () {
                 var year = d.getFullYear();
                 var actualNum = monthNumber - 2;
                 var result = actualNum.toString().padStart(2, "0");
+                var getPast3Months = new Date(d.getFullYear(), d.getMonth() - 3, 1);
+
                 // begining of the month
                 var lastMonthBegining = year + "-" + result + "-" + "01";
 
@@ -300,6 +309,8 @@ $(function () {
                 var result = actualNum.toString().padStart(2, "0");
                 // begining of the month
                 var lastMonthBegining = year + "-" + result + "-" + "01";
+                var getPast6Months = new Date(d.getFullYear(), d.getMonth() - 6, 1);
+
 
                 var pastDate6 = new Date(
                     newToday.getFullYear(),
@@ -321,8 +332,18 @@ $(function () {
                 // Outputs the past date as a string in the format 'YYYY-MM-DD'
                 var d = new Date();
                 var monthNumber = d.getMonth();
-                var year = d.getFullYear();
+                if( monthNumber < 10){
+                var actualNum_ = monthNumber + 1;
+                var actualNum = padWithLeadingZeros(actualNum_, 2)
+
+                }else{
                 var actualNum = monthNumber + 1;
+
+                }
+
+                var year = d.getFullYear();
+                // console.log("monthNumber ===>", actualNum)
+
                 // begining of the month
                 console.log(
                     " monthBeining ==>",
@@ -379,15 +400,22 @@ $(function () {
         if (
             !statementData.accountNumber ||
             !statementData.statementType ||
-            !statementData.branch ||
+            !statementData.branch||
             !statementData.startDate ||
             !statementData.endDate
         ) {
             toaster("Please complete all fields", "warning");
             return false;
         }
+
+        // $("#pin_code_modal").modal("show");
+
+
+        // corporateRequestStatement(statementData);
+
         if (!ISCORPORATE) {
             $("#pin_code_modal").modal("show");
+
         } else {
             corporateRequestStatement(statementData);
         }
