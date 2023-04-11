@@ -93,13 +93,18 @@
                     <li>
                         <a href="{{ url('payments') }}">Make Payment</a>
                     </li>
-                    <li>
-                        <a href="{{ url('airport-tax') }}">Airport Tax</a>
-                    </li>
+                    @if (!config('app.corporate'))
+                        <li>
+                            <a href="{{ url('airport-tax') }}">Airport Tax</a>
+                        </li>
+                    @endif
 
                     <li>
                         <a href="{{ url('salone-link') }}">Salone-Link</a>
                     </li>
+                    {{--  <li>
+                        <a href="{{ url('blink-pay') }}">Blink Pay</a>
+                    </li>  --}}
 
                     {{--  <li>
                         <a href="{{ url('cardless-payment') }}">Cardless</a>

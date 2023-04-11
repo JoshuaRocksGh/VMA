@@ -224,7 +224,7 @@ class LoansController extends Controller
         $customerNumber = session()->get('customerNumber');
 
         try {
-            $response = Http::retry(20, 100)->get(env('API_BASE_URL') . "loans/loanTrack/" . $customerNumber);
+            $response = Http::get(env('API_BASE_URL') . "loans/loanTrack/" . $customerNumber);
             // $response = Http::post(env('API_BASE_URL') . "loans/getLoans", $data);
 
             $result = new ApiBaseResponse();

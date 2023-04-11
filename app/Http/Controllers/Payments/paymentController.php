@@ -84,6 +84,33 @@ class paymentController extends Controller
         return $result->api_response($response);
     }
 
+    public function get_airport_tax_amount()
+    {
+        $base_response = new BaseResponse();
+
+        try {
+
+            $response = Http::get(env('API_BASE_URL') . "payment/airportTaxAmount");
+            return $response;
+            $result = new ApiBaseResponse();
+            // Log::alert($response);
+            return $result->api_response($response);
+            // return json_decode($response->body();
+
+        } catch (\Exception $e) {
+
+            DB::table('tb_error_logs')->insert([
+                'platform' => 'ONLINE_INTERNET_BANKING',
+                'user_id' => 'AUTH',
+                'message' => (string) $e->getMessage()
+            ]);
+
+            return $base_response->api_response('500', $e->getMessage(),  NULL); // return API BASERESPONSE
+
+
+        }
+    }
+
     public function airport_tax_payment(Request $request)
     {
 

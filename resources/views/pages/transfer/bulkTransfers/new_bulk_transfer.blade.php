@@ -353,6 +353,123 @@
 
                 </div>
             </div>
+            @isset($bulkUploads)
+                {{--  {{ $bulkUploads['uploadDetails']['referenceNumber'] }}  --}}
+                <div>
+                    <hr>
+                    <label class="font-weight-bold text-danger">Pending Uploads </label>
+                    <br>
+                    <div class="card" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;border-radius: 10px;">
+                        <div class="card-body bulk-summary-card">
+                            <div class="row">
+                                <div class="col-md-12 row">
+                                    <div class="col-md-2">
+                                        <p class="text-danger m-0">Reference:</p>
+                                        <h4>{{ $bulkUploads['uploadDetails']['referenceNumber'] ?? '' }}
+                                        </h4>
+                                        {{--  <hr>  --}}
+                                    </div>
+                                    {{--    --}}
+                                    <div class="col-md-3 ">
+                                        <p class="text-danger m-0">
+                                            Debit Account:
+                                        </p>
+                                        <h4>{{ $bulkUploads['uploadDetails']['debitAccount'] ?? '' }}
+                                        </h4>
+                                        {{--  <hr>  --}}
+                                    </div>
+                                    {{--    --}}
+                                    <div class="col-md-2 ">
+                                        <p class="text-danger m-0 ">
+                                            Total Amount:
+                                        </p>
+                                        <h4>
+                                            {{ number_format($bulkUploads['uploadDetails']['totalAmount'], 2, '.', ',') ?? '' }}
+                                        </h4>
+                                        {{--  {{ number_format($bulkUploads['uploadDetails']['totalAmount'], 2, '.', ',') }}  --}}
+
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <p class="text-danger m-0 ">
+                                            Total Upload:
+                                        </p>
+                                        <h4>
+                                            {{ count($bulkUploads['uploadData']) ?? '' }}
+
+                                        </h4>
+
+                                        {{--  <span class="upload_failed "></span>  --}}
+
+                                        {{--  <h4 class="upload_total_amount "></h4>  --}}
+
+                                    </div>
+                                    <div class="col-md-2 ">
+                                        <p class="text-danger m-0 ">
+                                            Failed Upload:
+                                        </p>
+                                        <span>{{ $bulkUploads['uploadDetails']['failed'] ?? '' }}</span>
+
+                                        {{--  <span class="upload_failed "></span>  --}}
+
+                                        {{--  <h4 class="upload_total_amount "></h4>  --}}
+
+                                    </div>
+                                    <div class="col-md-1 text-center" style="margin-top:-15px">
+                                        {{--  <p class="text-danger m-0 ">
+                                        Action:
+                                    </p>  --}}
+                                        <br>
+                                        @if ($bulkUploads['uploadDetails']['failed'] > 0)
+                                            <span>
+                                                <a href="delete-bulk-transfer?batch_no="
+                                                    class=" waves-effect waves-light text-center delete_bulk_transfer_upload"
+                                                    batch_no="">
+                                                    <i class="mdi mdi-delete-forever-outline mdi-36px text-danger"
+                                                        style="width:50px; height:80px"></i>
+                                                </a>
+                                            </span>
+                                        @else
+                                            <span>
+                                                <a href="delete-bulk-transfer?batch_no="
+                                                    class=" waves-effect waves-light text-center delete_bulk_transfer_upload"
+                                                    batch_no="">
+                                                    <i class="mdi mdi mdi-check-all mdi-36px text-success"
+                                                        style="width:50px; height:80px"></i>
+                                                </a>
+                                            </span>
+                                        @endif
+
+                                        {{--  <span class="upload_failed "></span>  --}}
+
+                                        {{--  <h4 class="upload_total_amount "></h4>  --}}
+
+                                    </div>
+                                    {{--  <hr>  --}}
+                                    {{--    --}}
+                                </div>
+                                {{--  <hr class="col-md-10 float-center">  --}}
+                                {{--  <div class="col-md-4"></div>  --}}
+                                {{--    --}}
+                                {{--  <div class="col-md-4"></div>  --}}
+
+                                {{--    --}}
+                                {{--  <div class="pt-2 col-md-4 upload_action"></div>  --}}
+
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endisset
+
+
+
         </form>
 
 

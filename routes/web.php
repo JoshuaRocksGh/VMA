@@ -41,6 +41,7 @@ use App\Http\Controllers\Loan\LoansController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MaileController;
 use App\Http\Controllers\MobileMoneyController;
+use App\Http\Controllers\Payments\BlinkPayController;
 use App\Http\Controllers\Payments\Bulk\BulkKorporController;
 use App\Http\Controllers\Payments\BulkUpload\BulkUploadsController;
 use App\Http\Controllers\Payments\BulkUpload\CorporateKorporController as BulkUploadCorporateKorporController;
@@ -174,6 +175,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('salone-link', [paymentController::class, 'salone_link'])->name('salone-link');
     Route::get('airport-tax', [paymentController::class, 'airport_tax'])->name('airport-tax');
     Route::post('airport-tax-payment-api', [paymentController::class, 'airport_tax_payment'])->name('airport-tax-payment-api');
+    Route::get('get-airport-tax-amount', [paymentController::class, 'get_airport_tax_amount'])->name('get-airport-tax-amount');
     Route::get('bulk-upload-payment', [paymentController::class, 'bulk_upload_payment'])->name('bulk-upload-payment');
     Route::get('payment-beneficiary', [paymentController::class, 'payment_beneficiary_list'])->name('payment-beneficiary');
     Route::get('payment-beneficiary-list', [paymentController::class, 'beneficiary_list'])->name('payment-beneficiary-list');
@@ -206,6 +208,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::post('/corporate-initiate-korpor', [BulkUploadCorporateKorporController::class, 'corporate_initiate_korpor'])->name('corporate-initiate-korpor');
     Route::post('/get-bulk-detail-list-for-approval', [PendingController::class, 'get_bulk_detail_list_for_approval'])->name('get-bulk-detail-list-for-approval');
     Route::post('/corporate-initiate-cardless', [CardlessController::class, 'corporate_cardless_transfer'])->name('corporate-initiate-cardless');
+    Route::get('/get-blink-pay', [BlinkPayController::class, 'get_blink_pay'])->name('get-blink-pay');
 
 
 

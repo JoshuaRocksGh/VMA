@@ -24,8 +24,33 @@ class BulkUploadsController extends Controller
 {
     public function index()
     {
+
+        $user_id = session()->get('userId');
+        $customer_no = session()->get('customerNumber');
         // return view('pages.transfer.bulkTransfers.bulk_trasnfer');
-        return view('pages.transfer.bulkTransfers.new_bulk_transfer');
+        $base_response = new BaseResponse();
+
+
+        try {
+            $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadDataHist/" . "$user_id/$customer_no");
+            // return $response['data'];
+            $result = new ApiBaseResponse();
+            // Log::alert($response);
+            // return $result->api_response($response);
+            // return json_decode($response->body();
+            return view('pages.transfer.bulkTransfers.new_bulk_transfer', [
+                // "bulkUploads" => $response['data'],
+            ]);
+        } catch (\Exception $e) {
+
+            DB::table('tb_error_logs')->insert([
+                'platform' => 'ONLINE_INTERNET_BANKING',
+                'user_id' => 'AUTH',
+                'message' => (string) $e->getMessage()
+            ]);
+
+            return $base_response->api_response('500', "Internal Server Error",  NULL); // return API BASERESPONSE
+        }
     }
 
     public function download_same_bank()

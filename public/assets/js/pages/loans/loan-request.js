@@ -6,7 +6,10 @@ function getOptions(optionUrl, optionId, incomingData) {
         datatype: "application/json",
         success: (response) => {
             let data = response?.data;
+            // console.log("response ==>", optionId, response);
             pageData[`${optionId.slice(1)}`] = data;
+            // console.log("getOptions ==>", pageData);
+
             data?.forEach((e) => {
                 if (!e.code || !e.name) return;
                 $(optionId).append(
@@ -603,10 +606,12 @@ $(function () {
     // TODO : check out opacity of select2 hover
     getAccounts();
     // $("#loan_quotation_modal").modal("show");
-    getLoantracking();
+    // getLoantracking();
+    getLoans();
+
     const initData = [
-        validateKyc(),
-        getLoans(),
+        // validateKyc(),
+        // getLoans(),
         Promise.allSettled([
             getOptions(
                 "get-loan-frequencies-api",
@@ -617,7 +622,11 @@ $(function () {
         ]).then((res) => {
             console.log("data", res);
             const data = res.data;
-            data?.forEach((e) => {
+            // res.map((e) => {
+            //     console.log("mapppp==>", e);
+            // });
+            res?.forEach((e) => {
+                console.log("allSettled ===>", e.value);
                 $("#loan_product").append(
                     $("<option>", {
                         value: e.PROD_CODE,
@@ -631,7 +640,7 @@ $(function () {
     Promise.all(initData)
         .then((res) => {
             siteLoading("hide");
-            console.log(res);
+            // console.log(res);
         })
         .catch((err) => {
             toaster(

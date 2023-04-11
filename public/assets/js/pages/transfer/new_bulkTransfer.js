@@ -794,8 +794,8 @@ $(document).ready(function () {
                             return;
                         } else {
                             var action_button = `<a href="delete-bulk-transfer?batch_no=${fileBatch}" class=" waves-effect waves-light text-center delete_bulk_transfer_upload" batch_no="${fileBatch}">
-                <i class="mdi mdi-delete-forever-outline mdi-36px text-danger" style="width:50px; height:80px"></i>
-            </a>`;
+                                <i class="mdi mdi-delete-forever-outline mdi-36px text-danger" style="width:50px; height:80px"></i>
+                            </a>`;
                         }
                         total_bulk_upload.row
                             .add([

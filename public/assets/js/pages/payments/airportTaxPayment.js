@@ -1,7 +1,38 @@
 // alert("here");
+function getAirporTaxAmount() {
+    $.ajax({
+        type: "GET",
+        url: "get-airport-tax-amount",
+        datatype: "application/json",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (response) {
+            res = JSON.parse(response);
+            console.log("getAirporTaxAmount ==>", res);
+            // console.log("getAirporTaxAmount ==>", response);
+
+            if (res.responseCode == "000") {
+                $.each(res.data, function (index) {
+                    $(".display_airport_tax_amount").append(
+                        `
+                            <div class="form-group align-items-center  bg-light p-2 col-md-5" style="border-radius: 5px">
+
+                            <h3 class="text-center font-weight-bold">${res.data[index]?.CURRENCY}: ${res.data[index]?.AMOUNT}</h3>
+
+                        </div>
+                        <div class="col-md-2"></div>
+
+                        `
+                    );
+                });
+            }
+        },
+    });
+}
 
 function personalAirportTax(data) {
-    console.log("data ==>", data);
+    // console.log("data ==>", data);
     siteLoading("show");
     $.ajax({
         type: "POST",
@@ -39,6 +70,8 @@ function personalAirportTax(data) {
 
 $(document).ready(function () {
     const airportTaxInfo = new Object();
+
+    getAirporTaxAmount();
     $("#account_of_transfer").change(function () {
         var details = $(this).val();
         var getValues = details.split("~");

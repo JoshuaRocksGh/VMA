@@ -11,9 +11,9 @@
         <div class="dashboard site-card overflow-hidden">
             <div class="tab-content dashboard-body p-4">
                 <div class="mx-auto  h-100 " style="max-width: 650px" id="airport_tax_payment">
-                    <div class="col-12 row">
+                    <div class="col-12 row display_airport_tax_amount">
 
-                        <div class="form-group align-items-center  bg-light p-2 col-md-5" style="border-radius: 5px">
+                        {{--  <div class="form-group align-items-center  bg-light p-2 col-md-5" style="border-radius: 5px">
 
                             <h3 class="text-center font-weight-bold">SLE: 400.00</h3>
 
@@ -25,7 +25,7 @@
 
 
 
-                        </div>
+                        </div>  --}}
 
                     </div>
                     <hr class="my-3" style="padding-top: 0px;marign-top: -5px; padding-bottom: 0px;">
@@ -232,8 +232,8 @@
                                         <td>
                                             <h4 class="text-danger">Enter OTP</h4>
                                         </td>
-                                        <td><input type="text" class="form-control text-input  "
-                                                placeholder="Enter Otp" id="transfer_otp"
+                                        <td><input type="text" class="form-control text-input  " placeholder="Enter Otp"
+                                                id="transfer_otp"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                                 required></td>
                                     </tr>
