@@ -19,6 +19,7 @@
 <script src="{{ asset('assets/plugins/blockui/jquery.blockUI.min.js') }}" defer></script>
 <script src="{{ asset('assets/plugins/select2/select2.min.js') }}" defer></script>
 <script src="{{ asset('assets/js/functions/genericFunctions.js') }}" defer></script>
+{{-- <script src="{{ assest('assets/js/temp/jquery.idle.js') }}"></script> --}}
 {{--  tour cdn  --}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/6.0.0/intro.min.js" crossorigin="anonymous"
@@ -262,5 +263,32 @@
             },
 
         })
+    }
+
+    // $(document).idle({
+    //     onIdle: function() {
+    //         window.location.href = 'logout';
+
+    //     },
+    //     idle: 600000,
+    //     keepTracking: true
+    // });
+
+    var idleTime = 300000; // 5 minutes (in milliseconds)
+    // var idleTime = 300; // 5 minutes (in milliseconds)
+    var idleTimer;
+
+    // Reset the timer on user activity
+    $(document).on('mousemove keydown scroll', function() {
+        // alert("hhhh")
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(refreshPage, idleTime);
+    });
+
+    // Refresh the page after idle time
+    function refreshPage() {
+        window.location.replace("login");
+        // window.location = "home";
+        // location.reload();
     }
 </script>

@@ -80,7 +80,7 @@ class AccountEnquiryController extends Controller
         // return env('API_BASE_URL') . "account/getTransactions";
         try {
             $response = Http::post(env('API_BASE_URL') . "account/getTransactions", $data);
-
+            // return response()->json($response);
 
             return $result->api_response($response);
         } catch (\Exception $error) {

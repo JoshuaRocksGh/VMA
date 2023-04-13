@@ -27,7 +27,8 @@ class BulkUploadsController extends Controller
 
         $user_id = session()->get('userId');
         $customer_no = session()->get('customerNumber');
-        // return view('pages.transfer.bulkTransfers.bulk_trasnfer');
+        // return view('pages.transfer.bulkTransfers.new_bulk_transfer');
+        // die();
         $base_response = new BaseResponse();
 
 
@@ -39,7 +40,7 @@ class BulkUploadsController extends Controller
             // return $result->api_response($response);
             // return json_decode($response->body();
             return view('pages.transfer.bulkTransfers.new_bulk_transfer', [
-                // "bulkUploads" => $response['data'],
+                "bulkUploads" => $response['data'],
             ]);
         } catch (\Exception $e) {
 

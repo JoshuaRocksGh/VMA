@@ -359,13 +359,14 @@
                     <hr>
                     <label class="font-weight-bold text-danger">Pending Uploads </label>
                     <br>
+                    @foreach($bulkUploads as $bulkUpload)
                     <div class="card" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;border-radius: 10px;">
                         <div class="card-body bulk-summary-card">
                             <div class="row">
                                 <div class="col-md-12 row">
                                     <div class="col-md-2">
                                         <p class="text-danger m-0">Reference:</p>
-                                        <h4>{{ $bulkUploads['uploadDetails']['referenceNumber'] ?? '' }}
+                                        <h4>{{ $bulkUpload['uploadDetails']['referenceNumber'] ?? '' }}
                                         </h4>
                                         {{--  <hr>  --}}
                                     </div>
@@ -374,7 +375,7 @@
                                         <p class="text-danger m-0">
                                             Debit Account:
                                         </p>
-                                        <h4>{{ $bulkUploads['uploadDetails']['debitAccount'] ?? '' }}
+                                        <h4>{{ $bulkUpload['uploadDetails']['debitAccount'] ?? '' }}
                                         </h4>
                                         {{--  <hr>  --}}
                                     </div>
@@ -384,7 +385,7 @@
                                             Total Amount:
                                         </p>
                                         <h4>
-                                            {{ number_format($bulkUploads['uploadDetails']['totalAmount'], 2, '.', ',') ?? '' }}
+                                            {{ number_format($bulkUpload['uploadDetails']['totalAmount'], 2, '.', ',') ?? '' }}
                                         </h4>
                                         {{--  {{ number_format($bulkUploads['uploadDetails']['totalAmount'], 2, '.', ',') }}  --}}
 
@@ -394,7 +395,7 @@
                                             Total Upload:
                                         </p>
                                         <h4>
-                                            {{ count($bulkUploads['uploadData']) ?? '' }}
+                                            {{ count($bulkUpload['uploadData']) ?? '' }}
 
                                         </h4>
 
@@ -407,7 +408,7 @@
                                         <p class="text-danger m-0 ">
                                             Failed Upload:
                                         </p>
-                                        <span>{{ $bulkUploads['uploadDetails']['failed'] ?? '' }}</span>
+                                        <span>{{ $bulkUpload['uploadDetails']['failed'] ?? '' }}</span>
 
                                         {{--  <span class="upload_failed "></span>  --}}
 
@@ -419,9 +420,9 @@
                                         Action:
                                     </p>  --}}
                                         <br>
-                                        @if ($bulkUploads['uploadDetails']['failed'] > 0)
+                                        @if ($bulkUpload['uploadDetails']['failed'] > 0)
                                             <span>
-                                                <a href="delete-bulk-transfer?batch_no="
+                                                <a href="delete-bulk-transfer?batch_no={{ $bulkUpload['uploadData'][0]['uploadBatch'] }}"
                                                     class=" waves-effect waves-light text-center delete_bulk_transfer_upload"
                                                     batch_no="">
                                                     <i class="mdi mdi-delete-forever-outline mdi-36px text-danger"
@@ -430,7 +431,7 @@
                                             </span>
                                         @else
                                             <span>
-                                                <a href="delete-bulk-transfer?batch_no="
+                                                <a href="view-bulk-transfer?batch_no={{ $bulkUpload['uploadData'][0]['uploadBatch'] }}"
                                                     class=" waves-effect waves-light text-center delete_bulk_transfer_upload"
                                                     batch_no="">
                                                     <i class="mdi mdi mdi-check-all mdi-36px text-success"
@@ -465,6 +466,8 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+                    @endforeach
                 </div>
             @endisset
 
