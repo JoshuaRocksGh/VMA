@@ -526,7 +526,14 @@ $(() => {
             return false;
         }
         pageData.paymentInfo.pinCode = pin;
-        makePayment(pageData.paymentInfo);
+        for (const key in pageData.paymentInfo) {
+            if (pageData.paymentInfo.hasOwnProperty(key)) {
+                // console.log("key ==>", key);
+
+                formData.append(key, pageData.paymentInfo[key]);
+            }
+        }
+        makePayment(formData);
         $("#user_pin").val("").text("");
     });
 });
