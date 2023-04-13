@@ -1,9 +1,5 @@
 // TODO : Test the request Card method. especially the API response
-if (ISCORPORATE) {
-    var url = "corporate-chequebook-request";
-} else {
-    var url = "cheque-book-request-api";
-}
+
 const PageData = {};
 function getBranches() {
     $.ajax({
@@ -59,6 +55,12 @@ $(".coming-soon").on("click", (e) => {
 
 function submitChequeRequest(data) {
     // console.log(data);
+    // return
+    if (ISCORPORATE) {
+        var url = "corporate-chequebook-request";
+    } else {
+        var url = "cheque-book-request-api";
+    }
     return $.ajax({
         type: "POST",
         headers: {

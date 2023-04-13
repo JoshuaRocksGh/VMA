@@ -1128,81 +1128,81 @@
                     function getAccountTransactions(account_number, account_currency, start_date, end_date, transLimit) {
                         //console.log([account_number, account_currency, start_date, end_date, transLimit]);
                         //return false;
-                        $.ajax({
-                            "type": "POST",
-                            "url": "account-transaction-history",
-                            datatype: "application/json",
-                            data: {
-                                "accountNumber": account_number,
-                                "endDate": end_date,
-                                "entrySource": "A",
-                                "startDate": start_date,
-                                "transLimit": transLimit
-                            },
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function(response) {
-                                //console.log("get account transaction:", response)
-                                //return false;
+                        // $.ajax({
+                        //     "type": "POST",
+                        //     "url": "account-transaction-history",
+                        //     datatype: "application/json",
+                        //     data: {
+                        //         "accountNumber": account_number,
+                        //         "endDate": end_date,
+                        //         "entrySource": "A",
+                        //         "startDate": start_date,
+                        //         "transLimit": transLimit
+                        //     },
+                        //     headers: {
+                        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        //     },
+                        //     success: function(response) {
+                        //         //console.log("get account transaction:", response)
+                        //         //return false;
 
-                                if (response.responseCode == '000') {
+                        //         if (response.responseCode == '000') {
 
-                                    if (response.data == "" || response.data == null || response.data == undefined) {
-                                        $("#line_chart_no_data").show()
-                                        $("#casa_myChart").hide()
-                                    } else {
+                        //             if (response.data == "" || response.data == null || response.data == undefined) {
+                        //                 $("#line_chart_no_data").show()
+                        //                 $("#casa_myChart").hide()
+                        //             } else {
 
-                                        $("#line_chart_no_data").hide()
-
-
-                                        let data_ = response.data;
-                                        //console.log(data_);
-                                        //console.log("========")
-                                        //console.log(data_)
-                                        //console.log("========")
+                        //                 $("#line_chart_no_data").hide()
 
 
-                                        let acc_run_balances = []
-                                        empty(cus_accounts);
-
-                                        cus_accounts.push(response.data)
-                                        empty(acc_run_balances);
-                                        $.each(data_, function(index) {
-
-                                            acc_run_balances.push(data_[index].runningBalance)
-
-                                        })
-
-                                        var details = [account_number, account_currency, acc_run_balances]
-                                        empty(acc_line_details);
-                                        acc_line_details.push(details)
+                        //                 let data_ = response.data;
+                        //                 //console.log(data_);
+                        //                 //console.log("========")
+                        //                 //console.log(data_)
+                        //                 //console.log("========")
 
 
-                                        // {{-- console.log(response.data) --}}
+                        //                 let acc_run_balances = []
+                        //                 empty(cus_accounts);
+
+                        //                 cus_accounts.push(response.data)
+                        //                 empty(acc_run_balances);
+                        //                 $.each(data_, function(index) {
+
+                        //                     acc_run_balances.push(data_[index].runningBalance)
+
+                        //                 })
+
+                        //                 var details = [account_number, account_currency, acc_run_balances]
+                        //                 empty(acc_line_details);
+                        //                 acc_line_details.push(details)
+
+
+                        //                 // {{-- console.log(response.data) --}}
 
 
 
-                                        var limit = 10;
-                                        let data = response.data.slice(0, limit);
+                        //                 var limit = 10;
+                        //                 let data = response.data.slice(0, limit);
 
 
-                                        account_line_chart(cus_accounts, acc_line_details)
+                        //                 account_line_chart(cus_accounts, acc_line_details)
 
-                                    }
+                        //             }
 
 
-                                }
+                        //         }
 
-                            },
-                            error: function(xhr, status, error) {
-                                // {{-- $("#account_transaction_loader").hide();
-                                // $(".account_transaction_display").hide();
-                                // $(".account_transaction_display_table").hide();
-                                // $("#account_transaction_retry_btn").show(); --}}
-                                //console.log(xhr, status, error);
-                            }
-                        })
+                        //     },
+                        //     error: function(xhr, status, error) {
+                        //         // {{-- $("#account_transaction_loader").hide();
+                        //         // $(".account_transaction_display").hide();
+                        //         // $(".account_transaction_display_table").hide();
+                        //         // $("#account_transaction_retry_btn").show(); --}}
+                        //         //console.log(xhr, status, error);
+                        //     }
+                        // })
                     }
 
                     var global_selected_currency = "";
@@ -1298,7 +1298,7 @@
 
                             // show_chart(account_data.i_have_total, account_data.i_owe_total, account_data.i_invest_total)
                             setTimeout(function() {
-                                getAccountTransactions(acc_num, acc_cur, start_date, end_date, transLimit)
+                                // getAccountTransactions(acc_num, acc_cur, start_date, end_date, transLimit)
                                 //line_graph()
                                 account_line_chart(cus_accounts, acc_line_details)
                             }, 500)
@@ -1312,10 +1312,10 @@
                         var my_account = account_details.split("~")
                         //console.log("my_account:", my_account)
 
-                        getAccountTransactions(my_account[2], my_account[3],
-                            start_date,
-                            end_date,
-                            transLimit)
+                        // getAccountTransactions(my_account[2], my_account[3],
+                        //     start_date,
+                        //     end_date,
+                        //     transLimit)
                     })
 
 

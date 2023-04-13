@@ -401,9 +401,14 @@ $(function () {
         $(".display_receiver_Adddress").text(address);
     });
 
-    $("#amount").on("change", function () {
+    $("#amount").on("keyup", function () {
+        // console.log($(this).val())
         let amount = $("#amount").val();
         $(".display_transfer_amount").text(formatToCurrency(amount));
+
+        $(".key_transfer_amount").val(
+            formatToCurrency(amount)
+        );
     });
 
     $("#narration").on("change", function () {

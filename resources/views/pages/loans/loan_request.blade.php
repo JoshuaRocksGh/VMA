@@ -36,10 +36,10 @@
                 <div class="nav nav-tabs justify-content-center border-0" id="nav-tab" role="tablist">
                     <a id="Balance_Tab" class="nav-link w-100 text-center active" data-toggle="tab" href="#Balances_Pill"
                         style="max-width: 175px">BALANCES</a>
-                    <a id="Request_Tab" class="nav-link w-100 text-center" data-toggle="tab" href="#Requests_Pill"
-                        style="max-width: 175px">REQUEST</a>
-                    <a id="Tracking_Tab" class="nav-link w-100 text-center" data-toggle="tab" href="#Tracking_Pill"
-                        style="max-width: 175px">TRACKING</a>
+                    {{-- <a id="Request_Tab" class="nav-link w-100 text-center" data-toggle="tab" href="#Requests_Pill"
+                        style="max-width: 175px">REQUEST</a> --}}
+                    {{-- <a id="Tracking_Tab" class="nav-link w-100 text-center" data-toggle="tab" href="#Tracking_Pill"
+                        style="max-width: 175px">TRACKING</a> --}}
                 </div>
             </nav>
             <div class="tab-content dashboard-body border-danger borders" id="pills-tabContent">
