@@ -66,7 +66,7 @@ function submitChequeRequest(data) {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        dataType: "application/json",
+        datatype: "application/json",
         url: url,
         data,
         beforeSend: (xhr) => {
@@ -76,15 +76,15 @@ function submitChequeRequest(data) {
         .always((e) => siteLoading("hide"))
         .done((response) => {
             console.log("success=>", response);
-            if (response?.data) {
-                const { data } = response;
-                if (data.responseCode === "000") {
-                    toaster(data.message, "success");
+            // if (response?.data) {
+                // const { data } = response;
+                if (response.responseCode === "000") {
+                    toaster(response.message, "success");
                     $("#cheque_request_form")[0].reset();
                 } else {
-                    toaster(data.message, "error");
+                    toaster(response.message, "error");
                 }
-            }
+            // }
         })
         .fail((e) => {
             console.log("fail =>", e.responseText);

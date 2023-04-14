@@ -568,21 +568,21 @@ $(() => {
         const transLimit = "20";
         blockUi({ block: "#acc_history" });
         Promise.allSettled([
-            // getData({
-            //     url: "account-transaction-history",
-            //     name: "transactions",
-            //     method: "POST",
-            //     data: {
-            //         accountNumber,
-            //         startDate,
-            //         endDate,
-            //         transLimit,
-            //     },
-            // }),
+            getData({
+                url: "account-transaction-history",
+                name: "transactions",
+                method: "POST",
+                data: {
+                    accountNumber,
+                    startDate,
+                    endDate,
+                    transLimit,
+                },
+            }),
         ]).then((data) => {
-            // $("account-transaction-history", data);
+            $("account-transaction-history", data);
             unblockUi("#acc_history");
-            // transactionsBarChart(pageData?.transactions);
+            transactionsBarChart(pageData?.transactions);
             // console.log("trans", pageData);
         });
         // getData({

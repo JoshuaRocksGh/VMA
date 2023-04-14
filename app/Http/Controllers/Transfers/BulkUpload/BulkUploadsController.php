@@ -33,14 +33,17 @@ class BulkUploadsController extends Controller
 
 
         try {
-            $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadDataHist/" . "$user_id/$customer_no");
-            // return $response['data'];
+            // $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadDataHist/" . "$user_id/$customer_no");
+            // dd("http://10.1.1.56:8680/ibank/api/v1.0/corporate/getBulkUploadDataHist/$user_id/$customer_no");
+            $response = Http::get("http://10.1.1.56:8680/ibank/api/v1.0/corporate/getBulkUploadDataHist/$user_id/$customer_no");
+            // return $response;
             $result = new ApiBaseResponse();
             // Log::alert($response);
             // return $result->api_response($response);
             // return json_decode($response->body();
+            $allUploads =   $response['data'] ?? "";
             return view('pages.transfer.bulkTransfers.new_bulk_transfer', [
-                "bulkUploads" => $response['data'],
+                "bulkUploads" => $allUploads,
             ]);
         } catch (\Exception $e) {
 

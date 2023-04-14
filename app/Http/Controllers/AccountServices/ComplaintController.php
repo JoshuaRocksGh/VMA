@@ -36,7 +36,7 @@ class ComplaintController extends Controller
         $channel = env('APP_CHANNEL');
 
         $data = [
-            // "accountNumber" => $request->authToken,
+            "accountNumber" => $request->accountNumber,
             // "serviceType" => $request->serviceType,
             // "description" => $request->description,
             // "request_type" => 'comp',
@@ -50,13 +50,13 @@ class ComplaintController extends Controller
             "deviceName" => $deviceInfo['deviceOs'],
             "entrySource" => $entrySource,
             "manufacturer" => $deviceInfo['deviceManufacturer'],
-            "otherService" => "string",
+            "other" => "",
             "phoneNumber" => "",
-            "serviceType" => "string",
+            "serviceCode" => $request->serviceType,
+            // 'pinCode' => 1234
             "userName" => $userID,
-            "userTel" => "",
-            "enquiryDescription" => $request->description,
-            // 'secPin' => 1234
+            // "userTel" => "",
+            "description" => $request->description,
 
         ];
         // return $data;

@@ -80,6 +80,11 @@ function initiatePayment(url, data) {
             console.log("response");
             // return false;
             if (response.responseCode == "000") {
+                // getAccounts();
+                // $("#success-message").text(response.message);
+                // $("#spinner").hide();
+                // $("#spinner-text").hide();
+                // $("#back_button").hide();
                 Swal.fire({
                     width: 400,
                     title: `<h2 class='text-success font-16 font-weight-bold'>${response.message}</h2>`,
@@ -411,6 +416,8 @@ $(function () {
         );
     });
 
+    $(".display_purpose").text($("#narration").val())
+
     $("#narration").on("change", function () {
         let purpose = $(this).val();
         $(".display_purpose").text(purpose);
@@ -500,6 +507,11 @@ $(function () {
     $("#confirm_transfer_button").click(function (e) {
         e.preventDefault();
         console.log("transferInfo ==>", transferInfo);
+
+        if (!$("#terms_and_conditions").is(":checked")) {
+            toaster("Accept Terms & Conditions to continue", "warning");
+            return false;
+        }
 
         if (ISCORPORATE) {
             corporateInitiatePayment(transferInfo);
