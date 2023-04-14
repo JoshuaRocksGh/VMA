@@ -28,7 +28,15 @@ function getAccountTransactions(accountNumber, startDate, endDate) {
                 }
                 PageData.transaction = [];
             } else {
-                PageData.transaction = response.data;
+                const getDates = response.data
+                const compareDates = (date1, date2) => {
+                    return  new Date(date2.postingSysDate) - new Date(date1.postingSysDate)
+                }
+                const dateEvents = getDates.slice().sort((date1, date2) => new Date(date1.postingSysDate) - new Date(date2.postingSysDate))
+                // getDates.sort(compareDates)
+                console.log('getDates=>', dateEvents)
+                PageData.transaction =  response.data;
+                // PageData.transaction =  dateEvents;
             }
             $("#filter").trigger("change");
             return;
@@ -245,7 +253,7 @@ $(function () {
     });
 
     function drawTransactionsTable(pdfData) {
-        console.log("drawTransactionsTable ==>", pdfData);
+        // console.log("drawTransactionsTable ==>", pdfData);
         // pdfHeader(pdfData);
         $("#account_transaction_display_table tbody").empty();
         $(".download").show();
@@ -337,15 +345,23 @@ $(function () {
             },
             data: PageData.transaction,
             // row: [{ data: "amount" }],
+            // columnDefs: [
+            //     {
+            //         target: 0,
+            //         type: 'asc',
+            //     },
+            // ],
             columns: [
                 {
                     data: "postingSysDate",
-                    render: (data) =>
-                        new Date(data).toLocaleString("en", {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                        }),
+                    render:(data) => new Date(data).toISOString()
+                    .slice(0, 10)
+                    // render: (data) =>
+                    //     new Date(data).toLocaleString("en", {
+                    //         year: "numeric",
+                    //         month: "short",
+                    //         day: "numeric",
+                    //     }),
                 },
                 { data: "amount" },
                 { data: "narration" },
@@ -374,9 +390,10 @@ $(function () {
                 //     },
                 // },
             ],
+            order: [[0, "desc"]],
             columnDefs: [
                 {
-                    targets: [1, 3],
+                    targets: [0,1, 3],
                     render: function (data, type) {
                         if (type === "display" || type === "filter") {
                             const color =

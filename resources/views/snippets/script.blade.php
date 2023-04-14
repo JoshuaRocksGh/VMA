@@ -274,21 +274,21 @@
     //     keepTracking: true
     // });
 
-    var idleTime = 300000; // 5 minutes (in milliseconds)
-    // var idleTime = 300; // 5 minutes (in milliseconds)
-    var idleTimer;
+    // var idleTime = 300000; // 5 minutes (in milliseconds)
+    // // var idleTime = 300; // 5 minutes (in milliseconds)
+    // var idleTimer;
 
-    // Reset the timer on user activity
-    $(document).on('mousemove keydown scroll', function() {
-        // alert("hhhh")
-        clearTimeout(idleTimer);
-        idleTimer = setTimeout(refreshPage, idleTime);
-    });
+    // // Reset the timer on user activity
+    // $(document).on('mousemove keydown scroll', function() {
+    //     // alert("hhhh")
+    //     clearTimeout(idleTimer);
+    //     idleTimer = setTimeout(refreshPage, idleTime);
+    // });
 
-    // Refresh the page after idle time
-    function refreshPage() {
-        window.location.replace("login");
-        // window.location = "home";
-        // location.reload();
-    }
+    // // Refresh the page after idle time
+    // function refreshPage() {
+    //     window.location.replace("login");
+    //     // window.location = "home";
+    //     // location.reload();
+    // }
 </script>

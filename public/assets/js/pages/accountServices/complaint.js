@@ -17,11 +17,16 @@ function getServiceType() {
                     select.appendChild(option);
                 });
             } else {
-                setTimeout(function () {
-                    getServiceType();
-                }, $.ajaxSetup().retryAfter);
+                getServiceType();
+
+                // setTimeout(function () {
+                // }, $.ajaxSetup().retryAfter);
             }
         },
+        error: function(){
+            getServiceType();
+
+        }
     });
     // .done(({ data }) => {
     //     if (!data) {
