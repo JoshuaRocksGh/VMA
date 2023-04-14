@@ -85,13 +85,13 @@
                     <button id="request_statement" data-toggle="pill"
                         class=" transition-all py-md-2 active  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
                         href="#tab_request_statement">Statement Request</button>
-                    <button {{-- data-toggle="pill" --}}
+                    {{-- <button
                         class=" transition-all coming-soon py-md-2  text-sm-center mb-1 mb-md-2  mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link "
-                        id="request_letter" href="#tab_request_letter">Request For Letter</button>
+                        id="request_letter" href="#tab_request_letter">Request For Letter</button> --}}
 
-                    <button id="request_bank_draft" {{-- data-toggle="pill" --}}
+                    {{-- <button id="request_bank_draft"
                         class="  transition-all coming-soon py-md-2 text-sm-center mb-1  mb-md-2 mx-2 font-weight-bold bg-white rounded-pill border text-dark border-gray knav nav-link"
-                        href="#tab_request_bank_draft">Request Bank Draft</button>
+                        href="#tab_request_bank_draft">Request Bank Draft</button> --}}
 
                 </nav>
                 <hr>

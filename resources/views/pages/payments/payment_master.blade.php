@@ -168,7 +168,7 @@
 
                                 </div>
 
-                                <div class="form-group row mb-3">
+                                <div class="form-group align-items-center row">
 
                                     <b class="col-md-4 text-dark">Amount&nbsp;
                                         <span class="text-danger">*</span></b>
@@ -177,11 +177,13 @@
                                     <div class="input-group mb-1 col-md-8" style="padding: 0px;">
                                         <div class="input-group-prepend">
                                             <input type="text" value="SLL" class="input-group-text display_currency"
-                                                id="select_currency" style="width: 80px;" readonly>
+                                                id="select_currency" style="width: 80px;" readonly />
                                         </div>
 
                                         &nbsp;&nbsp;
-                                        <input type="text" class="form-control " id="amount"
+                                        <input class="form-control  text-input key_transfer_amount" type="text" disabled>
+                                        {{-- <div></div> --}}
+                                        <input type="text" class="form-control text-input  ml-2 " id="amount"
                                             placeholder="Enter Amount To Transfer"
                                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                             required>
@@ -228,7 +230,6 @@
                                                 style="zoom: 0.5" alt="">
                                         </td>
                                     </tr>
-                                </tbody>
                                 <tr class="show-on-success" style="display: none">
                                     <td class="text-center bg-white" colspan="2">
                                         <span class="text-success font-13 text-bold " id="success-message"></span>
@@ -290,6 +291,13 @@
 
                     </td>
                 </tr>  --}}
+                <tr>
+                    <td>Transfer Date: </td>
+                    <td>
+                        <span class=" font-13 text-primary h3"
+                            id="display_transfer_date">{{ date('d F, Y') }}</span>
+                    </td>
+                </tr>
                                 <tr>
                                     <td>Posted By: </td>
                                     <td>
@@ -309,6 +317,21 @@
                                             required></td>
                                 </tr>
                                 @endif
+                                <tr class="hide-on-success bg-danger  text-white">
+                                    <td colspan="2">
+                                        <div class="custom-control d-flex custom-checkbox ">
+                                            <input type="checkbox" class="custom-control-input d-block" name="terms_and_conditions"
+                                                id="terms_and_conditions">
+                                            <label class="custom-control-label d-flex  align-items-center font-weight-bold"
+                                                for="terms_and_conditions">
+                                                By checking this box, you agree to
+                                                abide by the Terms and Conditions
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
 
                             </table>
 

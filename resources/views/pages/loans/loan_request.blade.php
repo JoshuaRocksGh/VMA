@@ -36,10 +36,10 @@
                 <div class="nav nav-tabs justify-content-center border-0" id="nav-tab" role="tablist">
                     <a id="Balance_Tab" class="nav-link w-100 text-center active" data-toggle="tab" href="#Balances_Pill"
                         style="max-width: 175px">BALANCES</a>
-                    <a id="Request_Tab" class="nav-link w-100 text-center" data-toggle="tab" href="#Requests_Pill"
-                        style="max-width: 175px">REQUEST</a>
-                    <a id="Tracking_Tab" class="nav-link w-100 text-center" data-toggle="tab" href="#Tracking_Pill"
-                        style="max-width: 175px">TRACKING</a>
+                    {{-- <a id="Request_Tab" class="nav-link w-100 text-center" data-toggle="tab" href="#Requests_Pill"
+                        style="max-width: 175px">REQUEST</a> --}}
+                    {{-- <a id="Tracking_Tab" class="nav-link w-100 text-center" data-toggle="tab" href="#Tracking_Pill"
+                        style="max-width: 175px">TRACKING</a> --}}
                 </div>
             </nav>
             <div class="tab-content dashboard-body border-danger borders" id="pills-tabContent">
@@ -52,8 +52,8 @@
                     <div id="loan_balances" class="table-responsive" style="display: none">
                         <table id="loan_balances_table"
                             class="table table-sm table-striped table-hover table-centered table-bordered">
-                            <thead class="bg-primary text-white font-weight-bold">
-                                <tr class="text-center">
+                            <thead class="bg-info" >
+                                <tr class="table-background">
                                     <th>Loan Description</th>
                                     <th>Amount Granted</th>
                                     <th>Loan Balance</th>
@@ -169,9 +169,9 @@
                     </div>
                     <div id="loan_tracking" class="table-responsive" style="display: none">
                         <table id="loan_tracking_table"
-                            class="table table-sm table-striped table-hover table-centered table-bordered">
-                            <thead class="bg-primary text-white font-weight-bold">
-                                <tr class="text-center">
+                        class="table nowrap display border dt-responsive table-hover rounded mb-0 ">
+                            <thead >
+                                <tr class="table-background">
                                     <th>Loan Description</th>
                                     <th>Amount Granted</th>
                                     <th>Loan Balance</th>

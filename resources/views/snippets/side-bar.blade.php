@@ -69,7 +69,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ url('swift_mt101') }}">MT101 </a>
+                            <a href="{{ url('swift_mt101') }}">Sierra Rutile </a>
                         </li>
                     @endif
 
@@ -186,14 +186,14 @@
                 </ul>
             </div>
         </li>
-        {{--  @if (!config('app.corporate'))  --}}
+         @if (!config('app.corporate'))
         <li class="menu-item">
             <a class="menu-item-header" href="{{ url('card-services') }}">
                 <i class="fas fa-credit-card"></i>
                 <span> Card Services </span>
             </a>
         </li>
-        {{--  @endif  --}}
+         @endif
 
         @if (config('app.corporate'))
             <li class="menu-item">
