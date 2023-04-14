@@ -42,7 +42,7 @@ function paymentType() {
         url: "get-payment-types-api",
         datatype: "application/json",
         success: function (response) {
-            // console.log("getPaymentTypesApi ==>", response)
+            console.log("getPaymentTypesApi ==>", response)
             $("#loader").hide();
             let data = response.data;
             if (response.responseCode == "000") {

@@ -15,7 +15,7 @@
         <div class=" mb-1 p-3 py-4 row mx-auto dashboard-body" style="max-width: 80rem">
 
             {{-- SELECT PAYMENT TYPE --}}
-            @if (config('app.corporate'))
+
                 <div class=" col-lg-4" data-title="Payment Tabs" data-intro="Click to select payment option">
                     <label class="mb-2 d-block f-18 text-center font-weight-bold text-dark">Select Payment
                         Type</label>
@@ -24,8 +24,8 @@
                     <hr class="col-md-8">
 
                 </div>
-            @endif
             <div class=" col-lg-8" data-title="Payment Form" data-intro="Complete form to perform transaction">
+                @if (config('app.corporate'))
                 <div class="form-group align-items-center row bg-light p-2" style="border-radius: 5px">
 
                     <label class="col-md-6 text-dark">Payment Type </label>
@@ -41,6 +41,8 @@
 
                     </div>
                 </div>
+            @endif
+
                 {{-- Select Account --}}
                 <div class="mx-auto" style="max-width: 50rem">
                     <label class="d-block text-center f-18 font-weight-bold mb-1 text-dark"> Select Account To
