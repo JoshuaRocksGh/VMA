@@ -152,7 +152,7 @@
                                 aria-autocomplete="off">
                         </div>
                         <!-- other form fields here -->
-                        <input type="hidden" name="_token" id="csrf-token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token() }}">
                         <!-- submit button here -->
                         <div class="form-group">
                             <div class="d-flex justify-content-between align-items-end">
