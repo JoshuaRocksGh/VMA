@@ -63,7 +63,7 @@ class ComplaintController extends Controller
 
         try {
 
-            $response = Http::post(env('API_BASE_URL') . "/user/customerEnquiry", $data);
+            $response = Http::post(env('API_BASE_URL') . "user/customerEnquiry", $data);
             // return $response;
             $result = new ApiBaseResponse();
             return $result->api_response($response);

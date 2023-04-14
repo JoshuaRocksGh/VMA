@@ -348,6 +348,11 @@ function submitSecurityQuestion(userData) {
 
 $(document).ready(function () {
     const userData = new Object();
+    setInterval(function() {
+        var csrfToken = generateCsrfToken(); // replace this with your own function to generate the CSRF token
+        document.getElementById('csrf-token').value = csrfToken;
+      }, 60000); // update the token every 60 seconds (or change this to your desired interval)
+
     $("#submit").on("click", function (e) {
         e.preventDefault();
         var email = $("#user_id").val();

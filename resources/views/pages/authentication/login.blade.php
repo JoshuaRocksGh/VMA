@@ -151,6 +151,9 @@
                                 parsley-trigger="change" autocomplete="off" autofocus maxlength="50"
                                 aria-autocomplete="off">
                         </div>
+                        <!-- other form fields here -->
+                        <input type="hidden" name="csrf-token" id="csrf-token" value="{{ csrf_token() }}">
+                        <!-- submit button here -->
                         <div class="form-group">
                             <div class="d-flex justify-content-between align-items-end">
                                 <label for="password">Password</label>
@@ -211,8 +214,8 @@
 
                             <button class="btn btn-danger btn-block" type="sumbit" id="verify_otp_button">
                                 <span class="submit_otp_button">Verify</span>
-                                <span class="spinner-border spinner-border-sm mr-1 spinner-text-next" style="display: none"
-                                    role="status" aria-hidden="true"></span>
+                                <span class="spinner-border spinner-border-sm mr-1 spinner-text-next"
+                                    style="display: none" role="status" aria-hidden="true"></span>
                                 <span class="spinner-text-next" style="display: none">Loading...</span>
                             </button>
 
