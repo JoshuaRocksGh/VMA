@@ -66,6 +66,7 @@ use App\Http\Controllers\Transfers\TransferStatusController;
 use App\Http\Controllers\SelfEnrollController;
 use App\Http\Controllers\Transfers\BollorieController;
 use App\Http\Controllers\Transfers\SwiftMT101Controller;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,10 @@ use App\Http\Controllers\Transfers\SwiftMT101Controller;
 */
 
 // --- AUTHENTICATION
+
+// $currenturl = URL::current();
+
+// dd($currenturl);
 Route::get('/', [AuthenticationLoginController::class, 'login']);
 Route::post('/login-api', [AuthenticationLoginController::class, 'loginApi']);
 Route::get('/login', [AuthenticationLoginController::class, 'login']);
