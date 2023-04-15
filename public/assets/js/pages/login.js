@@ -9,6 +9,7 @@ function login(email, password) {
         url: "login-api",
         datatype: "application/json",
         data: {
+            _token : $('meta[name="csrf-token"]').attr('content'),
             deviceOS: deviceOS,
             deviceType: deviceType,
             deviceID: deviceID,
@@ -348,10 +349,10 @@ function submitSecurityQuestion(userData) {
 
 $(document).ready(function () {
     const userData = new Object();
-    setInterval(function() {
-        var csrfToken = generateCsrfToken(); // replace this with your own function to generate the CSRF token
-        document.getElementById('csrf-token').value = csrfToken;
-      }, 60000); // update the token every 60 seconds (or change this to your desired interval)
+    // setInterval(function() {
+    //     var csrfToken = generateCsrfToken(); // replace this with your own function to generate the CSRF token
+    //     document.getElementById('csrf-token').value = csrfToken;
+    //   }, 60000); // update the token every 60 seconds (or change this to your desired interval)
 
     $("#submit").on("click", function (e) {
         e.preventDefault();
