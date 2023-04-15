@@ -276,6 +276,9 @@ $(function () {
                     extend: "print",
                     autoPrint: true,
                     // messageTop: pdfHeader(),
+                    exportOptions: {
+                        columns: [ 0, 1, 2, 3 ]
+                    },
                     messageTop: `<div>
                         <div class="d-flex justify-content-between px-3 items-center">
                             <div style="height: 150px"> <img src='assets/images/slcb-bg-logo.png'>
@@ -306,10 +309,12 @@ $(function () {
                                     pdfData?.details?.pdfAccountCurrency
                                 }</span> </div>
                                 <div class="details-label">Book Balance : <span id="account_legder_balance">${
-                                    pdfData?.details?.pdfAccountBalance
+                                    formatToCurrency(parseFloat(pdfData?.details?.pdfAccountBalance))
+
                                 }</span> </div>
                                 <div class="details-label">Cleared Balance : <span id="account_available_balance">${
-                                    pdfData?.details?.pdfAccountBalance
+                                    formatToCurrency(parseFloat(pdfData?.details?.pdfAccountBalance))
+                                    // pdfData?.details?.pdfAccountBalance
                                 }</span> </div>
                             </div>
                             <div>
@@ -334,6 +339,13 @@ $(function () {
                         </div>
                     </div>`,
                 },
+
+                // {
+                //     extend: 'pdfHtml5',
+                //     exportOptions: {
+                //         columns: [ 0, 1, 2, 3 ]
+                //     }
+                // },
             ],
             destroy: true,
             language: {
@@ -405,6 +417,7 @@ $(function () {
                         }
                         return data;
                     },
+
                 },
             ],
         };
