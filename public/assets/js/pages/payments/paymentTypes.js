@@ -290,7 +290,10 @@ function populateSubtypesSelect(type) {
         `<option selected disabled class="text-capitalize"> --- ${label} --- </option>`
     );
     $("#subtype_label").val(label).text(label);
+
     typeData.paySubTypes.forEach((e, i) => {
+    // console.log('populateSubtypesSelect=>',e)
+
         let { paymentLabel, paymentCode, paymentDescription, paymentLogo } = e;
         let logo = paymentLogo
             ? "data:image/jpg;base64," + paymentLogo
