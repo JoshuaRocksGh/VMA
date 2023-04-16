@@ -3,6 +3,7 @@
 // var deviceID = getGPU();
 function login(email, password) {
     // console.log(email, password);
+    console.log("token =>",$('meta[name="csrf-token"]').attr('content'))
     // return false;
     $.ajax({
         type: "POST",
