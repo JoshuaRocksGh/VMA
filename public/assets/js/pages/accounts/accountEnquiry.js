@@ -30,12 +30,12 @@ function getAccountTransactions(accountNumber, startDate, endDate) {
             } else {
                 const getDates = response.data
                 const compareDates = (date1, date2) => {
-                    return  new Date(date2.postingSysDate) - new Date(date1.postingSysDate)
+                    return new Date(date2.postingSysDate) - new Date(date1.postingSysDate)
                 }
                 const dateEvents = getDates.slice().sort((date1, date2) => new Date(date1.postingSysDate) - new Date(date2.postingSysDate))
                 // getDates.sort(compareDates)
-                console.log('getDates=>', dateEvents)
-                PageData.transaction =  response.data;
+                // console.log('getDates=>', dateEvents)
+                PageData.transaction = response.data;
                 // PageData.transaction =  dateEvents;
             }
             $("#filter").trigger("change");
@@ -64,9 +64,8 @@ const pdfHeader = (pdfData) => {
         <div>
             <div class="font-weight-bold font-14"> Account Details</div>
             <div class="details-label">Account Name: <span id="account_description"> </span></div>
-            <div class="details-label">Account Number: <span id="account_number">${
-                pdfData?.details?.accountNumber
-            }</span> </div>
+            <div class="details-label">Account Number: <span id="account_number">${pdfData?.details?.accountNumber
+        }</span> </div>
             <div class="details-label">Account Product: <span id="account_product"> </span></div>
         </div>
         <div>
@@ -81,13 +80,13 @@ const pdfHeader = (pdfData) => {
             <div class="details-label">To: <span id="end_date"></span></div>
 
             <div class="details-label">Requested On: <span id="request_date">${new Date().toLocaleString(
-                "en",
-                {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                }
-            )}</span></div>
+            "en",
+            {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+            }
+        )}</span></div>
 
         </div>
     </div>
@@ -277,7 +276,7 @@ $(function () {
                     autoPrint: true,
                     // messageTop: pdfHeader(),
                     exportOptions: {
-                        columns: [ 0, 1, 2, 3 ]
+                        columns: [0, 1, 2, 3,4]
                     },
                     messageTop: `<div>
                         <div class="d-flex justify-content-between px-3 items-center">
@@ -293,47 +292,39 @@ $(function () {
                         <div class="d-flex justify-content-around">
                             <div>
                                 <div class="font-weight-bold font-14"> Account Details</div>
-                                <div class="details-label">Account Name: <span id="account_description">${
-                                    pdfData?.details?.pdfAccountName
-                                } </span></div>
-                                <div class="details-label">Account Number: <span id="account_number">${
-                                    pdfData?.details?.pdfAccountNumber
-                                }</span> </div>
-                                <div class="details-label">Account Product: <span id="account_product">${
-                                    pdfData?.details?.pdfAccountType
-                                }  </span></div>
+                                <div class="details-label">Account Name: <span id="account_description">${pdfData?.details?.pdfAccountName
+                        } </span></div>
+                                <div class="details-label">Account Number: <span id="account_number">${pdfData?.details?.pdfAccountNumber
+                        }</span> </div>
+                                <div class="details-label">Account Product: <span id="account_product">${pdfData?.details?.pdfAccountType
+                        }  </span></div>
                             </div>
                             <div>
                                 <div class="font-weight-bold font-14"> Balance Details</div>
-                                <div class="details-label">Account Currency : <span class="account_currency">${
-                                    pdfData?.details?.pdfAccountCurrency
-                                }</span> </div>
-                                <div class="details-label">Book Balance : <span id="account_legder_balance">${
-                                    formatToCurrency(parseFloat(pdfData?.details?.pdfAccountBalance))
+                                <div class="details-label">Account Currency : <span class="account_currency">${pdfData?.details?.pdfAccountCurrency
+                        }</span> </div>
+                                <div class="details-label">Book Balance : <span id="account_legder_balance">${formatToCurrency(parseFloat(pdfData?.details?.pdfAccountBalance))
 
-                                }</span> </div>
-                                <div class="details-label">Cleared Balance : <span id="account_available_balance">${
-                                    formatToCurrency(parseFloat(pdfData?.details?.pdfAccountBalance))
-                                    // pdfData?.details?.pdfAccountBalance
-                                }</span> </div>
+                        }</span> </div>
+                                <div class="details-label">Cleared Balance : <span id="account_available_balance">${formatToCurrency(parseFloat(pdfData?.details?.pdfAccountBalance))
+                        // pdfData?.details?.pdfAccountBalance
+                        }</span> </div>
                             </div>
                             <div>
                                 <div class="font-weight-bold font-14"> Statement Details </div>
-                                <div class="details-label">From: <span id="start_date">${
-                                    pdfData?.details?.startDate
-                                }</span></div>
-                                <div class="details-label">To: <span id="end_date">${
-                                    pdfData?.details?.endDate
-                                }</span></div>
+                                <div class="details-label">From: <span id="start_date">${pdfData?.details?.startDate
+                        }</span></div>
+                                <div class="details-label">To: <span id="end_date">${pdfData?.details?.endDate
+                        }</span></div>
 
                                 <div class="details-label">Requested On: <span id="request_date">${new Date().toLocaleString(
-                                    "en",
-                                    {
-                                        year: "numeric",
-                                        month: "short",
-                                        day: "numeric",
-                                    }
-                                )}</span></div>
+                            "en",
+                            {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                            }
+                        )}</span></div>
 
                             </div>
                         </div>
@@ -366,8 +357,8 @@ $(function () {
             columns: [
                 {
                     data: "postingSysDate",
-                    render:(data) => new Date(data).toISOString()
-                    .slice(0, 10)
+                    render: (data) => new Date(data).toISOString()
+                        .slice(0, 10)
                     // render: (data) =>
                     //     new Date(data).toLocaleString("en", {
                     //         year: "numeric",
@@ -375,8 +366,19 @@ $(function () {
                     //         day: "numeric",
                     //     }),
                 },
-                { data: "amount" },
                 { data: "narration" },
+
+                {
+                    data: "amount",
+                    render: (data, type, row) =>
+                        data < 0 ? `${formatToCurrency(parseFloat(row.amount)) }` : "",
+                },
+                {
+                    data: "amount",
+                    render: (data, type, row) =>
+                        data > 0 ?`${formatToCurrency(parseFloat(row.amount)) }`: "",
+                },
+                // { data: "narration" },
                 { data: "runningBalance" },
                 {
                     data: "transactionNumber",
@@ -405,7 +407,7 @@ $(function () {
             order: [[0, "desc"]],
             columnDefs: [
                 {
-                    targets: [0,1, 3],
+                    targets: [0, 2,3, 4],
                     render: function (data, type) {
                         if (type === "display" || type === "filter") {
                             const color =

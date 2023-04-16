@@ -10,7 +10,7 @@ function login(email, password) {
         url: "login-api",
         datatype: "application/json",
         data: {
-            _token : $('meta[name="csrf-token"]').attr('content'),
+            _token: $('meta[name="csrf-token"]').attr('content'),
             deviceOS: deviceOS,
             deviceType: deviceType,
             deviceID: deviceID,
@@ -73,10 +73,10 @@ function login(email, password) {
             $("#spinner").hide();
             $("#spinner-text").hide();
             $("#log_in").show();
-            location.reload();
-            // error_alert("Connection Error", "#failed_login");
+            // location.reload();
+            error_alert(xhr.responseText, "#failed_login");
             console.log("Ajax request failed...");
-            console.log("Ajax request failed...", xhr.status );
+            console.log("Ajax request failed...", xhr.status);
             console.log("Ajax request failed...", xhr.responseText);
         },
     });
@@ -349,12 +349,37 @@ function submitSecurityQuestion(userData) {
     });
 }
 
+ // Set the amount of time (in milliseconds) before the user is considered inactive
+ var inactivityTime = 180000; // 5 mins
+
+ // Set a timer that will trigger after the specified amount of time
+ var timeoutId = setTimeout(function () {
+     // This code will execute when the user has been inactive for the specified amount of time
+    //  console.log("User is inactive");
+    location.reload()
+ }, inactivityTime);
+
+
+// Add event listeners to detect when the user interacts with the page
+$(document).on("mousemove keydown", function() {
+    // If the user interacts with the page, reset the timer
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(function() {
+        // console.log("User is inactive.......");
+        location.reload()
+    }, inactivityTime);
+});
+
+
+
 $(document).ready(function () {
     const userData = new Object();
     // setInterval(function() {
     //     var csrfToken = generateCsrfToken(); // replace this with your own function to generate the CSRF token
     //     document.getElementById('csrf-token').value = csrfToken;
     //   }, 60000); // update the token every 60 seconds (or change this to your desired interval)
+
+
 
     $("#submit").on("click", function (e) {
         e.preventDefault();

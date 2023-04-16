@@ -1051,6 +1051,10 @@
             $("#approve_transaction").click(function(e) {
 
                 e.preventDefault();
+                $("#approve_transaction").attr("disabled", true);
+                $("#reject_transaction").attr("disabled", true);
+
+
 
 
 
@@ -1112,10 +1116,10 @@
 
 
                             setTimeout(function() {
-                                window.location = 'approvals-pending'
-                                window.opener.location.reload();
+                                // window.location = 'approvals-pending'
+                                // window.opener.location.reload();
                                 window.close();
-                            }, 5000)
+                            }, 3000)
 
 
                         } else {
@@ -1130,6 +1134,8 @@
                                 confirmButtonColor: "red",
 
                             });
+                            $("#approve_transaction").attr("disabled", false);
+                            $("#reject_transaction").attr("disabled", false);
 
                         }
 
@@ -1137,6 +1143,8 @@
                     },
                     error: function(xhr, status, error) {
                         $('#approve_transaction').html(`Approve<i class="mdi mdi-check-all">`)
+                            $("#approve_transaction").attr("disabled", false);
+                $("#reject_transaction").attr("disabled", false);
                     }
                 })
             }
@@ -1160,7 +1168,11 @@
                         ajax_post()
 
                     } else if (result.isDenied) {
+
                         toaster('Failed to approve transaction', 'error')
+                        $("#approve_transaction").attr("disabled", false);
+                        $("#reject_transaction").attr("disabled", false);
+
                         {{-- Swal.fire('Failed to approve transaction', '', 'info') --}}
                     }
                 })
