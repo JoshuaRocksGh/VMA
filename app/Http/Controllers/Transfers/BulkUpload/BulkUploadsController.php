@@ -36,15 +36,20 @@ class BulkUploadsController extends Controller
             // $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadDataHist/" . "$user_id/$customer_no");
             // dd("http://10.1.1.56:8680/ibank/api/v1.0/corporate/getBulkUploadDataHist/$user_id/$customer_no");
             $response = Http::get("http://10.1.1.56:8680/ibank/api/v1.0/corporate/getBulkUploadDataHist/$user_id/$customer_no");
-            // return $response;
+            // return $response['responseCode'];
             $result = new ApiBaseResponse();
             // Log::alert($response);
             // return $result->api_response($response);
             // return json_decode($response->body();
             $allUploads =   $response['data'] ?? "";
-            return view('pages.transfer.bulkTransfers.new_bulk_transfer', [
-                "bulkUploads" => $allUploads,
-            ]);
+            if($response['responseCode'] == '000'){
+                return view('pages.transfer.bulkTransfers.new_bulk_transfer', [
+                    "bulkUploads" => $allUploads,
+                ]);
+            }else{
+                return view('pages.transfer.bulkTransfers.new_bulk_transfer');
+            }
+
         } catch (\Exception $e) {
 
             DB::table('tb_error_logs')->insert([
@@ -326,7 +331,8 @@ class BulkUploadsController extends Controller
                 'file',
                 file_get_contents($path),
                 $filename
-            )->post(env('API_BASE_URL') . "corporate/uploadBulkNew", $data);
+            )->post("http://10.1.1.56:8680/ibank/api/v1.0/corporate/uploadBulkNew", $data);
+            // post(env('API_BASE_URL') . "corporate/uploadBulkNew", $data);
             // return $response;
             // dd($response);
 

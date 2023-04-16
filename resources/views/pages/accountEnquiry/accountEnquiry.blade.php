@@ -133,10 +133,13 @@
 
                         <tr class="table-background ">
                             <th class="all">Date</th>
-                            <th class="all">Amount <span class="currency_display"></span></th>
+                            <th class="all">Purpose of Transfer <span class="account_currency_display_"></span> </th>
 
-                            <th class="all">Purpose of Transfer <span class="account_currency_display_"></span>
-                            </th>
+                            <th class="all">Debit <span class="currency_display"></span></th>
+                            <th class="all">Credit <span class="currency_display"></span></th>
+                            {{-- <th class="all">Purpose of Transfer <span class="account_currency_display_"></span> </th> --}}
+
+
                             <th class="all">Balance<span class="currency_display"></span>
                             </th>
                             <th class="all">Details</th>
