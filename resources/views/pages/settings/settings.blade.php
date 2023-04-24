@@ -63,6 +63,7 @@
     @include('pages.settings.contact_us')
     @include('pages.settings.terms_condition')
     @include('pages.settings.change_password')
+    @include('pages.settings.create_originator')
 @endsection
 @section('scripts')
     <script src="{{ asset('assets/js/pages/settings/settings.js') }}"></script>

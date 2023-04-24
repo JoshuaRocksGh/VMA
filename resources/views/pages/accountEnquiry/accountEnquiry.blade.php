@@ -143,30 +143,30 @@
                             <th class="all">Balance<span class="currency_display"></span>
                             </th>
                             <th class="all">Details</th>
-                            <th class="none">Attachment</th>
+                            {{-- <th class="none">Attachment</th> --}}
                             {{--  <th class="none">Details</th>  --}}
                         </tr>
-                        {{--  <tr>
-                            <td>145</td>
-                            <td>145</td>
-                            <td>145</td>
-                            <td>145</td>
-                            <td>145</td>
-                            <td>145</td>
-                        </tr>  --}}
+
+
+                        <tr id="balance_foward">
+
+                            <th class="balance_startDate"></th>
+                            <th>BALANCE BROUGHT FORWARD</th>
+                            <th></th>
+                            <th></th>
+                            <th class="balance_openingBalance"></th>
+                            <th></th>
+                        </tr>
+
+
+
 
                     </thead>
 
-
                     <tbody role="rowgroup" id="table_body_display">
-                        {{--  <tr id="display_opening_balance">
-                            <td>25/15/2022</td>
-                            <td></td>
-                            <td>Opening Balance</td>
-                            <td>518,833</td>
-                            <td></td>
-                            <td></td>
-                        </tr>  --}}
+                        {{-- <tr id="display_all_transactions">
+
+                        </tr> --}}
                         <td colspan="100%" class="text-center">
                             {!! $noDataAvailable !!}
                         </td>

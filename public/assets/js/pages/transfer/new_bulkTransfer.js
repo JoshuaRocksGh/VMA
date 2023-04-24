@@ -677,7 +677,7 @@ $(document).ready(function () {
                     ),
                 },
                 success: function (response) {
-                    console.log(response);
+                    console.log("upload_==>",response);
                     siteLoading("hide");
                     // return false;
                     let data = response?.data;
@@ -743,11 +743,11 @@ $(document).ready(function () {
                             // console.log("e=>", e);
                             // return false;
                             if (
-                                e.valid === "Y" &&
-                                e.name !== null &&
-                                e.refValid === "Valid Ref" &&
-                                e.transDescription !== null &&
-                                e.amountValid === "Y"
+                                e.valid == "Y"
+                                // e.name != null &&
+                                // e.refValid != null &&
+                                // e.transDescription != null &&
+                                // e.amountValid == "Y"
                             ) {
                                 group.valid.push(e);
                                 console.log("acctValid => ", acctValid);
@@ -768,11 +768,11 @@ $(document).ready(function () {
                             all_failed_uploads.row
                                 .add([
                                     // `<b>${valid_uploads_count}</b>`,
-                                    `<b>${name}</b>`,
+                                    name != null? `<b>${name}</b>` :'',
                                     `<b>${accountNumber}</b>`,
                                     `<b>${amount}</b>`,
-                                    `<b>${refNumber}</b>`,
-                                    `<b class="text-danger">${acctValid} <br> Name is ${name} <br> Transaction description is ${transDescription} <br> Amount is ${amount} <br> ${refValid}</b>`,
+                                    refNumber != null? `<b>${refNumber}</b>`:'',
+                                    `<b class="text-danger">${!acctValid? "":acctValid} <br> Name is ${!name?"":name} <br> Transaction description is ${!transDescription ? "": transDescription} <br> Amount is ${!amount? "":amount} <br> ${!refValid?"":refValid}</b>`,
                                 ])
                                 .draw(false);
                             return;

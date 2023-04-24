@@ -87,7 +87,9 @@ function get_corporate_requests(customerNumber, requestStatus) {
                         request_type = "Card Request";
                     } else if (data[index].request_type == "CARDB") {
                         request_type = "Card Block";
-                    } else if (data[index].request_type == "CARD") {
+                    } else if(data[index].request_type == "CNO"){
+                        request_type = "Create New Originator";
+                    }else if (data[index].request_type == "CARD") {
                         request_type = "Cardless";
                     } else if (data[index].request_type == "BKORP") {
                         amount =

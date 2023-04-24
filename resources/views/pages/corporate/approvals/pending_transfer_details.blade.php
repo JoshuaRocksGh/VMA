@@ -79,7 +79,7 @@
                                                                 <br><br>
                                                                 <div class="mt-3">
 
-                                                                    <div class="col-md-12 mb-3 pending_status">
+                                                                    <div class="col-md-12 mb-3 pending_status" style="display:none">
                                                                         <div class="row">
                                                                             <div class="col-md-2"></div>
                                                                             <button
@@ -346,7 +346,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title text-dark" id="myLargeModalLabel"> Tansaction Invoice</h3>
+                        <h3 class="modal-title text-dark" id="myLargeModalLabel"> Transaction Invoice</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body display-trans-invoice">
@@ -477,7 +477,11 @@
                             let request_type = 'Complaints'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
 
-                        } else if (request_type == 'CHQS') {
+                        } else if (request_type == 'CNO') {
+                            let request_type = 'Create New Originator'
+                            request_type != null ? append_approval_details("Request Type", request_type) : '';
+
+                        }else if (request_type == 'CHQS') {
                             let request_type = 'Stop Cheque Request'
                             request_type != null ? append_approval_details("Request Type", request_type) : '';
                         } else if (request_type == 'CHQR') {
