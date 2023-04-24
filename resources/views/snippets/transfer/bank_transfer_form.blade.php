@@ -346,7 +346,7 @@
                             placeholder="Enter purpose of transaction" class="form-group row mb-3">
                     </div>
                 @endif
-                <div class="form-group align-items-center row">
+                {{-- <div class="form-group align-items-center row">
                     <label class="text-dark col-4">Expense Category
                     </label>
                     <div class="col-md-8 px-0"> <select class="  " id="category" required>
@@ -355,7 +355,7 @@
                             </option>
                         </select>
                     </div>
-                </div>
+                </div> --}}
             </div>
             @if ($currentPath == 'Local Bank')
                 <div class="form-group align-items-center row bg-light p-2 "

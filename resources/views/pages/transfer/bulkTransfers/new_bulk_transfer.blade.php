@@ -111,9 +111,9 @@
                                     class="col-3 form-control text-input account_currency " style="width: 20px;" disabled>
                                 {{--  <input type="text" class="col-4">  --}}
                                 <input type="text" name="bulk_amount" id="bulk_amount"
-                                    pattern="([0-9]{1,3}).([0-9]{1,3})" placeholder="Enter bulk amount"
+                                    pattern="([0-9]{1,3}).([0-9]{1,3})" placeholder="Enter total credit amount"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
-                                    class="form-control bulk_amount" autocomplete="off" required>
+                                    class="form-control bulk_amount" autocomplete="off"  style="text-transform:uppercase" required>
                             </div>
 
 
@@ -127,7 +127,7 @@
                             data-intro="Enter reference same on upload file">
                             <label for="inputEmail3" class="text-dark">Upload Reference
                                 <span class="text-danger"> *</span></label>
-                            <input type="text" name="reference_no" id="reference_no" class="form-control input-sm"
+                            <input type="text" name="reference_no" id="reference_no" class="form-control input-sm" placeholder="Enter reference same in file"
                                 autocomplete="off" style="text-transform:uppercase" required>
 
                         </div>
@@ -141,7 +141,7 @@
                             data-intro="Enter reference same on upload file">
                             <label for="inputEmail3" class="text-dark">Transfer Narration
                                 <span class="text-danger"> *</span></label>
-                            <input type="text" name="transfer_narration" id="transfer_narration" autocomplete="off"
+                            <input type="text" name="transfer_narration" id="transfer_narration" autocomplete="off" placeholder="Enter transfer narration"
                                 class="form-control input-sm" autocomplete="off" style="text-transform:uppercase" required>
 
                         </div>
@@ -363,7 +363,7 @@
                 </div>
             </div>
             @isset($bulkUploads)
-                {{--  {{ $bulkUploads['uploadDetails']['referenceNumber'] }}  --}}
+                 {{-- {{ $bulkUploads['uploadDetails']['referenceNumber'] }} --}}
                 <div>
                     <hr>
                     <label class="font-weight-bold text-danger">Pending Uploads </label>

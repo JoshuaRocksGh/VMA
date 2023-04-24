@@ -105,9 +105,13 @@
             <div class="transaction-receipt">
                 <div class="side-2"></div>
                 <div class="transaction-header">
+                    @if($amount < 0)
                     <h2>
-                        Transaction Receipt
+                        Debit Transaction Advice
                     </h2>
+                    @else
+                    Credit Transaction Advice
+                    @endif
                 </div>
                 <div class="side-2"></div>
 
@@ -136,6 +140,11 @@
                                 </tr>
 
                                 <tr>
+                                    <td class="text-dark">Account Name</td>
+                                    <td class="text-bold">{{ $debitAccountName }}</td>
+                                </tr>
+
+                                <tr>
                                     <td class="text-dark">Transferred From</td>
                                     <td class="text-bold">{{ $debitAccount }}</td>
                                 </tr>
@@ -152,7 +161,7 @@
 
                                 <tr>
                                     <td class="text-dark">Amount</td>
-                                    <td class="text-bold display_transfer_amount">{{ number_format($amount, 2) }}</td>
+                                    <td class="text-bold display_transfer_amount">{{ $debitAccountCUrrency }} {{ number_format($amount, 2) }} </td>
                                 </tr>
 
                                 <tr>
@@ -171,6 +180,16 @@
                     </div>
                     {{--  <button type="button" class="btn btn-primary"id="print_button"
                         onclick="window.print()">click</button>  --}}
+                        <br><br>
+
+                        <div>
+                            <h3 class="text-danger">Disclaimer</h1>
+                                <p>Your transfer has been successful and beneficiary`s account has been credited. However,
+                                    this does not serve as the confirmation of the credit on the beneficiary`s account. Due to
+                                    the nature of the internet, transaction delays are possible. We recommend youmake an enquiry on
+                                    the beneficiary`s account after 24 hours. The bank will not be responsible for any
+                                    transaction delays.</p>
+                        </div>
 
                 </div>
 
@@ -179,7 +198,10 @@
             </div>
 
 
+
+
         </div>
+
         <div class="side"></div>
     </div>
     <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>

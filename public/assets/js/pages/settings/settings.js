@@ -2,12 +2,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
     // console.log("dong");
     if (ISCORPORATE) {
         var settingsList = [
-            // {
-            //     title: "change transaction pin",
-            //     icon: "unlock-alt",
-            //     bgClass: "grad-gray-blue",
-            //     dataTarget: "#change_transaction_pin_modal",
-            // },
+            {
+                title: "create originator",
+                icon: "user-plus",
+                bgClass: "green-yellow",
+                dataTarget: "#create_originator",
+            },
             {
                 title: "change password",
                 icon: "user-lock",

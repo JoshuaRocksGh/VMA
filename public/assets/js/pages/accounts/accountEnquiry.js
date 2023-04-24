@@ -35,8 +35,9 @@ function getAccountTransactions(accountNumber, startDate, endDate) {
                 const dateEvents = getDates.slice().sort((date1, date2) => new Date(date1.postingSysDate) - new Date(date2.postingSysDate))
                 // getDates.sort(compareDates)
                 // console.log('getDates=>', dateEvents)
-                PageData.transaction = response.data;
-                // PageData.transaction =  dateEvents;
+                // PageData.transaction = response.data;
+                PageData.transaction = dateEvents;
+                PageData.transactionSummary = response.summary
             }
             $("#filter").trigger("change");
             return;
@@ -188,6 +189,7 @@ $(function () {
         // pdfHeader(pdfData);
         await getAccountTransactions(accountNumber, startDate, endDate);
         siteLoading("hide");
+        // console.log)
 
         $("#display_account_number").text(accountNumber);
         $("#display_search_start_date").text(startDate);
@@ -252,20 +254,30 @@ $(function () {
     });
 
     function drawTransactionsTable(pdfData) {
-        // console.log("drawTransactionsTable ==>", pdfData);
+        // console.log("PageData ==>", PageData);
         // pdfHeader(pdfData);
         $("#account_transaction_display_table tbody").empty();
+        // $(".table_body_display").empty();
+        ;
         $(".download").show();
-        $("#table_body_display").append(`
-            <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-            </tr>
-        `);
+        // $('#balance_b/f').click(false);
+        console.log("==>",$("#balance_foward > th"))
+
+        $(".balance_startDate").text(PageData.transactionSummary.startDate)
+        $(".balance_openingBalance").text(formatToCurrency(parseFloat(PageData.transactionSummary.openingBalance)))
+    //     var outerHTML = $("#balance_foward").prop("outerHTML").empty();
+    // console.log("outerHTML==>",outerHTML);
+    // $("#balance_foward").empty().append(`
+
+    //             <th>${PageData.transactionSummary.startDate}</th>
+    //             <th>BALANCE BROUGHT FORWARD</th>
+    //             <th></th>
+    //             <th></th>
+    //             <th>${formatToCurrency(parseFloat(PageData.transactionSummary.openingBalance))}</th>
+    //             <th></th>
+
+    //     `).html();
+        // return;
         let transactionTableOptions = {
             dom: "Bfrtip",
             responsive: true,
@@ -276,7 +288,7 @@ $(function () {
                     autoPrint: true,
                     // messageTop: pdfHeader(),
                     exportOptions: {
-                        columns: [0, 1, 2, 3,4]
+                        columns: [0, 1, 2, 3, 4]
                     },
                     messageTop: `<div>
                         <div class="d-flex justify-content-between px-3 items-center">
@@ -295,18 +307,19 @@ $(function () {
                                 <div class="details-label">Account Name: <span id="account_description">${pdfData?.details?.pdfAccountName
                         } </span></div>
                                 <div class="details-label">Account Number: <span id="account_number">${pdfData?.details?.pdfAccountNumber
-                        }</span> </div>
+                        }${(pdfData?.details?.pdfAccountCurrency)}</span> </div>
                                 <div class="details-label">Account Product: <span id="account_product">${pdfData?.details?.pdfAccountType
                         }  </span></div>
                             </div>
                             <div>
                                 <div class="font-weight-bold font-14"> Balance Details</div>
-                                <div class="details-label">Account Currency : <span class="account_currency">${pdfData?.details?.pdfAccountCurrency
-                        }</span> </div>
+
                                 <div class="details-label">Book Balance : <span id="account_legder_balance">${formatToCurrency(parseFloat(pdfData?.details?.pdfAccountBalance))
 
                         }</span> </div>
-                                <div class="details-label">Cleared Balance : <span id="account_available_balance">${formatToCurrency(parseFloat(pdfData?.details?.pdfAccountBalance))
+                        <div class="details-label">Open Balance : <span class="account_currency">${formatToCurrency(parseFloat(PageData?.transactionSummary?.openingBalance))
+                        }</span> </div>
+                                <div class="details-label">Closing Balance : <span id="account_available_balance">${formatToCurrency(parseFloat(PageData.transactionSummary.closingBalance))
                         // pdfData?.details?.pdfAccountBalance
                         }</span> </div>
                             </div>
@@ -346,6 +359,9 @@ $(function () {
                     "Records Found"
                 )}`,
             },
+            row: [
+                { "date": "12-12-12" }
+            ],
             data: PageData.transaction,
             // row: [{ data: "amount" }],
             // columnDefs: [
@@ -366,35 +382,35 @@ $(function () {
                     //         day: "numeric",
                     //     }),
                 },
-                { data: "narration" },
+                { data: "transactionDetails" },
 
                 {
                     data: "amount",
                     render: (data, type, row) =>
-                        data < 0 ? `${formatToCurrency(parseFloat(row.amount)) }` : "",
+                        data < 0 ? `${formatToCurrency(parseFloat(row.amount))}` : "",
                 },
                 {
                     data: "amount",
                     render: (data, type, row) =>
-                        data > 0 ?`${formatToCurrency(parseFloat(row.amount)) }`: "",
+                        data > 0 ? `${formatToCurrency(parseFloat(row.amount))}` : "",
                 },
                 // { data: "narration" },
-                { data: "runningBalance" },
+                { data: "balance" },
                 {
-                    data: "transactionNumber",
+                    data: "batchNumber",
                     render: (data, type, row) => {
                         return `<a href="transaction-receipt?debitAccount=${pdfData?.details?.pdfAccountNumber}&batchNo=${row.batchNumber}&postingDate=${row.postingSysDate}&transNumber=${row.transactionNumber}&valueDate=${row.valueDate}&branch=${row.branch}
-                        &narration=${row.narration}&amount=${row.amount}&contraAccount=${row.contraAccount}&channel=${row.channel}" target='_blank' type="button" class="btn btn-outline-info">Details</a>`;
+                        &narration=${row.transactionDetails}&amount=${row.amount}&contraAccount=${row.contraAccount}&channel=${row.channel}&accountName=${pdfData?.details?.pdfAccountName}&accountCurrency=${pdfData?.details?.pdfAccountCurrency}" target='_blank' type="button" class="btn btn-outline-info">Details</a>`;
                     },
                 },
-                {
-                    data: "imageCheck",
-                    render: (data, type, row) =>
-                        data === 0
-                            ? (attachment = `<a href="#" data-value='${row.transactionNumber}' class="attachment-icon" >
-                <i class="fe-file-text d-block text-center text-gray"></a>`)
-                            : "N/A",
-                },
+                // {
+                //     data: "imageCheck",
+                //     render: (data, type, row) =>
+                //         data === 0
+                //             ? (attachment = `<a href="#" data-value='${row.transactionNumber}' class="attachment-icon" >
+                // <i class="fe-file-text d-block text-center text-gray"></a>`)
+                //             : "N/A",
+                // },
                 // {
                 //     data: "transactionNumber",
                 //     render: (data, type, row) => {
@@ -404,10 +420,11 @@ $(function () {
                 //     },
                 // },
             ],
-            order: [[0, "desc"]],
+            order: [[0, "asc"]],
             columnDefs: [
                 {
-                    targets: [0, 2,3, 4],
+
+                    targets: [0, 2, 3, 4],
                     render: function (data, type) {
                         if (type === "display" || type === "filter") {
                             const color =
@@ -427,6 +444,7 @@ $(function () {
         $("#account_transaction_display_table").DataTable(
             transactionTableOptions
         );
+
 
         $(".attachment-icon").on("click", function (e) {
             e.preventDefault();

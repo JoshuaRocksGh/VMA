@@ -414,6 +414,8 @@ Route::post('change-pin-api', [ChangePinController::class, 'change_pin'])->name(
 //Route for change-password-api
 Route::post('change-password-api', [ChangePasswordController::class, 'change_password'])->name('change-password-api');
 
+// Route for originator creation
+Route::post('create-new-originator', [settingsController::class, 'create_originator'])->name('create-new-originator');
 
 
 Route::get('get-card-types-api', [CardsController::class, 'getCardTypes']);

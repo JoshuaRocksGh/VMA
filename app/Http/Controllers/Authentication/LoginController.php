@@ -91,7 +91,7 @@ class LoginController extends Controller
         // return env('API_BASE_URL') . "/user/login";
 
         try {
-            $response = Http::post(env('API_BASE_URL') . "/user/login", $data);
+            $response = Http::post(env('API_BASE_URL') . "user/login", $data);
             // return $response;
             if (!$response->ok()) { // API response status code is 200
                 return $base_response->api_response('500', 'API SERVER ERROR',  NULL); // return API BASERESPONSE
@@ -117,11 +117,17 @@ class LoginController extends Controller
             // return env('CIB_API_BASE_URL') . "get-mandate/$user_id";
 
             if ($userDetail->customerType == "C") {
+
                 $mandateRes = Http::post(env('CIB_API_BASE_URL') . "get-mandate/$user_id");
-                // return $mandateRes['data'][0]['panel'];
+                if($mandateRes['responseCode'] == "000"){
+                    // return $mandateRes['data'][0]['panel'];
                 // return $mandateRes;
                 $userMandate = $mandateRes['data'][0]['panel'];
                 // $userMandate = "A";
+                }else{
+                    $userMandate = null;
+                }
+
             } else {
                 $userMandate = "";
             }

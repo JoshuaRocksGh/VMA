@@ -33,20 +33,25 @@ class BulkUploadsController extends Controller
 
 
         try {
-            // $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadDataHist/" . "$user_id/$customer_no");
+            // $response = Http::get(env('API_BASE_URL') . "corporate/getBulkUploadDataHist/$user_id/$customer_no");
+            // return $response;
             // dd("http://10.1.1.56:8680/ibank/api/v1.0/corporate/getBulkUploadDataHist/$user_id/$customer_no");
-            $response = Http::get("http://10.1.1.56:8680/ibank/api/v1.0/corporate/getBulkUploadDataHist/$user_id/$customer_no");
+            $response = Http::get("http://10.1.1.56:8680/ibank/api/v1.1/corporate/getBulkUploadDataHist/$user_id/$customer_no");
             // return $response['responseCode'];
+            // return $response;
             $result = new ApiBaseResponse();
             // Log::alert($response);
             // return $result->api_response($response);
             // return json_decode($response->body();
             $allUploads =   $response['data'] ?? "";
-            if($response['responseCode'] == '000'){
+            // return $allUploads;
+            if($response['responseCode'] == '000' && $allUploads != ""){
+                // return "correct";
                 return view('pages.transfer.bulkTransfers.new_bulk_transfer', [
                     "bulkUploads" => $allUploads,
                 ]);
             }else{
+                // return "incorrect";
                 return view('pages.transfer.bulkTransfers.new_bulk_transfer');
             }
 
@@ -331,8 +336,10 @@ class BulkUploadsController extends Controller
                 'file',
                 file_get_contents($path),
                 $filename
-            )->post("http://10.1.1.56:8680/ibank/api/v1.0/corporate/uploadBulkNew", $data);
+            )->post("http://10.1.1.56:8680/ibank/api/v1.1/corporate/uploadBulkNew", $data);
+
             // post(env('API_BASE_URL') . "corporate/uploadBulkNew", $data);
+
             // return $response;
             // dd($response);
 
