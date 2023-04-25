@@ -107,13 +107,13 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    {{-- <tr>
                         <td>Category:</td>
                         <td>
                             <span class="font-13 text-primary h3 display_category" id="display_category"></span>
 
                         </td>
-                    </tr>
+                    </tr> --}}
                     @if ($currentPath === 'Standing Order')
                         <tr>
                             <td>Start Date: </td>
