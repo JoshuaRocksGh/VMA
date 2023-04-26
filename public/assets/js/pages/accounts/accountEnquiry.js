@@ -304,7 +304,7 @@ $(function () {
                         columns: [0, 1, 2, 3, 4]
                     },
                     messageTop: `<div>
-                        <div class="d-flex justify-content-between px-3 items-center">
+                        <div class="d-flex justify-content-between  items-center">
                             <div style="height: 150px"> <img src='assets/images/slcb-bg-logo.png'>
                             </div>
                             <div class="font-14 font-weight-bold"> SIERRA LEONE COMMERCIAL BANK<br>
@@ -355,6 +355,33 @@ $(function () {
                             </div>
                         </div>
                     </div>`,
+                    messageBottom: `<div class="bg-light p-2 ">
+                    <div class="row">
+                            <div class="col-md-3">
+                            <div class="details-label">No of Debits: <span class="font-weight-bold font-14" id="">${PageData.transactionSummary.numberOfDebits
+                            } </span></div>
+
+                            </div>
+
+
+
+                            <div class="col-md-3">
+                            <div class="details-label">Total Debits: <span class="font-weight-bold font-14" id="">${formatToCurrency(parseFloat(PageData.transactionSummary.totalDebits))
+                            } </span></div>
+                            </div>
+
+                            <div class="col-md-3">
+                            <div class="details-label">No of Credits: <span class="font-weight-bold font-14" id="">${PageData.transactionSummary.numberOfCredits
+                            } </span></div>
+                            </div>
+
+                            <div class="col-md-3">
+                            <div class="details-label">Total Credits: <span class="font-weight-bold font-14" id="">${formatToCurrency(parseFloat(PageData.transactionSummary.totalCredits))
+                            } </span></div>
+
+                            </div>
+                    </div>
+                    </div>`
                 },
 
                 // {
@@ -400,12 +427,12 @@ $(function () {
                 {
                     data: "amount",
                     render: (data, type, row) =>
-                        data < 0 ? `${formatToCurrency(parseFloat(row.amount))}` : "",
+                        data < 0 ? `${formatToCurrency(parseFloat(row.amount))}` : "-",
                 },
                 {
                     data: "amount",
                     render: (data, type, row) =>
-                        data > 0 ? `${formatToCurrency(parseFloat(row.amount))}` : "",
+                        data > 0 ? `${formatToCurrency(parseFloat(row.amount))}` : "-",
                 },
                 // { data: "narration" },
                 { data: "balance" },
