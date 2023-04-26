@@ -76,8 +76,28 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <br><br>
+                                                                {{-- <br><br> --}}
+                                                                <table  class="table mb-0 table-striped mx-auto pending_status" style="margin-top: -15px;display:none">
+                                                                    <tbody>
+                                                                        <tr class="hide-on-success bg-danger  text-white">
+                                                                            <td colspan="2">
+                                                                                <div class="custom-control d-flex custom-checkbox ">
+                                                                                    <input type="checkbox" class="custom-control-input d-block" name="terms_and_conditions"
+                                                                                        id="terms_and_conditions">
+                                                                                    <label class="custom-control-label d-flex  align-items-center font-weight-bold"
+                                                                                        for="terms_and_conditions">
+                                                                                        By checking this box, you agree to
+                                                                                        abide by the Terms and Conditions
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+
+                                                                </table>
+                                                                <br>
                                                                 <div class="mt-3">
+
 
                                                                     <div class="col-md-12 mb-3 pending_status" style="display:none">
                                                                         <div class="row">
@@ -1055,6 +1075,10 @@
             $("#approve_transaction").click(function(e) {
 
                 e.preventDefault();
+                if (!$("#terms_and_conditions").is(":checked")) {
+            toaster("Accept Terms & Conditions to continue", "warning");
+            return false;
+        }
                 $("#approve_transaction").attr("disabled", true);
                 $("#reject_transaction").attr("disabled", true);
 
