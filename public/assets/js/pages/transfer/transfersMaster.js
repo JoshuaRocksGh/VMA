@@ -836,9 +836,9 @@ $(() => {
                 : $("#purpose").val();
         $(".display_purpose").text(transferInfo.transferPurpose);
         transferInfo.transferCategory = $("#category").val();
-        if (transferInfo.transferCategory !== "Others") {
-            transferInfo.transferCategory = $("#category").val().split("~")[1];
-        }
+        // if (transferInfo.transferCategory !== "Others") {
+        //     transferInfo.transferCategory = $("#category").val().split("~")[1];
+        // }
         $(".display_category").text(transferInfo.transferCategory);
 
         e.preventDefault();
@@ -865,7 +865,7 @@ $(() => {
             !transferInfo.accountNumber ||
             !transferInfo.beneficiaryAccountNumber ||
             !transferInfo.transferAmount ||
-            !transferInfo.transferCategory ||
+            // !transferInfo.transferCategory ||
             !transferInfo.transferPurpose
         ) {
             toaster("complete all fields", "warning");

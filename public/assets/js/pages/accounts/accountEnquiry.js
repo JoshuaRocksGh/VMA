@@ -262,6 +262,7 @@ $(function () {
         $(".download").show();
         // $('#balance_b/f').click(false);
         console.log("==>",$("#balance_foward > th"))
+        $("#balance_foward").show()
 
         $(".balance_startDate").text(PageData.transactionSummary.startDate)
         $(".balance_openingBalance").text(formatToCurrency(parseFloat(PageData.transactionSummary.openingBalance)))

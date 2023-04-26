@@ -148,7 +148,7 @@
                         </tr>
 
 
-                        <tr id="balance_foward">
+                        <tr id="balance_foward"  style="display:none">
 
                             <th class="balance_startDate"></th>
                             <th>BALANCE BROUGHT FORWARD</th>
