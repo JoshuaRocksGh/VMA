@@ -84,8 +84,11 @@
                         toaster("Couldn't get security questions", "warning");
                     }
                     // console.log("change transaction question=>", data);
-                    $(".change_pin_sec_question_code").val(data[0]?.code)
+                    if(data){
+                        $(".change_pin_sec_question_code").val(data[0]?.code)
                     $(".security_question").text(data[0]?.description)
+                    }
+
                     {{--  const input = document.getElementById("security_question");
                 input.value = data[0].question.code;
                 input.innerHTML = data[0].question.description;  --}}

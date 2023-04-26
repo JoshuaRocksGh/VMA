@@ -22,19 +22,31 @@ function getAccountTransactions(accountNumber, startDate, endDate) {
         },
         success: function (response) {
             console.log("account-transaction-history =>", response);
+
             if (response.responseCode !== "000" || response.data.length === 0) {
                 if (PageData?.prompt) {
                     toaster(response.message, "warning");
                 }
                 PageData.transaction = [];
             } else {
+                const validTrans = []
+
+                validTrans.push({
+                    'postingSysDate' : response.summary.startDate,
+                    'transactionDetails': "BALANCE BROUGHT FORWARD",
+                    'balance' : response.summary.openingBalance,
+                    'amount': 0,
+                    'batchNumber': ""
+                })
                 const getDates = response.data
+                getDates.forEach(e => validTrans.push(e) )
+                // validTrans.
                 const compareDates = (date1, date2) => {
                     return new Date(date2.postingSysDate) - new Date(date1.postingSysDate)
                 }
-                const dateEvents = getDates.slice().sort((date1, date2) => new Date(date1.postingSysDate) - new Date(date2.postingSysDate))
+                const dateEvents = validTrans.slice().sort((date1, date2) => new Date(date1.postingSysDate) - new Date(date2.postingSysDate))
                 // getDates.sort(compareDates)
-                // console.log('getDates=>', dateEvents)
+                console.log('validTrans=>', validTrans)
                 // PageData.transaction = response.data;
                 PageData.transaction = dateEvents;
                 PageData.transactionSummary = response.summary
@@ -261,11 +273,11 @@ $(function () {
         ;
         $(".download").show();
         // $('#balance_b/f').click(false);
-        console.log("==>",$("#balance_foward > th"))
+        // console.log("==>",$("#balance_foward > th"))
         $("#balance_foward").show()
 
-        $(".balance_startDate").text(PageData.transactionSummary.startDate)
-        $(".balance_openingBalance").text(formatToCurrency(parseFloat(PageData.transactionSummary.openingBalance)))
+        // $(".balance_startDate").text(PageData.transactionSummary.startDate)
+        // $(".balance_openingBalance").text(formatToCurrency(parseFloat(PageData.transactionSummary.openingBalance)))
     //     var outerHTML = $("#balance_foward").prop("outerHTML").empty();
     // console.log("outerHTML==>",outerHTML);
     // $("#balance_foward").empty().append(`
