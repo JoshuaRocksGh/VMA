@@ -100,9 +100,9 @@
 </script>
 
 <script type="text/javascript">
-    document.addEventListener("contextmenu", (event) => {
-        event.preventDefault();
-    });
+    // document.addEventListener("contextmenu", (event) => {
+    //     event.preventDefault();
+    // });
     const getDeviceOS = () => {
         if (navigator.appVersion.indexOf("Win") != -1) {
             return "Windows";

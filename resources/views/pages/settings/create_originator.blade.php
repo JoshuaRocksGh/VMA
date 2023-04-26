@@ -16,7 +16,7 @@
                 <div id="">
                     <!-- title-->
                     <!-- form -->
-                    <form id="create_originator_form"action="#" autocomplete="off" aria-autocomplete="off">
+                    <form id="create_originator_form" autocomplete="off" aria-autocomplete="off">
                         @csrf
                         <br>
 
@@ -59,22 +59,15 @@
                             {{-- <br> --}}
                             <label for="">Telephone Number</label>
                             <input type="text" id="telephone" placeholder="Enter originator telephone"
-                                class="form-control" autocomplete="off">
+                                class="form-control" autocomplete="off" required>
 
 
-                            <div class="otp-display" style="display: none">
-                                {{--  <div class="text-center mb-4">Enter the OTP sent to your mobile number</div>  --}}
-
-
-                            </div>
                         </div>
 
                         <div class="modal-footer">
 
-                            <button class="btn form-button " type="submit" id="new_originator_form">Submit
+                            <button class="btn form-button"  id="new_originator_form">Submit
                             </button>
-                            <button style="display: none" type="button" id='confirm_change_password'
-                                class="btn otp-display form-button">Change Password</button>
                         </div>
                     </form>
                 </div>
@@ -87,9 +80,9 @@
 <script type="text/javascript">
     const originatorData = new Object();
 
-    $(function() {
+    $(() => {
 
-        $("#create_originator_form").submit(function(e) {
+        $("#new_originator_form").click(function(e) {
             e.preventDefault()
             originatorData.status = $("#originator_status").val()
             originatorData.accountDetails = $("#account_number").val()
@@ -98,15 +91,18 @@
             originatorData.email = $("#email").val()
             originatorData.telephone = $("#telephone").val()
             // console.log($("#email").val())
+            // return
             // console.log(originatorData.email)
 
             // console.log(originatorData.accountDetails, originatorData.firstName, originatorData.lastName, !originatorData.email ,originatorData.telephone)
 
-            // if(!originatorData.account || !originatorData.firstName || !originatorData.lastName || !originatorData.telephone ){
-            //     toaster("Please complete all fields", "warning")
-            //             return;
-            // }
+            if(originatorData.account == "" || originatorData.firstName =="" || originatorData.lastName =="" || originatorData.telephone == "" || originatorData.email == ""){
+                toaster("Please complete all fields", "warning")
+                        return;
+            }
+            // if()
 
+            siteLoading(true)
             $.ajax({
                 type: "POST",
                 url: "create-originator-api",
@@ -118,6 +114,8 @@
                 },
                 success: function(response) {
                     // console.log(response)
+            siteLoading(false)
+
                     if (response.responseCode == '000') {
                         toaster(response.message, "success");
 
@@ -125,7 +123,6 @@
                         toaster(response.message, "error");
                     }
                 },
-                error:function()
 
 
             })
