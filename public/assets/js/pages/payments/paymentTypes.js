@@ -42,7 +42,7 @@ function paymentType() {
         url: "get-payment-types-api",
         datatype: "application/json",
         success: function (response) {
-            // console.log("getPaymentTypesApi ==>", response)
+            console.log("getPaymentTypesApi ==>", response)
             $("#loader").hide();
             let data = response.data;
             if (response.responseCode == "000") {
@@ -98,8 +98,13 @@ function makePayment(data) {
         },
         success: function (response) {
             siteLoading("hide");
-            if (response.responseCode == "000") {
+            console.log("make payemet =?", response)
+            if (response.responseCode == "000" || response.responseCode == "00") {
                 getAccounts();
+                if(pageData.paymentInfo.payeeName == "DAYCAR"){
+                    window.location.href = `https://sandbox.dycargroup.com/api/receipt?id=${response.data}`;
+                    return;
+                }
                 Swal.fire({
                     width: 400,
                     title: `<h2 class='text-success font-16 font-weight-bold'>${response.message}</h2>`,
@@ -140,7 +145,18 @@ function getRecipientName() {
         success: function (response) {
             if (response.responseCode == "000") {
                 siteLoading("hide");
-                pageData.paymentInfo.recipientName = response.data;
+                console.log("name-enquiry=?", response)
+                // return false;
+                if(pageData.paymentInfo.payeeName == "DYCAR"){
+                    pageData.paymentInfo.recipientName = response.data.customerName;
+                    pageData.paymentInfo.meterAddress = response.data.serviceAddress;
+                    pageData.paymentInfo.lastAmount = response.data.amountLast;
+                    pageData.paymentInfo.prepaidDebt = response.data.prepaidDebt;
+                    // prepaidDebt
+                }else{
+                    pageData.paymentInfo.recipientName = response.data;
+                }
+
                 paymentVerification();
             }
         },
@@ -155,7 +171,7 @@ function getRecipientName() {
 }
 
 function paymentVerification() {
-    // console.log("next_button ==>", pageData.paymentInfo);
+    console.log("next_button ==>", pageData.paymentInfo);
     if (!ISCORPORATE) {
         // IF TYPE IS MOMO
         if (pageData.paymentInfo.paymentType == "MOM") {
@@ -189,6 +205,10 @@ function paymentVerification() {
         }
     }
 
+    if(pageData.paymentInfo.payeeName == "DYCAR"){
+        $(".display_dycar").show()
+    }
+
     const {
         paymentType,
         account,
@@ -196,6 +216,9 @@ function paymentVerification() {
         amount,
         recipientName,
         payeeName,
+        meterAddress,
+        lastAmount,
+        prepaidDebt
     } = pageData.paymentInfo;
     const { paymentDescription, paymentAccount } = pageData[
         "pay_" + paymentType
@@ -205,7 +228,7 @@ function paymentVerification() {
         : 0.0;
     const expensetype = pageData["pay_" + paymentType].description;
     const transFee = "0";
-    const currency = "SLL";
+    const currency = "SLE";
     const totalAmount = parseFloat(amount) + parseFloat(transFee);
     $("#details_from_account").text(account);
     $("#details_to_account").text(recipientName);
@@ -219,6 +242,9 @@ function paymentVerification() {
     $("#details_total_amount").text(
         currency + " " + formatToCurrency(totalAmount)
     );
+    $("#details_meter_address").text(meterAddress)
+    $("#details_meter_balance").text(currency + " " + formatToCurrency(prepaidDebt))
+    $("#details_last_meter_amount").text(currency + " " + formatToCurrency(lastAmount))
     pageData.paymentInfo.paymentAccount = paymentAccount;
     pageData.paymentInfo.paymentDescription = paymentDescription;
     $("#payment_verification_modal").modal("show");
@@ -529,7 +555,14 @@ $(() => {
             return false;
         }
         pageData.paymentInfo.pinCode = pin;
-        makePayment(pageData.paymentInfo);
+        for (const key in pageData.paymentInfo) {
+            if (pageData.paymentInfo.hasOwnProperty(key)) {
+                // console.log("key ==>", key);
+
+                formData.append(key, pageData.paymentInfo[key]);
+            }
+        }
+        makePayment(formData);
         $("#user_pin").val("").text("");
     });
 });

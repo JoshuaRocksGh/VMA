@@ -451,6 +451,16 @@ class FunctionsController extends Controller
             'paymentType' => $req->paymentType
         ];
         // return $data;
+        if ($req->payeeName == "DYCAR") {
+
+            // http://197.157.233.214:5908/integrator/dycar/verifyMeter?meterNumber=54120004053
+
+            $response = Http::get("http://197.157.233.214:5908/integrator/dycar/verifyMeter?meterNumber=$req->beneficiaryAccount");
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        }
+
+
         $response = Http::post(env('API_BASE_URL') . "/payment/nameEnquiry", $data);
         // return $response;
         $result = new ApiBaseResponse();

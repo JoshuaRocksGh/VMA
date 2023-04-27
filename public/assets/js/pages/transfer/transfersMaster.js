@@ -1069,7 +1069,15 @@ $(() => {
         const endPoint =
             transferType.toLowerCase().trim().replace(" ", "-") +
             "-transfer-api";
-        makeTransfer(endPoint, transferInfo);
+
+            for (const key in transferInfo) {
+                if (transferInfo.hasOwnProperty(key)) {
+                    // console.log("key ==>", key);
+
+                    formData.append(key, transferInfo[key]);
+                }
+            }
+        makeTransfer(endPoint, formData);
         $("#user_pin").val("").text("");
         confirmationCompleted = false;
     });
