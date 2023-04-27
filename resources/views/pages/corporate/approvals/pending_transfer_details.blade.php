@@ -1121,7 +1121,7 @@
                     success: function(response) {
                         siteLoading('hide')
 
-                        console.log(response)
+                        // console.log(response)
                         let res = JSON.parse(response);
                         if (res.responseCode == '000' || res.responseCode == '200') {
                             siteLoading('hide')

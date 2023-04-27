@@ -114,6 +114,7 @@ Route::get('/account-creation/savings-account-creation', [accountCreationControl
 Route::get('/branches', [BranchesController::class, 'branches'])->name('branches');
 Route::get('/faq', [FAQController::class, 'index'])->name('faq');
 Route::get('/enquiry', [EnquiryController::class, 'index'])->name('enquiry');
+// Route:: post('/get-users-approval-status', [ApprovedRequestController::class, 'user_approval_status'])->name('approved-pending-request');
 
 //route to control the accountEnquiry screen
 Route::get('print-account-statement', [AccountEnquiryController::class, 'print_account_statement'])->name('print-account-statement');
@@ -181,6 +182,8 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('airport-tax', [paymentController::class, 'airport_tax'])->name('airport-tax');
     Route::post('airport-tax-payment-api', [paymentController::class, 'airport_tax_payment'])->name('airport-tax-payment-api');
     Route::get('get-airport-tax-amount', [paymentController::class, 'get_airport_tax_amount'])->name('get-airport-tax-amount');
+    Route::get('national-id', [paymentController::class, 'national_id'])->name('national-id');
+
     Route::get('bulk-upload-payment', [paymentController::class, 'bulk_upload_payment'])->name('bulk-upload-payment');
     Route::get('payment-beneficiary', [paymentController::class, 'payment_beneficiary_list'])->name('payment-beneficiary');
     Route::get('payment-beneficiary-list', [paymentController::class, 'beneficiary_list'])->name('payment-beneficiary-list');

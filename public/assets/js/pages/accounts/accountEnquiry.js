@@ -320,7 +320,7 @@ $(function () {
                                 <div class="details-label">Account Name: <span id="account_description">${pdfData?.details?.pdfAccountName
                         } </span></div>
                                 <div class="details-label">Account Number: <span id="account_number">${pdfData?.details?.pdfAccountNumber
-                        }${(pdfData?.details?.pdfAccountCurrency)}</span> </div>
+                        } - (${(pdfData?.details?.pdfAccountCurrency)})</span> </div>
                                 <div class="details-label">Account Product: <span id="account_product">${pdfData?.details?.pdfAccountType
                         }  </span></div>
                             </div>

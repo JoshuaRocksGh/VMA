@@ -26,16 +26,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 bgClass: "pink-cyan",
                 dataTarget: "#enquiry_modal",
             },
-            {
-                title: "Tarrif List",
-                icon: "chart-bar",
-                bgClass: "cyan-green",
-            },
-            {
-                title: "Agent List",
-                icon: "users",
-                bgClass: "yellow-yellow",
-            },
+            // {
+            //     title: "Tarrif List",
+            //     icon: "chart-bar",
+            //     bgClass: "cyan-green",
+            // },
+            // {
+            //     title: "Agent List",
+            //     icon: "users",
+            //     bgClass: "yellow-yellow",
+            // },
             {
                 title: "Help (FAQs)",
                 icon: "question-circle",
@@ -81,16 +81,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 bgClass: "pink-cyan",
                 dataTarget: "#enquiry_modal",
             },
-            {
-                title: "Tarrif List",
-                icon: "chart-bar",
-                bgClass: "cyan-green",
-            },
-            {
-                title: "Agent List",
-                icon: "users",
-                bgClass: "yellow-yellow",
-            },
+            // {
+            //     title: "Tarrif List",
+            //     icon: "chart-bar",
+            //     bgClass: "cyan-green",
+            // },
+            // {
+            //     title: "Agent List",
+            //     icon: "users",
+            //     bgClass: "yellow-yellow",
+            // },
             {
                 title: "Help (FAQs)",
                 icon: "question-circle",
