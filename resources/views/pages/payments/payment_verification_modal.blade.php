@@ -58,6 +58,9 @@
                         </span>
 
                     </div>
+                    <div class="d-item display_dycar" style="display: none">
+                        <span> Meter Address</span><span class="font-weight-bold" id="details_meter_address"> </span>
+                    </div>
                     <div class="d-item">
                         <span> Amount</span><span class="font-weight-bold" id="details_amount"> </span>
                     </div>
@@ -68,6 +71,17 @@
                     <div class="d-item">
                         <span> Expense Type</span><span class="font-weight-bold" id="details_expense_type"> </span>
                     </div>
+                    <div class="d-item display_dycar" style="display: none">
+                        <span>Meter Balance</span><span class="font-weight-bold" id="details_meter_balance"> </span>
+                    </div>
+
+
+                    <div class="d-item display_dycar" style="display: none">
+                        <span> Last Meter Amount</span><span class="font-weight-bold" id="details_last_meter_amount"> </span>
+                    </div>
+                    {{-- <div class="d-item display_dycar" style="display: none">
+                        <span> Prepaid Debt</span><span class="font-weight-bold" id="details_prepaid_debt"> </span>
+                    </div> --}}
                     <div class="d-item">
                         <span> Transaction Fee</span><span class="font-weight-bold" id="details_trans_fee"> </span>
                     </div>

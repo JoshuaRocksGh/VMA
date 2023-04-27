@@ -332,7 +332,7 @@ $(function () {
                         }</span> </div>
                         <div class="details-label">Open Balance : <span class="account_currency">${formatToCurrency(parseFloat(PageData?.transactionSummary?.openingBalance))
                         }</span> </div>
-                                <div class="details-label">Closing Balance : <span id="account_available_balance">${formatToCurrency(parseFloat(PageData.transactionSummary.closingBalance))
+                                <div class="details-label">Closing Balance : <span id="account_available_balance">${formatToCurrency(parseFloat(PageData?.transactionSummary?.closingBalance))
                         // pdfData?.details?.pdfAccountBalance
                         }</span> </div>
                             </div>
@@ -358,7 +358,7 @@ $(function () {
                     messageBottom: `<div class="bg-light p-2 ">
                     <div class="row">
                             <div class="col-md-3">
-                            <div class="details-label">No of Debits: <span class="font-weight-bold font-14" id="">${PageData.transactionSummary.numberOfDebits
+                            <div class="details-label">No of Debits: <span class="font-weight-bold font-14" id="">${PageData?.transactionSummary?.numberOfDebits
                             } </span></div>
 
                             </div>
@@ -366,17 +366,17 @@ $(function () {
 
 
                             <div class="col-md-3">
-                            <div class="details-label">Total Debits: <span class="font-weight-bold font-14" id="">${formatToCurrency(parseFloat(PageData.transactionSummary.totalDebits))
+                            <div class="details-label">Total Debits: <span class="font-weight-bold font-14" id="">${formatToCurrency(parseFloat(PageData?.transactionSummary?.totalDebits))
                             } </span></div>
                             </div>
 
                             <div class="col-md-3">
-                            <div class="details-label">No of Credits: <span class="font-weight-bold font-14" id="">${PageData.transactionSummary.numberOfCredits
+                            <div class="details-label">No of Credits: <span class="font-weight-bold font-14" id="">${PageData?.transactionSummary?.numberOfCredits
                             } </span></div>
                             </div>
 
                             <div class="col-md-3">
-                            <div class="details-label">Total Credits: <span class="font-weight-bold font-14" id="">${formatToCurrency(parseFloat(PageData.transactionSummary.totalCredits))
+                            <div class="details-label">Total Credits: <span class="font-weight-bold font-14" id="">${formatToCurrency(parseFloat(PageData?.transactionSummary?.totalCredits))
                             } </span></div>
 
                             </div>

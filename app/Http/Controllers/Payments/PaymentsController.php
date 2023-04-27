@@ -25,25 +25,19 @@ class PaymentsController extends Controller
         $entrySource = env('APP_ENTRYSOURCE');
         $channel = env('APP_CHANNEL');
 
+        $authToken = session()->get('userToken');
+        $userID = session()->get('userId');
+        $client_ip = request()->ip();
+        $api_headers = session()->get('headers');
+        $deviceInfo = session()->get('deviceInfo');
+        // $userID = session()->get('userId');
+            $userAlias = session()->get('userAlias');
+            $customerPhone = session()->get('customerPhone');
+            $customerNumber = session()->get('customerNumber');
 
 
 
-        $data = [
-            'accountNumber' => $req->account,
-            'amount' => $req->amount,
-            'customerName' => session()->get('userId'),
-            'customerNumber' => session()->get('customerNumber'),
-            'customerPhone' => session()->get('customerPhone'),
-            // 'entrySource' => "MOM",
-            'entrySource' => $entrySource,
-            'channel' => $channel,
-            'naration' => $req->paymentDescription,
-            'payeeName' => $req->payeeName,
-            'payeeNumber' => $req->paymentAccount,
-            'paymentCode' => $req->payeeName,
-            'paymentType' => $req->paymentType,
-            // 'pinCode' => $req->pinCode,
-        ];
+
 
 
         if (config("app.corporate")) {
@@ -104,9 +98,60 @@ class PaymentsController extends Controller
                 return $base_response->api_response('500', $e->getMessage(),  NULL); // return API BASERESPONSE
             }
         }
-        $data["pinCode"] = $req->pinCode;
+
+        if ($req->payeeName == "DYCAR") {
+
+            $data = [
+
+                "accountNumber" =>$req->account,
+                "amount" =>$req->amount,
+                "authToken" => $authToken,
+                "brand" => $deviceInfo['deviceBrand'],
+            // "channel" => env('APP_CHANNEL'),
+            "channel" => $channel,
+                "country" => $deviceInfo['deviceCountry'],
+                "customerName" => $req->recipientName,
+                "customerNumber" => $customerNumber,
+                "deviceId" => $deviceInfo['deviceId'],
+                "deviceIp" => $client_ip,
+                "deviceName" => $deviceInfo['deviceOs'],
+                "entrySource" => $entrySource,
+                "manufacturer" => $deviceInfo['deviceManufacturer'],
+                "meterNumber" => $req->beneficiaryAccount,
+                "phoneNumber" => $customerNumber,
+                "pinCode" => $req->pinCode,
+                "userName" => $req->recipientName
+
+            ];
+
+            $url = "edsa/buyCredit";
+        } else {
+
+            $data = [
+                'accountNumber' => $req->account,
+                'amount' => $req->amount,
+                'customerName' => session()->get('userId'),
+                'customerNumber' => session()->get('customerNumber'),
+                'customerPhone' => session()->get('customerPhone'),
+                // 'entrySource' => "MOM",
+                'entrySource' => $entrySource,
+                'channel' => $channel,
+                'naration' => $req->paymentDescription,
+                'payeeName' => $req->payeeName,
+                'payeeNumber' => $req->paymentAccount,
+                'paymentCode' => $req->payeeName,
+                'paymentType' => $req->paymentType,
+                'pinCode' => $req->pinCode,
+            ];
+
+
+            $url = "payment/makePayment";
+        }
+
+        // $data["pinCode"] = $req->pinCode;
+        // return $data;
         try {
-            $response = Http::post(env('API_BASE_URL') . "payment/makePayment", $data);
+            $response = Http::post(env('API_BASE_URL') . $url, $data);
             $result = new ApiBaseResponse();
             return $result->api_response($response);
         } catch (\Exception $e) {
