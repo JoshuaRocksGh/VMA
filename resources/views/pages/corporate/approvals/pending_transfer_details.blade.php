@@ -103,7 +103,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-2"></div>
                                                                             <button
-                                                                                class="btn btn-danger waves-effect waves-light col-md-3 btn-lg"
+                                                                                class="btn btn-secondary waves-effect waves-light col-md-3 btn-lg"
                                                                                 id="reject_transaction"
                                                                                 type="button">Reject
                                                                                 <i class="mdi mdi-cancel"></i>
