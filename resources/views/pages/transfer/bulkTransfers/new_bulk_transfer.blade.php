@@ -66,15 +66,19 @@
                     <div class="col-md-12  p-1 ">
                         <ul>
                             <li>
-                                Download template for upload <br>
+                                - Download same bank template <br>
+                                (<span class="text-danger"><a href="{{ url('download_same_bank_file') }}" class="text-danger">
+                                        Click
+                                        Here to Download </a></span>)
+                            </li>
+                            <li>
+                               - Download other bank template <br>
                         (<span class="text-danger"><a href="{{ url('download_other_bank_file') }}" class="text-danger">
                                 Click
                                 Here to Download </a></span>)
 
                         </li>
-                            <li>
-                                Upload Same and Other Banks using template
-                            </li>
+
                         </ul>
 
 
