@@ -36,7 +36,8 @@ function getAccountTransactions(accountNumber, startDate, endDate) {
                     'transactionDetails': "BALANCE BROUGHT FORWARD",
                     'balance' : response.summary.openingBalance,
                     'amount': 0,
-                    'batchNumber': ""
+                    'batchNumber': "",
+                    'documentReference' : ""
                 })
                 const getDates = response.data
                 getDates.forEach(e => validTrans.push(e) )
@@ -301,7 +302,7 @@ $(function () {
                     autoPrint: true,
                     // messageTop: pdfHeader(),
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4]
+                        columns: [0, 1,2, 3, 4, 5]
                     },
                     messageTop: `<div>
                         <div class="d-flex justify-content-between  items-center">
@@ -423,19 +424,24 @@ $(function () {
                     //     }),
                 },
                 { data: "transactionDetails" },
+                { data: "documentReference",
+                    render:(data , type, row) => row.documentReference
+            },
 
                 {
                     data: "amount",
                     render: (data, type, row) =>
-                        data < 0 ? `${formatToCurrency(parseFloat(row.amount))}` : "-",
+                        row.amountSign == "D" ? `${formatToCurrency(parseFloat(Math.abs(row.amount)))}` : "",
                 },
                 {
                     data: "amount",
                     render: (data, type, row) =>
-                        data > 0 ? `${formatToCurrency(parseFloat(row.amount))}` : "-",
+                        data > 0 ? `${formatToCurrency(parseFloat(row.amount))}` : "",
                 },
                 // { data: "narration" },
-                { data: "balance" },
+                { data: "balance" ,
+                render:(data,type,row) => `${formatToCurrency(parseFloat(row.balance))}`
+                },
                 {
                     data: "batchNumber",
                     render: (data, type, row) => {
