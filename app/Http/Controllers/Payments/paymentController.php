@@ -75,6 +75,11 @@ class paymentController extends Controller
         return view('pages.payments.airport_tax_payment');
     }
 
+    public function national_id()
+    {
+        return view('pages.payments.national_id_payment');
+    }
+
     public function paymentBeneficiaries()
     {
         // $userID = session()->get('userId');

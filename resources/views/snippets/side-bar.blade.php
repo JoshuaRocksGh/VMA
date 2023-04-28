@@ -44,9 +44,9 @@
                     <li>
                         <a href="{{ url('international-bank') }}">International Bank</a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ url('bollore-link') }}">Bollore Link</a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="{{ url('standing-order') }}">Create Standing Order</a>
                     </li>
@@ -68,9 +68,9 @@
                             <a href="{{ url('bulk-transfer') }}">Bulk Transfer </a>
                         </li>
 
-                        <li>
+                        {{-- <li>
                             <a href="{{ url('swift_mt101') }}">Sierra Rutile </a>
-                        </li>
+                        </li> --}}
                     @endif
 
                     <li>
@@ -94,11 +94,14 @@
                     <li>
                         <a href="{{ url('payments') }}">Make Payment</a>
                     </li>
-                    @if (!config('app.corporate'))
+                    {{-- @if (!config('app.corporate')) --}}
                         <li>
                             <a href="{{ url('airport-tax') }}">Airport Tax</a>
                         </li>
-                    @endif
+                        <li>
+                            <a href="{{ url('national-id') }}">National ID</a>
+                        </li>
+                    {{-- @endif --}}
 
                     <li>
                         <a href="{{ url('salone-link') }}">Salone-Link</a>

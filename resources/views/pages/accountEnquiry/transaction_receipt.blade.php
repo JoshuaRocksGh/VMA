@@ -131,7 +131,7 @@
                                 </tr>
                                 <tr>
                                     <td class="text-dark">Transaction Date</td>
-                                    <td class="text-bold">{{ $postingDate }}</td>
+                                    <td class="text-bold formatDate" value="{{ $postingDate }}" this-date="{{ $postingDate }}" id="formatDate"></td>
                                 </tr>
 
                                 <tr>
@@ -207,13 +207,29 @@
     <script src="{{ asset('assets\plugins\jquery\jquery-3.6.0.min.js') }}"></script>
 
 
-    {{--  <script src="jquery-3.6.0.min.js">
+     {{-- <script src="jquery-3.6.0.min.js">
         alert('calleds')
-    </script>  --}}
+    </script> --}}
     <script>
+        var thisDate = $("#formatDate").attr("this-date");
+        currentDate =     new Date(thisDate).toLocaleString("en", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                        }),
+        console.log("formatDate ==>", currentDate)
+        $("#formatDate").text(currentDate)
+        $("#formatDate").attr("this-date");
+
+        // console.log("formatDate 2 ==>", $("#formatDate").attr("this-date"))
+
+
+
         function formatToCurrency(amount) {
             return amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
         };
+
+
         $(document).ready(function() {
             {{--  alert('ready')  --}}
             window.print();
@@ -223,6 +239,11 @@
             // alert('calleds')
 
             $("#print_button").trigger("click");
+
+
+
+
+
 
 
         });
