@@ -31,9 +31,9 @@ class PaymentsController extends Controller
         $api_headers = session()->get('headers');
         $deviceInfo = session()->get('deviceInfo');
         // $userID = session()->get('userId');
-            $userAlias = session()->get('userAlias');
-            $customerPhone = session()->get('customerPhone');
-            $customerNumber = session()->get('customerNumber');
+        $userAlias = session()->get('userAlias');
+        $customerPhone = session()->get('customerPhone');
+        $customerNumber = session()->get('customerNumber');
 
 
 
@@ -99,16 +99,17 @@ class PaymentsController extends Controller
             }
         }
 
-        if ($req->payeeName == "DYCAR") {
+        if ($req->payeeName == "DYCAR" &&  $req->paymentType == "UTL") {
 
             $data = [
 
-                "accountNumber" =>$req->account,
-                "amount" =>$req->amount,
+                "accountNumber" => $req->account,
+                "amount" => $req->amount,
                 "authToken" => $authToken,
                 "brand" => $deviceInfo['deviceBrand'],
-            // "channel" => env('APP_CHANNEL'),
-            "channel" => $channel,
+                // "channel" => env('APP_CHANNEL'),
+                "channel" => "MOB",
+                // "channel" => $channel,
                 "country" => $deviceInfo['deviceCountry'],
                 "customerName" => $req->recipientName,
                 "customerNumber" => $customerNumber,
@@ -124,7 +125,51 @@ class PaymentsController extends Controller
 
             ];
 
-            $url = "edsa/buyCredit";
+            $url = "http://10.1.1.45:5908/ibank/api/v1.0/edsa/buyCredit";
+        } else if ($req->payeeName == "AFRI" &&  $req->paymentType == "AIR") {
+            $data = [
+                "accountNumber" => $req->account,
+                "amount" => $req->amount,
+                "authToken" =>  $authToken,
+                "brand" =>$deviceInfo['deviceBrand'],
+                "channel" => "MOB",
+                "country" => $deviceInfo['deviceCountry'],
+                "deviceId" => $deviceInfo['deviceId'],
+                "deviceIp" =>  $client_ip,
+                "deviceName" => $deviceInfo['deviceOs'],
+                "entrySource" => $entrySource,
+                "manufacturer" => $deviceInfo['deviceManufacturer'],
+                "phoneNumber" => "",
+                "pinCode" => $req->pinCode,
+                "telephone" => $req->beneficiaryAccount,
+                "userName" =>  $req->recipientName
+            ];
+
+            $url = "http://10.1.1.45:5908/ibank/api/v1.0/africel/africelTopup";
+        }else if($req->payeeName == "AFRI" &&  $req->paymentType == "MOM"){
+
+            $data = [
+                "accountNumber" => $req->account,
+                "amount" => $req->amount,
+                "authToken" => $authToken,
+                "brand" => $deviceInfo['deviceBrand'],
+                "channel" =>  "MOB",
+                "country" => $deviceInfo['deviceCountry'],
+                "currency" => $req->accountCurrency,
+                "customerName" => $req->accountName,
+                "deviceId" => $deviceInfo['deviceId'],
+                "deviceIp" => $client_ip,
+                "deviceName" =>  $deviceInfo['deviceOs'],
+                "entrySource" => $entrySource,
+                "manufacturer" => $deviceInfo['deviceManufacturer'],
+                "network" => "",
+                "phoneNumber" => "",
+                "pinCode" =>  $req->pinCode,
+                "telephone" => $customerNumber,
+                "userName" => $req->recipientName
+            ];
+
+            $url = "http://10.1.1.45:5908/ibank/api/v1.0/africel/creditMomo";
         } else {
 
             $data = [
@@ -150,12 +195,37 @@ class PaymentsController extends Controller
 
         // $data["pinCode"] = $req->pinCode;
         // return $data;
+        // if($req->payeeName == "AFRICEL"){
+        //     $response = Http::get("http://10.1.1.45:5908/ibank/api/v1.0/africel/africelTopup", );
+        //     $result = new ApiBaseResponse();
+        //     return $result->api_response($response);
+        // }
         try {
-            $response = Http::post(env('API_BASE_URL') . $url, $data);
+            // http://10.1.1.45:5908/ibank/api/v1.0/edsa/buyCredit
+            // $response = Http::post(env('API_BASE_URL') . $url, $data);
+            $response = Http::post($url, $data);
             $result = new ApiBaseResponse();
             return $result->api_response($response);
         } catch (\Exception $e) {
             return $base_response->api_response('500', $e->getMessage(),  NULL); // return API BASERESPONSE
         }
+    }
+
+    public function get_link_status()
+    {
+        $base_response = new BaseResponse();
+
+        $authToken = session()->get('userToken');
+        try{
+            $response = Http::get("http://10.1.1.45:5908/ibank/api/v1.0/africel/getLinkedAccount/${authToken}");
+        // return $response;
+        $result = new ApiBaseResponse();
+        return $result->api_response($response);
+
+        }catch (\Exception $e) {
+            return $base_response->api_response('500', $e->getMessage(),  NULL); // return API BASERESPONSE
+        }
+
+
     }
 }

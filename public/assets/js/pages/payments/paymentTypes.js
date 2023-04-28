@@ -36,6 +36,22 @@ function getPaymentBeneficiaries() {
     });
 }
 
+function getAccountLinkStatus(){
+    $.ajax({
+        type: "GET",
+        url: "get-account-link",
+        datatype: "application/json",
+        success: function(response){
+            console.log("getAccountLinkStatus=>", response)
+            if(response.responseCode == "000" || response.responseCode == "00"){
+
+            }else{
+                toaster(`${response.message} for mobile money transfer`, "warning");
+            }
+        }
+    })
+}
+
 function paymentType() {
     $.ajax({
         type: "GET",
@@ -84,6 +100,7 @@ function paymentType() {
 }
 
 function makePayment(data) {
+    console.log("my data=>", data)
     siteLoading("show");
     $.ajax({
         type: "POST",
@@ -101,9 +118,9 @@ function makePayment(data) {
             console.log("make payemet =?", response)
             if (response.responseCode == "000" || response.responseCode == "00") {
                 getAccounts();
-                if(pageData.paymentInfo.payeeName == "DAYCAR"){
-                    window.location.href = `https://sandbox.dycargroup.com/api/receipt?id=${response.data}`;
-                    return;
+                if(pageData.paymentInfo.payeeName == "DYCAR"){
+                    window.location.href = `https://sandbox.dycargroup.com/api/receipt?id=${response.data.id}`;
+                    // return;
                 }
                 Swal.fire({
                     width: 400,
@@ -231,8 +248,13 @@ function paymentVerification() {
     const currency = "SLE";
     const totalAmount = parseFloat(amount) + parseFloat(transFee);
     $("#details_from_account").text(account);
+    if(!pageData.paymentInfo.paymentDescription == "AFRICEL"){
+        $(".details_to_account").hide();
+    }
     $("#details_to_account").text(recipientName);
     $("#details_icon_text").text(recipientName[0]);
+
+
     $("#details_amount").text(currency + " " + formattedAmount);
     $("#details_recipient_number").text(beneficiaryAccount);
     $("#details_recipient_name").text(recipientName);
@@ -264,6 +286,10 @@ function initPaymentsCarousel() {
             $(e.currentTarget).addClass("current-type active");
             pageData.currentType = type;
             //populate beneficiaries
+            console.log("initPaymentsCarousel=>",type)
+            if(type == "MOM"){
+                getAccountLinkStatus()
+            }
             $("#to_account");
             populateBeneficiariesSelect(type);
             populateSubtypesSelect(type);
@@ -395,6 +421,36 @@ $(() => {
             return;
         }
     });
+
+    $()
+
+    // $("#subtype_select").change(function(){
+
+    //     console.log("get span 1=>",$(this).val())
+
+    //    let thisPayment = document.querySelectorAll(".payments");
+    //    thisPayment.forEach((item, i) => {
+    //     item.addEventListener("click", (e) => {
+
+    //         // $(".payments").removeClass("current-type active");
+    //         const thisType = $(e.currentTarget).attr("data-span");
+    //         $(e.currentTarget).addClass("current-type active");
+    //         // pageData.currentType = type;
+    //         //populate beneficiaries
+    //         console.log("initPaymentsCarousel=>",thisType)
+
+    //     });
+    //     // if (i === 0) {
+    //     //     $(item).trigger("click");
+    //     // }
+    // });
+
+
+    //     // var active = $(".knav").hasClass("active")
+    //     // if($(".knav").hasClass("active")){
+    //     //     console.log("get span 2=>",$(".knav").attr("id"))
+    //     // }
+    // })
 
     // adding invoice file
     pageData.paymentInfo = {

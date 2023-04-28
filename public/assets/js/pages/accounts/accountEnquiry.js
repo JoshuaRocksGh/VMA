@@ -424,6 +424,7 @@ $(function () {
                 },
                 { data: "transactionDetails" },
 
+
                 {
                     data: "amount",
                     render: (data, type, row) =>
