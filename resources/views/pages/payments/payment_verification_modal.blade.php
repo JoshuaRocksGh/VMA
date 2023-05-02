@@ -50,7 +50,7 @@
                         <span> From</span><span class="font-weight-bold" id="details_from_account"> </span>
                     </div>
                     <div class="d-item">
-                        <span> Recipient Name</span><span class="font-weight-bold" id="details_to_account"> </span>
+                        <span class="details_to_account"> Recipient Name</span><span class="font-weight-bold details_to_account" id="details_to_account"> </span>
 
                     </div>
                     <div class="d-item">

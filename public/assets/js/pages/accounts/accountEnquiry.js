@@ -428,6 +428,7 @@ $(function () {
                     render:(data , type, row) => row.documentReference
             },
 
+
                 {
                     data: "amount",
                     render: (data, type, row) =>

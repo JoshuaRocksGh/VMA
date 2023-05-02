@@ -360,6 +360,7 @@ Route::post('schedule-payment-api', [SchedulePaymentController::class, 'schedule
 Route::get('get-payment-types-api', [FunctionsController::class, 'payment_types']);
 Route::post('payment-name-enquiry-api', [FunctionsController::class, 'recipientNameEnquiry']);
 Route::post('make-payment-api', [PaymentsController::class, 'makePayment']);
+Route::get('get-account-link', [PaymentsController::class, 'get_link_status']);
 
 
 //route for cheque book request api
