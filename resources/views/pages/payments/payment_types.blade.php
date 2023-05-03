@@ -16,33 +16,32 @@
 
             {{-- SELECT PAYMENT TYPE --}}
 
-                <div class=" col-lg-4" data-title="Payment Tabs" data-intro="Click to select payment option">
-                    <label class="mb-2 d-block f-18 text-center font-weight-bold text-dark">Select Payment
-                        Type</label>
-                    <div class="payments-carousel mx-auto" style="max-width: 20rem">
-                    </div>
-                    <hr class="col-md-8">
-
+            <div class=" col-lg-4" data-title="Payment Tabs" data-intro="Click to select payment option">
+                <label class="mb-2 d-block f-18 text-center font-weight-bold text-dark">Select Payment
+                    Type</label>
+                <div class="payments-carousel mx-auto" style="max-width: 20rem">
                 </div>
-            <div class=" col-lg-8" data-title="Payment Form" data-intro="Complete form to perform transaction">
-                @if (config('app.corporate'))
-                <div class="form-group align-items-center row bg-light p-2" style="border-radius: 5px">
+                <hr class="col-md-8">
 
-                    <label class="col-md-6 text-dark">Payment Type </label>
-                    <div class="col-md-6">
-                        <div class="radio radio-info form-check-inline">
-                            <input type="radio" id="inlineRadio1" value="normal" name="trans_type" checked>&nbsp;&nbsp;
-                            <label class="pt-1" for="inlineRadio1 mt-1">Normal</label>
+            </div>
+            <div class=" col-lg-8" data-title="Payment Form" data-intro="Complete form to perform transaction">
+
+                {{-- here --}}
+
+                <div class="form-group d-flex bg-light p-2 momo_trasfer_type" style="border-radius: 5px;display: flex;justify-content: center;">
+                    <label class="col-md-4 text-capitalize col-form-label text-dark">Mobile Money Type </label>
+                    <div class="col-md-8">
+                        <div class="radio radio-info form-check-inline" >
+                            <input type="radio" id="AcctToMomo" value="AcctToMomo" name="AcctToMomo" checked>
+                            <label class="pt-2" for="AcctToMomo mt-1">Account to MoMo </label>
                         </div>
                         <div class="radio form-check-inline">
-                            <input type="radio" id="inlineRadio2" value="invoice" name="trans_type">&nbsp;&nbsp;
-                            <label class="pt-1" for="inlineRadio2"> Invoice Transaction </label>
+                            <input type="radio" id="MomoToAcct" value="MomoToAcct" name="AcctToMomo">
+                            <label class="pt-2" for="MomoToAcct">MoMo to Account </label>
                         </div>
-
                     </div>
                 </div>
-            @endif
-
+                {{-- hello --}}
                 {{-- Select Account --}}
                 <div class="mx-auto" style="max-width: 50rem">
                     <label class="d-block text-center f-18 font-weight-bold mb-1 text-dark"> Select Account To
@@ -107,6 +106,25 @@
                                 {{-- oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> --}}
                             </div>
                         </div>
+                        @if (config('app.corporate'))
+                            <div class="form-group d-flex" >
+
+                                <label class="col-md-4 text-capitalize col-form-label text-dark">Payment Type </label>
+                                <div class="col-md-8">
+                                    <div class="radio radio-info form-check-inline">
+                                        <input type="radio" id="inlineRadio1" value="normal" name="trans_type"
+                                            checked>&nbsp;&nbsp;
+                                        <label class="pt-1" for="inlineRadio1 mt-1">Normal</label>
+                                    </div>
+                                    <div class="radio form-check-inline">
+                                        <input type="radio" id="inlineRadio2" value="invoice"
+                                            name="trans_type">&nbsp;&nbsp;
+                                        <label class="pt-1" for="inlineRadio2"> Invoice Transaction </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        @endif
                         @if (config('app.corporate'))
                             {{--  <div class="form-group d-flex">
                                 <label class="col-4 text-capitalize col-form-label text-dark">Payment Invoice</label>

@@ -288,8 +288,11 @@ function initPaymentsCarousel() {
             //populate beneficiaries
             console.log("initPaymentsCarousel=>",type)
             if(type == "MOM"){
+                // $(".momo_trasfer_type").show()
                 getAccountLinkStatus()
             }
+            $(".momo_trasfer_type").hide()
+
             $("#to_account");
             populateBeneficiariesSelect(type);
             populateSubtypesSelect(type);
@@ -367,7 +370,13 @@ function getTransType() {
     // transferInfo.voucher = null;
     // transferInfo.fileUploaded = null;
 
-    console.log(transType);
+    // console.log(transType);
+}
+
+function getMomoTransType(){
+    var getMomoTransferType = $("input[name='AcctToMomo']:checked").val();
+    console.log("getMomoTransferType=>",getMomoTransferType)
+
 }
 
 $(() => {
@@ -375,6 +384,16 @@ $(() => {
     siteLoading("show");
     paymentType();
     getTransType();
+    // getMomoTransType()
+
+    $("input[name='AcctToMomo']").click(function(){
+        var getMomoTransferType = $("input[name='AcctToMomo']:checked").val();
+        console.log("getMomoTransferType=>",getMomoTransferType)
+
+
+    })
+
+
 
     function updateTransactionType(type) {
         if (type === "onetime") {
@@ -481,6 +500,10 @@ $(() => {
 
     $("#confirm_transfer_button").on("click", (e) => {
         e.preventDefault();
+
+        var getMomoTransferType = $("input[name='AcctToMomo']:checked").val();
+        pageData.paymentInfo.MomoTransferType = getMomoTransferType
+
         if (ISCORPORATE) {
             var file = document.getElementById("invoice_file").files[0];
             // pageData.paymentInfo = {
@@ -516,6 +539,7 @@ $(() => {
             toaster("Enter Valid OTP", "warning");
             return;
         }
+
         if (pageData.paymentInfo.paymentType == "MOM") {
             validateOTP(otp, 313).then((data) => {
                 // console.log("verifyOTP==>", data);
