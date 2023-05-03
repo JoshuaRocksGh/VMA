@@ -162,7 +162,7 @@ class PaymentsController extends Controller
                 "deviceName" =>  $deviceInfo['deviceOs'],
                 "entrySource" => $entrySource,
                 "manufacturer" => $deviceInfo['deviceManufacturer'],
-                "network" => "",
+                "network" => "AFRICELL",
                 "phoneNumber" => "",
                 "pinCode" =>  $req->pinCode,
                 "telephone" => $customerNumber,
