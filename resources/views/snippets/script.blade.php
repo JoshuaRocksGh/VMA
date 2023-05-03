@@ -106,17 +106,23 @@
     });
 
         // hide inspect element
-document.onkeydown=function(e){
-    if(event.keyCode == 123 ){
-        return false
-    }
+// document.onkeydown=function(e){
+//     if(event.keyCode == 123 ){
+//         return false
+//     }
 
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCOdeAt(0)){
-        return false;
-    }
+//     if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+//         return false;
+//     }
 
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCOdeAt)
-}
+//     if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+//         return false;
+//     }
+
+//     if(e.ctrlKey && e.shiftKey && e.keyCode == 'U'.charCodeAt(0)){
+//         return false;
+//     }
+// }
     const getDeviceOS = () => {
         if (navigator.appVersion.indexOf("Win") != -1) {
             return "Windows";
