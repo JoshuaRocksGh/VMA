@@ -26,7 +26,22 @@
             </div>
             <div class=" col-lg-8" data-title="Payment Form" data-intro="Complete form to perform transaction">
 
+                {{-- here --}}
 
+                <div class="form-group d-flex bg-light p-2 momo_trasfer_type" style="border-radius: 5px;display: flex;justify-content: center;">
+                    <label class="col-md-4 text-capitalize col-form-label text-dark">Mobile Money Type </label>
+                    <div class="col-md-8">
+                        <div class="radio radio-info form-check-inline" >
+                            <input type="radio" id="AcctToMomo" value="AcctToMomo" name="AcctToMomo" checked>
+                            <label class="pt-2" for="AcctToMomo mt-1">Account to MoMo </label>
+                        </div>
+                        <div class="radio form-check-inline">
+                            <input type="radio" id="MomoToAcct" value="MomoToAcct" name="AcctToMomo">
+                            <label class="pt-2" for="MomoToAcct">MoMo to Account </label>
+                        </div>
+                    </div>
+                </div>
+                {{-- hello --}}
                 {{-- Select Account --}}
                 <div class="mx-auto" style="max-width: 50rem">
                     <label class="d-block text-center f-18 font-weight-bold mb-1 text-dark"> Select Account To
