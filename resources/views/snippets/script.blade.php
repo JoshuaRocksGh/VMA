@@ -115,7 +115,13 @@ document.onkeydown=function(e){
         return false;
     }
 
-    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCOdeAt)
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCOdeAt(0)){
+        return false;
+    }
+
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'U'.charCOdeAt(0)){
+        return false;
+    }
 }
     const getDeviceOS = () => {
         if (navigator.appVersion.indexOf("Win") != -1) {
