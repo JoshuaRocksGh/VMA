@@ -1,237 +1,205 @@
 <!-- ========== Left Sidebar Start ========== -->
 
-<div id="sidebar-menu" class=" overflow-hidden p-0 text-xs  bg-danger site-card text-white"
-    style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
+<div id="sidebar-menu" class=" overflow-hidden p-0 text-xs site-card text-white"
+    style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;background-color:#bbdefb">
 
     <ul id="side-menu" class="accordion ">
-        <li class="menu-item">
-            <a class="menu-item-header" href="{{ url('home') }}">
-                <i class="fas fa-home"></i>
-                <span> Home</span>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="#sidebarMyAccount" class="menu-item-header" data-toggle="collapse" data-target="#sidebarMyAccount">
-                <i class="fas fa-book-reader"></i><span> My Accounts</span>
-                <span class="menu-arrow fas fa-angle-right"></span>
-            </a>
-            <div class="collapse menu-item-body" id="sidebarMyAccount">
-                <ul class="nav-second-level">
-
-                    <li>
-                        <a href="{{ url('account-enquiry') }}">Transactions Enquiry</a>
-                    </li>
-                </ul>
-            </div>
-
-        </li>
-        <li class="menu-item">
-            <a href="#sidebarTransfer" class="menu-item-header" data-toggle="collapse" data-target="#sidebarTransfer">
-                <i class="fas fa-sync"></i> <span> Transfers </span>
-                <span class="menu-arrow fas fa-angle-right"></span>
-            </a>
-            <div class="collapse menu-item-body" id="sidebarTransfer">
-                <ul class="nav-second-level">
-                    <li>
-                        <a href="{{ url('own-account') }}">Own Account</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('same-bank') }}">Same Bank</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('local-bank') }}">Other Bank</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('international-bank') }}">International Bank</a>
-                    </li>
-                    {{-- <li>
-                        <a href="{{ url('bollore-link') }}">Bollore Link</a>
-                    </li> --}}
-                    <li>
-                        <a href="{{ url('standing-order') }}">Create Standing Order</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('standing-order-status') }}">Standing Order Status</a>
-                    </li>
-                    {{-- <li>
-                        <a href="#sidebarStandingOrder" data-toggle="collapse">
-                            <span>Standing Order</span>
-                            <span class="menu-arrow fas fa-angle-right"></span>
-                        </a>
-                        <div class="collapse" id="sidebarStandingOrder">
-                            <ul class="nav-second-level">
-                            </ul>
-                        </div>
-                    </li> --}}
-                    @if (config('app.corporate'))
-                        <li>
-                            <a href="{{ url('bulk-transfer') }}">Bulk Transfer </a>
-                        </li>
-
-                        {{-- <li>
-                            <a href="{{ url('swift_mt101') }}">Sierra Rutile </a>
-                        </li> --}}
-                    @endif
-
-                    <li>
-                        <a href="{{ url('transfer-status') }}">Transfer Status</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('beneficiary-list') }}">Beneficiaries</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="menu-item">
-            <a href="#sidebarBeneficiary" class="menu-item-header" data-toggle="collapse">
-                <i class="fas fa-handshake"></i>
-                <span>Payments </span>
-                <span class="menu-arrow fas fa-angle-right"></span>
-            </a>
-            <div class="collapse menu-item-body" id="sidebarBeneficiary">
-                <ul class="nav-second-level">
-                    <li>
-                        <a href="{{ url('payments') }}">Make Payment</a>
-                    </li>
-                    {{-- @if (!config('app.corporate')) --}}
-                        <li>
-                            <a href="{{ url('airport-tax') }}">Airport Tax</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('national-id') }}">National ID</a>
-                        </li>
-                    {{-- @endif --}}
-
-                    <li>
-                        <a href="{{ url('salone-link') }}">Salone-Link</a>
-                    </li>
-                    {{--  <li>
-                        <a href="{{ url('blink-pay') }}">Blink Pay</a>
-                    </li>  --}}
-
-                    {{--  <li>
-                        <a href="{{ url('cardless-payment') }}">Cardless</a>
-                    </li>  --}}
-                    <li>
-                        <a href="{{ url('qr-payment') }}">
-                            <span> QR Payment</span>
-                        </a>
-                    </li>
-
-                    {{--  @if (config('app.corporate'))
-                        <li>
-                            <a href="{{ url('bulk-salone-Link') }}">Bulk Salone-link</a>
-                        </li>
-                    @endif  --}}
-
-                    <li>
-                        <a href="{{ url('payment-beneficiary-list') }}">Beneficiaries</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="menu-item">
-
-            <a class="menu-item-header" href="{{ url('loan-request') }}">
-                <i class="fas fa-balance-scale-right"></i>
-                <span> My
-                    Loans</span></a>
-
-            </a>
-
-        </li>
-
-        <li class="menu-item">
-            <a class="menu-item-header" href="#sidebarAccountServices" data-toggle="collapse">
-                <i class="fas fa-business-time"></i>
-                <span> Account Services </span>
-                <span class="menu-arrow fas fa-angle-right"></span>
-            </a>
-            <div class="collapse menu-item-body" id="sidebarAccountServices">
-                <ul class="nav-second-level">
-                    {{--  <li>
-                        <a href="{{ url('fixed-deposit') }}">Fixed Deposit</a>
-                    </li>  --}}
-                    @if (!config('app.corporate'))
-                        <li>
-                            <a href="{{ url('salary-advance') }}">Salary Advance</a>
-                        </li>
-                    @endif
-
-
-                    <li>
-                        <a href="{{ url('cheque-services') }}">Cheque Services</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('requests') }}">Requests</a>
-                    </li>
-                    {{--  <li>
-                        <a href="{{ url('kyc-update') }}">Update KYC</a>
-                    </li>  --}}
-
-                    {{--  <li>
-                        <a href="{{ url('open-additional-account') }}">Open additional account</a>
-                    </li>  --}}
-                    {{--  <li>
-                        <a href="#">Close Account</a>
-                    </li>  --}}
-                    {{--  <li>
-                        <a href="#">Update Account Signature</a>
-                    </li>  --}}
-                    <li>
-                        <a href="{{ url('complaint') }}">
-                            <span>Make Complaint</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-        </li>
-         @if (!config('app.corporate'))
-        <li class="menu-item">
-            <a class="menu-item-header" href="{{ url('card-services') }}">
-                <i class="fas fa-credit-card"></i>
-                <span> Card Services </span>
-            </a>
-        </li>
-         @endif
-
-        @if (config('app.corporate'))
+        @if (session()->get('UserMandate') == 'NationalLevel')
             <li class="menu-item">
-                <a href="#approvals" class="menu-item-header" data-toggle="collapse">
-                    <i class="fas fa-thumbs-up"></i> <span> Approvals </span>
+                <a class="menu-item-header" href="{{ url('home') }}">
+                    <i class="mdi mdi-home-outline"></i>
+                    <span> Home</span>
+                </a>
+            </li>
+        @elseif (session()->get('UserMandate') == 'RegionalLevel')
+            <li class="menu-item">
+                <a class="menu-item-header" href={{ url('region/' . $UserRegion) }}>
+                    <i class="fas fa-home"></i>
+                    <span> Home</span>
+                </a>
+            </li>
+        @elseif(session()->get('UserMandate') == 'ConstituencyLevel')
+            <li class="menu-item">
+                <a class="menu-item-header" href={{ url('constituency/' . $UserConstituency) }}>
+                    <i class="mdi mdi-home-outline"></i>
+                    <span> Home</span>
+                </a>
+            </li>
+        @endif
+
+        @if (session()->get('UserMandate') == 'NationalLevel')
+            <li class="menu-item">
+                <a href="#sidebarRegionalUsers" class="menu-item-header" data-toggle="collapse"
+                    data-target="#sidebarRegionalUsers">
+                    <i class="fas fa-sync"></i> <span> Regional Users</span>
                     <span class="menu-arrow fas fa-angle-right"></span>
                 </a>
-                <div class="collapse menu-item-body" id="approvals">
+                <div class="collapse menu-item-body" id="sidebarRegionalUsers">
                     <ul class="nav-second-level">
                         <li>
-                            <a href="{{ url('approvals-pending') }}">Pending</a>
+                            <a href="{{ url('all-regional-users') }}">All Regional Users</a>
                         </li>
                         <li>
-                            <a href="{{ url('approvals-approved') }}">Approved</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('approvals-rejected') }}">Rejected</a>
+                            <a href="{{ url('create-user') }}">Create Regional User</a>
                         </li>
 
                     </ul>
                 </div>
             </li>
+
+            <li class="menu-item">
+                <a href="#sidebarIssues" class="menu-item-header" data-toggle="collapse" data-target="#sidebarIssues">
+                    <i class="fas fa-sync"></i> <span>Reported Issue</span>
+                    <span class="menu-arrow fas fa-angle-right"></span>
+                </a>
+                <div class="collapse menu-item-body" id="sidebarIssues">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ url('reported-issues') }}">All Reported Issue</a>
+                        </li>
+                        {{--  <li>
+                            <a href="{{ url('create-user') }}">Create Regional User</a>
+                        </li>  --}}
+
+                    </ul>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a href="#sidebarNotfication" class="menu-item-header" data-toggle="collapse"
+                    data-target="#sidebarNotfication">
+                    <i class="fas fa-sync"></i> <span>Reported Issue</span>
+                    <span class="menu-arrow fas fa-angle-right"></span>
+                </a>
+                <div class="collapse menu-item-body" id="sidebarNotfication">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="send-notifications">Send Notifications</a>
+                        </li>
+                        {{--  <li>
+                            <a href="{{ url('create-user') }}">Create Regional User</a>
+                        </li>  --}}
+
+                    </ul>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a href="#sidebarSettings" class="menu-item-header" data-toggle="collapse"
+                    data-target="#sidebarSettings">
+                    <i class="fas fa-sync"></i> <span>Settings</span>
+                    <span class="menu-arrow fas fa-angle-right"></span>
+                </a>
+                <div class="collapse menu-item-body" id="sidebarSettings">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="view-profile">View Profile</a>
+                        </li>
+                        {{--  <li>
+                            <a href="{{ url('create-user') }}">Create Regional User</a>
+                        </li>  --}}
+
+                    </ul>
+                </div>
+            </li>
+        @elseif (session()->get('UserMandate') == 'RegionalLevel')
+            <li class="menu-item">
+                <a href="#sidebarConstitiencyUser" class="menu-item-header" data-toggle="collapse"
+                    data-target="#sidebarConstitiencyUser">
+                    <i class="fas fa-users"></i> <span> Constituency Users</span>
+                    <span class="menu-arrow fas fa-angle-right"></span>
+                </a>
+                <div class="collapse menu-item-body" id="sidebarConstitiencyUser">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ url('all-constituency-users') }}">All Constituency Users</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('create-user') }}">Create Constituency User</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
+            <li class="menu-item">
+                <a href="#sidebarRI" class="menu-item-header" data-toggle="collapse" data-target="#sidebarRI">
+                    <i class="fas fa-folder-plus"></i> <span> Reported Issue</span>
+                    <span class="menu-arrow fas fa-angle-right"></span>
+                </a>
+                <div class="collapse menu-item-body" id="sidebarRI">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ url('reported-issues') }}">All Reported Issue</a>
+                        </li>
+                        {{--  <li>
+                            <a href="{{ url('create-user') }}">Create Constituency User</a>
+                        </li>  --}}
+
+                    </ul>
+                </div>
+            </li>
+
+            <li class="menu-item">
+                <a href="#sidebarNotification" class="menu-item-header" data-toggle="collapse"
+                    data-target="#sidebarNotification">
+                    <i class="fas fa-bell"></i> <span>Notifications & Alerts</span>
+                    <span class="menu-arrow fas fa-angle-right"></span>
+                </a>
+                <div class="collapse menu-item-body" id="sidebarNotification">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ url('send-notifications') }}">Send Notifications</a>
+                        </li>
+                        {{--  <li>
+                            <a href="{{ url('create-user') }}">Create Constituency User</a>
+                        </li>  --}}
+
+                    </ul>
+                </div>
+            </li>
+
+            <li class="menu-item">
+                <a href="#sidebarProfile" class="menu-item-header" data-toggle="collapse" data-target="#sidebarProfile">
+                    <i class="fas fa-cog"></i> <span> Settings</span>
+                    <span class="menu-arrow fas fa-angle-right"></span>
+                </a>
+                <div class="collapse menu-item-body" id="sidebarProfile">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ url('view-profile') }}">View Profile</a>
+                        </li>
+                        {{--  <li>
+                            <a href="{{ url('create-user') }}">Create Constituency User</a>
+                        </li>  --}}
+
+                    </ul>
+                </div>
+            </li>
         @endif
-        <li class="menu-item">
-            <a class="menu-item-header" href="{{ url('settings') }}">
-                <i class="fas fa-user-cog"></i> <span> Settings </span>
-            </a>
 
-
-        </li>
         {{--  <li class="menu-item">
             <a class="menu-item-header" href="{{ url('branch-locator') }}">
                 <i class="fas fa-search-location"></i> <span> Branch Locator </span>
             </a>
         </li>  --}}
+
+        @if (session()->get('UserMandate') == 'ConstituencyLevel')
+            <li class="menu-item">
+                <a href="#sidebarConSettings" class="menu-item-header" data-toggle="collapse"
+                    data-target="#sidebarConSettings">
+                    <i class="fas fa-sync"></i> <span>Settings</span>
+                    <span class="menu-arrow fas fa-angle-right"></span>
+                </a>
+                <div class="collapse menu-item-body" id="sidebarConSettings">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ url('view-profile') }}">View Profile</a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </li>
+        @endif
 
         <li class="menu-item">
             <a class="menu-item-header" href="#" id="sidebar_logout">

@@ -2,65 +2,36 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\classes\API\BaseResponse;
-use App\Http\classes\WEB\ApiBaseResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index()
+    //
+    public function welcome()
     {
-        $customerAccounts = session()->get('customerAccounts');
-        return view('pages.dashboard.home', ["accounts" => $customerAccounts]);
+
+        return view('pages.dashboard.welcome');
     }
 
-
-    public function get_accounts()
+    public function home()
     {
-        // return 'kjsdf';
-        $authToken = session()->get('userToken');
-        $userID = session()->get('userId');
-        $base_response = new BaseResponse();
-        $data = [
-            "authToken" => $authToken,
-            "userId"    => $userID
-        ];
-        return $data;
-        $response = Http::post(env('API_BASE_URL') . "account/getAccounts", $data);
-        $result = new ApiBaseResponse();
-        return $result->api_response($response);
+        $AgentDetails = session()->get('AgentDetail');
+        return view('pages.dashboard.home', ['AgentDetails' => $AgentDetails]);
     }
 
-    // public function get_expenses()
-    // {
-    //     $authToken = session()->get('userToken');
-    //     $userID = session()->get('userId');
+    public function region()
+    {
+        return view('pages.mandate.regions');
+    }
 
-    //     $base_response = new BaseResponse();
+    public function logout()
+    {
+        Auth::logout();
 
-    //     $data = [
-    //         "authToken" => $authToken,
-    //         "userId"    => $userID
-    //     ];
-
-    //     return [
-    //         'responseCode' => '000',
-    //         'message' => 'spending analysis',
-    //         'data' => [
-    //             'travel' => '200',
-    //             'vendor payment' => '100',
-    //             'petty cash' => '300',
-    //             'salary' => '900',
-    //             'groceries' => '50',
-    //             'medical' => '50',
-    //             'insurance' => '950',
-    //             'tax' => '95',
-    //             'others' => '40'
-    //         ]
-    //     ];
-    // }
+        // session()->forget('user');
+        session()->flush();
+        return view('pages.logout');
+    }
 }

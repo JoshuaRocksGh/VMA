@@ -140,7 +140,7 @@
     }
 }
 #side-menu .menu-item-header {
-    color: var(--white);
+    color: var(--black);
     /* width: 100%; */
     display: block;
     font-size: 14px;
@@ -158,14 +158,14 @@
     margin: 10px 0px;
     margin-left: 20px;
     padding-left: 10px;
-    border-left: 1px solid var(--white);
+    border-left: 1px solid var(--black);
     font-size: 12px;
-    color: var(--white);
+    color: var(--black);
 }
 
 #side-menu .menu-item-body a {
     padding: 6px 20px;
-    color: var(--white);
+    color: var(--black);
     display: block;
     border-bottom-left-radius: 16px;
     border-top-left-radius: 16px;
@@ -176,12 +176,12 @@
 
 #side-menu a:hover {
     /* background-color: var(--brand); */
-    background-color: var(--danger);
+    background-color: var(--warning);
 }
 #side-menu a[aria-expanded="true"] {
-    border-left: solid 5px var(--white);
+    border-left: solid 5px var(--warning);
     padding-left: 15px;
-    background-color: var(--danger);
+    background-color: var(--warning);
     /* border-left: 1px solid var(--white); */
 }
 
@@ -198,9 +198,9 @@
 }
 
 #side-menu a.current-page {
-    background-color: var(--white);
-    color: red;
-    border-left: 5px solid var(--danger);
+    background-color: var(--warning);
+    color: black;
+    border-left: 5px solid var(--black);
 }
 /* #side-menu .menu-item-header.current-menu-header {
     border-left: solid 5px var(--brand);
@@ -224,7 +224,7 @@
     content: "";
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
-    color: #dc3545;
+    color: #00ffff;
     position: absolute;
     bottom: 0;
     right: 50%;
@@ -679,6 +679,7 @@
     position: relative;
     /* width: 80px; */
     /* height: 80px; */
+    color: black;
 }
 
 .lds-hourglass:after {
@@ -689,8 +690,8 @@
     height: 0;
     margin: 8px;
     box-sizing: border-box;
-    border: 10px solid var(--danger);
-    border-color: var(--danger) transparent var(--danger) transparent;
+    border: 10px solid var(--black);
+    border-color: var(--black) transparent var(--black) transparent;
     animation: lds-hourglass 1.5s infinite;
 }
 

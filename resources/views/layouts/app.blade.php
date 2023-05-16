@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>SLCB BANKING</title>
+    <title>VMA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Internet Banking Application" name="Internet Banking Portal for Sierra Leone Commerical Bank Ltd." />
-    <meta content="Banking Application" name="Union Systems Global" />
+    <meta content="Internet Banking Application" name="VMA" />
+    <meta content="Banking Application" name="DEVSIAD" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- App favicon -->
@@ -28,13 +28,14 @@
         -->
     <div id="site_loader">
         <div>
-            <img class="pulse mx-auto" style="width: 100px;" src="{{ asset('assets/images/logoSLCB.png') }}" />
-            <div class="mt-2  text-danger d-flex tw-relative"><span class="lds-hourglass tw-absolute"></span> <span
-                    class="text-semibold align-self-center mx-2 font-weight-bold">
-                    Loading</span></div>
+            <img class="pulse mx-auto" style="width: 100px;" src="{{ asset('assets/images/preloader.png') }}" />
+            <div class="mt-2  text-black d-flex tw-relative"><span class="lds-hourglass tw-absolute "></span>
+                <span class="text-semibold align-self-center mx-2 font-weight-bold">
+                    Loading</span>
+            </div>
         </div>
     </div>
-    <div id="wrapper" class="w-100 overflow-hidden" style="min-height:100vh; display: none">
+    <div id="wrapper1" class="w-100 overflow-hidden" style="min-height:100vh; display: none">
         @yield('content')
     </div>
 

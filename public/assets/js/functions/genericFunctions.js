@@ -330,9 +330,9 @@ function blockUi(data) {
     data = Object.assign(defaults, data);
     const { block, message, size, bgColor, opacity } = data;
     $(block).block({
-        message: `<div><img class="pulse " style="width: ${size};" src="assets/images/logoSLCB.png" />
+        message: `<div><img class="pulse " style="width: ${size};" src="assets/images/preloader.png" />
             <div class="mt-2 row tw-relative"><span class="text-semibold align-self-center mx-2 font-weight-bold">
-                ${message}</span><span class="lds-hourglass tw-absolute"></span> </div>`,
+                ${message}</span><span class="lds-hourglass tw-absolute text-dark"></span> </div>`,
         overlayCSS: {
             backgroundColor: bgColor,
             opacity: opacity,
