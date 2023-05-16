@@ -76,13 +76,13 @@
                                                                         class="d-flex justify-content-between align-items-end">
                                                                         <label for="password">Password</label>
                                                                         {{--  @if (!config('app.corporate'))  --}}
-                                                                        <button type="button"
+                                                                        {{--  <button type="button"
                                                                             class="text-danger text-right font-12"
                                                                             id="forgot_password"
                                                                             onmouseover='this.style.textDecoration="underline"'
                                                                             onmouseout='this.style.textDecoration="none"'>Forgot
                                                                             your
-                                                                            password?</button>
+                                                                            password?</button>  --}}
                                                                     </div>
                                                                     <div class="password-group">
                                                                         <input type="password" id="password" maxlength="50"

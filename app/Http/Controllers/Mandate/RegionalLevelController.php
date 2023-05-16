@@ -56,13 +56,19 @@ class RegionalLevelController extends Controller
             // }
         } elseif ($Mandate == "ConstituencyLevel") {
             // echo 'has spaces, but not at beginning or end';
-            // return $UserConstituency;
+            // return session()->get('Constituency');
             if ($UserConstituency_ == trim($UserConstituency_) && strpos($UserConstituency_, ' ') !== false) {
+
                 $UserConstituency = str_replace(' ', '_', $UserConstituency_);
+                // dd($UserConstituency);
 
                 // view('snippets.side-bar', ['UserRegion' => $UserConstituency]);
                 return view('pages.mandate.constituency', ['UserConstituency' => $UserConstituency, 'UserRegion' => $UserRegion]);
             } else {
+                $UserConstituency_ = session()->get('Constituency');
+
+                // dd($UserConstituency);
+
                 return view('pages.mandate.constituency', ['UserConstituency' => $UserConstituency_, 'UserRegion' => $UserRegion]);
             }
         } else {

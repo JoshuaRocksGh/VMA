@@ -38,7 +38,7 @@ function polling_station_assignment(constituency) {
             Constituency_,
         datatype: "application/json",
         success: function (response) {
-            // console.log(response);
+            // console.log("polling_station_assignment=>", response);
 
             if (response.status === "ok") {
                 $(".spinner-border").hide();

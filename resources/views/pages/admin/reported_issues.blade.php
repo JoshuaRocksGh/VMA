@@ -13,8 +13,7 @@
                 <div class="p-4">
                     <div class="table-responsive">
                         @if (session()->get('UserMandate') == 'NationalLevel')
-                            <table
-                                class="table table-borderless table-hover table-nowrap table-centered w-100  all_reported_issues_list">
+                            <table class="table table-striped dt-responsive nowrap w-100  all_reported_issues_list">
 
                                 <thead class="bg-dark">
                                     <tr class="text-white">
@@ -36,8 +35,7 @@
                                 </tbody>
                             </table>
                         @elseif(session()->get('UserMandate') == 'RegionalLevel')
-                            <table
-                                class="table table-borderless table-hover table-nowrap table-centered w-100  all_reported_issues_list">
+                            <table class="table table-striped dt-responsive nowrap w-100  all_reported_issues_list">
 
                                 <thead class="bg-dark">
                                     <tr class="text-white">

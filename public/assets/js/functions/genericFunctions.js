@@ -16,7 +16,7 @@ function approve_request() {
 
         if (result.isConfirmed) {
             setTimeout(() => {
-                window.location.replace("logout");
+                window.location.replace("/logout");
             }, 1000);
             // if (!result.value) {
             //     toaster("Enter Otp", "warning");

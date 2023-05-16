@@ -2,63 +2,105 @@
 
 
 @section('content')
-    <div class="container-fluid">
+    @php
+        $pageTitle = 'Dashboard';
+        $basePath = 'Home';
+        $currentPath = 'Dashboard';
+    @endphp
+    @include('snippets.pageHeader')
 
-        <h3 class="text-right m-3"><span class=" text-danger ">Home</span> </h3>
+    <div>
+        <div class="dashboard site-card overflow-hidden">
+            <div class="tab-content dashboard-body border-info border ">
+                <div class="p-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <b style="font-size: 24px;display: none" class="total national_assigment">0</b>
+                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+                                        </div>
+                                        <div class="col-md-4"><img src="{{ asset('assets/images/select.png') }}"
+                                                class=" img-fluid float-right" style="width:40px;height:40px" /></div>
+                                    </div>
+                                    <h3 class="text-center mt-0">TOTAL POLLING STATIONS</h3>
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <b style="font-size: 24px; display: none"
+                                                class="total_assigned national_assigment">0</b>
+                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+                                        </div>
+                                        <div class="col-md-4"><img src="{{ asset('assets/images/people.png') }}"
+                                                class=" img-fluid float-right" style="width:40px;height:40px" /></div>
+                                    </div>
+                                    <h3 class="text-center mt-0">ASSIGNED POLLING STATIONS</h3>
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:red" />
 
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card"
-                    style="background-color: rgba(136, 198, 197, 0.3);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <div class="card-body">
-                        <h3 class="text-center mt-0">TOTAL POLLING STATIONS</h3>
-                        <div class="row">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <b style="font-size: 24px ; display: none"
+                                                class="total_unassigned national_assigment">0</b>
+                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
 
-                            <div class="col-md-12 text-center">
-                                <b style="font-size: 48px;display: none" class="total national_assigment">0</b>
-                                <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+                                        </div>
+                                        <div class="col-md-4"><img src="{{ asset('assets/images/user.png') }}"
+                                                class=" img-fluid float-right" style="width:40px;height:40px" /></div>
+                                    </div>
+                                    <h3 class="text-center mt-0">UNASSIGNED POLLING STATIONS</h3>
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:green" />
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card"
-                    style="background-color: rgba(32, 185, 252, 0.3);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <div class="card-body">
-                        <h3 class="text-center mt-0">ASSIGNED POLLING STATIONS</h3>
-                        <div class="row">
+                    <br><br>
+                    <div class="datatable-buttons">
+                        <table class="table table-striped dt-responsive nowrap w-100 all_agent_list">
 
-                            <div class="col-md-12 text-center">
-                                <b style="font-size: 48px; display: none" class="total_assigned national_assigment">0</b>
-                                <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
-                            </div>
-                        </div>
+                            <thead class="bg-dark">
+                                <tr class="text-white">
+                                    <th>REGION</th>
+                                    <th>TOTAL POLLING STATIONS</th>
+                                    <th>ASSIGNED POLLING STATIONS</th>
+                                    <th>UNASSIGNED POLLING STATIONS</th>
+                                    <th>DETAILS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="national_details">
+
+
+
+
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card"
-                    style="background-color: rgba(252, 205, 201, 0.3);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <div class="card-body">
-                        <h3 class="text-center mt-0">UNASSIGNED POLLING STATIONS</h3>
-                        <div class="row">
-
-                            <div class="col-md-12 text-center">
-                                <b style="font-size: 48px ; display: none" class="total_unassigned national_assigment">0</b>
-                                <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
         </div>
+    </div>
+    <div class="container-fluid">
 
-
-        <div class="row">
+        {{--  <div class="row">
             <div class="col-md-12">
                 <div class="card"
                     style="background-color: rgba(255, 255, 255, 0.5);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
@@ -74,46 +116,18 @@
                     <div class="card-body" id="all_regions_table" style="display: none">
                         <h4 class="header-title mb-3">ALL REGIONS</h4>
 
-                        <div class="table-responsive">
-                            <table
-                                class="table table-borderless table-hover table-nowrap table-centered m-0 all_agent_list">
 
-                                <thead
-                                    style="background-color: rgba(32, 185, 252, 0.3);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                                    <tr>
-                                        <th>REGION</th>
-                                        <th>TOTAL POLLING STATIONS</th>
-                                        <th>ASSIGNED POLLING STATIONS</th>
-                                        <th>UNASSIGNED POLLING STATIONS</th>
-                                        <th>DETAILS</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="national_details">
-
-
-
-
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             </div>
 
-        </div>
+        </div>  --}}
 
     </div>
-
 @endsection
 
 @section('scripts')
-
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+    @include('extras.datatables')
 
     <script src="{{ asset('assets/js/home.js') }}"></script>
     <script>

@@ -1,185 +1,159 @@
-@extends("layouts.master")
+@extends('layouts.master')
 
-
-@section('styles')
-
-    <!-- third party css -->
-    <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
-        rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <!-- third party css end -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
-
-    <style>
-
-    </style>
-
-@endsection
 
 
 @section('content')
+    @php
+        $pageTitle = 'Dashboard';
+        $basePath = 'Home';
+        $currentPath = 'Dashboard';
+    @endphp
+    @include('snippets.pageHeader')
 
-    <div class="container-fluid">
-        <h3 class="">{{ session()->get('Region') }} &nbsp; > &nbsp;<span class=" text-danger">
-                {{ $UserConstituency }}</span>
-            @if (session()->get('Region') == 'ConstituencyLevel')
-                echo (session()->get('Region'))
-            @endif
+    <div>
+        <div class="dashboard site-card overflow-hidden">
+            <div class="text-center">
+                <h3 class="">{{ session()->get('Region') }} &nbsp; || &nbsp;<span class=" text-danger">
+                        {{ $UserConstituency }}</span>
+                    @if (session()->get('Region') == 'ConstituencyLevel')
+                        echo (session()->get('Region'))
+                    @endif
 
-        </h3>
+                </h3>
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card"
-                    style="background-color: rgba(32, 185, 252, 0.3);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <div class="card-body">
-                        <h3 class="text-center mt-0">POLLING STATIONS</h3>
-                        <div class="row">
+            </div>
+            <div class="tab-content dashboard-body border-info border ">
+                <div class="p-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <b style="font-size: 24px ; display: none"
+                                                class="total_polling_stations constituency_assigment">0</b>
+                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
 
-                            <div class="col-md-12 text-center">
-                                <b style="font-size: 48px ; display: none"
-                                    class="total_polling_stations constituency_assigment">0</b>
-                                <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+                                        </div>
+                                        <div class="col-md-4"><img src="{{ asset('assets/images/select.png') }}"
+                                                class=" img-fluid float-right" style="width:40px;height:40px" />
+                                        </div>
+
+                                    </div>
+                                    <h3 class="text-center mt-0">TOTAL POLLING STATIONS</h3>
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <b style="font-size: 24px; display: none "
+                                                class="assigned_polling_stations constituency_assigment">0</b>
+                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+
+                                        </div>
+                                        <div class="col-md-4"><img src="{{ asset('assets/images/people.png') }}"
+                                                class=" img-fluid float-right" style="width:40px;height:40px" /></div>
+                                    </div>
+                                    <h3 class="text-center mt-0">ASSIGNED POLLING STATIONS</h3>
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:red" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <b style="font-size: 24px;display: none"
+                                                class="unassigned_polling_stations constituency_assigment">0</b>
+                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+                                        </div>
+                                        <div class="col-md-4"><img src="{{ asset('assets/images/user.png') }}"
+                                                class=" img-fluid float-right" style="width:40px;height:40px" />
+                                        </div>
+
+                                    </div>
+                                    <h3 class="text-center mt-0">UNASSIGNED POLLING STATIONS</h3>
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:green" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card"
-                    style="background-color: rgba(136, 198, 197, 0.3 );backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <div class="card-body">
-                        <h3 class="text-center mt-0">ASSIGNED POLLING STATIONS</h3>
-                        <div class="row">
+                    {{--    --}}
+                    <br><br>
+                    <div class="">
 
-                            <div class="col-md-12 text-center">
-                                <b style="font-size: 48px; display: none "
-                                    class="assigned_polling_stations constituency_assigment">0</b>
-                                <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card"
-                    style="background-color: rgba(252, 205, 201, 0.3);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <div class="card-body">
-                        <h3 class="text-center mt-0">UNASSIGNED POLLING STATIONS</h3>
-                        <div class="row">
-
-                            <div class="col-md-12 text-center">
-                                <b style="font-size: 48px;display: none"
-                                    class="unassigned_polling_stations constituency_assigment">0</b>
-                                <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="row">
-
-        <div class="col-md-12">
-            <div class="card-box"
-                style="background-color: rgba(255, 255, 255, 0.5);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                <h4 class="header-title mb-4">Polling Station Information</h4>
-
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a href="#home" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                            <b class="text-success" style="font-size: 16px">Assigned Polling Agents</b>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#profile" data-toggle="tab" aria-expanded="true" class="nav-link">
-                            <b class="text-danger" style="font-size: 16px">UnAssigned Polling Agents</b>
-                        </a>
-                    </li>
-                    {{-- <li class="nav-item">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a href="#home" data-toggle="tab" aria-expanded="false" class="nav-link active">
+                                    <b class="text-success" style="font-size: 16px">Assigned Polling Agents</b>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#profile" data-toggle="tab" aria-expanded="true" class="nav-link">
+                                    <b class="text-danger" style="font-size: 16px">UnAssigned Polling Agents</b>
+                                </a>
+                            </li>
+                            {{-- <li class="nav-item">
                         <a href="#messages" data-toggle="tab" aria-expanded="false" class="nav-link">
                             Messages
                         </a>
                     </li> --}}
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane show active" id="home">
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="">
-                                    <div class=" card-body">
-
-                                        <h4 class="header-title">Assigned Agents</h4>
-
-
-                                        <table id="datatable-buttons"
-                                            class="table table-striped dt-responsive nowrap w-100 assigned_agent_list">
-                                            <thead class="bg-info">
-                                                <tr class="text-white">
-                                                    <th>No.</th>
-                                                    <th>Name</th>
-                                                    <th>Region</th>
-                                                    <th>Constituency</th>
-                                                    <th>Electoral Area</th>
-                                                    <th>User Id</th>
-                                                    <th>Action</th>
+                        </ul>
+                        {{--    --}}
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="home">
+                                <table id="datatable-buttons"
+                                    class="table table-striped dt-responsive nowrap w-100 assigned_agent_list">
+                                    <thead class="bg-dark">
+                                        <tr class="text-white">
+                                            <th>No.</th>
+                                            <th>Name</th>
+                                            <th>Region</th>
+                                            <th>Constituency</th>
+                                            <th>Electoral Area</th>
+                                            <th>User Id</th>
+                                            <th>Action</th>
 
 
-                                                </tr>
-                                            </thead>
+                                        </tr>
+                                    </thead>
 
-                                        </table>
+                                </table>
 
-                                    </div> <!-- end card body-->
-                                </div> <!-- end card -->
-                            </div><!-- end col-->
-                        </div>
+
+                                {{--  </div>  --}}
 
 
 
-                    </div>
-                    <div class="tab-pane " id="profile">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="">
-                                    <div class=" card-body">
+                            </div>
+                            <div class="tab-pane " id="profile">
+                                <table id="datatable-buttons"
+                                    class="table table-striped dt-responsive nowrap w-100 unassigned_agent_list">
+                                    <thead class="bg-dark">
+                                        <tr class="text-white">
+                                            <th>No.</th>
+                                            <th>Name</th>
+                                            <th>Region</th>
+                                            <th>Constituency</th>
+                                            <th>Electoral Area</th>
+                                            <th>User Id</th>
+                                            <th>Action</th>
 
-                                        <h4 class="header-title"> UnAssigned Agents</h4>
+                                        </tr>
+                                    </thead>
+
+                                </table>
 
 
-                                        <table id="datatable-buttons"
-                                            class="table table-striped dt-responsive nowrap w-100 unassigned_agent_list">
-                                            <thead class="bg-info">
-                                                <tr class="text-white">
-                                                    <th>No.</th>
-                                                    <th>Name</th>
-                                                    <th>Region</th>
-                                                    <th>Constituency</th>
-                                                    <th>Electoral Name</th>
-                                                    <th>User Id</th>
-                                                    <th>Action</th>
 
-                                                </tr>
-                                            </thead>
-
-                                        </table>
-
-                                    </div> <!-- end card body-->
-                                </div> <!-- end card -->
-                            </div><!-- end col-->
-                        </div>
-                        {{-- <div class="tab-pane" id="messages">
+                                {{-- <div class="tab-pane" id="messages">
                         <p>Vakal text here dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
                             Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
                             mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
@@ -189,13 +163,29 @@
                             pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
                             eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
                     </div> --}}
-                    </div>
-                </div> <!-- end card-box-->
-            </div> <!-- end col -->
+                            </div>
+                        </div> <!-- end card-box-->
+                    </div> <!-- end col -->
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <div class="row">
+
+        <div class="col-md-12">
+
 
             <!-- Standard modal content -->
-            <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog"
-                aria-labelledby="standard-modalLabel" aria-hidden="true">
+            <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -322,39 +312,10 @@
         </div>
         <!-- end row -->
     </div>
-
-
 @endsection
 
 @section('scripts')
-
-    <!-- third party js -->
-    <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}">
-    </script>
-    {{-- <script src="{{ asset('assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/datatables.net-select/js/dataTables.select.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/pdfmake/build/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/pdfmake/build/vfs_fonts.js') }}"></script> --}}
-    <!-- third party js ends -->
-
-    <!-- Datatables init -->
-    <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
-
+    @include('extras.datatables')
 
     <script src="{{ asset('assets/js/constituencyLevel.js') }}"></script>
     <script>

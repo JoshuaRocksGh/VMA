@@ -89,12 +89,13 @@ function all_users() {
         },
     });
 }
-setTimeout(function () {
-    // alert("Winner");
-    // console.log(AgentDetail);
-    all_users();
-}, 500);
+// setTimeout(function () {
+//     // alert("Winner");
+//     // console.log(AgentDetail);
+//     all_users();
+// }, 500);
 
 $(document).ready(function () {
-    getAllData();
+    // getAllData();
+    all_users();
 });
