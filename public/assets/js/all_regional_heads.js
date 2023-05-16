@@ -59,7 +59,7 @@ function get_all_regional_list() {
                             `<b>${data[index].PhoneNumber}</b>`,
                             `<b>${data[index].Username}</b>`,
                             `<b>${data[index].Region}</b>`,
-                            `<a href="#"  type="button"  class="btn  btn-blue waves-effect all_regional_list_action"
+                            `<a href="#"  type="button"  class="btn btn-outline-success waves-effect waves-light all_regional_list_action"
                             user-image="${data[index].Picture}" data-user-id="${data[index].Username}" user-name="${name}" user-phoneNumber="${data[index].PhoneNumber}" user-id="${user_id}" user-region="${data[index].Region}" user-mandate="${data[index].UserMandate}"
                             >More Actions</a>`,
                         ])

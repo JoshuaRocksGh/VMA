@@ -30,7 +30,16 @@
                             </thead>
                             <tbody class="national_details">
 
-
+                                {{--  <div class="row" id="user_list_spinner">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4 text-center">
+                                        <br>
+                                        <div class="spinner-border avatar-lg text-primary m-2 text-dark" role="status">
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="col-md-4 "></div>
+                                </div>  --}}
 
 
                             </tbody>
@@ -47,28 +56,6 @@
     <div class="container-fluid">
         <h3 class=""><span class=" text-danger">Regional Users</span> </h3>
         <div class="row">
-            <div class="col-md-12">
-                <div class="card"
-                    style="background-color: rgba(255, 255, 255, 0.5);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-
-                    <div class="row" id="user_list_spinner">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4 text-center">
-                            <br>
-                            <div class="spinner-border avatar-lg text-primary m-2 text-dark" role="status"></div>
-                            <br>
-                        </div>
-                        <div class="col-md-4 "></div>
-                    </div>
-
-                    <div class="card-body" id="all_regional_heads" style="display: none">
-                        <h4 class="header-title mb-3">ALL REGIONAL HEADS</h4>
-
-
-                    </div>
-
-                </div>
-            </div>
 
 
 
@@ -114,7 +101,7 @@
 
                                         <div class="col-md-4">
                                             <a type="button"
-                                                class="btn btn-outline-pink btn-rounded waves-effect waves-light mb-1 float-right user_delete"><b
+                                                class="btn btn-outline-danger btn-rounded waves-effect waves-light mb-1 float-right user_delete"><b
                                                     class="activate_deactivate_user">Delete
                                                     User</b></a>
                                         </div>

@@ -1,6 +1,71 @@
 @extends('layouts.master')
 
 @section('content')
+    @php
+        $pageTitle = 'Rported Issues';
+        $basePath = 'Issues';
+        $currentPath = 'Rported Issues';
+    @endphp
+    @include('snippets.pageHeader')
+    <div>
+        <div class="dashboard site-card overflow-hidden">
+            <div class="tab-content dashboard-body border-info border ">
+                <div class="p-4">
+                    <div class="table-responsive">
+                        @if (session()->get('UserMandate') == 'NationalLevel')
+                            <table
+                                class="table table-borderless table-hover table-nowrap table-centered w-100  all_reported_issues_list">
+
+                                <thead class="bg-dark">
+                                    <tr class="text-white">
+                                        <th>Date & Time</th>
+                                        <th>Name</th>
+                                        <th>user ID</th>
+                                        <th>Region</th>
+                                        <th>Constituency</th>
+                                        <th>Polling Station</th>
+                                        <th>Details</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="reported_issues_details">
+
+
+
+
+                                </tbody>
+                            </table>
+                        @elseif(session()->get('UserMandate') == 'RegionalLevel')
+                            <table
+                                class="table table-borderless table-hover table-nowrap table-centered w-100  all_reported_issues_list">
+
+                                <thead class="bg-dark">
+                                    <tr class="text-white">
+                                        <th>Date & Time</th>
+                                        <th>Name</th>
+                                        {{-- <th>Name</th> --}}
+                                        <th>user ID</th>
+                                        <th>Constituency</th>
+                                        <th>Polling Station</th>
+                                        <th>Details</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="reported_issues_details">
+
+
+
+
+                                </tbody>
+                            </table>
+                        @endif
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
     <div class="container-fluid">
         <h3 class=""><span class=" text-danger">Reported Issue</span> </h3>
         <div class="row">
@@ -20,7 +85,6 @@
                         <h4 class="header-title mb-3">ALL REPORTED ISSUES</h4>
                         <div class="table-responsive">
                             @if (session()->get('UserMandate') == 'NationalLevel')
-
                                 <table
                                     class="table table-borderless table-hover table-nowrap table-centered m-0 all_reported_issues_list">
 
@@ -44,8 +108,7 @@
 
                                     </tbody>
                                 </table>
-
-                            @elseif(session()->get('UserMandate') == "RegionalLevel")
+                            @elseif(session()->get('UserMandate') == 'RegionalLevel')
                                 <table
                                     class="table table-borderless table-hover table-nowrap table-centered m-0 all_reported_issues_list">
 
@@ -108,22 +171,14 @@
     </div><!-- /.modal -->
 
     {{-- data-toggle="modal" data-target="#standard-modal" --}}
-
-
 @endsection
 
 
 @section('scripts')
     <!-- Datatables init -->
     {{-- <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script> --}}
+    @include('extras.datatables')
 
-    <script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script>
         var my_mandate = "{{ session()->get('UserMandate') }}"
