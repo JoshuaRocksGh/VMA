@@ -77,11 +77,11 @@
 
                             <thead class="bg-dark">
                                 <tr class="text-white">
-                                    <th>REGION</th>
-                                    <th>TOTAL POLLING STATIONS</th>
-                                    <th>ASSIGNED POLLING STATIONS</th>
-                                    <th>UNASSIGNED POLLING STATIONS</th>
-                                    <th>DETAILS</th>
+                                    <th>Region</th>
+                                    <th>Total Polling Stations</th>
+                                    <th>Assigned Polling Stations</th>
+                                    <th>UnAssigned Polling Stations</th>
+                                    <th>Details</th>
                                 </tr>
                             </thead>
                             <tbody class="national_details">

@@ -18,6 +18,9 @@ function numberWithCommas(x) {
 // }
 
 function all_users() {
+    var table = $(".all_agent_list").DataTable();
+    // var unassigned = $(".unassigned_constituency_list").DataTable();
+    var nodes = table.rows().nodes();
     $.ajax({
         type: "GET",
         url: "national-api",

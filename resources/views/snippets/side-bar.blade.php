@@ -31,7 +31,7 @@
             <li class="menu-item">
                 <a href="#sidebarRegionalUsers" class="menu-item-header" data-toggle="collapse"
                     data-target="#sidebarRegionalUsers">
-                    <i class="fas fa-sync"></i> <span> Regional Users</span>
+                    <i class="fas fa-users"></i> <span> Regional Users</span>
                     <span class="menu-arrow fas fa-angle-right"></span>
                 </a>
                 <div class="collapse menu-item-body" id="sidebarRegionalUsers">
@@ -49,7 +49,7 @@
 
             <li class="menu-item">
                 <a href="#sidebarIssues" class="menu-item-header" data-toggle="collapse" data-target="#sidebarIssues">
-                    <i class="fas fa-sync"></i> <span>Reported Issue</span>
+                    <i class="fas fa-folder-plus"></i> <span>Reported Issue</span>
                     <span class="menu-arrow fas fa-angle-right"></span>
                 </a>
                 <div class="collapse menu-item-body" id="sidebarIssues">
@@ -67,7 +67,7 @@
             <li class="menu-item">
                 <a href="#sidebarNotfication" class="menu-item-header" data-toggle="collapse"
                     data-target="#sidebarNotfication">
-                    <i class="fas fa-sync"></i> <span>Reported Issue</span>
+                    <i class="fas fa-bell"></i> <span>Reported Issue</span>
                     <span class="menu-arrow fas fa-angle-right"></span>
                 </a>
                 <div class="collapse menu-item-body" id="sidebarNotfication">
@@ -85,7 +85,7 @@
             <li class="menu-item">
                 <a href="#sidebarSettings" class="menu-item-header" data-toggle="collapse"
                     data-target="#sidebarSettings">
-                    <i class="fas fa-sync"></i> <span>Settings</span>
+                    <i class="fas fa-cog"></i> <span>Settings</span>
                     <span class="menu-arrow fas fa-angle-right"></span>
                 </a>
                 <div class="collapse menu-item-body" id="sidebarSettings">
