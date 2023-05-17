@@ -45,40 +45,51 @@ function all_users() {
                 $(".total_unassigned").text(numberWithCommas(total_unassigned));
 
                 $.each(data, function (index) {
-                    // console.log(data[index]);
+                    console.log("for each->", data[index]);
                     // return false;
-                    $(".national_details").append(
-                        `
-                            <tr
-                                        style="background-color: rgba(233, 242, 255, 0.3);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                                         <td><span class="h2">${
-                                             data[index].region
-                                         }</span></td>
 
-                                        <td><span class="h2">${numberWithCommas(
-                                            data[index].total
-                                        )}</span></td>
+                    table.row
+                        .add([
+                            `<b>${data[index].region}</b>`,
+                            `<b>${numberWithCommas(data[index].total)}</b>`,
+                            `<b>${numberWithCommas(data[index].assigned)}</b>`,
+                            `<b>${numberWithCommas(
+                                data[index].unAssigned
+                            )}</b>`,
+                            `
+                            <a class="btn btn-outline-success waves-effect waves-light" href='region/${data[index].region}'>View Details</a>
+                            `,
+                        ])
+                        .draw(false);
 
-                                        <td class="h2">${numberWithCommas(
-                                            data[index].assigned
-                                        )}</td>
+                    // $(".national_details").append(
+                    //     `
+                    //         <tr
+                    //                     style="background-color: rgba(233, 242, 255, 0.3);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+                    //                      <td><span class="h2"></span></td>
 
-                                        <td class="h2">${numberWithCommas(
-                                            data[index].unAssigned
-                                        )}</td>
+                    //                     <td><span class="h2"></span></td>
 
-                                        <td>
-                                            <a href='region/${
-                                                data[index].region
-                                            }' class="btn btn-sm btn-blue">VIEW</a>
+                    //                     <td class="h2">${numberWithCommas(
+                    //                         data[index].assigned
+                    //                     )}</td>
 
-                                        </td>
-                                    </tr>
-                        `
-                    );
+                    //                     <td class="h2">${numberWithCommas(
+                    //                         data[index].unAssigned
+                    //                     )}</td>
 
-                    $(".region_data").show();
-                    $(".spinner-border ").hide();
+                    //                     <td>
+                    //                         <a href='region/${
+                    //                             data[index].region
+                    //                         }' class="btn btn-sm btn-blue">VIEW</a>
+
+                    //                     </td>
+                    //                 </tr>
+                    //     `
+                    // );
+
+                    // $(".region_data").show();
+                    // $(".spinner-border ").hide();
                 });
             } else {
                 $("#all_regions_table").hide();

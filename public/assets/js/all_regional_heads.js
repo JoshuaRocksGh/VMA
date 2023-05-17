@@ -39,14 +39,14 @@ function get_all_regional_list() {
                     ) {
                         var user_image = "assets/images/agent-user.png";
                     } else {
-                        var user_image = data[index].Picture;
+                        var user_image = data[index]?.Picture;
                     }
-                    let user_id = data[index].Username;
-                    var image = data[index].Picture;
-                    var name = data[index].Fname + " " + data[index].SurName;
+                    let user_id = data[index]?.Username;
+                    var image = data[index]?.Picture;
+                    var name = data[index]?.Fname + " " + data[index]?.SurName;
                     var image_name =
-                        `<span style="width: 36px;">
-                            <img src="${user_image}" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                        `<span style="width: 14px;">
+                            <img src="${user_image}" alt="contact-img" title="contact-img" class=" img-fluid rounded-circle avatar-sm" style="width:40px;height:40px" />
                          </span>` +
                         " " +
                         " " +

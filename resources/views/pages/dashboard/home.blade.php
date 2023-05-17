@@ -84,12 +84,7 @@
                                     <th>Details</th>
                                 </tr>
                             </thead>
-                            <tbody class="national_details">
 
-
-
-
-                            </tbody>
                         </table>
                     </div>
 

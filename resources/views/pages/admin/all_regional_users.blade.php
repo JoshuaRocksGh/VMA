@@ -14,8 +14,7 @@
             <div class="p-4">
                 <div>
                     <div class="table-responsive">
-                        <table
-                            class="table table-borderless table-hover table-nowrap table-centered m-0 all_regional_heads_list">
+                        <table class="table table-striped dt-responsive nowrap w-100 all_regional_heads_list">
 
                             <thead class="bg-dark">
                                 <tr class="text-white">
@@ -28,21 +27,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody class="national_details">
 
-                                {{--  <div class="row" id="user_list_spinner">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-4 text-center">
-                                        <br>
-                                        <div class="spinner-border avatar-lg text-primary m-2 text-dark" role="status">
-                                        </div>
-                                        <br>
-                                    </div>
-                                    <div class="col-md-4 "></div>
-                                </div>  --}}
-
-
-                            </tbody>
                         </table>
                     </div>
 
@@ -64,16 +49,17 @@
                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myLargeModalLabel">Regional User Details</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <div class="modal-header bg-dark">
+                            <h4 class="modal-title text-white" id="myLargeModalLabel">Regional User Details</h4>
+                            <button type="button" class="close bg-white" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
                         <span style="display: block; width: 100% ; border-top: 1px solid #ccc" class="mt-0"></span>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4 text-center ">
-                                    <img alt="image" class="img-fluid avatar-xxl rounded-circle user_image_id" />
+                                    <img alt="image" class="img-fluid avatar-lg rounded-circle user_image_id"
+                                        style="width:140px;height:140px" />
                                 </div>
                                 <div class="col-md-4"></div>
                                 <hr>
