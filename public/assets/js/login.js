@@ -535,6 +535,9 @@ function validate_user() {
 }
 
 function login(email, password) {
+    // console.log("email=>", email);
+    // console.log("password=>", password);
+    // return;
     $.ajax({
         type: "POST",
         url: "login-api",
@@ -604,6 +607,11 @@ function login(email, password) {
 
                 // hide_alert();
             }
+        },
+        error: function (xhr, status, error) {
+            // console.log("Ajax request failed...", xhr);
+            console.log("Ajax request failed...", xhr.status);
+            console.log("Ajax request failed...", xhr.responseText);
         },
     });
 }

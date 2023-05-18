@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdministrationController;
 use App\Http\Controllers\Agents\AddAgentsController;
 use App\Http\Controllers\Authentication\LoginController;
+// use App\Http\Controllers\Authentication\NewLoginController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Mandate\ConstituencyLevelController;
 use App\Http\Controllers\Mandate\NationalLevelController;
@@ -27,12 +28,13 @@ use Illuminate\Support\Facades\Route;
 
 //LOGIN ROUTE
 Route::get('/', [LoginController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login-api', [LoginController::class, 'login'])->name('login-api');
-Route::post('/validate-user-details-api', [LoginController::class, 'validate_user_details']);
-Route::post('/user-setup-password-api', [LoginController::class, 'user_setup_password']);
-Route::post('/send-mail', [LoginController::class, 'send_mail']);
-Route::post('/contact', [LoginController::class, 'contact']);
+Route::get('login', [LoginController::class, 'index']);
+Route::post('login-api', [LoginController::class, 'login'])->name('login-api');
+// Route::post('/login-api', [NewLoginController::class, 'login'])->name('login-api');
+Route::post('validate-user-details-api', [LoginController::class, 'validate_user_details']);
+Route::post('user-setup-password-api', [LoginController::class, 'user_setup_password']);
+Route::post('send-mail', [LoginController::class, 'send_mail']);
+Route::post('contact', [LoginController::class, 'contact']);
 
 
 
