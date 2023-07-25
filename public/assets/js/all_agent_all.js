@@ -26,8 +26,8 @@ function get_all_agents(my_mandate, my_region, my_constituency) {
 
                         table.row
                             .add([
-                                `<td style="width: 36px;">
-                                                        <img src=${data[index].Picture} alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                `<td style="width: 14px;">
+                                                        <img src=${data[index].Picture} alt="contact-img" title="contact-img" class="rounded-circle img-fluid avatar-sm" style="width:10px;height:10px"/>
                                                     </td>`,
                                 data[index].Fname + " " + data[index].SurName,
                                 data[index].Region,
@@ -46,8 +46,8 @@ function get_all_agents(my_mandate, my_region, my_constituency) {
                         if (data[index].Region == my_region) {
                             table.row
                                 .add([
-                                    `<td style="width: 36px;">
-                                                        <img src=${data[index].Picture} alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                    `<td style="width: 14px;">
+                                                        <img src=${data[index].Picture} alt="contact-img" title="contact-img" class="rounded-circle img-fluid avatar-sm" style="width:20px;height:20px"/>
                                                     </td>`,
                                     data[index].Fname +
                                         " " +
@@ -80,21 +80,21 @@ function get_all_agents(my_mandate, my_region, my_constituency) {
                                 data[index].Fname + " " + data[index].SurName;
 
                             var image_name =
-                                `<span style="width: 36px;">
-                                    <img src="${user_image}" alt="contact-img" title="contact-img" class="rounded-circle avatar-sm" />
+                                `<span style="width: 14px;">
+                                    <img src="${user_image}" alt="contact-img" title="contact-img" class="rounded-circle img-fluid avatar-sm style="width:20px;height:20px"" />
                                 </span>` +
                                 " " +
                                 " " +
                                 name;
                             table.row
                                 .add([
-                                    `<b class="h5">${count++}</b>`,
-                                    `<b class="h5">${image_name}</b>`,
-                                    `<b class="h5">${user_id}</b>`,
-                                    `<b class="h5">${data[index].Region}</b>`,
-                                    `<b class="h5">${data[index].Constituency}</b>`,
-                                    `<b class="h5">${data[index].ElectoralArea} -- ${data[index].PollingStation}</b>`,
-                                    `<a href="#"  type="button"  class="btn  btn-blue waves-effect all_agent_list_action"
+                                    `<b>${count++}</b>`,
+                                    `<b>${image_name}</b>`,
+                                    `<b>${user_id}</b>`,
+                                    `<b>${data[index].Region}</b>`,
+                                    `<b>${data[index].Constituency}</b>`,
+                                    `<b>${data[index].ElectoralArea} -- ${data[index].PollingStation}</b>`,
+                                    `<a href="#"  type="button"  class="btn btn-outline-success waves-effect waves-lightall_agent_list_action"
                                         user-image="${data[index].Picture}" user-name="${data[index].name}" user-region="${data[index].Region}" user-constituency="${data[index].Constituency}" user-electoral-area="${data[index].ElectoralArea}" user-id="${user_id}" user-dob="${data[index].DOB}" user-eduction-level="${data[index].EducationalLevel}"
                                         user-institution="${data[index].Institution}" user-phone-numbers="${data[index].phoneNumber}" user-gender="${data[index].Gender}">More Actions</a>`,
                                 ])

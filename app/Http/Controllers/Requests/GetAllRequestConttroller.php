@@ -73,6 +73,7 @@ class GetAllRequestConttroller extends Controller
 
         $constituency = $request->constituency;
         $base_response = new BaseResponse();
+        // return $request->constituency;
 
         $response = Http::post(env('API_BASE_URL') . "getPollingStation?constituency=$constituency");
 

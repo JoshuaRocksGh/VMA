@@ -13,26 +13,43 @@
     <div>
         <div class="dashboard site-card overflow-hidden">
             <div class="text-center">
-                <h3 class="">{{ session()->get('Region') }} &nbsp; || &nbsp;<span class=" text-danger">
-                        {{ $UserConstituency }}</span>
-                    @if (session()->get('Region') == 'ConstituencyLevel')
-                        echo (session()->get('Region'))
-                    @endif
 
-                </h3>
+                @if (session()->get('UserMandate') == 'NationalLevel')
+                    <h1>
+                        <a href="../home" class="h6" style="text-decoration: underline;cursor: pointer;">HOME</a>&nbsp; >
+                        &nbsp;
+                        <a href="../region/{{ $RegionPath }}" class="h6"
+                            style="text-decoration: underline;cursor: pointer;">{{ $RegionPath }} REGION </a>
+                        &nbsp; > &nbsp;
+                        <span class="h6 text-dark"></span>
+                        {{ $UserConstituency }} CONSTITUENCY
+                    </h1>
+                @elseif(session()->get('UserMandate') == 'RegionalLevel')
+                    <h1>
+                        {{--  <a href="../home" class="h6" style="text-decoration: underline;cursor: pointer;">HOME</a> >  --}}
+                        <a href="../region/{{ $RegionPath }}" class="h6"
+                            style="text-decoration: underline;cursor: pointer;">{{ $RegionPath }}</a>
+                        >
+                        <span class="h6 text-dark"></span>
+                        {{ $UserConstituency }}
+                    </h1>
+                @endif
+                {{--  style="text-decoration: underline;cursor: pointer;"  --}}
+
+
 
             </div>
             <div class="tab-content dashboard-body border-info border ">
                 <div class="p-4">
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="card">
+                            <div class="card" style="background-color:#45b5c6">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <b style="font-size: 24px ; display: none"
-                                                class="total_polling_stations constituency_assigment">0</b>
-                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+                                                class="total_polling_stations constituency_assigment text-white"></b>
+                                            <span class="spinner-border avatar-sm text-white m-2" role="status"></span>
 
                                         </div>
                                         <div class="col-md-4"><img src="{{ asset('assets/images/select.png') }}"
@@ -40,47 +57,50 @@
                                         </div>
 
                                     </div>
-                                    <h3 class="text-center mt-0">TOTAL POLLING STATIONS</h3>
-                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px" />
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px;color:white" />
+                                    <br>
+                                    <h3 class="text-center mt-0 text-white">TOTAL POLLING STATIONS</h3>
 
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card">
+                            <div class="card" style="background-color: green">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <b style="font-size: 24px; display: none "
-                                                class="assigned_polling_stations constituency_assigment">0</b>
-                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+                                                class="assigned_polling_stations constituency_assigment text-white"></b>
+                                            <span class="spinner-border avatar-sm text-white m-2" role="status"></span>
 
                                         </div>
                                         <div class="col-md-4"><img src="{{ asset('assets/images/people.png') }}"
                                                 class=" img-fluid float-right" style="width:40px;height:40px" /></div>
                                     </div>
-                                    <h3 class="text-center mt-0">ASSIGNED POLLING STATIONS</h3>
-                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:red" />
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:white" />
+                                    <br>
+                                    <h3 class="text-center mt-0 text-white">ASSIGNED POLLING STATIONS</h3>
 
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card">
+                            <div class="card" style="background-color:  red">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <b style="font-size: 24px;display: none"
-                                                class="unassigned_polling_stations constituency_assigment">0</b>
-                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+                                                class="unassigned_polling_stations constituency_assigment text-white"></b>
+                                            <span class="spinner-border avatar-sm text-white m-2" role="status"></span>
                                         </div>
                                         <div class="col-md-4"><img src="{{ asset('assets/images/user.png') }}"
                                                 class=" img-fluid float-right" style="width:40px;height:40px" />
                                         </div>
 
                                     </div>
-                                    <h3 class="text-center mt-0">UNASSIGNED POLLING STATIONS</h3>
-                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:green" />
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:white" />
+                                    <br>
+                                    <h3 class="text-center mt-0 text-white">UNASSIGNED POLLING STATIONS</h3>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +131,7 @@
                             <div class="tab-pane show active" id="home">
                                 <table id="datatable-buttons"
                                     class="table table-striped dt-responsive nowrap w-100 assigned_agent_list">
-                                    <thead class="bg-dark">
+                                    <thead class="bg-info">
                                         <tr class="text-white">
                                             <th>No.</th>
                                             <th>Name</th>
@@ -136,7 +156,7 @@
                             <div class="tab-pane " id="profile">
                                 <table id="datatable-buttons"
                                     class="table table-striped dt-responsive nowrap w-100 unassigned_agent_list">
-                                    <thead class="bg-dark">
+                                    <thead class="bg-info">
                                         <tr class="text-white">
                                             <th>No.</th>
                                             <th>Name</th>

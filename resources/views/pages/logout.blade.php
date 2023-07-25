@@ -2,13 +2,13 @@
 
 
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6 text-center">
                 <br><br><br><br><br><br><br><br><br><br>
-                <img src="{{ asset('assets/images/Coat.png') }}" alt="" class="welcome_loader img-fluid  w-50 h-50">
+                <img src="{{ asset('assets/images/loading-gif.gif') }}" alt=""
+                    class="welcome_loader img-fluid  w-20 h-20">
             </div>
             <div class="col-md-3"></div>
         </div>
@@ -24,5 +24,4 @@
             }, 2000)
         })
     </script>
-
 @endsection

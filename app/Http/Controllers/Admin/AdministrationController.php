@@ -181,4 +181,79 @@ class AdministrationController extends Controller
 
         }
     }
+
+    public function vote_monitor()
+    {
+        return view('pages.admin.vote_monitor');
+    }
+
+    public function create_candidate()
+    {
+        return view('pages.admin.create_candidate');
+    }
+
+    public function create_parliamentry_candidate()
+    {
+        // return view('pages.admin.create_candidate');
+        return view('pages.agents.create_parliamentry_candidate');
+        // return "hhhhh";
+        // return view('pages.admin.create_parliamentry_candidate');
+        // return view('pages.admin.create_parliamentry_candidate');
+    }
+
+    public function create_presidential_candidate(Request $request)
+    {
+        // return "here";
+        // return $request;
+
+        $candidate_name = $request->candidateName;
+        $candidate_party_name = $request->candidatePartyName;
+        $get_candidate_party_logo = $request->candidatePartyLogo;
+        // $candidate_party_logo = base64_encode($request->candidatePartyLogo);
+        $get_candidate_image = $request->candidateImage;
+        // $candidate_image = base64_encode($request->candidateImage);
+
+        // return $candidate_party_logo;
+
+        $data = [
+            "partyName" => $candidate_party_name,
+            "fullname" => $candidate_name,
+            "partyLogo" => $get_candidate_party_logo,
+            "candidateImage" =>  $get_candidate_image,
+            // "constituencyId" => "",
+        ];
+        // return $data;
+
+
+        try {
+
+            $response = Http::post(env('API_BASE_URL') . "createPresidentialCandidate", $data);
+            return json_decode($response);
+            // dd($response);
+            // return response()->json([
+            //     'responseCode' => '556',
+            //     'message' => "Agent Creation API",
+            //     'data' => $response
+            // ], 200);
+
+            $result = new ApiBaseResponse();
+            return $result->api_response($response);
+        } catch (\Exception $e) {
+
+            // DB::table('tb_error_logs')->insert([
+            //     'platform' => 'ONLINE_INTERNET_BANKING',
+            //     'user_id' => 'AUTH',
+            //     'message' => (string) $e->getMessage()
+            // ]);
+
+            return response()->json([
+                "status" => "failed",
+                "message" => "Internal Server Error",
+                "data" => []
+            ]);
+            // return $base_response->api_response('500', "Internal Server Error",  NULL);
+
+
+        }
+    }
 }

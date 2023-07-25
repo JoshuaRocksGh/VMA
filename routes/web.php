@@ -90,6 +90,15 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::get('activate-user', [RegionalLevelController::class, 'activate_user']);
     Route::get('de_activate-user', [RegionalLevelController::class, 'de_activate_user']);
 
+    // Vote Monitor
+    Route::get('/vote-monitor', [AdministrationController::class, 'vote_monitor'])->name('vote-monitor');
+
+    // CREATE CANDIDATES
+    Route::get('create-candidate', [AdministrationController::class, 'create_candidate'])->name('create-candidate');
+    Route::post('create-presidential-candidate', [AdministrationController::class, 'create_presidential_candidate'])->name('create-presidential-candidate');
+    Route::get('create-parliamentry-candidate', [ConstituencyLevelController::class, 'create_parliamentry_candidate'])->name('create-parliamentry-candidate');
+    Route::get('parliamentry-candidate', [ConstituencyLevelController::class, 'parliamentry_candidate'])->name('parliamentry-candidate');
+
     // UunBlock Or Block Agent
     Route::get('unblock-user', [RegionalLevelController::class, 'unblock_user']);
     Route::get('block-user', [RegionalLevelController::class, 'block_user']);

@@ -15,78 +15,96 @@
                 <div class="p-4">
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="card">
+                            <div class="card" style="background-color:#45b5c6">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <b style="font-size: 24px;display: none" class="total national_assigment">0</b>
-                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+                                            <b style="font-size: 24px; " class="text-white total national_assigment"></b>
+                                            <span class="spinner-border avatar-sm text-white m-2" role="status"></span>
                                         </div>
                                         <div class="col-md-4"><img src="{{ asset('assets/images/select.png') }}"
                                                 class=" img-fluid float-right" style="width:40px;height:40px" /></div>
                                     </div>
-                                    <h3 class="text-center mt-0">TOTAL POLLING STATIONS</h3>
-                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px" />
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:white" />
+                                    <br>
+                                    <h3 class="text-center mt-0 text-white">TOTAL POLLING STATIONS</h3>
+
 
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card">
+                            <div class="card " style="background-color: green">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <b style="font-size: 24px; display: none"
-                                                class="total_assigned national_assigment">0</b>
-                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+                                            <b style="font-size: 24px; "
+                                                class=" text-white total_assigned national_assigment"></b>
+                                            <span class="spinner-border avatar-sm text-white m-2" role="status"></span>
                                         </div>
                                         <div class="col-md-4"><img src="{{ asset('assets/images/people.png') }}"
                                                 class=" img-fluid float-right" style="width:40px;height:40px" /></div>
                                     </div>
-                                    <h3 class="text-center mt-0">ASSIGNED POLLING STATIONS</h3>
-                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:red" />
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:white" />
+                                    <br>
+                                    <h3 class="text-center mt-0 text-white">ASSIGNED POLLING STATIONS</h3>
+
 
 
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card">
+                            <div class="card" style="background-color:  red">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <b style="font-size: 24px ; display: none"
-                                                class="total_unassigned national_assigment">0</b>
-                                            <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>
+                                            <b style="font-size: 24px ; "
+                                                class="text-white total_unassigned national_assigment"></b>
+                                            <span class="spinner-border avatar-sm text-white m-2" role="status"
+                                                style="color: white"></span>
 
                                         </div>
                                         <div class="col-md-4"><img src="{{ asset('assets/images/user.png') }}"
-                                                class=" img-fluid float-right" style="width:40px;height:40px" /></div>
+                                                class=" img-fluid float-right text-white" style="width:40px;height:40px" />
+                                        </div>
                                     </div>
-                                    <h3 class="text-center mt-0">UNASSIGNED POLLING STATIONS</h3>
-                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:green" />
+                                    <hr style="border-style: solid;border-width: 2px;margin-bottom: 0px; color:white" />
+                                    <br>
+                                    <h3 class="text-center mt-0 text-white">UNASSIGNED POLLING STATIONS</h3>
+
 
 
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <hr>
                     <br><br>
-                    <div class="datatable-buttons">
-                        <table class="table table-striped dt-responsive nowrap w-100 all_agent_list">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="datatable-buttons">
 
-                            <thead class="bg-dark">
-                                <tr class="text-white">
-                                    <th>Region</th>
-                                    <th>Total Polling Stations</th>
-                                    <th>Assigned Polling Stations</th>
-                                    <th>UnAssigned Polling Stations</th>
-                                    <th>Details</th>
-                                </tr>
-                            </thead>
+                                <table class="table table-striped dt-responsive nowrap w-100 all_agent_list">
+                                    <h1 style="margin-bottom: -20px;">Regional Summary of Polling Stations</h1>
 
-                        </table>
+
+                                    <thead class="bg-info">
+                                        <tr class="text-white">
+                                            <th>Region</th>
+                                            <th>Total Polling Stations</th>
+                                            <th>Assigned Polling Stations</th>
+                                            <th>UnAssigned Polling Stations</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+
+                                </table>
+                            </div>
+
+                        </div>
                     </div>
+
 
                 </div>
             </div>
@@ -123,6 +141,9 @@
 
 @section('scripts')
     @include('extras.datatables')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
 
     <script src="{{ asset('assets/js/home.js') }}"></script>
     <script>

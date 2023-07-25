@@ -52,6 +52,11 @@ function regional_constituencies_assigmnet(UserRegion) {
                 );
 
                 //Assigned Constituencies
+                // var getUserMandate = Mandate;
+                // console.log("Mandate->", Mandate);
+                // if (getUserMandate == "NationalLevel") {
+                //     var url
+                // }
                 var count = 1;
                 let data = response.data;
                 $.each(data, function (index) {
@@ -70,19 +75,13 @@ function regional_constituencies_assigmnet(UserRegion) {
                     // return false;
                     table.row
                         .add([
-                            `<b class="">${count++}</b>`,
-                            `<b class="">${data[index].ConstituencyCode}</b>`,
-                            `<b class="">${numberWithCommas(
-                                data[index].total
-                            )}</b>`,
-                            `<b class="">${numberWithCommas(
-                                data[index].assigned
-                            )}</b>`,
-                            `<b class="">${numberWithCommas(
-                                data[index].unAssigned
-                            )}</b>`,
+                            `${count++}`,
+                            `${data[index].ConstituencyCode}`,
+                            `${numberWithCommas(data[index].total)}`,
+                            `${numberWithCommas(data[index].assigned)}`,
+                            `${numberWithCommas(data[index].unAssigned)}`,
                             `
-                            <a class="btn btn-outline-success waves-effect waves-light" href="../constituency/${constituencyName}">View Details</a>
+                            <a class="btn btn-outline-info waves-effect waves-light" href="../constituency/${constituencyName}">View Details</a>
                             `,
                         ])
                         .draw(false);

@@ -1,4 +1,5 @@
 $(".spinner-text").hide();
+// console.log("get cans==>", db.collection("candidates"));
 
 $("#success_alert").hide();
 $("#error_alert").hide();
@@ -158,6 +159,16 @@ function validate_user() {
 function any_suggestion(e) {
     e.preventDefault();
 }
+
+// Set the amount of time (in milliseconds) before the user is considered inactive
+var inactivityTime = 180000; // 5 mins
+
+// Set a timer that will trigger after the specified amount of time
+var timeoutId = setTimeout(function () {
+    // This code will execute when the user has been inactive for the specified amount of time
+    //  console.log("User is inactive");
+    location.reload();
+}, inactivityTime);
 
 $(document).ready(function () {
     $("#first_time_login").submit(function (e) {
@@ -551,7 +562,7 @@ function login(email, password) {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         success: function (response) {
-            // console.log(response.data);
+            console.log(response.data);
             let user_data = response.data;
 
             // $("#success_alert").append();
@@ -564,8 +575,13 @@ function login(email, password) {
                 // console.log(user_data.Active);
                 if (user_data.Active == false || user_data.Active == "false") {
                     $("#error_alert").show();
-                    $(".error_alert_message").text(
-                        "Please Contact National Head for Activation"
+                    // $(".error_alert_message").text(
+                    //     "Please Contact National Head for Activation"
+                    // );
+
+                    error_alert(
+                        "Please Contact National Head for Activation",
+                        "#error_alert"
                     );
                     $(".spinner-text").hide();
                     $(".log_in_text").show();
@@ -578,6 +594,7 @@ function login(email, password) {
                     user_data.FirstTime == "true"
                 ) {
                     validate_user();
+                    // return false;
                 }
 
                 // return false;
@@ -641,7 +658,7 @@ $("#login_form_button").click(function (e) {
 
         return false;
     } else {
-        $(".login_form_button").prop("disabled", true);
+        $("#login_form_button").prop("disabled", true);
         $(".spinner-text").show();
         $(".log_in_text").hide();
         login(email, password);

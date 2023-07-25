@@ -15,7 +15,7 @@ class NationalLevelController extends Controller
     {
         $base_response = new BaseResponse();
 
-        $response = Http::post(env('API_BASE_URL') . "checkRegionalAssignment2");
+        $response = Http::post(env('API_BASE_URL') . "checkTotalRegionalAssignment");
 
         // $response = Http::get("https://us-central1-parliamentary-dd744.cloudfunctions.net/checkRegionalAssignment2");
 

@@ -29,6 +29,18 @@
 
         @if (session()->get('UserMandate') == 'NationalLevel')
             <li class="menu-item">
+                <a class="menu-item-header" href="{{ url('vote-monitor') }}">
+                    <i class="mdi mdi-vote-outline"></i>
+                    <span> Vote Monitor</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-item-header" href="{{ url('create-candidate') }}">
+                    <i class="mdi mdi-vote-outline"></i>
+                    <span>Create Candidates</span>
+                </a>
+            </li>
+            <li class="menu-item">
                 <a href="#sidebarRegionalUsers" class="menu-item-header" data-toggle="collapse"
                     data-target="#sidebarRegionalUsers">
                     <i class="fas fa-users"></i> <span> Regional Users</span>
@@ -67,7 +79,7 @@
             <li class="menu-item">
                 <a href="#sidebarNotfication" class="menu-item-header" data-toggle="collapse"
                     data-target="#sidebarNotfication">
-                    <i class="fas fa-bell"></i> <span>Reported Issue</span>
+                    <i class="fas fa-bell"></i> <span>Notifications & Alerts</span>
                     <span class="menu-arrow fas fa-angle-right"></span>
                 </a>
                 <div class="collapse menu-item-body" id="sidebarNotfication">
@@ -158,7 +170,8 @@
             </li>
 
             <li class="menu-item">
-                <a href="#sidebarProfile" class="menu-item-header" data-toggle="collapse" data-target="#sidebarProfile">
+                <a href="#sidebarProfile" class="menu-item-header" data-toggle="collapse"
+                    data-target="#sidebarProfile">
                     <i class="fas fa-cog"></i> <span> Settings</span>
                     <span class="menu-arrow fas fa-angle-right"></span>
                 </a>
@@ -184,6 +197,66 @@
 
         @if (session()->get('UserMandate') == 'ConstituencyLevel')
             <li class="menu-item">
+                <a class="menu-item-header" href="{{ url('create-parliamentry-candidate') }}">
+                    <i class="mdi mdi-vote-outline"></i>
+                    <span>Create Candidates</span>
+                </a>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-item-header" href="{{ url('parliamentry-candidate') }}">
+                    <i class="mdi mdi-vote-outline"></i>
+                    <span>Create Candidates</span>
+                </a>
+            </li>
+
+
+            <li class="menu-item">
+                <a href="#sidebarMyAccount" class="menu-item-header" data-toggle="collapse"
+                    data-target="#sidebarMyAccount">
+                    <i class="mdi mdi-book-account-outline"></i>
+                    <span> Agent</span>
+                    <span class="menu-arrow fas fa-angle-right"></span>
+                </a>
+                <div class="collapse menu-item-body" id="sidebarMyAccount">
+                    <ul class="nav-second-level">
+                        <li>
+                            <a href="{{ url('add-agent') }}">Add New Agent</a>
+                        </li>
+                        <li>
+
+                            <a href="{{ url('edit-agent') }}">Edit Agent Details</a>
+                        </li>
+                        <li>
+                            {{-- <a href="{{ url('all-regional-users') }}">List Of Agents </a> --}}
+                            <a href="{{ url('agent-list') }}">List Of Agents</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('send-agent-message') }}">Send Message</a>
+                        </li>
+                        {{-- <li>
+                                <a href="#budgeting" data-toggle="collapse">
+                                    <span> Budgeting </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="budgeting">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ url('budgeting-spending-statics') }}">Spending
+                                                Statistics</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </li> --}}
+
+                    </ul>
+                </div>
+            </li>
+        @endif
+
+        @if (session()->get('UserMandate') == 'ConstituencyLevel')
+            <li class="menu-item">
                 <a href="#sidebarConSettings" class="menu-item-header" data-toggle="collapse"
                     data-target="#sidebarConSettings">
                     <i class="fas fa-sync"></i> <span>Settings</span>
@@ -202,7 +275,8 @@
         @endif
 
         <li class="menu-item">
-            <a class="menu-item-header" href="#" id="sidebar_logout">
+            {{--  <a class="menu-item-header" href="{{ url('logout') }}" id="sidebar_logout">  --}}
+            <a class="menu-item-header" href="{{ url('logout') }}">
                 <i class="fas fa-sign-out-alt"></i> <span> Logout </span>
             </a>
         </li>

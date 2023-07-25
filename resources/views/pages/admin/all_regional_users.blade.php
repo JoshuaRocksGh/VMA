@@ -1,5 +1,34 @@
 @extends('layouts.master')
 
+@section('style')
+    <style>
+        .modal-footer button {
+            width: 6rem;
+        }
+
+        .modal-dialog {
+            max-width: 600px !important;
+        }
+
+        .wizard-header {
+            border: 1px solid #bfc9d4;
+            background-color: transparent;
+            font-weight: 600;
+            font-size: 15px;
+            margin-right: 6px;
+            border-radius: 33px;
+            text-decoration: none;
+            padding: 9px 10px;
+        }
+
+        .wizard-header.active {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none
+        }
+    </style>
+@endsection
+
 
 @section('content')
     @php
@@ -13,13 +42,14 @@
         <div class="tab-content dashboard-body border-info border ">
             <div class="p-4">
                 <div>
+                    {{--  <span class="spinner-border avatar-sm text-dark m-2" role="status"></span>  --}}
                     <div class="table-responsive">
                         <table class="table table-striped dt-responsive nowrap w-100 all_regional_heads_list">
 
-                            <thead class="bg-dark">
+                            <thead class="bg-info">
                                 <tr class="text-white">
                                     <th>No.</th>
-                                    <th>Name</th>
+                                    <th>User Name</th>
                                     {{-- <th>Name</th> --}}
                                     <th>Phone Number</th>
                                     <th>User ID</th>
@@ -27,6 +57,18 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
+                            <tbody class="request_table">
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="spinner-border avatar-lg text-dark  m-2 canvas_spinner"
+                                                role="status">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
 
                         </table>
                     </div>
@@ -35,23 +77,15 @@
 
             </div>
 
-        </div>
-
-    </div>
-    <div class="container-fluid">
-        <h3 class=""><span class=" text-danger">Regional Users</span> </h3>
-        <div class="row">
-
-
-
             <!--  Modal content for the Large example -->
             <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog"
                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <div class="modal-header bg-dark">
+                        <div class="modal-header bg-info">
                             <h4 class="modal-title text-white" id="myLargeModalLabel">Regional User Details</h4>
-                            <button type="button" class="close bg-white" data-dismiss="modal" aria-hidden="true">×</button>
+                            <button type="button" class="close text-white" data-dismiss="modal"
+                                aria-hidden="true">×</button>
                         </div>
                         <span style="display: block; width: 100% ; border-top: 1px solid #ccc" class="mt-0"></span>
                         <div class="modal-body">
@@ -138,9 +172,15 @@
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+
+        </div>
+
+
+
     </div>
-    </div>
+
+
+    {{--  </div>  --}}
 @endsection
 
 

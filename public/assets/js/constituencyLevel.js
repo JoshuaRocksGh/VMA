@@ -113,16 +113,14 @@ function agent_assignments(constituency) {
                     // count++;
                     table.row
                         .add([
-                            `<b class="h4">${count++}</b>`,
-                            `<b class="h4"> ${
-                                data[index].Fname + " " + data[index].SurName
-                            }</b>`,
-                            `<b class="h4">${data[index].Region}</b>`,
-                            `<b class="h4">${data[index].Constituency}</b>`,
-                            `<b class="h4">${data[index].ElectoralArea} -- ${data[index].PollingStation}</b>`,
-                            `<b class="h4">${data[index].UserId}</b>`,
+                            `${count++}`,
+                            ` ${data[index].Fname + " " + data[index].SurName}`,
+                            `${data[index].Region}`,
+                            `${data[index].Constituency}`,
+                            `${data[index].ElectoralArea} -- ${data[index].PollingStation}`,
+                            `${data[index].UserId}`,
                             `
-                            <a class="btn btn-danger" href='../unassign-agent?electoral_area=${data[index].ElectoralArea}&UserConstituency=${UserConstituency}&user_id=${data[index].UserId}&assign=false' data-value=${data[index].ElectoralArea}>UnAssign</a>
+                            <a class="btn btn-outline-danger" href='../unassign-agent?electoral_area=${data[index].ElectoralArea}&UserConstituency=${UserConstituency}&user_id=${data[index].UserId}&assign=false' data-value=${data[index].ElectoralArea}>UnAssign</a>
                             `,
                         ])
                         .draw(false);
@@ -166,18 +164,18 @@ function agent_assignments(constituency) {
                     }
                     unassigned.row
                         .add([
-                            `<b class="h4">${count++}</b>`,
-                            `<b class="h4">${
+                            `${count++}`,
+                            `${
                                 agent_unassigned[index].Fname +
                                 " " +
                                 agent_unassigned[index].SurName
-                            }</b>`,
-                            `<b class="h4">${agent_unassigned[index].Region}</b>`,
-                            `<b class="h4">${agent_unassigned[index].Constituency}</b>`,
-                            `<b class="h4">${agent_unassigned[index].ElectoralArea} -- ${agent_unassigned[index].PollingStation}</b>`,
-                            `<b class="h4">${agent_unassigned[index].UserId}</b>`,
+                            }`,
+                            `${agent_unassigned[index].Region}`,
+                            `${agent_unassigned[index].Constituency}`,
+                            `${agent_unassigned[index].ElectoralArea} -- ${agent_unassigned[index].PollingStation}`,
+                            `${agent_unassigned[index].UserId}`,
                             `
-                            <a class="btn btn-info" href='../unassign-agent?electoral_area=${agent_unassigned[index].ElectoralArea}&user_id=${agent_unassigned[index].UserId}&assign=true&UserConstituency=${UserConstituency}' data-value=${agent_unassigned[index].ElectoralArea}>Assign</a>
+                            <a class="btn btn-outline-info" href='../unassign-agent?electoral_area=${agent_unassigned[index].ElectoralArea}&user_id=${agent_unassigned[index].UserId}&assign=true&UserConstituency=${UserConstituency}' data-value=${agent_unassigned[index].ElectoralArea}>Assign</a>
                             `,
                         ])
                         .draw(false);
@@ -211,6 +209,10 @@ function agent_assignments(constituency) {
                         agent_unassigned[index].ElectoralArea
                     );
                 });
+            } else {
+                setTimeout(function () {
+                    agent_assignments(constituency);
+                }, $.ajaxSetup().retryAfter);
             }
         },
         error: function (xhr, status, error) {
@@ -254,6 +256,10 @@ function agent_unassigned(constituency) {
                         ])
                         .draw(false);
                 });
+            } else {
+                setTimeout(function () {
+                    agent_unassigned(constituency);
+                }, $.ajaxSetup().retryAfter);
             }
         },
         error: function (xhr, status, error) {

@@ -46,24 +46,22 @@
             </div>
         </div>
 
-        <div class="d-none d-lg-flex align-items-center mx-4">
+        {{--  <div class="d-none d-lg-flex align-items-center mx-4">
             <div>
                 <i class="far fa-clock"></i>
             </div>
             <div class="mx-2">
                 <div class="font-12">
-                    {{--  {{ explode('GMT', session()->get('lastLogin'), 4)[0] }}  --}}
                     {{ date('Y-m-d H:i:s') }}
                 </div>
                 <div class="text-info  font-10">
                     Last Login Date
                 </div>
             </div>
-        </div>
+        </div>  --}}
 
         <div class="d-flex align-items-center">
             <div class="d-none d-md-block">
-                {{-- <img src="{{ asset('assets/images/logoRKB.png') }}" alt="company logo" height="45"> --}}
             </div>
 
             <div class="mx-2">

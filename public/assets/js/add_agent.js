@@ -61,6 +61,10 @@ function get_constituency(region) {
                         // }).text(data[index].name)
                     );
                 });
+            } else {
+                // setTimeout(function () {
+                get_constituency();
+                // }, $.ajaxSetup().retryAfter);
             }
         },
         error: function (xhr, status, error) {
@@ -78,14 +82,14 @@ function get_polling_station(constituency) {
         url: "get-polling-station-api?constituency=" + constituency,
         datatype: "application/json",
         success: function (response) {
-            // console.log(response);
+            console.log(response);
             $("#agent_electoral_area").prop("disabled", false);
             $("#agent_electoral_area").css("background", "#fefefe");
             let data = response.data;
             // console.log(data);
-            let selectize = $("#agent_electoral_area").selectize()[0].selectize;
+            // let selectize = $("#agent_electoral_area").selectize()[0].selectize;
             // console.log(data);
-            selectize.clearOptions();
+            // selectize.clearOptions();
 
             // $("#agent_electoral_area option").remove();
 
@@ -96,20 +100,24 @@ function get_polling_station(constituency) {
                 $.each(data, function (index) {
                     // console.log(data[index]);
                     $("#agent_electoral_area").append(
-                        selectize.addOption({
-                            value: data[index].name + "~" + data[index].code,
-                            text: data[index].name,
-                        })
-                        // $("<option>", {
+                        // selectize.addOption({
                         //     value: data[index].name + "~" + data[index].code,
-                        // }).text(data[index].name)
+                        //     text: data[index].name,
+                        // })
+                        $("<option>", {
+                            value: data[index].name + "~" + data[index].code,
+                        }).text(data[index].name)
                     );
                 });
+            } else {
+                setTimeout(function () {
+                    get_polling_station(constituency);
+                }, $.ajaxSetup().retryAfter);
             }
         },
         error: function (xhr, status, error) {
             setTimeout(function () {
-                get_polling_station();
+                get_polling_station(constituency);
             }, $.ajaxSetup().retryAfter);
         },
     });

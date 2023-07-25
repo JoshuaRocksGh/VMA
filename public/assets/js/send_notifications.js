@@ -1,6 +1,13 @@
 // function
 // alert("Welcome");
 
+const chatMessages = document.getElementById("chat-container");
+
+// Function to scroll the div to the bottom
+function scrollToBottom() {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
 function get_regions() {
     $.ajax({
         type: "GET",
@@ -73,6 +80,20 @@ function create_UUID() {
 
 $(document).ready(function () {
     get_regions();
+    // =================  //
+
+    // ================= //
+    // return;
+    //     function convertTo12HourFormat(timestamp) {
+    //   const dateObj = new Date(timestamp);
+    //   const hours = dateObj.getHours();
+    //   const minutes = dateObj.getMinutes();
+    //   const amOrPm = hours >= 12 ? 'PM' : 'AM';
+    //   const twelveHourFormatHours = hours % 12 || 12;
+
+    //   const formattedTime = `${twelveHourFormatHours}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
+    //   return formattedTime;
+    // }
     if (my_mandate == "NationalLevel") {
         $("#user_region").change(function () {
             console.log($(this).val());
@@ -85,10 +106,11 @@ $(document).ready(function () {
                 .onSnapshot((snapshots) => {
                     // console.log(snapshots.docs)
                     $("#view_chats").empty();
+                    $("#view_my_chats").empty();
 
                     snapshots.docs.forEach((doc) => {
                         var chat_details = doc.data();
-                        // console.log("chat_details=>", chat_details);
+                        console.log("chat_details=>", chat_details);
                         // console.log(userID);
                         var user_image = "assets/images/agent-user.png";
 
@@ -105,42 +127,62 @@ $(document).ready(function () {
 
                             $("#view_chats").append(
                                 `
-                            <li class="clearfix odd">
-                                            <div class="chat-avatar">
-                                                <img src="${user_image}"
-                                                    class="rounded" alt="${chat_details.userName}" />
-                                                <i style="zoom:0.9">${chat_time}</i>
-                                            </div>
-                                            <div class="conversation-text">
+                                <div class="card mr-8" style=" border-radius:10px;background-color:#C6CCD3;margin-right:60px;display: inline-block;margin-bottom: 10px;">
+                                    <div class="m-2"  style="display: inline;">
+                                    <li class="clearfix odd">
+
+                                            <div class="conversation-text" style="padding: 5px;">
                                                 <div class="ctext-wrap">
-                                                    <i>${chat_details.userName}-${chat_details.userId}</i>
-                                                    <p>
+                                                    <i class="text-muted">${chat_details.userName}-${chat_details.userId}</i>
+                                                    <br>
+
+                                                    <span style="display:flex;justify-content: space-between;">
+                                                    <h6 class="">
                                                         ${chat_details.text}
-                                                    </p>
+                                                    </h6>
+                                                <i style="zoom:0.7; padding:7px;float:right">${chat_time}</i>
+
+                                                    </span>
+
                                                 </div>
+
                                             </div>
                                         </li>
+
+                                    </div>
+                                </div>
+                                <br>
+
                         `
                             );
                         } else if (chat_details.userId == userID) {
                             // console.log(chat_details.);
                             $("#view_chats").append(
                                 `
-                            <li class="clearfix">
-                                            <div class="chat-avatar">
-                                                <img src="${user_image}"
-                                                    class="rounded" alt="${chat_details.userName}" />
-                                                <i style="zoom:0.9">${chat_time}</i>
-                                            </div>
+                                <br>
+                                <br>
+                                <div class="card mb-2" style="background-color:#c9e5fc;border-radius:10px;display: inline-block;padding: 5px; float:right">
+                                    <div class="m-2 text-right" style="display: inline;">
+
+                                    <li class="clearfix" style="">
+
                                             <div class="conversation-text">
                                                 <div class="ctext-wrap">
-                                                    <i>${chat_details.userName}</i>
-                                                    <p>
-                                                        ${chat_details.text}
-                                                    </p>
+                                                <span style="display:flex;justify-content: space-between;">
+                                                    <h6 class=""> ${chat_details.text}</h6>
+                                                    <i class="" style="zoom:0.7;padding:7px">${chat_time}</i>
+
+                                                </span>
+
                                                 </div>
+
+
                                             </div>
                                         </li>
+                                    </div>
+                                </div>
+                                <br>
+
                         `
                             );
                         } else {
@@ -149,6 +191,10 @@ $(document).ready(function () {
                         // updateScroll();
                         // setInterval(updateScroll, 1000);
                     });
+
+                    scrollToBottom();
+
+                    // $("#view_chats").scrollTop = $("#view_chats").scrollHeight;
                 });
         });
     } else if (my_mandate == "RegionalLevel") {
@@ -159,6 +205,7 @@ $(document).ready(function () {
             .onSnapshot((snapshots) => {
                 // console.log(snapshots.docs)
                 $("#view_chats").empty();
+                $("#view_my_chats").empty();
 
                 snapshots.docs.forEach((doc) => {
                     var chat_details = doc.data();
@@ -182,15 +229,15 @@ $(document).ready(function () {
                             <li class="clearfix odd">
                                             <div class="chat-avatar">
                                                 <img src="${user_image}"
-                                                    class="rounded" alt="${chat_details.userName}" />
+                                                    class="rounded-circle avatar-sm img-fluid " style="width:20px;height:20px" alt="${chat_details.userName}" />
                                                 <i>${chat_time}</i>
                                             </div>
                                             <div class="conversation-text">
                                                 <div class="ctext-wrap">
-                                                    <i>${chat_details.userName}-${chat_details.userId}</i>
-                                                    <p>
+                                                    <i class="text-muted">${chat_details.userName}-${chat_details.userId}</i>
+                                                    <h6>
                                                         ${chat_details.text}
-                                                    </p>
+                                                    </h6>
                                                 </div>
                                             </div>
                                         </li>
@@ -198,20 +245,20 @@ $(document).ready(function () {
                         );
                     } else if (chat_details.userId == userID) {
                         // console.log(chat_details.);
-                        $("#view_chats").append(
+                        $("#view_my_chats").append(
                             `
                             <li class="clearfix">
                                             <div class="chat-avatar">
                                                 <img src="${user_image}"
-                                                    class="rounded" alt="${chat_details.userName}" />
+                                                    class="rounded-circle avatar-sm img-fluid " style="width:20px;height:20px" alt="${chat_details.userName}" />
                                                 <i>${chat_time}</i>
                                             </div>
                                             <div class="conversation-text">
                                                 <div class="ctext-wrap">
-                                                    <i>${chat_details.userName}</i>
-                                                    <p>
+                                                    <i class="text-muted">${chat_details.userName}</i>
+                                                    <h6>
                                                         ${chat_details.text}
-                                                    </p>
+                                                    </h6>
                                                 </div>
                                             </div>
                                         </li>
@@ -232,6 +279,7 @@ $(document).ready(function () {
             .onSnapshot((snapshots) => {
                 // console.log(snapshots.docs)
                 $("#view_chats").empty();
+                $("#view_my_chats").empty();
 
                 snapshots.docs.forEach((doc) => {
                     var chat_details = doc.data();
@@ -255,15 +303,15 @@ $(document).ready(function () {
                             <li class="clearfix odd">
                                             <div class="chat-avatar" >
                                                 <img src="${user_image}"
-                                                    class="rounded" alt="${chat_details.userName}" />
+                                                   class="rounded-circle avatar-sm img-fluid " style="width:20px;height:20px" alt="${chat_details.userName}" />
                                                 <i style="zoom:0.9">${chat_time}</i>
                                             </div>
                                             <div class="conversation-text">
                                                 <div class="ctext-wrap">
-                                                    <i>${chat_details.userName}-${chat_details.userId}</i>
-                                                    <p>
+                                                    <i class="text-muted">${chat_details.userName}-${chat_details.userId}</i>
+                                                    <h6>
                                                         ${chat_details.text}
-                                                    </p>
+                                                    </h6>
                                                 </div>
                                             </div>
                                         </li>
@@ -271,20 +319,20 @@ $(document).ready(function () {
                         );
                     } else if (chat_details.userId == userID) {
                         // console.log(chat_details.);
-                        $("#view_chats").append(
+                        $("#view_my_chats").append(
                             `
                             <li class="clearfix">
                                             <div class="chat-avatar">
                                                 <img src="${user_image}"
-                                                    class="rounded" alt="${chat_details.userName}" />
+                                                    class="rounded-circle avatar-sm img-fluid " style="width:20px;height:20px" alt="${chat_details.userName}" />
                                                 <i style="zoom:0.9">${chat_time}</i>
                                             </div>
                                             <div class="conversation-text">
                                                 <div class="ctext-wrap">
-                                                    <i>${chat_details.userName}</i>
-                                                    <p>
+                                                    <i class="text-muted">${chat_details.userName}</i>
+                                                    <h6>
                                                         ${chat_details.text}
-                                                    </p>
+                                                    </h6>
                                                 </div>
                                             </div>
                                         </li>
@@ -409,4 +457,6 @@ $(document).ready(function () {
             }
         }
     });
+
+    // //////////////////////////////////////////////////////////////////
 });

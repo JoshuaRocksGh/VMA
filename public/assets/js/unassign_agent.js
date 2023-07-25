@@ -1,6 +1,6 @@
 //
 $(".spinner-border").show;
-function get_polling_station(constituency) {
+function get_polling_station(constituency, ElectoralArea) {
     // alert(constituency);+
     // return false;
     $.ajax({
@@ -16,18 +16,33 @@ function get_polling_station(constituency) {
             // console.log("=========");
 
             let data = response.data.unAssigned;
-            let selectize = $("#agent_electoral_area").selectize()[0].selectize;
+            // let selectize = $("#agent_electoral_area").selectize()[0].selectize;
             // selectize.onDropdownOpen();
 
             $.each(data, function (index) {
                 // console.log("Here!!!!!!!!!!!!");
                 // console.log(data[index]);
-                $(".agent_electoral_area").append(
-                    selectize.addOption({
-                        value: data[index].name + "~" + data[index].code,
-                        text: data[index].name,
-                    })
-                );
+                if (data[index].code == ElectoralArea) {
+                    $(".agent_electoral_area").append(
+                        $("<option selected>", {
+                            value: data[index].code,
+                        }).text(data[index].name)
+                        // selectize.addOption({
+                        //     value:
+                        //     text: ,
+                        // })
+                    );
+                } else {
+                    $(".agent_electoral_area").append(
+                        $("<option>", {
+                            value: data[index].name + "~" + data[index].code,
+                        }).text(data[index].name)
+                        // selectize.addOption({
+                        //     value:
+                        //     text: ,
+                        // })
+                    );
+                }
             });
         },
     });
@@ -99,11 +114,21 @@ function get_agent_details(user_id) {
                 $(".agent_region").text(data[0].Region);
                 $(".agent_constituency").val(data[0].Constituency);
                 $(".agent_constituency").text(data[0].Constituency);
-                $(".agent_electoral_area").val(data[0].ElectoralArea);
-                $(".agent_electoral_area").text(
-                    data[0].ElectoralArea + `--` + data[0].PollingStation
-                );
+                // $(".agent_electoral_area_name").val(data[0].ElectoralArea);
+                // $(".agent_electoral_area_name").text(
+                //     data[0].ElectoralArea + `--` + data[0].PollingStation
+                // );
+                get_polling_station(constituency, data[0].ElectoralArea);
+            } else {
+                setTimeout(function () {
+                    get_agent_details(user_id);
+                });
             }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            setTimeout(function () {
+                get_agent_details(user_id);
+            });
         },
     });
 }
@@ -138,7 +163,6 @@ $(document).ready(function () {
         // get_all_polling_stations(constituency);
         get_agent_details(user_id);
         polling_station_assignment(UserConstituency);
-        get_polling_station(constituency);
         // agent_assignments(constituency);
         // agent_unassigned(constituency);
     }, 1000);
@@ -194,7 +218,7 @@ $(document).ready(function () {
                 $(".confirm_text").show();
                 $(".spinner-text").hide();
                 if (response.status === "ok") {
-                    Swal.fire(response.message, "", "success");
+                    toaster(response.message, "success", 10000);
                     setTimeout(() => {
                         redirect_page();
                         // return back();

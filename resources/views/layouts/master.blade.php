@@ -72,7 +72,7 @@
     <!-- Pre-loader -->
     <div id="site_loader" style="z-index: 9999999999999">
         <div>
-            <img class="pulse mx-auto" style="width: 100px;" src="{{ asset('assets/images/preloader.png') }}" />
+            {{--  <img class="pulse mx-auto" style="width: 100px;" src="{{ asset('assets/images/preloader.png') }}" />  --}}
             <div class="mt-2  text-black d-flex tw-relative"><span class="lds-hourglass tw-absolute"></span> <span
                     class="text-semibold align-self-center mx-2 font-weight-bold">
                     Loading</span></div>

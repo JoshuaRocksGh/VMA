@@ -1,13 +1,12 @@
-@extends("layouts.master")
+@extends('layouts.master')
 
 
 @section('styles')
-
     <!-- third party css -->
     <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
         type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
-        rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet"
+        type="text/css" />
     <link href="{{ asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"
         type="text/css" />
     <link href="{{ asset('assets/libs/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}" rel="stylesheet"
@@ -19,7 +18,6 @@
     <style>
 
     </style>
-
 @endsection
 
 
@@ -220,8 +218,6 @@
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-
-
 @endsection
 
 @section('scripts')
@@ -243,8 +239,4 @@
         var my_region = "{{ session()->get('Region') }}"
         var my_constituency = "{{ session()->get('Constituency') }}"
     </script>
-
-
-
-
 @endsection

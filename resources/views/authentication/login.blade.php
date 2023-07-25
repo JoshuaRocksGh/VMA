@@ -9,8 +9,8 @@
                 <div class="container">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-1"></div>
-                            <div class="col-md-10">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
                                 <br> <br>
                                 <br> <br>
                                 <br>
@@ -18,9 +18,9 @@
                                     <div class="">
 
 
-                                        <div class=" row">
+                                        <div class=" ">
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="container">
                                                     <div class=" row ">
 
@@ -162,7 +162,7 @@
                                                                 </div>
 
                                                             </form>
-                                                            <div class="row">
+                                                            {{--  <div class="row">
                                                                 <div class="col-md-1"></div>
                                                                 <div class="col-md-10 text-center">
                                                                     <p type="text" href="#"
@@ -172,7 +172,7 @@
                                                                 </div>
                                                                 <div class="col-md-1"></div>
 
-                                                            </div>
+                                                            </div>  --}}
                                                             {{-- <br> --}}
 
                                                             <form action="#" id="first_time_login"
@@ -190,31 +190,31 @@
                                                                     {{-- <i class="mdi mdi-block-helper mr-2"></i> --}}
                                                                     <span class="first_time_error_alert_message"></span>
                                                                 </div>
-                                                                <div class="form-group mb-1">
-                                                                    <label class="h4">User ID</label>
+                                                                <div class="form-group mb-3">
+                                                                    <label>User ID</label>
                                                                     <input class="form-control" type="text"
                                                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                                                         maxlength="10" id="first_time_user_id"
                                                                         required="" placeholder="Enter Your User ID">
                                                                 </div>
 
-                                                                <div class="form-group mb-1">
-                                                                    <label class="h4">Voter ID</label>
+                                                                <div class="form-group mb-3">
+                                                                    <label>Voter ID</label>
                                                                     <input class="form-control" type="text"
                                                                         id="first_time_voter_id" required=""
                                                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                                                         maxlength="10" placeholder="Enter Voter ID">
                                                                 </div>
 
-                                                                <div class="form-group mb-1">
-                                                                    <label class="h4">Date of Birth</label>
+                                                                <div class="form-group mb-3">
+                                                                    <label>Date of Birth</label>
                                                                     <input class="form-control" type="date"
                                                                         id="first_time_dob" required="">
                                                                 </div>
                                                                 <br>
                                                                 <div class="form-group mb-0 text-center">
-                                                                    <button class="btn btn-blue btn-block " type="submit"
-                                                                        id="first_time_login_form_button">
+                                                                    <button class="btn btn-primary btn-block "
+                                                                        type="submit" id="first_time_login_form_button">
                                                                         <span class="first_time_log_in_text"><b>Verify
                                                                             </b></span>
                                                                         <span
@@ -240,8 +240,8 @@
                                                                     <span class="user_setup_error_alert_message"></span>
                                                                 </div>
 
-                                                                <div class="form-group mb-1">
-                                                                    <label class="h4">User ID</label>
+                                                                <div class="form-group mb-3">
+                                                                    <label>User ID</label>
                                                                     <input class="form-control" type="text"
                                                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"
                                                                         maxlength="10" id="user_setup_user_id"
@@ -249,15 +249,15 @@
                                                                         autocomplete="off" aria-autocomplete="off">
                                                                 </div>
 
-                                                                <div class="form-group mb-1">
-                                                                    <label class="h4">Password</label>
+                                                                <div class="form-group mb-3">
+                                                                    <label>Password</label>
                                                                     <input class="form-control" type="password"
                                                                         id="user_setup_user_password" required=""
                                                                         placeholder="Enter Your Password"
                                                                         autocomplete="off" aria-autocomplete="off">
                                                                 </div>
-                                                                <div class="form-group mb-1">
-                                                                    <label class="h4">Confirm Password</label>
+                                                                <div class="form-group mb-3">
+                                                                    <label>Confirm Password</label>
                                                                     <input class="form-control" type="password"
                                                                         id="user_setup_user_confirm_password"
                                                                         required="" placeholder="Confrim Your Password"
@@ -266,8 +266,8 @@
 
                                                                 <br>
                                                                 <div class="form-group mb-0 text-center">
-                                                                    <button class="btn btn-blue btn-block " type="submit"
-                                                                        id="user_setup_login_form_button">
+                                                                    <button class="btn btn-primary btn-block "
+                                                                        type="submit" id="user_setup_login_form_button">
                                                                         <span class="user_setup_log_in_text"><b>Register
                                                                             </b></span>
                                                                         <span
@@ -282,11 +282,7 @@
 
                                                         </div> <!-- end card-body -->
 
-                                                        {{-- <div class="col-md-6">
-                                        <form action="">
 
-                                        </form>
-                                    </div> --}}
                                                     </div>
                                                 </div>
 
@@ -296,7 +292,7 @@
                                             </div> <!-- end col -->
 
 
-                                            <div class="col-md-6 w-50">
+                                            {{--  <div class="col-md-6 w-50">
                                                 <div class=" h-100"
                                                     style="background-image: url({{ asset('assets/images/bk2.jpg') }});background-repeat: no-repeat;background-size: cover;">
                                                     <div class="card-body">
@@ -313,13 +309,13 @@
                                                     </div>
 
                                                 </div>
-                                            </div>
+                                            </div>  --}}
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-1"></div>
+                            <div class="col-md-3"></div>
 
                         </div>
                     </div>
@@ -341,8 +337,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
+
+
     <script src="{{ asset('assets/js/login.js') }}"></script>
-    {{-- <script>
-        var UserMandate = @json(session()->get('UserMandate'));
-    </script> --}}
 @endsection

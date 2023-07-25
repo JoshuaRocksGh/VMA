@@ -1,69 +1,49 @@
-@extends("layouts.master")
-
-
-@section('styles')
-
-    <!-- third party css -->
-    <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
-        rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <link href="{{ asset('assets/libs/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}" rel="stylesheet"
-        type="text/css" />
-    <!-- third party css end -->
-    <!-- third party css end -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
-
-    <style>
-
-    </style>
-
-@endsection
-
+@extends('layouts.master')
 
 @section('content')
-    <div class="container-fluid">
-        <h3 class="">Agent &nbsp; > &nbsp; <span class=" text-danger">Agent List</span> </h3>
-    </div>
-    <div class=" container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card"
-                    style="background-color: rgba(255, 255, 255, 0.5);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <div class="card-body">
+    @php
+        $pageTitle = 'All Agent';
+        $basePath = 'Agent';
+        $currentPath = 'Agent List';
+    @endphp
+    @include('snippets.pageHeader')
 
-                        <h4 class="header-title">List of Agents</h4>
-                        <div class="row" id="agent_list_spinner">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4 text-center">
-                                <div class="spinner-border avatar-lg text-primary m-2 text-dark" role="status"></div>
-                            </div>
-                            <div class="col-md-4 "></div>
+    <div class="dashboard site-card overflow-hidden">
+        <div class="tab-content dashboard-body border-info border ">
+            <div class="p-4">
+
+
+                <div class="">
+
+                    {{--  <h4 class="header-title">List of Agents</h4>  --}}
+                    <div class="row" id="agent_list_spinner">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 text-center">
+                            <div class="spinner-border avatar-lg text-primary m-2 text-dark" role="status"></div>
                         </div>
-                        <div id="data_table_view" style="display: none">
-                            <table id="datatable-buttons"
-                                class="table table-striped dt-responsive nowrap w-100 all_agent_list">
-                                <thead class="bg-info">
-                                    <tr class="text-white">
-                                        <th>No.</th>
-                                        {{-- <th>Image</th> --}}
-                                        <th>Name</th>
-                                        <th>User ID</th>
-                                        <th>Region</th>
-                                        <th>Constituency</th>
-                                        <th>Electoral Area</th>
-                                        <th>Action</th>
-                                        {{-- <th>Salary</th> --}}
-                                    </tr>
-                                </thead>
+                        <div class="col-md-4 "></div>
+                    </div>
+                    <div id="data_table_view" style="display: none;zoom:0.9">
+                        <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100 all_agent_list">
+                            <thead class="bg-info">
+                                <tr class="text-white">
+                                    <th>No.</th>
+                                    {{-- <th>Image</th> --}}
+                                    <th>Name</th>
+                                    <th>User ID</th>
+                                    <th>Region</th>
+                                    <th>Constituency</th>
+                                    <th>Electoral Area</th>
+                                    <th>Action</th>
+                                    {{-- <th>Salary</th> --}}
+                                </tr>
+                            </thead>
 
-                                {{-- @foreach ($AgentDetails as $AgentDetail) --}}
-                                {{-- {{ $AgentDetail['Constituency'] }} --}}
-                                <tbody>
+                            {{-- @foreach ($AgentDetails as $AgentDetail) --}}
+                            {{-- {{ $AgentDetail['Constituency'] }} --}}
+                            <tbody>
 
-                                    {{-- <tr>
+                                {{-- <tr>
                                         <td>Tiger Nixon</td>
                                         <td>System Architect</td>
                                         <td>Edinburgh</td>
@@ -75,17 +55,19 @@
 
 
 
-                                </tbody>
-                                {{-- @endforeach --}}
-                            </table>
-                        </div>
+                            </tbody>
+                            {{-- @endforeach --}}
+                        </table>
+                    </div>
 
 
-                    </div> <!-- end card body-->
-                </div> <!-- end card -->
-            </div><!-- end col-->
+                </div> <!-- end card body-->
+
+            </div>
         </div>
+
     </div>
+
 
     <!--  Modal content for the Large example -->
     <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -220,11 +202,10 @@
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-
-
 @endsection
 
 @section('scripts')
+    @include('extras.datatables')
     <script src="http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -243,8 +224,4 @@
         var my_region = "{{ session()->get('Region') }}"
         var my_constituency = "{{ session()->get('Constituency') }}"
     </script>
-
-
-
-
 @endsection

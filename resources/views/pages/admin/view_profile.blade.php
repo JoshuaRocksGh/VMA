@@ -14,258 +14,310 @@
         <div class="dashboard site-card overflow-hidden">
             <div class="tab-content dashboard-body border-info border ">
                 <div class="p-4">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
                                     <div class="row">
-
-
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-4 text-center ">
-                                            @if ($userDetails->Picture == '' || $userDetails->Picture == null)
-                                                <img src="{{ asset('assets/images/agent-user.png') }}" alt="image"
-                                                    class="rounded-circle img-thumbnail avatar-xxl" width="180" />
-                                            @else
-                                                <img src={{ $userDetails->Picture }} alt="image"
-                                                    class="rounded-circle img-thumbnail avatar-xxl" width="180" />
-                                            @endif
-                                        </div>
-                                        <div class="col-md-4"></div>
-
-                                        <div class="container">
-                                            @if (isset($userDetails->MiddleName))
-                                                <h3 class="text-center">
-
-                                                    {{ strtoupper($userDetails->Fname . ' ' . $userDetails->MiddleName . ' ' . $userDetails->SurName) }}
-                                                </h3>
-                                            @else
-                                                <h3 class="text-center">
-
-                                                    {{ strtoupper($userDetails->Fname . ' ' . $userDetails->SurName) }}
-                                                </h3>
-                                            @endif
-
-                                            <span style="display: block; width: 100% ; border-top: 1px solid #ccc"></span>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-10">
                                             <br>
+                                            <br>
+                                            <br>
+                                            <a href="reset-password?userId={{ $userDetails->Username }}" type="button"
+                                                class="btn btn-outline-info btn-rounded waves-effect waves-light mb-3 reset_account">
+                                                <i class="fe-unlock"></i> Reset Account
+                                            </a>
+                                            <br>
+                                            <a href="forgot-password?userId={{ $userDetails->Username }}" type="button"
+                                                class="btn btn-outline-warning btn-rounded waves-effect waves-light mb-3 forgot_password">
+                                                <b><i class="fe-unlock"></i> Forgot Password</b>
+                                            </a>
 
+
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+                                    {{--  <div class="card">  --}}
+                                    {{--  <div class="card-body">  --}}
+
+
+                                    {{--  </div>  --}}
+                                    {{--  </div>  --}}
+                                </div>
+                                <div class="col-md-9">
+                                    <h1>My Profile</h1>
+                                    <br>
+                                    <div class="card">
+                                        <div class="card-body">
                                             <div class="row">
-                                                <div class="col-md-1"></div>
-                                                <div class="col-md-10">
-                                                    <br>
-                                                    <a href="reset-password?userId={{ $userDetails->Username }}"
-                                                        type="button"
-                                                        class="btn btn-outline-info btn-rounded waves-effect waves-light mb-3">
-                                                        <b><i class="fe-unlock"></i> Reset Account</b>
-                                                    </a>
-                                                    <br>
-                                                    <a href="forgot-password?userId={{ $userDetails->Username }}"
-                                                        type="button"
-                                                        class="btn btn-outline-warning btn-rounded waves-effect waves-light mb-3">
-                                                        <b><i class="fe-unlock"></i> Forgot Password</b>
-                                                    </a>
 
+
+                                                <div class="col-md-4">
+                                                    @if ($userDetails->Picture == '' || $userDetails->Picture == null)
+                                                        <img src="{{ asset('assets/images/agent-user.png') }}"
+                                                            alt="image" class="rounded-circle  " width="100"
+                                                            height="100" />
+                                                    @else
+                                                        <img src={{ $userDetails->Picture }} alt="image"
+                                                            class="rounded-circle  " width="100" height="100" />
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-8  ">
+                                                    <div class="container">
+                                                        <br>
+
+                                                        @if (isset($userDetails->MiddleName))
+                                                            <h3 class="text-center">
+
+                                                                {{ strtoupper($userDetails->Fname . ' ' . $userDetails->MiddleName . ' ' . $userDetails->SurName) }}
+                                                            </h3>
+                                                        @else
+                                                            <h3 class="text-center">
+
+                                                                {{ strtoupper($userDetails->Fname . ' ' . $userDetails->SurName) }}
+                                                            </h3>
+                                                        @endif
+
+                                                        <span
+                                                            style="display: block; width: 100% ; border-top: 1px solid #ccc"></span>
+                                                        <br>
+
+
+
+                                                    </div>
 
                                                 </div>
-                                                <div class="col-md-1"></div>
+                                                {{--  <div class="col-md-4"></div>  --}}
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="card">
+                                        <div class="card-body" style="border-radius:15px;">
+                                            <h4>Personal Details</h4>
+                                            <br>
+                                            {{--  <span style="display: block; width: 100% ; border-top: 1px solid #ccc"></span>  --}}
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-borderless mb-0">
+
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row" class="text-danger">First Name</th>
+                                                                    <td><b
+                                                                            class="float-right">{{ strtoupper($userDetails->Fname) }}</b>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row" class="text-danger">Last Name</th>
+                                                                    <td><b
+                                                                            class="float-right">{{ strtoupper($userDetails->SurName) }}</b>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row" class="text-danger">Middle Name</th>
+                                                                    @if (isset($userDetails->MiddleName))
+                                                                        <td>
+                                                                            <b
+                                                                                class="float-right">{{ strtoupper($userDetails->MiddleName) }}</b>
+                                                                        </td>
+                                                                    @else
+                                                                        <td>
+                                                                            <b class="float-right"></b>
+                                                                        </td>
+                                                                    @endif
+
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div> <!-- end table-responsive-->
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-borderless mb-0">
+
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row" class="text-danger">Voter ID</th>
+                                                                    <td><b
+                                                                            class="float-right">{{ strtoupper($userDetails->Id) }}</b>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row" class="text-danger">Gender</th>
+                                                                    @if (isset($userDetails->Gender))
+                                                                        <td><b
+                                                                                class="float-right">{{ strtoupper($userDetails->Gender) }}</b>
+                                                                        </td>
+                                                                    @else
+                                                                        <td><b class="float-right"></b>
+                                                                        </td>
+                                                                    @endif
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row" class="text-danger">Date of Birth
+                                                                    </th>
+                                                                    @if (isset($userDetails->DOB))
+                                                                        <td><b
+                                                                                class="float-right">{{ strtoupper($userDetails->DOB) }}</b>
+                                                                        </td>
+                                                                    @else
+                                                                        <td><b class="float-right"></b>
+                                                                        </td>
+                                                                    @endif
+
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div> <!-- end table-responsive-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    {{--  <div class="card">  --}}
+                                    {{--  <div class="card-body">  --}}
+                                    {{--    --}}
+
+                                    {{--    --}}
+                                    <br>
+                                    <div class="card">
+                                        <div class="card-body" style="border-radius:15px;">
+                                            <h4>Contact Details</h4>
+                                            <br>
+                                            {{--  <span style="display: block; width: 100% ; border-top: 1px solid #ccc"></span>  --}}
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-borderless mb-0">
+
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row" class="text-danger">Primary Phone
+                                                                        Number</th>
+                                                                    <td>
+                                                                        <b
+                                                                            class="float-right">{{ strtoupper($userDetails->PhoneNumber) }}</b>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row" class="text-danger">Secondary Phone
+                                                                        Number
+                                                                    </th>
+                                                                    @if (isset($userDetails->PhoneNumber2))
+                                                                        <td>
+                                                                            <b
+                                                                                class="float-right">{{ strtoupper($userDetails->PhoneNumber2) }}</b>
+                                                                        </td>
+                                                                    @else
+                                                                        <td>
+                                                                            <b class="float-right"></b>
+                                                                        </td>
+                                                                    @endif
+
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div> <!-- end table-responsive-->
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-borderless mb-0">
+
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row" class="text-danger">Other Phone
+                                                                        Number</th>
+                                                                    @if (isset($userDetails->PhoneNumber3))
+                                                                        <td>
+                                                                            <b
+                                                                                class="float-right">{{ strtoupper($userDetails->PhoneNumber3) }}</b>
+                                                                        </td>
+                                                                    @else
+                                                                        <td>
+                                                                            <b class="float-right"></b>
+                                                                        </td>
+                                                                    @endif
+
+                                                                </tr>
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div> <!-- end table-responsive-->
+                                                </div>
                                             </div>
 
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    {{--    --}}
-                                    <h4>Personal Details</h4>
-                                    <span style="display: block; width: 100% ; border-top: 1px solid #ccc"></span>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="table-responsive">
-                                                <table class="table table-borderless mb-0">
-
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row" class="text-danger">First Name</th>
-                                                            <td><b
-                                                                    class="float-right">{{ strtoupper($userDetails->Fname) }}</b>
-                                                            </td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row" class="text-danger">Last Name</th>
-                                                            <td><b
-                                                                    class="float-right">{{ strtoupper($userDetails->SurName) }}</b>
-                                                            </td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row" class="text-danger">Middle Name</th>
-                                                            @if (isset($userDetails->MiddleName))
-                                                                <td>
-                                                                    <b
-                                                                        class="float-right">{{ strtoupper($userDetails->MiddleName) }}</b>
-                                                                </td>
-                                                            @else
-                                                                <td>
-                                                                    <b class="float-right"></b>
-                                                                </td>
-                                                            @endif
-
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div> <!-- end table-responsive-->
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="table-responsive">
-                                                <table class="table table-borderless mb-0">
-
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row" class="text-danger">Voter ID</th>
-                                                            <td><b
-                                                                    class="float-right">{{ strtoupper($userDetails->Id) }}</b>
-                                                            </td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row" class="text-danger">Gender</th>
-                                                            @if (isset($userDetails->Gender))
-                                                                <td><b
-                                                                        class="float-right">{{ strtoupper($userDetails->Gender) }}</b>
-                                                                </td>
-                                                            @else
-                                                                <td><b class="float-right"></b>
-                                                                </td>
-                                                            @endif
-
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row" class="text-danger">Date of Birth</th>
-                                                            @if (isset($userDetails->DOB))
-                                                                <td><b
-                                                                        class="float-right">{{ strtoupper($userDetails->DOB) }}</b>
-                                                                </td>
-                                                            @else
-                                                                <td><b class="float-right"></b>
-                                                                </td>
-                                                            @endif
-
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div> <!-- end table-responsive-->
-                                        </div>
-                                    </div>
                                     {{--    --}}
                                     <br>
-                                    <h4>Contact Details</h4>
-                                    <span style="display: block; width: 100% ; border-top: 1px solid #ccc"></span>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="table-responsive">
-                                                <table class="table table-borderless mb-0">
+                                    <div class="card">
+                                        <div class="card-body" style="border-radius:15px;">
+                                            <h4>Mandate Details</h4>
+                                            <br>
+                                            {{--  <span style="display: block; width: 100% ; border-top: 1px solid #ccc"></span>  --}}
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-borderless mb-0">
 
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row" class="text-danger">Primary Phone Number</th>
-                                                            <td>
-                                                                <b
-                                                                    class="float-right">{{ strtoupper($userDetails->PhoneNumber) }}</b>
-                                                            </td>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row" class="text-danger">Mandate Details
+                                                                    </th>
+                                                                    @if ($userDetails->UserMandate == 'NationalLevel')
+                                                                        <td>
+                                                                            <b class="float-right">
+                                                                                {{ strtoupper('National') }}
+                                                                            </b>
+                                                                        </td>
+                                                                    @elseif ($userDetails->UserMandate == 'RegionalLevel')
+                                                                        <td>
+                                                                            <b class="float-right">
+                                                                                {{ strtoupper('Regional') }}
+                                                                            </b>
+                                                                        </td>
+                                                                    @else<td>
+                                                                            <b class="float-right">
+                                                                                {{ strtoupper('Constituency') }} </b>
+                                                                        </td>
+                                                                    @endif
 
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row" class="text-danger">Secondary Phone Number
-                                                            </th>
-                                                            @if (isset($userDetails->PhoneNumber2))
-                                                                <td>
-                                                                    <b
-                                                                        class="float-right">{{ strtoupper($userDetails->PhoneNumber2) }}</b>
-                                                                </td>
-                                                            @else
-                                                                <td>
-                                                                    <b class="float-right"></b>
-                                                                </td>
-                                                            @endif
-
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div> <!-- end table-responsive-->
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="table-responsive">
-                                                <table class="table table-borderless mb-0">
-
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row" class="text-danger">Other Phone Number</th>
-                                                            @if (isset($userDetails->PhoneNumber3))
-                                                                <td>
-                                                                    <b
-                                                                        class="float-right">{{ strtoupper($userDetails->PhoneNumber3) }}</b>
-                                                                </td>
-                                                            @else
-                                                                <td>
-                                                                    <b class="float-right"></b>
-                                                                </td>
-                                                            @endif
-
-                                                        </tr>
+                                                                </tr>
 
 
-                                                    </tbody>
-                                                </table>
-                                            </div> <!-- end table-responsive-->
-                                        </div>
-                                    </div>
-                                    {{--    --}}
-                                    <br>
-                                    <h4>Mandate Details</h4>
-                                    <span style="display: block; width: 100% ; border-top: 1px solid #ccc"></span>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="table-responsive">
-                                                <table class="table table-borderless mb-0">
-
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row" class="text-danger">Mandate Details</th>
-                                                            @if ($userDetails->UserMandate == 'NationalLevel')
-                                                                <td>
-                                                                    <b class="float-right"> {{ strtoupper('National') }}
-                                                                    </b>
-                                                                </td>
-                                                            @elseif ($userDetails->UserMandate == 'RegionalLevel')
-                                                                <td>
-                                                                    <b class="float-right"> {{ strtoupper('Regional') }}
-                                                                    </b>
-                                                                </td>
-                                                            @else<td>
-                                                                    <b class="float-right">
-                                                                        {{ strtoupper('Constituency') }} </b>
-                                                                </td>
-                                                            @endif
-
-                                                        </tr>
-
-
-                                                    </tbody>
-                                                </table>
-                                            </div> <!-- end table-responsive-->
+                                                            </tbody>
+                                                        </table>
+                                                    </div> <!-- end table-responsive-->
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
+
+                                    {{--  </div>  --}}
+                                    {{--  </div>  --}}
                                 </div>
                             </div>
+
                         </div>
                     </div>
+
 
                 </div>
 
@@ -275,48 +327,7 @@
     </div>
 
 
-    <div class="conatainer-fluid">
-        <h3 class="">Settings &nbsp; > &nbsp; <span class=" text-danger">Profile</span> </h3>
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card"
-                    style="border-radius: 10px;background-repeat: no-repeat;background-size: cover; background-color: rgba(255, 255, 255, 0.5);backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <div class="card-body">
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="card"
-                    style="border-radius: 10px;background-repeat: no-repeat;background-size: cover;backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <div class="  card-body">
-
-
-                    </div>
-                </div>
-                <div class="card"
-                    style="border-radius: 10px;background-repeat: no-repeat;background-size: cover;backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <div class=" card-body">
-
-
-                    </div>
-                </div>
-                <div class="card"
-                    style="border-radius: 10px;background-repeat: no-repeat;background-size: cover;backdrop-filter: blur(5px);box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
-                    <div class=" card-body">
-
-
-
-                        <br><br><br><br><br><br>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <!--  Modal content for the Large example -->
@@ -325,7 +336,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myLargeModalLabel">My Details</h4>
+                    <h2 class="" id="myLargeModalLabel">My Details</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <span style="display: block; width: 100% ; border-top: 1px solid #ccc"></span>
@@ -471,5 +482,60 @@
 
     <script>
         //var my_username = "{{ session()->get('Username') }}"
+
+        $(document).ready(function() {
+
+            $(".reset_account").click(function(e) {
+                e.preventDefault();
+                var url = $(this).attr("href");
+                console.log("this url=>", url);
+                // return;
+
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    datatype: "application/json",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response) {
+                        console.log("response=>,", response);
+                        if (response.status == "ok") {
+                            toaster(response.message, "success", 10000);
+                        } else {
+                            toaster(response.message, "error", 10000);
+                        }
+                    },
+                });
+            });
+
+            //forgot_password
+            $(".forgot_password").click(function(e) {
+                e.preventDefault();
+                var url = $(this).attr("href");
+                console.log("this url=>", url);
+                // return;
+
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    datatype: "application/json",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(response) {
+                        console.log("response=>,", response);
+                        if (response.status == "ok") {
+                            toaster(response.message, "success", 10000);
+                        } else {
+                            toaster(response.message, "error", 10000);
+                        }
+                    },
+                });
+            });
+
+
+
+        })
     </script>
 @endsection

@@ -13,6 +13,7 @@ $(document).ready(function () {
         .orderBy("time", "asc")
         .onSnapshot((snapshots) => {
             // console.log("reported_issues=>", reported_issues);
+            $(".reported_issues_details tr").remove();
 
             snapshots.docs.forEach((doc) => {
                 let issue_details = doc.data();
@@ -41,13 +42,13 @@ $(document).ready(function () {
 
                     table.row
                         .add([
-                            `<b class="h5">${reported_date_time}</b>`,
-                            `<b class="h5">UserName</b>`,
-                            `<b class="h5">${reported_issues[index].userName}</b>`,
-                            `<b class="h5">${reported_issues[index].regionId}</b>`,
-                            `<b class="h5">Comstituency Name</b>`,
-                            `<b class="h5">${reported_issues[index].pollingId}</b>`,
-                            `<a href="#" type="button" class="btn  btn-blue waves-effect reported_issue_lists_action"
+                            `${reported_date_time}`,
+                            // `<b >UserName</b>`,
+                            `${reported_issues[index].userName}`,
+                            `${reported_issues[index].regionId}`,
+                            `${reported_issues[index].constituency}`,
+                            `${reported_issues[index].pollingId}`,
+                            `<a href="#" type="button" class="btn btn-outline-info waves-effect waves-light reported_issue_lists_action"
                             data-user-id="${reported_issues[index].userName}" report-image="${reported_issues[index].image}" report-text=${reported_issues[index].text}>More Details</a>`,
                         ])
                         .draw(false);
@@ -119,12 +120,12 @@ $(document).ready(function () {
 
                         table.row
                             .add([
-                                `<b class="h5">${reported_date_time}</b>`,
-                                `<b class="h5">UserName</b>`,
-                                `<b class="h5">${reported_issues[index].userName}</b>`,
-                                `<b class="h5">Comstituency Name</b>`,
-                                `<b class="h5">${reported_issues[index].pollingId}</b>`,
-                                `<a href="#" type="button" class="btn  btn-blue waves-effect reported_issue_lists_action"
+                                `<b >${reported_date_time}</b>`,
+                                `<b >UserName</b>`,
+                                `<b >${reported_issues[index].userName}</b>`,
+                                `<b >Constituency Name</b>`,
+                                `<b >${reported_issues[index].pollingId}</b>`,
+                                `<a href="#" type="button" class="btn btn-outline-success waves-effect waves-light reported_issue_lists_action"
                             data-user-id="${reported_issues[index].userName}" report-image="${reported_issues[index].image}" report-text=${reported_issues[index].text}>More Details</a>`,
                             ])
                             .draw(false);

@@ -14,6 +14,11 @@ class RegionalLevelController extends Controller
     //
     public function region($UserRegion)
     {
+        session([
+            "regionPath" => $UserRegion
+        ]);
+
+
         $Mandate = session()->get('UserMandate');
         if ($Mandate == "NationalLevel") {
             $UserRegion_ = $UserRegion;
@@ -41,10 +46,11 @@ class RegionalLevelController extends Controller
         $Mandate = session()->get('UserMandate');
         $UserConstituency_ = $UserConstituency;
         $UserRegion = session()->get("Region");
+        $RegionPath = session()->get('regionPath');
 
 
         if ($Mandate !== "ConstituencyLevel") {
-            return view('pages.mandate.constituency', ['UserConstituency' => $UserConstituency_, 'UserRegion' => $UserRegion]);
+            return view('pages.mandate.constituency', ['UserConstituency' => $UserConstituency_, 'UserRegion' => $UserRegion, "RegionPath" => $RegionPath]);
 
             // if ($UserRegion_ == trim($UserRegion_) && strpos($UserRegion_, ' ') !== false || $UserConstituency_ == trim($UserConstituency_) && strpos($UserConstituency_, ' ') !== false) {
             //     $UserRegion = str_replace(' ', '_', $UserRegion_);
@@ -103,7 +109,7 @@ class RegionalLevelController extends Controller
 
         $base_response = new BaseResponse();
 
-        $response = Http::post(env('API_BASE_URL') . "checkConstituencyAssignment2?region=$region");
+        $response = Http::post(env('API_BASE_URL') . "checkConstituencyAssignmentPerRegion?region=$region");
 
 
         // dd($response);
@@ -213,19 +219,20 @@ class RegionalLevelController extends Controller
         // dd(env('API_BASE_URL') . "userReset?userId=$userID");
 
         $response = Http::post(env('API_BASE_URL') . "userReset?userId=$userID");
+        return json_decode($response->body());
 
-        if ($response['status'] == "failed") {
-            Alert::error('', $response['message']);
-            return back();
-        } else {
-            Alert::success('', $response['message']);
-            return back();
-        }
+        // if ($response['status'] == "failed") {
+        //     Alert::error('', $response['message']);
+        //     return back();
+        // } else {
+        //     Alert::success('', $response['message']);
+        //     return back();
+        // }
     }
 
     public function reset_agent(Request $request)
     {
-        // return $request;
+        return $request;
         $userID = $request->query('userId');
         // return $userID;
 
@@ -234,11 +241,13 @@ class RegionalLevelController extends Controller
         $response = Http::post(env('API_BASE_URL') . "agentReset?userId=$userID");
 
         if ($response['status'] == "failed") {
-            Alert::error('', $response['message']);
-            return back();
+
+            return Alert::error('', $response['message']);
         } else {
-            Alert::success('', $response['message']);
-            return back();
+            // Alert::success('', $response['message']);
+            return Alert::error('', $response['message']);
+
+            // return back();
         }
     }
 

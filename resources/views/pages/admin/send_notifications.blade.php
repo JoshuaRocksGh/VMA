@@ -1,11 +1,61 @@
 @extends('layouts.master')
 
 
+
+<style type="text/css">
+    /* Your CSS styling for the chat UI goes here */
+    .chat-container {
+        height: 500px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+    }
+
+
+    .chat-messages {
+        height: 200px;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .view_chats {
+        position: relative;
+        width: 250px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #007bff;
+        color: #fff;
+        margin: 20px;
+    }
+
+    .view_chats::before {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 20px;
+        border-width: 0 10px 15px;
+        border-style: solid;
+        border-color: transparent transparent #007bff;
+    }
+
+    .view_chats::after {
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: 22px;
+        border-width: 0 8px 12px;
+        border-style: solid;
+        border-color: transparent transparent #fff;
+    }
+</style>
+
+
 @section('content')
     @php
         $pageTitle = 'Send Notification';
         $basePath = 'Notifications & Alert';
-        $currentPath = 'Send NNotifications';
+        $currentPath = 'Send Notifications';
     @endphp
     @include('snippets.pageHeader')
 
@@ -35,7 +85,7 @@
                                         <label class="text-dark"><b>Select Region to Send/View
                                                 Notifications<span class="text-danger">*</span></b></label>
                                         @if (session()->get('UserMandate') == 'NationalLevel')
-                                            <select class="form-control user_region" id="user_region">
+                                            <select class="form-control user_region readonly" id="user_region" readonly>
                                                 <option selected> -- Select Region -- </option>
 
                                             </select>
@@ -74,6 +124,21 @@
                                         <div class="col-md-4"></div>
                                     </div>
 
+                                    {{--  ===========  --}}
+
+                                    {{--  <div class="chat-container">
+                                        <div class="chat-messages" id="chat-messages">
+                                            <!-- Messages will be displayed here -->
+                                        </div>
+                                        <div class="chat-input">
+                                            <input type="text" id="username-input" placeholder="Your Name">
+                                            <input type="text" id="message-input" placeholder="Type your message...">
+                                            <button class="send-button" id="send-button">Send</button>
+                                        </div>
+                                    </div>  --}}
+
+                                    {{--  ===========  --}}
+
                                 </form>
 
                             </div>
@@ -84,23 +149,40 @@
 
                                 <span style="display: block; width: 100% ; border-top: 1px solid #ccc"
                                     class="mt-0"></span>
-                                <div class="card-body" data-simplebar style="max-height: 700px">
+                                <div class="" data-simplebar style="max-height: 700px">
 
 
-
-                                    <ul class="conversation-list" id="view_chats">
+                                    {{--  #f4f4f4  --}}
+                                    {{--  c9e5fc  --}}
+                                    <div style="background-color:f4f4f4">
                                         <div class="row">
-                                            <div class="col-md-4"></div>
-                                            <div class="col-md-4 text-center">
-                                                {{-- <span class="spinner-border avatar-sm text-dark m-2 chat_spinner"
-                                                role="status"></span> --}}
-                                                {{-- <img src="{{ asset('assets/images/no_data.png') }}" alt="" style="zoom:0.2"> --}}
+                                            <div class="col-md-12 chat-container" id="chat-container">
+                                                <div class="row">
+                                                    {{--  <div class="row">  --}}
+                                                    <div class="col-md-1"></div>
+                                                    <ul class="conversation-list col-md-10" id="view_chats">
+
+                                                    </ul>
+                                                    <div class="col-md-1"></div>
+                                                    {{--  </div>  --}}
+                                                </div>
+
                                             </div>
                                             <div class="col-md-4"></div>
+                                            {{--  <div class="col-md-4"></div>  --}}
+                                            {{--  <div class="col-md-12 text-right">
+                                                <ul class="conversation-list" id="view_my_chats">
+
+                                                </ul>
+                                            </div>  --}}
+
+                                            {{--  <div class="col-md-4">free space</div>  --}}
                                         </div>
+                                        {{--  <br>  --}}
+
+                                    </div>
 
 
-                                    </ul>
 
 
                                 </div>
@@ -112,16 +194,6 @@
 
             </div>
 
-        </div>
-    </div>
-    <div class="container-fluid">
-        <h3 class=""><span class=" text-danger">Send Notification</span> </h3>
-
-        <div class="row">
-            <div class="col-md-12">
-
-
-            </div>
         </div>
     </div>
 @endsection

@@ -15,10 +15,10 @@
                         @if (session()->get('UserMandate') == 'NationalLevel')
                             <table class="table table-striped dt-responsive nowrap w-100  all_reported_issues_list">
 
-                                <thead class="bg-dark">
+                                <thead class="bg-info">
                                     <tr class="text-white">
                                         <th>Date & Time</th>
-                                        <th>Name</th>
+                                        {{--  <th>Name</th>  --}}
                                         <th>user ID</th>
                                         <th>Region</th>
                                         <th>Constituency</th>
@@ -29,6 +29,15 @@
                                 </thead>
                                 <tbody class="reported_issues_details">
 
+                                    {{--  <tr>
+                                        <td colspan="6">
+                                            <div class="d-flex justify-content-center">
+                                                <div class="spinner-border avatar-lg text-dark  m-2 canvas_spinner"
+                                                    role="status">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>  --}}
 
 
 
@@ -51,6 +60,15 @@
                                 </thead>
                                 <tbody class="reported_issues_details">
 
+                                    {{--  <tr>
+                                        <td colspan="6">
+                                            <div class="d-flex justify-content-center">
+                                                <div class="spinner-border avatar-lg text-dark  m-2 canvas_spinner"
+                                                    role="status">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>  --}}
 
 
 
@@ -64,7 +82,10 @@
 
         </div>
     </div>
-    <div class="container-fluid">
+
+
+
+    {{--  <div class="container-fluid">
         <h3 class=""><span class=" text-danger">Reported Issue</span> </h3>
         <div class="row">
             <div class="col-md-12">
@@ -115,7 +136,6 @@
                                         <tr>
                                             <th>Date & Time</th>
                                             <th>Name</th>
-                                            {{-- <th>Name</th> --}}
                                             <th>user ID</th>
                                             <th>Constituency</th>
                                             <th>Polling Station</th>
@@ -137,7 +157,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  --}}
 
     <!-- Standard modal content -->
     <div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel"
@@ -161,8 +181,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    {{--  <button type="button" class="btn btn-primary">Save changes</button>  --}}
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

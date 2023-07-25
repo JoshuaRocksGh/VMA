@@ -3,10 +3,6 @@ function numberWithCommas(x) {
 }
 
 function get_all_regional_list() {
-    var table = $(".all_regional_heads_list").DataTable();
-
-    var nodes = table.rows().nodes();
-
     $.ajax({
         type: "GET",
         url: "get-all-regional-heads-list",
@@ -23,6 +19,13 @@ function get_all_regional_list() {
             // let user_detail = new Array();
 
             if (response.status == "ok") {
+                // $(".all_regional_heads_list tbody").remove();
+
+                var table = $(".all_regional_heads_list").DataTable();
+
+                var nodes = table.rows().nodes();
+                $(".all_reported_issues_list tr").remove();
+
                 $("#user_list_spinner").hide();
                 $("#all_regional_heads").toggle("500");
                 $.each(data, function (index) {
@@ -59,11 +62,11 @@ function get_all_regional_list() {
                             `<b>${data[index].PhoneNumber}</b>`,
                             `<b>${data[index].Username}</b>`,
                             `<b>${data[index].Region}</b>`,
-                            `<a href="#"  type="button"  class="btn btn-outline-success waves-effect waves-light all_regional_list_action"
+                            `<a href="#"  type="button"  class="btn btn-outline-info waves-effect waves-light all_regional_list_action"
                             user-image="${data[index].Picture}" data-user-id="${data[index].Username}" user-name="${name}" user-phoneNumber="${data[index].PhoneNumber}" user-id="${user_id}" user-region="${data[index].Region}" user-mandate="${data[index].UserMandate}"
                             >More Actions</a>`,
                         ])
-                        .draw(false);
+                        .draw();
 
                     /* $(".user_buttons").append(
 
@@ -77,12 +80,10 @@ function get_all_regional_list() {
                     ); */
                 });
 
-                let editButtons = document.querySelectorAll(
-                    ".all_regional_list_action"
-                );
-
-                editButtons.forEach((button) => {
-                    button.addEventListener("click", (e) => {
+                $(".all_regional_heads_list").on(
+                    "click",
+                    ".all_regional_list_action",
+                    function (e) {
                         const editButton = e.currentTarget;
                         const userDetail = data.find(
                             (e) =>
@@ -145,7 +146,88 @@ function get_all_regional_list() {
                         //     )
                         // );
 
-                        return false;
+                        //return false;
+                        // const beneficiaryData = user_id.find(
+                        //     (e) =>
+                        //         e.user_id ==
+                        //         $(".all_regional_list_action").addEventListener(
+                        //             "user-id"
+                        //         )
+                        // );
+                    }
+                );
+
+                return;
+
+                let editButtons = document.querySelectorAll(
+                    ".all_regional_list_action"
+                );
+
+                editButtons.forEach((button) => {
+                    button.addEventListener("click", (e) => {
+                        const editButton = e.currentTarget;
+                        const userDetail = data.find(
+                            (e) =>
+                                e.Username ===
+                                $(editButton).attr("data-user-id")
+                        );
+                        console.log(userDetail);
+                        // console.log(data);
+                        // return false;
+                        $(".users_name").text(
+                            userDetail.SurName + " " + userDetail.Fname
+                        );
+                        $(".user_telephone").text(userDetail.PhoneNumber);
+                        $(".user_mandate").text(userDetail.UserMandate);
+                        $(".user_region").text(userDetail.Region);
+                        $(".user_id").text(userDetail.Username);
+                        if (
+                            userDetail.Picture == "" ||
+                            userDetail.Picture == null
+                        ) {
+                            $(".user_image_id").attr(
+                                "src",
+                                "assets/images/agent-user.png"
+                            );
+                        } else {
+                            $(".user_image_id").attr("src", userDetail.Picture);
+                        }
+
+                        $(".user_reset_password").attr(
+                            "href",
+                            "reset-password?userId=" + userDetail.Username
+                        );
+
+                        $(".user_forgot_password").attr(
+                            "href",
+                            "forgot-password?userId=" + userDetail.Username
+                        );
+
+                        if (userDetail.Active != true) {
+                            $(".activate_deactivate_user").html("Activate");
+                            $(".user_delete").attr(
+                                "href",
+                                "activate-user?userId=" + userDetail.Username
+                            );
+                        } else {
+                            $(".activate_deactivate_user").html("De-Activate");
+                            $(".user_delete").attr(
+                                "href",
+                                "de_activate-user?userId=" + userDetail.Username
+                            );
+                        }
+                        $(".all_regional_list_action").attr({
+                            "data-toggle": "modal",
+                            "data-target": "#bs-example-modal-lg",
+                        });
+
+                        // console.log(
+                        //     $(".all_regional_list_action").getAttribute(
+                        //         "user-name"
+                        //     )
+                        // );
+
+                        //return false;
                         // const beneficiaryData = user_id.find(
                         //     (e) =>
                         //         e.user_id ==
@@ -207,4 +289,76 @@ $(document).ready(function () {
     function get_user_deatil(detail) {
         console.log(detail);
     }
+
+    $(".user_reset_password").click(function (e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+        console.log("this url=>", url);
+        // return;
+
+        $.ajax({
+            type: "get",
+            url: url,
+            datatype: "application/json",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                console.log("response=>,", response);
+                if (response.status == "ok") {
+                    toaster(response.message, "success", 10000);
+                } else {
+                    toaster(response.message, "error", 10000);
+                }
+            },
+        });
+    });
+
+    $(".user_forgot_password").click(function (e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+        console.log("this url=>", url);
+        // return;
+
+        $.ajax({
+            type: "get",
+            url: url,
+            datatype: "application/json",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                console.log("response=>,", response);
+                if (response.status == "ok") {
+                    toaster(response.message, "success", 10000);
+                } else {
+                    toaster(response.message, "error", 10000);
+                }
+            },
+        });
+    });
+
+    $(".user_delete").click(function (e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+        console.log("this url=>", url);
+        // return;
+
+        $.ajax({
+            type: "get",
+            url: url,
+            datatype: "application/json",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                console.log("response=>,", response);
+                if (response.status == "ok") {
+                    toaster(response.message, "success", 10000);
+                } else {
+                    toaster(response.message, "error", 10000);
+                }
+            },
+        });
+    });
 });

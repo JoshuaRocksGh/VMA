@@ -48,9 +48,13 @@ class ConstituencyLevelController extends Controller
             ];
         } else {
             // $pollingId = $request->pollingID;
+            $polling = $request->pollingID;
+            $pollingId_ = explode('--', $polling);
+            // return $pollingId_;
+            $pollingId = $pollingId_[0];
             $data = [
-                "pollingId" => $request->pollingID,
-                "userId" => $request->userID,
+                "pollingId" => trim($pollingId),
+                "userId" => trim($request->userID),
                 "PollingStation" => ""
             ];
         }
@@ -119,5 +123,16 @@ class ConstituencyLevelController extends Controller
     {
         $UserRegion = session()->get('Region');
         return view('pages.admin.all_regional_users', ['UserRegion' => $UserRegion]);
+    }
+
+    public function create_parliamentry_candidate()
+    {
+        // return view('pages.agents.create_parlimantry');
+        return view('pages.agents.create_parliamentry_candidate');
+    }
+
+    public function parliamentry_candidate()
+    {
+        return view('pages.agents.parliamentry_candidate');
     }
 }
