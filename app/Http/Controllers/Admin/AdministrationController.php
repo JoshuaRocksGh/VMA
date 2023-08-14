@@ -184,7 +184,8 @@ class AdministrationController extends Controller
 
     public function vote_monitor()
     {
-        return view('pages.admin.vote_monitor');
+        return view('pages.admin.vote_monitor1');
+        // return view('pages.admin.vote_monitor');
     }
 
     public function create_candidate()

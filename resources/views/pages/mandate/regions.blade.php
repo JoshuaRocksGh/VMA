@@ -89,7 +89,8 @@
                     <div class="card">
                         <div class="card-body">
                             <table id="datatable-buttons"
-                                class="table table-striped dt-responsive nowrap w-100 all_constituency_list">
+                                class="table table-striped dt-responsive nowrap w-100 all_constituency_list"
+                                style="zoom:0.9">
                                 <h1>Constituency Summary of Polling Stations</h1>
                                 <thead class="bg-info">
                                     <tr class="text-white">

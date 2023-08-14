@@ -3,16 +3,19 @@ function numberWithCommas(x) {
 }
 
 function get_all_regional_list() {
+    var table = $(".all_regional_heads_list").DataTable();
+
+    var nodes = table.rows().nodes();
     $.ajax({
         type: "GET",
         url: "get-all-regional-heads-list",
         datatype: "application/json",
         success: function (response) {
-            console.log("regional list=>", response);
+            // console.log("regional list=>", response);
 
             let data = response.data;
 
-            // console.log("data=>", data);
+            console.log("data=>", data);
 
             let count = 1;
 
@@ -21,12 +24,9 @@ function get_all_regional_list() {
             if (response.status == "ok") {
                 // $(".all_regional_heads_list tbody").remove();
 
-                var table = $(".all_regional_heads_list").DataTable();
+                $(".request_table tr").remove();
 
-                var nodes = table.rows().nodes();
-                $(".all_reported_issues_list tr").remove();
-
-                $("#user_list_spinner").hide();
+                $(".request_table tr").hide();
                 $("#all_regional_heads").toggle("500");
                 $.each(data, function (index) {
                     //console.log("regional list=>", data[index]);
@@ -36,20 +36,24 @@ function get_all_regional_list() {
                     //console.log("user_detail=>", user_detail);
                     // return false;
 
-                    if (
-                        data[index].Picture == "" ||
-                        data[index].Picture == null
-                    ) {
-                        var user_image = "assets/images/agent-user.png";
-                    } else {
-                        var user_image = data[index]?.Picture;
-                    }
+                    // if (
+                    //     data[index].Picture == "" ||
+                    //     data[index].Picture == null
+                    // ) {
+                    // } else {
+                    //     var user_image = data[index]?.Picture;
+                    // }
+                    var user_image = data[index]?.Picture;
+                    var noImage = "assets/images/agent-user.png";
+
                     let user_id = data[index]?.Username;
                     var image = data[index]?.Picture;
                     var name = data[index]?.Fname + " " + data[index]?.SurName;
                     var image_name =
                         `<span style="width: 14px;">
-                            <img src="${user_image}" alt="contact-img" title="contact-img" class=" img-fluid rounded-circle avatar-sm" style="width:40px;height:40px" />
+                            <img src="${
+                                user_image ? user_image : noImage
+                            }" alt="contact-img" class=" img-fluid rounded-circle avatar-sm" style="width:40px;height:40px" />
                          </span>` +
                         " " +
                         " " +
@@ -279,16 +283,15 @@ function get_all_regional_list() {
     });
 }
 
-setTimeout(() => {
-    get_all_regional_list();
-}, 500);
+// setTimeout(() => {}, 500);
 
 $(document).ready(function () {
     // document.addEventListener("touchstart", handler, { passive: true });
+    get_all_regional_list();
 
-    function get_user_deatil(detail) {
-        console.log(detail);
-    }
+    // function get_user_deatil(detail) {
+    //     console.log(detail);
+    // }
 
     $(".user_reset_password").click(function (e) {
         e.preventDefault();

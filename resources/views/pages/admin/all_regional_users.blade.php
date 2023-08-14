@@ -58,7 +58,7 @@
                                 </tr>
                             </thead>
                             <tbody class="request_table">
-                                <tr>
+                                {{--  <tr>
                                     <td colspan="6">
                                         <div class="d-flex justify-content-center">
                                             <div class="spinner-border avatar-lg text-dark  m-2 canvas_spinner"
@@ -66,7 +66,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr>  --}}
 
                             </tbody>
 
@@ -78,8 +78,8 @@
             </div>
 
             <!--  Modal content for the Large example -->
-            <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog"
-                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header bg-info">
@@ -185,13 +185,9 @@
 
 
 @section('scripts')
-    <!-- Datatables init -->
-    {{-- <script src="{{ asset('assets/js/pages/datatables.init.js') }}"></script> --}}
     @include('extras.datatables')
-
-
-
-    {{-- <script src="{{ assets('assets/js/all_regional_heads.js') }}"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 
     <script src="{{ asset('assets/js/all_regional_heads.js') }}"></script>
 @endsection
